@@ -239,12 +239,16 @@
 
     var count_tag = 1;
     $('#addtags').click(function () { 
-        var tagname = $('#tag').val();
-        if (tagname != '') {
-            $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
-            ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
-            '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
-            count_tag++;
+        if (count_tag <= 3) {
+            var tagname = $('#tag').val();
+            if (tagname != '') {
+                $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
+                ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
+                '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
+                count_tag++;
+            }
+        } else {
+            alert(test);
         }
     });
 

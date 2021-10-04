@@ -49,10 +49,10 @@ class PodcastController extends Controller
             $news->new_img              = $request->link;
             $news->save();
             DB::commit();
-            return redirect('admin/podcast')->with('success', 'Successful');
+            return redirect('admin/podcasts')->with('success', 'Successful');
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect('admin/podcast')->withError('Something Wrong! New podcast not Saved.');
+            return redirect('admin/podcasts')->withError('Something Wrong! New podcast not Saved.');
         }
     }
 

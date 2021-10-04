@@ -26,7 +26,71 @@
     .swal2-cancel {
         margin-right: 30px;
     }
-    .modal-xl{max-width:1200px}
+    .modal-xl{
+        max-width:1200px;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: -1px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: #FF5370;
+        -webkit-transition: .4s;
+        transition: .4s;
+        /* border: 1px solid #dfdfdf; */
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+    }
+
+    .published:checked+.slider {
+        background-color: #4099ff;
+    }
+
+    .published:focus+.slider {
+        box-shadow: 0 0 1px #4099ff;
+    }
+
+    .published:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
     @media only screen and (max-width: 480px) {
         .mytooltip .tooltip-content4 {
             margin: 0 0 10px -50px !important;
@@ -76,6 +140,7 @@
                         <th style="text-align: center;">Image</th>
                         <th style="text-align: center;">Title</th>
                         <th style="text-align: center;">Action</th>
+                        <th style="text-align: center;">Published</th>
                         <th style="text-align: center;">Create At</th>
                         <th style="text-align: center;">Management</th>
                     </tr>
@@ -104,6 +169,14 @@
                             <div class="col-12">
                                 <i class="icofont icofont-star" style="font-size: 22px; color: #ffc107;"></i> : {{$item->rating('C')}}
                             </div>
+                        </td>
+                        <td class="text-center text-middle">
+                            <label class="switch">
+                                <label class="switch">
+                                    <input type="checkbox" name="published" class="published" value="{{ $item->new_id}}" {{ $item->new_published == 1 ? "checked" : "" }}>
+                                    <span class="slider round"></span>
+                                  </label>
+                            </label>
                         </td>
                         <td class="text-center text-middle">{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td>
                         <td class="text-center text-middle">
@@ -207,6 +280,21 @@
 @include('flash-message')
 <script>
     $(".example1").DataTable();
+
+    $(document).ready(function () {
+        $('.published').change(function () { 
+            var id = $(this).val();
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'post',
+                url: '{{ url('admin/published') }}/' + id,
+                data: {id: id},
+                success: function (response) {
+                    
+                }
+            });
+        });
+    });
 
     function edit_content(id) {
         $.ajax({

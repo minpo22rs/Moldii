@@ -38,6 +38,43 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Verified</label>
+                        <div class="col-sm-10">
+                            <div class="row m-l-10">
+                                <div class="border-checkbox-section">
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="authentic" value="authentic">
+                                        <label class="border-checkbox-label" for="authentic">100% Authentic</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="daysreturn" value="daysreturn">
+                                        <label class="border-checkbox-label" for="daysreturn">15 Days Return</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="shipping" value="shipping">
+                                        <label class="border-checkbox-label" for="shipping">Free Shipping</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="access" value="access">
+                                        <label class="border-checkbox-label" for="access">Access</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="reward" value="reward">
+                                        <label class="border-checkbox-label" for="reward">Reward</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="coupons" value="coupons">
+                                        <label class="border-checkbox-label" for="coupons">Coupons</label>
+                                    </div>
+                                    <div class="border-checkbox-group border-checkbox-group-danger">
+                                        <input class="border-checkbox" name="verified[]" type="checkbox" id="all" value="all">
+                                        <label class="border-checkbox-label" for="all">All</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">

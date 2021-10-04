@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('searchproduct', 'FlashsaleController@searchproduct');
         Route::resource('promotion', 'PromotionController');
         Route::resource('news', 'NewsController');
+        Route::post('published/{id}', 'NewsController@published');
         Route::put('updatenews', 'NewsController@updatenews');
         Route::resource('bestseller', 'BestSellerController');
         Route::post('updatebestseller/{id}', 'BestSellerController@updatebestseller');

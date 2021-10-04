@@ -144,4 +144,21 @@ class NewsController extends Controller
             return redirect('admin/news')->withError('Something Wrong! Your Content can not Deleted.');
         }
     }
+
+    public function published($id)
+    {
+        DB::beginTransaction();
+        try {
+            $news = news::findOrFail($id);
+            if ($news->new_published == 2) {
+                $news->new_published          = 1;
+            } else {
+                $news->new_published          = 2;
+            }
+            $news->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+    }
 }

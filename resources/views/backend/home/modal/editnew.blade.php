@@ -11,6 +11,7 @@
                 @csrf
                 {{method_field('PUT')}}
                 <div class="modal-body">
+                    @if ($new->new_type == 'C')
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
@@ -35,6 +36,34 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item2">Link </span>
+                                <span class="tooltip-content4 clearfix">
+                                    <span class="tooltip-text2">
+                                        Image Size: 712 x 390 px.
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="link" class="form-control" placeholder="Link..." value="{{$new->new_img}}">
+                                </div>
+                                <div class="col-6">
+                                    <iframe class="img-fluid" src="https://www.youtube.com/embed/{{$new->new_img}}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Title</label>
                         <div class="col-sm-10">
