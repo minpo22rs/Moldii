@@ -27,68 +27,6 @@
         margin-right: 30px;
     }
 
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: -1px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        background-color: #FF5370;
-        -webkit-transition: .4s;
-        transition: .4s;
-        /* border: 1px solid #dfdfdf; */
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
-    }
-
-    .published:checked+.slider {
-        background-color: #4099ff;
-    }
-
-    .published:focus+.slider {
-        box-shadow: 0 0 1px #4099ff;
-    }
-
-    .published:checked+.slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-
     .modal-xl{max-width:1200px}
     @media only screen and (max-width: 480px) {
         .mytooltip .tooltip-content4 {

@@ -173,7 +173,11 @@ class FlashsaleController extends Controller
             $img = '<img src="'.$imgtag.'" class="img-fluid" width="150px" height="150px"> ';
             return $img;
         })
-        ->rawColumns(['img','name'])
+        ->addColumn('action', function($row){
+            $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->merchant_id.'" class="published ignore" checked><span class="slider round"></span></label></label>';
+            return $switchs;
+        })
+        ->rawColumns(['img','name', 'action'])
         ->make(true);
     }
 }

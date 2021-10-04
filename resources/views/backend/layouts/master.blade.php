@@ -364,7 +364,7 @@
                                     </a>
                                 </li> --}}
                                 <li class="">
-                                    <a href="">
+                                    <a href="{{url('admin/ticket')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-support"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Support Ticket</span>
                                         <span class="pcoded-mcaret"></span>

@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <ul class="feed-blog">
-                    @foreach ($comment as $item)
+                    @forelse ($comment as $item)
                     <li>
                         <div class="feed-user-img">
                             <img src="{{asset('files/assets/images/avatar-4.jpg')}}" class="img-radius " alt="User-Profile-Image">
@@ -27,7 +27,11 @@
                             </div>
                         </div>
                     </li>
-                    @endforeach
+                    @empty
+                    <li>
+                        <h6>No Comment</h6>
+                    </li>
+                    @endforelse
                 </ul>
             </div>
         </div>

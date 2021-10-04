@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function () {
 
         // calendar
         Route::resource('calendar', 'CalendarController');
+
+        // ticket
+        Route::resource('ticket', 'TicketController');
     });
 });
 
