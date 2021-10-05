@@ -18,9 +18,9 @@ class product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ProductgetTags()
+    public function ProductgetTags($type = null)
     {
-        return $this->hasMany(tag::class, 'tag_fkey', 'product_id');
+        return $this->hasMany(tag::class, 'tag_fkey', 'product_id')->where('tag_type', $type)->get();
     }
 
     static public function getProductImg($ref_id = null)
@@ -41,7 +41,12 @@ class product extends Model
      */
     public function Products_belong_Merchant()
     {
-        return $this->belongsTo(Merchant::class, 'product_merchant_id');
+        $merchant = $this->belongsTo(Merchant::class, 'product_merchant_id');
+        if ($merchant != null) {
+            return $merchant;
+        } else {
+            return '';
+        }
     }
 
     /**

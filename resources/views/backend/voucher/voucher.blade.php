@@ -1,5 +1,8 @@
 @extends('backend.layouts.master')
 @section('css')
+<!-- Multi Select css -->
+<link rel="stylesheet" type="text/css" href="{{asset('/files/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('/files/bower_components/multiselect/css/multi-select.css')}}" />
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
 <style>
     .swal2-container {
@@ -24,7 +27,11 @@
     .select2-search__field {
         z-index: 99999999999999;
     }
-    .modal-xl{max-width:1200px}
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background: #4099ff !important;
+        border: none;
+    }
+    .modal-xl{max-width:1200px;}
     @media only screen and (max-width: 480px) {
         .mytooltip .tooltip-content4 {
             margin: 0 0 10px -50px !important;
@@ -141,7 +148,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('admin/voucher')}}" method="POST" enctype="multipart/form-data" id="addmerchant" >
+            <form action="{{url('admin/voucher')}}" method="POST" enctype="multipart/form-data" id="addmerchant" onsubmit="return addmerchant()">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -162,10 +169,12 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..." required autocomplete="off">
+                                            <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..."  autocomplete="off">
+                                            @error('datestart')<span class="messages text-danger">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..." required autocomplete="off">
+                                            <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..."  autocomplete="off">
+                                            @error('dateend')<span class="messages text-danger">{{ $message }}</span>@enderror
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +187,7 @@
                             <div class="row m-l-10">
                                 <div class="border-checkbox-section">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox" name="canuse[]" type="checkbox" id="discount" value="discount">
+                                        <input class="border-checkbox" name="canuse[]" type="checkbox" id="discount" value="discount" checked>
                                         <label class="border-checkbox-label" for="discount">Discount</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
@@ -189,7 +198,7 @@
                                         <input class="border-checkbox" name="canuse[]" type="checkbox" id="gift" value="gift">
                                         <label class="border-checkbox-label" for="gift">Gift Voucher</label>
                                     </div>
-                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                    {{-- <div class="border-checkbox-group border-checkbox-group-primary">
                                         <input class="border-checkbox" name="canuse[]" type="checkbox" id="access" value="access">
                                         <label class="border-checkbox-label" for="access">Access</label>
                                     </div>
@@ -204,8 +213,9 @@
                                     <div class="border-checkbox-group border-checkbox-group-danger">
                                         <input class="border-checkbox" name="canuse[]" type="checkbox" id="all" value="all">
                                         <label class="border-checkbox-label" for="all">All</label>
-                                    </div>
+                                    </div> --}}
                                 </div>
+                                @error('canuse')<span class="messages text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </div>
@@ -214,7 +224,8 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="number" name="value" class="form-control" placeholder="Value" min="0" required autocomplete="off">
+                                    <input type="number" name="value" class="form-control" placeholder="Value" min="0"  autocomplete="off">
+                                    @error('value')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="col-6">
                                     <div class="form-radio m-b-30">
@@ -238,19 +249,14 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Partner</label>
                         <div class="col-sm-10">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search Merchants...">
-                                <span class="input-group-addon" id="basic-addon3"><i class="icofont icofont-search-alt-1"></i></span>
-                            </div>
-                            <label class="label label-primary label-lg">ร้านเสื้อผ้า (D2)
-                                <i class="icofont icofont-close pointer"></i>
-                            </label>
-                            <label class="label label-primary label-lg">ร้านขายเกมส์ (G7)
-                                <i class="icofont icofont-close pointer"></i>
-                            </label>
+                            <select class="js-example-basic-multiple col-sm-12" name="partner[]" multiple="multiple">
+                                @foreach ($merchant as $item)
+                                <option value="{{$item->merchant_id}}">{{$item->merchant_name}} {{$item->merchant_lname}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Condition</label>
                         <div class="col-sm-10">
                             <div class="form-radio m-b-30">
@@ -268,7 +274,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Note</label>
                         <div class="col-sm-10">
@@ -278,7 +284,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Amount <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" name="amount" class="form-control" placeholder="Amount..." min="0" required>
+                            <input type="number" name="amount" class="form-control" placeholder="Amount..." min="0" >
+                            @error('amount')<span class="messages text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -312,6 +319,7 @@
 </div>
 
 <div id="result-modalhis"></div>
+<div id="result-modalvoucher"></div>
 @endsection
 @section('js')
 @include('flash-message')
@@ -319,7 +327,7 @@
     $(".example1").DataTable();
     
     $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
-
+    
     $("#all").click(function() {
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
@@ -332,6 +340,17 @@
         }).done(function (data) {
             $('#result-modalhis').html(data);
             $("#hismodal").modal('show');
+        });
+    }
+
+    function edit_voucher(id) {
+        $.ajax({
+            url: '{{ url('admin/voucher') }}/' + id + '/edit',
+            type: 'GET',
+            data: {id: id},
+        }).done(function (data) {
+            $('#result-modalvoucher').html(data);
+            $("#editmodalvoucher").modal('show');
         });
     }
 </script>

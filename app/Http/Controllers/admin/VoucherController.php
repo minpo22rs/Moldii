@@ -9,6 +9,7 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use App\Models\VoucherUsed;
 use Helper;
+use App\Models\Merchant;
 
 class VoucherController extends Controller
 {
@@ -21,9 +22,11 @@ class VoucherController extends Controller
     {
         $voucher = voucher::all();
         $current = Carbon::now();
+        $merchant = Merchant::all();
         $data = array(
             'voucher' => $voucher, 
             'current' => $current, 
+            'merchant' => $merchant, 
         );
         return view('backend.voucher.voucher', $data);
     }
@@ -46,6 +49,27 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name'                      => 'required|max:250',
+            'datestart'                 => 'required|max:250',
+            'dateend'                   => 'required|max:250',
+            'canuse'                    => 'required|max:250',
+            'value'                     => 'required|max:250',
+            'amount'                    => 'required|max:250',
+        ];
+    
+        $customMessages = [
+            'name.required'             => 'กรุณากรอกชื่อ',
+            'datestart.required'        => 'กรุณากรอกวันเริ่มต้นใช้งาน',
+            'dateend.required'          => 'กรุณากรอกวันสิ้นสุดใช้งาน',
+            'canuse.required'           => 'กรุณาเลือกวัตถุประสงค์การใช้งาน',
+            'value.required'            => 'กรุณากรอกมูลค่า',
+            'amount.required'           => 'กรุณากรอกจำนวน',
+            'required'                  => 'กรุณาใส่ข้อมูล',
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         DB::beginTransaction();
         try {
             $voucher = new Voucher();
@@ -57,6 +81,7 @@ class VoucherController extends Controller
             $voucher->voucher_note   	        = $request->note;
             $voucher->voucher_amount   	        = $request->amount;
             $voucher->voucher_unit   	        = $request->unit;
+            $voucher->voucher_partner   	    = json_encode($request->partner);
             $voucher->voucher_code   	        = substr(md5(mt_rand()), 0, 8);
             $voucher->save();
             
@@ -90,7 +115,13 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $voucher = Voucher::findOrFail($id);
+        $merchant = Merchant::all();
+        $data = array(
+            'voucher' => $voucher, 
+            'merchant' => $merchant, 
+        );
+        return view('backend.voucher.modal.editvoucher', $data);
     }
 
     /**

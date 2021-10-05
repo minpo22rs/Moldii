@@ -199,10 +199,10 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="Start At..." required>
+                                            <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="Start At..." required autocomplete="off">
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="End At..." required>
+                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="End At..." required autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -229,10 +229,10 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..." required>
+                                    <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..." autocomplete="off" required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..." required>
+                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..." autocomplete="off" required>
                                 </div>
                             </div>
                         </div>

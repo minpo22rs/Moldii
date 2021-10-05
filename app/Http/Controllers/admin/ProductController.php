@@ -68,6 +68,7 @@ class ProductController extends Controller
                     $tag = new tag();
                     $tag->tag_name      = $value;
                     $tag->tag_fkey      = $product->product_id;
+                    $tag->tag_type      = 'P';
                     $tag->save();
                 }
             }
@@ -145,6 +146,7 @@ class ProductController extends Controller
                     $tag = new tag();
                     $tag->tag_name      = $value;
                     $tag->tag_fkey      = $id;
+                    $tag->tag_type      = 'P';
                     $tag->save();
                 }
             }

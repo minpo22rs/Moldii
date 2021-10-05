@@ -101,7 +101,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('backoffice/product')}}" method="POST" enctype="multipart/form-data" id="addproduct" onsubmit="return addproduct()">
+            <form action="{{url('admin/product')}}" method="POST" enctype="multipart/form-data" id="addproduct" onsubmit="return addproduct()">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="category_id" value="{{$category->cat_id}}">
@@ -246,15 +246,15 @@
                 ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
                 '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
                 count_tag++;
+                tagname = $('#tag').val('');
             }
-        } else {
-            alert(test);
         }
     });
 
     function del_tag(tag_num) {
         $('#tag_'+tag_num).fadeOut();
         $('#inputtag_'+tag_num).remove();
+        count_tag--;
     }
 
     function edit_product(id) {

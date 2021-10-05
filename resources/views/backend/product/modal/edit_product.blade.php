@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('backoffice/product', $product->product_id)}}" method="POST" enctype="multipart/form-data" id="edit_product">
+            <form action="{{url('admin/product', $product->product_id)}}" method="POST" enctype="multipart/form-data" id="edit_product">
                 @csrf
                 {{method_field('PUT')}}
                 <div class="modal-body">
@@ -121,11 +121,12 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-control">
-                                        @foreach ($product->ProductgetTags as $item)
+                                        @foreach ($product->ProductgetTags('P') as $item)
                                         <label class="label label-primary label-lg" id="oldtag_{{$item->tag_id}}">{{$item->tag_name}} 
                                             <i class="icofont icofont-close pointer" onclick="del_oldtag({{$item->tag_id}})"></i>
                                         </label>
                                         @endforeach
+                                        
                                         <div id="edit_resultappend"></div>
                                         <div id="edit_resultinput_tag"></div>
                                     </div>
@@ -144,30 +145,34 @@
 </div>
 
 <script>
-    var edit_count_tag = 1;
+    var edit_count_tag = {{ $product->ProductgetTags('P')->count() }}+1;
     $('#edit_addtags').click(function () { 
-        var edit_tagname = $('#edit_tag').val();
-        if (edit_tagname != '') {
-            $("#edit_resultappend").append('<label class="label label-primary label-lg" id="edit_tag_'+edit_count_tag+'" data-numtag="'+edit_count_tag+'">'+
-            ''+edit_tagname+' <i class="icofont icofont-close pointer" onclick="edit_del_tag('+edit_count_tag+')"></i></label>'+
-            '<input type="hidden" name="edit_tag[]" id="edit_inputtag_'+edit_count_tag+'" value="'+edit_tagname+'">')
-            edit_count_tag++;
+        if (edit_count_tag <= 3) {
+            var edit_tagname = $('#edit_tag').val();
+            if (edit_tagname != '') {
+                $("#edit_resultappend").append('<label class="label label-primary label-lg" id="edit_tag_'+edit_count_tag+'" data-numtag="'+edit_count_tag+'">'+
+                ''+edit_tagname+' <i class="icofont icofont-close pointer" onclick="edit_del_tag('+edit_count_tag+')"></i></label>'+
+                '<input type="hidden" name="edit_tag[]" id="edit_inputtag_'+edit_count_tag+'" value="'+edit_tagname+'">')
+                edit_count_tag++;
+            }
         }
     });
 
     function edit_del_tag(edit_tag_num) {
         $('#edit_tag_'+edit_tag_num).fadeOut();
         $('#edit_inputtag_'+edit_tag_num).remove();
+        edit_count_tag--;
     }
 
     function del_oldtag(id) {
         $.ajax({
-            url: '{{ url('backoffice/deleteoldtags') }}/' + id,
+            url: '{{ url('admin/deleteoldtags') }}/' + id,
             type: 'POST',
             data: {id: id},
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         }).done(function (data) {
             $('#oldtag_'+id).fadeOut();
         });
+        edit_count_tag--;
     }
 </script>

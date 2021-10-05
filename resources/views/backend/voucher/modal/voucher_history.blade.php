@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($vused as $key => $item)
+                            @forelse ($vused as $key => $item)
                             <tr>
                                 <td class="text-center text-middle">{{$key+1}}</td>
                                 <td class="text-center text-middle">{{$item->Vused_hasO_customer->customer_name}} {{$item->Vused_hasO_customer->customer_lname}}</td>
@@ -30,7 +30,11 @@
                                 <td class="text-center text-middle"></td>
                                 <td class="text-center text-middle">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d/m/Y H:i:s') }}</td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-middle">No History</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
