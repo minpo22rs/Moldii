@@ -1,6 +1,6 @@
 <?php
 
-namespace App\\Http\\Controllers\\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -53,9 +53,9 @@ class VideoController extends Controller
             if ($request->tag != null) {
                 foreach ($request->tag as $key => $value) {
                     $tag = new tag();
-                    $tag->tag_name          = $value;
-                    $tag->tag_fkey          = $news->new_id;
-                    $tag->tag_type          = 'C';
+                    $tag->tag_name      = $value;
+                    $tag->tag_fkey      = $news->new_id;
+                    $tag->tag_type      = 'C';
                     $tag->save();
                 }
             }
