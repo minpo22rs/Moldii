@@ -176,7 +176,11 @@ class FlashsaleController extends Controller
             return $img;
         })
         ->addColumn('action', function($row){
-            $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->EventA_hasO_merchant->merchant_id.'" class="published ignore" checked><span class="slider round"></span></label></label>';
+            if ($row->event_accept == 1) {
+                $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->EventA_hasO_merchant->merchant_id.'" class="published ignore" checked><span class="slider round"></span></label></label>';
+            } else {
+                $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->EventA_hasO_merchant->merchant_id.'" class="published ignore"><span class="slider round"></span></label></label>';
+            }
             return $switchs;
         })
         ->rawColumns(['img','name', 'action'])
