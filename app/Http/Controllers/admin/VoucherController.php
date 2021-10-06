@@ -20,7 +20,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        $voucher = voucher::all();
+        $voucher = Voucher::all();
         $current = Carbon::now();
         $merchant = Merchant::all();
         $data = array(
