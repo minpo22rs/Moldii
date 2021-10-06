@@ -13,4 +13,14 @@ class EventApplicant extends Model
     {
         return $this->belongsTo(Flashsale::class, 'event_fs_id', 'fs_id');
     }
+
+    /**
+     * Get the EventA_hasO_merchant associated with the EventApplicant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function EventA_hasO_merchant()
+    {
+        return $this->hasOne(Merchant::class, 'merchant_id', 'event_merchant_id');
+    }
 }

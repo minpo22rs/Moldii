@@ -311,27 +311,6 @@
     //     }
     // });
 
-    $(document).ready(function() {
-        var table = $('#productTable').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: '{{ url('admin/searchproduct') }}',
-            columns: [
-                {data: 'merchant_id', name: 'product_id'},
-                {data: 'img', name: 'img'},
-                {data: 'name', name: 'product_name'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ], 
-            columnDefs: [
-                {"targets": 0, "className": "text-center text-middle"},
-                {"targets": 1, "className": "text-center text-middle"},
-                {"targets": 2, "className": "text-middle"},
-                {"targets": 3, "className": "text-center text-middle"},
-            ]
-        });
-    });
-
     function search_product() {
         var product_id = $('.itemKey').val();
         $.ajax({

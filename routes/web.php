@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('updatebanner/{id}', 'HomeSettingController@updatebanner');
         Route::post('updatestatus/{id}', 'HomeSettingController@updatestatus');
         Route::resource('flashsale', 'FlashsaleController');
-        Route::get('searchproduct', 'FlashsaleController@searchproduct');
+        Route::get('searchproduct/{id}', 'FlashsaleController@searchproduct');
         Route::resource('promotion', 'PromotionController');
         Route::resource('news', 'NewsController');
         Route::post('published/{id}', 'NewsController@published');
@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');
         Route::resource('videos', 'VideoController');
         Route::resource('podcasts', 'PodcastController');
+
+        Route::post('ignore_mercahant/{id}', 'FlashsaleController@ignore_mercahant');
 
         //product
         Route::resource('category', 'CategoryController');

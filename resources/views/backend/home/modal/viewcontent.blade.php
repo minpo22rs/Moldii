@@ -49,6 +49,23 @@
                         <label class="col-form-label">{{$fs->fs_event_applicant($fs->fs_id)}}</label>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <div class="dt-responsive table-responsive">
+                            <table id="productTable" class="table" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">#</th>
+                                        <th style="text-align: center;">Image</th>
+                                        <th style="text-align: center;">Merchant Name</th>
+                                        <th style="text-align: center;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
@@ -56,3 +73,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var id = {{ $fs->fs_id }};
+        var table = $('#productTable').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: '{{ url('admin/searchproduct') }}/' + id,
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', "className": "text-center text-middle"},
+                {data: 'img', name: 'img', "className": "text-center text-middle"},
+                {data: 'name', name: 'product_name', "className": "text-middle"},
+                {data: 'action', name: 'action', orderable: false, searchable: false, "className": "text-center text-middle"},
+            ]
+        });
+    });
+
+    $(document).on('click', '.ignore', function () { 
+        var id = $(this).attr('data-ignore');
+        var event_id = {{ $fs->fs_id }};
+        $.ajax({
+            type: "POST",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url: "{{url('admin/ignore_mercahant')}}/"+ id,
+            data: {
+                id: id,
+                event_id: event_id,
+            },
+            success: function (response) {
+                
+            }
+        });
+    });
+</script>

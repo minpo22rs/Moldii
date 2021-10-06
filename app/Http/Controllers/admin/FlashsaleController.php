@@ -9,6 +9,7 @@ use DB;
 use Storage;
 use App\Models\Merchant;
 use App\Models\Flashsale;
+use App\Models\EventApplicant;
 use Helper;
 
 class FlashsaleController extends Controller
@@ -80,6 +81,7 @@ class FlashsaleController extends Controller
     public function show($id)
     {
         $fs = Flashsale::findOrFail($id);
+        $datatable = $this->searchproduct($id);
         $data = array('fs' => $fs, );
         return view('backend.home.modal.viewcontent', $data);
     }
@@ -159,25 +161,42 @@ class FlashsaleController extends Controller
         }
     }
 
-    public function searchproduct(Request $request)
+    public function searchproduct($id)
     {
-        $data = Merchant::all();
+        $data = EventApplicant::where('event_fs_id',$id)->get();
         return Datatables::of($data)
         ->addIndexColumn()
         ->addColumn('name', function($row){
-            $name = $row->merchant_name.' '.$row->merchant_lname;
+            $name = $row->EventA_hasO_merchant->merchant_name.' '.$row->EventA_hasO_merchant->merchant_lname;
             return $name;
         })
         ->addColumn('img', function($row){
-            $imgtag = asset('storage/app/merchant/'.$row->merchant_img.'');
+            $imgtag = asset('storage/app/merchant/'.$row->EventA_hasO_merchant->merchant_img.'');
             $img = '<img src="'.$imgtag.'" class="img-fluid" width="150px" height="150px"> ';
             return $img;
         })
         ->addColumn('action', function($row){
-            $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->merchant_id.'" class="published ignore" checked><span class="slider round"></span></label></label>';
+            $switchs = '<label class="switch"><label class="switch"><input type="checkbox" name="published" data-ignore="'.$row->EventA_hasO_merchant->merchant_id.'" class="published ignore" checked><span class="slider round"></span></label></label>';
             return $switchs;
         })
         ->rawColumns(['img','name', 'action'])
         ->make(true);
+    }
+
+    public function ignore_mercahant(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $data = EventApplicant::where('event_fs_id',$request->event_id)->where('event_merchant_id', $id)->first();
+            if ($data->event_accept == 1) {
+                $data->event_accept = 2;
+            } else {
+                $data->event_accept = 1;
+            }
+            $data->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 }

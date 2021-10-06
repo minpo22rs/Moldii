@@ -51,4 +51,14 @@ class Merchant extends Authenticatable
     {
         return $this->hasMany(product::class, 'product_merchant_id', 'merchant_id');
     }
+
+    /**
+     * Get the Merchant_belong_EventA that owns the Merchant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Merchant_belong_EventA()
+    {
+        return $this->belongsTo(EventApplicant::class, 'merchant_id');
+    }
 }
