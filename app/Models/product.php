@@ -50,11 +50,11 @@ class product extends Model
     }
 
     /**
-     * Get the user that owns the product
+     * Get the Product_belong_voucher that owns the product
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function Product_belong_voucher()
     {
         return $this->belongsTo(VoucherUsed::class, 'product_id');
     }

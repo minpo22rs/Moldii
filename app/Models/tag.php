@@ -18,4 +18,14 @@ class tag extends Model
     {
         return $this->belongsTo(product::class, 'tag_fkey');
     }
+
+    /**
+     * Get the Tag_belong_New that owns the tag
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Tag_belong_New()
+    {
+        return $this->belongsTo(news::class, 'tag_fkey');
+    }
 }

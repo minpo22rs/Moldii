@@ -103,7 +103,7 @@ class NewsController extends Controller
         try {
             $news = news::findOrFail($id);
             $news->new_title            = $request->title;
-            $news->new_content           = $request->content;
+            $news->new_content          = $request->content;
             if ($request->file('editnew') !== null)
             {
                 $img = $request->file('editnew');

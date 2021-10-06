@@ -36,6 +36,10 @@
         max-width: 1200px;
     }
 
+    .pointer {
+        cursor: pointer;
+    }
+
     @media only screen and (max-width: 480px) {
         .mytooltip .tooltip-content4 {
             margin: 0 0 10px -50px !important;
@@ -222,6 +226,34 @@ height="390">
                                 placeholder="Write Something..."></textarea>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Tags</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" class="form-control" placeholder="Tag Name..." id="tag">
+                                        <span class="input-group-addon btn btn-primary" id="addtags">
+                                            <span class="">Add</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div id="resultappend"></div>
+                                        <div id="resultinput_tag"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
             <div class="modal-footer">
@@ -244,6 +276,26 @@ height="390">
 <script>
     $(".example1").DataTable();
 
+    var count_tag = 1;
+    $('#addtags').click(function () { 
+        if (count_tag <= 3) {
+            var tagname = $('#tag').val();
+            if (tagname != '') {
+                $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
+                ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
+                '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
+                count_tag++;
+                tagname = $('#tag').val('');
+            }
+        }
+    });
+
+    function del_tag(tag_num) {
+        $('#tag_'+tag_num).fadeOut();
+        $('#inputtag_'+tag_num).remove();
+        count_tag--;
+    }
+
     $(document).ready(function () {
         $('.published').change(function () { 
             var id = $(this).val();
@@ -261,7 +313,7 @@ height="390">
 
     function edit_content(id) {
         $.ajax({
-            url: '{{ url('admin/news') }}/' + id + '/edit',
+            url: '{{ url('admin/videos') }}/' + id + '/edit',
             type: 'GET',
             data: {
                 id: id

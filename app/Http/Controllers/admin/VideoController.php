@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Storage;
 use App\Models\news;
+use App\Models\tag;
 
 class VideoController extends Controller
 {
@@ -48,6 +49,17 @@ class VideoController extends Controller
             $news->new_type             = 'V';
             $news->new_img              = $request->link;
             $news->save();
+
+            if ($request->tag != null) {
+                foreach ($request->tag as $key => $value) {
+                    $tag = new tag();
+                    $tag->tag_name      = $value;
+                    $tag->tag_fkey      = $news->new_id;
+                    $tag->tag_type      = 'C';
+                    $tag->save();
+                }
+            }
+
             DB::commit();
             return redirect('admin/videos')->with('success', 'Successful');
         } catch (\Throwable $th) {
@@ -75,7 +87,9 @@ class VideoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $new = news::findOrFail($id);
+        $data = array('new' => $new, );
+        return view('backend.home.modal.editvideo', $data);
     }
 
     /**
@@ -87,7 +101,30 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $news = news::findOrFail($id);
+            $news->new_title            = $request->title;
+            $news->new_content          = $request->content;
+            $news->new_img              = $request->link;
+            $news->save();
+
+            if ($request->edit_tag != null) {
+                foreach ($request->edit_tag as $key => $value) {
+                    $tag = new tag();
+                    $tag->tag_name      = $value;
+                    $tag->tag_fkey      = $id;
+                    $tag->tag_type      = 'C';
+                    $tag->save();
+                }
+            }
+
+            DB::commit();
+            return redirect('admin/videos')->with('success', 'Successful');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect('admin/videos')->withError('Something Wrong! New can not Updated.');
+        }
     }
 
     /**

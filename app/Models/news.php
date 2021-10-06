@@ -52,4 +52,14 @@ class news extends Model
         $dislike = Comment::where('comment_type', $type)->where('comment_object_id', $this->new_id)->sum('comment_dislike');
         return $dislike;
     }
+
+    /**
+     * Get all of the Content_hasM_Tags for the news
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function Content_hasM_Tags($type = null)
+    {
+        return $this->hasMany(tag::class, 'tag_fkey', 'new_id')->where('tag_type', $type)->get();
+    }
 }
