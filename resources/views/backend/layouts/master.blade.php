@@ -292,7 +292,7 @@
                             <ul class="pcoded-item pcoded-left-item"> 
                                 <li class="pcoded-hasmenu">
                                     <li class="">
-                                        <a href="">
+                                        <a href="{{url('admin/notification')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-alarm"></i><b>D</b></span>
                                             <span class="pcoded-mtext">Notification</span>
                                             <span class="pcoded-mcaret"></span>
@@ -345,6 +345,13 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    <li class="">
+                                        <a href="">
+                                            <span class="pcoded-micon"><i class="icofont icofont-history"></i><b>D</b></span>
+                                            <span class="pcoded-mtext">Logs</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
                                 </li>
                                 {{-- <li class="">
                                     <a href="{{url("admin/rolesetting")}}">

@@ -201,10 +201,10 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="Start At..." required>
+                                            <input type="text" name="regis_datestart" class="form-control datepicker" autocomplete="off" placeholder="Start At..." required>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="End At..." required>
+                                            <input type="text" name="regis_dateend" class="form-control datepicker" autocomplete="off" placeholder="End At..." required>
                                         </div>
                                     </div>
                                 </div>
@@ -231,10 +231,10 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..." required>
+                                    <input type="text" name="datestart" class="form-control datepicker" autocomplete="off" placeholder="Start At..." required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..." required>
+                                    <input type="text" name="dateend" class="form-control datepicker" autocomplete="off" placeholder="End At..." required>
                                 </div>
                             </div>
                         </div>
@@ -272,6 +272,8 @@
 @include('flash-message')
 <script>
     $(".example1").DataTable();
+
+    $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
     function view_fs(id) {
         $.ajax({

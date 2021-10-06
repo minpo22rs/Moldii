@@ -86,7 +86,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('backoffice/notification')}}" method="POST" enctype="multipart/form-data" id="addnotification" onsubmit="return addproduct()">
+            <form action="{{url('admin/notification')}}" method="POST" enctype="multipart/form-data" id="addnotification" onsubmit="return addproduct()">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
@@ -150,7 +150,7 @@
 
     function edit_noti(id) {
         $.ajax({
-            url: '{{ url('backoffice/notification') }}/' + id + '/edit',
+            url: '{{ url('admin/notification') }}/' + id + '/edit',
             type: 'GET',
             data: {id: id},
         }).done(function (data) {
@@ -160,7 +160,7 @@
     }
 
     function del_noti(id) {
-        var urlaction = '{{url('backoffice/notification')}}' + '/' + id;
+        var urlaction = '{{url('admin/notification')}}' + '/' + id;
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-primary',
