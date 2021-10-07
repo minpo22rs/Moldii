@@ -120,7 +120,7 @@
                                 </a>
                                 <ul class="show-notification profile-notification">
                                     <li>
-                                        <a href="{{url('profile', Auth::user()->admin_id)}}">
+                                        <a href="{{url('admin/profile', Auth::user()->admin_id)}}">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
@@ -160,6 +160,16 @@
                                     <a href="{{url("admin/index")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Order Management</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="">
+                                        <span class="pcoded-micon"><i class="icofont icofont-cart"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Order</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

@@ -55,7 +55,7 @@
                             <td class="text-center text-middle">{{$item->noti_title}}</td>
                             <td>{!! Str::limit($item->noti_detail, 150) !!}</td>
                             <td class="text-center text-middle">
-                                {{ $item->noti_create_by != "" ? $item->NotigetAuthor->employee_name." ".$item->NotigetAuthor->employee_lname : "No Record" }}
+                                {{ $item->noti_create_by != "" ? $item->NotigetAuthor->_name." ".$item->NotigetAuthor->admin_lname : "No Record" }}
                             </td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">

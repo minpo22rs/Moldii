@@ -39,14 +39,14 @@ class employee extends Authenticatable
      * @var array
      */
 
-     /**
-      * Get the AuthorgetNoti that owns the employee
-      *
-      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-      */
-     public function AuthorgetNoti()
-     {
-         return $this->belongsTo(notification::class, 'noti_create_by');
-     }
+    /**
+     * Get the AuthorgetNoti that owns the employee
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function AuthorgetNoti()
+    {
+        return $this->belongsTo(notification::class, 'noti_create_by');
+    }
 }
 

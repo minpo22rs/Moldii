@@ -115,19 +115,6 @@
                 },
                 @endforeach
             ],
-            eventAfterRender: function (event, element, view) {
-        var dataHoje = new Date();
-        if (event.start < dataHoje && event.end > dataHoje) {
-            //event.color = "#FFB347"; //Em andamento
-            element.css('background-color', '#FFB347');
-        } else if (event.start < dataHoje && event.end < dataHoje) {
-            //event.color = "#77DD77"; //Concluído OK
-            element.css('background-color', '#77DD77');
-        } else if (event.start > dataHoje && event.end > dataHoje) {
-            //event.color = "#AEC6CF"; //Não iniciado
-            element.css('background-color', '#AEC6CF');
-        }
-    },
             eventClick: function (event) {
                 var id = event.event.id;
                 $.ajax({

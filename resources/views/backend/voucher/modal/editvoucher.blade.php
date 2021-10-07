@@ -45,16 +45,16 @@
                                 <div class="row m-l-10">
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="discount" value="discount" {{in_array('discount', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
-                                            <label class="border-checkbox-label" for="discount">Discount</label>
+                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="discount_{{$voucher->voucher_id}}" value="discount" {{in_array('discount', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
+                                            <label class="border-checkbox-label" for="discount_{{$voucher->voucher_id}}">Discount</label>
                                         </div>
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="cashback" value="cashback" {{in_array('cashback', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
-                                            <label class="border-checkbox-label" for="cashback">Cash Back</label>
+                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="cashback_{{$voucher->voucher_id}}" value="cashback" {{in_array('cashback', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
+                                            <label class="border-checkbox-label" for="cashback_{{$voucher->voucher_id}}">Cash Back</label>
                                         </div>
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="gift" value="gift" {{in_array('gift', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
-                                            <label class="border-checkbox-label" for="gift">Gift Voucher</label>
+                                            <input class="border-checkbox" name="canuse[]" type="checkbox" id="gift_{{$voucher->voucher_id}}" value="gift" {{in_array('gift', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
+                                            <label class="border-checkbox-label" for="gift_{{$voucher->voucher_id}}">Gift Voucher</label>
                                         </div>
                                         {{-- <div class="border-checkbox-group border-checkbox-group-primary">
                                             <input class="border-checkbox" name="canuse[]" type="checkbox" id="access" value="access" {{in_array('access', $voucher->Voucher_decode_canuse($voucher->voucher_use_for)) ? 'checked' : ''}}>
