@@ -167,7 +167,7 @@
                             <div class="pcoded-navigation-label">Order Management</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="">
+                                    <a href="{{url("admin/order")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-cart"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Order</span>
                                         <span class="pcoded-mcaret"></span>

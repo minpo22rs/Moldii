@@ -75,10 +75,10 @@
             <div class="col-xl-6 col-md-6 col-12">
                 <div class="card trnasiction-card">
                     <div class="card-header">
-                        <h3 class="text-black">Flash sale<span class="d-block">{{date('d/m/Y', strtotime($fs->fs_datestart))}} - {{date('d/m/Y', strtotime($fs->fs_dateend))}}</span></h3>
-                        <div class="card-header-right">
-                            
-                        </div>
+                        <h3 class="text-black">{{$fs->fs_type == 'FS' ? 'Flash Sale' : 'Hot Deals'}}
+                            <span class="d-block">{{date('d/m/Y', strtotime($fs->fs_datestart))}} - {{date('d/m/Y', strtotime($fs->fs_dateend))}}</span>
+                        </h3>
+                        <div class="card-header-right"></div>
                     </div>
                     <div class="card-block">
                         <p>{{$fs->fs_content}}</p>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="col-xl-12 col-md-6 col-12">
-                <div class="card bg-7 order-card">
+                <div class="card bg-3 order-card">
                     <div class="card-block">
                         <h6>Customer</h6>
                         <h2 class="text-right"><i class="icofont icofont-users f-left"></i><span>{{$customer_count}}</span></h2>

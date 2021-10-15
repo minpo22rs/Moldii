@@ -59,6 +59,40 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Options</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" class="form-control" placeholder="Options Name..." id="edit_option">
+                                        <span class="input-group-addon btn btn-primary" id="edit_addoption">
+                                            <span class="">Add</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        @foreach ($product->Product_hasM_Options as $item)
+                                        <label class="label label-primary label-lg" id="oldoption_{{$item->option_id}}">{{$item->option_name}} 
+                                            <i class="icofont icofont-close pointer" onclick="del_oldoption({{$item->option_id}})"></i>
+                                        </label>
+                                        @endforeach
+
+                                        <div id="edit_resultappend_option"></div>
+                                        <div id="edit_resultinput_option"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Amount</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -145,6 +179,24 @@
 </div>
 
 <script>
+    var edit_count_option = 1;
+    $('#edit_addoption').click(function () { 
+        var edit_optionname = $('#edit_option').val();
+        if (edit_optionname != '') {
+            $("#edit_resultappend_option").append('<label class="label label-primary label-lg" id="edit_option_'+edit_count_option+'" data-numoption="'+edit_count_option+'">'+
+            ''+edit_optionname+' <i class="icofont icofont-close pointer" onclick="edit_del_option('+edit_count_option+')"></i></label>'+
+            '<input type="hidden" name="edit_option[]" id="edit_inputoption_'+edit_count_option+'" value="'+edit_optionname+'">')
+            edit_count_option++;
+            edit_optionname = $('#edit_option').val('');
+        }
+    });
+
+    function edit_del_option(edit_option_num) {
+        $('#edit_option_'+edit_option_num).fadeOut();
+        $('#edit_inputoption_'+edit_option_num).remove();
+        edit_count_option--;
+    }
+
     var edit_count_tag = {{ $product->ProductgetTags('P')->count() }}+1;
     $('#edit_addtags').click(function () { 
         if (edit_count_tag <= 3) {
@@ -174,5 +226,17 @@
             $('#oldtag_'+id).fadeOut();
         });
         edit_count_tag--;
+    }
+
+    function del_oldoption(id) {
+        $.ajax({
+            url: '{{ url('admin/deleteoldoptions') }}/' + id,
+            type: 'POST',
+            data: {id: id},
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        }).done(function (data) {
+            $('#oldoption_'+id).fadeOut();
+        });
+        edit_count_option--;
     }
 </script>

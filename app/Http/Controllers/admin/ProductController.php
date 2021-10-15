@@ -8,6 +8,7 @@ use DB;
 use App\Models\category;
 use App\Models\product;
 use App\Models\tag;
+use App\Models\Option;
 
 class ProductController extends Controller
 {
@@ -62,6 +63,15 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+
+            if ($request->option != null) {
+                foreach ($request->option as $key => $item) {
+                    $option = new Option();
+                    $option->option_name      = $item;
+                    $option->option_fkey      = $product->product_id;
+                    $option->save();
+                }
+            }
             
             if ($request->tag != null) {
                 foreach ($request->tag as $key => $value) {
@@ -140,6 +150,15 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+            
+            if ($request->edit_option != null) {
+                foreach ($request->edit_option as $key => $item) {
+                    $option = new Option();
+                    $option->option_name      = $item;
+                    $option->option_fkey      = $id;
+                    $option->save();
+                }
+            }
 
             if ($request->edit_tag != null) {
                 foreach ($request->edit_tag as $key => $value) {
@@ -185,6 +204,17 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $tag = tag::destroy($id);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+    }
+
+    public function deleteoldoptions($id)
+    {
+        DB::beginTransaction();
+        try {
+            Option::destroy($id);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();

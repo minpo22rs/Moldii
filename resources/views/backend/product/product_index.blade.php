@@ -1,11 +1,30 @@
 @extends('backend.layouts.master')
 @section('css')
 <style>
+    .swal2-container {
+        z-index: 99999999999 !important;
+    }
+
+    .mytooltip .tooltip-item2 {
+        color: #ff9d10;
+    }
+    .tooltip-content4 {
+        background-color: #2b2b2b;
+        color: white;
+        border-bottom: 40px solid #ff9d10;
+        margin: 0 0 10px -30px !important;
+    }
     .swal2-cancel {
         margin-right: 30px;
     }
-    
+
     .pointer {cursor: pointer;}
+
+    @media only screen and (max-width: 480px) {
+        .mytooltip .tooltip-content4 {
+            margin: 0 0 10px -50px !important;
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -68,9 +87,9 @@
                             {{-- <td>{{ Str::limit($item->product_description, 50) }}</td> --}}
                             <td class="text-center text-middle">{{$item->Products_belong_Merchant->merchant_name}} {{$item->Products_belong_Merchant->merchant_lname}}</td>
                             <td class="text-center text-middle">
-                                Price: {{$item->product_price}} ฿<br>
-                                BPoint: {{$item->product_bpoint}} BP. <br>
-                                GPoint: {{$item->product_gpoint}} GP.
+                                <span style="color: #2ed8b6;">Price: </span>{{$item->product_price}} ฿<br>
+                                <span style="color: #FF5370;">BPoint:</span> {{$item->product_bpoint}} BP. <br>
+                                <span style="color: #FFB64D;">GPoint:</span> {{$item->product_gpoint}} GP.
                             </td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
                             <td class="text-center text-middle">
@@ -142,6 +161,34 @@
                             <div class="row">
                                 <div class="col-12">
                                     <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Description..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Options</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" class="form-control" placeholder="Options Name..." id="option">
+                                        <span class="input-group-addon btn btn-primary" id="addoption">
+                                            <span class="">Add</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div id="resultappend_option"></div>
+                                        <div id="resultinput_option"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +283,24 @@
 @include('flash-message')
 <script>
     $(".example1").DataTable();
+
+    var count_option = 1;
+    $('#addoption').click(function () { 
+        var optionname = $('#option').val();
+        if (optionname != '') {
+            $("#resultappend_option").append('<label class="label label-primary label-lg" id="option_'+count_option+'" data-numoption="'+count_option+'">'+
+            ''+optionname+' <i class="icofont icofont-close pointer" onclick="del_option('+count_option+')"></i></label>'+
+            '<input type="hidden" name="option[]" id="inputoption_'+count_option+'" value="'+optionname+'">')
+            count_option++;
+            optionname = $('#option').val('');
+        }
+    });
+
+    function del_option(option_num) {
+        $('#option_'+option_num).fadeOut();
+        $('#inputoption_'+option_num).remove();
+        count_option--;
+    }
 
     var count_tag = 1;
     $('#addtags').click(function () { 

@@ -58,4 +58,14 @@ class product extends Model
     {
         return $this->belongsTo(VoucherUsed::class, 'product_id');
     }
+
+    /**
+     * Get all of the Product_hasM_Options for the product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function Product_hasM_Options()
+    {
+        return $this->hasMany(Option::class, 'option_fkey', 'product_id');
+    }
 }

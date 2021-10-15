@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
         Route::post('deleteoldtags/{id}', 'ProductController@deleteoldtags');
+        Route::post('deleteoldoptions/{id}', 'ProductController@deleteoldoptions');
 
         //admin
         Route::resource('admin', 'AdminController');
@@ -72,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
 
         // ticket
         Route::resource('ticket', 'TicketController');
+
+        // order
+        Route::resource('order', 'OrderController');
     });
 });
 
