@@ -85,7 +85,13 @@
                             </td>
                             <td class="text-center text-middle">{{$item->product_name}}</td>
                             {{-- <td>{{ Str::limit($item->product_description, 50) }}</td> --}}
-                            <td class="text-center text-middle">{{$item->Products_belong_Merchant->merchant_name}} {{$item->Products_belong_Merchant->merchant_lname}}</td>
+                            <td class="text-center text-middle">
+                                @if ($item->Products_belong_Merchant != null)
+                                {{$item->Products_belong_Merchant->merchant_name}} {{$item->Products_belong_Merchant->merchant_lname}}
+                                @else
+                                Admin
+                                @endif
+                            </td>
                             <td class="text-center text-middle">
                                 <span style="color: #2ed8b6;">Price: </span>{{$item->product_price}} ฿<br>
                                 <span style="color: #FF5370;">BPoint:</span> {{$item->product_bpoint}} BP. <br>

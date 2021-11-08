@@ -89,7 +89,7 @@ class VoucherController extends Controller
             return redirect('admin/voucher')->with('success', 'Successful');
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect('admin/voucher')->withError('Something Wrong! New Merchant can not saved.');
+            return redirect('admin/voucher')->withError('Something Wrong! New Voucher can not saved.');
         }
     }
 
@@ -133,7 +133,12 @@ class VoucherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 
     /**
@@ -145,5 +150,28 @@ class VoucherController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function Voucher_check(Request $request)
+    {
+        $voucher = Voucher::where('voucher_code', $request->code)->first();
+        $current = Carbon::now();
+        if ($voucher != null && Carbon::create($current)->between($voucher->voucher_start, $voucher->voucher_expire)) {
+            return 'Voucher can useing';
+        } else {
+            return 'Voucher can not useing';
+        }
+        
+    }
+
+    public function Voucher_useing(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $voucher = Voucher::where('voucher_code', $request->code)->first();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 }
