@@ -85,11 +85,18 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant', 'as' => 'mercha
     // event
     Route::resource('event', 'EventController');
     Route::post('eventdecline/{id}', 'EventController@eventdecline');
+    Route::post('event_selectproduct/{id}', 'EventController@event_selectproduct');
+    Route::get('selectphase', 'EventController@selectphase');
+
+    // calendar
+    Route::resource('calendar', 'CalendarController');
 
     // product
     Route::resource('product', 'ProductController');
     Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');
 });
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

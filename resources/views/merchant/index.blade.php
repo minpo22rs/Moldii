@@ -1,8 +1,40 @@
 @extends('merchant.layouts.master')
 @section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('/files/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('/files/bower_components/multiselect/css/multi-select.css')}}" />
+
 <style>
     .swal2-cancel {
         margin-right: 30px;
+    }
+
+    .mytooltip .tooltip-item2 {
+        color: #ff9d10;
+    }
+    .tooltip-content4 {
+        background-color: #2b2b2b;
+        color: white;
+        border-bottom: 40px solid #ff9d10;
+        margin: 0 0 10px -50px !important;
+    }
+    .select2-container {    
+        z-index: 999999999999;
+    }
+    .select2-dropdown .select2-dropdown--below {
+        z-index: 9999999999999;
+    }
+    .select2-search__field {
+        z-index: 99999999999999;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background: #4099ff !important;
+        border: none;
+    }
+    .modal-xl{max-width:1200px;}
+    @media only screen and (max-width: 480px) {
+        .mytooltip .tooltip-content4 {
+            margin: 0 0 10px -50px !important;
+        }
     }
 </style>
 @endsection
@@ -95,8 +127,8 @@
                     @if (!empty($fs->Fs_hasO_event))
                         @if ($fs->Fs_hasO_event->event_accept == 1)
                         <div class="b-t-default transection-footer row">
-                            <div class="col-12  b-r-default bg-c-blue" data-toggle="modal" data-target="#accept">
-                                <a href="#!" class="" style="color: white;">See Detail</a>
+                            <div class="col-12 b-r-default bg-c-blue">
+                                <a href="{{url('merchant/event', $fs->fs_id)}}" class="" style="color: white;">See Detail</a>
                             </div>
                         </div>
                         @endif
@@ -153,6 +185,7 @@
     </div>
 </div>
 
+@if (Carbon\Carbon::create($current)->between($fs->fs_regis_start, $fs->fs_dateend))
 <div class="modal fade" id="accept" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -191,48 +224,85 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
+                    {{-- <hr>
                     <br>
                     <div class="form-group row">
                         <label class="col-sm-12 col-form-label" style="color: #FF5370;">เลือกสินค้าที่ต้องในแต่ละวันและช่วงเวลา</label>
-                    </div>
+                    </div> --}}
+                    {{-- @for ($i = $fs->fs_datestart; $i <= $fs->fs_dateend; $i++)
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">22/08/2021</label>
+                        <label class="col-sm-2 col-form-label">{{date('d/m/Y', strtotime($i))}}</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-xl-12">
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs md-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home3" role="tab">00:00</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#phase1{{$i}}" role="tab">00:00</a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile3" role="tab">12:00</a>
+                                            <a class="nav-link" data-toggle="tab" href="#phase2{{$i}}" role="tab">12:00</a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#messages3" role="tab">18:00</a>
+                                            <a class="nav-link" data-toggle="tab" href="#phase3{{$i}}" role="tab">18:00</a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#settings3" role="tab">21:00</a>
+                                            <a class="nav-link" data-toggle="tab" href="#phase4{{$i}}" role="tab">21:00</a>
                                             <div class="slide"></div>
                                         </li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content card-block">
-                                        <div class="tab-pane active" id="home3" role="tabpanel">
-                                            <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                        <div class="tab-pane active" id="phase1{{$i}}" role="tabpanel">
+                                            <div class="form-group row m-t-10">
+                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <div class="col-sm-4">
+                                                    <select class="js-example-basic-multiple col-sm-12" name="product_phase1_{{$i}}[]">
+                                                        @foreach ($product as $item)
+                                                        <option value="{{$item->product_id}}">{{$item->product_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="tab-pane" id="profile3" role="tabpanel">
-                                            <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                        <div class="tab-pane" id="phase2{{$i}}" role="tabpanel">
+                                            <div class="form-group row m-t-10">
+                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <div class="col-sm-10">
+                                                    <select class="js-example-basic-multiple col-sm-12" name="product_phase2_{{$i}}[]" multiple="multiple">
+                                                        @foreach ($product as $item)
+                                                        <option value="{{$item->product_id}}">{{$item->product_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="tab-pane" id="messages3" role="tabpanel">
-                                            <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                        <div class="tab-pane" id="phase3{{$i}}" role="tabpanel">
+                                            <div class="form-group row m-t-10">
+                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <div class="col-sm-10">
+                                                    <select class="js-example-basic-multiple col-sm-12" name="product_phase3_{{$i}}[]" multiple="multiple">
+                                                        @foreach ($product as $item)
+                                                        <option value="{{$item->product_id}}">{{$item->product_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="tab-pane" id="settings3" role="tabpanel">
-                                            <p class="m-0">4.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                        <div class="tab-pane" id="phase4{{$i}}" role="tabpanel">
+                                            <div class="form-group row m-t-10">
+                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <div class="col-sm-10">
+                                                    <select class="js-example-basic-multiple col-sm-12" name="product_phase4_{{$i}}[]" multiple="multiple">
+                                                        @foreach ($product as $item)
+                                                        <option value="{{$item->product_id}}">{{$item->product_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -241,49 +311,7 @@
                     </div>
                     <hr>
                     <br>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">23/08/2021</label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs md-tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home3" role="tab">00:00</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile3" role="tab">12:00</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#messages3" role="tab">18:00</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#settings3" role="tab">21:00</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    </ul>
-                                    <!-- Tab panes -->
-                                    <div class="tab-content card-block">
-                                        <div class="tab-pane active" id="home3" role="tabpanel">
-                                            <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
-                                        </div>
-                                        <div class="tab-pane" id="profile3" role="tabpanel">
-                                            <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
-                                        </div>
-                                        <div class="tab-pane" id="messages3" role="tabpanel">
-                                            <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
-                                        </div>
-                                        <div class="tab-pane" id="settings3" role="tabpanel">
-                                            <p class="m-0">4.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor --}}
                 </div>
                 <input type="hidden" name="fs_id" value="{{$fs->fs_id}}">
             </form>
@@ -294,6 +322,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <form action="" method="post" id="event_decline">
     @csrf

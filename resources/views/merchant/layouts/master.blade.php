@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Moldii Merchant</title>
+    <title>{{ config('app.name') }} Merchant</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -167,6 +167,16 @@
                                     <a href="{{url('merchant/product')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-cubes"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Product</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">marketing section</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="{{url('merchant/calendar')}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-calendar"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Calendar</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

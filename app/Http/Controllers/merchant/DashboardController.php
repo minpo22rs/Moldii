@@ -18,10 +18,12 @@ class DashboardController extends Controller
         $current = Carbon::now();
         $fs = Flashsale::latest()->first();
         $product_count = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->count();
+        $product = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->get();
         $data = array(
             'current' => $current, 
             'fs' => $fs, 
             'product_count' => $product_count, 
+            'product' => $product, 
         );
         return view('merchant.index', $data);
     }
