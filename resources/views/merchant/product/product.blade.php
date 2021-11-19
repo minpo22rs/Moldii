@@ -88,7 +88,7 @@
                                         <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$item->product_id}})"><i class="icofont icofont-speech-comments"></i> View Comment</a>
                                         <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_product({{$item->product_id}})"><i class="fa fa-edit"></i> Edit</a>
                                         <div class="dropdown-divider"></div>
-                                        {{-- <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> Delete</a> --}}
+                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> Delete</a>
                                     </div>
                                 </div>
                             </td>
@@ -155,9 +155,31 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Material <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">Options</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="material" placeholder="Material...">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" class="form-control" placeholder="Options Name..." id="option">
+                                        <span class="input-group-addon btn btn-primary" id="addoption">
+                                            <span class="">Add</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        <div id="resultappend_option"></div>
+                                        <div id="resultinput_option"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -168,17 +190,6 @@
                                     <input type="number" name="amount" class="form-control" placeholder="Amount">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Category <span class="text-danger">*</span></label>
-                        <div class="col-sm-10">
-                            <select name="category_id" class="form-control">
-                                <option selected disabled>Select Category...</option>
-                                @foreach ($category as $item)
-                                <option value="{{$item->cat_id}}">{{$item->cat_name}}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -202,18 +213,18 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price..." min="0" required>
+                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price...">
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint..." min="0">
+                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint...">
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint..." min="0">
+                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint...">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tags</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -240,7 +251,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </form>
             <div class="modal-footer">
@@ -253,10 +264,52 @@
 
 <div id="result-modal"></div>
 <div id="result-modalview"></div>
+<form action="" method="post" id="delete_product">
+    @csrf
+    {{ method_field('delete') }}
+</form>
 @endsection
 @section('js')
 @include('flash-message')
 <script>
+    var count_option = 1;
+    $('#addoption').click(function () { 
+        var optionname = $('#option').val();
+        if (optionname != '') {
+            $("#resultappend_option").append('<label class="label label-primary label-lg" id="option_'+count_option+'" data-numoption="'+count_option+'">'+
+            ''+optionname+' <i class="icofont icofont-close pointer" onclick="del_option('+count_option+')"></i></label>'+
+            '<input type="hidden" name="option[]" id="inputoption_'+count_option+'" value="'+optionname+'">')
+            count_option++;
+            optionname = $('#option').val('');
+        }
+    });
+
+    function del_option(option_num) {
+        $('#option_'+option_num).fadeOut();
+        $('#inputoption_'+option_num).remove();
+        count_option--;
+    }
+
+    var count_tag = 1;
+    $('#addtags').click(function () { 
+        if (count_tag <= 3) {
+            var tagname = $('#tag').val();
+            if (tagname != '') {
+                $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
+                ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
+                '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
+                count_tag++;
+                tagname = $('#tag').val('');
+            }
+        }
+    });
+
+    function del_tag(tag_num) {
+        $('#tag_'+tag_num).fadeOut();
+        $('#inputtag_'+tag_num).remove();
+        count_tag--;
+    }
+    
     function edit_product(id) {
         $.ajax({
             url: '{{ url('merchant/product') }}/' + id + '/edit',
@@ -278,5 +331,44 @@
             $("#viewmodal").modal('show');
         });
     }
+
+    function del_product(id) {
+        var urlaction = '{{url('merchant/product')}}' + '/' + id;
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                $("#delete_product").attr('action', urlaction);
+                $("#delete_product").submit();
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Product has been Deleted',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Canceled',
+                    'Product has been Saved',
+                    'error'
+                )
+            }
+        })
+    };
 </script>
 @endsection

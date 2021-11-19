@@ -39,8 +39,11 @@
                         <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <input type="text" name="name" class="form-control" placeholder="Name..." value="{{$product->product_name}}">
+                                </div>
+                                <div class="col-6">
+                                    <label class="col-form-label">( {{$product->product_code}} )</label>
                                 </div>
                             </div>
                         </div>
@@ -56,11 +59,45 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Options</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" class="form-control" placeholder="Options Name..." id="edit_option">
+                                        <span class="input-group-addon btn btn-primary" id="edit_addoption">
+                                            <span class="">Add</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-control">
+                                        @foreach ($product->Product_hasM_Options as $item)
+                                        <label class="label label-primary label-lg" id="oldoption_{{$item->option_id}}">{{$item->option_name}} 
+                                            <i class="icofont icofont-close pointer" onclick="del_oldoption({{$item->option_id}})"></i>
+                                        </label>
+                                        @endforeach
+
+                                        <div id="edit_resultappend_option"></div>
+                                        <div id="edit_resultinput_option"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Amount</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}">
+                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -86,18 +123,18 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price..." min="0" value="{{$product->product_price}}" required>
+                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price..." value="{{$product->product_price}}" readonly>
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint..." min="0" value="{{$product->product_bpoint}}">
+                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint..." value="{{$product->product_bpoint}}" readonly>
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint..." min="0" value="{{$product->product_gpoint}}">
+                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint..." value="{{$product->product_gpoint}}" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tags</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -118,18 +155,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-control">
-                                        @foreach ($product->ProductgetTags as $item)
+                                        @foreach ($product->ProductgetTags('P') as $item)
                                         <label class="label label-primary label-lg" id="oldtag_{{$item->tag_id}}">{{$item->tag_name}} 
                                             <i class="icofont icofont-close pointer" onclick="del_oldtag({{$item->tag_id}})"></i>
                                         </label>
                                         @endforeach
+                                        
                                         <div id="edit_resultappend"></div>
                                         <div id="edit_resultinput_tag"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </form>
             <div class="modal-footer">

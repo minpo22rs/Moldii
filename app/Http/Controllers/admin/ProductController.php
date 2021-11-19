@@ -188,6 +188,8 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
+            $product = product::findOrFail($id);
+            $image_path = Storage::delete('product_cover/'.$product->product_img);
             $product = product::destroy($id);
             $tag = tag::where('tag_fkey', $id)->delete();
 

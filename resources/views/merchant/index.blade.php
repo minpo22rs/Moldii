@@ -152,7 +152,7 @@
                     <div class="card-block text-center">
                         <i class="icofont icofont-notification text-c-blue d-block f-40"></i>
                         <h4 class="m-b-40">No Event</h4>
-                        <button class="btn btn-primary btn-sm btn-round">More</button>
+                        <a href="{{url('merchant/calendar')}}" class="btn btn-primary btn-sm btn-round">More Event</a>
                     </div>
                 </div>
             </div>

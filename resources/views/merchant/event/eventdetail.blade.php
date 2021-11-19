@@ -7,6 +7,10 @@
         /* color: #fff; */
         background-color: #fff;
     }
+
+    .input-group-addon {
+        background-color: #FF5370;
+    }
 </style>
 @endsection
 @section('content')
@@ -36,15 +40,17 @@
         <form action="{{url('merchant/event_selectproduct', $fs->fs_id)}}" method="POST" id="event_selectproduct">
             @csrf
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">
+                <div class="col-sm-2 col-form-label">
                     <h6>Date & Time</h6>
-                    <br>
-                    <select name="date" class="form-control time" id="date">
+                </div>
+                <div class="col-sm-5">
+                    <select name="date" class="form-control form-control-primary time" id="date">
                         @for ($i = $fs->fs_datestart; $i <= $fs->fs_dateend; $i++)
                         <option value="{{$i}}">{{date('d/m/Y', strtotime($i))}}</option>
                         @endfor
                     </select>
-                    <br>
+                </div>
+                <div class="col-sm-5">
                     <select name="time" class="form-control form-control-warning time" id="time">
                         <option value="1" selected>00:00</option>
                         <option value="2">12:00</option>
@@ -52,23 +58,26 @@
                         <option value="4">21:00</option>
                     </select>
                     <input type="hidden" id="phase" value="1">
-                </label>
-                <div class="col-sm-10">
-                    <div id="result">
+                </div>
+                <div class="col-sm-12">
+                    <div id="resultdiv">
                         @foreach ($eventselect as $key => $item_event)
                         <input type="hidden" name="event_id[{{ $item_event->event_sp_id }}]" value="{{ $item_event->event_sp_id }}">
                         <div class="form-group row m-t-10">
-                        <div class="col-6">
-                            <select class="form-control" name="product[{{ $item_event->event_sp_id }}]" id="product_{{$key}}">
-                                <option disabled>Select Product</option>
-                                @foreach ($product as $item)
-                                <option value="{{$item->product_id}}" {{ $item_event->event_sp_product_id == $item->product_id ? "selected" : "" }}>{{$item->product_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" name="discount[{{ $item_event->event_sp_id }}]" id="discount_{{$key}}" class="form-control" value="{{ $item_event->event_sp_value }}" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
-                        </div>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="product[{{ $item_event->event_sp_id }}]" id="product_{{$key}}">
+                                    <option disabled>Select Product</option>
+                                    @foreach ($product as $item)
+                                    <option value="{{$item->product_id}}" {{ $item_event->event_sp_product_id == $item->product_id ? "selected" : "" }}>{{$item->product_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="number" name="discount[{{ $item_event->event_sp_id }}]" id="discount_{{$key}}" class="form-control" value="{{ $item_event->event_sp_value }}" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
+                                    <span class="input-group-addon" id="basic-addon3">{{$fs->fs_maximum_sale}}%</span>
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                         @if ($eventselect->count() < 3)
@@ -83,7 +92,10 @@
                                 </select>
                             </div>
                             <div class="col-6">
-                                <input type="number" name="new_discount[]" class="form-control" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
+                                <div class="input-group">
+                                    <input type="number" name="new_discount[]" class="form-control" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
+                                    <span class="input-group-addon" id="basic-addon3">{{$fs->fs_maximum_sale}}%</span>
+                                </div>
                             </div>
                         </div>
                         @endfor
@@ -113,7 +125,7 @@
             },
             dataType: "JSON",
             success: function (response) {
-                $('#result').html(response.html);
+                $('#resultdiv').html(response.html);
             }
         });
         $('#phase').val(time);

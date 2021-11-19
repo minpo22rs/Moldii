@@ -176,7 +176,7 @@ class EventController extends Controller
         foreach ($product as $key => $value) {
             $option = '';
             foreach ($our_product as $key => $item) {
-                $select ='';
+                $select = '';
                 if ($value->event_sp_product_id == $item->product_id) {
                     $select = 'selected';
                 }
