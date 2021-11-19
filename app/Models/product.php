@@ -68,4 +68,14 @@ class product extends Model
     {
         return $this->hasMany(Option::class, 'option_fkey', 'product_id');
     }
+
+    /**
+     * Get the Product_belong_Event that owns the product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Product_belong_EventSP()
+    {
+        return $this->belongsTo(EventSelect::class, 'product_id');
+    }
 }

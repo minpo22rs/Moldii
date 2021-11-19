@@ -165,11 +165,53 @@ class EventController extends Controller
         }
     }
 
-    public function selectphase(Request $request)
+    public function selectphase(Request $request, $id)
     {
-        $product['data'] = EventSelect::where('event_sp_date', $request->date)
+        $fs = Flashsale::findOrFail($id);
+        $our_product = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->get();
+        $product = EventSelect::where('event_sp_date', $request->date)
         ->where('event_sp_phase', $request->time)
         ->where('event_sp_merchant_id', Auth::guard('merchant')->user()->merchant_id)->get();
-        return response()->json($product);
+        $html = '';
+        foreach ($product as $key => $value) {
+            $option = '';
+            foreach ($our_product as $key => $item) {
+                $select ='';
+                if ($value->event_sp_product_id == $item->product_id) {
+                    $select = 'selected';
+                }
+                $option .= '<option value="'.$item->product_id.'"'.$select.'>'.$item->product_name.'</option>';
+            }
+            $html .= '<input type="hidden" name="event_id['.$value->event_sp_id.']" value="'.$value->event_sp_id.'">'.
+            '<div class="form-group row m-t-10">'.
+                '<div class="col-6">'.
+                    '<select class="form-control" name="product['.$value->event_sp_id.']" id="product_'.$key.'">'.
+                        '<option disabled>Select Product</option>'.$option.
+                    '</select>'.
+                '</div>'.
+                '<div class="col-6">'.
+                    '<input type="number" name="discount['.$value->event_sp_id.']" id="discount_'.$key.'" class="form-control" value="'.$value->event_sp_value.'" placeholder="Maximun Sale = '.$fs->fs_maximum_sale.'%" max="'.$fs->fs_maximum_sale.'" min="0">'.
+                '</div>'.
+            '</div>'.
+        '</div>';
+        }
+        for ($i = $product->count(); $i < 3; $i++) { 
+            $option = '';
+            foreach ($our_product as $key => $item) {
+                $option .= '<option value="'.$item->product_id.'">'.$item->product_name.'</option>';
+            }
+            $html .= '<div class="form-group row m-t-10">'.
+            '<div class="col-6">'.
+                '<select class="form-control" name="new_product[]" id="new_product_'.$i.'">'.
+                    '<option selected disabled>Select Product</option>'.$option.
+                '</select>'.
+            '</div>'.
+            '<div class="col-6">'.
+                '<input type="number" name="new_discount[]" class="form-control" placeholder="Maximun Sale = '.$fs->fs_maximum_sale.'%" max="'.$fs->fs_maximum_sale.'" min="0">'.
+            '</div>'.
+        '</div>';
+        }
+        $data = array('html' => $html, );
+        return $data;
     }
 }

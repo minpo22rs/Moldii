@@ -86,7 +86,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant', 'as' => 'mercha
     Route::resource('event', 'EventController');
     Route::post('eventdecline/{id}', 'EventController@eventdecline');
     Route::post('event_selectproduct/{id}', 'EventController@event_selectproduct');
-    Route::get('selectphase', 'EventController@selectphase');
+    Route::get('selectphase/{id}', 'EventController@selectphase');
 
     // calendar
     Route::resource('calendar', 'CalendarController');
