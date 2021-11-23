@@ -237,7 +237,7 @@
                                         </div>
                                         <div class="radio radiofill radio-primary radio-inline">
                                             <label>
-                                                <input type="radio" name="unit" value="precision">
+                                                <input type="radio" name="unit" value="%">
                                                 <i class="helper"></i>%
                                             </label>
                                         </div>
@@ -302,7 +302,7 @@
                         <div class="col-sm-10">
                             <div class="border-checkbox-section m-l-10">
                                 <div class="border-checkbox-group border-checkbox-group-warning">
-                                    <input class="border-checkbox" type="checkbox" id="announcer" value="announcer">
+                                    <input class="border-checkbox" type="checkbox" name="announcer" id="announcer" value="1">
                                     <label class="border-checkbox-label" for="announcer"></label>
                                 </div>
                             </div>

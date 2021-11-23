@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Models\VoucherUsed;
 use Helper;
 use App\Models\Merchant;
+use App\Models\notification;
+use Auth;
 
 class VoucherController extends Controller
 {
@@ -69,7 +71,7 @@ class VoucherController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
+        
         DB::beginTransaction();
         try {
             $voucher = new Voucher();
@@ -84,6 +86,15 @@ class VoucherController extends Controller
             $voucher->voucher_partner   	    = json_encode($request->partner);
             $voucher->voucher_code   	        = substr(md5(mt_rand()), 0, 8);
             $voucher->save();
+
+            if ($request->announcer == 1) {
+                $noti = new notification();
+                $noti->noti_title       = $request->name;
+                $noti->noti_date        = Helper::convert_date_format($request->datestart);
+                $noti->noti_detail      = $request->note;
+                $noti->noti_create_by   = Auth::user()->admin_id;
+                $noti->save();
+            }
             
             DB::commit();
             return redirect('admin/voucher')->with('success', 'Successful');

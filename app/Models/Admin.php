@@ -41,4 +41,14 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the AdminHasONoti that owns the Admin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function AdminHasONoti()
+    {
+        return $this->belongsTo(notification::class, 'admin_id');
+    }
 }

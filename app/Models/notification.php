@@ -16,6 +16,6 @@ class notification extends Model
      */
     public function NotigetAuthor()
     {
-        return $this->hasOne(employee::class, 'employee_id', 'noti_create_by');
+        return $this->hasOne(Admin::class, 'admin_id', 'noti_create_by');
     }
 }

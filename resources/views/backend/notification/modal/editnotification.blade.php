@@ -36,7 +36,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="detail" id="summernote" class="form-control summernote" cols="30" rows="10">
+                                    <textarea name="detail" class="form-control" cols="30" rows="10">
                                         {!!$noti->noti_detail!!}
                                     </textarea>
                                 </div>
@@ -52,9 +52,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote();
-    });
-</script>

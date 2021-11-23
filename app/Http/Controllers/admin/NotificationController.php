@@ -49,7 +49,7 @@ class NotificationController extends Controller
             $noti->noti_title       = $request->title;
             $noti->noti_date        = $date[2].'-'.$date[1].'-'.$date[0];
             $noti->noti_detail      = $request->detail;
-            $noti->noti_create_by   = Auth::user()->employee_id;
+            $noti->noti_create_by   = Auth::user()->admin_id;
             $noti->save();
             DB::commit();
             return redirect('admin/notification')->with('success', 'Successful');

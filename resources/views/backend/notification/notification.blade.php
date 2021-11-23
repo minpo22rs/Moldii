@@ -55,7 +55,7 @@
                             <td class="text-center text-middle">{{$item->noti_title}}</td>
                             <td>{!! Str::limit($item->noti_detail, 150) !!}</td>
                             <td class="text-center text-middle">
-                                {{ $item->noti_create_by != "" ? $item->NotigetAuthor->_name." ".$item->NotigetAuthor->admin_lname : "No Record" }}
+                                {{ $item->noti_create_by != "" ? $item->NotigetAuthor->admin_name." ".$item->NotigetAuthor->admin_lname : "No Record" }}
                             </td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">
@@ -114,7 +114,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="detail" id="summernote" class="form-control summernote" cols="30" rows="10"></textarea>
+                                    <textarea name="detail" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +143,6 @@
     $(".example1").DataTable();
 
     $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
-    
-    $(document).ready(function() {
-        $('.summernote').summernote();
-    });
 
     function edit_noti(id) {
         $.ajax({
