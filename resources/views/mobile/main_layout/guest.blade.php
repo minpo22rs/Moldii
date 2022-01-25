@@ -14,7 +14,10 @@
     <link rel="icon" type="image/png" href=" {{ asset('new_assets/img/favicon.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href=" {{ asset('new_assets/img/icon/192x192.png') }}">
     <link rel="stylesheet" href=" {{ asset('new_assets/css/style.css') }}">
+    <link rel="stylesheet" href=" {{ asset('new_assets/css/input.css') }}">
     <link rel="manifest" href="{{ asset('custom_assets/__manifest.json') }}">
+   
+    
 </head>
 
 <body class="bg-white">
@@ -34,6 +37,7 @@
     <!-- ///////////// Js Files ////////////////////  -->
     <!-- Jquery -->
     <script src=" {{ asset('new_assets/js/lib/jquery-3.4.1.min.js') }}"></script>
+    <script src=" {{ asset('new_assets/js/input.js') }}"></script>
     <!-- Bootstrap-->
     <script src=" {{ asset('new_assets/js/lib/popper.min.js') }}"></script>
     <script src=" {{ asset('new_assets/js/lib/bootstrap.min.js') }}"></script>

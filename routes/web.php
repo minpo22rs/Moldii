@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mobile\user\UserAccController;
 use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
+use App\Http\Controllers\mobile\user\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
+use App\Http\Controllers\mobile\user\OtpController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +36,11 @@ Route::get('user/wallet', [WalletController::class, 'index']);
 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
+Route::post('register',[RegisterController::class,'create'])->name('Register');
+
+
+
+Route::get('otp',[OtpController::class,'index'])->name('OTP');
+Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
+Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
+Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
