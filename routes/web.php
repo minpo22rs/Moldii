@@ -33,3 +33,13 @@ Route::get('user/wallet', [WalletController::class, 'index']);
 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
+Route::get('/clc', function() {
+	Artisan::call('cache:clear');
+	Artisan::call('config:clear');
+	Artisan::call('config:cache');
+	Artisan::call('view:clear');
+    // Artisan::call('optimize');
+    // Artisan::call('clear-compiled');
+    // session()->forget('key');
+	return "Cleared!";
+});

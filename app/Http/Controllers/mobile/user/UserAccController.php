@@ -4,6 +4,7 @@ namespace App\Http\Controllers\mobile\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class UserAccController extends Controller
 {
@@ -15,6 +16,7 @@ class UserAccController extends Controller
 
     public function login()
     {
+        // dd(DB::Table('tb_admins')->get());
         return view('mobile.member.login.login');
     }
 
