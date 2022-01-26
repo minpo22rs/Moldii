@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
 
 ///////////////////////////////////////////////////////////////////////////
 // Page Loader with preload
-$(document).ready(function () {
+$(document).ready(function() {
     setTimeout(() => {
         $("#loader").fadeToggle(250);
     }, 700); // hide delay when page load
@@ -20,18 +20,19 @@ $(document).ready(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Fix for # href
-$('a[href="#"]').click(function (e) {
-    e.preventDefault();
-})
-///////////////////////////////////////////////////////////////////////////
+$('a[href="#"]').click(function(e) {
+        e.preventDefault();
+    })
+    ///////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////
 // Go Top Button
-$(".goTop").click(function (event) {
+$(".goTop").click(function(event) {
     event.preventDefault();
     $("html, body").animate({ scrollTop: 0 }, "slow");
 });
+
 function goDownButton() {
     var scrollD = $(this).scrollTop();
     if (scrollD > 350) {
@@ -41,7 +42,7 @@ function goDownButton() {
     }
 }
 goDownButton();
-$(window).scroll(function () {
+$(window).scroll(function() {
     goDownButton();
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -49,7 +50,7 @@ $(window).scroll(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Go Back Button
-$(".goBack").click(function () {
+$(".goBack").click(function() {
     window.history.go(-1);
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -57,7 +58,7 @@ $(".goBack").click(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Adbox Close
-$(".adbox .closebutton").click(function () {
+$(".adbox .closebutton").click(function() {
     $(this).parent(".adbox").addClass("hide");
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -74,18 +75,15 @@ if (windowsPhoneDetection) {
     // Windows Phone Detected
     $(".windowsphone-detection").addClass("is-active");
     $(".mobile-detection").addClass("is-active");
-}
-else if (androidDetection) {
+} else if (androidDetection) {
     // Android Detected
     $(".android-detection").addClass("is-active");
     $(".mobile-detection").addClass("is-active");
-}
-else if (iosDetection) {
+} else if (iosDetection) {
     // iOS Detected
     $(".ios-detection").addClass("is-active");
     $(".mobile-detection").addClass("is-active");
-}
-else {
+} else {
     // Non-Mobile Detected
     $(".non-mobile-detection").addClass("is-active");
 
@@ -95,32 +93,31 @@ else {
 
 ///////////////////////////////////////////////////////////////////////////
 // Tooltip
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-///////////////////////////////////////////////////////////////////////////
+$(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    ///////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////
 // Input
-$(".clear-input").click(function () {
+$(".clear-input").click(function() {
     $(this).parent(".input-wrapper").find(".form-control").focus();
     $(this).parent(".input-wrapper").find(".form-control").val("");
     $(this).parent(".input-wrapper").removeClass("not-empty");
 });
 // active
-$(".form-group .form-control").focus(function () {
-    $(this).parent(".input-wrapper").addClass("active");
-}).blur(function () {
-    $(this).parent(".input-wrapper").removeClass("active");
-})
-// empty check
-$(".form-group .form-control").keyup(function () {
+$(".form-group .form-control").focus(function() {
+        $(this).parent(".input-wrapper").addClass("active");
+    }).blur(function() {
+        $(this).parent(".input-wrapper").removeClass("active");
+    })
+    // empty check
+$(".form-group .form-control").keyup(function() {
     var inputCheck = $(this).val().length;
     if (inputCheck > 0) {
         $(this).parent(".input-wrapper").addClass("not-empty");
-    }
-    else {
+    } else {
         $(this).parent(".input-wrapper").removeClass("not-empty");
     }
 });
@@ -129,12 +126,11 @@ $(".form-group .form-control").keyup(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Searchbox Toggle
-$(".toggle-searchbox").click(function () {
+$(".toggle-searchbox").click(function() {
     var a = $("#search").hasClass("show");
     if (a) {
         $("#search").removeClass("show");
-    }
-    else {
+    } else {
         $("#search").addClass("show");
         $("#search .form-control").focus();
     }
@@ -143,16 +139,15 @@ $(".toggle-searchbox").click(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Stepper
-$("body").on("click", ".stepper-up", function () {
+$("body").on("click", ".stepper-up", function() {
     var valueInput = $(this).parent(".stepper").children(".form-control");
     valueInput.val(parseInt(valueInput.val()) + 1);
 });
-$("body").on("click", ".stepper-down", function () {
+$("body").on("click", ".stepper-down", function() {
     var valueInput = $(this).parent(".stepper").children(".form-control");
     if (parseInt(valueInput.val()) < 1) {
-        
-    }
-    else{
+
+    } else {
         valueInput.val(parseInt(valueInput.val()) - 1);
     }
 });
@@ -246,12 +241,12 @@ function notification(target, time) {
     }
 };
 // close button notification
-$(".notification-box .close-button").click(function (event) {
+$(".notification-box .close-button").click(function(event) {
     event.preventDefault();
     $(".notification-box.show").removeClass("show");
 });
 // tap to close notification
-$(".notification-box.tap-to-close .notification-dialog").click(function () {
+$(".notification-box.tap-to-close .notification-dialog").click(function() {
     $(".notification-box.show").removeClass("show");
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -274,12 +269,12 @@ function toastbox(target, time) {
     }
 };
 // close button toast
-$(".toast-box .close-button").click(function (event) {
+$(".toast-box .close-button").click(function(event) {
     event.preventDefault();
     $(".toast-box.show").removeClass("show");
 });
 // tap to close toast
-$(".toast-box.tap-to-close").click(function () {
+$(".toast-box.tap-to-close").click(function() {
     $(this).removeClass("show");
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -301,12 +296,12 @@ function toastbox1(target, time) {
     }
 };
 // close button toast
-$(".toast-box1 .close-button").click(function (event) {
+$(".toast-box1 .close-button").click(function(event) {
     event.preventDefault();
     $(".toast-box1.show").removeClass("show");
 });
 // tap to close toast
-$(".toast-box1.tap-to-close").click(function () {
+$(".toast-box1.tap-to-close").click(function() {
     $(this).removeClass("show");
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -324,7 +319,7 @@ function animatedHeader() {
     }
 }
 animatedHeader();
-$(window).scroll(function () {
+$(window).scroll(function() {
     animatedHeader();
 });
 ///////////////////////////////////////////////////////////////////////////
@@ -340,12 +335,9 @@ var OfflineText = "No Internet Connection";
 // Online Mode Toast Append
 function onlineModeToast() {
     $("body").append(
-        "<div id='online-toast' class='toast-box bg-success toast-top tap-to-close'>"
-        +
-        "<div class='in'><div class='text'>"
-        +
-        OnlineText
-        +
+        "<div id='online-toast' class='toast-box bg-success toast-top tap-to-close'>" +
+        "<div class='in'><div class='text'>" +
+        OnlineText +
         "</div></div></div>"
     );
     setTimeout(() => {
@@ -356,12 +348,9 @@ function onlineModeToast() {
 // Ofline Mode Toast Append
 function offlineModeToast() {
     $("body").append(
-        "<div id='offline-toast' class='toast-box bg-danger toast-top tap-to-close'>"
-        +
-        "<div class='in'><div class='text'>"
-        +
-        OfflineText
-        +
+        "<div id='offline-toast' class='toast-box bg-danger toast-top tap-to-close'>" +
+        "<div class='in'><div class='text'>" +
+        OfflineText +
         "</div></div></div>"
     );
     setTimeout(() => {
@@ -379,11 +368,10 @@ function onlineMode() {
         setTimeout(() => {
             $("#online-toast").removeClass("show");
         }, 3000);
-    }
-    else {
+    } else {
         onlineModeToast();
     }
-    $(".toast-box.tap-to-close").click(function () {
+    $(".toast-box.tap-to-close").click(function() {
         $(this).removeClass("show");
     });
 }
@@ -395,11 +383,10 @@ function offlineMode() {
     }
     if ($("#offline-toast").length > 0) {
         $("#offline-toast").addClass("show");
-    }
-    else {
+    } else {
         offlineModeToast();
     }
-    $(".toast-box.tap-to-close").click(function () {
+    $(".toast-box.tap-to-close").click(function() {
         $(this).removeClass("show");
     });
 }
@@ -412,13 +399,13 @@ window.addEventListener('offline', offlineMode);
 
 ///////////////////////////////////////////////////////////////////////////
 // Upload Input
-$('.custom-file-upload input[type="file"]').each(function () {
+$('.custom-file-upload input[type="file"]').each(function() {
     // Refs
     var $fileUpload = $(this),
         $filelabel = $fileUpload.next('label'),
         $filelabelText = $filelabel.find('span'),
         filelabelDefault = $filelabelText.text();
-    $fileUpload.on('change', function (event) {
+    $fileUpload.on('change', function(event) {
         var name = $fileUpload.val().split('\\').pop(),
             tmppath = URL.createObjectURL(event.target.files[0]);
         if (name) {
@@ -437,17 +424,16 @@ $('.custom-file-upload input[type="file"]').each(function () {
 
 ///////////////////////////////////////////////////////////////////////////
 // Multi-level Listview
-$(".multi-level > a.item").click(function () {
+$(".multi-level > a.item").click(function() {
     if ($(this).parent(".multi-level").hasClass("active")) {
         $(this).next("ul").slideToggle(250);
         $(this).parent(".multi-level").removeClass("active");
-    }
-    else {
+    } else {
         // $(".multi-level ul").slideUp(250);
         $(this).parent(".multi-level").parent("ul").children("li").children("ul").slideUp(250)
         $(this).next("ul").slideToggle(250);
         $(this).parent(".multi-level").parent("ul").children(".multi-level").removeClass("active")
-        // $(".multi-level").removeClass("active");
+            // $(".multi-level").removeClass("active");
         $(this).parent(".multi-level").addClass("active");
     }
 });
@@ -461,17 +447,14 @@ function AddtoHome(time, once) {
         var AddHomeStatus = localStorage.getItem("MobilekitAddHomeStatus");
         if (AddHomeStatus === "1" || AddHomeStatus === 1) {
             // already showed up
-        }
-        else {
+        } else {
             localStorage.setItem("MobilekitAddHomeStatus", 1)
             window.addEventListener('load', () => {
                 if (navigator.standalone) {
                     // if app installed ios home screen
-                }
-                else if (matchMedia('(display-mode: standalone)').matches) {
+                } else if (matchMedia('(display-mode: standalone)').matches) {
                     // if app installed android home screen
-                }
-                else {
+                } else {
                     // if app is not installed
                     if (androidDetection) {
                         setTimeout(() => {
@@ -486,16 +469,13 @@ function AddtoHome(time, once) {
                 }
             });
         }
-    }
-    else {
+    } else {
         window.addEventListener('load', () => {
             if (navigator.standalone) {
                 // app loaded to ios
-            }
-            else if (matchMedia('(display-mode: standalone)').matches) {
+            } else if (matchMedia('(display-mode: standalone)').matches) {
                 // app loaded to android
-            }
-            else {
+            } else {
                 // app not loaded
                 if (androidDetection) {
                     setTimeout(() => {
@@ -520,17 +500,14 @@ var checkDarkModeStatus = localStorage.getItem("MobilekitDarkModeActive");
 // if dark mode on
 if (checkDarkModeStatus === 1 || checkDarkModeStatus === "1") {
     $(".dark-mode-switch").attr('checked', true);
-    if ($("body").hasClass("dark-mode-active")) {
-    }
-    else {
+    if ($("body").hasClass("dark-mode-active")) {} else {
         $("body").addClass("dark-mode-active");
     }
-}
-else {
+} else {
     $(".dark-mode-switch").attr('checked', false);
 }
 // Dark mode switch
-$('.dark-mode-switch').change(function () {
+$('.dark-mode-switch').change(function() {
     $(".dark-mode-switch").trigger('.dark-mode-switch');
     var darkmodeCheck = localStorage.getItem("MobilekitDarkModeActive");
 
@@ -540,16 +517,20 @@ $('.dark-mode-switch').change(function () {
         }
         localStorage.setItem("MobilekitDarkModeActive", "0");
         $(".dark-mode-switch").attr('checked', false);
-    }
-    else {
+    } else {
         $("body").addClass("dark-mode-active");
         $(".dark-mode-switch").attr('checked', true);
         localStorage.setItem("MobilekitDarkModeActive", "1");
     }
 });
 var dmswitch = $(".dark-mode-switch");
-dmswitch.on('change', function () {
+dmswitch.on('change', function() {
     dmswitch.prop('checked', this.checked);
 });
 ///////////////////////////////////////////////////////////////////////////
 
+function clickEvent(first, last) {
+    if (first.value.length) {
+        document.getElementById(last).focus();
+    }
+}

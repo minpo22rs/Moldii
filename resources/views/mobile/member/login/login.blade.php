@@ -48,7 +48,7 @@
                             New Here ? 
                         </span>
                         <span class = "custom_hover my-3" style = "font-size: 16px; font-weight: bold;">
-                            Register
+                        <a href="{{url('otp')}}">Register</a>
                         </span>
                         
                     </div>
