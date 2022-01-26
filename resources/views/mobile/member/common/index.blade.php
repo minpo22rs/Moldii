@@ -1,4 +1,5 @@
 @extends('mobile.main_layout.main')
+
     @section('app_header')
     <div class="appHeader bg-danger text-light">
         <div class="left">
@@ -141,6 +142,13 @@
     @endsection
 
     @section('custom_script')
+        <script>
+            var a = "{{Session::get('success')}}";
+            if(a){
+                alert(a);
+            }
+        </script>
+    
         <script>
                 bottom_now(1);
         </script>

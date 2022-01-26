@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mobile\user\UserAccController;
 use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
-use App\Http\Controllers\mobile\user\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\user\OtpController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,11 +47,16 @@ Route::get('/clc', function() {
     // session()->forget('key');
 	return "Cleared!";
 });
-Route::post('register',[RegisterController::class,'create'])->name('Register');
+Route::post('checkregister',[RegisterController::class,'create']);
+Route::post('checklogin',[LoginController::class,'checklogin']);
 
 
 
-Route::get('otp',[OtpController::class,'index'])->name('OTP');
+Route::get('otp',[OtpController::class,'index']);
 Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
 Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

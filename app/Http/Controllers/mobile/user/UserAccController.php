@@ -27,6 +27,7 @@ class UserAccController extends Controller
 
     public function register()
     {
+        // dd('saasdasd');
         return view('mobile.member.register.register');
     }
 

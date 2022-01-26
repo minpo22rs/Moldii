@@ -10,9 +10,6 @@ use Auth;
 
 class LoginController extends Controller
 {
-
-    protected $maxAttempts = 1; // Default is 5
-    protected $decayMinutes = 1; // Default is 1
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -41,18 +38,19 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('guest:merchant')->except('logout');
     }
 
-    public function login(Request $request)
+    public function checklogin(Request $request)
     {
         // dd(Auth::guard('web'));
-        if (Auth::guard('merchant')->attempt(['merchant_email' => $request->email , 'password' => $request->password])) {
-            return redirect(url('merchant/index'));
-        } elseif (Auth::guard('web')->attempt(['admin_email' => $request->email , 'password' => $request->password])) {
-            return redirect(url('admin/index'));
+        
+       
+        if (Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])) {
+            // dd('yes');
+            return redirect('user/index');
         } else {
-            return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+            // dd('dddd');
+            return redirect('user/login')->with('error','Username Or Password Are Wrong.');
         }
     }
 }

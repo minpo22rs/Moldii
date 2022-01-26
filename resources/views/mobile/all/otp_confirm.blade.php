@@ -1,7 +1,12 @@
 @extends('mobile.main_layout.guest')
 @section('content')
 
-
+<script>
+    var a = "{{Session::get('error')}}";
+    if(a){
+        alert(a);
+    }
+</script>
 
 
 <!-- App Capsule -->
@@ -18,8 +23,6 @@
         <div class="section mt-1 mb-5">
             <form action="{{route('Check_OTP')}}" method="post">
                 @csrf
-                
-      
 
                 <div class="form-group boxed">
                     <div class="input-wrapper">
@@ -29,9 +32,6 @@
                         </i>
                     </div>
                 </div>
-
-
-
           
                 <div class="form-group boxed">
                     <div class="input-wrapper">
@@ -55,4 +55,7 @@
 <!-- * App Capsule -->
 
 
+@endsection
+
+@section('custom_script')
 @endsection
