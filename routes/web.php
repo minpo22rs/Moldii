@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mobile\user\UserAccController;
 use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
-use App\Http\Controllers\mobile\user\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\TestUiController;
@@ -37,11 +37,22 @@ Route::get('user/wallet', [WalletController::class, 'index']);
 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
-Route::post('register',[RegisterController::class,'create'])->name('Register');
+Route::get('/clc', function() {
+	Artisan::call('cache:clear');
+	Artisan::call('config:clear');
+	Artisan::call('config:cache');
+	Artisan::call('view:clear');
+    // Artisan::call('optimize');
+    // Artisan::call('clear-compiled');
+    // session()->forget('key');
+	return "Cleared!";
+});
+Route::post('checkregister',[RegisterController::class,'create']);
+Route::post('checklogin',[LoginController::class,'checklogin']);
 
 
 
-Route::get('otp',[OtpController::class,'index'])->name('OTP');
+Route::get('otp',[OtpController::class,'index']);
 Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
 Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');

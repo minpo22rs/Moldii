@@ -14,20 +14,24 @@
                 <h1>สมัครสมาชิก</h1>
                 <h4>กรุณาใส่ข้อมูลให้ครบถ้วน</h4>
             </div>
+            <br>
             <div class="section mt-1 mb-5">
                 <form action="{{route('Create_OTP')}}" method="POST">
-                @csrf
+                    @csrf
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <input type="text" class="form-control" name = "tel" id="tel" placeholder="หมายเลขโทรศัพท์">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
+                            
                         </div>
+                        
                     </div>
+                   
 
-                    <div class="form-button-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">ขอ OTP</button>
+                    <div class="form-button-group " >
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" >ขอ OTP</button>
                     </div>
 
                 </form>
@@ -37,5 +41,7 @@
 
     </div>
     <!-- * App Capsule -->
-
+    <script>
+        
+    </script>
     @endsection

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\mobile\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tb_otp;
+use App\Models\User;
 use Carbon\Carbon;
+use Session;
 
 class OtpController extends Controller
 {
     public function index()
     {
+        // dd('otppppppp');
         return view('mobile.all.otp_request');
     }
 
@@ -18,8 +21,6 @@ class OtpController extends Controller
 
     public function create(Request $request)
     {
-
-
 
         $request->validate([
             'tel' => ['required',  'min:10'],
@@ -35,8 +36,8 @@ class OtpController extends Controller
             'tel' => $phone,
             'otp_ref' => hexdec(uniqid())
 
-
         ]);
+
 
         //ส่วนการส่ง OTP ไปที่มือถือ
         $username = 'apinya';
@@ -86,9 +87,6 @@ class OtpController extends Controller
 
 
 
-
-
-
     public function confirm()
     {
         return view('mobile.all.otp_confirm');
@@ -103,9 +101,6 @@ class OtpController extends Controller
             'tel' => ['required',  'min:10'],
             'otp' => ['required',  'min:4']
 
-
-
-            
         ]);
         
         $tel_otp = Tb_otp::where(['otp_code' => $otp,'tel'=>$tel])->first();
@@ -113,10 +108,17 @@ class OtpController extends Controller
         if ($tel_otp != null) {
             $id =$tel_otp->otp_id;
             Tb_otp::where('otp_id', $id)
-            ->update(['otp_verified' => Carbon::now()]);
+                    ->update(['otp_verified' => Carbon::now()]);
+
+            User::where('customer_id',Session::get('u_id'))->update(['customer_phone'=>$tel]);
             
-            return redirect('user/register');
+            return redirect('user/index')->with('success','คุณสมัครสมาชิกเรียบร้อยแล้ว');
         } else {
+            // User::where('customer_id',Session::get('u_id'))->increment('customer_count', 1);
+            // if(){
+
+            // }
+
             return redirect('confirm/otp')->with(['phone'=>$tel]);
         }
     }

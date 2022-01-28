@@ -17,12 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'tb_customers';
     protected $fillable = [
-        'name',
-        'lastname',
-        'email',
-        'password',
-        'is_admin',
+        'customer_name',
+        'customer_lname',
+        'customer_email',
+        'customer_password',
+        'customer_phone',
+  
     ];
 
     /**
@@ -31,7 +33,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'customer_password',
         'remember_token',
     ];
 
@@ -43,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->customer_password;
+    }
 }

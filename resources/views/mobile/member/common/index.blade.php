@@ -106,3 +106,15 @@
 
 
 
+    @section('custom_script')
+        <script>
+            var a = "{{Session::get('success')}}";
+            if(a){
+                alert(a);
+            }
+        </script>
+    
+        <script>
+                bottom_now(1);
+        </script>
+    @endsection
