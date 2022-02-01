@@ -8,6 +8,8 @@ use App\Http\Controllers\mobile\user\HelpCenterController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\user\OtpController;
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\TestUiController;
 
 /*
@@ -57,7 +59,10 @@ Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
 Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
 
+//Home
+Route::get('home', [HomeController::class, 'index']);
 
 // Test UI 
 Route::get('test/ui',[TestUiController::class,'index']);
 Route::get('test/all',[TestUiController::class,'testAll']);
+Route::get('test/goToView',[TestUiController::class,'goToView']);

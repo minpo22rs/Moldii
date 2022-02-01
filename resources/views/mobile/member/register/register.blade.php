@@ -4,16 +4,16 @@
     <div class="m-1">
         <div class="row align-items-center">
             <div class="col-12 text-left">
-                <ion-icon name="arrow-back-outline" class="text-dark font-weight-bold" style="color: black; margin-top: 10%; font-size: 25px;"></ion-icon>
+                <ion-icon name="arrow-back-outline" class="text-dark font-weight-bold" style="color: black; margin-top: 25px; font-size: 25px;"></ion-icon>
             </div>
-            <div class="col-6 text-right" style="margin-top: 35%;">
+            <div class="col-6 text-right" style="margin-top: 100px;">
                 <h1 class="">
                     Register
                 </h1>
             </div>
 
             
-            <div class="col-6 text-center" style="margin-top:33%;">
+            <div class="col-6 text-center" style="margin-top: 100px;">
                 <div class="m-1">
 
                     <img src="{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight: 50px; height: 50px;">

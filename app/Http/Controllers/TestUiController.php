@@ -13,4 +13,15 @@ class TestUiController extends Controller
     public function testAll(){
         return view('mobile.all.invitation_income_withdraw');
     }
+
+    public function goToView(Request $request)
+    {
+        $request_all = $request->all();
+        if (isset($request_all["view_target"]) && !empty($request_all["view_target"]))
+        {
+            return view($request_all["view_target"]);
+        }
+        else
+            return "triggered";
+    }
 }
