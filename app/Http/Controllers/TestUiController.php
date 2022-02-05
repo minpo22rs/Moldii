@@ -7,13 +7,27 @@ use Illuminate\Http\Request;
 class TestUiController extends Controller
 {
     public function index(){
-        return view('mobile.member.main.index');
+        return view('mobile.member.common.content.comment');
     }
 
-    public function testAll(){
-        return view('mobile.all.invitation_income_withdraw');
+    public function cm_podcast(){
+        return view('mobile.member.common.content.podcast_comment');
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    public function shoppingTest(){
+        return view('mobile.member.common.content.shopping.shopping_1');
+
+    }
+    public function shoppingTest_2(){
+        return view('mobile.member.common.content.shopping.shopping_2');
+
+    }
+  
+=======
+>>>>>>> Stashed changes
     public function goToView(Request $request)
     {
         $request_all = $request->all();
@@ -24,4 +38,8 @@ class TestUiController extends Controller
         else
             return "triggered";
     }
+<<<<<<< Updated upstream
+=======
+>>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54
+>>>>>>> Stashed changes
 }
