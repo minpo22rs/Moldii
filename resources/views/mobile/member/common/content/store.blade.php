@@ -150,6 +150,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="owl-item card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -217,6 +218,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="owl-item active card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -284,10 +286,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
 
                             <div class="owl-item cloned  " style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
@@ -373,6 +371,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
                     <div class="card-body col-12 p-1 ">
@@ -404,6 +403,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
                     <div class="card-body col-12 p-1 ">
@@ -435,6 +435,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
                     <div class="card-body col-12 p-1 ">
@@ -466,11 +467,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        <!-- align-self-center justify-content-center -->
+            <!-- align-self-center justify-content-center -->
 
         </div>
 
-        @endsection
+    @endsection
    
