@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\TestUiController;
 
@@ -27,8 +28,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('user/login', [UserAccController::class, 'login']);
-Route::get('user/register', [UserAccController::class, 'register']);
+Route::get('user/login', [UserAccController::class, 'login'])->name('login');
+Route::get('user/register', [UserAccController::class, 'register'])->name('register');
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);
 Route::get('user/profile', [UserAccController::class, 'profile']);
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
@@ -66,6 +67,7 @@ Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
 Route::get('home', [HomeController::class, 'index']);
 
 // Test UI 
+Route::get('test/p',[TestUiController::class,'p']);
 Route::get('test/ui',[TestUiController::class,'index']);
 
 Route::get('test/ui/cm_podcast',[TestUiController::class,'cm_podcast']);

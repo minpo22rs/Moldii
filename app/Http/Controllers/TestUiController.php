@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 
 class TestUiController extends Controller
 {
     public function index(){
-        return view('mobile.member.common.content.comment');
+        return view('mobile.common.main.index');
+    }
+
+    public function p(){
+        $sql = DB::Table('tb_news')->where('new_type','C')->get();
+        return view('mobile.member.common.content.home');
+        
     }
 
     public function cm_podcast(){
