@@ -14,9 +14,7 @@ class TestUiController extends Controller
         return view('mobile.member.common.content.podcast_comment');
     }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+
     public function shoppingTest(){
         return view('mobile.member.common.content.shopping.shopping_1');
 
@@ -25,9 +23,12 @@ class TestUiController extends Controller
         return view('mobile.member.common.content.shopping.shopping_2');
 
     }
+    public function Profile(){
+        return view('mobile.member.userAccount.profile');
+        
+    }
   
-=======
->>>>>>> Stashed changes
+
     public function goToView(Request $request)
     {
         $request_all = $request->all();
@@ -38,8 +39,5 @@ class TestUiController extends Controller
         else
             return "triggered";
     }
-<<<<<<< Updated upstream
-=======
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54
->>>>>>> Stashed changes
+
 }

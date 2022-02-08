@@ -21,9 +21,9 @@
 <body class="bg-white">
 
     <!-- loader -->
-    <div id="loader">
+    <!-- <div id="loader">
         <div class="spinner-border text-primary" role="status"></div>
-    </div>
+    </div> -->
     <!-- * loader -->
 
     <!-- App Header -->
@@ -60,7 +60,7 @@
                 <span class="text-dark" id="bottom_text_noti">แจ้งเตือน</span>
             </div>
         </a>
-        <a href="#" class="item" id="bottom_button_acc">
+        <a href="{{url('user/profile')}}" class="item" id="bottom_button_acc">
             <div class="col">
                 <ion-icon name="person-circle-outline" class="text-dark md hydrated" id="bottom_icon_acc"></ion-icon>
                 <span class="text-dark" id="bottom_text_acc">บัญชี</span>

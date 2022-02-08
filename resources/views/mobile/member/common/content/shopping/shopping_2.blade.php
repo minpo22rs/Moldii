@@ -589,7 +589,7 @@
 
     <div class="share-box p-2" id="share_box">
         <div class="text-center">
-            <h4 class="font-weight-bold">รายละเอียด</h4>
+            <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
         </div>
         <div class="row justify-content-around p-1 ">
             <a href="" class="m-0 text-center align-self-end  share-item">

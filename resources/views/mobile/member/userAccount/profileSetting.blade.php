@@ -1,100 +1,171 @@
-
 @extends('mobile.main_layout.main')
-    @section('app_header')
-    <div class="appHeader bg-danger text-light">
-        <div class="left">
-                <ion-icon name="arrow-back-outline"  onclick = "window.history.back();"></ion-icon>
-        </div>
-        <div class="pageTitle">
-            ตั้งค่าบัญชี
-        </div>
+@section('app_header')
+<div class="appHeader bg-danger text-light">
+    <div class="left">
+        <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
     </div>
-    @endsection
-    @section('content') 
-        <div>
-            <div class = "col-12 text-center">
-                <img src = "{{asset('original_assets/img/material_icons/woman.png')}}" class = "rounded-circle mt-5"  width = "25%" height = "auto"><br>
-                <span class = "font-weight-bold"><h3 class = "mb-0"><?php //$my_name ?></h3></span>
-            </div>
-        </div>
+    <div class="pageTitle">
+        ตั้งค่าบัญชี
+    </div>
+</div>
+@endsection
+@section('content')
 
-        <div class = "row my-2 mb-3">
-            <div class = "col-6 pr-0">
-                <div class = "m-1">
-                    <div class = "card">
-                        <div class = "row w-100 mx-3 my-2 text-center">
-                            <img src = "{{asset('original_assets/index_category_icon/wallet-filled-money-tool_blue_blue.svg')}}" width = "15%">
-                            <span class = "ml-2"><?php //number_format($available_cash) ?> ฿</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-6 pl-0">
-                <div class = "m-1">
-                    <div class = "card">
-                        <div class = "row w-100 mx-3 my-2 text-center">
-                            <img src = "{{asset('original_assets/index_category_icon/coin_dark_blue.svg')}}" width = "15%">
-                            <span class = "ml-2"><?php //number_format($available_point) ?> คะแนน</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class = "row my-2 border-top">
-            <div class = "col-8 mx-0">
-                <div class = "mx-2 my-1 ml-2">รายการของฉัน</div>
-            </div>
-            <div class = "col-4 mx-0 text-right">
-                <div class = "mx-2 my-1 ml-2 mr-2"><img src = "{{asset('original_assets/materials/right-arrow.png')}}" width = "10%" height = "auto"></div>
-            </div>
-        </div>
+<div class="row py-1  pl-1" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 mt-2 align-self-center row p-0">
+        <h4 class="mb-1 ml-2 font-weight-bold " style="color:rgba(131, 131, 131, 0.5);">บัญชีของฉัน</h4>
+    </div>
+</div>
 
-        <div class = "row my-2 border-top">
-            <div class = "col-8 mx-0">
-                <div class = "mx-2 my-1 ml-2">สิ่งที่ถูกใจ</div>
-            </div>
-            <div class = "col-4 mx-0 text-right">
-                <div class = "mx-2 my-1 ml-2 mr-2"><img src = "{{asset('original_assets/materials/right-arrow.png')}}" width = "10%" height = "auto"></div>
-            </div>
-        </div>
 
-        <div class = "row my-2 border-top">
-            <div class = "col-8 mx-0">
-                <div class = "mx-2 my-1 ml-2">การชำระเงิน</div>
-            </div>
-            <div class = "col-4 mx-0 text-right">
-                <div class = "mx-2 my-1 ml-2 mr-2"><img src = "{{asset('original_assets/materials/right-arrow.png')}}" width = "10%" height = "auto"></div>
-            </div>
-        </div>
+<a href="{{url('user/profilePage')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
 
-        <div class = "row my-2 border-top">
-            <div class = "col-8 mx-0">
-                <div class = "mx-2 my-1 ml-2">ข้อมูลส่วนตัว</div>
-            </div>
-            <div class = "col-4 mx-0 text-right">
-                <div class = "mx-2 my-1 ml-2 mr-2"><img src = "{{asset('original_assets/materials/right-arrow.png')}}" width = "10%" height = "auto"></div>
-            </div>
-        </div>
+        <h5 class="m-0 ml-2 font-weight-bold">หน้าโปรไฟล์</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
 
-        <div class = "row my-2  border-top">
-            <div class = "col-8 mx-0">
-                <div class = "mx-2 my-1 ml-2">การตั้งค่า</div>
-            </div>
-            <div class = "col-4 mx-0 text-right">
-                <div class = "mx-2 my-1 ml-2 mr-2"><img src = "{{asset('original_assets/materials/right-arrow.png')}}" width = "10%" height = "auto"></div>
-            </div>
-        </div>
+<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
 
-        <div class = "row my-2  border-top border-bottom text-danger">
-            <div class = "col-12 mx-0">
-                <div class = "mx-2 my-2 ml-2" onclick = "window.location.replace('../logout.php');">ออกจากระบบ</div>
-            </div>
-        </div>
-    @endsection
+        <h5 class="m-0 ml-2 font-weight-bold">ที่อยู่ของฉัน</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
 
-    @section('custom_script')
-        <script>
-                bottom_now(4);
-        </script>
-    @endsection
+<a href="" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">รายการบัญชีธนาคาร/บัตรที่บันทึก</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+
+<div class="row py-1  pl-1" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 mt-2 align-self-center row p-0">
+        <h4 class="mb-1 ml-2 font-weight-bold " style="color:rgba(131, 131, 131, 0.5);">ตั้งค่า</h4>
+    </div>
+</div>
+<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
+
+        <h5 class="m-0 ml-2 font-weight-bold">ตั้งค่าการแจ้งเตือน</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">การตั้งค่าความเป็นส่วนตัว</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+
+<div class="row py-1  pl-1" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 mt-2 align-self-center row p-0">
+        <h4 class="mb-1 ml-2 font-weight-bold " style="color:rgba(131, 131, 131, 0.5);">ช่วยเหลือ</h4>
+    </div>
+</div>
+<a href="{{url('user/profileHelpCenter')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
+
+        <h5 class="m-0 ml-2 font-weight-bold">ศูนย์ช่วยเหลือ</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1  border-top pl-2 " style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">เคล็ดลับและเทคนิค</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
+
+        <h5 class="m-0 ml-2 font-weight-bold">กฏระเบียบในการใช้</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1  border-top pl-2 " style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">นโยบายของ MOLDII</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row p-0">
+
+        <h5 class="m-0 ml-2 font-weight-bold">ให้คะแนนชื่อแอป</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1  border-top pl-2 " style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">เกี่ยวกับ</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+<a href="" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row  p-0">
+
+
+        <h5 class="m-0 ml-2 font-weight-bold">คำขอลบบัญชีผู้ใช้</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+
+
+
+<div class="row col-12 m-0 mt-4 p-0 justify-content-center">
+    <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold col-11 mt-2 " style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">
+    <img class="mr-1" src="{{ asset('new_assets/img/icon/logout.svg')}}" >
+    ออกจากระบบ
+</button>
+    
+
+</div>
+
+
+
+
+@endsection
+
+@section('custom_script')
+<script>
+    bottom_now(4);
+</script>
+@endsection
