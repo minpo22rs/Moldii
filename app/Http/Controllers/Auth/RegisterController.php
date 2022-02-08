@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $p->save();
 
         Session::put('u_id',$p->id);
-
+        dd($p);
         return redirect()->to('otp');
     }
 }

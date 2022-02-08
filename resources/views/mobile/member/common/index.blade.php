@@ -396,7 +396,7 @@
             <!--      D : Vestibulum sed facilisis diam, vel sodales leo. Aenean lacinia, nisi sit amet iaculis
                     maximus, nibh orci iaculis risus, vitae faucibus dui orci quis elit. -->
             @include("mobile.member.common.content.story")
-            @include("mobile.member.common.content.store")
+            @include("mobile.member.common.content.shopping.index")
         </div>
     </div> --}}
 </div>

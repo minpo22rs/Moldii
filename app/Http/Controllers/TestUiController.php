@@ -14,11 +14,27 @@ class TestUiController extends Controller
     public function p(){
         $sql = DB::Table('tb_news')->where('new_type','C')->get();
         return view('mobile.member.common.content.home');
+        
     }
 
-    public function testAll(){
-        return view('mobile.all.invitation_income_withdraw');
+    public function cm_podcast(){
+        return view('mobile.member.common.content.podcast_comment');
     }
+
+
+    public function shoppingTest(){
+        return view('mobile.member.common.content.shopping.shopping_1');
+
+    }
+    public function shoppingTest_2(){
+        return view('mobile.member.common.content.shopping.shopping_2');
+
+    }
+    public function Profile(){
+        return view('mobile.member.userAccount.profile');
+        
+    }
+  
 
     public function goToView(Request $request)
     {
@@ -30,4 +46,5 @@ class TestUiController extends Controller
         else
             return "triggered";
     }
+
 }

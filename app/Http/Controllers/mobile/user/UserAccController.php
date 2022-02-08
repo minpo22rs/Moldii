@@ -50,4 +50,12 @@ class UserAccController extends Controller
     {
         return view('mobile.member.userAccount.profileSetting');
     }
+    public function profileHelpCenter(){
+        return view('mobile.member.userAccount.profile_help_center');
+
+    }
+    public function profilePage(){
+        return view('mobile.member.userAccount.profilePage');
+
+    }
 }

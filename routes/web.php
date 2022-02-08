@@ -34,6 +34,9 @@ Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);
 Route::get('user/profile', [UserAccController::class, 'profile']);
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
 
+Route::get('user/profilePage', [UserAccController::class, 'profilePage']);
+Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);
+
 Route::get('user/index', [MainController::class, 'index']); 
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
@@ -66,5 +69,14 @@ Route::get('home', [HomeController::class, 'index']);
 // Test UI 
 Route::get('test/p',[TestUiController::class,'p']);
 Route::get('test/ui',[TestUiController::class,'index']);
+
+Route::get('test/ui/cm_podcast',[TestUiController::class,'cm_podcast']);
+Route::get('test/ui/shopping',[TestUiController::class,'shoppingTest']);
+Route::get('test/ui/shopping/2',[TestUiController::class,'shoppingTest_2'])->name('shopping_2');
+
+Route::get('test/ui/profile',[TestUiController::class,'Profile']);
+
+
 Route::get('test/all',[TestUiController::class,'testAll']);
 Route::get('test/goToView',[TestUiController::class,'goToView']);
+

@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
     </div>
     <div class="pageTitle">
-        บัญชีของฉัน
+        หน้าโปรไฟล์
     </div>
 </div>
 @endsection
@@ -20,30 +20,6 @@
     </div>
 </div>
 
-<div class="row my-2 mb-3">
-    <div class="col-6 pr-0">
-        <div class="m-1">
-            <div class="card">
-                <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/img/icon/pig.svg')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold"><?php //number_format($available_cash) 
-                                                                            ?> ฿</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 pl-0">
-        <div class="m-1">
-            <div class="card">
-                <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/img/icon/$.svg')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold"><?php //number_format($available_point) 
-                                                                            ?> คะแนน</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">

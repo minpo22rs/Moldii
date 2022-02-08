@@ -1,12 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////
 // Service Workers
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('service worker registered'))
-        .catch(err => console.log('service worker not registered - there is an error.', err));
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+        .register("service-worker.js")
+        .then((reg) => console.log("service worker registered"))
+        .catch((err) =>
+            console.log(
+                "service worker not registered - there is an error.",
+                err
+            )
+        );
 }
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Page Loader with preload
@@ -17,14 +22,12 @@ $(document).ready(function() {
 });
 ///////////////////////////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////////////////////////
 // Fix for # href
 $('a[href="#"]').click(function(e) {
-        e.preventDefault();
-    })
-    ///////////////////////////////////////////////////////////////////////////
-
+    e.preventDefault();
+});
+///////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////
 // Go Top Button
@@ -47,7 +50,6 @@ $(window).scroll(function() {
 });
 ///////////////////////////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////////////////////////
 // Go Back Button
 $(".goBack").click(function() {
@@ -55,14 +57,12 @@ $(".goBack").click(function() {
 });
 ///////////////////////////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////////////////////////
 // Adbox Close
 $(".adbox .closebutton").click(function() {
     $(this).parent(".adbox").addClass("hide");
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // OS Detection
@@ -86,18 +86,15 @@ if (windowsPhoneDetection) {
 } else {
     // Non-Mobile Detected
     $(".non-mobile-detection").addClass("is-active");
-
 }
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Tooltip
 $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    ///////////////////////////////////////////////////////////////////////////
-
+    $('[data-toggle="tooltip"]').tooltip();
+});
+///////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////
 // Input
@@ -107,12 +104,14 @@ $(".clear-input").click(function() {
     $(this).parent(".input-wrapper").removeClass("not-empty");
 });
 // active
-$(".form-group .form-control").focus(function() {
+$(".form-group .form-control")
+    .focus(function() {
         $(this).parent(".input-wrapper").addClass("active");
-    }).blur(function() {
-        $(this).parent(".input-wrapper").removeClass("active");
     })
-    // empty check
+    .blur(function() {
+        $(this).parent(".input-wrapper").removeClass("active");
+    });
+// empty check
 $(".form-group .form-control").keyup(function() {
     var inputCheck = $(this).val().length;
     if (inputCheck > 0) {
@@ -122,7 +121,6 @@ $(".form-group .form-control").keyup(function() {
     }
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Searchbox Toggle
@@ -145,9 +143,7 @@ $("body").on("click", ".stepper-up", function() {
 });
 $("body").on("click", ".stepper-down", function() {
     var valueInput = $(this).parent(".stepper").children(".form-control");
-    if (parseInt(valueInput.val()) < 1) {
-
-    } else {
+    if (parseInt(valueInput.val()) < 1) {} else {
         valueInput.val(parseInt(valueInput.val()) - 1);
     }
 });
@@ -155,14 +151,14 @@ $("body").on("click", ".stepper-down", function() {
 
 ///////////////////////////////////////////////////////////////////////////
 // Owl Carousel
-$('.carousel-full').owlCarousel({
+$(".carousel-full").owlCarousel({
     loop: true,
     margin: 0,
     nav: false,
     items: 1,
     dots: false,
 });
-$('.carousel-single').owlCarousel({
+$(".carousel-single").owlCarousel({
     stagePadding: 30,
     loop: true,
     margin: 16,
@@ -175,11 +171,10 @@ $('.carousel-single').owlCarousel({
         },
         768: {
             items: 3,
-        }
-    }
-
+        },
+    },
 });
-$('.carousel-multiple').owlCarousel({
+$(".carousel-multiple").owlCarousel({
     stagePadding: 32,
     loop: true,
     margin: 16,
@@ -193,10 +188,10 @@ $('.carousel-multiple').owlCarousel({
         },
         768: {
             items: 4,
-        }
-    }
+        },
+    },
 });
-$('.carousel-small').owlCarousel({
+$(".carousel-small").owlCarousel({
     stagePadding: 32,
     loop: true,
     margin: 16,
@@ -210,10 +205,10 @@ $('.carousel-small').owlCarousel({
         },
         768: {
             items: 8,
-        }
-    }
+        },
+    },
 });
-$('.carousel-slider').owlCarousel({
+$(".carousel-slider").owlCarousel({
     loop: true,
     margin: 8,
     nav: false,
@@ -222,7 +217,6 @@ $('.carousel-slider').owlCarousel({
 });
 
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Notification
@@ -239,7 +233,7 @@ function notification(target, time) {
             $(".notification-box").removeClass("show");
         }, time);
     }
-};
+}
 // close button notification
 $(".notification-box .close-button").click(function(event) {
     event.preventDefault();
@@ -250,7 +244,6 @@ $(".notification-box.tap-to-close .notification-dialog").click(function() {
     $(".notification-box.show").removeClass("show");
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Toast
@@ -267,7 +260,7 @@ function toastbox(target, time) {
             $(".toast-box").removeClass("show");
         }, time);
     }
-};
+}
 // close button toast
 $(".toast-box .close-button").click(function(event) {
     event.preventDefault();
@@ -294,7 +287,7 @@ function toastbox1(target, time) {
             $(".toast-box1").removeClass("show");
         }, time);
     }
-};
+}
 // close button toast
 $(".toast-box1 .close-button").click(function(event) {
     event.preventDefault();
@@ -305,7 +298,6 @@ $(".toast-box1.tap-to-close").click(function() {
     $(this).removeClass("show");
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Header Scrolled
@@ -324,7 +316,6 @@ $(window).scroll(function() {
 });
 ///////////////////////////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////////////////////////
 // Offline Mode / Online Mode Detection
 
@@ -341,7 +332,7 @@ function onlineModeToast() {
         "</div></div></div>"
     );
     setTimeout(() => {
-        toastbox('online-toast', 3000);
+        toastbox("online-toast", 3000);
     }, 500);
 }
 
@@ -354,7 +345,7 @@ function offlineModeToast() {
         "</div></div></div>"
     );
     setTimeout(() => {
-        toastbox('offline-toast');
+        toastbox("offline-toast");
     }, 500);
 }
 
@@ -392,35 +383,33 @@ function offlineMode() {
 }
 
 // Check with event listener if online or offline
-window.addEventListener('online', onlineMode);
-window.addEventListener('offline', offlineMode);
+window.addEventListener("online", onlineMode);
+window.addEventListener("offline", offlineMode);
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Upload Input
 $('.custom-file-upload input[type="file"]').each(function() {
     // Refs
     var $fileUpload = $(this),
-        $filelabel = $fileUpload.next('label'),
-        $filelabelText = $filelabel.find('span'),
+        $filelabel = $fileUpload.next("label"),
+        $filelabelText = $filelabel.find("span"),
         filelabelDefault = $filelabelText.text();
-    $fileUpload.on('change', function(event) {
-        var name = $fileUpload.val().split('\\').pop(),
+    $fileUpload.on("change", function(event) {
+        var name = $fileUpload.val().split("\\").pop(),
             tmppath = URL.createObjectURL(event.target.files[0]);
         if (name) {
             $filelabel
-                .addClass('file-uploaded')
-                .css('background-image', 'url(' + tmppath + ')');
+                .addClass("file-uploaded")
+                .css("background-image", "url(" + tmppath + ")");
             $filelabelText.text(name);
         } else {
-            $filelabel.removeClass('file-uploaded');
+            $filelabel.removeClass("file-uploaded");
             $filelabelText.text(filelabelDefault);
         }
     });
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Multi-level Listview
@@ -430,15 +419,23 @@ $(".multi-level > a.item").click(function() {
         $(this).parent(".multi-level").removeClass("active");
     } else {
         // $(".multi-level ul").slideUp(250);
-        $(this).parent(".multi-level").parent("ul").children("li").children("ul").slideUp(250)
+        $(this)
+            .parent(".multi-level")
+            .parent("ul")
+            .children("li")
+            .children("ul")
+            .slideUp(250);
         $(this).next("ul").slideToggle(250);
-        $(this).parent(".multi-level").parent("ul").children(".multi-level").removeClass("active")
-            // $(".multi-level").removeClass("active");
+        $(this)
+            .parent(".multi-level")
+            .parent("ul")
+            .children(".multi-level")
+            .removeClass("active");
+        // $(".multi-level").removeClass("active");
         $(this).parent(".multi-level").addClass("active");
     }
 });
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////
 // Add to Home
@@ -448,49 +445,48 @@ function AddtoHome(time, once) {
         if (AddHomeStatus === "1" || AddHomeStatus === 1) {
             // already showed up
         } else {
-            localStorage.setItem("MobilekitAddHomeStatus", 1)
-            window.addEventListener('load', () => {
+            localStorage.setItem("MobilekitAddHomeStatus", 1);
+            window.addEventListener("load", () => {
                 if (navigator.standalone) {
                     // if app installed ios home screen
-                } else if (matchMedia('(display-mode: standalone)').matches) {
+                } else if (matchMedia("(display-mode: standalone)").matches) {
                     // if app installed android home screen
                 } else {
                     // if app is not installed
                     if (androidDetection) {
                         setTimeout(() => {
-                            $('#android-add-to-home-screen').modal();
+                            $("#android-add-to-home-screen").modal();
                         }, time);
                     }
                     if (iosDetection) {
                         setTimeout(() => {
-                            $('#ios-add-to-home-screen').modal();
+                            $("#ios-add-to-home-screen").modal();
                         }, time);
                     }
                 }
             });
         }
     } else {
-        window.addEventListener('load', () => {
+        window.addEventListener("load", () => {
             if (navigator.standalone) {
                 // app loaded to ios
-            } else if (matchMedia('(display-mode: standalone)').matches) {
+            } else if (matchMedia("(display-mode: standalone)").matches) {
                 // app loaded to android
             } else {
                 // app not loaded
                 if (androidDetection) {
                     setTimeout(() => {
-                        $('#android-add-to-home-screen').modal();
+                        $("#android-add-to-home-screen").modal();
                     }, time);
                 }
                 if (iosDetection) {
                     setTimeout(() => {
-                        $('#ios-add-to-home-screen').modal();
+                        $("#ios-add-to-home-screen").modal();
                     }, time);
                 }
             }
         });
     }
-
 }
 ///////////////////////////////////////////////////////////////////////////
 
@@ -499,16 +495,16 @@ function AddtoHome(time, once) {
 var checkDarkModeStatus = localStorage.getItem("MobilekitDarkModeActive");
 // if dark mode on
 if (checkDarkModeStatus === 1 || checkDarkModeStatus === "1") {
-    $(".dark-mode-switch").attr('checked', true);
+    $(".dark-mode-switch").attr("checked", true);
     if ($("body").hasClass("dark-mode-active")) {} else {
         $("body").addClass("dark-mode-active");
     }
 } else {
-    $(".dark-mode-switch").attr('checked', false);
+    $(".dark-mode-switch").attr("checked", false);
 }
 // Dark mode switch
-$('.dark-mode-switch').change(function() {
-    $(".dark-mode-switch").trigger('.dark-mode-switch');
+$(".dark-mode-switch").change(function() {
+    $(".dark-mode-switch").trigger(".dark-mode-switch");
     var darkmodeCheck = localStorage.getItem("MobilekitDarkModeActive");
 
     if (darkmodeCheck === 1 || darkmodeCheck === "1") {
@@ -516,16 +512,16 @@ $('.dark-mode-switch').change(function() {
             $("body").removeClass("dark-mode-active");
         }
         localStorage.setItem("MobilekitDarkModeActive", "0");
-        $(".dark-mode-switch").attr('checked', false);
+        $(".dark-mode-switch").attr("checked", false);
     } else {
         $("body").addClass("dark-mode-active");
-        $(".dark-mode-switch").attr('checked', true);
+        $(".dark-mode-switch").attr("checked", true);
         localStorage.setItem("MobilekitDarkModeActive", "1");
     }
 });
 var dmswitch = $(".dark-mode-switch");
-dmswitch.on('change', function() {
-    dmswitch.prop('checked', this.checked);
+dmswitch.on("change", function() {
+    dmswitch.prop("checked", this.checked);
 });
 ///////////////////////////////////////////////////////////////////////////
 
@@ -534,3 +530,56 @@ function clickEvent(first, last) {
         document.getElementById(last).focus();
     }
 }
+//_______________[Share]__________________//
+
+const shareBtn = document.getElementById("icon-share");
+const shareCon = document.getElementById("share_container");
+const shareBox = document.getElementById("share_box");
+const shareOff = document.getElementById("off_share_btn");
+
+shareBtn.addEventListener("click", () => {
+    shareBox.classList.add("show-share");
+    shareCon.classList.add("share-container");
+});
+
+window.addEventListener("click", (e) =>
+    e.target == shareCon ?
+    shareCon.classList.remove("share-container") &
+    shareBox.classList.remove("show-share") :
+    false
+);
+
+shareOff.addEventListener("click", () => {
+    shareBox.classList.remove("show-share");
+    shareCon.classList.remove("share-container");
+});
+//_______________[Share]__________________//
+
+
+
+//_______________[Buy_goods]__________________//
+const buyGoodsBtn = document.getElementById("buy-goods");
+const buyGoodsCon = document.getElementById("buy_goods_container");
+const buyGoodsBox = document.getElementById("buy_goods_box");
+
+buyGoodsBtn.addEventListener("click", () => {
+    buyGoodsBox.classList.add("show-buy-good-box");
+    buyGoodsCon.classList.add("buy-good-container");
+});
+
+window.addEventListener("click", (e) =>
+    e.target == buyGoodsCon ?
+    buyGoodsCon.classList.remove("buy-good-container") &
+    buyGoodsBox.classList.remove("show-buy-good-box") :
+    false
+);
+//_______________[Buy_goods]__________________//
+
+
+
+
+window.addEventListener("scroll", function() {
+    const choiceCon = document.getElementById("choice_container");
+    let windowPosition = window.scrollY > 0;
+    choiceCon.classList.toggle("show-choice", windowPosition);
+});
