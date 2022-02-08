@@ -8286,3 +8286,18 @@ body.dark-mode-active .cart-item .cart-item-footer {
     box-shadow: none;
     border: 1px solid #E5E6E7;
 }
+
+.bg_image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg_image .text-center {
+    position: relative;
+}
+
+.bg_image h5 {
+    top: -1.2rem;
+    position: absolute;
+}

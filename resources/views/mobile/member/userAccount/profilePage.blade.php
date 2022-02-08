@@ -10,58 +10,118 @@
 </div>
 @endsection
 @section('content')
-<div>
+<div class="bg_image" style="background-image: url('/new_assets/img/bg_image.svg');">
     <div class="col-12 text-center">
         <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
-        <span class="font-weight-bold">
-            <h3 class="mb-0"><?php //$my_name 
-                                ?></h3>
-        </span>
+        <h5 class="m-0 text-center" style="color:white;">แก้ไข</h5>
+
     </div>
+    
+    <div  class="btn  btn-sm btn-block square mt-2" style="height:1.4rem; background-color:rgba(196, 196, 196, 0.4); color:white;"  >แตะเพื่อเปลี่ยน</div>
+
 </div>
 
 
+<a href="" class="row py-1 border-top mt-3 pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">ชื่อผู้ใช้</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold ">MR.xxx</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">Bio</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold">ตั้งค่าตอนนี้</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top pl-2 mt-3" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">เพศ</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold">ชาย</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
 <a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row">
-        <i class="far fa-list-alt"></i>
-        <h5 class="m-0 ml-2 font-weight-bold">รายการของฉัน</h5>
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">วันเกิด</h5>
     </div>
-    <div class="col-4 mx-0 text-right">
-        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold">DD-MM-YYYY</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">เบอร์ติดต่อ</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold">********39</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">E-mail</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+            <h5 class="m-0 mr-2 font-weight-bold">*********@gmail.com</h5>
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
+<a href="" class="row py-1 border-top border-bottom  mt-3 pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">เปลี่ยนรหัสผ่าน</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 ">
+
+
+            <i class="far fa-angle-right"></i>
+        </div>
     </div>
 </a>
 
-<div class="row py-1 border-top pl-2" style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row">
-        <i class="fas fa-heart "></i>
-        <h5 class="m-0 ml-2 font-weight-bold">สิ่งที่ถูกใจ</h5>
-    </div>
-    <div class="col-4 mx-0 text-right">
-        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
-    </div>
-</div>
 
-<div class="row py-1 border-top pl-2" style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row">
-        <i class="fal fa-credit-card"></i>
-        <h5 class="m-0 ml-2 font-weight-bold">รายการบัญชีธนาคาร/บัตรที่บันทึก</้>
-    </div>
-    <div class="col-4 mx-0 text-right">
-        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
-    </div>
-</div>
-
-
-
-<a href="{{url('user/profile/setting')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row ">
-        <i class="far fa-cog"></i>
-        <h5 class="m-0 ml-2 font-weight-bold">การตั้งค่า</h5>
-    </div>
-    <div class="col-4 mx-0 text-right">
-        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
-    </div>
-</a>
 
 <!-- <div class="row py-1  border-top border-bottom text-danger">
     <div class="col-12 mx-0">
