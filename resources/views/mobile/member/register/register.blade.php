@@ -40,13 +40,20 @@
                 </div>
                 
                 <div class="col-6 text-left">
-                    <span class="custom_hover font-weight-bold  my-3" style="font-size: 16px;">
-                        Already a member ?
-                    </span>
-                    <span class="custom_hover my-3" style="font-size: 16px; font-weight: bold;">
-                        <a href="{{url('user/login')}}">Login</a>
-
-                    </span>
+                    <div class = "row align-items-center my-3">
+                        <div class = "col-12">
+                            <span class="custom_hover font-weight-bold" style="font-size: 16px;">
+                                Already a member ?
+                            </span>
+                        </div>
+                        <div class = "col-12">
+                            <span class="custom_hover" style="font-size: 16px; font-weight: bold;">
+                                <a href="{{url('user/login')}}">Login</a>
+                            </span>
+                        </div>
+                        
+                        
+                    </div>
                 </div>
             </form>
 
