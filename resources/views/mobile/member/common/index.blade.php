@@ -63,6 +63,8 @@
         </li>
     </ul> --}}
 
+    <div class="mt-3" name="story_videos_section" id="story_videos_section">
+
     <ul class="nav nav-tabs style1 mt-2"role="tablist">
         <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#home" role="tab" >บทความ</a></li>
         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#video" role="tab">วิดีโอ</a></li>
@@ -71,11 +73,12 @@
     </ul>
 
 
-    <br>
+   <!--  <br>
     
-    <br>
+    <br> -->
     <div class="tab-content mt-2">
         <div id="home" class="tab-pane fade in active show">
+        @include("mobile.member.common.content.story")
             @foreach ($c as $sqls)
                 <?php $count = DB::Table('tb_comments')->where('comment_object_id',$sqls->new_id)->get()?>
                 <div class="card my-3">
@@ -136,6 +139,7 @@
 
 
         <div id="video" class="tab-pane fade">
+            @include("mobile.member.common.content.story")
             @foreach ($v as $item)
                 <?php $count = DB::Table('tb_comments')->where('comment_object_id',$item->new_id)->get()?>
                 <div class="card my-3">
@@ -200,6 +204,7 @@
 
 
         <div id="podcast" class="tab-pane fade">
+            @include("mobile.member.common.content.story")
           <h3>Menu 2</h3>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
         </div>
@@ -207,6 +212,7 @@
 
         
         <div id="store" class="tab-pane fade">
+            @include("mobile.member.common.content.story")
             <div class="container p-1 my-3">
 
                 <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
@@ -224,96 +230,43 @@
     
                 <div class="" name="story_videos_section" id="story_videos_section">
     
-                    <div class="carousel-multiple owl-carousel owl-theme owl-loaded owl-drag">
-    
-                        <div class="owl-stage-outer">
-                            <div class="owl-stage " style="transform: translate3d(-514px, 0px, 0px); transition: all 0.25s ease 0s; width: 1265px; padding-left: 32px; padding-right: 32px;">
-                                @foreach($pro as $pros)
-                                    <div class="owl-item cloned card" style="width: 140px; margin-right: 16px;">
-                                        <div class="item card ">
-                                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                                            <div class="card-body col-12 p-1 ">
-                                                <div class="row pl-1">
-                                                    <h5 class=" font-weight-bolder m-0">{{$pros->product_name}}</h5>
-                                                </div>
-                                                <div class=" row ">
-                                                    <h6 class="mt-1 pl-1 m-0 col-6">{{$pros->product_price}}</h6>
-                                                    {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
-                                                    <div class="pl-2">
-                                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                                        <div class="rating-system2">
-        
-                                                            <input type="radio" name='rate2' id="star5_2" />
-                                                            <label for="star5_2"></label>
-        
-                                                            <input type="radio" name='rate2' id="star4_2" />
-                                                            <label for="star4_2"></label>
-        
-                                                            <input type="radio" name='rate2' id="star3_2" />
-                                                            <label for="star3_2"></label>
-        
-                                                            <input type="radio" name='rate2' id="star2_2" />
-                                                            <label for="star2_2"></label>
-        
-                                                            <input type="radio" name='rate2' id="star1_2" />
-                                                            <label for="star1_2"></label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    <div class="carousel-multiple owl-carousel owl-theme">
+                        @foreach($pro as $pros)
+                            <div class = "item">
+                                <div class="card ">
+                                    <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
+                                    <div class="card-body col-12 p-1 ">
+                                        <div class="row pl-1">
+                                            <h5 class=" font-weight-bolder m-0">{{$pros->product_name}}</h5>
                                         </div>
-                                    </div>
-                                @endforeach
-                                @foreach($pro as $pros)
-                                <div class="owl-item cloned card" style="width: 140px; margin-right: 16px;">
-                                    <div class="item card ">
-                                        <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                                        <div class="card-body col-12 p-1 ">
-                                            <div class="row pl-1">
-                                                <h5 class=" font-weight-bolder m-0">{{$pros->product_name}}</h5>
-                                            </div>
-                                            <div class=" row ">
-                                                <h6 class="mt-1 pl-1 m-0 col-6">{{$pros->product_price}}</h6>
-                                                {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
-                                                <div class="pl-2">
-                                                    <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                                    <div class="rating-system2">
-    
-                                                        <input type="radio" name='rate2' id="star5_2" />
-                                                        <label for="star5_2"></label>
-    
-                                                        <input type="radio" name='rate2' id="star4_2" />
-                                                        <label for="star4_2"></label>
-    
-                                                        <input type="radio" name='rate2' id="star3_2" />
-                                                        <label for="star3_2"></label>
-    
-                                                        <input type="radio" name='rate2' id="star2_2" />
-                                                        <label for="star2_2"></label>
-    
-                                                        <input type="radio" name='rate2' id="star1_2" />
-                                                        <label for="star1_2"></label>
-                                                    </div>
+                                        <div class=" row ">
+                                            <h6 class="mt-1 pl-1 m-0 col-6">{{$pros->product_price}}</h6>
+                                            {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
+                                            <div class="pl-2">
+                                                <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
+                                                <div class="rating-system2">
+
+                                                    <input type="radio" name='rate2' id="star5_2" />
+                                                    <label for="star5_2"></label>
+
+                                                    <input type="radio" name='rate2' id="star4_2" />
+                                                    <label for="star4_2"></label>
+
+                                                    <input type="radio" name='rate2' id="star3_2" />
+                                                    <label for="star3_2"></label>
+
+                                                    <input type="radio" name='rate2' id="star2_2" />
+                                                    <label for="star2_2"></label>
+
+                                                    <input type="radio" name='rate2' id="star1_2" />
+                                                    <label for="star1_2"></label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                                
                             </div>
-                        </div>
-                        <div class="owl-nav disabled">
-                            <button type="button" role="presentation" class="owl-prev">
-                                <span aria-label="Previous">‹</span>
-                            </button>
-                            <button type="button" role="presentation" class="owl-next">
-                                <span aria-label="Next">›</span>
-                            </button>
-                        </div>
-                        <div class="owl-dots disabled">
-    
-                        </div>
+                        @endforeach
                     </div>
     
                 </div>
@@ -369,7 +322,8 @@
 
 
       </div>
-    {{-- <div class="tab-content mt-2">
+    {{--
+    <div class="tab-content mt-2" >
         <div class="tab-pane fade active show" id="home" role="tabpanel">
             <!-- A : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate enim sed elit
                     consequat, sed ultricies ligula venenatis. In nec arcu eget neque sodales accumsan vel
@@ -398,7 +352,8 @@
             @include("mobile.member.common.content.story")
             @include("mobile.member.common.content.shopping.index")
         </div>
-    </div> --}}
+    </div> 
+    --}}
 </div>
 
 
