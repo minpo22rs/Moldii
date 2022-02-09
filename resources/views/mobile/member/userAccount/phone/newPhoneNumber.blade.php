@@ -13,6 +13,7 @@
 <div class="mt-3 p-2 col-12">
 
     <form action="{{url('user/OTP_PhoneNumber')}}">
+    @csrf
         <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลขโทรศัพท์เพื่อรับ OTP</small> </h6>
 
         <input type="text" class="form-control form-control-lg mt-1 mb-1 input" style="border-radius: 10px; " name="newPhone" id="newPhone" value="" placeholder="หมายเลขโทรศัพท์">

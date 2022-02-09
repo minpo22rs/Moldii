@@ -54,6 +54,9 @@ class UserAccController extends Controller
         return view('mobile.member.helpCenter.helpCenter');
 
     }
+
+
+
     public function profilePage(){// หน้าโปรไฟล์
         return view('mobile.member.userAccount.profilePage');
 
@@ -62,36 +65,52 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.nameChange');
 
     }
+
+
     public function phoneNumber(){// หน้าโชว์เบอร์
-        return view('mobile.member.userAccount.phoneNumber');
+        return view('mobile.member.userAccount.phone.showPhoneNumber');
 
     }
     public function newPhoneNumber(){// กรอกเบอร์ใหม่
-        return view('mobile.member.userAccount.newPhoneNumber');
+        return view('mobile.member.userAccount.phone.newPhoneNumber');
 
     }
     public function OTP_PhoneNumber(){// กรอกOTP
-        return view('mobile.member.userAccount.OTP_PhoneNumber');
+        return view('mobile.member.userAccount.phone.OTP_PhoneNumber');
 
     }
-    public function changePassword(){
-        return view('mobile.member.userAccount.changePassword');
+
+
+    public function changePassword(){// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+        return view('mobile.member.userAccount.password.changePassword');
 
     }
-    public function newPassword(){
-        return view('mobile.member.userAccount.newPassword');
+    public function newPassword(){// กรอกรหัสผ่านใหม่
+        return view('mobile.member.userAccount.password.newPassword');
 
     }
-    public function Profile_ForgotPassword(){
-        return view('mobile.member.userAccount.forgotPassword');
+    public function Profile_ForgotPassword(){// ลืมรหัสผ่าน(Profile)
+        return view('mobile.member.userAccount.password.forgotPassword');
 
     }
-    public function changeEmail(){
-        return view('mobile.member.userAccount.changeEmail');
+
+
+    public function changeEmail(){// E-mail
+        return view('mobile.member.userAccount.email.changeEmail');
 
     }
-    public function newEmail(){
-        return view('mobile.member.userAccount.newEmail');
+    public function newEmail(){// กรอก E-mail ใหม่
+        return view('mobile.member.userAccount.email.newEmail');
+
+    }
+
+
+    public function myAddress(){// โชว์ที่อยู่ของฉัน
+        return view('mobile.member.userAccount.address.myAddress');
+
+    }
+    public function newAddress(){// เพิ่มที่อยู่ใหม่
+        return view('mobile.member.userAccount.address.newAddress');
 
     }
     

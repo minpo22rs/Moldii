@@ -13,6 +13,7 @@
 <div class="mt-3 p-2 col-12">
 
     <form action="">
+    @csrf
         <div class="row justify-content-between col-12 m-0 p-0">
             <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลข OTP</small> </h6>
            <a href=""><h6 class="my-1"><small style="color:rgba(80, 202, 101, 1);">ส่ง OTP อีกครั้ง</small> </h6></a> 

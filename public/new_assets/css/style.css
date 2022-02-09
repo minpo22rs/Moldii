@@ -4569,8 +4569,8 @@ textarea,
 }
 
 .custom-control .custom-control-input:checked~.custom-control-label:before {
-    background: #1E74FD !important;
-    border-color: #1E74FD !important;
+    background: rgba(255, 92, 99, 1) !important;
+    border-color: rgba(255, 92, 99, 1) !important;
 }
 
 .custom-control .custom-control-input:checked~.custom-control-label:after {
@@ -8305,6 +8305,13 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .input::placeholder {
     color: rgba(181, 181, 181, 0.5);
     font-size: 15px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.input_2::placeholder {
+    color: rgba(181, 181, 181, 0.5);
+    font-size: 12px;
     align-items: center;
     margin: 0 auto;
 }

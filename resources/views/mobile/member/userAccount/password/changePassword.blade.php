@@ -13,7 +13,7 @@
 <div class="mt-1 p-2 col-12">
 
     <form action="{{url('user/newPassword')}}">
-
+    @csrf
         <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">เพื่อความปลอดภัยของบัญชีคุณ</small> </h6>
         <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณายืนยันรหัสผ่านเพื่อดำเนินการต่อ</small> </h6>
 
