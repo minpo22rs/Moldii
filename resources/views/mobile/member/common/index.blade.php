@@ -84,7 +84,7 @@
         
                         <div class="card-title col-8  align-self-center m-0 ">
                             <div class="card-title m-0 row align-self-center">
-                                <h4 class=" m-0 p-0">{{$sqls->new_title}}</h4>
+                                <h4 class=" m-0 p-0">{{$sqls->created_by}}</h4>
                                 <a href="#" class="ml-1 align-self-center">
                                     <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
                                 </a>
@@ -98,10 +98,10 @@
                         </div>
                     </div>
                     <div class="card-body p-2">
-                        <p class="card-text">{{substr($sqls->new_content,0,80)}}</p>
+                        <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
         
                     </div>
-                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                    <a href="{{url('content/'.$sqls->new_id.'')}}"><img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"></a>
         
                     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
                         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
@@ -411,9 +411,7 @@
         if(a){
             alert(a);
         }
-    </script>
-
-    <script>
-            bottom_now(1);
+   
+         bottom_now(1);
     </script>
 @endsection

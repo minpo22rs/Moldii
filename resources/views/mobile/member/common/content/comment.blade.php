@@ -2,7 +2,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('user/ThaiLotto/selectMethod')}}');">
+        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('user/index')}}');">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
@@ -43,12 +43,12 @@
 
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
-                <h4 class=" m-0 p-0">ชื่อ XXXXXXX</h4>
+                <h4 class=" m-0 p-0">{{$c->created_by}}</h4>
                 <a href="#" class="ml-1 align-self-center">
                     <h6 class="m-0 p-0 font-weight-bold " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
                 </a>
             </div>
-            <h6 class=" m-0 p-0">DD-MM-YYYY</h6>
+            <h6 class=" m-0 p-0">{{$c->created_at}}</h6>
         </div>
 
         <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
@@ -57,13 +57,13 @@
         </div>
     </div>
     <div class="card-body p-2">
-        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto necessitatibus libero veniam !</p>
+        <p class="card-text">{{$c->new_content}}</p>
 
     </div>
-    <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
 
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
-        <h6 class="mb-0 ml-1 card-subtitle text-muted">230 ชื่นชอบ</h6>
+        <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น 120 รายการ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">2.7k รับชม</h6>
@@ -138,22 +138,20 @@
 
         </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 
 </div>
 
 
 
+@endsection
+@section('custom_script')
+    <script>
+        var a = "{{Session::get('success')}}";
+        if(a){
+            alert(a);
+        }
+   
+         bottom_now(1);
+    </script>
 @endsection

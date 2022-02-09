@@ -7,6 +7,7 @@ use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
+use App\Http\Controllers\mobile\common\ContentController;
 use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -40,6 +41,8 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 Route::get('user/index', [MainController::class, 'index']); 
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
+
+Route::get('content/{id}', [ContentController::class, 'index']); 
 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
