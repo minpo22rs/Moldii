@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Session;
 
 
 class RegisterController extends Controller
@@ -66,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        // dd('asfadf');/
+        // dd('asfadf');
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -84,7 +85,7 @@ class RegisterController extends Controller
         $p->save();
 
         Session::put('u_id',$p->id);
-        dd($p);
+        // dd($p);
         return redirect()->to('otp');
     }
 }

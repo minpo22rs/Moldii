@@ -6,7 +6,7 @@
                     @csrf
                         <div class = "row align-items-center">
                             <div class = "col-12 text-center">
-                                <h1 class = ""  style = "margin-top: 50%;">
+                                <h1 class = ""  style = "margin-top: 150px;">
                                     LOGIN
                                 </h1>
                             </div>
