@@ -41,7 +41,7 @@ class UserAccController extends Controller
         return view('mobile.member.forgotPassword.forgotPassword');
     }
 
-    public function profile()
+    public function profile()// หน้าบัญชีของฉัน
     {
         return view('mobile.member.userAccount.profile');
     }
@@ -51,11 +51,48 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.profileSetting');
     }
     public function profileHelpCenter(){
-        return view('mobile.member.userAccount.profile_help_center');
+        return view('mobile.member.helpCenter.helpCenter');
 
     }
-    public function profilePage(){
+    public function profilePage(){// หน้าโปรไฟล์
         return view('mobile.member.userAccount.profilePage');
 
     }
+    public function nameChange(){// เปลี่ยนชื่อ
+        return view('mobile.member.userAccount.nameChange');
+
+    }
+    public function phoneNumber(){// หน้าโชว์เบอร์
+        return view('mobile.member.userAccount.phoneNumber');
+
+    }
+    public function newPhoneNumber(){// กรอกเบอร์ใหม่
+        return view('mobile.member.userAccount.newPhoneNumber');
+
+    }
+    public function OTP_PhoneNumber(){// กรอกOTP
+        return view('mobile.member.userAccount.OTP_PhoneNumber');
+
+    }
+    public function changePassword(){
+        return view('mobile.member.userAccount.changePassword');
+
+    }
+    public function newPassword(){
+        return view('mobile.member.userAccount.newPassword');
+
+    }
+    public function Profile_ForgotPassword(){
+        return view('mobile.member.userAccount.forgotPassword');
+
+    }
+    public function changeEmail(){
+        return view('mobile.member.userAccount.changeEmail');
+
+    }
+    public function newEmail(){
+        return view('mobile.member.userAccount.newEmail');
+
+    }
+    
 }

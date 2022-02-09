@@ -31,11 +31,21 @@ Route::get('/', function () {
 Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);
-Route::get('user/profile', [UserAccController::class, 'profile']);
-Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
 
-Route::get('user/profilePage', [UserAccController::class, 'profilePage']);
-Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);
+Route::get('user/profile', [UserAccController::class, 'profile']);// หน้าบัญชีของฉัน
+Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
+Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
+Route::get('user/nameChange', [UserAccController::class, 'nameChange']);// เปลี่ยนชื่อ
+Route::get('user/phoneNumber', [UserAccController::class, 'phoneNumber']);// หน้าโชว์เบอร์
+Route::get('user/newPhoneNumber', [UserAccController::class, 'newPhoneNumber']);// กรอกเบอร์ใหม่
+Route::get('user/OTP_PhoneNumber', [UserAccController::class, 'OTP_PhoneNumber']);// กรอกOTP
+Route::get('user/changePassword', [UserAccController::class, 'changePassword']);
+Route::get('user/newPassword', [UserAccController::class, 'newPassword']);
+Route::get('user/profile/forgotPassword', [UserAccController::class, 'Profile_ForgotPassword']);
+Route::get('user/changeEmail', [UserAccController::class, 'changeEmail']);
+Route::get('user/newEmail', [UserAccController::class, 'newEmail']);
+
+Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
 
 Route::get('user/index', [MainController::class, 'index']); 
 

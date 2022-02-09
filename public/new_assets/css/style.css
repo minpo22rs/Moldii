@@ -8301,3 +8301,10 @@ body.dark-mode-active .cart-item .cart-item-footer {
     top: -1.2rem;
     position: absolute;
 }
+
+.input::placeholder {
+    color: rgba(181, 181, 181, 0.5);
+    font-size: 15px;
+    align-items: center;
+    margin: 0 auto;
+}
