@@ -368,38 +368,38 @@
 
 
 
-      </div>
-    {{-- <div class="tab-content mt-2">
+    </div>
+    <div class="tab-content mt-2">
         <div class="tab-pane fade active show" id="home" role="tabpanel">
             <!-- A : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate enim sed elit
                     consequat, sed ultricies ligula venenatis. In nec arcu eget neque sodales accumsan vel
                     et neque. -->
 
             @include("mobile.member.common.content.story")
-            @include("mobile.member.common.content.home")
+            {{-- @include("mobile.member.common.content.home") --}}
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel">
             <!-- B : Suspendisse maximus ligula eu ligula iaculis, eu bibendum odio dignissim. Pellentesque
                     elementum nisl elit, non feugiat risus luctus sit amet. -->
             @include("mobile.member.common.content.story")
-            @include("mobile.member.common.content.video")
+            {{-- @include("mobile.member.common.content.video") --}}
 
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel">
             <!--   C : Vestibulum sed facilisis diam, vel sodales leo. Aenean lacinia, nisi sit amet iaculis
                     maximus, nibh orci iaculis risus, vitae faucibus dui orci quis elit. -->
             @include("mobile.member.common.content.story")
-            @include("mobile.member.common.content.podcast")
+            {{-- @include("mobile.member.common.content.podcast") --}}
 
         </div>
         <div class="tab-pane fade" id="store" role="tabpanel">
             <!--      D : Vestibulum sed facilisis diam, vel sodales leo. Aenean lacinia, nisi sit amet iaculis
                     maximus, nibh orci iaculis risus, vitae faucibus dui orci quis elit. -->
             @include("mobile.member.common.content.story")
-            @include("mobile.member.common.content.shopping.index")
+            {{-- @include("mobile.member.common.content.shopping.index") --}}
         </div>
-    </div> --}}
-</div>
+    </div>
+</di v>
 
 
 @endsection
