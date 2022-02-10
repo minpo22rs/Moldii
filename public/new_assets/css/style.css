@@ -4620,7 +4620,7 @@ textarea,
 .input-list .custom-control-label:before,
 .input-list .custom-control-label:after {
     top: 50%;
-    left: 16px;
+    left: 6px;
     transform: translate(0%, -50%);
     margin: 0;
 }
@@ -4636,8 +4636,8 @@ textarea,
 }
 
 .custom-switch .custom-control-label {
-    width: 56px;
-    height: 30px;
+    width: 42px;
+    height: 24px;
 }
 
 .custom-switch .custom-control-label:before {
@@ -4645,18 +4645,18 @@ textarea,
     left: 0;
     top: 0;
     border-radius: 100px;
-    width: 56px;
-    height: 30px;
+    width: 42px;
+    height: 24px;
     border-color: #d4d4d4 !important;
     background: #E1E1E1;
 }
 
 .custom-switch .custom-control-label:after {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 100px;
-    margin-top: -1px;
-    margin-left: 1px;
+    margin-top: -2px;
+    margin-left: -1px;
     left: 3px;
     top: 4px;
     background: #fff;
@@ -4672,10 +4672,10 @@ textarea,
 }
 
 .custom-switch .custom-control-input:checked~.custom-control-label:after {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 100px;
-    left: 16px;
+    left: 9px;
 }
 
 .message-divider {
@@ -8314,4 +8314,22 @@ body.dark-mode-active .cart-item .cart-item-footer {
     font-size: 12px;
     align-items: center;
     margin: 0 auto;
+}
+
+.brd-10 {
+    border-radius: 10px;
+}
+
+.a-shadow {
+    background: transparent;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.22);
+    border-radius: 25px;
+}
+
+.a-shadow a {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.a-shadow .row {
+    background-color: rgba(255, 255, 255, 1);
 }

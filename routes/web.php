@@ -47,6 +47,11 @@ Route::get('user/changeEmail', [UserAccController::class, 'changeEmail']);// E-m
 Route::get('user/newEmail', [UserAccController::class, 'newEmail']);// กรอก E-mail ใหม่
 Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
+Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
+Route::get('user/notification', [UserAccController::class, 'notification']);// ตั้งค่าการแจ้งเตือน
+Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
+Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
 

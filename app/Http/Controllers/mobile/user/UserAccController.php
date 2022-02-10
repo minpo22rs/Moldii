@@ -114,4 +114,28 @@ class UserAccController extends Controller
 
     }
     
+
+
+    public function creditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
+        return view('mobile.member.userAccount.credit_card.creditCard');
+
+    }
+    public function addCreditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
+        return view('mobile.member.userAccount.credit_card.addCreditCard');
+
+    }
+
+    public function notification(){// ตั้งค่าการแจ้งเตือน
+        return view('mobile.member.userAccount.notification');
+
+    }
+    public function privacySettings(){// ตั้งค่าความเป็นส่วนตัว
+        return view('mobile.member.userAccount.privacySettings');
+
+    }
+    public function appAccess(){// การเข้าถึงของแอป
+        return view('mobile.member.userAccount.appAccess');
+
+    }
+    
 }
