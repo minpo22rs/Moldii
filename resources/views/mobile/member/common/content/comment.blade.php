@@ -10,29 +10,7 @@
 
     </div>
     <div class="right"></div>
-    <!-- <div class="m-1 w-100">
-
-            <div class = "row">
-                <div class = "col-10">
-                    <form class="search-form">
-                        <div class="form-group searchbox mt-1 mb-0">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <i class="input-icon">
-                                <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                            </i>
-                        </div>
-                    </form>
-                </div>
-                <div class = "col-2">
-                    <ion-icon   name="funnel"  
-                                class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5"  
-                                
-                                role="img" aria-label="search outline">
-                    </ion-icon>
-                </div>
-            </div>
-            
-        </div> -->
+    
 </div>
 @endsection
 
