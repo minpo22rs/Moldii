@@ -31,12 +31,35 @@ Route::get('/', function () {
 
 Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
-Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);
-Route::get('user/profile', [UserAccController::class, 'profile']);
-Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
+Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);// ลืมรหัสผ่าน(Log in)
 
-Route::get('user/profilePage', [UserAccController::class, 'profilePage']);
-Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);
+Route::get('user/profile', [UserAccController::class, 'profile']);// หน้าบัญชีของฉัน
+Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
+Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
+Route::get('user/nameChange', [UserAccController::class, 'nameChange']);// เปลี่ยนชื่อ
+Route::get('user/phoneNumber', [UserAccController::class, 'phoneNumber']);// หน้าโชว์เบอร์
+Route::get('user/newPhoneNumber', [UserAccController::class, 'newPhoneNumber']);// กรอกเบอร์ใหม่ รับ OTP
+Route::get('user/OTP_PhoneNumber', [UserAccController::class, 'OTP_PhoneNumber']);// กรอกOTP
+Route::get('user/changePassword', [UserAccController::class, 'changePassword']);// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+Route::get('user/newPassword', [UserAccController::class, 'newPassword']);// กรอกรหัสผ่านใหม่
+Route::get('user/profile/forgotPassword', [UserAccController::class, 'Profile_ForgotPassword']);// ลืมรหัสผ่าน(Profile)
+Route::get('user/changeEmail', [UserAccController::class, 'changeEmail']);// E-mail
+Route::get('user/newEmail', [UserAccController::class, 'newEmail']);// กรอก E-mail ใหม่
+Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
+Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
+Route::get('user/notification', [UserAccController::class, 'notification']);// ตั้งค่าการแจ้งเตือน
+Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
+Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
+
+Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
+
+
+
+
+
+
 
 Route::get('user/index', [MainController::class, 'index']); 
 

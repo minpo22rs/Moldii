@@ -223,7 +223,8 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <!-- QR Code -->
     <script src="{{ asset('new_assets/js/lib/qrcode.min.js') }}"></script>
-
+    <!-- fontawesom -->
+    <!-- <script src="https://kit.fontawesome.com/6a1519527e.js" crossorigin="anonymous"></script> -->
     <script>
         function triggered() {
             alert('triggered');

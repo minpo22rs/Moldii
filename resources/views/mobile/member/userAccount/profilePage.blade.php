@@ -22,7 +22,7 @@
 </div>
 
 
-<a href="" class="row py-1 border-top mt-3 pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/nameChange')}}" class="row py-1 border-top mt-3 pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">ชื่อผู้ใช้</h5>
@@ -44,7 +44,7 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">ตั้งค่าตอนนี้</h5>
+            <h6 class="m-0 mr-2 font-weight-bold align-self-center"><small>ตั้งค่าตอนนี้</small></h6>
 
             <i class="far fa-angle-right"></i>
         </div>
@@ -78,7 +78,7 @@
         </div>
     </div>
 </a>
-<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/phoneNumber')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">เบอร์ติดต่อ</h5>
@@ -92,7 +92,7 @@
         </div>
     </div>
 </a>
-<a href="" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/changeEmail')}}" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">E-mail</h5>
@@ -106,7 +106,7 @@
         </div>
     </div>
 </a>
-<a href="" class="row py-1 border-top border-bottom  mt-3 pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/changePassword')}}" class="row py-1 border-top border-bottom  mt-4 pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">เปลี่ยนรหัสผ่าน</h5>
