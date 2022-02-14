@@ -13,10 +13,12 @@
 <div class="mt-3 p-2 col-12">
 
     <form action="">
-    @csrf
+        @csrf
         <div class="row justify-content-between col-12 m-0 p-0">
             <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลข OTP</small> </h6>
-           <a href=""><h6 class="my-1"><small style="color:rgba(80, 202, 101, 1);">ส่ง OTP อีกครั้ง</small> </h6></a> 
+            <a href="">
+                <h6 class="my-1"><small style="color:rgba(80, 202, 101, 1);">ส่ง OTP อีกครั้ง</small> </h6>
+            </a>
 
         </div>
 
@@ -32,8 +34,67 @@
 
 @endsection
 
-@section('custom_script')
+@section('numpad')
+<div class="" id="numpad_container">
+
+    <div class="numpad-box " id="numpad_box">
+        <div class="wrapper">
+
+
+            <section class="calc-btn_row">
+
+                <div class="calc_btn_row">
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '1';">1</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '2';">2</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '3';">3</button>
+
+
+                </div>
+                <div class="calc_btn_row">
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '4';">4</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '5';">5</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '6';">6</button>
+
+                </div>
+                <div class="calc_btn_row">
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '7';">7</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '8';">8</button>
+                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '9';">9</button>
+
+                </div>
+                <div class="calc_btn_row justify-content-end">
+
+                    <button class="calc_btn none-bg" onclick=""></button>
+                    <button class="calc_btn " onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '0';">0</button>
+                    <button class="calc_btn none-bg"  onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
+
+                </div>
+
+
+
+            </section>
+        </div>
+    </div>
+
+
+</div>
 <script>
-    bottom_now(4);
+    //_______________[Buy_goods]__________________//
+    const showNum = document.getElementById("newPassword");
+    const boxNum = document.getElementById("numpad_box");
+    const conNum = document.getElementById("numpad_container");
+
+    showNum.addEventListener("click", () => {
+        boxNum.classList.add("numpad-show");
+
+    });
+
+
+
+
+
+
+    //_______________[Buy_goods]__________________//
 </script>
+
 @endsection

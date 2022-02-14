@@ -555,8 +555,6 @@ shareOff.addEventListener("click", () => {
 });
 //_______________[Share]__________________//
 
-
-
 //_______________[Buy_goods]__________________//
 const buyGoodsBtn = document.getElementById("buy-goods");
 const buyGoodsCon = document.getElementById("buy_goods_container");
@@ -575,11 +573,35 @@ window.addEventListener("click", (e) =>
 );
 //_______________[Buy_goods]__________________//
 
-
-
-
 window.addEventListener("scroll", function() {
     const choiceCon = document.getElementById("choice_container");
     let windowPosition = window.scrollY > 0;
     choiceCon.classList.toggle("show-choice", windowPosition);
 });
+
+// function openCity(cityName) {
+//     var i;
+//     var x = document.getElementsByClassName("city");
+//     for (i = 0; i < x.length; i++) {
+//         x[i].style.display = "none";
+//     }
+//     document.getElementById(cityName).style.display = "block";
+// }
+
+
+
+
+
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tabs-btn");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}

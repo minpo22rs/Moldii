@@ -4507,7 +4507,7 @@ textarea,
     font-weight: 500;
     font-size: 13px;
     border: 0 !important;
-    border-bottom: 2px solid transparent !important;
+    border-bottom: 3px solid transparent !important;
     line-height: 1.2em;
     width: 100%;
     border-radius: 0;
@@ -4529,9 +4529,9 @@ textarea,
 }
 
 .nav-tabs.lined .nav-item .nav-link.active {
-    color: #1E74FD;
+    color: rgba(255, 92, 99, 1);
     background: transparent;
-    border-bottom-color: #1E74FD !important;
+    border-bottom-color: rgba(255, 92, 99, 1) !important;
 }
 
 .nav-tabs.iconed i.icon,
@@ -8332,4 +8332,85 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 .a-shadow .row {
     background-color: rgba(255, 255, 255, 1);
+}
+
+.test-con {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    transition: transform 0.4s;
+}
+
+.numpad-box {
+    position: absolute;
+    width: 100%;
+    height: 291px;
+    background-color: #FFF;
+    bottom: 0;
+    z-index: 1000;
+    border-radius: 8px 8px 0px 0px;
+    transform: translateY( 100%);
+    transition: transform 0.4s;
+}
+
+.numpad-box.numpad-show {
+    transform: translateY( 0%);
+    transition: transform 0.4s;
+}
+
+.wrapper {
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: rgba(214, 215, 220, 1);
+    padding: 6px;
+}
+
+.calc_btn_row {
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    margin-bottom: 0.8%;
+}
+
+.calc_btn {
+    background-color: rgba(252, 252, 254, 1);
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    border: none;
+    width: 33.33%;
+    height: 46px;
+    margin: 3.5px;
+    border-radius: 5px;
+}
+
+.calc_btn:active {
+    background-color: #bbbcbe;
+}
+
+.none-bg {
+    background-color: transparent;
+}
+
+.tabs-btn {
+    border: none;
+    width: 33.33%;
+    color: rgba(196, 196, 196, 1);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.tabs-btn.active {
+    color: rgba(255, 92, 99, 1);
+    transition: 0.3s;
 }

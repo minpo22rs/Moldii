@@ -53,6 +53,10 @@ Route::get('user/notification', [UserAccController::class, 'notification']);// �
 Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
+
+Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
+
+
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
 
 
