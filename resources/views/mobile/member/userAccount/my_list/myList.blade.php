@@ -36,14 +36,14 @@
             <div class="tab-pane fade show active " id="purchase" role="tabpanel">
 
                 <div class="row justify-content-center my-3">
-                    <button class="tabs-btn font-weight-bold justify-content-center active" onclick="openCity(event, 'delivered_2')">ที่ต้องจัดส่ง</button>
-                    <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'receive_2')">ที่ต้องได้รับ</button>
-                    <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'score_2')">ให้คะแนน</button>
+                    <button class="tabs-btn font-weight-bold justify-content-center active" onclick="openCity(event, 'delivered')">ที่ต้องจัดส่ง</button>
+                    <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'receive')">ที่ต้องได้รับ</button>
+                    <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'score')">ให้คะแนน</button>
                 </div>
                 
                 <!-- ที่ต้องจัดส่ง -->
-                <div id="delivered_2" class="tabcontent">
-                    <div class="row p-2  border-top border-bottom">
+                <div id="delivered" class="tabcontent">
+                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
                         <div class="mx-1">
                             <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                         </div>
@@ -59,8 +59,8 @@
                                 <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
                             </div>
                         </div>
-                    </div>
-                    <div class="row p-2  border-top border-bottom">
+                    </a>
+                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
                         <div class="mx-1">
                             <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                         </div>
@@ -76,7 +76,7 @@
                                 <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     <h2>ที่ต้องจัดส่ง</h2> <!-- Test -->
 
                 </div>
@@ -87,8 +87,8 @@
 
                 
                 <!-- ที่ต้องได้รับ -->
-                <div id="receive_2" class="tabcontent" style="display:none">
-                    <div class="row p-2  border-top border-bottom">
+                <div id="receive" class="tabcontent" style="display:none">
+                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
                         <div class="mx-1">
                             <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                         </div>
@@ -104,8 +104,8 @@
                                 <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
                             </div>
                         </div>
-                    </div>
-                    <div class="row p-2  border-top border-bottom">
+                    </a>
+                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
                         <div class="mx-1">
                             <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                         </div>
@@ -121,7 +121,7 @@
                                 <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     <h2>ทีต้องได้รับ</h2> <!-- Test -->
                 </div>
                 <!-- ที่ต้องได้รับ -->
@@ -129,7 +129,7 @@
 
 
                 <!-- ให้คะแนน -->
-                <div id="score_2" class="tabcontent" style="display:none">
+                <div id="score" class="tabcontent" style="display:none">
                     <div class=" px-2 py-3 border-top border-bottom text-right">
                         <div class="col-12 row p-0 m-0 ">
                             <div class="mx-1">
@@ -148,7 +148,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>บันทึก</button>
+                        
+                        <a href="{{url('user/score')}}"  class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
                     </div>
                     <div class=" px-2 py-3 border-top border-bottom text-right">
                         <div class="col-12 row p-0 m-0 ">
@@ -168,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>บันทึก</button>
+                        <a href="{{url('user/score')}}"  class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
                     </div>
                     <h2>ให้คะแนน</h2> <!-- Test -->
                 </div>

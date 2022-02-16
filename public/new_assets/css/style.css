@@ -4342,17 +4342,15 @@ textarea,
     bottom: 0;
     right: 0;
     overflow: hidden;
-    background-color: rgba(225, 225, 225, 0.2);
-    background-size: 45px 58px;
-    border: 1px solid #E1E1E1;
-    border-radius: 6px;
+    background-color: #F2F0F0;
+    background-size: 75px 75px;
     margin: 0;
 }
 
 .custom-file-upload label span {
     display: block;
     font-size: 15px;
-    color: #A1A1A2;
+    color: rgba(0, 0, 0, 1);
     height: auto;
     position: absolute;
     top: 50%;
@@ -8413,4 +8411,34 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .tabs-btn.active {
     color: rgba(255, 92, 99, 1);
     transition: 0.3s;
+}
+
+.fs-1_5rem {
+    font-size: 1.5rem;
+}
+
+.fs-11px {
+    font-size: 13px;
+}
+
+.rating__star {
+    width: 29px;
+    height: 28px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #F1F437;
+}
+
+.input-phd::placeholder {
+    font-size: 11px;
+    color: #C8C8C8;
+    align-items: start;
+}
+
+.input-phd {
+    resize: none;
+}
+
+.input-phd:focus {
+    box-shadow: none;
 }

@@ -145,5 +145,13 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.myList');
 
     }
+    public function orderDetails(){// รายการของฉัน
+        return view('mobile.member.userAccount.my_list.orderDetails');
+
+    }
+    public function score(){// รายการของฉัน
+        return view('mobile.member.userAccount.my_list.score');
+
+    }
     
 }

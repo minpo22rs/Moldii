@@ -55,6 +55,8 @@ Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// กา�
 
 
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
+Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
+Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
 
 
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
