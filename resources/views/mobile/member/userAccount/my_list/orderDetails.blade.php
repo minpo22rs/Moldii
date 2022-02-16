@@ -68,14 +68,18 @@
             <div class="col-3 p-0">
                 <img src="{{asset('new_assets/img/sample/avatar/avatar2.jpg')}}" class="col-12 align-self-start"><br>
             </div>
-            <div class="col-7 pr-0 align-self-center">
+            <div class="col-5 pr-0 align-self-center">
                 <h5 class="mb-1 ">ชื่อสินค้า</h5>
                 <h5 class="mb-1" style="color:rgba(79, 77, 77, 1);">จำนวนสินค้า</h5>
                 <h5 class="m-0" style="color:rgba(79, 77, 77, 1);">ราคาต่อหน่วย</h5>
             </div>
-            <div class="col-2 text-right pr-0 align-self-end">
+            <div class="col-4 text-right pr-0 align-self-end">
                 <h5 class="mb-1 font-weight-bold" style="">x1</h5>
-                <h5 class="m-0 font-weight-bold" style="">฿ 100.00</h5>
+                <div class="row justify-content-end col-12 m-0 p-0">
+                    <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿200.00</s> </h5>
+                    <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿100.00</h5>
+                </div>
+
             </div>
         </div>
         <div class="col-12 row p-0 mt-2 ">
