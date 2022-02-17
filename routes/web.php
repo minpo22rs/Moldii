@@ -33,7 +33,7 @@ Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);// ลืมรหัสผ่าน(Log in)
 
-Route::get('user/profile', [UserAccController::class, 'profile']);// หน้าบัญชีของฉัน
+Route::get('user/myAccount', [UserAccController::class, 'myAccount']);// หน้าบัญชีของฉัน
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
 Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
 Route::get('user/nameChange', [UserAccController::class, 'nameChange']);// เปลี่ยนชื่อ
@@ -55,7 +55,10 @@ Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// กา�
 
 
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
+Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำการสั่งซื้อ
+
 Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
+Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
 Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
 
 

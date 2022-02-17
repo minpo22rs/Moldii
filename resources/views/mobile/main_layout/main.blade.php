@@ -36,11 +36,14 @@
     </div>
     <!-- * App Capsule -->
     
-        @yield('choices')
+        
     
-
+    @yield('choices')
     <!-- App Bottom Menu -->
     <div class="appBottomMenu bg-danger px-0">
+    @yield('choice')
+    
+    
     @yield('numpad')
         <a href="{{url('user/index')}}" class="item" id="bottom_button_home">
             <div class="col">

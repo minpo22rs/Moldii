@@ -41,9 +41,9 @@ class UserAccController extends Controller
         return view('mobile.member.forgotPassword.forgotPassword');
     }
 
-    public function profile()// หน้าบัญชีของฉัน
+    public function myAccount()// หน้าบัญชีของฉัน
     {
-        return view('mobile.member.userAccount.profile');
+        return view('mobile.member.userAccount.myAccount');
     }
 
     public function profileSetting()
@@ -145,12 +145,20 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.myList');
 
     }
-    public function orderDetails(){// รายการของฉัน
+    public function orderDetails(){// รายละเอียดคำสั่งซื้อ
         return view('mobile.member.userAccount.my_list.orderDetails');
 
     }
-    public function score(){// รายการของฉัน
+    public function score(){// ให้คะแนน
         return view('mobile.member.userAccount.my_list.score');
+
+    }
+    public function shoppingCart(){// ตะกร้าสินค้า
+        return view('mobile.member.userAccount.my_list.shoppingCart');
+
+    }
+    public function buyGoods(){// ทำการสั่งซื้อ
+        return view('mobile.member.userAccount.my_list.buyGoods');
 
     }
     

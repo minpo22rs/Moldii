@@ -40,7 +40,7 @@
                     <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'receive')">ที่ต้องได้รับ</button>
                     <button class="tabs-btn font-weight-bold justify-content-center " onclick="openCity(event, 'score')">ให้คะแนน</button>
                 </div>
-                
+
                 <!-- ที่ต้องจัดส่ง -->
                 <div id="delivered" class="tabcontent">
                     <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
@@ -85,7 +85,7 @@
 
 
 
-                
+
                 <!-- ที่ต้องได้รับ -->
                 <div id="receive" class="tabcontent" style="display:none">
                     <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
@@ -148,8 +148,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <a href="{{url('user/score')}}"  class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
+
+                        <a href="{{url('user/score')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
                     </div>
                     <div class=" px-2 py-3 border-top border-bottom text-right">
                         <div class="col-12 row p-0 m-0 ">
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{url('user/score')}}"  class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
+                        <a href="{{url('user/score')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
                     </div>
                     <h2>ให้คะแนน</h2> <!-- Test -->
                 </div>
@@ -182,7 +182,7 @@
 
 
 
-                
+
 
 
 
@@ -197,9 +197,61 @@
 
 
             <!-- * shopping_cart -->
-            <div class="tab-pane fade" id="shopping_cart" role="tabpanel">
-
-
+            <div class="tab-pane fade mt-2" id="shopping_cart" role="tabpanel">
+                <a href="{{url('user/shoppingCart')}}" class="row p-2  border-top border-bottom">
+                    <div class="mx-1">
+                        <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                    </div>
+                    <div class="col-10 row align-self-center justify-content-between pl-2">
+                        <div class="col-7 p-0 ">
+                            <h5 class="m-0">ชื่อร้าน</h5>
+                            <h5 class="m-0">จำนวนรายการสินค้า</h5>
+                            <h5 class="m-0">ราคาทั้งหมด</h5>
+                        </div>
+                        <div class=" p-0 text-center">
+                            <h5 class="m-0  ">วว/ดด/ปป</h5>
+                            <h5 class="m-0  ">เวลา</h5>
+                            
+                        </div>
+                    </div>
+                </a>
+                <a href="{{url('user/shoppingCart')}}" class="row p-2  border-top border-bottom">
+                    <div class="mx-1">
+                        <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                    </div>
+                    <div class="col-10 row align-self-center justify-content-between pl-2">
+                        <div class="col-7 p-0 ">
+                            <h5 class="m-0">ชื่อร้าน</h5>
+                            <h5 class="m-0">จำนวนรายการสินค้า</h5>
+                            <h5 class="m-0">ราคาทั้งหมด</h5>
+                        </div>
+                        <div class=" p-0 text-center">
+                            <h5 class="m-0  ">วว/ดด/ปป</h5>
+                            <h5 class="m-0  ">เวลา</h5>
+                            
+                        </div>
+                    </div>
+                </a>
+                <a href="{{url('user/shoppingCart')}}" class="row p-2  border-top border-bottom">
+                    <div class="mx-1">
+                        <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                    </div>
+                    <div class="col-10 row align-self-center justify-content-between pl-2">
+                        <div class="col-7 p-0 ">
+                            <h5 class="m-0">ชื่อร้าน</h5>
+                            <h5 class="m-0">จำนวนรายการสินค้า</h5>
+                            <h5 class="m-0">ราคาทั้งหมด</h5>
+                        </div>
+                        <div class=" p-0 text-center">
+                            <h5 class="m-0  ">วว/ดด/ปป</h5>
+                            <h5 class="m-0  ">เวลา</h5>
+                            
+                        </div>
+                    </div>
+                </a>
+                
+                
+                
             </div>
             <!-- * shopping_cart -->
 

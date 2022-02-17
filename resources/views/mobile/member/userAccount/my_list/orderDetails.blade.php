@@ -13,8 +13,24 @@
 <div class="container m-0 p-0">
     <div class="col-12 p-2 " style="background: #DFEDFC;">
         <h5 class="m-0  mt-1 mb-1 font-weight-bold ">คำสั่งซื้อกำลังอยู่ระหว่างส่ง</h5>
-        <h5 class=" ">คุณจะได้รับสินค้าภายใน <a href="">26-08-2021</a> </h5>
+        <h5 class=" m-0 ">คุณจะได้รับสินค้าภายใน <a href="" style="color:rgba(0, 0, 0, 1);">26-08-2021</a> </h5>
     </div>
+
+    <!-- //*คำสั่งซื้อสำเร็จแล้ว -->
+    <!-- <div class="col-12 p-2 row m-0" style="background: #DFEDFC;">
+        <div class="col-10">
+            <h5 class="m-0  mt-1 mb-1 font-weight-bold ">คำสั่งซื้อสำเร็จแล้ว</h5>
+            <h5 class="  ">ขอบคุณสำหรับการให้คะแนน คุณสามารถแก้ไขรีวิวได้ </h5>
+            <h5 class=" m-0 "><a href="" style="color:rgba(0, 0, 0, 1);">26-08-2021</a></h5>
+            
+        </div>
+        <img class="col-2 p-0 m-0" src="{{ asset('new_assets/img/icon/clipboard.svg')}}" alt="alt" style="">
+    </div> -->
+    <!-- //*คำสั่งซื้อสำเร็จแล้ว -->
+
+
+
+
     <div class="col-12 row p-2 m-0 border-bottom">
         <div class="col-1 p-0">
             <img class="col-12 p-0" src="{{ asset('new_assets/img/icon/delivery.svg')}}" alt="alt" style="">
@@ -76,7 +92,7 @@
             <div class="col-4 text-right pr-0 align-self-end">
                 <h5 class="mb-1 font-weight-bold" style="">x1</h5>
                 <div class="row justify-content-end col-12 m-0 p-0">
-                    <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿200.00</s> </h5>
+                    <!-- <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿200.00</s> </h5> -->
                     <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿100.00</h5>
                 </div>
 
