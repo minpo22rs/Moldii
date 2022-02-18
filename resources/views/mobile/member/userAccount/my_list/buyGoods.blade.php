@@ -11,12 +11,14 @@
 @endsection
 @section('content')
 <div class="container m-0 p-0">
-    <div class=" p-2 col-12  border-bottom " style="height:144px;">
+    
+    <div  class=" p-2 col-12  border-bottom " style="height:144px;">
         <div class="row col-12 m-0">
             <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
 
         </div>
-        <div class="row col-12 p-0 m-0">
+       
+        <a href="{{url('user/chooseAddress')}}" class="row col-12 p-0 m-0" style="color:rgba(14, 18, 66, 1);">
             <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
             <div class="text-start col-10">
                 <h5 class="m-0 " style="height:70px;">รายละเอียดที่อยู่ </h5>
@@ -26,7 +28,7 @@
 
 
 
-        </div>
+        </a>
     </div>
     <div class="row p-1 border-top mt-2 " style="color:black; font-size:18px; height:43px;">
         <div class="col-8 mx-0 align-self-center row">
@@ -76,7 +78,7 @@
             <h5 class="m-0 ml-2 font-weight-bold">หมายเหตุ:</h5>
         </div>
         <div class="col-5 p-0 pr-1 mx-0 text-right">
-            <input style="border:none; width:100%; height:100%; " type="text" name="name" class="form-control input_2 p-0 " placeholder="ฝากข้อความถึงผู้ขายหรือบริษัทขนส่ง">
+            <input style="border:none; width:100%; height:100%;  " id="test"type="text" name="name" class="form-control input_2 p-0  " placeholder="ฝากข้อความถึงผู้ขายหรือบริษัทขนส่ง">
 
             <!-- <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);"></small> </h6> -->
 
@@ -121,7 +123,7 @@
         </div>
     </div>
 
-    <a href="" class="row py-1 border-top border-bottom pl-2 mt-2" style="color:black; font-size:18px">
+    <a href="{{url('user/paymentMethod')}}" class="row py-1 border-top border-bottom pl-2 mt-2" style="color:black; font-size:18px">
         <div class="col-6 mx-0 pl-0 align-self-center row">
             <img src="{{ asset('new_assets/img/icon/wallet.svg')}}" alt="alt" style="">
 

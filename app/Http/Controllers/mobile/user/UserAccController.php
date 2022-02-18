@@ -161,5 +161,22 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.buyGoods');
 
     }
+    public function chooseAddress(){// เลือกที่อยู่
+        return view('mobile.member.userAccount.my_list.chooseAddress');
+
+    }
+    public function paymentMethod(){// ช่องทางการชำระเงิน
+        return view('mobile.member.userAccount.my_list.paymentMethod');
+
+    }
+    public function addCreditCard_2(){// ช่องทางการชำระเงิน
+        return view('mobile.member.userAccount.my_list.addCreditCard');
+
+    }
+    
+    public function deliveryStatus(){// สถานะการจัดส่ง
+        return view('mobile.member.userAccount.my_list.deliveryStatus');
+
+    }
     
 }

@@ -1808,6 +1808,7 @@ a.badge-dark {
     opacity: 0.5;
     top: 50%;
     margin-top: -8px;
+    color: black;
 }
 
 .link-listview>li a:active {
@@ -1832,12 +1833,10 @@ a.badge-dark {
 }
 
 .image-listview>li .item .image {
-    min-width: 36px;
-    max-width: 36px;
-    width: 36px;
-    height: 36px;
-    border-radius: 400px;
-    margin-right: 16px;
+    min-width: 2.8125rem;
+    max-width: 3.4375rem;
+    width: 3.0625rem;
+    height: 1rem;
 }
 
 .image-listview>li .item .icon-box {
@@ -1882,15 +1881,15 @@ a.badge-dark {
 }
 
 .image-listview>li a.item:after {
-    background-image: url("data:image/svg+xml,%0A%3Csvg width='10px' height='16px' viewBox='0 0 10 16' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg id='Listview' transform='translate(-112.000000, -120.000000)' stroke='%23A1A1A2' stroke-width='2.178'%3E%3Cpolyline id='Path' points='114 122 120 128 114 134'%3E%3C/polyline%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 16px;
-    height: 16px;
+    width: 23px;
+    height: 23px;
     content: "";
     position: absolute;
     right: 12px;
-    opacity: 0.5;
+    opacity: 1;
     top: 50%;
     margin-top: -8px;
 }
@@ -1925,7 +1924,7 @@ a.badge-dark {
 }
 
 .multi-level>a:after {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 }
 
 .multi-level ul {
@@ -1949,7 +1948,7 @@ a.badge-dark {
 }
 
 .multi-level.active>a:after {
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
 
 .multi-level.active ul {
@@ -3102,7 +3101,7 @@ a.badge-dark {
     font-size: 18px;
     position: absolute;
     right: 10px;
-    color: #A1A1A2;
+    color: #0a0a0a;
     line-height: 1em;
     height: 18px;
     top: 50%;
@@ -8314,6 +8313,13 @@ body.dark-mode-active .cart-item .cart-item-footer {
     margin: 0 auto;
 }
 
+.input_3::placeholder {
+    color: rgba(167, 167, 167, 1);
+    font-size: 17px;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .input_2 {
     background-color: transparent;
 }
@@ -8597,3 +8603,25 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 
 /* **************************************************************** */
+
+.btn-1 {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    height: 100%;
+}
+
+#myInput {
+    background-color: transparent;
+    border: none;
+    border: none;
+    width: auto;
+    height: 12px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+*:focus {
+    outline: none;
+}

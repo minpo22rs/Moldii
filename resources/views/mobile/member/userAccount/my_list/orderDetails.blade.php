@@ -32,8 +32,9 @@
 
 
     <div class="col-12 row p-2 m-0 border-bottom">
-        <div class="col-1 p-0">
+        <div class="col-1 p-0 text-center">
             <img class="col-12 p-0" src="{{ asset('new_assets/img/icon/delivery.svg')}}" alt="alt" style="">
+            <img class=" p-0 mt-4" src="{{ asset('new_assets/img/icon/status.svg')}}" alt="alt" style="width:0.5625rem; height:2.1875rem;">
         </div>
         <div class="col-8 pr-0">
             <h5 class="m-0 font-weight-bold">สถานะการจัดส่ง</h5>
@@ -41,10 +42,11 @@
             <h5 class="">รหัสการจัดส่งสินค้า</h5>
 
             <h5 class="m-0" style="color:rgba(1, 186, 175, 1);">ชื่อบริษัทที่จัดส่งสินค้า-ประเภทการจัดส่ง</h5>
+            <!-- <h5 class="m-0" style="color:rgba(0, 84, 118, 1);">การจัดส่งพัสดุสำเร็จ</h5> -->
             <h5 class="m-0">dd/mm/yyyy 00:00</h5>
         </div>
         <div class="col-3 text-right pr-0">
-            <a href="">
+            <a href="{{url('user/deliveryStatus')}}">
                 <h5 class="m-0 font-weight-bold" style="color:rgba(1, 186, 175, 1);">ดูรายละเอียด</h5>
             </a>
         </div>
