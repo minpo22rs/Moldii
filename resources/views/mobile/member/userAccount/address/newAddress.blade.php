@@ -12,7 +12,7 @@
 @section('content')
 
 
-<form action="">
+<form action="" id="input_Top_Up">
     @csrf
     <div class="row p-2 col-12 m-0   border-bottom " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="col-12 px-3">
-        <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;">บันทึก</button>
+        <button type="submit" class="btn  mt-3 col-12" id="btn_Top_Up" style="font-size:1.3rem; background: #C4C6C7; color:#fff;">บันทึก</button>
 
     </div>
 
@@ -60,5 +60,21 @@
 @section('custom_script')
 <script>
     bottom_now(4);
+
+
+    const inputTopUp = document.getElementById("input_Top_Up");
+    const btnTopUp = document.getElementById("btn_Top_Up");
+
+    inputTopUp.addEventListener('input', () => {
+        if (inputTopUp.value !== "") {
+            btnTopUp.classList.add('btn-success');
+        }else{
+            btnTopUp.classList.remove('btn-success');
+
+        }
+
+
+
+    });
 </script>
 @endsection

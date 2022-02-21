@@ -64,9 +64,9 @@
                 </div>
                 <div class="calc_btn_row justify-content-end">
 
-                    <button class="calc_btn none-bg" onclick=""></button>
+                    <button class="calc_btn_2 none-bg" onclick=""></button>
                     <button class="calc_btn " onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '0';">0</button>
-                    <button class="calc_btn none-bg"  onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
+                    <button class="calc_btn_2 none-bg" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
 
                 </div>
 

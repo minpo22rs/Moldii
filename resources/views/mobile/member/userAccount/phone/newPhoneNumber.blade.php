@@ -16,7 +16,7 @@
         @csrf
         <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลขโทรศัพท์เพื่อรับ OTP</small> </h6>
 
-        <input type="number" class="form-control form-control-lg mt-1 mb-1 input" style="border-radius: 10px; " name="newPhone" id="phone"  placeholder="หมายเลขโทรศัพท์" data-operand-current>
+        <input type="number" class="form-control form-control-lg mt-1 mb-1 input" style="border-radius: 10px; " name="newPhone" id="phone" placeholder="หมายเลขโทรศัพท์" data-operand-current>
 
         <h6 class="text-center my-3"><small style="color:rgba(181, 181, 181, 1);">หากคุณแก้ไขหมายเลขโทรศัพท์ที่นี่ หมายเลขโทรศัพท์ของบัญชีทั้งหมดที่ผูกกับบัญชีผู้ใช้นี้จะถูกแก้ไขตามไปด้วย</small> </h6>
 
@@ -61,9 +61,9 @@
                 </div>
                 <div class="calc_btn_row justify-content-end">
 
-                    <button class="calc_btn none-bg" onclick=""></button>
+                    <button class="calc_btn_2 none-bg" onclick=""></button>
                     <button class="calc_btn " onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '0';">0</button>
-                    <button class="calc_btn none-bg"  onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
+                    <button class="calc_btn_2 none-bg" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
 
                 </div>
 

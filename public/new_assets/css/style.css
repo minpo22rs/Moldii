@@ -8369,6 +8369,30 @@ body.dark-mode-active .cart-item .cart-item-footer {
     transition: transform 0.4s;
 }
 
+.numpad-box-2 {
+    position: fixed;
+    width: 100%;
+    height: 291px;
+    background-color: #FFF;
+    bottom: 0;
+    z-index: 1000;
+    border-radius: 8px 8px 0px 0px;
+    transform: translateY( 0%);
+    transition: transform 0.4s;
+}
+
+.num-bar {
+    position: fixed;
+    height: 55px;
+    background-color: rgba(244, 245, 250, 1);
+    bottom: 291px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateY( 0%);
+    transition: transform 0.4s;
+}
+
 .wrapper {
     max-width: 100%;
     height: 100%;
@@ -8385,6 +8409,21 @@ body.dark-mode-active .cart-item .cart-item-footer {
 }
 
 .calc_btn {
+    background-color: rgba(252, 252, 254, 1);
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    border: none;
+    width: 33.33%;
+    height: 46px;
+    margin: 3.5px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.calc_btn_2 {
     background-color: rgba(252, 252, 254, 1);
     color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -8674,4 +8713,47 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .search-container-1.show-search-con-1 {
     opacity: 1;
     transition: transform 0.6s;
+}
+
+.input-xl {
+    border: none;
+    background-color: transparent;
+    font-size: 78px;
+    font-weight: bold;
+    color: rgba(115, 115, 115, 1);
+}
+
+.input-xl::-webkit-input-placeholder {
+    font-weight: bold;
+    color: rgba(228, 228, 228, 1);
+    font-size: 78px;
+}
+
+.input-xl[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.check-confirm-con {
+    width: 100%;
+    min-height: 395px;
+    background-color: #FFF;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    border-radius: 8px 8px 0px 0px;
+    box-shadow: 0px -3px 9px 0px rgba(0, 0, 0, 0.14);
+    transform: translateY( 100%);
+    transition: transform 0.5s;
+}
+
+.check-confirm-con.show-check-confirm {
+    transform: translateY( 0%);
+    transition: transform 0.5s;
+}
+
+.color-220 {
+    color: rgba(220, 218, 222, 1);
+    transition: transform 0.5s;
 }

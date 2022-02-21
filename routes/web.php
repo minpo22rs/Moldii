@@ -81,6 +81,9 @@ Route::get('user/index', [MainController::class, 'index']);
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
 Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
+Route::get('user/bankAccount', [WalletController::class, 'bankAccount']); // บัญชีธนาคาร
+Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); // ระบุจำนวน
+Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 
 
 Route::get('content/{id}', [ContentController::class, 'index']); 

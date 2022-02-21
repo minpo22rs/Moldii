@@ -229,11 +229,11 @@
 <div class="" id="search_container_2">
     <div class="col-12 m-0 p-1 search-box-2" id="search_box_2">
         <div class="col-12 pl-0 text-left mt-2">
-            <ion-icon name="close-outline" id="off_search_2"style="color:rgba(255, 255, 255, 1);cursor: pointer; font-size:2rem;"></ion-icon>
+            <ion-icon name="close-outline" id="off_search_2" style="color:rgba(255, 255, 255, 1);cursor: pointer; font-size:2rem;"></ion-icon>
 
 
         </div>
-        <div class="row p-1 "  >
+        <div class="row p-1 ">
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">ร้านอาหาร</h4>
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">โรงแรม</h4>
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">สินค้า</h4>
@@ -241,31 +241,37 @@
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">เช่ารถ</h4>
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">แจ้งเหตุฉุกเฉิน</h4>
             <h4 class="mb-0 mx-2 p-1 font-weight-bold c-255">โหวตนางงาม</h4>
-           
-            
-            
+
+
+
         </div>
         <div class="done text-center p-1" style="border-top: 1px solid rgba(126, 131, 137, 0.2);cursor: pointer;">
-            <h3 class="m-0 off" id="off_search_2" style="color:rgba(255, 255, 255, 1);">DONE</h3> 
+            <h3 class="m-0 off" id="off_search_2" style="color:rgba(255, 255, 255, 1);">DONE</h3>
         </div>
 
     </div>
 </div>
 <div class="search-container-1" id="search_container_1">
-    <div class="col-12 p-2 mt-4 search-box-1" >
+    <div class="col-12 p-2 mt-4 search-box-1">
         <div class="col-12">
             <div class="row">
                 <h2 class="mb-1">Recent searches</h2>
             </div>
         </div>
-        <a href=""><h4 class="m-0 font-weight-bold">ร้านส้มตำ</h4></a>
-        <a href=""><h4 class="m-0 font-weight-bold">โรงแรมพังงา</h4></a>
-        <a href=""><h4 class="m-0 font-weight-bold">สถานที่ท่องเที่ยวในหัวหิน</h4></a>
+        <a href="">
+            <h4 class="m-0 font-weight-bold">ร้านส้มตำ</h4>
+        </a>
+        <a href="">
+            <h4 class="m-0 font-weight-bold">โรงแรมพังงา</h4>
+        </a>
+        <a href="">
+            <h4 class="m-0 font-weight-bold">สถานที่ท่องเที่ยวในหัวหิน</h4>
+        </a>
     </div>
 </div>
-        
-        
-        
+
+
+
 
 
 @endsection
@@ -323,17 +329,17 @@
     const offSearch_2 = document.querySelector('.off');
     const searchCon = document.getElementById('search_container_2');
     const searchBox = document.getElementById('search_box_2');
-    
+
 
     btnSearch.addEventListener('click', () => {
         searchCon.classList.add('search-container-2');
         searchBox.classList.add('show-search-box');
     });
-    offSearch.addEventListener('click',()=>{
+    offSearch.addEventListener('click', () => {
         searchCon.classList.remove('search-container-2');
         searchBox.classList.remove('show-search-box');
     });
-    offSearch_2.addEventListener('click',()=>{
+    offSearch_2.addEventListener('click', () => {
         searchCon.classList.remove('search-container-2');
         searchBox.classList.remove('show-search-box');
     });
@@ -341,23 +347,20 @@
 
     const inputSearch = document.getElementById('input_search_1');
     const searchCon_1 = document.getElementById('search_container_1');
-    
-  
-   
+
+
+
     inputSearch.addEventListener('input', () => {
         searchCon_1.classList.add('show-search-con-1');
-       
+
     });
 
     window.addEventListener("click", (e) =>
-    e.target == searchCon_1 ?
-    searchCon_1.classList.remove("show-search-con-1")  :
-    false
-    
+        e.target == searchCon_1 ?
+        searchCon_1.classList.remove("show-search-con-1") :
+        false
+     );
 
-);
-    
 
-    
 </script>
 @endsection
