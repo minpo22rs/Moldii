@@ -12,4 +12,8 @@ class WalletController extends Controller
     {
         return view('mobile.member.wallet.wallet');
     }
+    public function addMoney ()
+    {
+        return view('mobile.member.wallet.add_money');
+    }
 }

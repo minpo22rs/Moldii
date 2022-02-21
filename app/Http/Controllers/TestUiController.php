@@ -31,7 +31,7 @@ class TestUiController extends Controller
 
     }
     public function Profile(){
-        return view('mobile.member.userAccount.profile');
+        return view('mobile.member.userAccount.myAccount');
         
     }
   

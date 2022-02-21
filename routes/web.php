@@ -48,8 +48,11 @@ Route::get('user/newEmail', [UserAccController::class, 'newEmail']);// กรอ
 Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
-Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
-Route::get('user/notification', [UserAccController::class, 'notification']);// ตั้งค่าการแจ้งเตือน
+Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
+
+Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
+Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
+
 Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
@@ -60,13 +63,13 @@ Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);//
 Route::get('user/paymentMethod', [UserAccController::class, 'paymentMethod']);// ช่องทางการชำระเงิน
 Route::get('user/addCreditCard_2', [UserAccController::class, 'addCreditCard_2']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
 Route::get('user/deliveryStatus', [UserAccController::class, 'deliveryStatus']);// สถานะการจัดส่ง
-
-
 Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
 Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
 Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
 
+
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
+
 
 
 
@@ -77,9 +80,10 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 Route::get('user/index', [MainController::class, 'index']); 
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
+Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
+
 
 Route::get('content/{id}', [ContentController::class, 'index']); 
-
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
 Route::get('/clc', function() {

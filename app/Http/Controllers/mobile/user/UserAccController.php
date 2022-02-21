@@ -120,13 +120,17 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.credit_card.creditCard');
 
     }
-    public function addCreditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
+    public function addCreditCard(){// การเพิ่มบัตร
         return view('mobile.member.userAccount.credit_card.addCreditCard');
 
     }
 
-    public function notification(){// ตั้งค่าการแจ้งเตือน
-        return view('mobile.member.userAccount.notification');
+    public function notification(){// การแจ้งเตือน
+        return view('mobile.member.userAccount.notification.notification');
+
+    }
+    public function settingNotification(){// ตั้งค่าการแจ้งเตือน
+        return view('mobile.member.userAccount.notification.notificationSetting');
 
     }
     public function privacySettings(){// ตั้งค่าความเป็นส่วนตัว
@@ -178,5 +182,6 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.deliveryStatus');
 
     }
+    
     
 }
