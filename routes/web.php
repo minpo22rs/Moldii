@@ -66,6 +66,7 @@ Route::get('user/index', [MainController::class, 'index']);
 Route::get('user/wallet', [WalletController::class, 'index']); 
 
 Route::get('content/{id}', [ContentController::class, 'index']); 
+Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
@@ -80,6 +81,8 @@ Route::get('/clc', function() {
 	return "Cleared!";
 });
 Route::post('checkregister',[RegisterController::class,'create']);
+Route::get('checkusername',[RegisterController::class,'checkusername']);
+Route::get('checkmn',[RegisterController::class,'checkmn']);
 Route::post('checklogin',[LoginController::class,'checklogin']);
 
 

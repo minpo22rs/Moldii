@@ -42,7 +42,7 @@
 
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
-        <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น 120 รายการ</h6>
+        <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()}} รายการ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">2.7k รับชม</h6>
     </div>
@@ -70,47 +70,59 @@
 
 
     <div class="card-footer p-1 ">
+        @if($comment->count() != 0)
+            @foreach ($comment as $comments)
+                <?php $detail = DB::Table('tb_customers')->where('customer_id',$comments->comment_author)->first()?>
 
-        <div class=" row justify-content-end pl-1 my-2">
-            <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
-            <div class=" mx-2  col-10 p-1 pl-2" style=" min-height: 85px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
-                <h4 class="m-0 mb-1">ชื่อ XXXXXXX</h4>
-                <h5 class="m-0">ความคิดเห็น</h5>
-                <h4 class="m-0">XXXXXXXXXXXXXXXXXXXXXXXXXXX</h4>
-                <div class="row  align-self-center  m-0 p-0">
-                    <h6 class="m-0 "><small>DD-MM-YYYY</small></h6>
-                    <a href="">
-                        <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
-                    </a>
-                </div>
-            </div>
-
-            <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" style="">
-
-                <div class=" pl-0 col-12 row justify-content-end">
-                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
-
-                    <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
-                        <h5 class="m-0 mb-1">ชื่อ XXXXXXX</h5>
-                        <div class="align-self-center  m-0 p-0 ">
-                            <h6 class="m-0">ความคิดเห็น</h6>
-                            <h5 class="m-0">XXXXXXXXXXXXXXXXXXXXXXXXXXX</h5>
-                        </div>
-                        <div class="row  align-self-center  m-0 p-0 ">
-                            <h6 class="m-0 "><small>DD-MM-YYYY</small></h6>
+                <div class=" row justify-content-end pl-1 my-2">
+                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                    <div class=" mx-2  col-10 p-1 pl-2" style=" min-height: 85px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
+                        <h4 class="m-0 mb-1">{{$detail->customer_username}}</h4>
+                        {{-- <h5 class="m-0">ความคิดเห็น</h5> --}}
+                        <h4 class="m-0">{{$comments->comment_text}}</h4>
+                        <div class="row  align-self-center  m-0 p-0">
+                            <h6 class="m-0 "><small>{{$comments->created_at}}</small></h6>
                             <a href="">
                                 <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
                             </a>
                         </div>
                     </div>
-                </div>
+                    @if($comments->comment_reply != null)
 
-            </div>
-        </div>
-        <form class="needs-validation row justify-content-center" novalidate>
-            <input type="text" class="comment-form form-control col-9 mr-2 " placeholder="" required>
+                        <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" style="">
+
+                            <div class=" pl-0 col-12 row justify-content-end">
+                                <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
+
+                                <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
+                                    <h5 class="m-0 mb-1">ชื่อ XXXXXXX</h5>
+                                    <div class="align-self-center  m-0 p-0 ">
+                                       
+                                        <h5 class="m-0">{{$comments->comment_reply}}</h5>
+                                    </div>
+                                    <div class="row  align-self-center  m-0 p-0 ">
+                                        <h6 class="m-0 "><small>{{$comments->updated_at}}</small></h6>
+                                        {{-- <a href="">
+                                            <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
+                                        </a> --}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+
+        @endif
+
+
+        <form class="needs-validation row justify-content-center" id="sendcomment"  action="{{url('sendcomment')}}" method="POST" novalidate>
+            @csrf
+            <input type="text" class="comment-form form-control col-9 mr-2 " placeholder="" id="comment" name="comment">
+            <input type="hidden" name="cid" value="{{$c->new_id}}">
             <div class="emoji ml-1 p-1 ">
-                <img src="{{ asset('new_assets/img/icon/emoji.png')}}" alt="alt" style="width:35px; height:35px;">
+               <img src="{{ asset('new_assets/img/icon/emoji.png')}}" alt="alt" style="width:35px; height:35px;" onclick="sendcomment();">
 
             </div>
 
@@ -129,7 +141,18 @@
         if(a){
             alert(a);
         }
+
+        function sendcomment(){
+            var c = document.getElementById("comment").value;
+            if( c == ''){
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                $('#comment').focus();
+            }else{
+                $('#sendcomment').submit();
+
+            }
+        }
    
-         bottom_now(1);
+        bottom_now(1);
     </script>
 @endsection

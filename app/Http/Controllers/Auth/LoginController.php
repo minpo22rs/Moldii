@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use DB;
+use Session;
 
 class LoginController extends Controller
 {
@@ -44,9 +46,12 @@ class LoginController extends Controller
     {
         // dd(Auth::guard('web'));
         
-       
-        if (Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])) {
-            // dd('yes');
+        $user = DB::table('tb_customers')->where('customer_username', $request->username)->orWhere('customer_phone', $request->username)->first();
+
+        if ( Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])
+            || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password])) {
+            Session::put('cid',$user->customer_id);
+            // dd(Session::all());
             return redirect('user/index');
         } else {
             // dd('dddd');

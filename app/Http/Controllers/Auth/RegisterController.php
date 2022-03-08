@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Session;
-
+use DB;
 
 class RegisterController extends Controller
 {
@@ -53,7 +53,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+           
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -67,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        // dd('asfadf');
+  
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -81,11 +81,28 @@ class RegisterController extends Controller
         $p->customer_name = $request->firstname;
         $p->customer_lname = $request->lastname;
         $p->customer_username = $request->username;
+        $p->customer_phone = $request->mn;
         $p->customer_password = Hash::make($request['password']);
         $p->save();
 
         Session::put('u_id',$p->id);
         // dd($p);
         return redirect()->to('otp');
+    }
+
+    public function checkusername(Request $request)
+    {
+        $chk = DB::table('tb_customers')->where('customer_username',$request->name)->first();
+        if($chk != null){
+            return 1;
+        }
+    }
+
+    public function checkmn(Request $request)
+    {
+        $chk = DB::table('tb_customers')->where('customer_phone',$request->mn)->first();
+        if($chk != null){
+            return 1;
+        }
     }
 }
