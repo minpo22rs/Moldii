@@ -12,25 +12,22 @@
     <div class="right"></div>
     <!-- <div class="m-1 w-100">
 
-            <div class = "row">
-                <div class = "col-10">
-                    <form class="search-form">
-                        <div class="form-group searchbox mt-1 mb-0">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <i class="input-icon">
-                                <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                            </i>
-                        </div>
-                    </form>
-                </div>
-                <div class = "col-2">
-                    <ion-icon   name="funnel"  
-                                class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5"  
-                                
-                                role="img" aria-label="search outline">
-                    </ion-icon>
-                </div>
+            <div class="row" >
+            <div class="col-10">
+                <form class="search-form">
+                    <div class="form-group searchbox mt-1 mb-0">
+                        <input type="text" class="form-control" id="input_search_1" placeholder="Search...">
+                        <i class="input-icon">
+                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                        </i>
+                    </div>
+                </form>
             </div>
+            <div class="col-2">
+                <ion-icon id="btn_search_2" style="cursor: pointer;"name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                </ion-icon>
+            </div>
+        </div>
             
         </div> -->
 </div>
@@ -98,7 +95,7 @@
 
         <div class=" row justify-content-end pl-1 my-2">
             <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
-            <div class=" mx-2  col-10 p-1 pl-2" style=" min-height: 85px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
+            <div class=" mx-2  col-10 p-1 pl-2" style=" min-height: 85px;  border-radius: 10px;">
                 <h4 class="m-0 mb-1">ชื่อ XXXXXXX</h4>
                 <h5 class="m-0">ความคิดเห็น</h5>
                 <h4 class="m-0">XXXXXXXXXXXXXXXXXXXXXXXXXXX</h4>
@@ -115,7 +112,7 @@
                 <div class=" pl-0 col-12 row justify-content-end">
                     <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
 
-                    <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
+                    <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px;  border-radius: 10px;">
                         <h5 class="m-0 mb-1">ชื่อ XXXXXXX</h5>
                         <div class="align-self-center  m-0 p-0 ">
                             <h6 class="m-0">ความคิดเห็น</h6>
@@ -133,7 +130,7 @@
             </div>
         </div>
         <form class="needs-validation row justify-content-center" novalidate>
-            <input type="text" class="comment-form form-control col-9 mr-2 " placeholder="" required>
+            <input type="text" class="comment-form form-control col-9 mr-2 " placeholder="แสดงความคิดเห็นของคุณ" required>
             <div class="emoji ml-1 p-1 ">
                 <img src="{{ asset('new_assets/img/icon/emoji.png')}}" alt="alt" style="width:35px; height:35px;">
 

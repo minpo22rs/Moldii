@@ -27,7 +27,7 @@
                         </form>
                     </div>
                     <div class = "col-2">
-                        <ion-icon   name="funnel"  
+                        <ion-icon id="btn_search_2"   name="funnel"  
                                     class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5"  
                                     
                                     role="img" aria-label="search outline">

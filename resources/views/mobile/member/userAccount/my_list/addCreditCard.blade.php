@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
     </div>
     <div class="pageTitle">
-        การเพิ่มบัตร
+        การเพิ่มบัตร22222
     </div>
 </div>
 @endsection
@@ -60,8 +60,8 @@
     </div>
 
 
-    <div class="col-12 px-3">
-        <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;">บันทึกบัตร</button>
+    <div class="col-12 px-3 " style="height:100%;">
+        <button type="submit" class="btn btn-success  col-12 " style="font-size:1.3rem; margin-top:60%;">บันทึกบัตร</button>
 
     </div>
 

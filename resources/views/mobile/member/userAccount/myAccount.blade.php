@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/myList')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
         <i class="far fa-list-alt"></i>
         <h5 class="m-0 ml-2 font-weight-bold">รายการของฉัน</h5>

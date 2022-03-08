@@ -649,8 +649,8 @@
                 <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
                 <input type="text" class="form-control font-weight-bold " value="1" disabled style="border:none;" />
                 <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
-
             </div>
+
         </div>
         <hr class="my-2 ">
         <div class="row justify-content-around p-1 ">

@@ -41,9 +41,9 @@ class UserAccController extends Controller
         return view('mobile.member.forgotPassword.forgotPassword');
     }
 
-    public function profile()// หน้าบัญชีของฉัน
+    public function myAccount()// หน้าบัญชีของฉัน
     {
-        return view('mobile.member.userAccount.profile');
+        return view('mobile.member.userAccount.myAccount');
     }
 
     public function profileSetting()
@@ -120,13 +120,17 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.credit_card.creditCard');
 
     }
-    public function addCreditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
+    public function addCreditCard(){// การเพิ่มบัตร
         return view('mobile.member.userAccount.credit_card.addCreditCard');
 
     }
 
-    public function notification(){// ตั้งค่าการแจ้งเตือน
-        return view('mobile.member.userAccount.notification');
+    public function notification(){// การแจ้งเตือน
+        return view('mobile.member.userAccount.notification.notification');
+
+    }
+    public function settingNotification(){// ตั้งค่าการแจ้งเตือน
+        return view('mobile.member.userAccount.notification.notificationSetting');
 
     }
     public function privacySettings(){// ตั้งค่าความเป็นส่วนตัว
@@ -137,5 +141,47 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.appAccess');
 
     }
+    
+    
+    
+    
+    public function myList(){// รายการของฉัน
+        return view('mobile.member.userAccount.my_list.myList');
+
+    }
+    public function orderDetails(){// รายละเอียดคำสั่งซื้อ
+        return view('mobile.member.userAccount.my_list.orderDetails');
+
+    }
+    public function score(){// ให้คะแนน
+        return view('mobile.member.userAccount.my_list.score');
+
+    }
+    public function shoppingCart(){// ตะกร้าสินค้า
+        return view('mobile.member.userAccount.my_list.shoppingCart');
+
+    }
+    public function buyGoods(){// ทำการสั่งซื้อ
+        return view('mobile.member.userAccount.my_list.buyGoods');
+
+    }
+    public function chooseAddress(){// เลือกที่อยู่
+        return view('mobile.member.userAccount.my_list.chooseAddress');
+
+    }
+    public function paymentMethod(){// ช่องทางการชำระเงิน
+        return view('mobile.member.userAccount.my_list.paymentMethod');
+
+    }
+    public function addCreditCard_2(){// ช่องทางการชำระเงิน
+        return view('mobile.member.userAccount.my_list.addCreditCard');
+
+    }
+    
+    public function deliveryStatus(){// สถานะการจัดส่ง
+        return view('mobile.member.userAccount.my_list.deliveryStatus');
+
+    }
+    
     
 }

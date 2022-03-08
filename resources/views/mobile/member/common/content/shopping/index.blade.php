@@ -1,4 +1,3 @@
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
 <div class="container p-1 my-3">
 
     <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
@@ -42,7 +41,6 @@
     </div>
     <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
     <div class="card-title my-1 font-weight-bold font-weight-bolder">คัดสรรมาเพื่อคุณ </div>
-=======
 
 @extends('mobile.main_layout.main')
     
@@ -86,7 +84,6 @@
             </div>
             <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
             <div class="card-title my-1 font-weight-bold font-weight-bolder">คัดสรรมาเพื่อคุณ </div>
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
             <div class="" name="story_videos_section" id="story_videos_section">
 
@@ -95,24 +92,6 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage " style="transform: translate3d(-514px, 0px, 0px); transition: all 0.25s ease 0s; width: 1265px; padding-left: 32px; padding-right: 32px;">
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item cloned card border-product" style="width: 140px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item cloned card" style="width: 140px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -125,7 +104,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -148,25 +126,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item cloned card border-product" style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item cloned card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -179,7 +138,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -202,24 +160,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item cloned card border-product" style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item cloned card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -232,7 +172,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -254,26 +193,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                        </div>
-                    </div>
-                    <div class="owl-item card border-product" style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -286,7 +205,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -309,24 +227,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item active card border-product" style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item active card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -339,7 +239,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -361,7 +260,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
                         </div>
                     </div>
                     <div class="owl-item active card border-product" style="width: 155.5px; margin-right: 16px;">
@@ -380,7 +278,6 @@
                                     <div class="pl-2">
                                         <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                         <div class="rating-system2">
-=======
                             <div class="owl-item active card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -393,7 +290,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -416,24 +312,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item cloned card border-product" style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
                             <div class="owl-item cloned card" style="width: 155.5px; margin-right: 16px;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -446,7 +324,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -469,24 +346,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-                    <div class="owl-item cloned card border-product " style="width: 155.5px; margin-right: 16px;">
-                        <div class="item card ">
-                            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-                            <div class="card-body col-12 p-1 ">
-                                <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                                </div>
-                                <div class=" row ">
-                                    <div class="row col-7">
-                                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                                    </div>
-                                    <div class="pl-2">
-                                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                        <div class="rating-system2">
-=======
 
 
 
@@ -503,7 +362,6 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
@@ -539,46 +397,11 @@
 
                     </div>
                 </div>
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-
-
-
-
-            </div>
-            <div class="owl-nav disabled">
-                <button type="button" role="presentation" class="owl-prev">
-                    <span aria-label="Previous">‹</span>
-                </button>
-                <button type="button" role="presentation" class="owl-next">
-                    <span aria-label="Next">›</span>
-                </button>
-            </div>
-            <div class="owl-dots disabled">
-=======
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
             </div>
 
             <div class="card-title my-3 font-weight-bold font-weight-bolder">สินค้าแนะนำประจำวัน</div>
 
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-    <div class="col-12 row m-0 justify-content-center ">
-        <div class=" card  my-2 mx-2 align-self-center justify-content-center border-product">
-            <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
-            <div class="card-body col-12 p-1 ">
-                <div class="row pl-1">
-                    <h5 class=" font-weight-bolder m-0">ชื่อสินค้า</h5>
-                </div>
-                <div class=" row ">
-                    <div class="row col-7">
-                        <h6 class="mt-1 pl-1 m-0 "><s>฿350</s></h6>
-                        <h6 class="mt-1  m-0  font-weight-bold" style="color:#E81F12;">฿250</h6>
-
-                    </div>
-                    <div class="pl-2">
-                        <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                        <div class="rating-system2">
-=======
             <div class="col-12 row m-0 justify-content-center ">
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
@@ -622,7 +445,6 @@
                             <div class="pl-2">
                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                     <input type="radio" name='rate2' id="star5_2" />
                                     <label for="star5_2"></label>
@@ -643,7 +465,6 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
             </div>
         </div>
         <div class=" card  my-2 mx-2 align-self-center justify-content-center border-product" >
@@ -661,7 +482,6 @@
                     <div class="pl-2">
                         <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                         <div class="rating-system2">
-=======
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                     <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
                     <div class="card-body col-12 p-1 ">
@@ -704,7 +524,6 @@
                             <div class="pl-2">
                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                 <div class="rating-system2">
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
                                     <input type="radio" name='rate2' id="star5_2" />
                                     <label for="star5_2"></label>
@@ -726,21 +545,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD:resources/views/mobile/member/common/content/shopping/index.blade.php
-        </div>
-        
-       
-        
-    </div>
-
-    <!-- align-self-center justify-content-center -->
-
-
-
-
-
-=======
->>>>>>> ba64fa387615019b89f64bb28cbba9f4b3158f54:resources/views/mobile/member/common/content/store.blade.php
 
         <!-- align-self-center justify-content-center -->
 

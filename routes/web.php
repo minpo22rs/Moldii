@@ -33,7 +33,7 @@ Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);// ลืมรหัสผ่าน(Log in)
 
-Route::get('user/profile', [UserAccController::class, 'profile']);// หน้าบัญชีของฉัน
+Route::get('user/myAccount', [UserAccController::class, 'myAccount']);// หน้าบัญชีของฉัน
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
 Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
 Route::get('user/nameChange', [UserAccController::class, 'nameChange']);// เปลี่ยนชื่อ
@@ -48,12 +48,28 @@ Route::get('user/newEmail', [UserAccController::class, 'newEmail']);// กรอ
 Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
-Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
-Route::get('user/notification', [UserAccController::class, 'notification']);// ตั้งค่าการแจ้งเตือน
+Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
+
+Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
+Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
+
 Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
+
+Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
+Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำการสั่งซื้อ
+Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);// เลือกที่อยู่
+Route::get('user/paymentMethod', [UserAccController::class, 'paymentMethod']);// ช่องทางการชำระเงิน
+Route::get('user/addCreditCard_2', [UserAccController::class, 'addCreditCard_2']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
+Route::get('user/deliveryStatus', [UserAccController::class, 'deliveryStatus']);// สถานะการจัดส่ง
+Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
+Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
+Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
+
+
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
+
 
 
 
@@ -64,10 +80,15 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 Route::get('user/index', [MainController::class, 'index']); 
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
+Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
+Route::get('user/bankAccount', [WalletController::class, 'bankAccount']); // บัญชีธนาคาร
+Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); // ระบุจำนวน
+Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 
 Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
 
+Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
 Route::get('/clc', function() {

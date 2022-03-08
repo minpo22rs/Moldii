@@ -3300,7 +3300,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-dark:hover {
     color: #fff;
-    background-color: #343a40;
+    background-color: #343a401a;
     border-color: #343a40
 }
 
@@ -3319,7 +3319,7 @@ fieldset:disabled a.btn {
 .btn-outline-dark:not(:disabled):not(.disabled):active,
 .show>.btn-outline-dark.dropdown-toggle {
     color: #fff;
-    background-color: #343a40;
+    background-color: #343a401a;
     border-color: #343a40
 }
 

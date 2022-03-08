@@ -35,13 +35,16 @@
         @yield('content')
     </div>
     <!-- * App Capsule -->
-    
-        @yield('choices')
-    
 
+
+
+    @yield('choices')
     <!-- App Bottom Menu -->
     <div class="appBottomMenu bg-danger px-0">
-    @yield('choice')
+        @yield('choice')
+
+
+        @yield('numpad')
         <a href="{{url('user/index')}}" class="item" id="bottom_button_home">
             <div class="col">
                 <ion-icon name="home-outline" class="text-dark md hydrated" id="bottom_icon_home"></ion-icon>
@@ -54,7 +57,7 @@
                 <span class="text-dark" id="bottom_text_list">รายการ</span>
             </div>
         </a>
-        <a href="{{url('user/selectLotto')}}" class="item" id="bottom_button_noti">
+        <a href="{{url('user/notification')}}" class="item" id="bottom_button_noti">
             <div class="col">
                 <ion-icon name="notifications" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
                 <span class="text-dark" id="bottom_text_noti">แจ้งเตือน</span>
@@ -225,6 +228,8 @@
     <script src="{{ asset('new_assets/js/lib/qrcode.min.js') }}"></script>
     <!-- fontawesom -->
     <!-- <script src="https://kit.fontawesome.com/6a1519527e.js" crossorigin="anonymous"></script> -->
+    <script src="{{ asset('new_assets/js/script.js') }}"></script>
+
     <script>
         function triggered() {
             alert('triggered');
@@ -265,6 +270,8 @@
                 document.getElementById('bottom_text_acc').className = 'text-dark';
             }
         }
+
+       
     </script>
     @yield('custom_script')
 </body>
