@@ -46,6 +46,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        // dd(Auth::guard('web'));
         if (Auth::guard('merchant')->attempt(['merchant_email' => $request->email , 'password' => $request->password])) {
             return redirect(url('merchant/index'));
         } elseif (Auth::guard('web')->attempt(['admin_email' => $request->email , 'password' => $request->password])) {

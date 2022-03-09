@@ -263,6 +263,13 @@
                                     </ul>
                                 </li> --}}
                                 <li class="">
+                                    <a href="{{url("admin/banner")}}">
+                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                        <span class="pcoded-mtext">Slide Banner</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
                                     <a href="{{url("admin/news")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-note"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Contents</span>

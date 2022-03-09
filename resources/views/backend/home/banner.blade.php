@@ -62,6 +62,7 @@
                         <tr>
                             <th style="text-align: center;">#</th>
                             <th style="text-align: center;">Image</th>
+                            <th style="text-align: center;">Type</th>
                             <th style="text-align: center;">Published</th>
                             <th style="text-align: center;">Management</th>
                         </tr>
@@ -70,9 +71,10 @@
                         @forelse ($banner as $key => $item)
                         <tr>
                             <td class="text-center text-middle">{{$key+1}}</td>
-                            <td class="text-middle">
-                                <img src="{{asset('storage/app/banner/'.$item->banner_name.'')}}" alt="" width="325" height="205">
+                            <td class="text-center text-middle">
+                                <img src="{{asset('storage/app/banner/'.$item->banner_name.'')}}" alt="" width="300" height="auto">
                             </td>
+                            <td class="text-center text-middle">{{$item->banner_type==1?'Index':'Store'}}</td>
                             <td class="text-center text-middle">
                                 <div class="border-checkbox-section">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
@@ -134,6 +136,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-2 col-form-label">
+                            
+                                <span class="tooltip-item2" style="color: #ff9d10">Type <span class="text-danger">*</span></span>
+                                
+                            
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="form-control col-sm-12" name="bannertype">
+                                        <option value="1">Please Select</option>
+                                        <option value="1">Index</option>
+                                        <option value="2">Store</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </form>
             <div class="modal-footer">
@@ -156,6 +179,16 @@
 <script>
     $(".example1").DataTable();
 
+    function edit_banner(id) {
+        $.ajax({
+            url: '{{ url('admin/editbanner') }}/' + id ,
+            type: 'GET',
+            data: {id: id},
+        }).done(function (data) {
+            $('#result-modal').html(data);
+            $("#editmodal").modal('show');
+        });
+    }
     
 </script>
 @endsection
