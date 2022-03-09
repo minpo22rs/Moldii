@@ -52,6 +52,7 @@ class ProductController extends Controller
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
             $product->product_bpoint        = $request->bpoint;
+            $product->product_merchant_id   = 1;
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
             if ($request->file('cover') !== null)
             {
