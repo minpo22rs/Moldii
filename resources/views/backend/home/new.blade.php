@@ -181,7 +181,7 @@
                                 <div class="col-6">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Promotion</button> 
+                                        <i class="icofont icofont-image"></i> Add Image</button> 
                                 </div>
                             </div>
                         </div>

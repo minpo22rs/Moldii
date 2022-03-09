@@ -96,13 +96,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // dd($request);
         DB::beginTransaction();
         try {
             $category = category::findOrFail($id);
             $category->cat_name     = $request->name;
             $category->cat_code     = $request->code;
-            if ($request->file('cover') !== null)
+            if ($request->file('cover') != null)
             {
+                
                 $imgcover = $request->file('cover');
                 foreach($imgcover as $key => $item) {
                     unlink('storage/app/category_cover/'.$category->cat_img);
@@ -116,6 +119,7 @@ class CategoryController extends Controller
             return redirect('admin/category')->with('success', 'Successful');
         } catch (\Throwable $th) {
             DB::rollback();
+            // dd($th->getMessage());
             return redirect('admin/category')->withError('Something Wrong! New Product can not Updated.');
         }
     }

@@ -48,6 +48,7 @@ class NewsController extends Controller
             $news->new_title            = $request->title;
             $news->new_content          = $request->content;
             $news->new_type             = 'C';
+            $news->created_by             = 'Admin';
             if ($request->file('img') != null)
             {
                 $img = $request->file('img');
@@ -99,6 +100,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $news = news::findOrFail($id);
@@ -119,7 +121,9 @@ class NewsController extends Controller
             DB::commit();
             return redirect('admin/news')->with('success', 'Successful');
         } catch (\Throwable $th) {
+          
             DB::rollback();
+         
             return redirect('admin/news')->withError('Something Wrong! New can not Updated.');
         }
     }

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('admin/videos', $new->new_id)}}" method="POST" enctype="multipart/form-data" id="edit_new">
+            <form action="{{url('admin/news', $new->new_id)}}" method="POST" enctype="multipart/form-data" id="edit_new">
                 @csrf
                 {{method_field('PUT')}}
                 <div class="modal-body">
@@ -26,8 +26,8 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="file" name="editnew[]" style="display: none;" id="editdocument">
-                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('editdocument').click();">
+                                    <input type="file" name="editnew[]" style="display: none;" id="editdocument{{$new->new_id}}">
+                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('editdocument{{$new->new_id}}').click();">
                                         <i class="icofont icofont-image"></i> Change Image</button> 
                                 </div>
                                 <div class="col-6">

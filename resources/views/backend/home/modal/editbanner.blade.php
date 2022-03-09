@@ -32,6 +32,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+
+                        <label class="col-sm-2 col-form-label">
+                            
+                                <span class="tooltip-item2" style="color: #ff9d10">Type <span class="text-danger">*</span></span>
+                                
+                            
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="form-control col-sm-12" name="bannertype">
+                                        <option value="1">Please Select</option>
+                                        <option value="1" {{$banner->banner_type==1?'selected':''}}>Index</option>
+                                        <option value="2" {{$banner->banner_type==2?'selected':''}}>Store</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </form>
             <div class="modal-footer">

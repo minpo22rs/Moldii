@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // dd(DB::Table('tb_admins')->get());
     return view('welcome');
 });
 Auth::routes();

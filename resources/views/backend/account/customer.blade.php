@@ -217,7 +217,7 @@
                 $("#delete_customer").submit();
                 swalWithBootstrapButtons.fire(
                     'Deleted!',
-                    'Product has been Deleted',
+                    'Customer has been Deleted',
                     'success'
                 )
             } else if (
@@ -226,7 +226,7 @@
             ) {
                 swalWithBootstrapButtons.fire(
                     'Canceled',
-                    'Product has been Saved',
+                    'Customer has been Saved',
                     'error'
                 )
             }
