@@ -67,7 +67,7 @@ class CustomerController extends Controller
             $customer->customer_lname        = $request->lname;
             $customer->customer_phone        = $request->phone;
             $customer->customer_email        = $request->email;
-            $customer->customer_invate_id    = substr(md5(mt_rand()), 0, 8).'c'.$count;
+            // $customer->customer_invate_id    = substr(md5(mt_rand()), 0, 8).'c'.$count;
             $customer->password              = Hash::make($request->password);
             $customer->save();
 

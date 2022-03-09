@@ -24,6 +24,7 @@ class HomeSettingController extends Controller
         try {
             $banner = new banner();
             $banner->banner_status 	 = 1;
+            $banner->banner_type 	 = $request->bannertype;
             if ($request->file('img') !== null)
             {
                 $img = $request->file('img');
@@ -44,6 +45,7 @@ class HomeSettingController extends Controller
 
     public function editbanner($id)
     {
+        // dd('asasdasdas');
         $banner = banner::findOrFail($id);
         $data = array('banner' => $banner, );
         return view('backend.home.modal.editbanner', $data);
@@ -54,6 +56,8 @@ class HomeSettingController extends Controller
         DB::beginTransaction();
         try {
             $banner = banner::findOrFail($id);
+            $banner->banner_type 	 = $request->bannertype;
+
             if ($request->file('editbanner') !== null)
             {
                 $imgbanner = $request->file('editbanner');
