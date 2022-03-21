@@ -7,10 +7,12 @@ use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\mobile\common\MainController;
+use App\Http\Controllers\mobile\common\ShoppingController;
 use App\Http\Controllers\mobile\common\ContentController;
 use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\TestUiController;
 
@@ -25,9 +27,9 @@ use App\Http\Controllers\TestUiController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
@@ -67,26 +69,26 @@ Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// �
 Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
 Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
 
-
-Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
-
-
-
-
-
-
-
-
-Route::get('user/index', [MainController::class, 'index']); 
-
 Route::get('user/wallet', [WalletController::class, 'index']); 
 Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
 Route::get('user/bankAccount', [WalletController::class, 'bankAccount']); // บัญชีธนาคาร
 Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); // ระบุจำนวน
 Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 
+
+Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
+
+
+
+Route::get('/', [MainController::class, 'index']); 
+Route::get('logout', [LoginController::class, 'logout']); 
+
+
+
+// content
 Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
+Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']); 
 
 Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
@@ -101,23 +103,37 @@ Route::get('/clc', function() {
     // session()->forget('key');
 	return "Cleared!";
 });
+
+
+
+
+//shopping
+Route::get('shopping/category/{id}',[ShoppingController::class,'category']);
+Route::get('shopping/product/{id}',[ShoppingController::class,'product']);
+
+
+//process register
 Route::post('checkregister',[RegisterController::class,'create']);
 Route::get('checkusername',[RegisterController::class,'checkusername']);
 Route::get('checkmn',[RegisterController::class,'checkmn']);
 Route::post('checklogin',[LoginController::class,'checklogin']);
-
-
-
 Route::get('otp',[OtpController::class,'index']);
 Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
 Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
 
+
+//resetpass
+Route::get('user/forgotChange',[ResetPasswordController::class,'forgotChange']);
+Route::post('createreset',[ResetPasswordController::class,'createreset']);
+Route::post('checkreset',[ResetPasswordController::class,'checkreset']);
+Route::post('formresetpassword',[ResetPasswordController::class,'formresetpassword']);
+
 //Home
 Route::get('home', [HomeController::class, 'index']);
 
 // Test UI 
-Route::get('test/p',[TestUiController::class,'p']);
+Route::get('p',[TestUiController::class,'p']);
 Route::get('test/ui',[TestUiController::class,'index']);
 
 Route::get('test/ui/cm_podcast',[TestUiController::class,'cm_podcast']);
@@ -125,6 +141,9 @@ Route::get('test/ui/shopping',[TestUiController::class,'shoppingTest']);
 Route::get('test/ui/shopping/2',[TestUiController::class,'shoppingTest_2'])->name('shopping_2');
 
 Route::get('test/ui/profile',[TestUiController::class,'Profile']);
+
+
+Route::get('test/pass',[TestUiController::class,'pass']);
 
 
 Route::get('test/all',[TestUiController::class,'testAll']);

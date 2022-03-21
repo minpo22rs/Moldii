@@ -45,7 +45,7 @@
 
 
         @yield('numpad')
-        <a href="{{url('user/index')}}" class="item" id="bottom_button_home">
+        <a href="{{url('/')}}" class="item" id="bottom_button_home">
             <div class="col">
                 <ion-icon name="home-outline" class="text-dark md hydrated" id="bottom_icon_home"></ion-icon>
                 <span class="text-dark" id="bottom_text_home">หน้าหลัก</span>
@@ -63,7 +63,7 @@
                 <span class="text-dark" id="bottom_text_noti">แจ้งเตือน</span>
             </div>
         </a>
-        <a href="{{url('user/profile')}}" class="item" id="bottom_button_acc">
+        <a href="{{url('user/myAccount')}}" class="item" id="bottom_button_acc">
             <div class="col">
                 <ion-icon name="person-circle-outline" class="text-dark md hydrated" id="bottom_icon_acc"></ion-icon>
                 <span class="text-dark" id="bottom_text_acc">บัญชี</span>

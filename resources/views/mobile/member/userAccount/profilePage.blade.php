@@ -120,6 +120,20 @@
         </div>
     </div>
 </a>
+<a href="{{url('user/changePassword')}}" class="row py-1 border-top border-bottom  mt-4 pl-2" style="color:black; font-size:18px">
+    <div class="col-6 mx-0 align-self-center row">
+
+        <h5 class="m-0 ml-1 font-weight-bold">ลงชื่อออก</h5>
+    </div>
+    <div class="col-6 mx-0 text-right">
+
+        <div class="mx-2 my-1 ml-2 mr-2 ">
+
+
+            <i class="far fa-angle-right"></i>
+        </div>
+    </div>
+</a>
 
 
 

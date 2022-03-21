@@ -5,6 +5,8 @@ namespace App\Http\Controllers\mobile\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Session;
+
 
 class UserAccController extends Controller
 {
@@ -16,7 +18,8 @@ class UserAccController extends Controller
 
     public function login()
     {
-        // dd(DB::Table('tb_admins')->get());
+        // Session::flush();
+
         return view('mobile.member.login.login');
     }
 
@@ -37,7 +40,8 @@ class UserAccController extends Controller
     }
 
     public function forgotPassword ()
-    {
+    {   
+        // Session::forget('phone');
         return view('mobile.member.forgotPassword.forgotPassword');
     }
 

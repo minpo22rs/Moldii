@@ -1,8 +1,19 @@
 @extends('mobile.main_layout.main')
+<style>
+    .emojireply {
+        width: 39px;
+        /* height: 50px; */
+        border-radius: 13px;
+        background: #FFFFFF;
+        border: none;
+        color: rgba(208, 208, 208, 1);
+        box-shadow: 2px 2px 8px 0px rgb(0 0 0 / 17%);
+    }
+</style>
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('user/index')}}');">
+        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/')}}');">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
@@ -42,13 +53,12 @@
 
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
-        <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()}} รายการ</h6>
+        <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()+$countreply->count()}} รายการ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
-        <h6 class="mb-0 ml-1 card-subtitle text-muted">2.7k รับชม</h6>
+        <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->viewer}} รับชม</h6>
     </div>
 
-    <div class="card-footer row    justify-content-center ">
-
+    <div class="card-footer row justify-content-center ">
         <div class="col-3 row p-0  justify-content-center">
             <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
             <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
@@ -82,47 +92,64 @@
                         <h4 class="m-0">{{$comments->comment_text}}</h4>
                         <div class="row  align-self-center  m-0 p-0">
                             <h6 class="m-0 "><small>{{$comments->created_at}}</small></h6>
-                            <a href="">
-                                <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
-                            </a>
+                            
+                            <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);" onclick="buttonreply({{$comments->comment_id}})">ตอบกลับ</h6>
                         </div>
+                   
+                            <form class="needs-validation row justify-content-center mt-1" id="reply{{$comments->comment_id}}"  action="{{url('sendcommentreply')}}" method="POST" novalidate style="display: none">
+                                @csrf
+                                <textarea class="comment-form  form-control col-9 mr-2" placeholder="Reply" name="reply" rows="1" style="height: 50px"></textarea>
+                                <input type="hidden" name="cid" value="{{$comments->comment_id}}">
+                                <input type="hidden" name="newsid" value="{{$c->new_id}}">
+
+                                <div class="emojireply ml-1 p-1 mt-1">
+                                <img src="{{ asset('new_assets/img/icon/send-message-icon.jpg')}}" alt="alt" style="width:24px; height:24px;margin-top:1px" onclick="sendcommentreply({{$comments->comment_id}});">
+                    
+                                </div>
+                    
+                            </form>
+                       
                     </div>
                     @if($comments->comment_reply != null)
+                        <?php $reply = DB::Table('tb_comment_replys')->where('id_tb_comment',$comments->comment_id)
+                            ->leftJoin('tb_customers', 'tb_comment_replys.customer_id', '=', 'tb_customers.customer_id')->get()?>
+                        @foreach ($reply as $replys)
+                            <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" >
 
-                        <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" style="">
+                                <div class=" pl-0 col-12 row justify-content-end">
+                                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
 
-                            <div class=" pl-0 col-12 row justify-content-end">
-                                <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
-
-                                <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
-                                    <h5 class="m-0 mb-1">ชื่อ XXXXXXX</h5>
-                                    <div class="align-self-center  m-0 p-0 ">
-                                       
-                                        <h5 class="m-0">{{$comments->comment_reply}}</h5>
+                                    <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
+                                        <h5 class="m-0 mb-1">{{$replys->customer_username}}</h5>
+                                        <div class="align-self-center  m-0 p-0 ">
+                                        
+                                            <h5 class="m-0">{{$replys->comment_reply_text}}</h5>
+                                        </div>
+                                        <div class="row  align-self-center  m-0 p-0 ">
+                                            <h6 class="m-0 "><small>{{$replys->updated_at}}</small></h6>
+                                            {{-- <a href="">
+                                                <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
+                                            </a> --}}
+                                        </div>
                                     </div>
-                                    <div class="row  align-self-center  m-0 p-0 ">
-                                        <h6 class="m-0 "><small>{{$comments->updated_at}}</small></h6>
-                                        {{-- <a href="">
-                                            <h6 class="  ml-1 m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">ตอบกลับ</h6>
-                                        </a> --}}
-                                    </div>
+                                    
                                 </div>
+                                
                             </div>
-
-                        </div>
+                        @endforeach
                     @endif
                 </div>
             @endforeach
 
         @endif
 
-
-        <form class="needs-validation row justify-content-center" id="sendcomment"  action="{{url('sendcomment')}}" method="POST" novalidate>
+        <br>
+        <form class="needs-validation row justify-content-center" id="sendcomment"  action="{{url('sendcomment')}}" method="POST" novalidate >
             @csrf
-            <input type="text" class="comment-form form-control col-9 mr-2 " placeholder="" id="comment" name="comment">
+            <textarea class="comment-form form-control col-9 mr-2" placeholder="Comment" id="comment" name="comment" rows="1"></textarea>
             <input type="hidden" name="cid" value="{{$c->new_id}}">
             <div class="emoji ml-1 p-1 ">
-               <img src="{{ asset('new_assets/img/icon/emoji.png')}}" alt="alt" style="width:35px; height:35px;" onclick="sendcomment();">
+               <img src="{{ asset('new_assets/img/icon/send-message-icon.jpg')}}" alt="alt" style="width:35px; height:35px;" onclick="sendcomment();">
 
             </div>
 
@@ -137,9 +164,20 @@
 @endsection
 @section('custom_script')
     <script>
+       
         var a = "{{Session::get('success')}}";
         if(a){
             alert(a);
+        }
+
+        function buttonreply(v){
+            document.getElementById('reply'+v).style.display = '';
+
+        }
+
+        function sendcommentreply(v){
+            // console.log(v);
+            $('#reply'+v).submit();
         }
 
         function sendcomment(){

@@ -1,10 +1,33 @@
 @extends('mobile.main_layout.guest')
+<style>
+    #bg {
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+    }
+    #bg img {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin: auto; 
+        min-width: 50%;
+        min-height: 50%;
+    }
+</style>
 @section('content')
+<div id="bg">
+    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/logo/login.png')}}" alt="">
+</div>
+<br>
 <div class="m-1">
     <div class="m-1">
         <div class="row align-items-center">
             <div class="col-12 text-left">
-                <ion-icon name="arrow-back-outline" class="text-dark font-weight-bold" style="color: black; margin-top: 25px; font-size: 25px;"></ion-icon>
+                <a href="{{url('/user/login')}}"><ion-icon name="arrow-back-outline" class="text-dark font-weight-bold" style="color: black; margin-top: 25px; font-size: 25px;"></ion-icon></a>
             </div>
             <div class="col-6 text-right" style="margin-top: 100px;">
                 <h1 class="">

@@ -12,8 +12,7 @@ class TestUiController extends Controller
     }
 
     public function p(){
-        $sql = DB::Table('tb_news')->where('new_type','C')->get();
-        return view('mobile.member.common.content.comment');
+        return view('mobile.member.main.index');
         
     }
 
@@ -33,6 +32,11 @@ class TestUiController extends Controller
     public function Profile(){
         return view('mobile.member.userAccount.myAccount');
         
+    }
+
+    public function pass ()
+    {
+        return view('mobile.member.forgotPassword.forgotChange');
     }
   
 

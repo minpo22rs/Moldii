@@ -1,14 +1,37 @@
 @extends('mobile.main_layout.guest')
+<style>
+    #bg {
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+    }
+    #bg img {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin: auto; 
+        min-width: 50%;
+        min-height: 50%;
+    }
+</style>
     @section('content')
+        <div id="bg">
+            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/logo/login.png')}}" alt="">
+        </div>
+        <br><br><br>
         <div class = "m-1">
             <div class = "m-1">
                 <form action="{{url('checklogin')}}" method="POST">
                     @csrf
                         <div class = "row align-items-center">
                             <div class = "col-12 text-center">
-                                <h1 class = ""  style = "margin-top: 150px;">
+                                <b><h1 class = ""  style = "margin-top: 150px;">
                                     LOGIN
-                                </h1>
+                                </h1></b>
                             </div>
                         
                                 <div class = "col-10 offset-1 text-center">
@@ -22,7 +45,7 @@
                                             value = "" placeholder = "Password" >
                                 </div>
                                 <div class = "col-10 offset-1 text-right">
-                                    <span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">Forgot password?</span>
+                                    <a href="{{url('user/forgotPassword')}}"><span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">Forgot password?</span></a>
                                 </div>
                                 <div class = "col-10 offset-1 text-center">
                                     <input  type = "submit" class = "btn btn-danger btn-block font-weight-bold my-3 rounded-pill" 

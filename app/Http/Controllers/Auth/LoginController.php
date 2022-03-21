@@ -44,7 +44,8 @@ class LoginController extends Controller
 
     public function checklogin(Request $request)
     {
-        // dd(Auth::guard('web'));
+        // dd();
+        // dd(Auth::guard('web')->user()->id());
         
         $user = DB::table('tb_customers')->where('customer_username', $request->username)->orWhere('customer_phone', $request->username)->first();
 
@@ -52,10 +53,18 @@ class LoginController extends Controller
             || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password])) {
             Session::put('cid',$user->customer_id);
             // dd(Session::all());
-            return redirect('user/index');
+            return redirect('/');
         } else {
             // dd('dddd');
             return redirect('user/login')->with('error','Username Or Password Are Wrong.');
         }
     }
+
+
+    public function logout()
+    {
+        Session::flush();
+        return redirect('user/login');
+    }
+
 }
