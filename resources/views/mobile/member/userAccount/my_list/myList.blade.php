@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     </a>
-                    <h2>ที่ต้องจัดส่ง</h2> <!-- Test -->
+                    {{-- <h2>ที่ต้องจัดส่ง</h2> <!-- Test --> --}}
 
                 </div>
                 <!-- ที่ต้องจัดส่ง -->
@@ -268,6 +268,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

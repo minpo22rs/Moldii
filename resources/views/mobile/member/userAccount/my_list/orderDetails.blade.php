@@ -64,7 +64,7 @@
         </div>
         <div class="col-3 text-right pr-0">
             <a href="">
-                <h5 class="m-0 font-weight-bold" style="color:rgba(1, 186, 175, 1);">คัดลอก</h5>
+                <h5 class="m-0 font-weight-bold" style="color:rgba(1, 186, 175, 1);">เปลี่ยน</h5>
             </a>
         </div>
     </div>

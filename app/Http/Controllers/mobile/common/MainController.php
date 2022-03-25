@@ -17,8 +17,9 @@ class MainController extends Controller
         $s = DB::Table('tb_merchants')->get();
         $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
         $pro = DB::Table('tb_products')->get();
+        $group = DB::Table('tb_familys')->get();
 
-        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro]);
+        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group]);
     }
     
 }

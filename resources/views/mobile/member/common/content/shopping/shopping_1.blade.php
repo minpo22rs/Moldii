@@ -55,9 +55,9 @@
         @foreach($product as $products)
             <?php $detail = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
 
-            <a href="{{url('shopping/product/'.$products->product_id.'')}}">
+            <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
                 <div class=" card  my-2 mx-2 align-self-center justify-content-center border-product">
-                    <img class="imaged w-100 card-image-top mt-1" src="{{ asset('new_assets/img/Rectangle_65.png')}}" alt="alt" style=" height:120px;">
+                    <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
                     <div class="card-body col-12 p-1 ">
                         <div class="row pl-1">
                             <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>

@@ -125,14 +125,14 @@
         </div>
         <div class="row text-center mt-1 ">
             <div class="col-4 p-1 line-con align-self-center">
-                <h5 class=" m-0 p-0 font-weight-bold">500</h5>
+                <h5 class=" m-0 p-0 font-weight-bold">{{$productstore->count()}}</h5>
                 <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">รายการสินค้า</h6>
                 <div class="line my-1"></div>
             </div>
 
             <div class="col-4 p-1 align-self-center">
-                <h5 class=" m-0 p-0 font-weight-bold">4.1</h5>
-                <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">ให้คะแนน</h6>
+                <h5 class=" m-0 p-0 font-weight-bold">{{$store->merchant_score}}</h5>
+                <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">คะแนน</h6>
                 <div class="line my-1"></div>
             </div>
 
@@ -206,7 +206,7 @@
                     @foreach ($productcat as $productcats)
                         <?php $sale = DB::Table('tb_order_details')->where('product_id',$productcats->product_id)->get();?>
 
-                            <a href="{{url('shopping/product/'.$productcats->product_id.'')}}">
+                            <a href="{{url('shopping/product/'.$productcats->product_id.'')}}" style="width: 50%;">
                                 <div class="item card ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$productcats->product_img.'')}}" alt="alt" style=" height:120px;">
                                     <div class="card-body col-12 p-1 ">
@@ -258,7 +258,7 @@
 
                     @foreach ($productcat as $productcats)
                         <?php $sale = DB::Table('tb_order_details')->where('product_id',$productcats->product_id)->get();?>
-                            <a href="{{url('shopping/product/'.$productcats->product_id.'')}}">
+                            <a href="{{url('shopping/product/'.$productcats->product_id.'')}}" style="width: 50%;">
                                 <div class="card m-2 ">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$productcats->product_img.'')}}" alt="alt" style=" height:120px;">
                                     <div class="card-body col-12 p-1 ">
@@ -363,7 +363,7 @@
     <div class="buy-good-box p-2" id="buy_goods_box">
         <div class="row ">
             <div class="col-6 p-1">
-                <img src="{{ asset('new_assets/img/product_1.svg')}}" alt="alt" style="border-radius: 4px;" class=" imaged w-100 square">
+                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" style="border-radius: 4px;" class=" imaged w-100 square">
 
             </div>
             <div class="col-6 pt-2">
@@ -376,25 +376,32 @@
 
         </div>
         <hr class="my-2 ">
-        <div class="row justify-content-between  p-1">
-            <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3>
+            <form action="{{url('order')}}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{$product->product_id}}">
+                <div class="row justify-content-between  p-1">
+                    <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3>
 
-            <div class="stepper stepper-dark align-self-center" style="font-size: 17px; ">
-                <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
-                <input type="text" class="form-control font-weight-bold " value="1" disabled style="border:none;" />
-                <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
-            </div>
+                    <div class="stepper stepper-dark align-self-center" style="font-size: 17px; ">
+                        <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
+                        <input type="text" class="form-control font-weight-bold " value="1" readonly style="border:none;" name="count" />
+                        <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
+                    </div>
 
-        </div>
-        <hr class="my-2 ">
-        <div class="row justify-content-around p-1 ">
+                </div>
+                <hr class="my-2 ">
+                <div class="row justify-content-around p-1 ">
 
+                    
+                        <div class="row col-11  mt-2 p-0">
+                            <button type="submit" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(80, 202, 101, 1); color:#FFF; font-size:15px; border-radius: 8px;">
+                               ซื้อสินค้า
+                            </button>
 
-            <div class="row col-11  mt-2 p-0">
-                <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(80, 202, 101, 1); color:#FFF; font-size:15px; border-radius: 8px;">ซื้อสินค้า</button>
-
-            </div>
-        </div>
+                        </div>
+                    
+                </div>
+            </form>
     </div>
 
 

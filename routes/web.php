@@ -6,9 +6,14 @@ use App\Http\Controllers\mobile\user\UserAccController;
 use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\mobile\common\OrderController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\common\ShoppingController;
 use App\Http\Controllers\mobile\common\ContentController;
+use App\Http\Controllers\mobile\common\StoreController;
+use App\Http\Controllers\mobile\common\VideoController;
+use App\Http\Controllers\mobile\common\GroupController;
+use App\Http\Controllers\mobile\common\CartController;
 use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -93,6 +98,27 @@ Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']);
 Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
+
+
+
+//store
+Route::get('store', [StoreController::class, 'index']); 
+
+
+//family
+Route::get('group', [GroupController::class, 'index']); 
+
+
+//cart
+Route::get('cart', [CartController::class, 'index']); 
+
+
+
+//video
+Route::get('video', [videoController::class, 'index']); 
+
+
+
 Route::get('/clc', function() {
 	Artisan::call('cache:clear');
 	Artisan::call('config:clear');
@@ -131,6 +157,11 @@ Route::post('formresetpassword',[ResetPasswordController::class,'formresetpasswo
 
 //Home
 Route::get('home', [HomeController::class, 'index']);
+
+
+//order
+Route::post('order', [OrderController::class, 'index']);
+
 
 // Test UI 
 Route::get('p',[TestUiController::class,'p']);

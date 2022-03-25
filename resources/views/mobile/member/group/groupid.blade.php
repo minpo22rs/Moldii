@@ -154,33 +154,7 @@
     </div>
 
     <br>
-    {{-- <div style="background-color: gray" >
-        <div class="row">
-            <div class="col-6">
-                <h1 class="ml-2 mt-1">MOLDII</h1>
-                <h1 class="ml-2"> LIVE</h1> 
-            </div>
-            <div class="col-6 text-right  ">
-                <a href="" style="color: white;top: 60%;position: relative;right: 30px;font-size:21px">More > </a>
-            </div>
-
-        </div>
-    </div>
-    <br> --}}
-
-    {{-- <div class="row">
-        <div class="col-6 text-left">
-            <h2 class="ml-3">ยอดฮิต</h2>
-           
-        </div>
-        <div class="col-6 text-right " >
-            <a href="" class="mr-2" style="color: red">ดูทั้งหมด</a>
-        </div>
-
-    </div>
-    @include("mobile.member.common.content.prelive")
-
-    <br> --}}
+   
     @include("mobile.member.common.content.story")
 
     <div class="row">
@@ -215,20 +189,19 @@
 
     <div class="mt-3" name="story_videos_section" id="story_videos_section">
 
-        {{-- <ul class="nav nav-tabs style1 mt-2" role="tablist">
+        <ul class="nav nav-tabs style1 mt-2" role="tablist">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#video" role="tab">Video</a></li>
-            {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#podcast" role="tab">Podcast</a></li> 
+            {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#podcast" role="tab">Podcast</a></li> --}}
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#store" role="tab"> Store</a></li>
             <li class="nav-item active"><a class="nav-link " data-toggle="tab" href="#home" role="tab">Family</a></li>
 
-        </ul> --}}
+        </ul>
 
         <div class="tab-content mt-2">
 
 
-            <div id="home" class="tab-pane fade in active show">
-
-              
+            <div id="home" class="tab-pane fade ">
+            @include("mobile.member.common.content.group")
 
                 @foreach ($c as $sqls)
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();
@@ -292,63 +265,64 @@
             </div>
 
 
-            {{-- <div id="video" class="tab-pane fade">
+            <div id="video" class="tab-pane fade in active show">
                 @foreach ($v as $item)
-                    <?php $count = DB::Table('tb_comments')->where('comment_object_id', $item->new_id)->get() ?>
-                    <div class="card my-3">
-                        <div class="card-body row col-12 justify-content-center m-0">
-                            <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                <?php $count = DB::Table('tb_comments')->where('comment_object_id', $item->new_id)->get() ?>
+                <div class="card my-3">
+                    <div class="card-body row col-12 justify-content-center m-0">
+                        <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
 
-                            <div class="card-title col-8  align-self-center m-0 ">
-                                <div class="card-title m-0 row align-self-center">
-                                    <h4 class=" m-0 p-0">{{$item->created_by}}</h4>
-                                    <a href="#" class="ml-1 align-self-center">
-                                        <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
-                                    </a>
-                                </div>
-                                <h6 class=" m-0 p-0">{{$item->created_at}}</h6>
+                        <div class="card-title col-8  align-self-center m-0 ">
+                            <div class="card-title m-0 row align-self-center">
+                                <h4 class=" m-0 p-0">{{$item->created_by}}</h4>
+                                <a href="#" class="ml-1 align-self-center">
+                                    <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
+                                </a>
                             </div>
-
-                            <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
-                                <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
-                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
-                            </div>
-                        </div>
-                        <div class="card-body p-2">
-                            <a href="{{url('content/'.$item->new_id.'')}}"><p class="card-text">{{substr($item->new_title,0,80)}}</p></a>
-
-                        </div>
-                        <iframe width="390" height="215" src="https://www.youtube.com/embed/{{$item->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">230 ชื่นชอบ</h6>
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น 120 รายการ</h6>
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">2.7k รับชม</h6>
+                            <h6 class=" m-0 p-0">{{$item->created_at}}</h6>
                         </div>
 
-                        <div class="card-footer row    justify-content-center ">
-
-                            <div class="col-3 row p-0  justify-content-center">
-                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
-                            </div>
-                            <div class="col-5 row p-0 justify-content-center ml-1 ">
-                                <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <a href="{{url('content/'.$item->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
-                            </div>
-                            <div class="col-2 row p-0 justify-content-center ml-1 ">
-                                <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ">แชร์</h5>
-                            </div>
-                            <div class="col-3 row p-0 justify-content-center  ">
-                                <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1">โดเนท</h5>
-                            </div>
-
+                        <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
+                            <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
+                            <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
                         </div>
                     </div>
+                    <div class="card-body p-2">
+                        <a href="{{url('content/'.$item->new_id.'')}}"><p class="card-text">{{substr($item->new_title,0,80)}}</p></a>
+
+                    </div>
+                    {{-- <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"> --}}
+                    <iframe width="390" height="215" src="https://www.youtube.com/embed/{{$item->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
+                        <h6 class="mb-0 ml-1 card-subtitle text-muted">230 ชื่นชอบ</h6>
+                        <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น 120 รายการ</h6>
+                        <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
+                        <h6 class="mb-0 ml-1 card-subtitle text-muted">2.7k รับชม</h6>
+                    </div>
+
+                    <div class="card-footer row    justify-content-center ">
+
+                        <div class="col-3 row p-0  justify-content-center">
+                            <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
+                            <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
+                        </div>
+                        <div class="col-5 row p-0 justify-content-center ml-1 ">
+                            <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
+                            <a href="{{url('content/'.$item->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
+                        </div>
+                        <div class="col-2 row p-0 justify-content-center ml-1 ">
+                            <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
+                            <h5 class="mb-0 ">แชร์</h5>
+                        </div>
+                        <div class="col-3 row p-0 justify-content-center  ">
+                            <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
+                            <h5 class="mb-0 ml-1">โดเนท</h5>
+                        </div>
+
+                    </div>
+                </div>
                 @endforeach
-            </div> --}}
+            </div>
 
 
             {{-- <div id="podcast" class="tab-pane fade">
@@ -358,7 +332,7 @@
 
 
 
-            {{-- <div id="store" class="tab-pane fade">
+            <div id="store" class="tab-pane fade">
                 <div class="container p-1 my-3">
 
                     <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
@@ -388,6 +362,7 @@
                                                 </div>
                                                 <div class=" row ">
                                                     <h6 class="mt-1 pl-1 m-0 col-6">{{$pros->product_price}}</h6>
+                                                    {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
                                                     <div class="pl-2">
                                                         <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                         <div class="rating-system2">
@@ -432,6 +407,7 @@
                                         </div>
                                         <div class=" row ">
                                             <h6 class="mt-1 pl-1 m-0 col-6">{{$products->product_price}}</h6>
+                                            {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
@@ -463,7 +439,7 @@
                     <!-- align-self-center justify-content-center -->
 
                 </div>
-            </div> --}}
+            </div>
 
 
         </div>
@@ -473,92 +449,92 @@
 
 
     @section('custom_script')
-        <script>
-            var a = "{{Session::get('success')}}";
-            if (a) {
-                alert(a);
-            }
+    <script>
+        var a = "{{Session::get('success')}}";
+        if (a) {
+            alert(a);
+        }
 
-            bottom_now(1);
-
-
-            const btnSearch = document.getElementById('btn_search_2');
-            const offSearch = document.getElementById('off_search_2');
-            const offSearch_2 = document.querySelector('.off');
-            const searchCon = document.getElementById('search_container_2');
-            const searchBox = document.getElementById('search_box_2');
+        bottom_now(1);
 
 
-            btnSearch.addEventListener('click', () => {
-                searchCon.classList.add('search-container-2');
-                searchBox.classList.add('show-search-box');
-            });
-            offSearch.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
-            offSearch_2.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
-        </script>
-        <script src="script.js">
+        const btnSearch = document.getElementById('btn_search_2');
+        const offSearch = document.getElementById('off_search_2');
+        const offSearch_2 = document.querySelector('.off');
+        const searchCon = document.getElementById('search_container_2');
+        const searchBox = document.getElementById('search_box_2');
 
-        </script>
-        <script>
-            const wrapper = document.querySelector(".postblog_wrapper"),
-            editableInput = wrapper.querySelector(".postblog_editable"),
-            readonlyInput = wrapper.querySelector(".postblog_readonly"),
-            placeholder = wrapper.querySelector(".postblog_placeholder"),
-            counter = wrapper.querySelector(".postblog_counter"),
-            button = wrapper.querySelector("button");
-                
-                editableInput.onfocus = ()=>{
-                placeholder.style.color = "#c5ccd3";
-            }
-            editableInput.onblur = ()=>{
-                placeholder.style.color = "#98a5b1";
-            }
+
+        btnSearch.addEventListener('click', () => {
+            searchCon.classList.add('search-container-2');
+            searchBox.classList.add('show-search-box');
+        });
+        offSearch.addEventListener('click', () => {
+            searchCon.classList.remove('search-container-2');
+            searchBox.classList.remove('show-search-box');
+        });
+        offSearch_2.addEventListener('click', () => {
+            searchCon.classList.remove('search-container-2');
+            searchBox.classList.remove('show-search-box');
+        });
+    </script>
+    <script src="script.js">
+
+    </script>
+    <script>
+        const wrapper = document.querySelector(".postblog_wrapper"),
+        editableInput = wrapper.querySelector(".postblog_editable"),
+        readonlyInput = wrapper.querySelector(".postblog_readonly"),
+        placeholder = wrapper.querySelector(".postblog_placeholder"),
+        counter = wrapper.querySelector(".postblog_counter"),
+        button = wrapper.querySelector("button");
             
-            editableInput.onkeyup = (e)=>{
-                let element = e.target;
-                validated(element);
+            editableInput.onfocus = ()=>{
+            placeholder.style.color = "#c5ccd3";
+        }
+        editableInput.onblur = ()=>{
+            placeholder.style.color = "#98a5b1";
+        }
+        
+        editableInput.onkeyup = (e)=>{
+            let element = e.target;
+            validated(element);
+        }
+        editableInput.onkeypress = (e)=>{
+            let element = e.target;
+            validated(element);
+            placeholder.style.display = "none";
+        }
+        
+        function validated(element){
+            let text;
+            let maxLength = 1000;
+            let currentlength = element.innerText.length;
+        
+            if(currentlength <= 0){
+            placeholder.style.display = "block";
+            counter.style.display = "none";
+            button.classList.remove("active");
+            }else{
+            placeholder.style.display = "none";
+            counter.style.display = "block";
+            button.classList.add("active");
             }
-            editableInput.onkeypress = (e)=>{
-                let element = e.target;
-                validated(element);
-                placeholder.style.display = "none";
+        
+            counter.innerText = maxLength - currentlength;
+        
+            if(currentlength > maxLength){
+            let overText = element.innerText.substr(maxLength); //extracting over texts
+            overText = `<span class="highlight">${overText}</span>`; //creating new span and passing over texts
+            text = element.innerText.substr(0, maxLength) + overText; //passing overText value in textTag variable
+            readonlyInput.style.zIndex = "1";
+            counter.style.color = "#e0245e";
+            button.classList.remove("active");
+            }else{
+            readonlyInput.style.zIndex = "-1";
+            counter.style.color = "#333";
             }
-            
-            function validated(element){
-                let text;
-                let maxLength = 1000;
-                let currentlength = element.innerText.length;
-            
-                if(currentlength <= 0){
-                placeholder.style.display = "block";
-                counter.style.display = "none";
-                button.classList.remove("active");
-                }else{
-                placeholder.style.display = "none";
-                counter.style.display = "block";
-                button.classList.add("active");
-                }
-            
-                counter.innerText = maxLength - currentlength;
-            
-                if(currentlength > maxLength){
-                let overText = element.innerText.substr(maxLength); //extracting over texts
-                overText = `<span class="highlight">${overText}</span>`; //creating new span and passing over texts
-                text = element.innerText.substr(0, maxLength) + overText; //passing overText value in textTag variable
-                readonlyInput.style.zIndex = "1";
-                counter.style.color = "#e0245e";
-                button.classList.remove("active");
-                }else{
-                readonlyInput.style.zIndex = "-1";
-                counter.style.color = "#333";
-                }
-                readonlyInput.innerHTML = text; //replacing innerHTML of readonly div with textTag value
-            }
-        </script>
+            readonlyInput.innerHTML = text; //replacing innerHTML of readonly div with textTag value
+        }
+    </script>
     @endsection

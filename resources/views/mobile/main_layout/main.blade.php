@@ -51,10 +51,22 @@
                 <span class="text-dark" id="bottom_text_home">หน้าหลัก</span>
             </div>
         </a>
-        <a href="#" class="item" id="bottom_button_list">
+        <a href="{{url('video')}}" class="item" id="bottom_button_yt">
             <div class="col">
-                <ion-icon name="list-outline" class="text-dark md hydrated" id="bottom_icon_list"></ion-icon>
-                <span class="text-dark" id="bottom_text_list">รายการ</span>
+                <ion-icon name="logo-youtube" class="text-dark md hydrated" id="bottom_icon_yt"></ion-icon>
+                <span class="text-dark" id="bottom_text_yt">คลิป</span>
+            </div>
+        </a>
+        <a href="{{url('cart')}}" class="item" id="bottom_button_bk">
+            <div class="col">
+                <ion-icon name="cart" class="text-dark md hydrated" id="bottom_icon_bk"></ion-icon>
+                <span class="text-dark" id="bottom_text_bk">ตะกร้า</span>
+            </div>
+        </a>
+        <a href="{{url('group')}}" class="item" id="bottom_button_fam">
+            <div class="col">
+                <ion-icon name="people-circle-outline" class="text-dark md hydrated" id="bottom_icon_fam"></ion-icon>
+                <span class="text-dark" id="bottom_text_fam">Family</span>
             </div>
         </a>
         <a href="{{url('user/notification')}}" class="item" id="bottom_button_noti">
@@ -63,10 +75,16 @@
                 <span class="text-dark" id="bottom_text_noti">แจ้งเตือน</span>
             </div>
         </a>
+        <a href="{{url('store')}}" class="item" id="bottom_button_s">
+            <div class="col">
+                <ion-icon name="basket" class="text-dark md hydrated" id="bottom_icon_s"></ion-icon>
+                <span class="text-dark" id="bottom_text_s">ร้านค้า</span>
+            </div>
+        </a>
         <a href="{{url('user/myAccount')}}" class="item" id="bottom_button_acc">
             <div class="col">
                 <ion-icon name="person-circle-outline" class="text-dark md hydrated" id="bottom_icon_acc"></ion-icon>
-                <span class="text-dark" id="bottom_text_acc">บัญชี</span>
+                <span class="text-dark" id="bottom_text_acc">โปรไฟล์</span>
             </div>
         </a>
         <!--  <a href="javascript:;" class="item" data-toggle="modal" data-target="#sidebarPanel">
@@ -240,9 +258,9 @@
             document.getElementById('bottom_icon_home').className = 'text-white md hydrated';
             document.getElementById('bottom_text_home').className = 'text-white';
 
-            document.getElementById('bottom_button_list').className = 'item';
-            document.getElementById('bottom_icon_list').className = 'text-white md hydrated';
-            document.getElementById('bottom_text_list').className = 'text-white';
+            document.getElementById('bottom_button_bk').className = 'item';
+            document.getElementById('bottom_icon_bk').className = 'text-white md hydrated';
+            document.getElementById('bottom_text_bk').className = 'text-white';
 
             document.getElementById('bottom_button_noti').className = 'item';
             document.getElementById('bottom_icon_noti').className = 'text-white md hydrated';
@@ -252,19 +270,45 @@
             document.getElementById('bottom_icon_acc').className = 'text-white md hydrated';
             document.getElementById('bottom_text_acc').className = 'text-white';
 
+            document.getElementById('bottom_button_s').className = 'item';
+            document.getElementById('bottom_icon_s').className = 'text-white md hydrated';
+            document.getElementById('bottom_text_s').className = 'text-white';
+
+            document.getElementById('bottom_button_yt').className = 'item';
+            document.getElementById('bottom_icon_yt').className = 'text-white md hydrated';
+            document.getElementById('bottom_text_yt').className = 'text-white';
+
+            document.getElementById('bottom_button_fam').className = 'item';
+            document.getElementById('bottom_icon_fam').className = 'text-white md hydrated';
+            document.getElementById('bottom_text_fam').className = 'text-white';
+
             if (Number(position) == 1) {
                 document.getElementById('bottom_button_home').className = 'item bg-white p-1';
                 document.getElementById('bottom_icon_home').className = 'text-dark md hydrated';
                 document.getElementById('bottom_text_home').className = 'text-dark';
             } else if (Number(position) == 2) {
-                document.getElementById('bottom_button_list').className = 'item bg-white p-1';
-                document.getElementById('bottom_icon_list').className = 'text-dark md hydrated';
-                document.getElementById('bottom_text_list').className = 'text-dark';
+                document.getElementById('bottom_button_yt').className = 'item bg-white p-1';
+                document.getElementById('bottom_icon_yt').className = 'text-dark md hydrated';
+                document.getElementById('bottom_text_yt').className = 'text-dark';
             } else if (Number(position) == 3) {
+                document.getElementById('bottom_button_bk').className = 'item bg-white p-1';
+                document.getElementById('bottom_icon_bk').className = 'text-dark md hydrated';
+                document.getElementById('bottom_text_bk').className = 'text-dark';
+            } else if (Number(position) == 4) {
+                document.getElementById('bottom_button_fam').className = 'item bg-white p-1';
+                document.getElementById('bottom_icon_fam').className = 'text-dark md hydrated';
+                document.getElementById('bottom_text_fam').className = 'text-dark';
+            }else if(Number(position) == 5){
                 document.getElementById('bottom_button_noti').className = 'item bg-white p-1';
                 document.getElementById('bottom_icon_noti').className = 'text-dark md hydrated';
                 document.getElementById('bottom_text_noti').className = 'text-dark';
-            } else if (Number(position) == 4) {
+            }
+            else if(Number(position) == 6){
+                document.getElementById('bottom_button_s').className = 'item bg-white p-1';
+                document.getElementById('bottom_icon_s').className = 'text-dark md hydrated';
+                document.getElementById('bottom_text_s').className = 'text-dark';
+            }
+            else if(Number(position) == 7){
                 document.getElementById('bottom_button_acc').className = 'item bg-white p-1';
                 document.getElementById('bottom_icon_acc').className = 'text-dark md hydrated';
                 document.getElementById('bottom_text_acc').className = 'text-dark';
