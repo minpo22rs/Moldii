@@ -207,7 +207,7 @@
             </ul>
             <div class="postblog_content">
                 {{-- <span class="postblog_counter">1000</span>  --}}
-                <button>Tweet</button>
+                <button>Post</button>
             </div>
             </div>
         </div>

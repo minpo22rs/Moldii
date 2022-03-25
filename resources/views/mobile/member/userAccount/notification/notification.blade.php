@@ -53,13 +53,8 @@
             </div>
         </div>
     </a>
-                
-                
 
 </div>
-
-
-
 
 @endsection
 
