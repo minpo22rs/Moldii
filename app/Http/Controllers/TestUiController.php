@@ -12,7 +12,7 @@ class TestUiController extends Controller
     }
 
     public function p(){
-        return view('mobile.member.main.index');
+        return view('mobile.member.userAccount.my_list.myList');
         
     }
 

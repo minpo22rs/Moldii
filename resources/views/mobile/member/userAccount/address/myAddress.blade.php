@@ -29,7 +29,7 @@
 <div class=" p-2 col-12  border-bottom ">
     <div class="row col-12 m-0">
         <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
-        <!-- <h5 class="font-weight-bold ml-1" style="color:rgba(255, 92, 99, 1);">ค่าเริ่มต้น</h5> -->
+        <h5 class="font-weight-bold ml-1" style="color:rgb(97, 92, 255);">ตั้งเป็นค่าเริ่มต้น</h5> 
     </div>
     <div class="row col-12 p-0 m-0">
         <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
@@ -80,6 +80,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

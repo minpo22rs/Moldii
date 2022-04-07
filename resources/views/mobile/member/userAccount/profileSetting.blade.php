@@ -149,7 +149,7 @@
 </a>
 
 
-
+{{-- 
 <div class="row col-12 m-0 mt-4 p-0 justify-content-center">
     <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold col-11 mt-2 " style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">
     <img class="mr-1" src="{{ asset('new_assets/img/icon/logout.svg')}}" >
@@ -157,7 +157,7 @@
 </button>
     
 
-</div>
+</div> --}}
 
 
 
@@ -166,6 +166,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

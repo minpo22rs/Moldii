@@ -110,7 +110,13 @@ Route::get('group', [GroupController::class, 'index']);
 
 
 //cart
-Route::get('cart', [CartController::class, 'index']); 
+Route::post('cart', [CartController::class, 'addcart']); 
+Route::get('cartindex', [CartController::class, 'index']); 
+Route::get('calcartstore', [CartController::class, 'calcartstore']); 
+Route::get('calcartid', [CartController::class, 'calcartid']); 
+Route::get('calcartall', [CartController::class, 'calcartall']); 
+Route::post('checkoutaddress', [CartController::class, 'checkoutaddress']); 
+Route::get('delcartid', [CartController::class, 'delcartid']); 
 
 
 
@@ -136,6 +142,7 @@ Route::get('/clc', function() {
 //shopping
 Route::get('shopping/category/{id}',[ShoppingController::class,'category']);
 Route::get('shopping/product/{id}',[ShoppingController::class,'product']);
+Route::get('shopping/merchant/{id}',[ShoppingController::class,'merchant']);
 
 
 //process register

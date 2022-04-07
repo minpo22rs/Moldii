@@ -73,6 +73,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(3);
 </script>
 @endsection

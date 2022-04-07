@@ -10,11 +10,13 @@
     <title>Moldii</title>
     <meta name="description" content="Moldii">
     <meta name="keywords" content="Moldii" />
-    <link rel="icon" type="image/png" href="{{ asset('new_assets/img/favicon.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/icon/512x512.png') }}" sizes="512x512">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('new_assets/img/icon/192x192.png') }}">
     <link rel="stylesheet" href="{{ asset('new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    {{-- @laravelPWA --}}
+    {{-- <link rel="manifest" href="/manifest.json"> --}}
 
 </head>
 
@@ -57,8 +59,11 @@
                 <span class="text-dark" id="bottom_text_yt">คลิป</span>
             </div>
         </a>
-        <a href="{{url('cart')}}" class="item" id="bottom_button_bk">
-            <div class="col">
+        <?php $sql = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
+        <a href="{{url('cartindex')}}" class="item" id="bottom_button_bk">
+            
+            <div class="col ">
+                <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span>
                 <ion-icon name="cart" class="text-dark md hydrated" id="bottom_icon_bk"></ion-icon>
                 <span class="text-dark" id="bottom_text_bk">ตะกร้า</span>
             </div>

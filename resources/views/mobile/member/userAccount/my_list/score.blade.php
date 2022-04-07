@@ -110,6 +110,9 @@
 
 @section('custom_script')
 <script>
+
+    bottom_now(7);
+
     const ratingStars = [...document.getElementsByClassName("rating__star")];
 
     function executeRating(stars) {

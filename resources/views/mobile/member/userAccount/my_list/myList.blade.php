@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 <div class="container m-0 p-0">
-    <div class="section full">
+    {{-- <div class="section full">
         <div class=" transparent p-0">
             <ul class="nav nav-tabs lined iconed" role="tablist">
                 <li class="nav-item">
@@ -28,7 +28,7 @@
 
             </ul>
         </div>
-    </div>
+    </div> --}}
     <div class="section full mb-2">
         <div class="tab-content">
 

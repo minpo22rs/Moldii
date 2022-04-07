@@ -2,7 +2,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('shopping/category/'.$product->product_cat_id.'')}}');">
+        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('store')}}');">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
@@ -40,10 +40,20 @@
 <div class="m-1 shopping-container">
     <div class="section full mt-3 mb-3">
         <div class="carousel-full owl-carousel owl-theme">
-
-            <div class="item">
-                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" class="imaged w-100 square">
-            </div>
+            @if($imggal->count()>0)
+                @foreach($imggal as $imggals)
+                    <div class="item">
+                    
+                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_img/'.$imggals->img_name.'')}}" alt="alt" class="imaged w-100 square">
+                    </div>
+                @endforeach
+            @else
+                <div class="item">
+                        
+                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" class="imaged w-100 square">
+                </div>
+            @endif
+        
            
         </div>
     </div>
@@ -107,7 +117,7 @@
 
     </div>
     <hr>
-
+    {{-- merchant --}}
     <div class="col-12">
         <div class="row justify-content-between">
             <div class="row px-2">
@@ -119,7 +129,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn  btn-sm rounded shadowed  mr-1 p-1 align-self-center " style="width: 53px; height: 22px; background: #FF5C63; color: white; font-size:10px;">ดูร้านค้า</button>
+           <a href="{{url('/shopping/merchant/'.$store->merchant_id.'')}}"><button type="button" class="btn  btn-sm rounded shadowed  mr-1 p-1 align-self-center " style="width: 53px; height: 22px; background: #FF5C63; color: white; font-size:10px;">ดูร้านค้า</button></a>
 
 
         </div>
@@ -163,6 +173,8 @@
             </a>
         </div>
         <br>
+
+        {{-- รีวิวจากลูกค้า --}}
         
         <div class="col-12 card-footer p-1">
             <br>
@@ -311,10 +323,6 @@
     </div>
 
 
-
-
-
-
 </div>
 
 @endsection
@@ -376,9 +384,12 @@
 
         </div>
         <hr class="my-2 ">
-            <form action="{{url('order')}}" method="POST">
+            <form action="{{url('cart')}}" method="POST" id="formcart">
                 @csrf
+                <input type="hidden" name="back" value="1" id="backpage">
                 <input type="hidden" name="id" value="{{$product->product_id}}">
+                <input type="hidden" name="store_id" value="{{$store->merchant_id}}">
+                <input type="hidden" name="total" value="{{$product->product_discount!=null?$product->product_discount:$product->product_price}}">
                 <div class="row justify-content-between  p-1">
                     <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3>
 
@@ -410,11 +421,13 @@
 @endsection
 @section('choices')
 <div class="row w-100 choice-container m-0" id="choice_container">
-    <div href="" class="col-6 m-0 p-1  add-to-cart text-center ">
-        <div class="item-cart">
-            <i class="fal fa-shopping-bag" style="font-size:24px;"></i>
-            <h5 class="font-weight-bold m-0">เพิ่มในตะกร้า</h5>
-        </div>
+    <div class="col-6 m-0 p-1  add-to-cart text-center ">
+            <a href="javascript:;" onclick="subcart();">
+                <div class="item-cart" >
+                    <i class="fal fa-shopping-bag" style="font-size:24px;"></i>
+                    <h5 class="font-weight-bold m-0">เพิ่มในตะกร้า</h5>
+                </div>
+            </a>
     </div>
     <div id="buy-goods" class="col-6 m-0 p-2  row justify-content-center align-items-center buy-goods h3">
         ซื้อสินค้า
@@ -428,8 +441,13 @@
             alert(a);
         }
 
+
+        function subcart(){
+            document.getElementById('backpage').value =2;
+            $('#formcart').submit();
+        }
        
    
-        bottom_now(1);
+        bottom_now(6);
     </script>
 @endsection

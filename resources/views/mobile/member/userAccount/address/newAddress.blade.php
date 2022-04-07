@@ -1,5 +1,8 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
+<style>
+    optgroup { font-size:1rem; }
+</style>
 <div class="appHeader bg-danger text-light">
     <div class="left">
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
@@ -12,7 +15,7 @@
 @section('content')
 
 
-<form action="" id="input_Top_Up">
+<form action="{{url('user/addnewaddress')}}" method="POST" id="input_Top_Up">
     @csrf
     <div class="row p-2 col-12 m-0   border-bottom " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">
@@ -27,11 +30,21 @@
             <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">ที่อยู่</h4>
         </div>
     </div>
-    <input style="border:none;" type="text" name="province" class="form-control input_2  border-bottom" placeholder="จังหวัด">
-    <input style="border:none;" type="text" name="county" class="form-control input_2  border-bottom" placeholder="เขต/อำเภอ">
-    <input style="border:none;" type="text" name="zip_code" class="form-control input_2  border-bottom" placeholder="รหัสไปรษณีย์">
-
     <input style="border:none;" type="text" name="address_details" class="form-control input_2 border-top mt-2  border-bottom" placeholder="รายละเอียดที่อยู่">
+    <select style="border:none;" class="form-control input_2  border-bottom" name="province" id="province">
+        <optgroup>
+            <option value="" >เลือกจังหวัด</option>
+        </optgroup>
+    </select>
+    <select style="border:none;" class="form-control input_2  border-bottom" name="county" id="county">
+        <option>เลือกเขต/อำเภอ</option>
+    </select>
+    <select style="border:none;" class="form-control input_2  border-bottom" name="zip_code" id="tumbon">
+        <option>เลือกแขวง/ตำบล</option>
+    </select>
+
+    <input style="border:none;" type="text" name="zip_code" class="form-control input_2  border-bottom" placeholder="รหัสไปรษณีย์" readonly>
+
 
     <div class="row p-2 col-12 m-0 mt-1    " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">
@@ -59,7 +72,7 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 
 
     const inputTopUp = document.getElementById("input_Top_Up");

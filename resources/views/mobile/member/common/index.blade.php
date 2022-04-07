@@ -294,7 +294,7 @@
 
             {{-- <div id="video" class="tab-pane fade">
                 @foreach ($v as $item)
-                    <?php $count = DB::Table('tb_comments')->where('comment_object_id', $item->new_id)->get() ?>
+                    <?php $count = DB::Table('tb_comments')->where('comment_object_id', $item->new_id)->get() ?> 
                     <div class="card my-3">
                         <div class="card-body row col-12 justify-content-center m-0">
                             <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">

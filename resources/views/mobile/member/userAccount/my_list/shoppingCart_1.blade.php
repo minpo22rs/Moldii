@@ -28,20 +28,22 @@
             <div class="row p-1 border-top " style="color:black; font-size:18px; height:43px;">
                 <div class="col-8 mx-0 align-self-center row">
 
-                    <input class="my-1 mx-1 selecttoall checkbox_check{{$key}}" type="checkbox" id="checkbox_check{{$key}}" onclick='selectbox({{$key}},{{$mycarts->store_id}})' value="Select All" >
+                    <input class="my-1 mx-1 selecttoall checkbox_check{{$key}}"  type="checkbox" name="check-list{{$key}}" onclick='selectbox({{$key}})' value="Select All" >
 
 
                     <img src="{{ asset('new_assets/img/icon/shop.svg')}}" alt="alt" style="font-size:1rem;">
                     <h5 class="m-0 ml-1 font-weight-bold align-self-center">{{$store->merchant_name}}</h5>
                     <i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i>
-                    {{-- <a href="{{url('shopping/merchant/'.$store->merchant_id.'')}}" style="color: black"><i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i></a> --}}
                 </div>
                 <div class="col-4 mx-0 text-right align-self-center">
-                    <div class="edit-cart" id="edit_cart" onclick='editButton({{$key}})' name="edit_cart{{$key}}"  >
+                    <div class="edit-cart" id="edit_cart">
                         <h5 class="m-0  font-weight-bold align-self-center mr-1" style="color:rgba(139, 139, 139, 1);">แก้ไข</h5>
                     </div>
                 </div>
             </div>
+
+
+
 
                 <!-- -->
                 @foreach($cartt as $cartts)
@@ -49,11 +51,10 @@
                     <div class=" px-2 py-3 pl-0 pb-0 border-top border-bottom text-right product-cart">
                         <div class="col-12 row p-0 m-0 ">
                             <div class=" row ml-1">
-                                <form action="{{url('checkoutaddress')}}" method="post" id="formcheckoutaddress">
-                                    @csrf
-                                    <input class="my-1 mx-1 selecttoall" type="checkbox" name="check-list{{$key}}[]" id="check-list{{$cartts->cart_id}}" value="{{$cartts->cart_id}}" onclick="calcart({{$cartts->cart_id}})"> 
-                                </form>
-                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+
+                                <input class="my-1 mx-1 selecttoall" type="checkbox" name="check-list{{$key}}" > 
+
+                                <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                             </div>
 
                             <div class="col-9 ml-1 row align-self-center justify-content-between ">
@@ -65,12 +66,8 @@
                                     </select>
 
                                     <div class="row col-12">
-                                        @if($product->product_discount != null)
-                                            <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿{{number_format($product->product_price)}}</s> </h5>
-                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_discount)}}</h5>
-                                        @else
-                                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price)}}</h5>
-                                        @endif
+                                        <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿200.00</s> </h5>
+                                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿100.00</h5>
                                     </div>
                                     <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">
                                         <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
@@ -81,7 +78,7 @@
 
                             </div>
                         </div>
-                        <a href="javascript:;" class="delete-product text-center delbtn{{$key}}"  onclick="delcartid({{$cartts->cart_id}});">
+                        <a href="" class="delete-product text-center" id="delete_product">
                             <h3 class="m-0 align-self-center" style="color:#FFFFFF;">ลบ</h3>
                         </a>
                     </div>
@@ -124,7 +121,7 @@
             <div class="col-12 row m-0 pr-0 justify-content-between">
                 <div class="col-4 row p-2 pl-1">
                     <div class="form-group_2 select-all align-self-center mr-1">
-                        <input type="checkbox" id="select-all" onchange="calcartall();">
+                        <input type="checkbox" id="select-all">
                         <label class="label_2 m-0 mx-1" for="select-all">
                             <span class="checkbox">
                                 <span class="check"></span>
@@ -139,11 +136,11 @@
                     <div class="col px-1 py-1 align-self-center">
                         <div class="row p-0 m-0 justify-content-end">
                             <h5 class="m-0 ">ราคาทั้งหมด</h5>
-                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);" >฿<span id="chkout">0</span></h5>
+                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿100.00</h5>
                         </div>
                         <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
                     </div>
-                    <a href="javascript:;" type="button" class="btn btn-success square" onclick="checkoutaddress();"> ชำระเงิน ( <span id="chkcount">0</span>)</a>
+                    <a href="{{url('user/buyGoods')}}" type="button" class="btn btn-success square ">ชำระเงิน(0)</a>
                 </div>
             </div>
         </div>
@@ -157,131 +154,61 @@
 @section('custom_script')
 <script>
     bottom_now(3);
-    var countchk  = 0;
-    function editButton(v){  
-        // console.log('asdasd');
-        const delete_product = document.querySelectorAll('.delbtn'+v); 
-        delete_product.forEach( x => x.classList.toggle('show-delete'));
-     
-    }
+
+
+        
+   
+
+    const edit_cart = document.getElementById('edit_cart');
+    const delete_product = document.getElementById('delete_product');
+    
+
+    edit_cart.addEventListener('click', () => {     
+        delete_product.classList.toggle('show-delete'); 
+        
+    });
+    
+ 
+    
+    // function showDelete() {
+    //     delete_product.classList.toggle('show-delete');
+
+    // }
+
    
     document.getElementById('select-all').onclick = function() {
         var checkboxes = document.querySelectorAll('.selecttoall');
+    
         
         for (var checkbox of checkboxes) {
             checkbox.checked = this.checked;
         }
     }
 
+
+  
       
-    function selectbox(v,s){  
-        var  chkdels = 0;
+    function selectbox(v){  
+
         if ($('input.checkbox_check'+v).is(':checked')) {
     
-            var ele=document.getElementsByName('check-list'+v+'[]');  
+            var ele=document.getElementsByName('check-list'+v);  
             for(var i=0; i<ele.length; i++){  
                 if(ele[i].type=='checkbox')  
                     ele[i].checked=true;  
             } 
-            chkdels = 0;
+
         }else{
-            var ele=document.getElementsByName('check-list'+v+'[]');  
+            var ele=document.getElementsByName('check-list'+v);  
             for(var i=0; i<ele.length; i++){  
                 if(ele[i].type=='checkbox')  
                     ele[i].checked=false;      
             }  
-            chkdels = 1;
+
         }
-
-        $.ajax({
-            url: '{{ url("calcartstore")}}',
-            type: 'GET',
-            dataType: 'HTML',
-            data: {'s':s,'chkdel':chkdels},
-            success: function(data) {
-                var t  = JSON.parse(data);
-                console.log(t['colors']);
-                $('#chkout').html(t['sum']);
-                $('#chkcount').html(t['chkcount']);
-                countchk =  t['chkcount'];
-            }
-        });
-
-
     }  
 
-    function calcart(v){
-        var  chkdelid = 0;
-        if($('#check-list'+v).is(":checked")){
-            chkdelid = 0;
-        }else{
-            chkdelid = 1; //uncheck
 
-        }
-        $.ajax({
-            url: '{{ url("calcartid")}}',
-            type: 'GET',
-            dataType: 'HTML',
-            data: {'id':v,'chkdel':chkdelid},
-            success: function(data) {
-                var t  = JSON.parse(data);
-                // console.log(t['sum']);
-                $('#chkout').html(t['sum']);
-                $('#chkcount').html(t['chkcount']);
-                countchk =  t['chkcount'];
-            }
-        });
-    }
-
-
-    function calcartall(v){
-        var  chkdelall = 0;
-        if($('#select-all').is(":checked")){
-            chkdelall = 0;
-        }else{
-            chkdelall = 1;
-
-        }
-        $.ajax({
-            url: '{{ url("calcartall")}}',
-            type: 'GET',
-            dataType: 'HTML',
-            data: {'chkdel':chkdelall},
-            success: function(data) {
-                var t  = JSON.parse(data);
-                // console.log(t['sum']);
-                $('#chkout').html(t['sum']);
-                $('#chkcount').html(t['chkcount']);
-                countchk =  t['chkcount'];
-            }
-        });
-    }
-
-
-    function delcartid(v){
-        $.ajax({
-            url: '{{ url("delcartid")}}',
-            type: 'GET',
-            dataType: 'HTML',
-            data: {'id':v},
-            success: function(data) {
-              
-                window.location.reload();
-            }
-        });
-    }
-
-
-
-
-    function checkoutaddress(){
-       
-        if(countchk == 0){
-            alert('กรุณาเลือกสินค้า');
-        }else{
-            $('#formcheckoutaddress').submit();
-        }
-    }
 
 </script>
 @endsection

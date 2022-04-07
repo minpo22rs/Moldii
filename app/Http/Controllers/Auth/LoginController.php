@@ -44,14 +44,15 @@ class LoginController extends Controller
 
     public function checklogin(Request $request)
     {
-        // dd();
+        // dd($request->all());
         // dd(Auth::guard('web')->user()->id());
         
         $user = DB::table('tb_customers')->where('customer_username', $request->username)->orWhere('customer_phone', $request->username)->first();
-
+        // dd($user);
         if ( Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])
             || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password])) {
             Session::put('cid',$user->customer_id);
+            
             // dd(Session::all());
             return redirect('/');
         } else {
