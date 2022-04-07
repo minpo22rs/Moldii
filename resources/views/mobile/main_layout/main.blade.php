@@ -71,7 +71,7 @@
         <a href="{{url('group')}}" class="item" id="bottom_button_fam">
             <div class="col">
                 <ion-icon name="people-circle-outline" class="text-dark md hydrated" id="bottom_icon_fam"></ion-icon>
-                <span class="text-dark" id="bottom_text_fam">Family</span>
+                <span class="text-dark" id="bottom_text_fam">Family smile</span>
             </div>
         </a>
         <a href="{{url('user/notification')}}" class="item" id="bottom_button_noti">
