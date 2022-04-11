@@ -82,7 +82,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
 
 });
 
-Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant', 'as' => 'merchant.', 'middleware' => 'merchant'], function () {
+Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'merchant.', 'middleware' => 'merchant'], function () {
     //merchant
     Route::get('index', 'DashboardController@index')->name('merchantindex');
     Route::get('profile', 'MerchantController@index');

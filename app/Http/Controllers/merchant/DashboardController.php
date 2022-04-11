@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Merchant;
+namespace App\Http\Controllers\merchant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
