@@ -1,6 +1,7 @@
 @extends('merchant.layouts.master')
 <link href="../files/assets/pages/jquery.filer/css/jquery.filer.css" type="text/css" rel="stylesheet" />
 <link href="../files/assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+
 @section('css')
 <style>
     .swal2-container {
@@ -157,6 +158,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Category</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="form-control" name="category_id">
+                                        <option value="'">Select Category</option>
+                                        @foreach($category as $cats)
+                                            <option value="{{$cats->cat_id}}">{{$cats->cat_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Options</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -205,7 +221,7 @@
                                     <label class="col-sm-2 col-form-label" style="color: #FF5370;">GPoint</label>
                                 </div>
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #FFB64D;">BPoint</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #FFB64D;">Discount</label>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +237,7 @@
                                     <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint...">
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint...">
+                                    <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
                                 </div>
                             </div>
                         </div>
@@ -254,6 +270,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Image Gallery</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                        </div>                
+                    </div>
+                   
                 </div>
             </form>
             <div class="modal-footer">
@@ -273,9 +298,7 @@
 @endsection
 @section('js')
 <!-- jquery file upload js -->
-<script src="../files/assets/pages/jquery.filer/js/jquery.filer.min.js"></script>
-<script src="../files/assets/pages/filer/custom-filer.js" ></script>
-<script src="../files/assets/pages/filer/jquery.fileuploads.init.js" ></script>
+
 @include('flash-message')
 <script>
     var count_option = 1;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class FamilyController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        
         DB::beginTransaction();
         try {
             $Family = new Family();

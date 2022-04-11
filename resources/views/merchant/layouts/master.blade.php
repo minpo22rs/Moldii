@@ -57,6 +57,7 @@
     <link href="{{ asset('plugins/crop/croppie.css') }}" type="text/css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500&display=swap" rel="stylesheet">
     <!-- jquery file upload Frame work -->
+    
     <link href="{{ asset('files/assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ asset('files/assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css" rel="stylesheet" />
     <style>
@@ -157,6 +158,15 @@
                                     <a href="{{url("merchant/index")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-dashboard-web"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="{{url("merchant/ordermerchant")}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-list"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Order</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

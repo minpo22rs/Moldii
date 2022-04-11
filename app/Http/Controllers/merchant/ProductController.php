@@ -10,6 +10,7 @@ use App\Models\category;
 use App\Models\product;
 use App\Models\tag;
 use App\Models\Option;
+use App\Models\product_img;
 
 class ProductController extends Controller
 {
@@ -47,7 +48,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+    
         DB::beginTransaction();
+
+        
         try {
             $count = product::count();
             $count = $count+1;
@@ -60,7 +65,14 @@ class ProductController extends Controller
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
-            $product->product_bpoint        = $request->bpoint;
+            if ($request->discount != null) {
+                if ( ((float)$request->discount) >= ((float)$request->price)) {
+                    return back()->withError('Discount can not be more or equal to the price!.');
+                }else{
+                    
+                    $product->product_discount = $request->discount;
+                }
+            }
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
             if ($request->file('cover') !== null)
             {
@@ -72,6 +84,19 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+
+            if ($request->file('files') !== null)
+            {
+                $img = $request->file('files');
+                foreach($img as $key => $item) {
+                    $image = new product_img();
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('product_img',  $name);
+                    $image->product_id  = $product->product_id;
+                    $image->img_name  = $name;
+                    $image->save();
+                }
+            }
             
             if ($request->option != null) {
                 foreach ($request->option as $key => $item) {

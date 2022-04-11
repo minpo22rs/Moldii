@@ -99,6 +99,9 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant', 'as' => 'mercha
     // product
     Route::resource('product', 'ProductController');
     Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');
+
+    // order
+    Route::resource('ordermerchant', 'OrderMerchantController');
 });
 
 
