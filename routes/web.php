@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // dd(DB::Table('tb_admins')->get());
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
 Auth::routes();
 
 Route::post('loginUser', 'Auth\LoginController@login')->name('loginUser');
@@ -76,6 +74,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
 
     // order
     Route::resource('order', 'OrderController');
+
+    Route::resource('familys', 'FamilyController');
+    Route::post('addgroup', 'FamilyController@store');
+    Route::post('publishedgroup/{id}', 'FamilyController@publishedgroup');
+
+
 });
 
 Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant', 'as' => 'merchant.', 'middleware' => 'merchant'], function () {

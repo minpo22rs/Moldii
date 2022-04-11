@@ -1,4 +1,6 @@
 @extends('merchant.layouts.master')
+<link href="../files/assets/pages/jquery.filer/css/jquery.filer.css" type="text/css" rel="stylesheet" />
+<link href="../files/assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
 @section('css')
 <style>
     .swal2-container {
@@ -270,6 +272,10 @@
 </form>
 @endsection
 @section('js')
+<!-- jquery file upload js -->
+<script src="../files/assets/pages/jquery.filer/js/jquery.filer.min.js"></script>
+<script src="../files/assets/pages/filer/custom-filer.js" ></script>
+<script src="../files/assets/pages/filer/jquery.fileuploads.init.js" ></script>
 @include('flash-message')
 <script>
     var count_option = 1;

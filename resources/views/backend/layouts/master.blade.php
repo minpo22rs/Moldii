@@ -283,7 +283,15 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
                                 <li class="">
+                                    <a href="{{url("admin/familys")}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-user-group"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Family</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                {{-- <li class="">
                                     <a href="{{url("admin/podcasts")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-radio-mic"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Podcasts</span>
@@ -296,7 +304,7 @@
                                         <span class="pcoded-mtext">Live & Streaming</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 {{-- <li class="">
                                     <a href="{{url("admin/notification")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-bell-alt"></i><b>D</b></span>

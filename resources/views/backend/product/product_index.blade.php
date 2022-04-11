@@ -25,6 +25,9 @@
             margin: 0 0 10px -50px !important;
         }
     }
+
+
+
 </style>
 @endsection
 @section('content')
@@ -162,7 +165,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Description</label>
+                        <label class="col-sm-2 col-form-label">Description <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -200,7 +203,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Amount</label>
+                        <label class="col-sm-2 col-form-label">Amount <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -210,17 +213,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Value</label>
+                        <label class="col-sm-2 col-form-label">Value <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">Price</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">Price </label>
                                 </div>
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #FF5370;">GPoint</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #FF5370;">GPoint </label>
                                 </div>
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #FFB64D;">BPoint</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #FFB64D;">Discount</label>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +239,7 @@
                                     <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint...">
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="bpoint" class="form-control form-control-warning" placeholder="BPoint...">
+                                    <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
                                 </div>
                             </div>
                         </div>
@@ -269,7 +272,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Image Gallery</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                        </div>                
+                    </div>
+
+
                 </div>
+
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
@@ -289,6 +303,9 @@
 @include('flash-message')
 <script>
     $(".example1").DataTable();
+
+   
+
 
     var count_option = 1;
     $('#addoption').click(function () { 

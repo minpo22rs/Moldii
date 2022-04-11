@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\category;
 use App\Models\product;
+use App\Models\product_img;
 use App\Models\tag;
 use App\Models\Option;
 
@@ -40,6 +41,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $count = product::count();
@@ -51,8 +54,17 @@ class ProductController extends Controller
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
-            $product->product_bpoint        = $request->bpoint;
             $product->product_merchant_id   = 1;
+
+            if ($request->discount != null) {
+                if ( ((float)$request->discount) >= ((float)$request->price)) {
+                    return back()->withError('Discount can not be more or equal to the price!.');
+                }else{
+                    
+                    $product->product_discount = $request->discount;
+                }
+            }
+
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
             if ($request->file('cover') !== null)
             {
@@ -63,7 +75,23 @@ class ProductController extends Controller
                     $product->product_img  = $name;
                 }
             }
+
+
             $product->save();
+
+            if ($request->file('files') !== null)
+            {
+                $img = $request->file('files');
+                foreach($img as $key => $item) {
+                    $image = new product_img();
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('product_img',  $name);
+                    $image->product_id  = $product->product_id;
+                    $image->img_name  = $name;
+                    $image->save();
+                }
+            }
+
 
             if ($request->option != null) {
                 foreach ($request->option as $key => $item) {
@@ -87,6 +115,7 @@ class ProductController extends Controller
             DB::commit();
             return back()->with('success', 'Successful');
         } catch (\Throwable $th) {
+            // dd($th);
             DB::rollback();
             return back()->withError('Something Wrong! New Product can not Saved.');
         }

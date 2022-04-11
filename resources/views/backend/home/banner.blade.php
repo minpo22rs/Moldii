@@ -138,12 +138,7 @@
                     </div>
                     <div class="form-group row">
 
-                        <label class="col-sm-2 col-form-label">
-                            
-                                <span class="tooltip-item2" style="color: #ff9d10">Type <span class="text-danger">*</span></span>
-                                
-                            
-                        </label>
+                        <label class="col-sm-2 col-form-label">Type </label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
