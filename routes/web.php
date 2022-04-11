@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::post('loginUser', 'Auth\LoginController@login')->name('loginUser');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin.', 'middleware' => 'admin'], function () {
+Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'middleware' => 'admin'], function () {
 
     Route::get('index', 'DashboardController@index')->name('adminindex');
 
