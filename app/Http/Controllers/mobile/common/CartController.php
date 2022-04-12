@@ -9,6 +9,7 @@ use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\Tb_cart;
 use App\Models\User;
+use App\Models\Tb_address;
 use Session;
 
 
@@ -262,8 +263,11 @@ class CartController extends Controller
     {
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
         $my = User::where('customer_id',Session::get('cid'))->first();
-        // dd($mycart);
-        return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my]);
+        $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
+        $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
+        $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
+        $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
+        return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'p'=>$p,'a'=>$a,'t'=>$t]);
     }
     
 }

@@ -14,14 +14,15 @@
     
     <div  class=" p-2 col-12  border-bottom " style="height:144px;">
         <div class="row col-12 m-0">
-            <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
+            <h5 class="font-weight-bold">{{$add->customer_name}}  {{$add->customer_phone}}</h5>
 
         </div>
        
         <a href="{{url('user/chooseAddress')}}" class="row col-12 p-0 m-0" style="color:rgba(14, 18, 66, 1);">
             <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
             <div class="text-start col-10">
-                <h5 class="m-0 " style="height:70px;">รายละเอียดที่อยู่ </h5>
+                <h5 class="m-0 " style="height:70px;">รายละเอียดที่อยู่ <br> <br> {{$add->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$add->customer_postcode}}</h5>
+                
             </div>
 
             <i class="far fa-angle-right col-1 p-0 align-self-center text-right" style="font-size:1.7rem;"></i>
@@ -188,7 +189,7 @@
 
 
 
-            <a href="{{url('user/buyGoods')}}" style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square ">สั่งสินค้า</a>
+            <a href="{{url('addorder')}}" style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square ">สั่งสินค้า</a>
         </div>
     </div>
 

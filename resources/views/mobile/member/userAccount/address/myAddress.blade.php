@@ -10,54 +10,48 @@
 </div>
 @endsection
 @section('content')
-<div class=" p-2 col-12  border-bottom ">
-    <div class="row col-12 m-0">
-        <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
-        <h5 class="font-weight-bold ml-1" style="color:rgba(255, 92, 99, 1);">ค่าเริ่มต้น</h5>
-    </div>
-    <div class="row col-12 p-0 m-0">
-        <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
-        <div class="text-start col-10">
-            <h5 class="m-0 ">รายละเอียดที่อยู่ Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum fugit ad dignissimos ipsam harum aut ea sunt aspernatur consequatur id tempore aliquam blanditiis enim, doloribus a porro libero, architecto, officia assumenda reiciendis! Tempore praesentium enim illo aut, repellendus rem quaerat? </h5>
-        </div>
+        
+            <div class=" p-2 col-12  border-bottom ">
+                <div class="row col-12 m-0">
+                    <h5 class="font-weight-bold">{{$addon->customer_name}}  {{$addon->customer_phone}}</h5>
+                    <h5 class="font-weight-bold ml-1" style="color:rgba(255, 92, 99, 1);">ค่าเริ่มต้น</h5>
+                </div>
+                <div class="row col-12 p-0 m-0">
+                    <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
+                    <div class="text-start col-10">
+                    <h5 class="m-0 ">รายละเอียดที่อยู่ <br><br> {{$addon->customer_address}} {{$ont->name_th}} {{$ona->name_th}} {{$onp->name_th}} {{$addon->customer_postcode}} </h5>
+                </div>
 
-        <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br>
-
-
-    </div>
-</div>
-<div class=" p-2 col-12  border-bottom ">
-    <div class="row col-12 m-0">
-        <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
-        <h5 class="font-weight-bold ml-1" style="color:rgb(97, 92, 255);">ตั้งเป็นค่าเริ่มต้น</h5> 
-    </div>
-    <div class="row col-12 p-0 m-0">
-        <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
-        <div class="text-start col-10">
-            <h5 class="m-0 ">รายละเอียดที่อยู่ Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum fugit ad dignissimos ipsam harum aut ea sunt aspernatur consequatur id tempore aliquam blanditiis enim, doloribus a porro libero, architecto, officia assumenda reiciendis! Tempore praesentium enim illo aut, repellendus rem quaerat? </h5>
-        </div>
-
-        <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
+                    <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br>
 
 
-    </div>
-</div>
-<div class=" p-2 col-12  border-bottom ">
-    <div class="row col-12 m-0">
-        <h5 class="font-weight-bold">ชื่อ-นามสกุล</h5>
-        <!-- <h5 class="font-weight-bold ml-1" style="color:rgba(255, 92, 99, 1);">ค่าเริ่มต้น</h5> -->
-    </div>
-    <div class="row col-12 p-0 m-0">
-        <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
-        <div class="text-start col-10">
-            <h5 class="m-0 ">รายละเอียดที่อยู่ Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum fugit ad dignissimos ipsam harum aut ea sunt aspernatur consequatur id tempore aliquam blanditiis enim, doloribus a porro libero, architecto, officia assumenda reiciendis! Tempore praesentium enim illo aut, repellendus rem quaerat? </h5>
-        </div>
+                </div>
+            </div>
+        @foreach($addoff as $adds)
+            <?php 
+                $p = DB::Table('provinces')->where('id',$adds->customer_province)->first();
+                $a = DB::Table('amphures')->where('id',$adds->customer_district)->first();
+                $t = DB::Table('districts')->where('id',$adds->customer_tumbon)->first();
+            
+            ?>
+            <div class=" p-2 col-12  border-bottom ">
+                <div class="row col-12 m-0">
+                    <h5 class="font-weight-bold">{{$adds->customer_name}}  {{$adds->customer_phone}}</h5>
+                    <a href="{{url('user/changevalueaddress/'.$adds->id_customer_address.'')}}"><h5 class="font-weight-bold ml-1" style="color:rgb(97, 92, 255);">ตั้งเป็นค่าเริ่มต้น</h5> </a>
+                </div>
+                <div class="row col-12 p-0 m-0">
+                    <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
+                    <div class="text-start col-10">
+                        <h5 class="m-0 ">รายละเอียดที่อยู่ <br><br> {{$adds->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$adds->customer_postcode}}</h5>
+                    </div>
 
-        <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
+                    <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
 
 
-    </div>
-</div>
+                </div>
+            </div>
+       
+        @endforeach
 
 
 <a href="{{url('user/newAddress')}}" class="row p-2 col-12 m-0 mt-2 border-top border-bottom " style="color:black; font-size:18px">

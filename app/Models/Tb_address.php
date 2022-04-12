@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tb_order extends Model
+class Tb_address extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_orders';
+    protected $table = 'tb_customer_addresss';
 
 }

@@ -12,25 +12,56 @@ use App\Models\Tb_order;
 class OrderController extends Controller
 {
     //
-    public function index(Request $request)
+    public function ordertoship(Request $request)
+    {
+        $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
+            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->get();
+        Session::put('totalcart',0);
+        Session::put('countcart',0);
+        Session::put('cartid',null);
+
+        return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
+    }
+
+    public function addorder(Request $request)
     {
         // dd(Session::all());
-        // dd($request->all());
-        // $order = new Tb_order();
+        // dd($sql);
+        $order = new Tb_order();
+        $order->customer_id = Session::get('cid');
+        $order->order_total = Session::get('totalcart');
+        $order->shipping_cost = 14;
+        $order->save();
+        
+        $sql = DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->get();
 
-        // $order->customer_id = $request->cid;
-        // $order->order_total  = $request->total;
-        // $order->save();
+        foreach($sql as $sqls){
+            $p = DB::Table('tb_products')->where('product_id',$sqls->product_id)->first();
+            $order_de = new Tb_order_detail();
+            $order_de->order_id = $order->id;
+            $order_de->product_id =  $sqls->product_id;
+            if( $p->product_discount == null){
+                $order_de->price = $p->product_price;
+            }else{
 
+                $order_de->price =  $p->product_discount;
+            }
 
-        // $order_de = new Tb_order_detail();
-        // $order_de->order_id = $order->order_id;
-        // $order_de->product_id  = $request->id;
-        // $order_de->store_id  = $request->store_id;
-        // $order_de->price  = $request->total;
-        // $order_de->save();
+            
+            $order_de->store_id =  $sqls->store_id;
+            $order_de->customer_id =   Session::get('cid');
+            $order_de->amount =  $sqls->count;
+            $order_de->save();
+        }
 
-        return view('mobile.member.userAccount.my_list.shoppingCart');
+        DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->delete();
+
+        return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+
     }
+
+
     
 }

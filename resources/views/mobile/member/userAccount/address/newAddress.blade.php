@@ -1,8 +1,6 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
-<style>
-    optgroup { font-size:1rem; }
-</style>
+
 <div class="appHeader bg-danger text-light">
     <div class="left">
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
@@ -30,20 +28,25 @@
             <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">ที่อยู่</h4>
         </div>
     </div>
-    <input style="border:none;" type="text" name="address_details" class="form-control input_2 border-top mt-2  border-bottom" placeholder="รายละเอียดที่อยู่">
-    <select style="border:none;" class="form-control input_2  border-bottom" name="province" id="province">
-        <optgroup>
-            <option value="" >เลือกจังหวัด</option>
-        </optgroup>
-    </select>
-    <select style="border:none;" class="form-control input_2  border-bottom" name="county" id="county">
+    <input style="border:none;" type="text" name="address_details" class="form-control input_2   border-bottom" placeholder="รายละเอียดที่อยู่">
+    
+        <select style="border:none;" class="form-control input_2  border-bottom" name="province" id="province" onchange="getAmphure(this.value);">
+            
+                <option value="" >เลือกจังหวัด</option>
+                @foreach($p as  $ps)
+                    <option value="{{$ps->id}}" >{{$ps->name_th}}</option>
+                @endforeach
+            
+        </select>
+    
+    <select style="border:none;" class="form-control input_2  border-bottom" name="district" id="county" onchange="getSubDistrict(this.value);">
         <option>เลือกเขต/อำเภอ</option>
     </select>
-    <select style="border:none;" class="form-control input_2  border-bottom" name="zip_code" id="tumbon">
+    <select style="border:none;" class="form-control input_2  border-bottom" name="tumbon" id="tumbon" onchange="getZipcode(this.value);">
         <option>เลือกแขวง/ตำบล</option>
     </select>
 
-    <input style="border:none;" type="text" name="zip_code" class="form-control input_2  border-bottom" placeholder="รหัสไปรษณีย์" readonly>
+    <input style="border:none;" type="text" name="zip_code" class="form-control input_2  border-bottom" placeholder="รหัสไปรษณีย์" id="zip_code" readonly>
 
 
     <div class="row p-2 col-12 m-0 mt-1    " style="color:black; font-size:18px">
@@ -54,7 +57,7 @@
             <h4 class="m-0  font-weight-bold align-self-center" style="color:rgba(84, 84, 84, 1);">ตั้งค่าเป็นที่อยู่เริ่มต้น</h4>
 
             <div class="custom-control custom-switch  ">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <input type="checkbox" name="chk" class="custom-control-input" id="customSwitch1">
                 <label class="custom-control-label" for="customSwitch1"></label>
             </div>
         </div>
@@ -89,5 +92,54 @@
 
 
     });
+
+    function getAmphure(v){
+        $.ajax({
+            url: '{{ url("getAmphure")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#county').html(data);
+               
+            }
+        });
+
+    }
+
+    function getSubDistrict(v){
+        $.ajax({
+            url: '{{ url("getSubDistrict")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#tumbon').html(data);
+               
+            }
+        });
+
+    }
+
+
+    function getZipcode(v){
+        $.ajax({
+            url: '{{ url("getZipcode")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+                document.getElementById('zip_code').value = data;
+                // $('#zip_code').value(data);data
+               
+            }
+        });
+
+    }
+
+
+
 </script>
 @endsection

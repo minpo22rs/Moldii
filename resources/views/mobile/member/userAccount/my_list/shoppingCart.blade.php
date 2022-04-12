@@ -1,8 +1,9 @@
 <style>
     #footer-fixed-bottom {
-    position: fixed;
+    position: sticky;
     bottom: 7%;
     width: 100%;
+    background-color: #FFFFFF
     }
 </style>
 

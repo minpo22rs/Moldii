@@ -54,6 +54,15 @@ Route::get('user/changeEmail', [UserAccController::class, 'changeEmail']);// E-m
 Route::get('user/newEmail', [UserAccController::class, 'newEmail']);// กรอก E-mail ใหม่
 Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
+Route::post('user/addnewaddress', [UserAccController::class, 'addnewaddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changevalueaddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);// โชว์ที่อยู่ของฉัน
+
+Route::get('getAmphure',[UserAccController::class, 'getAmphure']);//
+Route::get('getSubDistrict',[UserAccController::class, 'getSubDistrict']);//
+Route::get('getZipcode',[UserAccController::class, 'getZipcode']);//
+
+
 Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
 Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
 
@@ -115,7 +124,7 @@ Route::get('cartindex', [CartController::class, 'index']);
 Route::get('calcartstore', [CartController::class, 'calcartstore']); 
 Route::get('calcartid', [CartController::class, 'calcartid']); 
 Route::get('calcartall', [CartController::class, 'calcartall']); 
-Route::post('checkoutaddress', [CartController::class, 'checkoutaddress']); 
+Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkoutaddress']); 
 Route::get('delcartid', [CartController::class, 'delcartid']); 
 
 
@@ -167,7 +176,8 @@ Route::get('home', [HomeController::class, 'index']);
 
 
 //order
-Route::post('order', [OrderController::class, 'index']);
+Route::get('ordertoship', [OrderController::class, 'ordertoship']);
+Route::get('addorder', [OrderController::class, 'addorder']);
 
 
 // Test UI 

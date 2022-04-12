@@ -1,9 +1,9 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
 <div class="appHeader bg-danger text-light">
-    <div class="left">
+    {{-- <div class="left">
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
-    </div>
+    </div> --}}
     <div class="pageTitle">
         รายการของฉัน
     </div>
@@ -43,40 +43,25 @@
 
                 <!-- ที่ต้องจัดส่ง -->
                 <div id="delivered" class="tabcontent">
-                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                        <div class="mx-1">
-                            <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                        </div>
-                        <div class="col-10 row align-self-center justify-content-between pl-2">
-                            <div class="col-6 p-0 ">
-                                <h5 class="m-0">ชื่อร้าน</h5>
-                                <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                <h5 class="m-0">ราคาทั้งหมด</h5>
+                    @foreach($sql as $sqls)
+                        <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
+                            <div class="mx-1">
+                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                             </div>
-                            <div class="col-4 p-0 ">
-                                <h5 class="m-0  text-right">วว/ดด/ปป</h5>
-                                <h5 class="m-0  text-right">เวลา</h5>
-                                <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
+                            <div class="col-10 row align-self-center justify-content-between pl-2">
+                                <div class="col-6 p-0 ">
+                                    <h5 class="m-0">{{$sqls->merchant_name}}</h5>
+                                    <h5 class="m-0">X{{$sqls->amount}}</h5>
+                                    <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
+                                </div>
+                                <div class="col-4 p-0 ">
+                                    <h5 class="m-0  text-right">วว/ดด/ปป</h5>
+                                    <h5 class="m-0  text-right">เวลา</h5>
+                                    <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                        <div class="mx-1">
-                            <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                        </div>
-                        <div class="col-10 row align-self-center justify-content-between pl-2">
-                            <div class="col-6 p-0 ">
-                                <h5 class="m-0">ชื่อร้าน</h5>
-                                <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                <h5 class="m-0">ราคาทั้งหมด</h5>
-                            </div>
-                            <div class="col-4 p-0 ">
-                                <h5 class="m-0  text-right">วว/ดด/ปป</h5>
-                                <h5 class="m-0  text-right">เวลา</h5>
-                                <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
                     {{-- <h2>ที่ต้องจัดส่ง</h2> <!-- Test --> --}}
 
                 </div>
@@ -122,7 +107,7 @@
                             </div>
                         </div>
                     </a>
-                    <h2>ทีต้องได้รับ</h2> <!-- Test -->
+                    
                 </div>
                 <!-- ที่ต้องได้รับ -->
 
@@ -171,7 +156,7 @@
                         </div>
                         <a href="{{url('user/score')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
                     </div>
-                    <h2>ให้คะแนน</h2> <!-- Test -->
+                   
                 </div>
                 <!-- ให้คะแนน -->
 
@@ -269,5 +254,10 @@
 @section('custom_script')
 <script>
     bottom_now(7);
+
+    var a = "{{Session::get('msg')}}";
+    if(a){
+        alert(a);
+    }
 </script>
 @endsection
