@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Orders;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class OrderMerchantController extends Controller
 {
@@ -16,15 +17,12 @@ class OrderMerchantController extends Controller
      */
     public function index()
     {
-         $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
+        $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-            ->leftJoin('tb_merchants','tb_order_details.customer_id','=','tb_merchants.merchant_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
             ->get();
-        Session::put('totalcart',0);
-        Session::put('countcart',0);
-        Session::put('cartid',null);
-
-        return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
+        return view('merchant.order.order')->with(['sql'=>$sql]);
     }
 
     /**
