@@ -16,7 +16,12 @@ class OrderMerchantController extends Controller
      */
     public function index()
     {
-        return view('merchant.order.order');
+        $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)
+            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
+            ->get();
+        return view('merchant.order.order')->with(['sql'=>$sql]);
     }
 
     /**

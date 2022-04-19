@@ -39,16 +39,27 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Code</th>
+                            <th style="text-align: center;">Product Code</th>
              
-                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Customer Name</th>
                             <th style="text-align: center;">Price</th>
                             <th style="text-align: center;">Amount</th>
                             <th style="text-align: center;">Management</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                                <?php $i =1 ;?>
+                            @foreach ($sql as $sqls)
+                                <tr>
+                                    <td style="text-align: center;">{{$i}}</td>
+                                    <td style="text-align: center;">{{$sqls->product_code}}</td>
+                                    <td style="text-align: center;">{{$sqls->customer_name}}{{$sqls->customer_lname}}</td>
+                                    <td style="text-align: center;">{{$sqls->price}}</td>
+                                    <td style="text-align: center;">{{$sqls->amount}}</td>
+                                    <td style="text-align: center;">รอขนส่งและ payment gateway</td>
+                                </tr>
+                                <?php $i ++ ;?>
+                            @endforeach
                     </tbody>
                 </table>
             </div>
