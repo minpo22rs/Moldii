@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\merchant;
 
 use App\Http\Controllers\Controller;
-use App\Orders;
 use Illuminate\Http\Request;
-use DB;
 use Auth;
+use App\Models\Merchant;
 
-class OrderMerchantController extends Controller
+class MerchantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +16,9 @@ class OrderMerchantController extends Controller
      */
     public function index()
     {
-        $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)
-            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
-            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
-            ->get();
-        return view('merchant.order.order')->with(['sql'=>$sql]);
+        $merchant = Merchant::findOrFail(Auth::guard('merchant')->user()->merchant_id);
+        $data = array('merchant' => $merchant, );
+        return view('merchant.account.profile', $data);
     }
 
     /**
@@ -49,10 +45,10 @@ class OrderMerchantController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
         //
     }
@@ -60,10 +56,10 @@ class OrderMerchantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Orders $orders)
+    public function edit($id)
     {
         //
     }
@@ -72,10 +68,10 @@ class OrderMerchantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,10 +79,10 @@ class OrderMerchantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
         //
     }
