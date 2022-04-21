@@ -98,7 +98,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}" readonly>
+                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}" >
                                 </div>
                             </div>
                         </div>

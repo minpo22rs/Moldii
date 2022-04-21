@@ -173,7 +173,7 @@ class ProductController extends Controller
             {
                 $imgcover = $request->file('cover');
                 foreach($imgcover as $key => $item) {
-                    unlink('storage/app/product_cover/'.$product->product_img);
+                    // unlink('storage/app/product_cover/'.$product->product_img);
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
                     $item->storeAs('product_cover',  $name);
                     $product->product_img = $name;

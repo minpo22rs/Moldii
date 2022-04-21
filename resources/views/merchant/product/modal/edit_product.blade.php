@@ -99,7 +99,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}" readonly>
+                                    <input type="number" name="amount" class="form-control" placeholder="Amount" value="{{$product->product_amount}}" >
                                 </div>
                             </div>
                         </div>
@@ -125,13 +125,13 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="number" name="price" class="form-control form-control-success"  value="{{$product->product_price}}" readonly>
+                                    <input type="number" name="price" class="form-control form-control-success"  value="{{$product->product_price}}" >
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="gpoint" class="form-control form-control-danger" value="{{$product->product_gpoint}}" readonly>
+                                    <input type="number" name="gpoint" class="form-control form-control-danger" value="{{$product->product_gpoint}}" >
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)..." value="{{$product->product_discount}}" readonly>
+                                    <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)..." value="{{$product->product_discount}}" >
                                 </div>
                             </div>
                         </div>
