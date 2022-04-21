@@ -1,9 +1,9 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
 <div class="appHeader bg-danger text-light">
-    {{-- <div class="left">
+    <div class="left">
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
-    </div> --}}
+    </div>
     <div class="pageTitle">
         รายการของฉัน
     </div>
