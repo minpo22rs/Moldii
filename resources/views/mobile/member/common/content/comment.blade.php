@@ -49,8 +49,11 @@
         <p class="card-text">{{$c->new_content}}</p>
 
     </div>
-    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
-
+    @if($c->new_type=='C')
+        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+    @else
+        <iframe width="390" height="215" src="https://www.youtube.com/embed/{{$c->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    @endif
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()+$countreply->count()}} รายการ</h6>
