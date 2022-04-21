@@ -167,7 +167,7 @@
 
         <hr class="my-1">
         <div class="col-12 p-1 ">
-            <h4 class="text-break ">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h4>
+            <h4 class="text-break ">{{$product->product_description}}</h4>
             <a href="" class="text-center">
                 <h6 class="   m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">เพิ่มเติม</h6>
             </a>
