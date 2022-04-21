@@ -34,7 +34,7 @@
 
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
-                $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->get(); 
+                $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
                 $sum = 0;
                 $countt = 0;
         ?>

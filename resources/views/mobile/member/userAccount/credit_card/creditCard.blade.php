@@ -2,7 +2,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
+        <ion-icon name="arrow-back-outline" onclick="window.location.replace('profile/setting')"></ion-icon>
     </div>
     <div class="pageTitle">
         รายการบัญชีธนาคาร/บัตรที่บันทึก
@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 
-<div class=" p-2 col-12 m-0    " style="color:black; font-size:18px">
+<div class=" p-2 col-12 m-0" style="color:black; font-size:18px">
     <div class="col-12 mx-0 align-self-center row p-0">
         <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">บัตรของคุณ</h4>
     </div>
@@ -67,10 +67,6 @@
 
 
 </div>
-
-
-
-
 
 
 @endsection

@@ -20,6 +20,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $mycart = Tb_cart::where('customer_id',Session::get('cid'))->groupBy('store_id')->get();
+        // dd( $mycart);
         $my = User::where('customer_id',Session::get('cid'))->first();
         Session::put('totalcart',0);
         Session::put('countcart',0);
@@ -66,7 +67,7 @@ class CartController extends Controller
         $sum = 0;
         $chkcount = 0;
         $idpluck =  array();
-        $mycart = Tb_cart::where('store_id',$request->s)->get();
+        $mycart = Tb_cart::where('store_id',$request->s)->where('customer_id',Session::get('cid'))->get();
         $idpluck = $mycart->pluck('cart_id');
         // dd($idpluck );
         if($request->chkdel ==1){
@@ -261,13 +262,62 @@ class CartController extends Controller
 
     public function checkoutaddress(Request $request)
     {
+        
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
+     
         $my = User::where('customer_id',Session::get('cid'))->first();
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
         $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
         $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
         $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
         return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'p'=>$p,'a'=>$a,'t'=>$t]);
+    }
+
+    public function countdown(Request $request){
+        // dd(Session::all());
+        Tb_cart::where('cart_id',$request->k)->decrement('count', 1);
+        if(Session::get('cartid')!= null){
+            $count =  Session::get('countcart')-1;
+            Session::put('countcart',$count);
+    
+            $sum =  Session::get('totalcart')-$request->p;
+            Session::put('totalcart',$sum);
+            $data = array(
+                'sum' => number_format( Session::get('totalcart')),
+                'chkcount' => Session::get('countcart'),
+            );
+    
+    
+            return  json_encode($data);
+        }else{
+            return 1;
+        }
+       
+      
+
+    }
+
+    public function countup(Request $request){
+        // dd(Session::all());
+        Tb_cart::where('cart_id',$request->k)->increment('count', 1);
+        if(Session::get('cartid')!= null){
+            $count =  Session::get('countcart')+1;
+            Session::put('countcart',$count);
+
+            $sum =  Session::get('totalcart')+$request->p;
+            Session::put('totalcart',$sum);
+            $data = array(
+                'sum' => number_format( Session::get('totalcart')),
+                'chkcount' => Session::get('countcart'),
+            );
+
+
+            return  json_encode($data);
+        }else{
+            return 1;
+        }
+
+        
     }
     
 }

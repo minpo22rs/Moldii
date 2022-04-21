@@ -2,7 +2,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
+        <ion-icon name="arrow-back-outline" onclick="window.location.replace('profile/setting')"></ion-icon>
     </div>
     <div class="pageTitle">
         ที่อยู่ของฉัน

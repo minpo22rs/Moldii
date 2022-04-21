@@ -58,7 +58,8 @@
                     </div>
                 </div>
                 <div class="card-body p-2">
-                    <a href="{{url('content/'.$item->new_id.'')}}"><p class="card-text">{{substr($item->new_title,0,80)}}</p></a>
+                    <a href="{{url('content/'.$item->new_id.'')}}"><p class="card-text">{{$item->new_title}}</p></a>
+                    {{-- <a href="{{url('content/'.$item->new_id.'')}}"><p class="card-text">{{substr($item->new_title,0,80)}}</p></a> --}}
 
                 </div>
                 {{-- <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"> --}}

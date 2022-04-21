@@ -24,7 +24,7 @@
 
         @foreach($mycart as $key => $mycarts)
             <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
-                    $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->get(); 
+                    $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
             ?>
             <div class="row p-1 border-top " style="color:black; font-size:18px; height:43px;">
                 <div class="col-8 mx-0 align-self-center row">
@@ -46,7 +46,17 @@
 
                 <!-- -->
                 @foreach($cartt as $cartts)
-                    <?php $product = DB::Table('tb_products')->where('product_id',$cartts->product_id)->first();  ?>
+                    <?php   $product = DB::Table('tb_products')->where('product_id',$cartts->product_id)->first();
+                            $p = 0;
+                            if($product->product_discount != null){
+                                $p =$product->product_discount;
+
+                            }else{
+                                $p = $product->product_price;
+
+                            }
+                    
+                    ?>
                     <div class=" px-2 py-3 pl-0 pb-0 border-top border-bottom text-right product-cart">
                         <div class="col-12 row p-0 m-0 ">
                             <div class=" row ml-1">
@@ -70,13 +80,13 @@
                                             <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿{{number_format($product->product_price)}}</s> </h5>
                                             <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_discount)}}</h5>
                                         @else
-                                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price)}}</h5>
+                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price)}}</h5>
                                         @endif
                                     </div>
                                     <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">
-                                        <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
-                                        <input type="text" class="form-control font-weight-bold "value="{{$cartts->count}}" readonly style="border:none;" />
-                                        <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
+                                        <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle" onclick="countdown({{$p}},{{$cartts->cart_id}});"></i></a>
+                                        <input type="text" class="form-control font-weight-bold "value="{{$cartts->count}}" id="countupdown{{$cartts->cart_id}}" readonly style="border:none;"  />
+                                        <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle " onclick="countup({{$p}},{{$cartts->cart_id}});"></i></a>
                                     </div>
                                 </div>
 
@@ -174,9 +184,71 @@
         }
     }
 
+
+    function countdown(p,k){
+        var v = document.getElementById('countupdown'+k).value;
+        var s = "{{Session::get('cartid')}}";
+        
+        var cv = v-1;
+        
+        
+        if(cv > 0){
+            console.log(v);
+            console.log(cv);
+            $.ajax({
+                url: '{{ url("countdown")}}',
+                type: 'GET',
+                dataType: 'HTML',
+                data: {'p':p,'s':s,'k':k},
+                success: function(data) {
+                    if(data != 1){
+                        var t  = JSON.parse(data);
+        
+                        $('#chkout').html(t['sum']);
+                        $('#chkcount').html(t['chkcount']);
+                    }
+                    
+                
+                }
+            });
+        }
+
+       
+
+        
+        
+        
+    }
+
+    function countup(p,k){
+        var v = document.getElementById('countupdown'+k).value;
+        var s = "{{Session::get('cartid')}}";
+      
+        
+            console.log(v);
+            $.ajax({
+                url: '{{ url("countup")}}',
+                type: 'GET',
+                dataType: 'HTML',
+                data: {'p':p,'s':s,'k':k},
+                success: function(data) {
+                    if(data != 1){
+                        var t  = JSON.parse(data);
+        
+                        $('#chkout').html(t['sum']);
+                        $('#chkcount').html(t['chkcount']);
+                    }
+                    
+                }
+            });
+        
+    }
+
       
     function selectbox(v,s){  
-        var  chkdels = 0;
+        var chkdels = 0;
+        
+
         if ($('input.checkbox_check'+v).is(':checked')) {
     
             var ele=document.getElementsByName('check-list'+v+'[]');  

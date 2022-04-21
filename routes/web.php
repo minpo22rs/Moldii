@@ -65,6 +65,8 @@ Route::get('getZipcode',[UserAccController::class, 'getZipcode']);//
 
 Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
 Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
+Route::get('user/saveCreditCardonProfile', [UserAccController::class, 'saveCreditCardonProfile']);// การเพิ่มบัตร
+
 
 Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
 Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
@@ -126,6 +128,8 @@ Route::get('calcartid', [CartController::class, 'calcartid']);
 Route::get('calcartall', [CartController::class, 'calcartall']); 
 Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkoutaddress']); 
 Route::get('delcartid', [CartController::class, 'delcartid']); 
+Route::get('countdown', [CartController::class, 'countdown']); 
+Route::get('countup', [CartController::class, 'countup']); 
 
 
 

@@ -9,6 +9,7 @@ use Session;
 use App\Models\Tb_address;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
+use App\Models\Tb_credit;
 
 class UserAccController extends Controller
 {
@@ -195,11 +196,37 @@ class UserAccController extends Controller
 
 
     public function creditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
-        return view('mobile.member.userAccount.credit_card.creditCard');
+        $on = Tb_credit::where('customer_id',Session::get('cid'))->where('status_credit','=','on')->first();
+        $off = Tb_credit::where('customer_id',Session::get('cid'))->where('status_credit','=','off')->get();
+        return view('mobile.member.userAccount.credit_card.creditCard')->with(['on'=>$on,'off'=>$off]);
 
     }
     public function addCreditCard(){// การเพิ่มบัตร
         return view('mobile.member.userAccount.credit_card.addCreditCard');
+
+    }
+
+
+    public function saveCreditCardonProfile(){// การบันทึกบัตร
+
+        $a = new Tb_credit();
+        $a->customer_id  =  Session::get('cid');
+        $a->typecard  =  $request->typecard;
+        $a->number  =  $request->no;
+        $a->holder  =  $request->name;
+        $a->expirem  =  $request->expirem;
+        $a->expirey  =  $request->expirey;
+        $a->ccv  =  $request->ccv;
+        if(isset($request->nickname)){
+            $a->nickname  =  $request->nickname;
+
+        }
+        if(isset($request->chk)){
+            $a->status_credit  =  $request->chk;
+
+        }
+        $a->save();
+        return redirect('user/creditCard');
 
     }
 

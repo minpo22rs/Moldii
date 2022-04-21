@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->leftJoin('tb_merchants','tb_order_details.customer_id','=','tb_merchants.merchant_id')
             ->get();
         Session::put('totalcart',0);
         Session::put('countcart',0);

@@ -143,7 +143,7 @@ $("body").on("click", ".stepper-up", function() {
 });
 $("body").on("click", ".stepper-down", function() {
     var valueInput = $(this).parent(".stepper").children(".form-control");
-    if (parseInt(valueInput.val()) < 1) {} else {
+    if (parseInt(valueInput.val()) < 2) {} else {
         valueInput.val(parseInt(valueInput.val()) - 1);
     }
 });

@@ -121,3 +121,9 @@
 
 </div>
 @endsection
+
+@section('custom_script')
+<script>
+    bottom_now(3);
+</script>
+@endsection
