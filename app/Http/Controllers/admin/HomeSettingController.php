@@ -73,6 +73,7 @@ class HomeSettingController extends Controller
             DB::commit();
             return redirect('admin/banner')->with('success', 'Successful');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
             return redirect('admin/banner')->withError('Something Wrong! New Banner can not Updated.');
         }
