@@ -97,8 +97,8 @@
                             </td>
                             <td class="text-center text-middle">
                                 <span style="color: #2ed8b6;">Price: </span>{{$item->product_price}} ฿<br>
-                                <span style="color: #FF5370;">BPoint:</span> {{$item->product_bpoint}} BP. <br>
-                                <span style="color: #FFB64D;">GPoint:</span> {{$item->product_gpoint}} GP.
+                                <span style="color: #FF5370;">GPoint:</span> {{$item->product_gpoint}} BP. <br>
+                                <span style="color: #FFB64D;">Discount:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
                             </td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
                             <td class="text-center text-middle">
@@ -244,6 +244,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tags</label>
                         <div class="col-sm-10">

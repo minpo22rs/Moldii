@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <a href="{{url("admin/index")}}">
-                            <img class="img-fluid" src="{{asset('storage/app/logo/moldii.png')}}" alt="Theme-Logo" />
+                            <img class="img-fluid" src="{{asset('storage/app/logo/Moldii.png')}}" alt="Theme-Logo" style="width: 27% !important"  />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>

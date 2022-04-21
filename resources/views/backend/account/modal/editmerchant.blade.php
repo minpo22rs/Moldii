@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Verified</label>
                         <div class="col-sm-10">
                             <div class="row m-l-10">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
                         <div class="col-sm-10">

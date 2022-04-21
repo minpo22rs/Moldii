@@ -23,9 +23,11 @@ class ProductController extends Controller
     {
         $category = category::all();
         $product = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->get();
+        $s = DB::Table('tb_shipping_companys')->get();
         $data = array(
             'category' => $category, 
             'product' => $product, 
+            's' => $s, 
         );
         return view('merchant.product.product', $data);
     }
@@ -48,8 +50,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
 
-    
         DB::beginTransaction();
 
         
@@ -84,7 +86,15 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+           
 
+            foreach ($request->ship as $key => $value) {
+              
+                DB::Table('tb_product_shippings')->insert(['id_company'=>$key,'id_product'=>$product->product_id,'cost'=>$value[0]]);
+                
+            }
+
+            
             if ($request->file('files') !== null)
             {
                 $img = $request->file('files');
@@ -120,6 +130,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect('merchant/product')->with('success', 'Successful');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
             return redirect('merchant/product')->withError('Something Wrong! New Product can not Saved.');
         }
@@ -145,7 +156,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::findOrFail($id);
-        $data = array('product' => $product, );
+        $s = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
+        $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
+        // dd($img);
+        $data = array('product' => $product,'s'=>$s,'img'=>$img );
         return view('merchant.product.modal.edit_product', $data);
     }
 
@@ -158,6 +172,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $product = product::findOrFail($id);
@@ -178,7 +194,38 @@ class ProductController extends Controller
                 }
             }
             $product->save();
-            
+
+            if(isset($request->ship)){
+                foreach ($request->ship as $key => $value) {
+                    DB::Table('tb_product_shippings')->where('id_company',$key)->where('id_product',$product->product_id)->update(['cost'=>$value[0]]);
+                }
+            }
+
+            if($request->deletedkey != null){
+                $imgcover = DB::Table('tb_product_imgs')->whereIn('product_img_id',$request->deletedkey)->get();
+
+                foreach($imgcover as $key => $item) {
+                    unlink('storage/app/product_img/'.$item->img_name);
+                }
+                
+                DB::Table('tb_product_imgs')->whereIn('product_img_id',$request->deletedkey)->delete();
+
+            }
+
+            if ($request->file('sub_gallery') !== null)
+            {
+                $img = $request->file('sub_gallery');
+                foreach($img as $key => $item) {
+                    $image = new product_img();
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('product_img',  $name);
+                    $image->product_id  = $product->product_id;
+                    $image->img_name  = $name;
+                    $image->save();
+                }
+            }
+
+
             if ($request->edit_option != null) {
                 foreach ($request->edit_option as $key => $item) {
                     $option = new Option();

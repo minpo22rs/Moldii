@@ -14,8 +14,8 @@
     <meta name="theme-color" content="#11c788">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Gradient Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="description" content="Moldii" />
+    <meta name="keywords" content="Moldii" />
     <meta name="author" content="codedthemes" />
     <!-- Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <a href="{{url("merchant/index")}}">
-                            <img class="img-fluid" src="{{asset('storage/app/logo/moldii_merchant.png')}}" alt="Theme-Logo" />
+                            <img class="img-fluid" src="{{asset('storage/app/logo/Moldii.png')}}" alt="Theme-Logo" style="width: 27% !important" />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>

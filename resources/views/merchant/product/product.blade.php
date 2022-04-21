@@ -1,6 +1,4 @@
 @extends('merchant.layouts.master')
-<link href="../files/assets/pages/jquery.filer/css/jquery.filer.css" type="text/css" rel="stylesheet" />
-<link href="../files/assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
 
 @section('css')
 <style>
@@ -130,7 +128,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="file" name="cover[]" style="display: none;" id="adddocument">
+                                    <input type="file" name="cover[]" style="display: none;" id="adddocument" required>
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
                                         <i class="icofont icofont-image"></i> Add Cover</button> 
                                 </div>
@@ -142,7 +140,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Name...">
+                                    <input type="text" name="name" class="form-control" placeholder="Name..." required>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +150,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Description..."></textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Description..." required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -162,8 +160,8 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <select class="form-control" name="category_id">
-                                        <option value="'">Select Category</option>
+                                    <select class="form-control" name="category_id" required>
+                                        <option value="">Select Category</option>
                                         @foreach($category as $cats)
                                             <option value="{{$cats->cat_id}}">{{$cats->cat_name}}</option>
                                         @endforeach
@@ -205,7 +203,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount">
+                                    <input type="number" name="amount" class="form-control" placeholder="Amount" required>
                                 </div>
                             </div>
                         </div>
@@ -231,14 +229,41 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price...">
+                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price..." required>
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint...">
+                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint..." required>
                                 </div>
                                 <div class="col-4">
                                     <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            Shipping cost</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-4">
+                                        <label class="col-sm-2 col-form-label">{{$sc->name_company}}</label>
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-4">
+                                        <input type="number" name="ship[{{$sc->id_shipping_company}}][]" class="form-control" placeholder="{{$sc->name_company}}..." required>
+                                    </div>
+                                @endforeach
+                               
                             </div>
                         </div>
                     </div>
@@ -275,7 +300,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Image Gallery</label>
                         <div class="col-sm-7">
-                            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
                         </div>                
                     </div>
                    
@@ -297,7 +322,7 @@
 </form>
 @endsection
 @section('js')
-<!-- jquery file upload js -->
+
 
 @include('flash-message')
 <script>

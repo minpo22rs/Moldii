@@ -78,7 +78,6 @@ class ProductController extends Controller
 
 
             $product->save();
-
             if ($request->file('files') !== null)
             {
                 $img = $request->file('files');
@@ -147,7 +146,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::findOrFail($id);
-        $data = array('product' => $product, );
+        $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
+        $data = array('product' => $product,'img'=>$img );
         return view('backend.product.modal.edit_product', $data);
     }
 
@@ -181,6 +181,32 @@ class ProductController extends Controller
             }
             $product->save();
             
+
+            if($request->deletedkey != null){
+                $imgcover = DB::Table('tb_product_imgs')->whereIn('product_img_id',$request->deletedkey)->get();
+
+                foreach($imgcover as $key => $item) {
+                    unlink('storage/app/product_img/'.$item->img_name);
+                }
+                
+                DB::Table('tb_product_imgs')->whereIn('product_img_id',$request->deletedkey)->delete();
+
+            }
+
+            if ($request->file('sub_gallery') !== null)
+            {
+                $img = $request->file('sub_gallery');
+                foreach($img as $key => $item) {
+                    $image = new product_img();
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('product_img',  $name);
+                    $image->product_id  = $product->product_id;
+                    $image->img_name  = $name;
+                    $image->save();
+                }
+            }
+
+
             if ($request->edit_option != null) {
                 foreach ($request->edit_option as $key => $item) {
                     $option = new Option();
