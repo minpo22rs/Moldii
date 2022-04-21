@@ -27,8 +27,8 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="file" name="cover[]" style="display: none;" id="adddocument">
-                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
+                                    <input type="file" name="cover[]" style="display: none;" id="adddocument{{$product->product_id}}">
+                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument'+{{$product->product_id}}).click();">
                                         <i class="icofont icofont-image"></i> Add Cover</button> 
                                 </div>
                                 <div class="col-6">

@@ -29,6 +29,7 @@ class ProductController extends Controller
             'product' => $product, 
             's' => $s, 
         );
+        // dd($s);
         return view('merchant.product.product', $data);
     }
 
@@ -158,7 +159,7 @@ class ProductController extends Controller
         $product = product::findOrFail($id);
         $s = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
         $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
-        // dd($img);
+        
         $data = array('product' => $product,'s'=>$s,'img'=>$img );
         return view('merchant.product.modal.edit_product', $data);
     }
