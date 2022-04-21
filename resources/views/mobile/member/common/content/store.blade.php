@@ -38,7 +38,7 @@
 @section('content')
     <div class="container p-1 my-3">
 
-        <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">
+        <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}"  alt="alt">
         <div class="col-12 p-2 row justify-content-center m-0">
             @foreach($cat as $cats)
                 <div class="col-3 p-1 text-center ">

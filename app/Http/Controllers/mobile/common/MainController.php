@@ -18,8 +18,9 @@ class MainController extends Controller
         $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
         $pro = DB::Table('tb_products')->get();
         $group = DB::Table('tb_familys')->get();
+        $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
 
-        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group]);
+        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban]);
     }
     
 }
