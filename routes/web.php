@@ -102,6 +102,7 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
 
     // order
     Route::resource('ordermerchant', 'OrderMerchantController');
+    Route::get('createbooking/{id}', 'OrderMerchantController@createbooking');
 });
 
 

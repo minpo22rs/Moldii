@@ -65,7 +65,7 @@
                             <th style="text-align: center;">#</th>
                             <th style="text-align: center;">image</th>
                             <th style="text-align: center;">Name</th>
-                            <th style="text-align: center;">Description</th>
+                            {{-- <th style="text-align: center;">Description</th> --}}
                             <th style="text-align: center;">Price</th>
                             <th style="text-align: center;">Amount</th>
                             <th style="text-align: center;">Management</th>
@@ -79,7 +79,7 @@
                                 <img src="{{asset('storage/app/product_cover/'.$item->product_img.'')}}" class="img-fluid" width="100" height="100">
                             </td>
                             <td class="text-center text-middle">{{$item->product_name}}</td>
-                            <td>{{ Str::limit($item->product_description, 50) }}</td>
+                            {{-- <td class="text-center text-middle">{{ Str::limit($item->product_description, 50) }}</td> --}}
                             <td class="text-center text-middle">{{$item->product_price}} ฿</td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
                             <td class="text-center text-middle">

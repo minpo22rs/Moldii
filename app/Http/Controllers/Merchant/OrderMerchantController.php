@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\merchant;
 
 use App\Http\Controllers\Controller;
-use App\Orders;
+use App\Models\Orders;
+use App\Models\Merchant;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+
 
 class OrderMerchantController extends Controller
 {
@@ -22,7 +24,146 @@ class OrderMerchantController extends Controller
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
             ->get();
-        return view('merchant.order.order')->with(['sql'=>$sql]);
+        $pluck = $sql->pluck('order_id');
+        $num = Orders::whereIn('id_order',$pluck)
+                        ->leftJoin('tb_customers','tb_orders.customer_id','=','tb_customers.customer_id')
+                        ->get();
+        // dd($num);
+        return view('merchant.order.order')->with(['num'=>$num]);
+    }
+
+
+    
+    public function createbooking($id){
+        $sql = Orders::leftJoin('districts', 'tb_orders.order_tumbon', '=', 'districts.id')
+                        ->leftJoin('amphures', 'tb_orders.order_district', '=', 'amphures.id')
+                        ->leftJoin('provinces', 'tb_orders.order_province', '=', 'provinces.id')
+                        ->leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
+                        ->select('tb_customers.customer_name','tb_customers.customer_lname'
+                        ,'tb_orders.order_phone','tb_orders.order_address','tb_orders.order_postcode'
+                        ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                        ->where('id_order',$id)->first();
+        $sqlsel = Merchant::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->first();
+        $province = DB::Table('provinces')->where('id',$sqlsel->merchant_province)->first();
+        $tumbon = DB::Table('districts')->where('id',$sqlsel->merchant_tumbon)->first();
+        $amphure = DB::Table('amphures')->where('id',$sqlsel->merchant_district)->first();
+        // dd($sql);
+
+
+        // district == tumbon 
+        // state == amphure
+
+
+        $url = 'https://mkpservice.shippop.dev/booking/'; 
+        $from = array (
+            "name"=> $sqlsel->merchant_name.$sqlsel->merchant_lname,
+            "address"=> $sqlsel->merchant_address,
+            "district"=> $tumbon->name_th,
+            "state"=> $amphure->name_th,
+            "province"=>$province->name_th,
+            "postcode"=> $sqlsel->merchant_postcode,
+            "tel"=> $sqlsel->merchant_phone
+        );
+
+        $to = array (
+            "name"=> $sql->customer_name.$sql->customer_lname,
+            "address"=> $sql->order_address,
+            "district"=> $sql->tth,
+            "state"=> $sql->ath,
+            "province"=> $sql->pth,
+            "postcode"=> $sql->order_postcode,
+            "tel"=> $sql->order_phone
+        );
+
+        $parcel = array (
+            "name"=> "-",
+            "weight"=> "1",
+            "width"=> "1",
+            "length"=> "1",
+            "height"=> "1"
+        );
+
+        $arraysum = array(
+            "from" => $from,
+            "to" => $to,
+            "parcel" => $parcel,
+            "courier_code" => "FLE",
+
+        );
+        
+        $datasend = array(
+            'api_key' => "dv0b807c69926747664783d53c9de9bf0e65391dce97a3c4a24a0b689ccf0728449668c9318667fc2c1638935079",
+            'email' => "sapappsth.biz@gmail.com",
+            "data" => array($arraysum),
+        );
+
+        // dd($datasend);
+        
+        try{
+	        $datasend = http_build_query($datasend);
+
+            $ch = curl_init();
+            curl_setopt( $ch, CURLOPT_URL, $url );
+            curl_setopt( $ch, CURLOPT_POSTFIELDS, $datasend );
+            curl_setopt( $ch, CURLOPT_POST, true );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true);
+            $content = curl_exec( $ch );
+            curl_close($ch);
+            $json = json_decode($content);
+            $jsondata = (array)$json->data;
+            // dd($jsondata['0']->tracking_code);
+            if($json->status === 'false'){
+                // dd('whattttttt');
+                Orders::where('id_order',$id)->update(['status_order'=>'4']);
+                return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
+
+
+            }else{
+                // dd('ok');
+                Orders::where('id_order',$id)->update(['purchase_id'=>$json->purchase_id]);
+                self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$id);
+                // Toastr::success('Successfully.');
+                // return back();
+
+
+            }
+            
+        }catch(Exception $ex){
+        
+            echo $ex;
+        }
+
+    }
+
+    public function confirm( $purchase_id ,$tracking_code,$id) {
+        $post_data = array(
+            'api_key'=>'dv0b807c69926747664783d53c9de9bf0e65391dce97a3c4a24a0b689ccf0728449668c9318667fc2c1638935079',
+            'purchase_id' => $purchase_id
+        );
+        $post_data = http_build_query($post_data);
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL, 'https://mkpservice.shippop.dev/confirm/');
+  
+        curl_setopt($curl,CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $jsonres = json_decode($result);
+        
+        if($jsonres->status === 'false'){
+            Orders::where('id_order',$id)->update(['status_order'=>'4']);
+            // Toastr::warning('Unsuccessfully confirm, please try again.');
+            return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
+
+        }else{
+
+            Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
+            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code]);
+            // Toastr::success('Created successfully.');
+            return redirect('merchant/ordermerchant')->with('success','successfully');
+
+        }
+          
     }
 
     /**
