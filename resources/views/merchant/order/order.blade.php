@@ -72,15 +72,20 @@
                                     <td style="text-align: center;">@foreach ($sql as $sqls){{$sqls->amount}}<br><br>@endforeach</td>
                                     <td style="text-align: center;color:green">
                                         @foreach ($sql as $sqls)
-                                            @if($sqls->tracking_code)
-                                                {{$sqls->tracking_code}}<br><br>
-                                            @else
-                                                 No Tracking<br><br>
-                                            @endif
+                                            {{$sqls->tracking_code==null?'No Tracking':$sqls->tracking_code}}<br><br>
                                         @endforeach
                                     </td>
                                    
-                                    <td style="text-align: center;">{{$nums->status_order==1?'Waiting for payment':'Paid'}}</td>
+                                    <td style="text-align: center;">
+                                        @if($nums->status_order==1)
+                                            Waiting for payment
+                                        @elseif($nums->status_order==2)
+                                            Paid
+                                        @else
+                                            Delivery
+                                        @endif
+                                    
+                                    </td>
                                     
 
                                     <td style="text-align: center;">
