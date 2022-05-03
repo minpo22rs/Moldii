@@ -60,6 +60,172 @@
                 </li>
             </ul>
         </div>
+
+
+        <form action="{{url('merchant/updateprofile')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal" tabindex="-1" role="dialog" id="edit-Modal">
+                        <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h5 class="modal-title">Edit Profile</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        
+                                                        <div class="view-info">
+                                                                <div class="row">
+                                                                <div class="col-lg-12">
+                                                                        <div class="general-info">
+                                                                        <div class="row">
+
+                                                                                <div class="col-lg-12 col-xl-12">
+                                                                                        <div class="table-responsive">
+                                                                                        <table class="table">
+                                                                                                <tbody>
+                                                                                                
+                                                                                                <tr>
+                                                                                                        <th scope="row">Cover Image Size: 357 x 357 px. *</th>
+                                                                                                        <td><input type="file" name="cover[]" id="filer_input" ></td>
+                                                                                                </tr>
+                                                                                                
+                                                                                                </tbody>
+                                                                                        </table>
+                                                                                        </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-lg-12 col-xl-6">
+                                                                                <div class="table-responsive">
+                                                                                        <table class="table m-0">
+                                                                                        <tbody>
+                                                                                                <tr>
+                                                                                                        <th>Shop Name *</th>
+                                                                                                        <td><input type="text" class="form-control" name="sname" value="{{$merchant->merchant_shopname}}" required></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                        <th>First Name *</th>
+                                                                                                        <td><input type="text" class="form-control" name="fname" value="{{$merchant->merchant_name}}" required></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                        <th>Last Name *</th>
+                                                                                                        <td><input type="text" class="form-control" name="lname" value="{{$merchant->merchant_lname}}" required></td>
+                                                                                                </tr>
+                                                                                                
+                                                                                                
+                                                                                        </tbody>
+                                                                                        </table>
+                                                                                </div>
+                                                                                </div>
+                                                                                <!-- end of table col-lg-6 -->
+                                                                                <div class="col-lg-12 col-xl-6">
+                                                                                        <div class="table-responsive">
+                                                                                                <table class="table">
+                                                                                                <tbody>
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Email *</th>
+                                                                                                                <td><input type="email" class="form-control" name="email" value="{{$merchant->merchant_email}}" required></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Mobile Number *</th>
+                                                                                                                <td><input type="text" class="form-control" name="phone" value="{{$merchant->merchant_phone}}" required></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Address *</th>
+                                                                                                                <td><textarea rows="5" cols="20" class="form-control" name="address" required>{{$merchant->merchant_address}}</textarea></td>
+                                                                                                        </tr>
+                                                                                                </tbody>
+                                                                                                </table>
+                                                                                        </div>
+                                                                                </div>
+
+                                                                                <div class="col-lg-12 col-xl-6">
+                                                                                        <div class="table-responsive">
+                                                                                        <table class="table">
+                                                                                                <tbody>
+                                                                                                
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Province *</th>
+                                                                                                                <td>    <select name="province" class="form-control" onchange="getAmphure(this.value)" required>
+                                                                                                                                <option value=""> กรุณาเลือกจังหวัด</option>
+                                                                                                                                @foreach($province as $provinces)
+                                                                                                                                        <option value="{{$provinces->id}}" {{$merchant->merchant_province==$provinces->id?'selected':''}}> {{$provinces->name_th}}</option>
+
+                                                                                                                                @endforeach
+                                                                                                                        </select>
+                                                                                                                </td>
+                                                                                                        </tr>
+
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Sub District *</th>
+                                                                                                                <td> 
+                                                                                                                        <select name="tumbon" class="form-control" id="tumbon" onchange="getZipcode(this.value)" required>
+                                                                                                                                <option value="">กรุณาเลือกแขวง/ตำบล</option>
+                                                                                                                                @foreach($tumbon as $tumbons)
+                                                                                                                                        <option value="{{$tumbons->id}}" {{$merchant->merchant_tumbon==$tumbons->id?'selected':''}}> {{$tumbons->name_th}}</option>
+
+                                                                                                                                @endforeach
+                                                                                                                        </select>
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                        
+                                                                                                </tbody>
+                                                                                        </table>
+                                                                                        </div>
+                                                                                </div>
+
+                                                                                <div class="col-lg-12 col-xl-6">
+                                                                                        <div class="table-responsive">
+                                                                                        <table class="table">
+                                                                                                <tbody>
+                                                                                                
+                                                                                                        <tr> 
+                                                                                                                <th scope="row">District *</th>
+                                                                                                                <td>
+                                                                                                                        <select name="amphure" class="form-control" id="amphure" onchange="getSubDistrict(this.value)" required>
+                                                                                                                                <option value="">กรุณาเลือกเขต/อำเภอ</option>
+                                                                                                                                @foreach($amphure as $amphuress)
+                                                                                                                                        <option value="{{$amphuress->id}}" {{$merchant->merchant_district==$amphuress->id?'selected':''}}> {{$amphuress->name_th}}</option>
+
+                                                                                                                                @endforeach
+                                                                                                                        </select>
+                                                                                                                </td>
+                                                                                                        </tr>
+
+                                                                                                        <tr>
+                                                                                                                <th scope="row">Postcode</th>
+                                                                                                                <td><input type="text" name="postcode" class="form-control" value="{{$merchant->merchant_postcode}}" id='zip_code' readonly ></td>
+                                                                                                        </tr>
+                                                                                                </tbody>
+                                                                                        </table>
+                                                                                        </div>
+                                                                                </div>
+                                                                               
+
+                                                                                <!-- end of table col-lg-6 -->
+                                                                        </div>
+                                                                        <!-- end of row -->
+                                                                        </div>
+                                                                        <!-- end of general info -->
+                                                                </div>
+                                                                <!-- end of col-lg-12 -->
+                                                                </div>
+                                                                <!-- end of row -->
+                                                        </div>
+                                                
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </form>
+
+
         <!-- tab header end -->
         <!-- tab content start -->
         <div class="tab-content">
@@ -69,9 +235,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-header-text">About Me</h5>
-                        <button id="edit-btn" type="button"
+                        <button id="edit-btn" type="button" data-toggle="modal" data-target="#edit-Modal"
                             class="btn btn-sm btn-primary waves-effect waves-light f-right">
-                            <i class="icofont icofont-edit"></i>
+                            <i class="icofont icofont-edit" ></i>
                         </button>
                     </div>
                     <div class="card-block">
@@ -84,18 +250,19 @@
                                                 <div class="table-responsive">
                                                     <table class="table m-0">
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">Full Name</th>
-                                                                <td>{{$merchant->merchant_name}} {{$merchant->merchant_lname}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Gender</th>
-                                                                <td>Female</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Birth Date</th>
-                                                                <td>October 25th, 1990</td>
-                                                            </tr>
+                                                                <tr>
+                                                                        <th scope="row">Shop Name</th>
+                                                                        <td> {{$merchant->merchant_shopname}}</td>
+                                                                        </tr>
+                                                                <tr>
+                                                                        <th scope="row">First Name</th>
+                                                                        <td>{{$merchant->merchant_name}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <th scope="row">Last Name</th>
+                                                                        <td> {{$merchant->merchant_lname}}</td>
+                                                                </tr>
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -111,11 +278,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Mobile Number</th>
-                                                                <td>(0123) - 4567891</td>
+                                                                <td>{{$merchant->merchant_phone}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Address</th>
-                                                                <td></td>
+                                                                <td>{{$merchant->merchant_address}}<br> {{$merchant->tth}} 
+                                                                {{$merchant->ath}} <br>{{$merchant->pth}} {{$merchant->merchant_postcode}}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -2241,5 +2409,51 @@
 @endsection
 @section('js')
 @include('flash-message')
+<script>
+        function getAmphure(v){
+        $.ajax({
+            url: '{{ url("merchant/getAmphure")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#amphure').html(data);
+               
+            }
+        });
 
+    }
+
+    function getSubDistrict(v){
+        $.ajax({
+            url: '{{ url("merchant/getSubDistrict")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#tumbon').html(data);
+               
+            }
+        });
+
+    }
+
+
+    function getZipcode(v){
+        $.ajax({
+            url: '{{ url("merchant/getZipcode")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+                document.getElementById('zip_code').value = data;
+                // $('#zip_code').value(data);data
+               
+            }
+        });
+
+    }
+</script>
 @endsection

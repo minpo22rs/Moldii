@@ -46,6 +46,7 @@
                             <th style="text-align: center;">Amount</th>
                             <th style="text-align: center;">Tracking Code</th>
                             <th style="text-align: center;">Status Payment</th>
+                            <th style="text-align: center;">Status Order</th>
                             <th style="text-align: center;">Management</th>
                         </tr>
                     </thead>
@@ -82,7 +83,18 @@
                                         @elseif($nums->status_order==2)
                                             Paid
                                         @else
+                                            -
+                                        @endif
+                                    
+                                    </td>
+
+                                    <td style="text-align: center;">
+                                        @if($nums->status_order==3)
                                             Delivery
+                                        @elseif($nums->status_order==4)
+                                           Cancel Order
+                                        @else
+                                            Pending
                                         @endif
                                     
                                     </td>
@@ -112,11 +124,28 @@
                                                             <i class="fa fa-edit"></i> จัดส่งออเดอร์
                                                         </a>
                                                 @endif
-                                                <a href="#" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
-                                                {{-- <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$nums->id_order}})"><i class="icofont icofont-speech-comments"></i> View Detail</a> --}}
+                                                <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a href="#" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-bin"></i> ยกเลิกออเดอร์</a>
-                                                {{-- <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$nums->id_order}})"><i class="icofont icofont-bin"></i> ยกเลิกออเดอร์</a> --}}
+                                                @if($nums->status_order!=4)
+                                                    <a  href="javascript:"
+                                                        onclick="Swal.fire({
+                                                        title: 'ยืนยันการยกเลิกออเดอร์ใช่หรือไม่',
+                                                        showDenyButton: true,
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#377dff',
+                                                        cancelButtonColor: '#363636',
+                                                        confirmButtonText: `Yes`,
+                                                        denyButtonText: `No`,
+                                                        }).then((result) => {
+                                                            if (result.value) {
+                                                                location.href='{{url('merchant/cancelorder',$nums->id_order)}}';
+                                                            } else{
+                                                                Swal.fire('Canceled', '', 'info')
+                                                            }
+                                                        })"  class="dropdown-item waves-light waves-effect" >
+                                                        <i class="icofont icofont-bin"></i> ยกเลิกออเดอร์
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

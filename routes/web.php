@@ -86,6 +86,10 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     //merchant
     Route::get('index', 'DashboardController@index')->name('merchantindex');
     Route::get('profile', 'MerchantController@index');
+    Route::post('updateprofile', 'MerchantController@updateprofile');
+    Route::get('getAmphure','MerchantController@getAmphure');//
+    Route::get('getSubDistrict','MerchantController@getSubDistrict');//
+    Route::get('getZipcode','MerchantController@getZipcode');//
 
     // event
     Route::resource('event', 'EventController');
@@ -102,6 +106,8 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
 
     // order
     Route::resource('ordermerchant', 'OrderMerchantController');
+    Route::get('orderdetail/{id}', 'OrderMerchantController@orderdetail');
+    Route::get('cancelorder/{id}', 'OrderMerchantController@cancelorder');
     Route::get('createbooking/{id}', 'OrderMerchantController@createbooking');
 });
 

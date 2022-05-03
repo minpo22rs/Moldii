@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Merchant;
+use DB;
 
 class MerchantController extends Controller
 {
@@ -16,9 +17,58 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        $merchant = Merchant::findOrFail(Auth::guard('merchant')->user()->merchant_id);
-        $data = array('merchant' => $merchant, );
+        $merchant = Merchant::leftJoin('districts', 'tb_merchants.merchant_tumbon', '=', 'districts.id')
+                            ->leftJoin('amphures', 'tb_merchants.merchant_district', '=', 'amphures.id')
+                            ->leftJoin('provinces', 'tb_merchants.merchant_province', '=', 'provinces.id')
+                            ->select('tb_merchants.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                            ->where('merchant_id',Auth::guard('merchant')->user()->merchant_id)
+                            
+                            ->first();
+        $province = DB::Table('provinces')->get();
+        $tumbon = DB::Table('districts')->get();
+        $amphure = DB::Table('amphures')->get();                                    
+        $data = array('merchant' => $merchant,'province'=>$province,'tumbon'=>$tumbon,'amphure'=>$amphure );
         return view('merchant.account.profile', $data);
+    }
+
+
+
+    public function getAmphure(Request $request){
+        $merchant = Merchant::findOrFail(Auth::guard('merchant')->user()->merchant_id);
+
+        $amphures = DB::table('amphures')
+            ->where('province_id',$request->v)
+            ->get();
+        $html = '<option value="">กรุณาเลือกเขต/อำเภอ</option>';
+            foreach($amphures as $_amphures => $item){
+                $html .=  '<option value="'.$item->id.'" >'.$item->name_th.'</option>';
+            }
+        echo $html;
+    }
+
+    public function getSubDistrict(Request $request){
+        $merchant = Merchant::findOrFail(Auth::guard('merchant')->user()->merchant_id);
+
+        $districts = DB::table('districts')
+            ->where('amphure_id',$request->v)
+            ->get();
+        
+        $html = '<option value="">กรุณาเลือกแขวง/ตำบล</option>';
+        foreach($districts as $_districts => $item){
+            $html .=  '<option value="'.$item->id.'">'.$item->name_th.'</option>';
+        }
+        echo $html;
+    
+    }
+
+    public function getZipcode(Request $request){
+
+        $districts = DB::table('districts')
+            ->where('id',$request->v)
+            ->first();
+        // dd($districts );
+           
+        return $districts->zip_code;
     }
 
     /**
@@ -26,8 +76,41 @@ class MerchantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function updateprofile(Request $request)
     {
+        $merchant = Merchant::findOrFail(Auth::guard('merchant')->user()->merchant_id);
+        // $province = DB::Table('provinces')->where('id',$request->province)->first();
+        // $tumbon = DB::Table('districts')->where('id',$request->tumbon)->first();
+        // $amphure = DB::Table('amphures')->where('id',$request->amphure)->first();
+        // dd($request->all());
+        // if($request->tumbon){
+
+        // }
+
+
+        $merchant->merchant_shopname =  $request->sname;
+        $merchant->merchant_name =  $request->fname;
+        $merchant->merchant_lname =  $request->lname;
+        $merchant->merchant_email =  $request->email;
+        $merchant->merchant_phone =  $request->phone;
+        $merchant->merchant_address =  $request->address;
+        $merchant->merchant_tumbon =  $request->tumbon;
+        $merchant->merchant_district =  $request->amphure;
+        $merchant->merchant_province =  $request->province;
+        $merchant->merchant_postcode =  $request->postcode;
+        if ($request->file('cover') !== null)
+            {
+                $img = $request->file('cover');
+                foreach($img as $key => $item) {
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('merchant',  $name);
+                    $merchant->merchant_img  = $name;
+                }
+            }
+        $merchant->save();
+
+        return back()->with('success','อัพเดตข้อมูลเรียบร้อยแล้ว');
+
         //
     }
 

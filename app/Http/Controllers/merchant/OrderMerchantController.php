@@ -19,17 +19,29 @@ class OrderMerchantController extends Controller
      */
     public function index()
     {
-        $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)
-            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
-            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
-            ->get();
+        $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)->get();
         $pluck = $sql->pluck('order_id');
         $num = Orders::whereIn('id_order',$pluck)
                         ->leftJoin('tb_customers','tb_orders.customer_id','=','tb_customers.customer_id')
                         ->get();
-        // dd($num);
         return view('merchant.order.order')->with(['num'=>$num]);
+    }
+
+
+    public function orderdetail($id)
+    {
+        $order = DB::Table('tb_orders')->where('id_order',$id)
+            ->first();
+        $num = Orders::where('customer_id',$order->customer_id)->get();
+        return view('merchant.order.order-details')->with(['order'=>$order,'num'=>$num]);
+    }
+
+
+    public function cancelorder($id)
+    {
+        $order = DB::Table('tb_orders')->where('id_order',$id)->update(['status_order'=>4]);
+        
+        return back()->with('success','ยกเลิกออเดอร์เรียบร้อยแล้ว');
     }
 
 
@@ -114,7 +126,7 @@ class OrderMerchantController extends Controller
             // dd($jsondata['0']->tracking_code);
             if($json->status === 'false'){
                 // dd('whattttttt');
-                Orders::where('id_order',$id)->update(['status_order'=>'4']);
+                Orders::where('id_order',$id)->update(['status_order'=>'5']);
                 return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
 
@@ -151,7 +163,7 @@ class OrderMerchantController extends Controller
         $jsonres = json_decode($result);
         
         if($jsonres->status === 'false'){
-            Orders::where('id_order',$id)->update(['status_order'=>'4']);
+            Orders::where('id_order',$id)->update(['status_order'=>'5']);
             // Toastr::warning('Unsuccessfully confirm, please try again.');
             return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
