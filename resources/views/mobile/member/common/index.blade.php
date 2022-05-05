@@ -240,7 +240,9 @@ color: #666;
             <form id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
                 <div class="widget-post__content">
                     <label for="post-content" class="sr-only">Share</label>
-                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's wrong with r00tme?"></textarea>
+                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
+                        <video id="video" width="320" height="240" controls style="display: none;"></video>
+                    </textarea>
                 </div>
                 <div class="widget-post__options is--hidden" id="stock-options">
                 </div>
@@ -269,7 +271,7 @@ color: #666;
                     </div>
 
                     <div class="post-actions__widget">
-                        <button class="btn post-actions__publish">publish</button>
+                        <button class="btn post-actions__publish">Post</button>
                     </div>
                 </div>
             </form>
@@ -570,6 +572,16 @@ color: #666;
 
         </script>
         <script>
+
+            document.getElementById("upload-video").addEventListener("change", function() {
+                var media = URL.createObjectURL(this.files[0]);
+                var video = document.getElementById("video");
+                video.src = media;
+                video.style.display = "block";
+                video.play();
+            });
+
+
             var myInputimage = document.getElementById('upload-image');
             var myInputvideo = document.getElementById('upload-video');
 
