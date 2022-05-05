@@ -243,7 +243,7 @@ color: #666;
                     <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
                         
                     </textarea>
-                    <video id="video" width="320" height="240" controls style="display: none;"></video>
+                    
                 </div>
                 <div class="widget-post__options is--hidden" id="stock-options">
                 </div>
@@ -261,7 +261,7 @@ color: #666;
                             </label>
                         </button>
                         <input type="file" id="upload-video" name="video" accept="video/*;capture=camera">
-
+                        <video id="video" width="320" height="240" controls style="display: none;"></video>
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
                             <label for="upload-image" class="post-actions__label">
@@ -269,6 +269,7 @@ color: #666;
                             </label>
                         </button>
                         <input type="file" id="upload-image" name="img" accept="image/*;capture=camera">
+                        <img id="myImg" src="" alt="The Pulpit Rock" width="304" height="228" style="display: none;">
                     </div>
 
                     <div class="post-actions__widget">
@@ -588,7 +589,8 @@ color: #666;
 
             function sendPic() {
                 var file = myInputimage.files[0];
-
+                document.getElementById("myImg").style.display = "";
+                document.getElementById("myImg").src =myInputimage.files[0];
                 // Send file here either by adding it to a `FormData` object 
                 // and sending that via XHR, or by simply passing the file into 
                 // the `send` method of an XHR instance.
