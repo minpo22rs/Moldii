@@ -12,12 +12,12 @@
   <style>
       /* Import Google Font - Poppins */
       * {
-  box-sizing: border-box;
-}
-body {
-  padding: 0 1em;
-  font-family: sans-serif;
-}
+            box-sizing: border-box;
+        }
+        body {
+                padding: 0 1em;
+                font-family: sans-serif;
+        }
 
 
 /* * Post widget * */
@@ -180,34 +180,35 @@ ul {
           </h2>
         </div>
         <form id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
-          <div class="widget-post__content">
-            <label for="post-content" class="sr-only">Share</label>
-            <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's wrong with r00tme?"></textarea>
-          </div>
-          <div class="widget-post__options is--hidden" id="stock-options">
-          </div>
-          <div class="widget-post__actions post--actions">
-            <div class="post-actions__attachments">
-              <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
-                <i class="fa fa-usd" aria-hidden="true"></i>
-                stock
-              </button>
-              <button type="button" class="btn post-actions__upload attachments--btn">
-                <label for="upload-image" class="post-actions__label">
-                   <i class="fa fa-upload" aria-hidden="true"></i> 
-                  upload image
-                </label>
-              </button>
-              <input type="file" id="upload-image" accept="image/*" accept="image/*;capture=camera">
+            <div class="widget-post__content">
+                <label for="post-content" class="sr-only">Share</label>
+                <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's wrong with r00tme?"></textarea>
             </div>
-            <div class="post-actions__widget">
-              <button class="btn post-actions__publish">publish</button>
+            <div class="widget-post__options is--hidden" id="stock-options">
             </div>
-          </div>
+            <div class="widget-post__actions post--actions">
+                <div class="post-actions__attachments">
+                <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                    stock
+                </button>
+                <button type="button" class="btn post-actions__upload attachments--btn">
+                    <label for="upload-image" class="post-actions__label">
+                    <i class="fa fa-upload" aria-hidden="true"></i> 
+                    upload image
+                    </label>
+                </button>
+                <input type="file" id="upload-image" accept="image/*" accept="image/*;capture=camera">
+                </div>
+                <div class="post-actions__widget">
+                <button class="btn post-actions__publish">publish</button>
+                </div>
+            </div>
         </form>
+    </div>
   </body>
   <script>
-      var myInput = document.getElementById('upload-image');
+        var myInput = document.getElementById('upload-image');
 
         function sendPic() {
             var file = myInput.files[0];

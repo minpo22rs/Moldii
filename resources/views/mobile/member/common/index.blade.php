@@ -2,117 +2,161 @@
 
 @section('app_header')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+  
+
+/* * Post widget * */
+
+input[type="file"] {
+display: none;
+}
+ul {
+list-style-type: none;
+}
+
+.btn {
+padding: .5em 1em;
+
+background-color: transparent;
+color: #6b7270;
+
+border: none;
+cursor: pointer;
+}
+
+.widget-post {
+width: 375px;
+min-height: 100px;
+height: auto;
+
+border: 1px solid #eaeaea;
+border-radius: 6px;
+box-shadow: 0 1px 2px 1px rgba(130, 130, 130, 0.1);
+
+background-color: #fff;
+
+margin: auto;
+overflow: hidden;
+}
+
+.widget-post__header {
+padding: .2em .5em;
+
+background-color: #eaeaea;
+color: #3f5563;
+}
+.widget-post__title {
+font-size: 18px;
+margin-top:10px;
+}
+
+.widget-post__content {
+width: 100%;
+height: 50%;
+}
+.widget-post__textarea {
+width: 100%;
+height: 100%;
+padding: .5em;
+
+border: none;
+resize: none;
+}
+.widget-post__textarea:focus {
+outline: none;
+}
+
+.widget-post__options {
+padding: .5em;
+}
+.widget-post___input {
+display: inline-block;
+
+width: 24%;
+padding: .2em .5em;
+
+border: 1px solid #eaeaea;
+border-radius: 1.5em;
+}
+.post-actions__label {
+cursor: pointer;
+margin-top:10px;
+
+}
+
+.widget-post__actions {
+width: 100%;
+padding: .5em;
+}
+.post--actions {
+position: relative;
+padding: .5em;
+
+background-color: #f5f5f5;
+color: #a2a6a7;
+}
+.post-actions__attachments {
+display: inline-block;
+width: 60%;
+}
+.attachments--btn {
+background-color: #eaeaea;
+color: #007582;
+
+border-radius: 1.5em;
+}
+
+.post-actions__widget {
+display: inline-block;
+width: 38%;
+text-align: right;
+}
+.post-actions__publish {
+width: 120px;
+
+background-color: #008391;
+color: #fff;
+
+border-radius: 1.5em;
+}
+
+.scroller::-webkit-scrollbar {
+display: none;
+}
+
+.is--hidden {
+display: none;
+}
+
+.sr-only {
+width: 1px;
+height: 1px;
+
+clip: rect(1px, 1px, 1px, 1px);
+-webkit-clip-path: inset(50%);
+clip-path: inset(50%);
+
+overflow: hidden;
+white-space: nowrap;
+
+position: absolute;
+top: 0;
+
+}
 
 
-        .postblog_wrapper{
-        background: #fff;
-        max-width: 475px;
-        width: 100%;
-        border-radius: 15px;
-        padding: 25px 25px 15px 25px;
-        box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
-        }
-        .postblog_input-box{
-        padding-top: 10px;
-        border-bottom: 1px solid #e6e6e6;
-        }
-        .postblog_input-box .postblog_tweet-area{
-        position: relative;
-        min-height: 130px;
-        max-height: 170px;
-        overflow-y: auto;
-        }
-        .postblog_tweet-area::-webkit-scrollbar{
-        width: 0px;
-        }
-        .postblog_tweet-area .postblog_placeholder{
-        position: absolute;
-        margin-top: -3px;
-        font-size: 22px;
-        color: #98A5B1;
-        pointer-events: none;
-        }
-        .postblog_tweet-area .postblog_input{
-        outline: none;
-        font-size: 17px;
-        min-height: inherit;
-        word-wrap: break-word;
-        word-break: break-all;
-        }
-        .postblog_tweet-area .postblog_editable{
-        position: relative;
-        z-index: 5;
-        }
-        .postblog_tweet-area .postblog_readonly{
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        color: transparent;
-        background: transparent;
-        }
-        .postblog_readonly .postblog_highlight{
-        background: #fd9bb0;
-        }
-
-        .postblog_bottom{
-        display: flex;
-        margin-top: 13px;
-        align-items: center;
-        justify-content: space-between;
-        }
-        .postblog_bottom .postblog_icons{
-        display: inline-flex;
-        }
-        .postblog_icons li{
-        list-style: none;
-        color: #1da1f2;
-        font-size: 20px;
-        margin: 0 2px;
-        height: 38px;
-        width: 38px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background 0.2s ease;
-        }
-        .postblog_bottom .postblog_content{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        }
-        .postblog_bottom .postblog_counter{
-        color: #333;
-        display: none;
-        font-weight: 500;
-        margin-right: 15px;
-        padding-right: 15px;
-        border-right: 1px solid #aab8c2;
-        }
-        .postblog_bottom button{
-        padding: 9px 18px;
-        border: none;
-        outline: none;
-        border-radius: 50px;
-        font-size: 16px;
-        font-weight: 700;
-        background: #1da1f2;
-        color: #fff;
-        cursor: pointer;
-        opacity: 0.5;
-        pointer-events: none;
-        transition: background 0.2s ease;
-        }
-        .postblog_bottom button.active{
-        opacity: 1;
-        pointer-events: auto;
-        }
-        .postblog_bottom button:hover{
-        background: #0d8bd9;
-        }
+/* *  Placeholder contrast * */
+::-webkit-input-placeholder {
+color: #666;
+}
+::-moz-placeholder {
+color: #666;
+}
+:-ms-input-placeholder {
+color: #666;
+}
+:-moz-placeholder {
+color: #666;
+}
 </style>
 <div class="appHeader bg-danger text-light">
 
@@ -183,34 +227,55 @@
     <br> --}}
     @include("mobile.member.common.content.story")
 
+    
+    <br>
     <div class="row">
+        <div class="widget-post" aria-labelledby="post-header-title">
+            <div class="widget-post__header">
+              <h2 class="widget-post__title" id="post-header-title">
+                 <i class="fa fa-pencil" aria-hidden="true"></i>
+                Write Me
+              </h2>
+            </div>
+            <form id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
+                <div class="widget-post__content">
+                    <label for="post-content" class="sr-only">Share</label>
+                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's wrong with r00tme?"></textarea>
+                </div>
+                <div class="widget-post__options is--hidden" id="stock-options">
+                </div>
+                <div class="widget-post__actions post--actions">
+                    <div class="post-actions__attachments">
+                        {{-- <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+                            <i class="fa fa-usd" aria-hidden="true"></i>
+                            stock
+                        </button> --}}
 
-        <div class="postblog_wrapper m-2">
-            {{-- <div >
-                <input type="text" class="form-control" placeholder='หัวข้อ' name="title" style="border: 10px">
-                
-            </div>
-            <br> --}}
-            <div class="postblog_input-box">
-            <div class="postblog_tweet-area">
-                <span class="postblog_placeholder">What's happening?</span>
-                <div class="postblog_input postblog_editable" contenteditable="true" spellcheck="false"></div>
-                <div class="postblog_input postblog_readonly" contenteditable="true" spellcheck="false"></div>
-            </div>
-            
-            </div>
-            <div class="postblog_bottom">
-            <ul class="postblog_icons">
-                <li><i class="far fa-file-image"></i></li>
-                <li><i class="far fa-solid fa-video"></i></li>
-                <li><i class="far fa-solid fa-link"></i></li>
-            </ul>
-            <div class="postblog_content">
-                {{-- <span class="postblog_counter">1000</span>  --}}
-                <button>Post</button>
-            </div>
-            </div>
+                        <button type="button" class="btn post-actions__upload attachments--btn">
+                            {{-- <label for="upload-image" class="post-actions__label"> --}}
+                            <i class="fa fa-video" aria-hidden="true"></i> 
+                            
+                            {{-- </label> --}}
+                        </button>
+                        <input type="file" id="upload-video"  accept="video/*;capture=camera">
+
+
+                        <button type="button" class="btn post-actions__upload attachments--btn">
+                            <label for="upload-image" class="post-actions__label">
+                            <i class="fa fa-file-image" aria-hidden="true"></i> 
+                            
+                            </label>
+                        </button>
+                        <input type="file" id="upload-image" accept="image/*;capture=camera">
+                    </div>
+
+                    <div class="post-actions__widget">
+                        <button class="btn post-actions__publish">publish</button>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
 
     <div class="mt-3" name="story_videos_section" id="story_videos_section">
@@ -506,59 +571,17 @@
 
         </script>
         <script>
-            const wrapper = document.querySelector(".postblog_wrapper"),
-            editableInput = wrapper.querySelector(".postblog_editable"),
-            readonlyInput = wrapper.querySelector(".postblog_readonly"),
-            placeholder = wrapper.querySelector(".postblog_placeholder"),
-            counter = wrapper.querySelector(".postblog_counter"),
-            button = wrapper.querySelector("button");
-                
-                editableInput.onfocus = ()=>{
-                placeholder.style.color = "#c5ccd3";
+            var myInputimage = document.getElementById('upload-image');
+            var myInputvideo = document.getElementById('upload-video');
+
+            function sendPic() {
+                var file = myInput.files[0];
+
+                // Send file here either by adding it to a `FormData` object 
+                // and sending that via XHR, or by simply passing the file into 
+                // the `send` method of an XHR instance.
             }
-            editableInput.onblur = ()=>{
-                placeholder.style.color = "#98a5b1";
-            }
-            
-            editableInput.onkeyup = (e)=>{
-                let element = e.target;
-                validated(element);
-            }
-            editableInput.onkeypress = (e)=>{
-                let element = e.target;
-                validated(element);
-                placeholder.style.display = "none";
-            }
-            
-            function validated(element){
-                let text;
-                let maxLength = 1000;
-                let currentlength = element.innerText.length;
-            
-                if(currentlength <= 0){
-                placeholder.style.display = "block";
-                counter.style.display = "none";
-                button.classList.remove("active");
-                }else{
-                placeholder.style.display = "none";
-                counter.style.display = "block";
-                button.classList.add("active");
-                }
-            
-                counter.innerText = maxLength - currentlength;
-            
-                if(currentlength > maxLength){
-                let overText = element.innerText.substr(maxLength); //extracting over texts
-                overText = `<span class="highlight">${overText}</span>`; //creating new span and passing over texts
-                text = element.innerText.substr(0, maxLength) + overText; //passing overText value in textTag variable
-                readonlyInput.style.zIndex = "1";
-                counter.style.color = "#e0245e";
-                button.classList.remove("active");
-                }else{
-                readonlyInput.style.zIndex = "-1";
-                counter.style.color = "#333";
-                }
-                readonlyInput.innerHTML = text; //replacing innerHTML of readonly div with textTag value
-            }
+
+            myInputimage.addEventListener('change', sendPic, false);
         </script>
     @endsection
