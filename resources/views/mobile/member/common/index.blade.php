@@ -252,21 +252,15 @@ color: #666;
                         </button> --}}
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
-                            {{-- <label for="upload-image" class="post-actions__label"> --}}
                             <i class="fa fa-video" aria-hidden="true"></i> 
-                            
-                            {{-- </label> --}}
                         </button>
-                        <input type="file" id="upload-video"  accept="video/*;capture=camera">
+                        <input type="file" id="upload-video" name="video" accept="video/mp4, video/webm,video/ogg;capture=camera">
 
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
-                            <label for="upload-image" class="post-actions__label">
                             <i class="fa fa-file-image" aria-hidden="true"></i> 
-                            
-                            </label>
                         </button>
-                        <input type="file" id="upload-image" accept="image/*;capture=camera">
+                        <input type="file" id="upload-image" name="img" accept="image/*;capture=camera">
                     </div>
 
                     <div class="post-actions__widget">
@@ -575,7 +569,7 @@ color: #666;
             var myInputvideo = document.getElementById('upload-video');
 
             function sendPic() {
-                var file = myInput.files[0];
+                var file = myInputimage.files[0];
 
                 // Send file here either by adding it to a `FormData` object 
                 // and sending that via XHR, or by simply passing the file into 
