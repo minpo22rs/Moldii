@@ -202,7 +202,7 @@
             <div class="postblog_bottom">
             <ul class="postblog_icons">
                 <li><i class="far fa-file-image"></i></li>
-                <li><i class="far fa-solid fa-music"></i></li>
+                <li><i class="far fa-solid fa-video"></i></li>
                 <li><i class="far fa-solid fa-link"></i></li>
             </ul>
             <div class="postblog_content">

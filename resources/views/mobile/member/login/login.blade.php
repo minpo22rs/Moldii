@@ -20,7 +20,7 @@
 </style>
     @section('content')
         <div id="bg">
-            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/logo/login.png')}}" alt="">
+            <img src="{{asset('new_assets/img/login.png')}}" alt="">
         </div>
         <br><br><br>
         <div class = "m-1">
@@ -29,7 +29,8 @@
                     @csrf
                         <div class = "row align-items-center">
                             <div class = "col-12 text-center">
-                                <b><h1 class = ""  style = "margin-top: 150px;">
+                                <img src="{{asset('new_assets/img/Moldii.png')}}" style="width: 25%;height:25%;margin-top: 100px;">
+                                <b><h1 class = ""  style = "margin-top: 10px;">
                                     LOGIN
                                 </h1></b>
                             </div>

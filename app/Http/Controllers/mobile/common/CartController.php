@@ -34,7 +34,9 @@ class CartController extends Controller
         // dd($request->all());
       
 
-        $sql = DB::Table('tb_carts')->where('product_id',$request->id)->first();
+        $sql = DB::Table('tb_carts')->where('customer_id',Session::get('cid'))->where('product_id',$request->id)->first();
+        $ship = DB::Table('tb_product_shippings')->where('id_product',$request->id)->orderBy('cost','DESC')->first();
+ 
         if($sql !=null){
             DB::Table('tb_carts')->where('product_id',$request->id)->increment('count', 1);
         }else{
@@ -43,8 +45,9 @@ class CartController extends Controller
             $cart->customer_id = Session::get('cid');
             $cart->product_id  = $request->id;
             $cart->store_id  = $request->store_id;
-            $cart->count  = $request->count;
-            // $cart->price  = $request->total;
+            $cart->shipping_cost  = $ship->cost;
+            $cart->shipping_id  = $ship->id_company;
+      
             $cart->save();
         }
         if($request->back == 2){
@@ -264,12 +267,13 @@ class CartController extends Controller
     {
         
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
-     
+       
         $my = User::where('customer_id',Session::get('cid'))->first();
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
         $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
         $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
         $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
+       
         return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'p'=>$p,'a'=>$a,'t'=>$t]);
     }
 

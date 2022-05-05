@@ -55,8 +55,8 @@
                                     <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
                                 </div>
                                 <div class="col-4 p-0 ">
-                                    <h5 class="m-0  text-right">วว/ดด/ปป</h5>
-                                    <h5 class="m-0  text-right">เวลา</h5>
+                                    <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
+                                    <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
                                     <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@
 
 <form action="{{url('user/saveCreditCardonProfile')}}" method="POST">
     @csrf
-    <div class="row p-2 col-12 m-0    " style="color:black; font-size:18px">
+    {{-- <div class="row p-2 col-12 m-0    " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">
             <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">ประเภทบัตร</h4>
         </div>
@@ -24,9 +24,8 @@
                 <option value="2">Mastercard</option>
             </select>
        
-        {{-- <input style="border-radius: 10px; height:2.8125rem;" type="text" name="no" class="form-control mt-1 input_3  " placeholder="•••• •••• •••• ••••" required> --}}
 
-    </div>
+    </div> --}}
 
     <div class="row p-2 col-12 m-0    " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">

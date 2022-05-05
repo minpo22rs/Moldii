@@ -20,7 +20,7 @@
 </style>
     @section('content')
     <div id="bg">
-        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/logo/login.png')}}" alt="">
+        <img src="{{asset('new_assets/img/login.png')}}" alt="">
     </div>
     <br>
         <div class = "m-1">
@@ -39,6 +39,7 @@
                             Password?
                         </h1>
                     </div>
+                    
                   
                         <div class = "col-8 offset-1 text-center"  >
                 

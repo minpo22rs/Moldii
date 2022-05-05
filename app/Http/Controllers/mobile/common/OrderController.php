@@ -28,11 +28,24 @@ class OrderController extends Controller
     public function addorder(Request $request)
     {
         // dd(Session::all());
-        // dd($sql);
+        $address = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->where('address_status','=','on')
+                        ->leftJoin('districts', 'tb_orders.order_tumbon', '=', 'districts.id')
+                        ->leftJoin('amphures', 'tb_orders.order_district', '=', 'amphures.id')
+                        ->leftJoin('provinces', 'tb_orders.order_province', '=', 'provinces.id')
+                        ->select('tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
+                                    ,',districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                        ->first();
         $order = new Tb_order();
         $order->customer_id = Session::get('cid');
         $order->order_total = Session::get('totalcart');
         $order->shipping_cost = 14;
+        $order->order_code = substr(md5(mt_rand()), 0, 8);
+        $order->order_address = $address->customer_address;
+        $order->order_phone = $address->customer_phone;
+        $order->order_tumbon = $address->tth;
+        $order->order_district = $address->ath;
+        $order->order_province = $address->pth;
+        $order->order_postcode = $address->customer_postcode;
         $order->save();
         
         $sql = DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->get();

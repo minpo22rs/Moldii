@@ -20,7 +20,7 @@
 </style>
     @section('content')
     <div id="bg">
-        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/logo/login.png')}}" alt="">
+        <img src="{{asset('new_assets/img/login.png')}}" alt="">
     </div>
     <br>
         <div class = "m-1">
@@ -31,15 +31,15 @@
                                     class = "text-dark font-weight-bold" 
                                     style = "color: black; margin-top: 10%; font-size: 25px;"></ion-icon></a>
                     </div>
-                    <div class = "col-12 text-left" style = "margin-top: 30%;">
-                        <h1 class = "ml-4">
+                    <div class = "col-12 " style = "margin-top: 30%;">
+                        <h1 class = "ml-4 text-left">
                             Forgot
                         </h1>
-                        <h1 class = "ml-4">
+                        <h1 class = "ml-4 text-left">
                             Password?
                         </h1>
                     </div>
-                  
+                   
                         <div class = "col-8 offset-1 text-center"  >
                             <form action="{{url('createreset')}}" method="POST" id="sendmn">
                                 @csrf

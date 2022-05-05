@@ -254,7 +254,10 @@ class UserAccController extends Controller
         $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->latest('tb_order_details.created_at')
+            ->select('tb_order_details.*','tb_products.product_img','tb_merchants.merchant_name')
             ->get();
+            // dd($sql );
         return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
 
     }
@@ -292,7 +295,11 @@ class UserAccController extends Controller
 
     }
     public function paymentMethod(){// ช่องทางการชำระเงิน
-        return view('mobile.member.userAccount.my_list.paymentMethod');
+        $on = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','on')->first();
+        $off = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','off')->get();
+        $publicKey ='llhk';
+        $head =  base64_encode($s);
+        return view('mobile.member.userAccount.my_list.paymentMethod')->with(['on'=>$on,'off'=>$off]);
 
     }
     public function addCreditCard_2(){// ช่องทางการชำระเงิน

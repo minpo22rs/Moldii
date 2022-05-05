@@ -201,3 +201,4 @@ Route::get('test/pass',[TestUiController::class,'pass']);
 Route::get('test/all',[TestUiController::class,'testAll']);
 Route::get('test/goToView',[TestUiController::class,'goToView']);
 
+Route::get('/testbox', [TestUiController::class, 'testbox']); 

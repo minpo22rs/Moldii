@@ -31,12 +31,20 @@
 
         </a>
     </div>
-
+    <?php  $sumship = 0;?>
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
                 $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
                 $sum = 0;
+               
                 $countt = 0;
+
+                $pluck = $cartt->pluck('product_id');
+                $ship = DB::Table('tb_product_shippings')->whereIn('id_product',$pluck)
+                            ->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')
+                            ->orderBy('cost','DESC')->first();
+                $sumship += $ship->cost;
+
         ?>
         <div class="row p-1 border-top mt-2 " style="color:black; font-size:18px; height:43px;">
             <div class="col-8 mx-0 align-self-center row">
@@ -60,7 +68,7 @@
             ?>
             <div class="col-12 row p-2 pr-1 border-top m-0">
                 <div class="col-3 p-0">
-                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" class="col-12 pl-0  align-self-start"><br>
+                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" class="col-12 pl-0  align-self-start" style="width:90px;height:62px"><br>
                 </div>
                 <div class="col-5 pr-0 align-self-center">
                     <h5 class="mb-1 ">{{$product->product_name}}</h5>
@@ -82,11 +90,11 @@
             <h5 class="m-0  mt-1 mb-1 font-weight-bold " style="color:rgba(80, 202, 101, 1);">ตัวเลือกการจัดส่ง</h5>
             <div class="col-12 row m-0 p-0 pt-1 justify-content-between border-top">
                 <div class="col-8 p-0">
-                    <h5 class="m-0">ชื่อบริษัทขนส่ง - ประเภทของการจัดส่ง </h5>
-                    <h5 class="m-0">จะได้รับใน dd/mm - dd/mm/yy </h5>
+                    <h5 class="m-0">{{$ship->name_company}} - ส่งธรรมดาในประเทศ </h5>
+                    <h5 class="m-0">จะได้รับใน {{date('d-m-Y')}} - {{date('d-m-Y', strtotime('+3 days'))}} </h5>
                 </div>
                 <a href="" class="col-3 p-0 pr-1  row justify-content-end" style="color:black;">
-                    <h5 class="m-0 align-self-center font-weight-bold mr-1">฿7.00</h5>
+                    <h5 class="m-0 align-self-center font-weight-bold mr-1">฿{{$ship->cost}}</h5>
                     <i class="far fa-angle-right col-1 p-0 align-self-center" style="font-size:1.5rem;"></i>
 
                 </a>
@@ -111,7 +119,7 @@
                 <h5 class="m-0 ml-2 font-weight-bold">คำสั่งซื้อทั้งหมด({{$countt}}ชิ้น):</h5>
             </div>
             <div class="col-4 mx-0 text-right">
-                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+7)}}</h5>
+                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+$ship->cost)}}</h5>
 
             </div>
         </a>
@@ -164,25 +172,25 @@
     </a>
     <div class="col-12 row p-0  p-2">
 
-        <div class="col-10 pr-0 align-self-center">
+        <div class="col-9 pr-0 align-self-center">
             <h5 class="mb-1  " style="color:rgba(79, 77, 77, 1);">รวมค่าสินค้า</h5>
             <h5 class="mb-1 " style="color:rgba(79, 77, 77, 1);">ค่าจัดส่ง</h5>
             <h5 class="m-0 " style="color:rgba(79, 77, 77, 1);">รวมทั้งหมด</h5>
         </div>
-        <div class="col-2 text-right pr-0 align-self-end">
-            <h5 class="mb-1 font-weight-bold" style="">฿{{number_format(Session::get('totalcart'))}}</h5>
-            <h5 class="mb-1 font-weight-bold" style="">฿14.00</h5>
-            <h5 class="m-0 font-weight-bold" style="">฿ {{number_format((Session::get('totalcart')+14))}}</h5>
+        <div class="col-3 text-right pr-0 align-self-end">
+            <h5 class="mb-1 font-weight-bold" style="">฿{{number_format(Session::get('totalcart'))}}.00</h5>
+            <h5 class="mb-1 font-weight-bold" style="">฿{{$sumship}}.00</h5>
+            <h5 class="m-0 font-weight-bold" style="">฿{{number_format((Session::get('totalcart')+$sumship))}}.00</h5>
         </div>
     </div>
-
+    <input type="hidden" name="sumship" value="{{$sumship}}">
     <div class="col-12 row m-0 pr-0 border-top justify-content-end">
 
         <div class="col-12 row text-right p-0">
             <div class="col px-1 py-1 align-self-center">
                 <div class="row p-0 m-0 justify-content-end">
                     <h5 class="m-0 ">ยอดชำระเงินทั้งหมด</h5>
-                    <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format((Session::get('totalcart')+14))}}</h5>
+                    <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format((Session::get('totalcart')+$sumship))}}.00</h5>
                 </div>
                 <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
             </div>

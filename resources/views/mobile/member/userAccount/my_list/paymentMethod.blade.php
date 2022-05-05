@@ -17,12 +17,12 @@
 
     <ul class="listview link-listview mb-2">
 
-
+        {{-- บัตรเคดิต/บัตรเดบิต --}}
         <li class="multi-level">
             <a href="#" class="item">
                 <h5 class="m-0  font-weight-bold align-self-center">บัตรเคดิต/บัตรเดบิต</h5>
                 <div class="row">
-                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">*0000</span>
+                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{$on!=null?'*'.$on->num:''}}</span>
 
 
                 </div>
@@ -30,52 +30,24 @@
             </a>
             <!-- sub menu -->
             <ul class="listview image-listview pb-0">
+                @foreach($off as $sqls)
+                    <li>
+                        <a href="#" class="item border-top pr-3">
+                            <img src="{{ asset('new_assets/img/icon/Visa_big.svg')}}" alt="image" class="image mr-1">
 
-                <li>
-                    <a href="#" class="item border-top pr-3">
-                        <img src="{{ asset('new_assets/img/icon/Visa_big.svg')}}" alt="image" class="image mr-1">
+                            <div class="in">
+                                <h5 class="m-0  font-weight-bold align-self-center">ธนาคารกสิกรไทย</h5>
+                                <div class="row">
+                                    <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*0000</span>
+                                    <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
 
-                        <div class="in">
-                            <h5 class="m-0  font-weight-bold align-self-center">ธนาคารกสิกรไทย</h5>
-                            <div class="row">
-                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*0000</span>
-                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
-
-                            </div>
-
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="item border-top pr-3">
-                        <img src="{{ asset('new_assets/img/icon/Visa_big.svg')}}" alt="image" class="image mr-1">
-
-                        <div class="in">
-                            <h5 class="m-0  font-weight-bold align-self-center">ธนาคารกสิกรไทย</h5>
-                            <div class="row">
-                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*0000</span>
-                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem; opacity: 0; " class=" p-0 align-self-center"><br>
+                                </div>
 
                             </div>
-
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="item border-top pr-3">
-                        <img src="{{ asset('new_assets/img/icon/Visa_big.svg')}}" alt="image" class="image mr-1">
-
-                        <div class="in">
-                            <h5 class="m-0  font-weight-bold align-self-center">ธนาคารกสิกรไทย</h5>
-                            <div class="row">
-                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*0000</span>
-                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem; opacity: 0;" class=" p-0 align-self-center"><br>
-
-                            </div>
-
-                        </div>
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                @endforeach
+                    
                 <li>
                     <a href="{{url('user/addCreditCard_2')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/plus_2.svg')}}" alt="image" style="height:1.5rem;" class="image mr-1">
@@ -87,6 +59,138 @@
                         </div>
                     </a>
                 </li>
+
+            </ul>
+            <!-- * sub menu -->
+        </li>
+
+        {{-- Mobile Banking --}}
+        <li class="multi-level">
+            <a href="#" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">Mobile Banking</h5>
+               
+
+            </a>
+            <!-- sub menu -->
+            <ul class="listview image-listview pb-0">
+
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Kplus.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">KPLUS </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/SCB.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">SCB EASY </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/logo_bangkok.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">BualuangM </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Krungsri.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Krungsri</h5>
+                            
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/logo_krungthai.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Krungthai Next</h5>
+                            
+
+                        </div>
+                    </a>
+                </li>
+               
+
+            </ul>
+            <!-- * sub menu -->
+        </li>
+
+        {{-- Wallet --}}
+        <li class="multi-level">
+            <a href="#" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">Wallet</h5>
+               
+
+            </a>
+            <!-- sub menu -->
+            <ul class="listview image-listview pb-0">
+
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Wechat.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Wechat Pay </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Turemoney.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">TrueMoney Wallet </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Shopee.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">ShopeePay</h5>
+                            
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Rabbit.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Rabbit Line Pay </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+               
 
             </ul>
             <!-- * sub menu -->
