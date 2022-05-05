@@ -241,8 +241,9 @@ color: #666;
                 <div class="widget-post__content">
                     <label for="post-content" class="sr-only">Share</label>
                     <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
-                        <video id="video" width="320" height="240" controls style="display: none;"></video>
+                        
                     </textarea>
+                    <video id="video" width="320" height="240" controls style="display: none;"></video>
                 </div>
                 <div class="widget-post__options is--hidden" id="stock-options">
                 </div>
