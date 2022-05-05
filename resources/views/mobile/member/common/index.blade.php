@@ -79,7 +79,7 @@ border-radius: 1.5em;
 }
 .post-actions__label {
 cursor: pointer;
-margin-top:10px;
+/* margin-top:10px; */
 
 }
 
@@ -252,13 +252,13 @@ color: #666;
                         </button> --}}
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
-                            <i class="fa fa-video" aria-hidden="true"></i> 
+                            <i class="fa fa-video post-actions__label" aria-hidden="true"></i> 
                         </button>
                         <input type="file" id="upload-video" name="video" accept="image/*;capture=camera">
 
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
-                            <i class="fa fa-file-image" aria-hidden="true"></i> 
+                            <i class="fa fa-file-image post-actions__label" aria-hidden="true"></i> 
                         </button>
                         <input type="file" id="upload-image" name="img" accept="image/*;capture=camera">
                     </div>
