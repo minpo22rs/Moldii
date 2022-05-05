@@ -257,7 +257,7 @@ color: #666;
                                 <i class="fa fa-video " aria-hidden="true"></i> 
                             </label>
                         </button>
-                        <input type="file" id="upload-video" name="video" accept="image/*;capture=camera">
+                        <input type="file" id="upload-video" name="video" accept="video/*;capture=camera">
 
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
