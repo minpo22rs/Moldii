@@ -237,12 +237,17 @@ color: #666;
                 Write Me
               </h2>
             </div>
-            <form id="widget-form" class="widget-post__form" name="form" aria-label="post widget">
+            <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget">
+                @csrf
                 <div class="widget-post__content">
                     <label for="post-content" class="sr-only">Share</label>
                     <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
                         
                     </textarea>
+                    <div class="row" id="rowimage"> </div>
+                    <div class="row" id="rowvideo"> </div>
+                    
+
                     
                 </div>
                 <div class="widget-post__options is--hidden" id="stock-options">
@@ -255,21 +260,19 @@ color: #666;
                         </button> --}}
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
-                            <label for="upload-image" class="post-actions__label">
+                            <label for="upload-video" class="post-actions__label">
 
                                 <i class="fa fa-video " aria-hidden="true"></i> 
                             </label>
                         </button>
-                        <input type="file" id="upload-video" name="video" accept="video/*;capture=camera">
-                        <video id="video" width="320" height="240" controls style="display: none;"></video>
+                        <input type="file" id="upload-video" name="video[]" accept="video/*;capture=camera" multiple onchange="readGalleryURL1(this)">
 
                         <button type="button" class="btn post-actions__upload attachments--btn">
                             <label for="upload-image" class="post-actions__label">
                                 <i class="fa fa-file-image" aria-hidden="true"></i> 
                             </label>
                         </button>
-                        <input type="file" id="upload-image" name="img" accept="image/*;capture=camera">
-                        <img id="myImg" src="" alt="The Pulpit Rock" width="304" height="228" style="display: none;">
+                        <input type="file" id="upload-image" name="img[]" accept="image/*;capture=camera" multiple onchange="readGalleryURL2(this)">
                     </div>
 
                     <div class="post-actions__widget">
@@ -575,27 +578,49 @@ color: #666;
         </script>
         <script>
 
-            document.getElementById("upload-video").addEventListener("change", function() {
-                var media = URL.createObjectURL(this.files[0]);
-                var video = document.getElementById("video");
-                video.src = media;
-                video.style.display = "block";
-                video.play();
-            });
 
+            function readGalleryURL1(input) {
 
-            var myInputimage = document.getElementById('upload-image');
-            var myInputvideo = document.getElementById('upload-video');
-
-            function sendPic() {
-                var file = myInputimage.files[0];
-                document.getElementById("myImg").style.display = "";
-                document.getElementById("myImg").src =myInputimage.files[0];
-                // Send file here either by adding it to a `FormData` object 
-                // and sending that via XHR, or by simply passing the file into 
-                // the `send` method of an XHR instance.
+                var filelist = input.files;
+                for(var i=0; i<filelist.length; i++)
+                {
+                    writevideo(filelist[i]);
+                }
             }
 
-            myInputimage.addEventListener('change', sendPic, false);
+            function writevideo(v) {
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var videotag= '<div class="col-3"><video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video></div>';
+                        
+                    $('#rowvideo').append(videotag);
+                }
+                reader.readAsDataURL(v);
+            }
+
+
+            function readGalleryURL2(input)
+            {
+                var filelist = input.files;
+                for(var i=0; i<filelist.length; i++)
+                {
+                    writeimg(filelist[i]);
+                }
+            }
+
+
+            function writeimg(v) {
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgtag = '<div class="col-3"><img id="myImg" src="'+e.target.result+'" width="150" height="150"></div>';
+                        
+                    $('#rowimage').append(imgtag);
+                }
+                reader.readAsDataURL(v);
+            }
+
+            // myInputimage.addEventListener('change', sendPic, false);
         </script>
     @endsection

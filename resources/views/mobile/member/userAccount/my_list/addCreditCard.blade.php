@@ -38,7 +38,7 @@
 
         <div class="col-6">
             <div class="col-12 mx-0 align-self-center row p-0">
-                <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">CVV</h4>
+                <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">CCV</h4>
             </div>
             <input style="border-radius: 10px; height:2.8125rem;" type="text" name="ccv" class="form-control mt-1 input_3  " minlength="3" maxlength="3"  placeholder="•••" required>
         </div>
@@ -90,8 +90,10 @@
     function numberValidation(e){
         e.target.value = e.target.value.replace(/[^\d ]/g,'');
         return false;
-      }
+    }
 
+
+    
 
    
 </script>

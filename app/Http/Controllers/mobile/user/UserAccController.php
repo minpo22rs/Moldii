@@ -207,26 +207,65 @@ class UserAccController extends Controller
     }
 
 
-    public function saveCreditCardonProfile(){// การบันทึกบัตร
+    public function saveCreditCardonProfile(Request $request){// การบันทึกบัตร
 
-        $a = new Tb_credit();
-        $a->customer_id  =  Session::get('cid');
-        $a->typecard  =  $request->typecard;
-        $a->number  =  $request->no;
-        $a->holder  =  $request->name;
-        $a->expirem  =  $request->expirem;
-        $a->expirey  =  $request->expirey;
-        $a->ccv  =  $request->ccv;
-        if(isset($request->nickname)){
-            $a->nickname  =  $request->nickname;
+        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
+        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem:";
+        $base64 = base64_encode($public);
+        $b = "Basic ";
+        $headerskey = $b.$base64;
 
+        $data = array(
+            'rememberCard' => true,
+            'card' => array(
+                "number"=> str_replace(' ', '', $request->no),
+                "expirationMonth"=> $request->expirem,
+                "expirationYear"=> $request->expirey,
+                "securityCode"=> $request->ccv,
+                "name"=> $request->name
+        ));
+
+        $headers = array(
+            "Authorization:" . $headerskey,
+            'Content-Type: application/json',
+        );
+       
+
+        $payload = json_encode($data);
+        $ch = curl_init('https://api.globalprimepay.com/v2/tokens');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        $chargeResp = json_decode($result, true);
+
+        // dd($chargeResp['card']['cardType']);
+        if($chargeResp['resultCode'] == "00"){
+            $a = new Tb_credit();
+            $a->customer_id  =  Session::get('cid');
+            $a->typecard  =  $chargeResp['card']['cardType'];
+            $a->token  = $chargeResp['card']['token'];
+            $a->num  = substr($chargeResp['card']['number'],-4,4);
+            if(isset($request->nickname)){
+                $a->nickname  =  $request->nickname;
+    
+            }
+            if(isset($request->chk)){
+                $a->status_credit  =  $request->chk;
+                
+            }
+            $a->save();
+        }else{
+            return redirect('user/creditCard')->with('msg','ไม่สามารถบันทึกได้ กรุณากรอกข้อมูลใหม่อีกครั้ง');
+            
         }
-        if(isset($request->chk)){
-            $a->status_credit  =  $request->chk;
 
-        }
-        $a->save();
-        return redirect('user/creditCard');
+        return redirect('user/creditCard')->with('msg','บันทึกเรียบร้อย');
 
     }
 
@@ -297,8 +336,8 @@ class UserAccController extends Controller
     public function paymentMethod(){// ช่องทางการชำระเงิน
         $on = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','on')->first();
         $off = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','off')->get();
-        $publicKey ='llhk';
-        $head =  base64_encode($s);
+        // $publicKey ='llhk';
+        // $head =  base64_encode($s);
         return view('mobile.member.userAccount.my_list.paymentMethod')->with(['on'=>$on,'off'=>$off]);
 
     }

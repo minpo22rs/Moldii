@@ -65,7 +65,7 @@ Route::get('getZipcode',[UserAccController::class, 'getZipcode']);//
 
 Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
 Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
-Route::get('user/saveCreditCardonProfile', [UserAccController::class, 'saveCreditCardonProfile']);// การเพิ่มบัตร
+Route::post('user/saveCreditCardonProfile', [UserAccController::class, 'saveCreditCardonProfile']);// การเพิ่มบัตร
 
 
 Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
@@ -102,6 +102,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 // content
+Route::post('userpostcontent', [ContentController::class, 'userpostcontent']); 
+
+
 Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
 Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']); 

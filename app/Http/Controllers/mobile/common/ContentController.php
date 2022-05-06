@@ -36,6 +36,11 @@ class ContentController extends Controller
         DB::Table('tb_comments')->where('comment_id',$request->cid)->update(['comment_reply'=> 1]);
         return back();
     }
+
+    public function userpostcontent(Request $request){
+        dd($request->all());
+
+    }
     
     
 }
