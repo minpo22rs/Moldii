@@ -43,7 +43,7 @@
            
         </div>
         <div class="col-6 text-right " >
-            <a href="{{url('/')}}" class="mr-2" style="color: red">ดูทั้งหมด</a>
+            <a href="{{url('/index')}}" class="mr-2" style="color: red">ดูทั้งหมด</a>
         </div>
 
     </div>

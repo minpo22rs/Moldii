@@ -30,16 +30,38 @@
             </a>
             <!-- sub menu -->
             <ul class="listview image-listview pb-0">
+                <li>
+                    <a href="{{url('selectpaymentmethod/1/'.$on->num.'')}}" class="item border-top pr-3">
+                        @if($on->typecard == 'VIS')
+                            <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
+                        @else
+                            <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
+                        @endif
+                        <div class="in" >
+                            <h5 class="m-0  font-weight-bold align-self-center"></h5>
+                            <div class="row">
+                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$on->num}}</span>
+                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
+
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
                 @foreach($off as $sqls)
                     <li>
-                        <a href="#" class="item border-top pr-3">
-                            <img src="{{ asset('new_assets/img/icon/Visa_big.svg')}}" alt="image" class="image mr-1">
+                        <a href="{{url('selectpaymentmethod/1/'.$sqls->num.'')}}" class="item border-top pr-3">
+                            @if($sqls->typecard == 'VIS')
+                                <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
+                            @else
+                                <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
+                            @endif
 
-                            <div class="in">
-                                <h5 class="m-0  font-weight-bold align-self-center">ธนาคารกสิกรไทย</h5>
+                            <div class="in" style="margin-right: 22px;">
+                                <h5 class="m-0  font-weight-bold align-self-center"></h5>
                                 <div class="row">
-                                    <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*0000</span>
-                                    <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
+                                    <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$sqls->num}}</span>
+                                    {{-- <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br> --}}
 
                                 </div>
 
@@ -75,7 +97,7 @@
             <ul class="listview image-listview pb-0">
 
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/2/004')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Kplus.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -86,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/2/014')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/SCB.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -97,7 +119,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/2/002')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/logo_bangkok.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -108,7 +130,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/2/025')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Krungsri.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -119,7 +141,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/2/006')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/logo_krungthai.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -146,7 +168,7 @@
             <ul class="listview image-listview pb-0">
 
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/3/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Wechat.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -158,7 +180,7 @@
                 </li>
                
                 <li>
-                    <a href="#" class="item border-top pr-3">
+                    <a href="{{url('selectpaymentmethod/4/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Turemoney.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -168,8 +190,8 @@
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="item border-top pr-3">
+                {{-- <li>
+                    <a href="{{url('selectpaymentmethod/5/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Shopee.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -178,9 +200,9 @@
 
                         </div>
                     </a>
-                </li>
-                <li>
-                    <a href="#" class="item border-top pr-3">
+                </li> --}}
+                {{-- <li>
+                    <a href="{{url('selectpaymentmethod/6/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Rabbit.svg')}}" alt="image" class="image mr-1">
 
                         <div class="in">
@@ -189,11 +211,23 @@
 
                         </div>
                     </a>
-                </li>
+                </li> --}}
                
 
             </ul>
             <!-- * sub menu -->
+        </li>
+
+        {{-- moldii wallet --}}
+        <li class="multi-level">
+            <a href="{{url('selectpaymentmethod/7/0')}}" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
+                <div class="row">
+                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{$user->customer_wallet}}</span>
+
+                </div>
+
+            </a>
         </li>
 
 

@@ -12,7 +12,7 @@
 @section('content')
 
 
-<form action="">
+<form action="{{url('user/saveCreditCardonCart')}}" method="POST">
     @csrf
     <div class="row p-2 col-12 m-0 " style="color:black; font-size:18px">
         <div class="col-12 mx-0 align-self-center row p-0">
@@ -64,7 +64,7 @@
 
     <div class="col-12 px-5 " style="height:100%;">
         <button type="submit" class="btn btn-success  col-12 " style="font-size:1.3rem; margin-top:60%;">บันทึกบัตร</button>
-
+        {{-- id="buttonok" --}}
     </div>
 
 </form>
@@ -91,9 +91,6 @@
         e.target.value = e.target.value.replace(/[^\d ]/g,'');
         return false;
     }
-
-
-    
 
    
 </script>

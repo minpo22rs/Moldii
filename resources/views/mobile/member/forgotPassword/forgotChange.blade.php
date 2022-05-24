@@ -20,7 +20,7 @@
 </style>
     @section('content')
     <div id="bg">
-        <img src="{{asset('new_assets/img/login.png')}}" alt="">
+        <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
     </div>
     <br>
         <div class = "m-1">
@@ -63,7 +63,7 @@
                                                 name = "confirm_password" id = "confirm_password" value = "" placeholder = "Confirm Password" minlength="8">
                                     </div>
                                     <div class = "col-10 offset-1 text-center">
-                                        <input  type = "button" class = "btn btn-danger btn-block font-weight-bold my-3 rounded-pill" id="btnsend"
+                                        <input  type = "button" class = "btn btn-index btn-block font-weight-bold my-3 rounded-pill" id="btnsend"
                                                 style = "   font-size: 18px; 
                                                             align-items: center; height: 50px;" value = "Reset Password" 
                                                 onclick="confirmpass();"      

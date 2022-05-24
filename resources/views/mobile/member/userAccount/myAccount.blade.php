@@ -23,13 +23,14 @@
 <div class="row my-2 mb-3">
     <div class="col-6 pr-0">
         <div class="m-1">
-            <div class="card">
-                <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/img/icon/pig.svg')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold"><?php //number_format($available_cash) 
-                                                                            ?> ฿</span>
+            <a href="{{url('user/wallet')}}" style="color: black">
+                <div class="card">
+                    <div class="row w-100 mx-3 my-2 text-center">
+                        <img src="{{ asset('new_assets/img/icon/pig.svg')}}" width="15%">
+                        <span class="ml-2 align-self-center font-weight-bold"> ฿ {{number_format($sql->customer_wallet,2,'.',',')}}</span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="col-6 pl-0">

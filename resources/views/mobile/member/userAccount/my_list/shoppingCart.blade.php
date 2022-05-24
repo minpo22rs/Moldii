@@ -77,10 +77,10 @@
 
                                     <div class="row col-12">
                                         @if($product->product_discount != null)
-                                            <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿{{number_format($product->product_price)}}</s> </h5>
-                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_discount)}}</h5>
+                                            <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿{{number_format($product->product_price,2,'.','')}}</s> </h5>
+                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_discount,2,'.','')}}</h5>
                                         @else
-                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price)}}</h5>
+                                            <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price,2,'.','')}}</h5>
                                         @endif
                                     </div>
                                     <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">
@@ -106,7 +106,7 @@
         
         {{-- โค้ดส่วนลด --}}
         <div class="col-12 p-0 m-0 " id="footer-fixed-bottom">
-            <a href="" class="row py-1 border-top pl-2 mt-3" style="color:black; font-size:18px">
+            {{-- <a href="" class="row py-1 border-top pl-2 mt-3" style="color:black; font-size:18px">
                 <div class="col-6 mx-0 pl-0 align-self-center row">
                     <img src="{{ asset('new_assets/img/icon/ticket.svg')}}" alt="alt" style="">
 
@@ -120,15 +120,15 @@
                         <i class="far fa-angle-right"></i>
                     </div>
                 </div>
-            </a>
-            <div class="col-12 mx-0  py-2 px-3 pl-1 border-top border-bottom align-self-center justify-content-between row ">
+            </a> --}}
+            <div class="col-12 mx-0  py-2 px-3 pl-1 border-top border-bottom align-self-center justify-content-between row " style="margin-top: 60px;">
                 <div class="row col-8 mx-0 pl-0 align-self-center">
                     <img src="{{ asset('new_assets/img/icon/coin.svg')}}" style="color:black;">
 
                     <h5 class="m-0 ml-2 font-weight-bold align-self-center">คะแนนของคุณ {{$my->customer_point}} คะแนน</h5>
                 </div>
                 <div class="custom-control custom-switch" id="customSwitchdiv">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" onchange="coinswitch();" {{$my->customer_point==0?'disabled':''}}>
                     <label class="custom-control-label" for="customSwitch1"></label>
                 </div>
             </div>
@@ -181,6 +181,37 @@
         
         for (var checkbox of checkboxes) {
             checkbox.checked = this.checked;
+        }
+    }
+
+    function coinswitch(){
+        var  chk = 0;
+        if($('#customSwitch1').is(":checked")){
+            chk = 0;
+        }else{
+            chk = 1; //uncheck
+
+        }
+
+        if(countchk == 0){
+            alert('กรุณาเลือกสินค้า');
+            document.getElementById('customSwitch1').checked=false;
+        }else{
+            // $('#formcheckoutaddress').submit();
+            $.ajax({
+                url: '{{ url("coinswitch")}}',
+                type: 'GET',
+                dataType: 'HTML',
+                data: {'chk':chk},
+                success: function(data) {
+                    var t  = JSON.parse(data);
+                    // console.log(t['colors']);
+                    $('#chkout').html(t['sum']);
+                    // $('#chkcount').html(t['chkcount']);
+                    // countchk =  t['chkcount'];
+                }
+            });
+            // alert('vvvvv');
         }
     }
 
@@ -263,7 +294,7 @@
                 if(ele[i].type=='checkbox')  
                     ele[i].checked=false;      
             }  
-            chkdels = 1;
+            chkdels = 1; //ติ้กออก
         }
 
         $.ajax({

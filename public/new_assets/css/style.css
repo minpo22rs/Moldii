@@ -2302,6 +2302,32 @@ a.badge-dark {
     opacity: 0.5;
 }
 
+
+
+.btn-index {
+    background: #fc684b !important;
+    /* old :  #fc684b !important;*/
+    border-color: #fc684b !important;
+    color: #ffffff !important;
+}
+
+.btn-index:hover,
+.btn-index:focus,
+.btn-index:active,
+.btn-index.active {
+    background: #f3882d !important;
+    border-color: #f3882d !important;
+}
+
+.btn-index.disabled,
+.btn-index:disabled {
+    background: #fc684b;
+    border-color: #fc684b;
+    opacity: 0.5;
+}
+
+
+
 .btn-danger {
     background: #FF5C63 !important;
     /* old :  #FF5C63 !important;*/
@@ -3664,7 +3690,7 @@ a.badge-dark {
 }
 
 .bg-danger {
-    background: #FF5C63 !important;
+    background: #fc684b !important;
     color: #FFF;
 }
 
@@ -8718,7 +8744,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .input-xl {
     border: none;
     background-color: transparent;
-    font-size: 78px;
+    font-size: 65px;
     font-weight: bold;
     color: rgba(115, 115, 115, 1);
 }
@@ -8726,7 +8752,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 .input-xl::-webkit-input-placeholder {
     font-weight: bold;
     color: rgba(228, 228, 228, 1);
-    font-size: 78px;
+    font-size: 65px;
 }
 
 .input-xl[type=number]::-webkit-inner-spin-button {

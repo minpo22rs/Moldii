@@ -54,7 +54,7 @@ class LoginController extends Controller
             Session::put('cid',$user->customer_id);
             
             // dd(Session::all());
-            return redirect('/');
+            return redirect('/index');
         } else {
             // dd('dddd');
             return redirect('user/login')->with('error','Username Or Password Are Wrong.');

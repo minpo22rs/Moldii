@@ -9,7 +9,12 @@ use DB;
 class MainController extends Controller
 {
     //
+
     public function index()
+    {
+        return redirect('/user/login');
+    }
+    public function indexpage()
     {
         $c = DB::Table('tb_news')->where('new_type','C')->get();
         $v = DB::Table('tb_news')->where('new_type','V')->get();
@@ -22,5 +27,8 @@ class MainController extends Controller
 
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban]);
     }
+
+
+
     
 }

@@ -25,6 +25,12 @@ class CartController extends Controller
         Session::put('totalcart',0);
         Session::put('countcart',0);
         Session::put('cartid',null);
+        Session::put('coin',null);
+        Session::put('typepayment',null);
+        Session::put('bankcode',null);
+        Session::put('idcode',null);
+        Session::put('codename','เลือกโค้ดส่วนลด');
+        Session::put('sumship',0);
         // dd(Session::all());
         return view('mobile.member.userAccount.my_list.shoppingCart')->with(['mycart'=>$mycart,'my'=>$my]);
     }
@@ -72,77 +78,117 @@ class CartController extends Controller
         $idpluck =  array();
         $mycart = Tb_cart::where('store_id',$request->s)->where('customer_id',Session::get('cid'))->get();
         $idpluck = $mycart->pluck('cart_id');
-        // dd($idpluck );
+        $sessionsum = 0;
+        $sessioncount = 0;
+        
+
+
         if($request->chkdel ==1){
             if(Session::get('cartid') == null){
                 Session::put('totalcart',0);
                 Session::put('countcart',0);
                 Session::put('cartid',null);
             }else{
+                $colors =  Session::get('cartid');
+                // dd($colors);
+
                 foreach( $mycart as  $mycarts){
+                    $sum = 0;
+                    $chkcount = 0;
+                    $sessionsum = 0;
+                    $sessioncount = 0;
                     $product = DB::Table('tb_products')->where('product_id',$mycarts->product_id)->first();
                     if( $product->product_discount == null){
-                        $sum += $product->product_price*$mycarts->count;
+                        $sum = $product->product_price*$mycarts->count;
                     }else{
         
-                        $sum += $product->product_discount*$mycarts->count;
+                        $sum = $product->product_discount*$mycarts->count;
                     }
                     // Session::push('cartid',$mycarts->cart_id);
-                    $chkcount += $mycarts->count;
+                    
+
+                    // dd($mycarts->cart_id);
+
+                    if (($key = array_search($mycarts->cart_id, $colors)) !== false) {
+                        unset($colors[$key]);
+                        // dd('sssssss');
+                    // $chkcount += $mycarts->count;
+                        $sessioncount =  Session::get('countcart')-$mycarts->count;
+                        Session::put('countcart',$sessioncount);
+                
+                        $sessionsum =  Session::get('totalcart')-$sum;
+                        Session::put('totalcart',$sessionsum);
+
+
+                        
+                    }
                 }
 
-
-
-
-                $colors =  Session::get('cartid');
-                foreach ($idpluck  as $idplucks){
-                    if (($key = array_search($idplucks, $colors)) !== false) {
-                            unset($colors[$key]);
-                        }
-                }
-
-               
                 Session::put('cartid',$colors);
+                
+                if(Session::get('cartid') == null){
+                    Session::put('totalcart',0);
+                    Session::put('countcart',0);
+                    Session::put('cartid',null);
+                }
 
-
-
-                $sessioncount =  Session::get('countcart')-$chkcount;
-                Session::put('countcart',$sessioncount);
-        
-                $sessionsum =  Session::get('totalcart')-$sum;
-                Session::put('totalcart',$sessionsum);
+            //    dd('rrrr');
+                
             }
 
         }else{
             foreach( $mycart as  $mycarts){
                 $product = DB::Table('tb_products')->where('product_id',$mycarts->product_id)->first();
+                
+                $sum = 0;
+                $chkcount = 0;
+                $sessionsum = 0;
+                $sessioncount = 0;
                 if( $product->product_discount == null){
                     $sum += $product->product_price*$mycarts->count;
                 }else{
     
                     $sum += $product->product_discount*$mycarts->count;
                 }
-                Session::push('cartid',$mycarts->cart_id);
-                $chkcount += $mycarts->count;
+
+                if( Session::get('cartid') != null){
+                    $colors =Session::get('cartid');
+                    
+                    if (($key = array_search($mycarts->cart_id,$colors) === false)) {
+                        
+                        Session::push('cartid',$mycarts->cart_id);
+
+                
+                        $chkcount += $mycarts->count;
+                        $sessioncount =  Session::get('countcart')+$chkcount;
+                        Session::put('countcart',$sessioncount);
+                
+                        $sessionsum =  Session::get('totalcart')+$sum;
+                        Session::put('totalcart',$sessionsum);
+                    }
+                    
+                }else{
+                    Session::push('cartid',$mycarts->cart_id);
+
+                
+                    $chkcount += $mycarts->count;
+                    $sessioncount =  Session::get('countcart')+$chkcount;
+                    Session::put('countcart',$sessioncount);
+            
+                    $sessionsum =  Session::get('totalcart')+$sum;
+                    Session::put('totalcart',$sessionsum);
+
+                }
+              
             }
     
-            $sessioncount =  Session::get('countcart')+$chkcount;
-            Session::put('countcart',$sessioncount);
-    
-            $sessionsum =  Session::get('totalcart')+$sum;
-            Session::put('totalcart',$sessionsum);
-
         }
-       
-
-        // dd(Session::all());
 
         $data = array(
-            'sum' => number_format( $sessionsum),
-            'chkcount' => $sessioncount,
+            'sum' => number_format( Session::get('totalcart'),2,'.',''),
+            'chkcount' => Session::get('countcart'),
             'colors' =>  Session::get('cartid')
         );
-        // dd(Session::all());
         return  json_encode($data);
     }
 
@@ -168,8 +214,8 @@ class CartController extends Controller
                 Session::put('countcart',0);
                 Session::put('cartid',null);
             }else{
-                Session::decrement('countcart', $decrementBy = 1);
-                $sessioncount =  Session::get('countcart');
+                // Session::decrement('countcart', $decrementBy = 1);
+                $sessioncount =  Session::get('countcart')-$mycart->count;
                 $colors =  Session::get('cartid');
     
                 //delete element in array by value "green"
@@ -177,6 +223,7 @@ class CartController extends Controller
                     unset($colors[$key]);
                 }
                 Session::put('cartid',$colors);
+                Session::put('countcart',$sessioncount);
                 $sessionsum =  Session::get('totalcart')-$sum;
                 Session::put('totalcart',$sessionsum);
             }
@@ -184,7 +231,7 @@ class CartController extends Controller
 
         }else{
                
-            $sessioncount =  Session::get('countcart')+1;
+            $sessioncount =  Session::get('countcart')+$mycart->count;
             Session::put('countcart',$sessioncount);
             Session::push('cartid',$mycart->cart_id);
             $sessionsum =  Session::get('totalcart')+$sum;
@@ -194,8 +241,8 @@ class CartController extends Controller
 
 
         $data = array(
-            'sum' => number_format( $sessionsum),
-            'chkcount' => $sessioncount,
+            'sum' => number_format(  Session::get('totalcart'),2,'.',''),
+            'chkcount' => Session::get('countcart'),
         );
 
         // dd(Session::all());
@@ -245,7 +292,7 @@ class CartController extends Controller
 
 
         $data = array(
-            'sum' => number_format(Session::get('totalcart')),
+            'sum' => number_format(Session::get('totalcart'),2,'.',''),
             'chkcount' =>Session::get('countcart'),
         );
 
@@ -270,6 +317,7 @@ class CartController extends Controller
        
         $my = User::where('customer_id',Session::get('cid'))->first();
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
+        // dd(Session::get('cid'));
         $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
         $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
         $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
@@ -287,7 +335,7 @@ class CartController extends Controller
             $sum =  Session::get('totalcart')-$request->p;
             Session::put('totalcart',$sum);
             $data = array(
-                'sum' => number_format( Session::get('totalcart')),
+                'sum' => number_format( Session::get('totalcart'),2,'.',''),
                 'chkcount' => Session::get('countcart'),
             );
     
@@ -311,7 +359,7 @@ class CartController extends Controller
             $sum =  Session::get('totalcart')+$request->p;
             Session::put('totalcart',$sum);
             $data = array(
-                'sum' => number_format( Session::get('totalcart')),
+                'sum' => number_format( Session::get('totalcart'),2,'.',''),
                 'chkcount' => Session::get('countcart'),
             );
 
@@ -322,6 +370,63 @@ class CartController extends Controller
         }
 
         
+    }
+
+    public function coinswitch(Request $request){
+        $my = User::where('customer_id',Session::get('cid'))->first();
+        Session::put('coin',0);
+        if($request->chk == 0){
+            Session::put('coin',-(int)$my->customer_point);
+            Session::put('totalcart',Session::get('totalcart')+ Session::get('coin'));
+
+        }else{
+            
+            Session::put('coin',null);
+            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_point);
+
+        }
+
+        $data = array(
+            'sum' => number_format( Session::get('totalcart'),2,'.',''),
+        );
+
+
+        return  json_encode($data);
+
+    }
+
+
+    public function coinswitch2(Request $request){
+        $my = User::where('customer_id',Session::get('cid'))->first();
+        $s1 =0;
+        $s2 =0;
+        $s3 =0;
+        Session::put('coin',0);
+        if($request->chk == 0){
+            Session::put('coin',-(int)$my->customer_point);
+            Session::put('totalcart',Session::get('totalcart')+ Session::get('coin'));
+            $s1 = number_format(Session::get('totalcart'),2,'.','');
+            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+
+        }else{
+            
+            Session::put('coin',null);
+            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_point);
+            $s1 = number_format(Session::get('totalcart'),2,'.','');
+            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+        }
+
+        $data = array(
+            'subsum' => '฿'.$s1,
+            'subsumship' => '฿'.$s2,
+            'totalsum' => '฿'.$s3,
+        );
+
+
+        return  json_encode($data);
+
     }
     
 }

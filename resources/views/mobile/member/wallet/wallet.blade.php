@@ -25,7 +25,7 @@
                             จำนวนเงินทั้งหมด
                         </div>
                         <div class="row mt-1 font-weight-bold" style="font-size: 22px;">
-                            THB 10,000.00
+                            THB {{number_format($sql->customer_wallet,2,'.',',')}}
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
 
 
 
-<div class="section full mt-3 mb-3">
+{{-- <div class="section full mt-3 mb-3">
     <div class="card bg-success mx-3" style="/* background-color: #005476; */ color: white;">
         <div class="card-body p-1">
             <div class="row font-weight-bold" style="height:2rem;">
@@ -68,153 +68,76 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="section full mt-3 mb-3">
     <div class="row mx-3 my-3">
         <div class="col-6 text-left">
             <span class="text-dark font-weight-bold">รายการล่าสุด</span>
         </div>
-        <div class="col-6 text-right">
+        {{-- <div class="col-6 text-right">
             <span class="text-info font-weight-bold">ดูทั้งหมด</span>
-        </div>
+        </div> --}}
     </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">Payment</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อรายการ</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold" style="font-size: 18px;">
-                        THB 1,000
-                    </span>
+
+    @foreach($p as $ps)
+        @if($ps->payment_type == 'OUT')
+            <div class="row border-top mx-3 my-3 text-dark">
+                <div class="col-6 mt-1 text-left">
+                    <div class="row">
+                        <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">ชำระค่าสินค้า</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12"><span>{{$ps->created_at}}</span></div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมเงิน</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อธนาคาร</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold text-success" style="font-size: 18px;">
-                        THB +1,000
-                    </span>
-                </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
+                <div class="col-6 mt-1 text-right">
+                    <div class="row mt-1">
+                        <div class="col-10 pr-0">
+                            <span class="font-weight-bold" style="font-size: 18px;">
+                                THB {{number_format($ps->amount )}}
+                            </span>
+                        </div>
+                        <div class="col-2">
+                            <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">Payment</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อรายการ</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold" style="font-size: 18px;">
-                        THB 1,000
-                    </span>
+        @else
+            <div class="row border-top mx-3 my-3 text-dark">
+                <div class="col-6 mt-1 text-left">
+                    <div class="row">
+                        <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมเงิน</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12"><span>{{$ps->created_at}}</span></div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมเงิน</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อธนาคาร</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold text-success" style="font-size: 18px;">
-                        THB +1,000
-                    </span>
-                </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
+                <div class="col-6 mt-1 text-right">
+                    <div class="row mt-1">
+                        <div class="col-10 pr-0">
+                            <span class="font-weight-bold text-success" style="font-size: 18px;">
+                                THB +{{number_format($ps->amount )}}
+                            </span>
+                        </div>
+                        <div class="col-2">
+                            <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">Payment</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อรายการ</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold" style="font-size: 18px;">
-                        THB 1,000
-                    </span>
-                </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row border-top mx-3 my-3 text-dark">
-        <div class="col-6 mt-1 text-left">
-            <div class="row">
-                <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมเงิน</span></div>
-            </div>
-            <div class="row">
-                <div class="col-12"><span>ชื่อธนาคาร</span></div>
-            </div>
-        </div>
-        <div class="col-6 mt-1 text-right">
-            <div class="row mt-1">
-                <div class="col-10 pr-0">
-                    <span class="font-weight-bold text-success" style="font-size: 18px;">
-                        THB +1,000
-                    </span>
-                </div>
-                <div class="col-2">
-                    <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endif
+    @endforeach
+   
 </div>
 @endsection
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
+    var msg = "{{Session::get('msg')}}"; 
+    if(msg){
+        alert(msg);
+    }
 </script>
 @endsection

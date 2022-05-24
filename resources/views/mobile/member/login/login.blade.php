@@ -20,7 +20,7 @@
 </style>
     @section('content')
         <div id="bg">
-            <img src="{{asset('new_assets/img/login.png')}}" alt="">
+            <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
         </div>
         <br><br><br>
         <div class = "m-1">
@@ -49,7 +49,7 @@
                                     <a href="{{url('user/forgotPassword')}}"><span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">Forgot password?</span></a>
                                 </div>
                                 <div class = "col-10 offset-1 text-center">
-                                    <input  type = "submit" class = "btn btn-danger btn-block font-weight-bold my-3 rounded-pill" 
+                                    <input  type = "submit" class = "btn btn-index btn-block font-weight-bold my-3 rounded-pill" 
                                             style = "   font-size: 18px; 
                                                         align-items: center; height: 50px;" value = "Login">
                                 </div>

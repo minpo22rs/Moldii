@@ -67,6 +67,7 @@ Route::get('user/creditCard', [UserAccController::class, 'creditCard']);// ร�
 Route::get('user/addCreditCard', [UserAccController::class, 'addCreditCard']);// การเพิ่มบัตร
 Route::post('user/saveCreditCardonProfile', [UserAccController::class, 'saveCreditCardonProfile']);// การเพิ่มบัตร
 
+Route::get('user/deleteCredit/{id}', [UserAccController::class, 'deleteCredit']);// รายการของฉัน
 
 Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
 Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
@@ -80,16 +81,20 @@ Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำก
 Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);// เลือกที่อยู่
 Route::get('user/paymentMethod', [UserAccController::class, 'paymentMethod']);// ช่องทางการชำระเงิน
 Route::get('user/addCreditCard_2', [UserAccController::class, 'addCreditCard_2']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
+Route::post('user/saveCreditCardonCart', [UserAccController::class, 'saveCreditCardonCart']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
 Route::get('user/deliveryStatus', [UserAccController::class, 'deliveryStatus']);// สถานะการจัดส่ง
 Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
 Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
 Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
+Route::get('user/selectpaymentWallet/{type}/{num}', [WalletController::class, 'selectpaymentWallet']); 
 Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
 Route::get('user/bankAccount', [WalletController::class, 'bankAccount']); // บัญชีธนาคาร
 Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); // ระบุจำนวน
 Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
+Route::post('user/paymentWallet', [WalletController::class, 'paymentWallet']); // Top-up wallet
+Route::post('walletgateway/response/{id}', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 
 
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
@@ -97,6 +102,7 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 
 
 Route::get('/', [MainController::class, 'index']); 
+Route::get('/index', [MainController::class, 'indexpage']); 
 Route::get('logout', [LoginController::class, 'logout']); 
 
 
@@ -133,6 +139,8 @@ Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkou
 Route::get('delcartid', [CartController::class, 'delcartid']); 
 Route::get('countdown', [CartController::class, 'countdown']); 
 Route::get('countup', [CartController::class, 'countup']); 
+Route::get('coinswitch', [CartController::class, 'coinswitch']); 
+Route::get('coinswitch2', [CartController::class, 'coinswitch2']); 
 
 
 
@@ -184,7 +192,14 @@ Route::get('home', [HomeController::class, 'index']);
 
 //order
 Route::get('ordertoship', [OrderController::class, 'ordertoship']);
-Route::get('addorder', [OrderController::class, 'addorder']);
+Route::match(['GET', 'POST'],'addorder', [OrderController::class, 'addorder']);
+Route::get('bankcode', [OrderController::class, 'bankcode']);
+Route::get('choosecode/{ship}', [OrderController::class, 'choosecode']);
+Route::get('selectcode/{id}/{ship}', [OrderController::class, 'selectcode']);
+Route::get('selectpaymentmethod/{type}/{name}', [OrderController::class, 'selectpaymentmethod']);
+
+Route::post('gateway/response', [OrderController::class, 'addorder']);
+Route::post('paymentgateway', [OrderController::class, 'paymentgateway']);
 
 
 // Test UI 

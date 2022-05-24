@@ -237,17 +237,15 @@ color: #666;
                 Write Me
               </h2>
             </div>
-            <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget">
+            <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget" enctype="multipart/form-data">
                 @csrf
+
                 <div class="widget-post__content">
                     <label for="post-content" class="sr-only">Share</label>
                     <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
                         
                     </textarea>
-                    <div class="row" id="rowimage"> </div>
-                    <div class="row" id="rowvideo"> </div>
-                    
-
+                    <div class="row" id="rowsocial"> </div>
                     
                 </div>
                 <div class="widget-post__options is--hidden" id="stock-options">
@@ -259,30 +257,33 @@ color: #666;
                             stock
                         </button> --}}
 
-                        <button type="button" class="btn post-actions__upload attachments--btn">
+                        <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
                             <label for="upload-video" class="post-actions__label">
 
                                 <i class="fa fa-video " aria-hidden="true"></i> 
                             </label>
                         </button>
-                        <input type="file" id="upload-video" name="video[]" accept="video/*;capture=camera" multiple onchange="readGalleryURL1(this)">
+                        {{-- <input type="file" id="upload-video" name="video[0]" accept="video/mp4;capture=camera" multiple onclick="addimagegallery()"> --}}
 
-                        <button type="button" class="btn post-actions__upload attachments--btn">
+                        <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
                             <label for="upload-image" class="post-actions__label">
                                 <i class="fa fa-file-image" aria-hidden="true"></i> 
                             </label>
                         </button>
-                        <input type="file" id="upload-image" name="img[]" accept="image/*;capture=camera" multiple onchange="readGalleryURL2(this)">
+                        {{-- <input type="file" id="upload-image" name="img[0]" accept="image/*;capture=camera" multiple onchange="addimagegallery()"> --}}
                     </div>
 
                     <div class="post-actions__widget">
                         <button class="btn post-actions__publish">Post</button>
                     </div>
                 </div>
+
+
             </form>
         </div>
 
     </div>
+  
 
     <div class="mt-3" name="story_videos_section" id="story_videos_section">
 
@@ -325,9 +326,10 @@ color: #666;
                                 <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
                             </div>
                         </div>
+                        
+
                         <div class="card-body p-2">
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
-
                         </div>
                         <a href="{{url('content/'.$sqls->new_id.'')}}"><img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"></a>
 
@@ -551,7 +553,7 @@ color: #666;
             }
 
             bottom_now(1);
-
+            var gallery = 1000;
 
             const btnSearch = document.getElementById('btn_search_2');
             const offSearch = document.getElementById('off_search_2');
@@ -578,47 +580,82 @@ color: #666;
         </script>
         <script>
 
+            function addimagegallery(){
 
-            function readGalleryURL1(input) {
-
-                var filelist = input.files;
-                for(var i=0; i<filelist.length; i++)
-                {
-                    writevideo(filelist[i]);
-                }
+                gallery++;
+                console.log('cc');
+                newimage =  '<div class="col-6" id="div'+gallery+'" style="padding: 20px;">'+
+                            '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL(this,'+gallery+')">'+
+                            '<img id="gallerypreview'+gallery+'" style="max-height:100px ;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
+                            '<button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+                $('#rowsocial').append(newimage);
             }
 
-            function writevideo(v) {
+            function browsImage(id){
+                $('.chooseImage'+id).click();
+            }
 
+
+            function writevideo(v,id) {
+                gallery++;
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    var videotag= '<div class="col-3"><video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video></div>';
+                    $('#gallerypreview'+id).attr('src', e.target.result);
+
+                    // var videotag= '<div class="col-6" id="div'+gallery+'"><video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
                         
-                    $('#rowvideo').append(videotag);
+                    // $('#rowsocial').append(videotag);
                 }
                 reader.readAsDataURL(v);
             }
 
 
-            function readGalleryURL2(input)
+            function readGalleryURL(input,id)
             {
+
+               
                 var filelist = input.files;
                 for(var i=0; i<filelist.length; i++)
                 {
-                    writeimg(filelist[i]);
+                    gallery++;
+                    // console.log(filelist[i].name);
+                    var fileName = filelist[i].name;
+                    var fileExtension = fileName.split('.').pop();
+                    if(fileExtension == 'mp4'){
+                        writevideo(filelist[i],id);
+                        // var imgs = '<input type="file" name=video['+gallery+'] value="'+filelist[i].name+'" >';
+                        // $('#rowsocial').append(imgs);
+
+                    }else{
+                        writeimg(filelist[i],id);
+                        // var imgs = '<input type="file" name=img['+gallery+'] value="'+filelist[i].name+'" >';
+                        // $('#rowsocial').append(imgs);
+                    }
                 }
+               
             }
 
 
-            function writeimg(v) {
-
+            function writeimg(v,id) {
+                gallery++;
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    var imgtag = '<div class="col-3"><img id="myImg" src="'+e.target.result+'" width="150" height="150"></div>';
+                    // console.log(e.target.result.name);
+                    // var imgtag = '<div class="col-6" id="div'+gallery+'"><img  src="'+e.target.result+'" width="150" height="150"><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+                    $('#gallerypreview'+id).attr('src', e.target.result);
                         
-                    $('#rowimage').append(imgtag);
+                    // $('#rowsocial').append(imgtag);
                 }
                 reader.readAsDataURL(v);
+            }
+
+
+            function deletegallery(num){
+
+                $('#div'+num).remove();
+                //gallery--;
+                // $('#delete').append('<input type="hidden" name="deletedkey[]" value="'+num+'">');
+
             }
 
             // myInputimage.addEventListener('change', sendPic, false);

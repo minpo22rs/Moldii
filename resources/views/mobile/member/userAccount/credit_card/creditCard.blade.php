@@ -15,33 +15,45 @@
     <div class="col-12 mx-0 align-self-center row p-0">
         <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">บัตรของคุณ</h4>
     </div>
-    <div class="a-shadow">
-        <div class="row col-12 p-1 pl-2 my-4 mx-0  brd-10" style="height:2.8125rem;">
-            <img src="{{asset('new_assets/img/icon/logo_visa.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
-            <div class="text-start col-10 align-self-center">
-                <h5 class="m-0 font-weight-bold">1234</h5>
+    @foreach ($on as $item)
+        @if($item->status_credit == 'on')
+            <div class="a-shadow">
+                <div class="row col-12 p-1 pl-2 my-4 mx-0  brd-10" style="height:2.8125rem;">
+                    @if($item->typecard == 'VIS')
+                        <img src="{{asset('new_assets/img/icon/logo_visa.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
+                    @else
+                        <img src="{{asset('new_assets/img/icon/logo_mastercard.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
+                    @endif
+                    <div class="text-start col-10 align-self-center">
+                        <h5 class="m-0 font-weight-bold">{{$item->nickname!=null?$item->nickname:'* '.$item->num.''}}</h5>
+                    </div>
+
+                    <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br>
+
+
+                </div>
             </div>
 
-            <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br>
+        @else
+            <div class="a-shadow">
+                <div class="row col-12 p-1 pl-2 my-4 mx-0  brd-10" style="height:2.8125rem;">
+                    @if($item->typecard == 'VIS')
+                        <img src="{{asset('new_assets/img/icon/logo_visa.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
+                    @else
+                        <img src="{{asset('new_assets/img/icon/logo_mastercard.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
+                    @endif
+                    <div class="text-start col-10 align-self-center">
+                        <h5 class="m-0 font-weight-bold">{{$item->nickname!=null?$item->nickname:'* '.$item->num.''}}</h5>
+                    </div>
 
+                    <i class="fa fa-trash" style="margin-top: 5px" onclick="dc({{$item->id_customer_credits}});"></i> 
 
-        </div>
-    </div>
-
-
-    <div class="a-shadow">
-        <div class="row col-12 p-1 pl-2 my-4 mx-0  brd-10" style="height:2.8125rem;">
-            <img src="{{asset('new_assets/img/icon/logo_visa.svg')}}" style="width:1.875rem; height:0.625rem;" class="col-1 p-0 align-self-center">
-            <div class="text-start col-10 align-self-center">
-                <h5 class="m-0 font-weight-bold">1234</h5>
+                </div>
             </div>
-
-            <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
-
-
-        </div>
-    </div>
-
+        @endif
+        
+    @endforeach
+    
 
 </div>
 <div class=" p-2 col-12 m-0  border-top border-bottom   " style="color:black; font-size:18px">
@@ -73,11 +85,21 @@
 
 @section('custom_script')
 <script>
-    bottom_now(3);
+    bottom_now(7);
 
     var msg = "{{Session::get('msg')}}"; 
     if(msg){
         alert(msg);
+    }
+
+
+    function dc(v){
+        // alert('ยืนยันการลบบัตรเครดิตนี้ใช่หรือไม่');
+        if (confirm("ยืนยันการลบบัตรเครดิตนี้ใช่หรือไม่") == true) {
+            window.location.replace ('deleteCredit/'+v)
+        } else {
+            
+        }
     }
 </script>
 @endsection

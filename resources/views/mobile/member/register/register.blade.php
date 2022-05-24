@@ -20,7 +20,7 @@
 </style>
 @section('content')
 <div id="bg">
-    <img src="{{asset('new_assets/img/login.png')}}" alt="">
+    <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
 </div>
 <br>
 <div class="m-1">
@@ -61,7 +61,7 @@
                     <input type="password" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="password" id="password" value="" minlength="8" placeholder="Password">
                 </div>
                 <div class="col-5 offset-1 text-center">
-                    <input type="button" class="btn btn-danger btn-block font-weight-bold my-3 rounded-pill" 
+                    <input type="button" class="btn btn-index btn-block font-weight-bold my-3 rounded-pill" 
                                         style="font-size: 18px; align-items: center; height: 50px;" value="Sign-up" 
                                         id="subbutton" onclick="subform();">
                 </div>

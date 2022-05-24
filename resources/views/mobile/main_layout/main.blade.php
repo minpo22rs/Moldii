@@ -11,7 +11,7 @@
     <meta name="description" content="Moldii">
     <meta name="keywords" content="Moldii" />
     <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/icon/512x512.png') }}" sizes="512x512">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('new_assets/img/icon/192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/new_assets/img/icon/192x192.png') }}">
     <link rel="stylesheet" href="{{ asset('new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -47,7 +47,7 @@
 
 
         @yield('numpad')
-        <a href="{{url('/')}}" class="item" id="bottom_button_home">
+        <a href="{{url('/index')}}" class="item" id="bottom_button_home">
             <div class="col">
                 <ion-icon name="home-outline" class="text-dark md hydrated" id="bottom_icon_home"></ion-icon>
                 <span class="text-dark" id="bottom_text_home">หน้าหลัก</span>

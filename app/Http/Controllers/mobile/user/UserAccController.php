@@ -10,6 +10,7 @@ use App\Models\Tb_address;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\Tb_credit;
+use App\Models\User;
 
 class UserAccController extends Controller
 {
@@ -21,8 +22,8 @@ class UserAccController extends Controller
 
     public function login()
     {
+        // dd(Session::all());
         // Session::flush();
-
         return view('mobile.member.login.login');
     }
 
@@ -50,7 +51,8 @@ class UserAccController extends Controller
 
     public function myAccount()// หน้าบัญชีของฉัน
     {
-        return view('mobile.member.userAccount.myAccount');
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.userAccount.myAccount')->with(['sql'=>$sql]);
     }
 
     public function profileSetting()
@@ -93,6 +95,7 @@ class UserAccController extends Controller
 
     }
     public function newPassword(){// กรอกรหัสผ่านใหม่
+        
         return view('mobile.member.userAccount.password.newPassword');
 
     }
@@ -196,9 +199,8 @@ class UserAccController extends Controller
 
 
     public function creditCard(){// รายการบัญชีธนาคาร/บัตรที่บันทึก
-        $on = Tb_credit::where('customer_id',Session::get('cid'))->where('status_credit','=','on')->first();
-        $off = Tb_credit::where('customer_id',Session::get('cid'))->where('status_credit','=','off')->get();
-        return view('mobile.member.userAccount.credit_card.creditCard')->with(['on'=>$on,'off'=>$off]);
+        $on = Tb_credit::where('customer_id',Session::get('cid'))->get();
+        return view('mobile.member.userAccount.credit_card.creditCard')->with(['on'=>$on]);
 
     }
     public function addCreditCard(){// การเพิ่มบัตร
@@ -206,9 +208,16 @@ class UserAccController extends Controller
 
     }
 
+    public function deleteCredit($id){// การลบบัตร
+        // dd($id);
+        Tb_credit::where('id_customer_credits', $id)->delete();
+
+        return redirect('user/creditCard')->with('msg','ลบบัตรเรียบร้อยแล้ว');
+    }
+
 
     public function saveCreditCardonProfile(Request $request){// การบันทึกบัตร
-
+        // dd($request->all());
         $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
         $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem:";
         $base64 = base64_encode($public);
@@ -255,8 +264,10 @@ class UserAccController extends Controller
                 $a->nickname  =  $request->nickname;
     
             }
-            if(isset($request->chk)){
-                $a->status_credit  =  $request->chk;
+            if(isset($request->status)){
+                Tb_credit::where('customer_id', Session::get('cid'))->update(['status_credit'=>'off']);
+
+                $a->status_credit  =  $request->status;
                 
             }
             $a->save();
@@ -265,7 +276,7 @@ class UserAccController extends Controller
             
         }
 
-        return redirect('user/creditCard')->with('msg','บันทึกเรียบร้อย');
+        return redirect('user/creditCard')->with('msg','บันทึกบัตรเรียบร้อยแล้ว');
 
     }
 
@@ -336,11 +347,77 @@ class UserAccController extends Controller
     public function paymentMethod(){// ช่องทางการชำระเงิน
         $on = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','on')->first();
         $off = DB::Table('tb_customer_credits')->where('customer_id',Session::get('cid'))->where('status_credit','=','off')->get();
+        $user = User::where('customer_id',Session::get('cid'))->first();
         // $publicKey ='llhk';
         // $head =  base64_encode($s);
-        return view('mobile.member.userAccount.my_list.paymentMethod')->with(['on'=>$on,'off'=>$off]);
+        return view('mobile.member.userAccount.my_list.paymentMethod')->with(['on'=>$on,'off'=>$off,'user'=>$user]);
 
     }
+
+    public function saveCreditCardonCart(Request $request){// การบันทึกบัตรจากหน้าตระกร้า
+        // dd( $request->all());
+        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
+        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem:";
+        $base64 = base64_encode($public);
+        $b = "Basic ";
+        $headerskey = $b.$base64;
+
+        $data = array(
+            'rememberCard' => true,
+            'card' => array(
+                "number"=> str_replace(' ', '', $request->no),
+                "expirationMonth"=> $request->expirem,
+                "expirationYear"=> $request->expirey,
+                "securityCode"=> $request->ccv,
+                "name"=> $request->name
+        ));
+
+        $headers = array(
+            "Authorization:" . $headerskey,
+            'Content-Type: application/json',
+        );
+       
+
+        $payload = json_encode($data);
+        $ch = curl_init('https://api.globalprimepay.com/v2/tokens');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        $chargeResp = json_decode($result, true);
+
+        // dd($chargeResp['card']['cardType']);
+        if($chargeResp['resultCode'] == "00"){
+            $a = new Tb_credit();
+            $a->customer_id  =  Session::get('cid');
+            $a->typecard  =  $chargeResp['card']['cardType'];
+            $a->token  = $chargeResp['card']['token'];
+            $a->num  = substr($chargeResp['card']['number'],-4,4);
+            if(isset($request->nickname)){
+                $a->nickname  =  $request->nickname;
+    
+            }
+            if(isset($request->status)){
+                Tb_credit::where('customer_id', Session::get('cid'))->update(['status_credit'=>'off']);
+                $a->status_credit  =  $request->status;
+                
+            }
+            $a->save();
+        }else{
+            return redirect('user/paymentMethod')->with('msg','ไม่สามารถบันทึกได้ กรุณากรอกข้อมูลใหม่อีกครั้ง');
+            
+        }
+
+        return redirect('user/paymentMethod')->with('msg','บันทึกบัตรเรียบร้อยแล้ว');
+
+    }
+
+
     public function addCreditCard_2(){// ช่องทางการชำระเงิน
         return view('mobile.member.userAccount.my_list.addCreditCard');
 

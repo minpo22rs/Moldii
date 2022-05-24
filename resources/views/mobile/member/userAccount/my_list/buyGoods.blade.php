@@ -2,7 +2,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
+        <ion-icon name="arrow-back-outline" onclick="window.location.replace('cartindex')"></ion-icon>
     </div>
     <div class="pageTitle">
         ทำการสั่งซื้อ
@@ -31,13 +31,13 @@
 
         </a>
     </div>
-    <?php  $sumship = 0;?>
+    <?php  $sumship = 0;$countt = 0;?>
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
                 $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
                 $sum = 0;
-               
                 $countt = 0;
+                
 
                 $pluck = $cartt->pluck('product_id');
                 $ship = DB::Table('tb_product_shippings')->whereIn('id_product',$pluck)
@@ -64,7 +64,7 @@
                         $sum += (float)$product->product_discount*(int)$cartts->count;
                     } 
 
-                    $countt != $cartts->count;
+                    $countt += $cartts->count;
             ?>
             <div class="col-12 row p-2 pr-1 border-top m-0">
                 <div class="col-3 p-0">
@@ -79,7 +79,7 @@
                     <h5 class="mb-1 font-weight-bold" style="">x{{$cartts->count}}</h5>
                     <div class="row justify-content-end col-12 m-0 p-0">
                         <!-- <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿200.00</s> </h5> -->
-                        <h5 class="m-0 font-weight-bold ml-1">฿{{number_format($product->product_discount!=null?$product->product_discount:$product->product_price)}}</h5>
+                        <h5 class="m-0 font-weight-bold ml-1">฿{{number_format($product->product_discount!=null?$product->product_discount:$product->product_price,2,'.','')}}</h5>
                     </div>
 
                 </div>
@@ -91,11 +91,11 @@
             <div class="col-12 row m-0 p-0 pt-1 justify-content-between border-top">
                 <div class="col-8 p-0">
                     <h5 class="m-0">{{$ship->name_company}} - ส่งธรรมดาในประเทศ </h5>
-                    <h5 class="m-0">จะได้รับใน {{date('d-m-Y')}} - {{date('d-m-Y', strtotime('+3 days'))}} </h5>
+                    <h5 class="m-0">จะได้รับใน {{date('d-m-Y', strtotime('+2 days'))}} - {{date('d-m-Y', strtotime('+5 days'))}} </h5>
                 </div>
                 <a href="" class="col-3 p-0 pr-1  row justify-content-end" style="color:black;">
                     <h5 class="m-0 align-self-center font-weight-bold mr-1">฿{{$ship->cost}}</h5>
-                    <i class="far fa-angle-right col-1 p-0 align-self-center" style="font-size:1.5rem;"></i>
+                    {{-- <i class="far fa-angle-right col-1 p-0 align-self-center" style="font-size:1.5rem;"></i> --}}
 
                 </a>
             </div>
@@ -107,115 +107,103 @@
                 <h5 class="m-0 ml-2 font-weight-bold">หมายเหตุ:</h5>
             </div>
             <div class="col-5 p-0 pr-1 mx-0 text-right">
-                <input style="border:none; width:100%; height:100%;  " id="test"type="text" name="name" class="form-control input_2 p-0  " placeholder="ฝากข้อความถึงผู้ขายหรือบริษัทขนส่ง">
+                <input style="border:none; width:100%; height:100%; margin-left: 30px;  " id="test" type="text" name="note" class="form-control input_2 p-0  " placeholder="ฝากข้อความถึงผู้ขาย">
 
                 <!-- <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);"></small> </h6> -->
 
             </div>
         </div>
-        <a href="{{url('')}}" class="row p-1 border-top border-bottom pl-2" style="color:black; height:2.375rem;">
+        <a href="javascript:;" class="row p-1 border-top border-bottom pl-2" style="color:black; height:2.375rem;">
             <div class="col-8 mx-0 align-self-center row p-0">
 
                 <h5 class="m-0 ml-2 font-weight-bold">คำสั่งซื้อทั้งหมด({{$countt}}ชิ้น):</h5>
             </div>
             <div class="col-4 mx-0 text-right">
-                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+$ship->cost)}}</h5>
+                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+$ship->cost,2,'.','')}}</h5>
 
             </div>
         </a>
     @endforeach
 
 
+    <form action="{{url('paymentgateway')}}" method="POST" id="formsubmit">
+        @csrf
+        {{-- โค้ดส่วนลด --}}
+        <a href="{{url('choosecode')}}/{{$sumship}}" class="row py-1 border-top pl-2 mt-1" style="color:black; font-size:18px">
+            <div class="col-6 mx-0 pl-0 align-self-center row">
+                <img src="{{ asset('new_assets/img/icon/ticket.svg')}}" alt="alt" style="">
 
-    {{-- โค้ดส่วนลด --}}
-    <a href="" class="row py-1 border-top pl-2 mt-1" style="color:black; font-size:18px">
-        <div class="col-6 mx-0 pl-0 align-self-center row">
-            <img src="{{ asset('new_assets/img/icon/ticket.svg')}}" alt="alt" style="">
-
-            <h5 class="m-0 ml-1 font-weight-bold align-self-center">โค้ดส่วนลด</h5>
-        </div>
-        <div class="col-6 mx-0 text-right">
-
-            <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-                <h5 class="m-0 mr-1 font-weight-bold align-self-center" style="color:rgba(80, 202, 101, 1);">เลือกโค้ดส่วนลด</h5>
-
-                <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
+                <h5 class="m-0 ml-1 font-weight-bold align-self-center">โค้ดส่วนลด</h5>
             </div>
-        </div>
-    </a>
-    <div class="col-12 mx-0  py-2 px-3 pl-1 border-top border-bottom align-self-center justify-content-between row ">
-        <div class="row col-8 mx-0 pl-0 align-self-center">
-            <img src="{{ asset('new_assets/img/icon/coin.svg')}}" style="color:black;">
+            <div class="col-6 mx-0 text-right">
 
-            <h5 class="m-0 ml-2 font-weight-bold align-self-center">คุณมีคะแนนไม่พอ</h5>
-        </div>
-        <div class="custom-control custom-switch  ">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1">
-            <label class="custom-control-label" for="customSwitch1"></label>
-        </div>
-    </div>
+                <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+                    <h5 class="m-0 mr-1 font-weight-bold align-self-center" style="color:rgba(80, 202, 101, 1);">{{Session::get('codename')}}</h5>
 
-    <a href="{{url('user/paymentMethod')}}" class="row py-1 border-top border-bottom pl-2 mt-2" style="color:black; font-size:18px">
-        <div class="col-6 mx-0 pl-0 align-self-center row">
-            <img src="{{ asset('new_assets/img/icon/wallet.svg')}}" alt="alt" style="">
-
-            <h5 class="m-0 ml-1 font-weight-bold align-self-center">วิธีการชำระเงิน</h5>
-        </div>
-        <div class="col-6 mx-0 text-right">
-
-            <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-                <h5 class="m-0 mr-1 font-weight-bold align-self-center" style="color:rgba(80, 202, 101, 1);">เลือกวิธีการชำระเงิน</h5>
-
-                <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
-            </div>
-        </div>
-    </a>
-    <div class="col-12 row p-0  p-2">
-
-        <div class="col-9 pr-0 align-self-center">
-            <h5 class="mb-1  " style="color:rgba(79, 77, 77, 1);">รวมค่าสินค้า</h5>
-            <h5 class="mb-1 " style="color:rgba(79, 77, 77, 1);">ค่าจัดส่ง</h5>
-            <h5 class="m-0 " style="color:rgba(79, 77, 77, 1);">รวมทั้งหมด</h5>
-        </div>
-        <div class="col-3 text-right pr-0 align-self-end">
-            <h5 class="mb-1 font-weight-bold" style="">฿{{number_format(Session::get('totalcart'))}}.00</h5>
-            <h5 class="mb-1 font-weight-bold" style="">฿{{$sumship}}.00</h5>
-            <h5 class="m-0 font-weight-bold" style="">฿{{number_format((Session::get('totalcart')+$sumship))}}.00</h5>
-        </div>
-    </div>
-    <input type="hidden" name="sumship" value="{{$sumship}}">
-    <div class="col-12 row m-0 pr-0 border-top justify-content-end">
-
-        <div class="col-12 row text-right p-0">
-            <div class="col px-1 py-1 align-self-center">
-                <div class="row p-0 m-0 justify-content-end">
-                    <h5 class="m-0 ">ยอดชำระเงินทั้งหมด</h5>
-                    <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format((Session::get('totalcart')+$sumship))}}.00</h5>
+                    <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
                 </div>
-                <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
             </div>
+        </a>
+        <div class="col-12 mx-0  py-2 px-3 pl-1 border-top border-bottom align-self-center justify-content-between row ">
+            <div class="row col-8 mx-0 pl-0 align-self-center">
+                <img src="{{ asset('new_assets/img/icon/coin.svg')}}" style="color:black;">
 
-
-
-            <a href="{{url('addorder')}}" style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square ">สั่งสินค้า</a>
+                <h5 class="m-0 ml-2 font-weight-bold align-self-center">คะแนนของคุณ {{$my->customer_point}} คะแนน</h5>
+            </div>
+            <div class="custom-control custom-switch  ">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="coinuser" value="{{$my->customer_point}}" onchange="coinswitch();" {{Session::get('coin')!=0?'checked':''}}  {{$my->customer_point==0?'disabled':''}}>
+                <label class="custom-control-label" for="customSwitch1"></label>
+            </div>
         </div>
-    </div>
+        
+        {{-- วิธีการชำระเงิน --}}
+        <a href="{{url('user/paymentMethod')}}" class="row py-1 border-top border-bottom pl-2 mt-2" style="color:black; font-size:18px">
+            <div class="col-6 mx-0 pl-0 align-self-center row">
+                <img src="{{ asset('new_assets/img/icon/wallet.svg')}}" alt="alt" style="">
+
+                <h5 class="m-0 ml-1 font-weight-bold align-self-center">วิธีการชำระเงิน</h5>
+            </div>
+            <div class="col-6 mx-0 text-right">
+
+                <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+                    <h5 class="m-0 mr-1 font-weight-bold align-self-center" style="color:rgba(80, 202, 101, 1);">{{Session::get('typepayment')==null?'เลือกวิธีการชำระเงิน':Session::get('typepayment')}}</h5>
+
+                    <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
+                </div>
+            </div>
+        </a>
+        <div class="col-12 row p-0  p-2">
+
+            <div class="col-9 pr-0 align-self-center">
+                <h5 class="mb-1  " style="color:rgba(79, 77, 77, 1);">รวมค่าสินค้า</h5>
+                <h5 class="mb-1 " style="color:rgba(79, 77, 77, 1);">ค่าจัดส่ง</h5>
+                <h5 class="m-0 " style="color:rgba(79, 77, 77, 1);">รวมทั้งหมด</h5>
+            </div>
+            <div class="col-3 text-right pr-0 align-self-end">
+                <h5 class="mb-1 font-weight-bold" style="" id="subsum">฿{{number_format(Session::get('totalcart'),2,'.','')}}</h5>
+                <h5 class="mb-1 font-weight-bold" style="">฿{{$sumship}}</h5>
+                <h5 class="m-0 font-weight-bold" style="" id="subsumship">฿{{number_format((Session::get('totalcart')+$sumship),2,'.','')}}</h5>
+            </div>
+        </div>
+        <input type="hidden" name="sumship" id="sumship" value="{{number_format($sumship,2,'.','')}}">
+        <div class="col-12 row m-0 pr-0 border-top justify-content-end">
+
+            <div class="col-12 row text-right p-0">
+                <div class="col px-1 py-1 align-self-center">
+                    <div class="row p-0 m-0 justify-content-end">
+                        <h5 class="m-0 ">ยอดชำระเงินทั้งหมด</h5>
+                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);" id="totalsum">฿{{number_format((Session::get('totalcart')+$sumship),2,'.','')}}</h5>
+                    </div>
+                    <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
+                </div>
 
 
 
+                <button style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square " onclick="submitform();">สั่งสินค้า</button>
+            </div>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+    </form>
 
 
 
@@ -228,6 +216,51 @@
     <script>
 
         bottom_now(3);
+
+        function coinswitch(){
+            var  chk = 0;
+            var  v = document.getElementById('sumship').value;
+            if($('#customSwitch1').is(":checked")){
+                chk = 0;
+            }else{
+                chk = 1; //uncheck
+                // document.getElementById('customSwitch1').checked=false;
+            }
+
+            
+            $.ajax({
+                url: '{{ url("coinswitch2")}}',
+                type: 'GET',
+                dataType: 'HTML',
+                data: {'chk':chk,'v':v},
+                success: function(data) {
+                    var t  = JSON.parse(data);
+                    // console.log(t['colors']);
+                    $('#subsum').html(t['subsum']);
+                    $('#subsumship').html(t['subsumship']);
+                    $('#totalsum').html(t['totalsum']);
+                    // $('#chkcount').html(t['chkcount']);
+                    // countchk =  t['chkcount'];
+                }
+            });
+           
+        
+        }
+
+
+        function submitform(){
+            var chk = "{{Session::get('typepayment')}}";
+            console.log(chk);
+            if(chk==''){
+                alert('กรุณาเลือกวิธีการชำระเงิน');
+
+            }else{
+                $('#formsubmit').submit();
+            }
+        }
+
+
+
     </script>
 
 @endsection

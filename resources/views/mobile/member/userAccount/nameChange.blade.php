@@ -15,8 +15,8 @@
     <form action="">
     @csrf
         <h3 class="ml-1">ชื่อใหม่</h3>
-        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="nameChange" id="nameChange" value="" placeholder="•••• •••• •••• ••••">
-        <h6 class="ml-1"><small>ห้ามเกิน 100 ตัวอักษร</small></h6>
+        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="nameChange" id="nameChange" value="" maxlength="50" placeholder="xxxxx">
+        <h6 class="ml-1"><small>ห้ามเกิน 50 ตัวอักษร</small></h6>
         <button type="submit" class="btn btn-success col-12" style="font-size:1.3rem;">บันทึก</button>
     </form>
 </div>
@@ -27,6 +27,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

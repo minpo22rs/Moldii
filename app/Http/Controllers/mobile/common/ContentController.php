@@ -5,6 +5,8 @@ namespace App\Http\Controllers\mobile\common;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\Tb_content_img;
+use App\Models\Tb_user_content;
 use Auth;
 use DB;
 use Session;
@@ -39,6 +41,43 @@ class ContentController extends Controller
 
     public function userpostcontent(Request $request){
         dd($request->all());
+        $content = new Tb_user_content();
+        $content->customer_id          = Session::get('cid');
+        if(isset($request->post)){
+            $content->new_title        = $request->post;
+
+        }
+        $content->save();
+
+        if ($request->img !== null || $request->video !== null)
+        {
+        //    dd('gggg');
+            $arr3 = array_unique( array_merge($request->img,$request->video) ); 
+
+            foreach($arr3 as $key => $item) {
+                // dd('asdasdasdasd');
+                if( $item !== null){
+                    // dd($item);
+                    $ext = pathinfo($item, PATHINFO_EXTENSION);
+                    $name = rand().time().'.'.$ext;
+                    $item->storeAs('content_img',  $name);
+                    $contentimg = new Tb_content_img();
+                    $contentimg->id_content  = $content->id;
+                    $contentimg->name  = $name;
+                    if($ext =='mp4'){
+                        $contentimg->type  = 'V';
+    
+                    }else{
+                        $contentimg->type  = 'I';
+    
+                    }
+                    $contentimg->save();
+                }
+               
+            }
+        }
+        // dd('rrr//rr');
+        return back()->with('success','โพสต์เรียบร้อยแล้ว');
 
     }
     

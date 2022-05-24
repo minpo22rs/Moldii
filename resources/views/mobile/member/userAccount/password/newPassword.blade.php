@@ -77,7 +77,11 @@
 
 
 </div>
+@endsection
+@section('custom_script')
+
 <script>
+    bottom_now(7);
     //_______________[Buy_goods]__________________//
     const showNum = document.getElementById("newPassword");
     const boxNum = document.getElementById("numpad_box");

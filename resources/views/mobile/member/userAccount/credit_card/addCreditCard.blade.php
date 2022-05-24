@@ -92,42 +92,6 @@
         e.target.value = e.target.value.replace(/[^\d ]/g,'');
         return false;
     }
-    // Basic eXV5Q2N2cG1JTGNlaVloTHNEVVBEaHZDeUpPdXlXZW06
-
-    document.getElementById("buttonok").addEventListener("click", function(event){
-        event.preventDefault();
-        var publicKey = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem";
-        var keyyy= "Basic " + btoa(publicKey + ":");
-        console.log(keyyy);
-        var dataReq = {
-            "rememberCard": false,
-            "card": {
-                "number": "4535017710535741",
-                "expirationMonth": "05",
-                "expirationYear": "28",
-                "securityCode": "184",
-                "name": "Card Test UAT (Server Test)"
-            }
-        };
-        $.ajax({
-            type: "POST",
-            url: "https://api.globalprimepay.com/v2/tokens",       // Test URL: https://api.globalprimepay.com/v2/tokens , Production URL: https://api.gbprimepay.com/v2/tokens
-            data: JSON.stringify(dataReq),
-            contentType: "application/json",
-            dataType: "json",
-            headers: {
-            "Authorization": "Basic " + btoa(publicKey + ":")
-            },
-            success: function(dataResp){
-                var dataStr = JSON.stringify(dataResp);
-                alert(dataStr);
-            },
-            failure: function(errMsg) {
-                alert(errMsg);
-            }
-        });
-    });
-
 
 
 </script>

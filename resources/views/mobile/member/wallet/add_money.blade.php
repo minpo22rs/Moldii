@@ -11,44 +11,221 @@
 @endsection
 @section('content')
 <div class="container m-0 p-0">
-    <div class="col-12 p-2 border-bottom">
-        <div class="col-12 mx-0 align-self-center row p-0">
-            <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">Bank Account</h4>
-        </div>
-        <div class="" style="box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.2);border-radius: 10px;">
-            <a href="{{url('user/addCreditCard')}}" class="row  col-12 pl-2 p-1 my-3 mx-0  brd-10" style="height:2.8125rem;">
-                <div class="text-start col-11 p-0  mr-1 row  align-self-center">
-                    <img src="{{asset('new_assets/img/icon/logo_bank/logo_K_PLUS.svg')}}" style="width:2rem; " class=" p-0 mr-1 align-self-center">
-                    <h4 class="m-0 font-weight-bold align-self-center">K PLUS</h4>
+
+
+
+
+    <ul class="listview link-listview mb-2">
+
+        {{-- บัตรเคดิต/บัตรเดบิต --}}
+        <li class="multi-level">
+            <a href="#" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">บัตรเคดิต/บัตรเดบิต</h5>
+                <div class="row">
+                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{$on!=null?'*'.$on->num:''}}</span>
 
 
                 </div>
 
-                <img src="{{asset('new_assets/img/icon/plus_2.svg')}}" style="width:1.48rem; height:1.48rem;" class="col-1 p-0 align-self-center"><br>
+            </a>
+            <!-- sub menu -->
+            <ul class="listview image-listview pb-0">
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/1/'.$on->num.'')}}" class="item border-top pr-3">
+                        @if($on->typecard == 'VIS')
+                            <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
+                        @else
+                            <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
+                        @endif
+                        <div class="in" >
+                            <h5 class="m-0  font-weight-bold align-self-center"></h5>
+                            <div class="row">
+                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$on->num}}</span>
+                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
+
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+                @foreach($off as $sqls)
+                    <li>
+                        <a href="{{url('user/selectpaymentWallet/1/'.$sqls->num.'')}}" class="item border-top pr-3">
+                            @if($sqls->typecard == 'VIS')
+                                <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
+                            @else
+                                <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
+                            @endif
+
+                            <div class="in" style="margin-right: 22px;">
+                                <h5 class="m-0  font-weight-bold align-self-center"></h5>
+                                <div class="row">
+                                    <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$sqls->num}}</span>
+                                    {{-- <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br> --}}
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </li>
+                @endforeach
+                    
+                <li>
+                    <a href="{{url('user/addCreditCard')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/plus_2.svg')}}" alt="image" style="height:1.5rem;" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-normal align-self-center">เพิ่มบัตรเครดิต/บัตรเดบิต</h5>
 
 
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- * sub menu -->
+        </li>
+
+        {{-- Mobile Banking --}}
+        <li class="multi-level">
+            <a href="#" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">Mobile Banking</h5>
+               
 
             </a>
-        </div>
-    </div>
-    <a href="{{url('user/Top_upWallet')}}" class="col-12 mx-0 p-2 align-self-center border-bottom row ">
-        <h4 class="m-0  font-weight-bold" style="color:rgba(84, 84, 84, 1);">Top-up wallet</h4>
-    </a>
-    <a href="{{url('user/bankAccount')}}" class="row py-2  pl-2 border-bottom" style="color:black; font-size:18px">
-        <div class="col-6 mx-0 pl-0 align-self-center row">
-            <img class="mx-2" src="{{ asset('new_assets/img/icon/$phone.svg')}}" alt="alt" >
+            <!-- sub menu -->
+            <ul class="listview image-listview pb-0">
 
-            <h5 class="m-0  font-weight-bold align-self-center" style="color:rgba(84, 84, 84, 1);">Bank Account</h5>
-        </div>
-        <div class="col-6 mx-0 text-right">
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/2/004')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Kplus.svg')}}" alt="image" class="image mr-1">
 
-            <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-                
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">KPLUS </h5>
+                           
 
-                <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
-            </div>
-        </div>
-    </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/2/014')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/SCB.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">SCB EASY </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/2/002')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/logo_bangkok.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">BualuangM </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="{{url('user/selectpaymentWallet/2/025')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Krungsri.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Krungsri</h5>
+                            
+
+                        </div>
+                    </a>
+                </li> --}}
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/2/006')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/logo_krungthai.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Krungthai</h5>
+                            
+
+                        </div>
+                    </a>
+                </li>
+               
+
+            </ul>
+            <!-- * sub menu -->
+        </li>
+
+        {{-- Wallet --}}
+        <li class="multi-level">
+            <a href="#" class="item">
+                <h5 class="m-0  font-weight-bold align-self-center">Wallet</h5>
+               
+
+            </a>
+            <!-- sub menu -->
+            <ul class="listview image-listview pb-0">
+
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/3/0')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Wechat.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Wechat Pay </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="{{url('user/selectpaymentWallet/4/0')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Turemoney.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">TrueMoney Wallet </h5>
+                           
+
+                        </div>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="{{url('user/selectpaymentWallet/5/0')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Shopee.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">ShopeePay</h5>
+                            
+
+                        </div>
+                    </a>
+                </li> --}}
+                {{-- <li>
+                    <a href="{{url('user/selectpaymentWallet/6/0')}}" class="item border-top pr-3">
+                        <img src="{{ asset('new_assets/img/icon/logo_bank/Rabbit.svg')}}" alt="image" class="image mr-1">
+
+                        <div class="in">
+                            <h5 class="m-0  font-weight-bold align-self-center">Rabbit Line Pay </h5>
+                           
+
+                        </div>
+                    </a>
+                </li> --}}
+               
+
+            </ul>
+            <!-- * sub menu -->
+        </li>
+
+    
+
+
+
+
+    </ul>
+
+
 
 
 </div>
@@ -56,6 +233,12 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
+
+    var msg = "{{Session::get('msg')}}"; 
+    if(msg){
+        alert(msg);
+    }
+
 </script>
 @endsection
