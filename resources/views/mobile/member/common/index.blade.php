@@ -586,7 +586,7 @@ color: #666;
                 console.log('cc');
                 newimage =  '<div class="col-6" id="div'+gallery+'" style="padding: 20px;">'+
                             '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL(this,'+gallery+')">'+
-                            '<img id="gallerypreview'+gallery+'" style="max-height:100px ;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
+                            '<img id="gallerypreview'+gallery+'" style="max-height:150px ;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
                             '<button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
                 $('#rowsocial').append(newimage);
             }
