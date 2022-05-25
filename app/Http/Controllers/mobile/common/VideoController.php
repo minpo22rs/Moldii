@@ -14,9 +14,10 @@ class VideoController extends Controller
 
         // dd('asdasdasdasd');
         $v = DB::Table('tb_news')->where('new_type','V')->get();
+        $c = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
        
 
-        return view('mobile.member.common.content.video')->with(['v'=>$v]);
+        return view('mobile.member.common.content.video')->with(['v'=>$v,'c'=>$c]);
     }
     
 }

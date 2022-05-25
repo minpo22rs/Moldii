@@ -40,7 +40,7 @@ class ContentController extends Controller
     }
 
     public function userpostcontent(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');
         if(isset($request->post)){
@@ -49,17 +49,18 @@ class ContentController extends Controller
         }
         $content->save();
 
-        if ($request->img !== null || $request->video !== null)
+        if ($request->file('sub_gallery') !== null)
         {
         //    dd('gggg');
-            $arr3 = array_unique( array_merge($request->img,$request->video) ); 
+            // $arr3 = array_unique( array_merge($request->img,$request->video) ); 
 
-            foreach($arr3 as $key => $item) {
+            foreach($request->file('sub_gallery') as $key => $item) {
                 // dd('asdasdasdasd');
-                if( $item !== null){
+               
                     // dd($item);
-                    $ext = pathinfo($item, PATHINFO_EXTENSION);
-                    $name = rand().time().'.'.$ext;
+                    $ext = $item->getClientOriginalExtension();
+                    // dd($ext);
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
                     $item->storeAs('content_img',  $name);
                     $contentimg = new Tb_content_img();
                     $contentimg->id_content  = $content->id;
@@ -72,7 +73,7 @@ class ContentController extends Controller
     
                     }
                     $contentimg->save();
-                }
+                
                
             }
         }

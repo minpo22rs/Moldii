@@ -1,6 +1,16 @@
 
 @extends('mobile.main_layout.main')
-
+<style>
+    #search_2 {
+      width: 100%;
+      padding: 30px 0;
+      text-align: center;
+      background-color: #fc684b ;
+      margin-top: 30px;
+      position: fixed;
+      display: none;
+    }
+</style>   
 
 @section('app_header')
 
@@ -16,22 +26,37 @@
 
             <div class="row">
                 <div class="col-10">
-                    <form class="search-form">
+                    <form action="{{url('video')}}">
                         <div class="form-group searchbox mt-1 mb-0">
-                            <input type="text" class="form-control" id="input_search_1" placeholder="Search...">
+                            <input type="text" class="form-control" id="input_search_1" placeholder="Search...">  <!-- ทำหน้ารับฟรอมแล้วแสดงรายการเลย พี่สร้างหน้าใหม่ไม่เป็น ไม่อยากมั่ว Controllers กลัวพัง 55  -->
                             <i class="input-icon">
-                                <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                                <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline" type="submit"></ion-icon>
                             </i>
                         </div>
                     </form>
                 </div>
                 <div class="col-2">
-                    <ion-icon id="btn_search_2" style="cursor: pointer;" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                    <ion-icon id="btn_search_2" onclick="myFunction()" style="cursor: pointer;" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
                     </ion-icon>
                 </div>
             </div>
 
         </div>
+
+        <!-- Show List Menu btn_search_2 [Start]-->
+        <div id="search_2" >
+            <div class="mt-2">
+                <div style="left: 16px;  position: absolute; " class="mt-2">
+                     <ion-icon name="close" onclick="myFunction()"  aria-label="search outline" ></ion-icon>
+                </div>
+                <br><br>     
+                    @foreach($c as $cs)
+                        <a href="#" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
+                    @endforeach  
+            </div>
+        </div>
+        <!-- Show List Menu btn_search_2 [End]--> 
+
     </div>
 @endsection
     
@@ -107,25 +132,35 @@
                 alert(a);
             }
 
-            const btnSearch = document.getElementById('btn_search_2');
-            const offSearch = document.getElementById('off_search_2');
-            const offSearch_2 = document.querySelector('.off');
-            const searchCon = document.getElementById('search_container_2');
-            const searchBox = document.getElementById('search_box_2');
+            // const btnSearch = document.getElementById('btn_search_2');
+            // const offSearch = document.getElementById('off_search_2');
+            // const offSearch_2 = document.querySelector('.off');
+            // const searchCon = document.getElementById('search_container_2');
+            // const searchBox = document.getElementById('search_box_2');
 
 
-            btnSearch.addEventListener('click', () => {
-                searchCon.classList.add('search-container-2');
-                searchBox.classList.add('show-search-box');
-            });
-            offSearch.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
-            offSearch_2.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
+            // btnSearch.addEventListener('click', () => {
+            //     searchCon.classList.add('search-container-2');
+            //     searchBox.classList.add('show-search-box');
+            // });
+            // offSearch.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
+            // offSearch_2.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
+
+
+            function myFunction() {
+                var x = document.getElementById("search_2");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
         </script>
 @endsection
     

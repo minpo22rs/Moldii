@@ -157,6 +157,19 @@ color: #666;
 :-moz-placeholder {
 color: #666;
 }
+
+#search_box_2 {
+      width: 100%;
+      padding: 55px 0;
+      text-align: center;
+      background-color: white ;
+      margin-top: 30px;
+      position: fixed;
+      display: none;
+      transform: translateY( 0%);
+    transition: transform 0.5s;
+    }
+
 </style>
 <div class="appHeader bg-danger text-light">
 
@@ -177,6 +190,7 @@ color: #666;
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
                         </i>
                     </div>
+                    
                 </form>
             </div>
             <div class="col-2">
@@ -187,6 +201,9 @@ color: #666;
 
     </div>
 </div>
+<div id="search_box_2">
+    <h3> Recent Search</h3>
+ </div>
 @endsection
 
 @section('content')
@@ -227,7 +244,7 @@ color: #666;
     <br> --}}
     @include("mobile.member.common.content.story")
 
-    
+    {{-- Write Me --}}
     <br>
     <div class="row">
         <div class="widget-post" aria-labelledby="post-header-title">
@@ -242,9 +259,7 @@ color: #666;
 
                 <div class="widget-post__content">
                     <label for="post-content" class="sr-only">Share</label>
-                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?">
-                        
-                    </textarea>
+                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?"></textarea>
                     <div class="row" id="rowsocial"> </div>
                     
                 </div>
@@ -331,6 +346,7 @@ color: #666;
                         <div class="card-body p-2">
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
+                        
                         <a href="{{url('content/'.$sqls->new_id.'')}}"><img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"></a>
 
                         <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
@@ -555,25 +571,30 @@ color: #666;
             bottom_now(1);
             var gallery = 1000;
 
-            const btnSearch = document.getElementById('btn_search_2');
-            const offSearch = document.getElementById('off_search_2');
-            const offSearch_2 = document.querySelector('.off');
-            const searchCon = document.getElementById('search_container_2');
+            // const btnSearch = document.getElementById('btn_search_2');
+            // const offSearch = document.getElementById('off_search_2');
+            // const offSearch_2 = document.querySelector('.off');
+            const searchCon = document.getElementById('input_search_1');
             const searchBox = document.getElementById('search_box_2');
 
-
-            btnSearch.addEventListener('click', () => {
-                searchCon.classList.add('search-container-2');
-                searchBox.classList.add('show-search-box');
+            
+            searchCon.addEventListener('click', () => {
+                // searchCon.classList.add('search-container-2');
+                // searchBox.classList.add('show-search-box');
+                if (searchBox.style.display === "none") {
+                    searchBox.style.display = "block";
+                } else {
+                    searchBox.style.display = "none";
+                }
             });
-            offSearch.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
-            offSearch_2.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
+            // offSearch.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
+            // offSearch_2.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
         </script>
         <script src="script.js">
 
@@ -583,11 +604,10 @@ color: #666;
             function addimagegallery(){
 
                 gallery++;
-                console.log('cc');
-                newimage =  '<div class="col-6" id="div'+gallery+'" style="padding: 10px;">'+
+                newimage =  '<div class="col-12" id="div'+gallery+'" style="padding: 10px;">'+
                             '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL(this,'+gallery+')">'+
-                            '<img id="gallerypreview'+gallery+'" style="width:auto;max-height:150px ;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
-                            '<button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+                            '<img id="gallerypreview'+gallery+'" style="max-height:150px ;padding: 10px;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
+                            '<button  id="btn'+gallery+'"  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
                 $('#rowsocial').append(newimage);
             }
 
@@ -600,11 +620,12 @@ color: #666;
                 gallery++;
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#gallerypreview'+id).attr('src', e.target.result);
+                    $('#gallerypreview'+id).remove();
+                    $('#btn'+id).remove();
 
-                    // var videotag= '<div class="col-6" id="div'+gallery+'"><video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+                    var videotag= '<video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
                         
-                    // $('#rowsocial').append(videotag);
+                    $('#div'+id).append(videotag);
                 }
                 reader.readAsDataURL(v);
             }
