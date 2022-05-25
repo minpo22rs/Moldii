@@ -160,7 +160,8 @@ color: #666;
 
 #search_box_2 {
       width: 100%;
-      padding: 55px 0;
+      height: 350px;
+      padding: 60px 0;
       text-align: center;
       background-color: white ;
       margin-top: 30px;
