@@ -165,7 +165,7 @@ color: #666;
       text-align: center;
       background-color: white ;
       margin-top: 30px;
-      position: fixed;
+      position: sticky;
       display: none;
       transform: translateY( 0%);
     transition: transform 0.5s;
