@@ -47,14 +47,12 @@ class OrderMerchantController extends Controller
 
     
     public function createbooking($id){
-        $sql = Orders::leftJoin('districts', 'tb_orders.order_tumbon', '=', 'districts.id')
-                        ->leftJoin('amphures', 'tb_orders.order_district', '=', 'amphures.id')
-                        ->leftJoin('provinces', 'tb_orders.order_province', '=', 'provinces.id')
-                        ->leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
+        $sql = Orders::leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
                         ->select('tb_customers.customer_name','tb_customers.customer_lname'
-                        ,'tb_orders.order_phone','tb_orders.order_address','tb_orders.order_postcode'
-                        ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                        ,'tb_orders.*')
                         ->where('id_order',$id)->first();
+
+
         $sqlsel = Merchant::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->first();
         $province = DB::Table('provinces')->where('id',$sqlsel->merchant_province)->first();
         $tumbon = DB::Table('districts')->where('id',$sqlsel->merchant_tumbon)->first();
@@ -80,9 +78,9 @@ class OrderMerchantController extends Controller
         $to = array (
             "name"=> $sql->customer_name.$sql->customer_lname,
             "address"=> $sql->order_address,
-            "district"=> $sql->tth,
-            "state"=> $sql->ath,
-            "province"=> $sql->pth,
+            "district"=> $sql->order_tumbon, //tumbon
+            "state"=> $sql->order_district,
+            "province"=> $sql->order_province,
             "postcode"=> $sql->order_postcode,
             "tel"=> $sql->order_phone
         );
