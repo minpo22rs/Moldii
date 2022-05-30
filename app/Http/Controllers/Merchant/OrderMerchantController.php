@@ -123,7 +123,7 @@ class OrderMerchantController extends Controller
             curl_close($ch);
             $json = json_decode($content);
             $jsondata = (array)$json->data;
-            // dd($jsondata['0']->tracking_code);
+            dd($json);
             if($json->status === 'false'){
                 // dd('whattttttt');
                 Orders::where('id_order',$id)->update(['status_order'=>'5']);
@@ -169,7 +169,7 @@ class OrderMerchantController extends Controller
 
         }else{
 
-            Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
+            // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
             DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code]);
             // Toastr::success('Created successfully.');
             return redirect('merchant/ordermerchant')->with('success','successfully');

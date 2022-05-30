@@ -8,6 +8,8 @@ use DB;
 use Storage;
 use URL;
 use App\Models\news;
+use App\Models\new_image;
+use App\Models\Family;
 
 class NewsController extends Controller
 {
@@ -19,7 +21,10 @@ class NewsController extends Controller
     public function index()
     {
         $new = news::where('new_type', 'C')->get();
-        $data = array('new' => $new, );
+        // $img = DB::Table('tb_new_imgs')->where('new_id', '=',36)->get();
+        $g = Family::where('published','=','1')->get();
+        // dd( $img[0]->name);
+        $data = array('new' => $new, 'g'=>$g);
         return view('backend.home.new', $data);
     }
 
@@ -49,19 +54,35 @@ class NewsController extends Controller
             $news->new_content          = $request->content;
             $news->new_type             = 'C';
             $news->created_by             = 'Admin';
-            if ($request->file('img') != null)
+            // if ($request->file('img') != null)
+            // {
+            //     $img = $request->file('img');
+            //     foreach($img as $key => $item) {
+            //         $name = rand().time().'.'.$item->getClientOriginalExtension();
+            //         $item->storeAs('news',  $name);
+            //         $news->new_img  = $name;
+            //     }
+            // }
+            $news->save();
+
+            if ($request->file('files') !== null)
             {
-                $img = $request->file('img');
+                $img = $request->file('files');
                 foreach($img as $key => $item) {
+                    $image = new new_image();
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
                     $item->storeAs('news',  $name);
-                    $news->new_img  = $name;
+                    $image->new_id  = $news->new_id;
+                    $image->name  = $name;
+                    $image->save();
                 }
             }
-            $news->save();
+
+
             DB::commit();
             return redirect('admin/news')->with('success', 'Successful');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
             return redirect('admin/news')->withError('Something Wrong! New Content can not Saved.');
         }

@@ -86,10 +86,11 @@
                 </thead>
                 <tbody>
                     @foreach ($new as $key => $item)
-                    <tr>
+                        <?php $ids=$item->new_id;  $img = DB::Table('tb_new_imgs')->where('new_id',$ids)->first();?>
+                        <tr>
                         <td class="text-center text-middle">{{$key+1}}</td>
                         <td class="text-center text-middle">
-                            <img src="{{asset('storage/app/news/'.$item->new_img.'')}}" class="img-fluid" width="250" height="390">
+                            {{-- <img src="{{asset('storage/app/news/'.$img->name.'')}}" class="img-fluid" width="250" height="390"> --}}
                         </td>
                         <td class="text-center text-middle">{{ $item->new_title }}</td>
                         <td class="text-center text-middle">
@@ -165,7 +166,7 @@
             <form action="{{url('admin/news')}}" method="POST" enctype="multipart/form-data" id="addnews" onsubmit="return news()">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item2">Image <span class="text-danger">*</span></span>
@@ -185,19 +186,40 @@
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Group  <span class="text-danger">(option)</span></label>
+                        <div class="col-sm-10">
+                            <Select class="form-control" name='group'>
+                                <option value="">Please Select</option>
+                                @foreach($g as $gs)
+                                    <option value="{{$gs->id}}">{{$gs->name}}</option>
+                                @endforeach
+                            </Select>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title</label>
+                        <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Title..." name="title" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Content</label>
+                        <label class="col-sm-2 col-form-label">Content <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <textarea name="content" class="form-control" cols="30" rows="10" placeholder="Write Something..."></textarea>
                         </div>
                     </div>
+
+                    
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Image Gallery<span class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                        </div>                
+                    </div>
+
                 </div>
             </form>
             <div class="modal-footer">
