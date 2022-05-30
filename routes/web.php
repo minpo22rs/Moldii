@@ -76,6 +76,7 @@ Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
 
+Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceive']);// รายการของฉัน
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
 Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำการสั่งซื้อ
 Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);// เลือกที่อยู่
@@ -85,7 +86,8 @@ Route::post('user/saveCreditCardonCart', [UserAccController::class, 'saveCreditC
 Route::get('user/deliveryStatus', [UserAccController::class, 'deliveryStatus']);// สถานะการจัดส่ง
 Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// รายละเอียดคำสั่งซื้อ
 Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
-Route::get('user/score', [UserAccController::class, 'score']);// ให้คะแนน
+Route::get('user/score/{id}', [UserAccController::class, 'score']);// ให้คะแนน
+Route::post('user/sendscore', [UserAccController::class, 'sendscore']);// ให้คะแนน
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
 Route::get('user/selectpaymentWallet/{type}/{num}', [WalletController::class, 'selectpaymentWallet']); 
@@ -198,7 +200,7 @@ Route::get('choosecode/{ship}', [OrderController::class, 'choosecode']);
 Route::get('selectcode/{id}/{ship}', [OrderController::class, 'selectcode']);
 Route::get('selectpaymentmethod/{type}/{name}', [OrderController::class, 'selectpaymentmethod']);
 
-Route::post('gateway/response', [OrderController::class, 'addorder']);
+Route::post('gateway/response/{id}/{rid}', [OrderController::class, 'addorder']);
 Route::post('paymentgateway', [OrderController::class, 'paymentgateway']);
 
 

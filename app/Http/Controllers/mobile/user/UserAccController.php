@@ -10,6 +10,8 @@ use App\Models\Tb_address;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\Tb_credit;
+use App\Models\Tb_review;
+use App\Models\Tb_review_img;
 use App\Models\User;
 
 class UserAccController extends Controller
@@ -297,7 +299,11 @@ class UserAccController extends Controller
 
     }
     
-    
+    public function confirmreceive($id){
+        // dd($id);
+        Tb_order_detail::where('id_order_detail',$id)->update(['status_detail'=>1]);
+        return redirect('user/myList')->with('msg','ยืนยันสินค้าเรียบร้อยแล้ว');
+    }
     
     
     public function myList(){// รายการของฉัน
@@ -315,10 +321,52 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.orderDetails');
 
     }
-    public function score(){// ให้คะแนน
-        return view('mobile.member.userAccount.my_list.score');
+    public function score($id){// ให้คะแนน
+        // dd($id);
+        $sql = Tb_order_detail::where('id_order_detail',$id)
+            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->latest('tb_order_details.created_at')
+            ->select('tb_order_details.*','tb_products.product_img','tb_merchants.merchant_name')
+            ->first();
+
+        return view('mobile.member.userAccount.my_list.score')->with(['sql'=>$sql]);
 
     }
+
+    public function sendscore(Request $request){
+        // dd($request->all());
+        $re = new Tb_review();
+        $re->product_id = $request->pid;
+        $re->order_detail_id = $request->id;
+        if(isset($request->text)){
+            $re->text = $request->text;
+
+        }
+        $re->score = $request->star;
+        $re->customer_id = Session::get('cid');
+        $re->save();
+
+        Tb_order_detail::where('id_order_detail',$request->id)->update(['status_detail'=>7]);
+
+           
+        foreach($request->file('imgs') as $key => $item) {
+            if($item != 'null' || $item != null){
+                $name = rand().time().'.'.$item->getClientOriginalExtension();
+                $item->storeAs('public/review_img',  $name);
+                $img = new Tb_review_img();
+                $img->id_tb_review  = $re->id;
+                $img->name  = $name;
+                
+                $img->save();
+            }
+            
+        }
+        
+        return redirect('user/myList')->with('msg','รีวิวสินค้าเรียบร้อยแล้ว');
+
+    }
+
     public function shoppingCart(){// ตะกร้าสินค้า
         return view('mobile.member.userAccount.my_list.shoppingCart');
 

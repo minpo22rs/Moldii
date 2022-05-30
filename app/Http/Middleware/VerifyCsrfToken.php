@@ -13,6 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        '/gateway/response/*','/walletgateway/response/*'
+        '/gateway/response/*/*','/walletgateway/response/*'
     ];
 }

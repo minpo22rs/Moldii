@@ -51,17 +51,13 @@ class ContentController extends Controller
 
         if ($request->file('sub_gallery') !== null)
         {
-        //    dd('gggg');
-            // $arr3 = array_unique( array_merge($request->img,$request->video) ); 
 
             foreach($request->file('sub_gallery') as $key => $item) {
-                // dd('asdasdasdasd');
-               
                     // dd($item);
                     $ext = $item->getClientOriginalExtension();
                     // dd($ext);
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('content_img',  $name);
+                    $item->storeAs('public/content_img',  $name);
                     $contentimg = new Tb_content_img();
                     $contentimg->id_content  = $content->id;
                     $contentimg->name  = $name;

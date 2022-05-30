@@ -44,23 +44,25 @@
                 <!-- ที่ต้องจัดส่ง -->
                 <div id="delivered" class="tabcontent">
                     @foreach($sql as $sqls)
-                        <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                            <div class="mx-1">
-                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                            </div>
-                            <div class="col-10 row align-self-center justify-content-between pl-2">
-                                <div class="col-6 p-0 ">
-                                    <h5 class="m-0">{{$sqls->merchant_name}}</h5>
-                                    <h5 class="m-0">X{{$sqls->amount}}</h5>
-                                    <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
+                        @if($sqls->status_detail=='6')
+                            <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
+                                <div class="mx-1">
+                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                                 </div>
-                                <div class="col-4 p-0 ">
-                                    <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
-                                    <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
-                                    <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
+                                <div class="col-10 row align-self-center justify-content-between pl-2">
+                                    <div class="col-6 p-0 ">
+                                        <h5 class="m-0">{{$sqls->merchant_name}}</h5>
+                                        <h5 class="m-0">X{{$sqls->amount}}</h5>
+                                        <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
+                                    </div>
+                                    <div class="col-4 p-0 ">
+                                        <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
+                                        <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
+                                        <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endif
                     @endforeach
                     {{-- <h2>ที่ต้องจัดส่ง</h2> <!-- Test --> --}}
 
@@ -73,40 +75,28 @@
 
                 <!-- ที่ต้องได้รับ -->
                 <div id="receive" class="tabcontent" style="display:none">
-                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                        <div class="mx-1">
-                            <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                        </div>
-                        <div class="col-10 row align-self-center justify-content-between pl-2">
-                            <div class="col-6 p-0 text-left">
-                                <h5 class="m-0">ชื่อร้าน</h5>
-                                <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                <h5 class="m-0">ราคาทั้งหมด</h5>
-                            </div>
-                            <div class="col-4 p-0 text-right">
-                                <h5 class="m-0  ">วว/ดด/ปป</h5>
-                                <h5 class="m-0  ">เวลา</h5>
-                                <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                        <div class="mx-1">
-                            <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                        </div>
-                        <div class="col-10 row align-self-center justify-content-between pl-2">
-                            <div class="col-6 p-0 text-left">
-                                <h5 class="m-0">ชื่อร้าน</h5>
-                                <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                <h5 class="m-0">ราคาทั้งหมด</h5>
-                            </div>
-                            <div class="col-4 p-0 text-right">
-                                <h5 class="m-0  ">วว/ดด/ปป</h5>
-                                <h5 class="m-0  ">เวลา</h5>
-                                <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
-                            </div>
-                        </div>
-                    </a>
+                    @foreach($sql as $sqls)
+                        @if($sqls->status_detail=='5')
+                            <a href="javascript:;" class="row p-2  border-top border-bottom">
+                                <div class="mx-1">
+                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                                </div>
+                                <div class="col-10 row align-self-center justify-content-between pl-2">
+                                    <div class="col-6 p-0 ">
+                                        <h5 class="m-0">{{$sqls->merchant_name}}</h5>
+                                        <h5 class="m-0">X{{$sqls->amount}}</h5>
+                                        <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
+                                    </div>
+                                    <div class="col-4 p-0 ">
+                                        <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
+                                        <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
+                                        <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);" onclick="confirmreceive({{$sqls->id_order_detail}});">ยืนยันการรับสินค้า</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                    
                     
                 </div>
                 <!-- ที่ต้องได้รับ -->
@@ -115,47 +105,32 @@
 
                 <!-- ให้คะแนน -->
                 <div id="score" class="tabcontent" style="display:none">
-                    <div class=" px-2 py-3 border-top border-bottom text-right">
-                        <div class="col-12 row p-0 m-0 ">
-                            <div class="mx-1">
-                                <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                            </div>
-                            <div class="col-10 row align-self-center justify-content-between pl-2">
-                                <div class="col-6 p-0 text-left ">
-                                    <h5 class="m-0">ชื่อร้าน</h5>
-                                    <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                    <h5 class="m-0">ราคาทั้งหมด</h5>
+                    @foreach($sql as $sqls)
+                        @if($sqls->status_detail=='1' || $sqls->status_detail=='7')
+                            <div class=" px-2 py-3 border-top border-bottom text-right">
+                                <div class="col-12 row p-0 m-0 ">
+                                    <div class="mx-1">
+                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                                    </div>
+                                    <div class="col-10 row align-self-center justify-content-between pl-2">
+                                        <div class="col-4 p-0 text-left">
+                                            <h5 class="m-0">{{$sqls->merchant_name}}</h5>
+                                            <h5 class="m-0">X{{$sqls->amount}}</h5>
+                                            <h5 class="m-0">{{$sqls->price*$sqls->amount}}</h5>
+                                        </div>
+                                        <div class="col-6 p-0 text-right">
+                                            <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
+                                            <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
+                                            <h5 class="m-0  text-right" style="color:rgba(45, 176, 67, 1);" >ได้รับสินค้าเรียบร้อยแล้ว</h5>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-4 p-0 text-right ">
-                                    <h5 class="m-0  ">วว/ดด/ปป</h5>
-                                    <h5 class="m-0  ">เวลา</h5>
-                                    <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
-                                </div>
+                                @if( $sqls->status_detail=='1')
+                                    <a href="{{url('user/score/'.$sqls->id_order_detail.'')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
+                                @endif
                             </div>
-                        </div>
-
-                        <a href="{{url('user/score')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
-                    </div>
-                    <div class=" px-2 py-3 border-top border-bottom text-right">
-                        <div class="col-12 row p-0 m-0 ">
-                            <div class="mx-1">
-                                <img src="{{ asset('new_assets/img/sample/photo/wide6.jpg')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                            </div>
-                            <div class="col-10 row align-self-center justify-content-between pl-2">
-                                <div class="col-6 p-0 text-left ">
-                                    <h5 class="m-0">ชื่อร้าน</h5>
-                                    <h5 class="m-0">จำนวนรายการสินค้า</h5>
-                                    <h5 class="m-0">ราคาทั้งหมด</h5>
-                                </div>
-                                <div class="col-4 p-0 text-right ">
-                                    <h5 class="m-0  ">วว/ดด/ปป</h5>
-                                    <h5 class="m-0  ">เวลา</h5>
-                                    <h5 class="m-0  " style="color:rgba(45, 176, 67, 1);">ชำระเงินเรียบร้อย</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="{{url('user/score')}}" class="btn btn-success col-9 mt-2 mr-2 font-weight-bold" style="font-size:12px; height: 30px; background: #50CA65; border-radius: 8px;"><i class="fal fa-star mx-1"></i>ให้คะแนน</a>
-                    </div>
+                        @endif
+                    @endforeach
                    
                 </div>
                 <!-- ให้คะแนน -->
@@ -163,21 +138,6 @@
 
             </div>
             <!-- * purchase -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -252,12 +212,25 @@
 @endsection
 
 @section('custom_script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script>
     bottom_now(7);
 
     var a = "{{Session::get('msg')}}";
     if(a){
         alert(a);
+    }
+
+
+    function confirmreceive(v){
+
+        if (confirm('ฉันได้ตรวจสอบและยอมรับสินค้า') == true) {
+            window.location.replace('confirmreceive/'+v+'');
+        } else {
+            
+        }
+
+        
     }
 </script>
 @endsection

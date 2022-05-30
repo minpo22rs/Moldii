@@ -10,6 +10,7 @@ use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\User;
 use App\Models\Tb_credit;
+use App\Models\Tb_payment_log;
 
 class OrderController extends Controller
 {
@@ -18,41 +19,58 @@ class OrderController extends Controller
     {
         $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-            ->leftJoin('tb_merchants','tb_order_details.customer_id','=','tb_merchants.merchant_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->get();
         Session::put('totalcart',0);
         Session::put('countcart',0);
         Session::put('cartid',null);
 
+        // dd($sql);
+
         return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
     }
 
-    public function addorder(Request $request)
+    public function addorder(Request $request,$id,$rid)
     {
-
-        dd($request->all());
+        Session::put('cid',$id);
+        // dd($request->all());
      
         if($request->resultCode == '55'){
-            return back();
+            return redirect('cartindex');
         }elseif($request->resultCode == '01'){ //customer cancel
-            return back();
+            return redirect('cartindex');
+
+        }else{
+
+            Tb_order::where('id_order',$rid)->update(['status_order'=>3]);
+            Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
+            'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
+            return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }
 
+       
+
+    }
+
+    public function paymentgateway(Request $request){
+
+
         $address = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->where('address_status','=','on')
-                        ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
-                        ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
-                        ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
-                        ->select('tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
-                                    ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
-                        ->first();
+                ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
+                ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
+                ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
+                ->select('tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
+                            ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                ->first();
         $order = new Tb_order();
         $order->customer_id = Session::get('cid');
-        $order->order_total = Session::get('totalcart');
+        $order->order_total = number_format(Session::get('totalcart'),2,'.','');
+        $order->status_order = 4;
 
         if(Session::get('coin')!=null){
-            $order->order_coin = Session::get('coin');
-            User::where('customer_id',Session::get('cid'))->update(['customer_point'=>0]);
+        $order->order_coin = Session::get('coin');
+        User::where('customer_id',Session::get('cid'))->update(['customer_point'=>0]);
 
         }
         $order->shipping_cost = Session::get('sumship');
@@ -64,7 +82,7 @@ class OrderController extends Controller
         $order->order_province = $address->pth;
         $order->order_postcode = $address->customer_postcode;
         $order->save();
-        
+
         $sql = DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->get();
 
         foreach($sql as $sqls){
@@ -76,23 +94,23 @@ class OrderController extends Controller
                 $order_de->price = $p->product_price;
             }else{
 
-                $order_de->price =  $p->product_discount;
+             $order_de->price =  $p->product_discount;
             }
 
-            
+
             $order_de->store_id =  $sqls->store_id;
-            $order_de->customer_id =   Session::get('cid');
+            $order_de->customer_id = Session::get('cid');
             $order_de->amount =  $sqls->count;
+
             $order_de->save();
         }
 
         DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->delete();
 
-        return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
-    }
 
-    public function paymentgateway(Request $request){
+
+
 
         // dd(Session::all());
         $url='';
@@ -103,21 +121,22 @@ class OrderController extends Controller
         $r = rand(0000000,9999999);
         $ref = $d.$r;
 
-        $responseUrl = "http://127.0.0.1:8000/gateway/response";
-        $backgroundUrl = "http://127.0.0.1:8000/gateway/response";
+        $responseUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
+        $backgroundUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
 
         $amount = number_format(Session::get('totalcart'),2,'.','');
-
-
         $sql = Tb_credit::where('customer_id',Session::get('cid'))->where('num',Session::get('bankcode'))->first();
-        
-
         Session::put('sumship',$request->sumship);
 
+
+
+
         if(Session::get('typepayment') == 'Moldii wallet'){
+            Tb_order::where('id_order',$order->id)->update(['status_order'=>3]);
+            
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
-            return redirect('addorder');
+            return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }elseif(Session::get('typepayment') == 'Credit card'){//
             $url='https://api.globalprimepay.com/v2/tokens/charge';
@@ -133,8 +152,8 @@ class OrderController extends Controller
                     "token"=> $sql->token
                 ),
                 "otp"=> "Y",
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response"
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id.""
             );
 
             $payload = json_encode($data);
@@ -158,8 +177,8 @@ class OrderController extends Controller
                
                 "bankCode" =>Session::get('bankcode'),
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response"
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -184,7 +203,7 @@ class OrderController extends Controller
                
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response"
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -205,8 +224,8 @@ class OrderController extends Controller
                 "publicKey"=> $public,
                 "customerTelephone"=>'0830443596',
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response"
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -225,9 +244,9 @@ class OrderController extends Controller
                 "amount"=> number_format( Session::get('totalcart'),2,'.',''),
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response",
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response"
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -245,8 +264,8 @@ class OrderController extends Controller
                 "amount"=> Session::get('totalcart'),
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response",
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
             );

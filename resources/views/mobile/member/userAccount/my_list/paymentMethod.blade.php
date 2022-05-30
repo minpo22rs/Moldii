@@ -223,10 +223,10 @@
             <a href="{{url('selectpaymentmethod/7/0')}}" class="item">
                 <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
                 <div class="row">
-                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{$user->customer_wallet}}</span>
+                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
 
                 </div>
-
+                
             </a>
         </li>
 
