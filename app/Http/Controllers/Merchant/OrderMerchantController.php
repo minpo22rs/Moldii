@@ -122,8 +122,8 @@ class OrderMerchantController extends Controller
             $content = curl_exec( $ch );
             curl_close($ch);
             $json = json_decode($content);
-            $jsondata = (array)$json->data;
             dd($json);
+            $jsondata = (array)$json->data;
             if($json->status === 'false'){
                 // dd('whattttttt');
                 Orders::where('id_order',$id)->update(['status_order'=>'5']);
