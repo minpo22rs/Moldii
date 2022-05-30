@@ -131,10 +131,14 @@ class OrderMerchantController extends Controller
             }else{
                 // dd('ok');
                 Orders::where('id_order',$id)->update(['purchase_id'=>$json->purchase_id]);
-                self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$id);
-                // Toastr::success('Successfully.');
-                // return back();
+                $res = self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$id);
+                if($res == 1){
+                    return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
+                }else{
+                    return redirect('merchant/ordermerchant')->with('success','successfully');
+
+                }
 
             }
             
@@ -162,15 +166,12 @@ class OrderMerchantController extends Controller
         
         if($jsonres->status === 'false'){
             Orders::where('id_order',$id)->update(['status_order'=>'5']);
-            // Toastr::warning('Unsuccessfully confirm, please try again.');
-            return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
-
+            return 1;
         }else{
 
             // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
             DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code]);
-            // Toastr::success('Created successfully.');
-            return redirect('merchant/ordermerchant')->with('success','successfully');
+            return 0;
 
         }
           
