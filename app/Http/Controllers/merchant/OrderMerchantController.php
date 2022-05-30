@@ -170,7 +170,7 @@ class OrderMerchantController extends Controller
         }else{
 
             // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
-            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code]);
+            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'5']);
             return 0;
 
         }

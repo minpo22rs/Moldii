@@ -46,7 +46,7 @@
                             <th style="text-align: center;">Amount</th>
                             <th style="text-align: center;">Tracking Code</th>
                             <th style="text-align: center;">Status Payment</th>
-                            <th style="text-align: center;">Status Order</th>
+                            {{-- <th style="text-align: center;">Status Order</th> --}}
                             <th style="text-align: center;">Management</th>
                         </tr>
                     </thead>
@@ -88,7 +88,7 @@
                                     
                                     </td>
 
-                                    <td style="text-align: center;">
+                                    {{-- <td style="text-align: center;">
                                         @if($nums->status_order==3)
                                             Delivery
                                         @elseif($nums->status_order==4)
@@ -97,7 +97,7 @@
                                             Pending
                                         @endif
                                     
-                                    </td>
+                                    </td> --}}
                                     
 
                                     <td style="text-align: center;">
