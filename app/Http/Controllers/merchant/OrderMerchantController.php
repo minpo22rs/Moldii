@@ -120,7 +120,7 @@ class OrderMerchantController extends Controller
             $content = curl_exec( $ch );
             curl_close($ch);
             $json = json_decode($content);
-            dd($content);
+            // dd($content);
             $jsondata = (array)$json->data;
             if($json->status === 'false'){
                 // dd('whattttttt');
