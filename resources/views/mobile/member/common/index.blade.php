@@ -209,7 +209,7 @@ color: #666;
                  <ion-icon name="close" onclick="myFunction()"  aria-label="search outline" ></ion-icon>
             </div>
             <br><br>     
-                @foreach($c as $cs)
+                @foreach($cat as $cs)
                     <a href="#" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
                 @endforeach  
         </div>
