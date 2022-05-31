@@ -97,9 +97,9 @@
                                 THB {{number_format($ps->amount )}}
                             </span>
                         </div>
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -120,9 +120,9 @@
                                 THB +{{number_format($ps->amount )}}
                             </span>
                         </div>
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -222,7 +222,7 @@ class OrderController extends Controller
                 "amount"=> number_format( Session::get('totalcart'),2,'.',''),
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "customerTelephone"=>'0830443596',
+                // "customerTelephone"=>'0830443596',
                 "checksum"=> $checksum,
                 "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
                 "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
