@@ -195,12 +195,26 @@ color: #666;
                 </form>
             </div>
             <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
                 </ion-icon>
             </div>
         </div>
 
     </div>
+
+     <!-- Show List Menu btn_search_2 [Start]-->
+     <div id="search_2" >
+        <div class="mt-2">
+            <div style="left: 16px;  position: absolute; " class="mt-2">
+                 <ion-icon name="close" onclick="myFunction()"  aria-label="search outline" ></ion-icon>
+            </div>
+            <br><br>     
+                @foreach($c as $cs)
+                    <a href="#" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
+                @endforeach  
+        </div>
+    </div>
+    <!-- Show List Menu btn_search_2 [End]--> 
 </div>
 <div id="search_box_2">
     <h3> Recent Search</h3>
@@ -596,6 +610,16 @@ color: #666;
             //     searchCon.classList.remove('search-container-2');
             //     searchBox.classList.remove('show-search-box');
             // });
+
+
+            function myFunction() {
+                var x = document.getElementById("search_2");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
         </script>
         <script src="script.js">
 
