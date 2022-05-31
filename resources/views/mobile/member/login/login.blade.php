@@ -20,7 +20,7 @@
 </style>
     @section('content')
         <div id="bg">
-            <img src="{{asset('public/new_assets/img/login_new.JPG')}}" alt="">
+            <img src="{{asset('public/new_assets/img/login_new.jpg')}}" alt="">
         </div>
         <br><br><br>
         <div class = "m-1">
