@@ -160,7 +160,7 @@ color: #666;
 
 #search_box_2 {
     width: 100%;
-    height: 350px;
+    height: auto;
     padding: 60px 0;
     text-align: center;
     background-color: white ;
@@ -228,6 +228,15 @@ color: #666;
 </div>
 <div id="search_box_2">
     <h3> Recent Search</h3>
+    <p> @if(Session::get('recent') != null)
+            @foreach (Session::get('recent') as $text)
+                {{$text}}<br>
+            @endforeach
+            
+        @else
+            ไม่พบการค้นหาล่าสุด
+        @endif
+    </p>
  </div>
 @endsection
 
