@@ -307,7 +307,8 @@ class UserAccController extends Controller
     
     
     public function myList(){// รายการของฉัน
-        $sql = Tb_order_detail::where('customer_id',Session::get('cid'))
+        $sql = Tb_order_detail::where('tb_order_details.customer_id',Session::get('cid'))->where('status_order','!=',4)
+            ->leftJoin('tb_orders','tb_order_details.order_id','=','tb_orders.id_order')
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->latest('tb_order_details.created_at')
