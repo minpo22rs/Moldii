@@ -21,7 +21,7 @@ class OrderMerchantController extends Controller
     {
         $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)->get();
         $pluck = $sql->pluck('order_id');
-        $num = Orders::whereIn('id_order',$pluck)
+        $num = Orders::whereIn('id_order',$pluck)->where('status_order','!=',4)
                         ->leftJoin('tb_customers','tb_orders.customer_id','=','tb_customers.customer_id')
                         ->get();
         return view('merchant.order.order')->with(['num'=>$num]);
