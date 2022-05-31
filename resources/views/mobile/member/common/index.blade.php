@@ -159,17 +159,27 @@ color: #666;
 }
 
 #search_box_2 {
-      width: 100%;
-      height: 350px;
-      padding: 60px 0;
-      text-align: center;
-      background-color: white ;
-      margin-top: 30px;
-      position: sticky;
-      display: none;
-      transform: translateY( 0%);
+    width: 100%;
+    height: 350px;
+    padding: 60px 0;
+    text-align: center;
+    background-color: white ;
+    margin-top: 30px;
+    position: sticky;
+    display: none;
+    transform: translateY( 0%);
     transition: transform 0.5s;
-    }
+}
+
+#search_2 {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    background-color: #fc684b ;
+    margin-top: 30px;
+    position: fixed;
+    display: none;
+}
 
 </style>
 <div class="appHeader bg-danger text-light">
