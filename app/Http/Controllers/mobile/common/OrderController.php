@@ -121,8 +121,8 @@ class OrderController extends Controller
         $r = rand(0000000,9999999);
         $ref = $d.$r;
 
-        $responseUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
-        $backgroundUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
+        $responseUrl = "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."";
+        $backgroundUrl = "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."";
 
         $amount = number_format(Session::get('totalcart'),2,'.','');
         $sql = Tb_credit::where('customer_id',Session::get('cid'))->where('num',Session::get('bankcode'))->first();
@@ -152,8 +152,8 @@ class OrderController extends Controller
                     "token"=> $sql->token
                 ),
                 "otp"=> "Y",
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id.""
+                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id.""
             );
 
             $payload = json_encode($data);
@@ -177,8 +177,8 @@ class OrderController extends Controller
                
                 "bankCode" =>Session::get('bankcode'),
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -203,7 +203,7 @@ class OrderController extends Controller
                
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -224,8 +224,8 @@ class OrderController extends Controller
                 "publicKey"=> $public,
                 "customerTelephone"=>'0830443596',
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -244,9 +244,9 @@ class OrderController extends Controller
                 "amount"=> number_format( Session::get('totalcart'),2,'.',''),
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
             );
             $payload = $data;
 
@@ -264,8 +264,8 @@ class OrderController extends Controller
                 "amount"=> Session::get('totalcart'),
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
             );

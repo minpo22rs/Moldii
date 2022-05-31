@@ -45,8 +45,8 @@ class WalletController extends Controller
         $r = rand(0000000,9999999);
         $ref = $d.$r;
 
-        $responseUrl = "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."";
-        $backgroundUrl = "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."";
+        $responseUrl = "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."";
+        $backgroundUrl = "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."";
 
         $amount = number_format($request->number,2,'.','');
 
@@ -68,8 +68,8 @@ class WalletController extends Controller
                     "token"=> $sql->token
                 ),
                 "otp"=> "Y",
-                "responseUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid').""
+                "responseUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid').""
             );
 
             $payload = json_encode($data);
@@ -93,8 +93,8 @@ class WalletController extends Controller
                
                 "bankCode" =>$request->num,
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid').""
+                "responseUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid').""
             );
             $payload = $data;
 
@@ -119,7 +119,7 @@ class WalletController extends Controller
                
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid').""
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid').""
             );
             $payload = $data;
 
@@ -140,8 +140,8 @@ class WalletController extends Controller
                 "publicKey"=> $public,
                 "customerTelephone"=>'0830443596',
                 "checksum"=> $checksum,
-                "responseUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid').""
+                "responseUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid').""
             );
             $payload = $data;
 
@@ -160,9 +160,9 @@ class WalletController extends Controller
                 "amount"=> $amount,
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
+                "responseUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
                 "checksum"=> $checksum,
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid').""
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid').""
             );
             $payload = $data;
 
@@ -180,8 +180,8 @@ class WalletController extends Controller
                 "amount"=> $amount,
                 "referenceNo"=> $ref,
                 "publicKey"=> $public,
-                "responseUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
-                "backgroundUrl"=> "http://127.0.0.1:8000/walletgateway/response/".Session::get('cid')."",
+                "responseUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
+                "backgroundUrl"=> "https://modii.sapapps.work/walletgateway/response/".Session::get('cid')."",
                 "detail" =>Session::get('cid'),
                 "checksum"=> $checksum,
             );
