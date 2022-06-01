@@ -70,8 +70,8 @@ class OrderController extends Controller
         $order->status_order = 4;
 
         if(Session::get('coin')!=null){
-        $order->order_coin = Session::get('coin');
-        User::where('customer_id',Session::get('cid'))->update(['customer_point'=>0]);
+            $order->order_coin = Session::get('coin');
+            User::where('customer_id',Session::get('cid'))->update(['customer_point'=>0]);
 
         }
         $order->shipping_cost = Session::get('sumship');
@@ -289,7 +289,7 @@ class OrderController extends Controller
 
         $chargeResp = json_decode($result, true);
 
-        // dd($chargeResp);
+        dd($result);
         if(Session::get('typepayment') == 'Wechat Pay'){
             return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
 
@@ -307,9 +307,6 @@ class OrderController extends Controller
 
         }
         // dd('eeeee');
-        
-
-
 
     }
 
