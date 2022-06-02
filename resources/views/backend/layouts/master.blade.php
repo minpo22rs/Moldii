@@ -173,6 +173,14 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
+                                <li class="">
+                                    <a href="{{url("merchant/order")}}">
+                                        <span class="pcoded-micon"><i class="icofont-check-circled"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">Transfer confirmation</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
                             <div class="pcoded-navigation-label">Product Management</div>
                             <ul class="pcoded-item pcoded-left-item"> 

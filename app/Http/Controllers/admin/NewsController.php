@@ -54,15 +54,15 @@ class NewsController extends Controller
             $news->new_content          = $request->content;
             $news->new_type             = 'C';
             $news->created_by             = 'Admin';
-            // if ($request->file('img') != null)
-            // {
-            //     $img = $request->file('img');
-            //     foreach($img as $key => $item) {
-            //         $name = rand().time().'.'.$item->getClientOriginalExtension();
-            //         $item->storeAs('news',  $name);
-            //         $news->new_img  = $name;
-            //     }
-            // }
+            if ($request->file('img') != null)
+            {
+                $img = $request->file('img');
+                foreach($img as $key => $item) {
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('news',  $name);
+                    $news->new_img  = $name;
+                }
+            }
             $news->save();
 
             if ($request->file('files') !== null)

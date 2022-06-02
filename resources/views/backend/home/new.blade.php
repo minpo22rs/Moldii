@@ -166,13 +166,13 @@
             <form action="{{url('admin/news')}}" method="POST" enctype="multipart/form-data" id="addnews" onsubmit="return news()">
                 @csrf
                 <div class="modal-body">
-                    {{-- <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Image <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">Image Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 712 x 390 px.
+                                        Image Size: 375 x 197 px.
                                     </span>
                                 </span>
                             </span>
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Group  <span class="text-danger">(option)</span></label>
                         <div class="col-sm-10">
@@ -214,7 +214,7 @@
                     
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image Gallery<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">Image Gallery (Image Size: 375 x 197 px.)<span class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple">
                         </div>                
