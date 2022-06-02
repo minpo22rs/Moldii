@@ -117,12 +117,12 @@
                             <div class="row">
                                 @if(!empty($img))
                                     @foreach($img as $key => $picture)
-                                    <div id="gal{{$picture->product_img_id }}">
+                                    <div id="gal{{$picture->id_new_img }}">
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="file" style="display: none;" name="sub_gallery[{{$picture->product_img_id}}]" class="form-control" id="slidepicture{{$picture->product_img_id}}" multiple="multiple" onchange="readGalleryURL2(this,{{$picture->product_img_id}})">
-                                                <img id="gallerypreview{{$picture->product_img_id}}" style="max-height:250px ;" src="{{asset('storage/app/news/'.$picture->img_name)}}" />
-                                                <button  type="button" class="btn btn-danger" onclick="deletegallery({{$picture->product_img_id}})" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>
+                                                <input type="file" style="display: none;" name="sub_gallery[{{$picture->id_new_img}}]" class="form-control" id="slidepicture{{$picture->id_new_img}}" multiple="multiple" onchange="readGalleryURL2(this,{{$picture->id_new_img}})">
+                                                <img id="gallerypreview{{$picture->id_new_img}}" style="max-height:250px ;" src="{{asset('storage/app/news/'.$picture->name)}}" />
+                                                <button  type="button" class="btn btn-danger" onclick="deletegallery({{$picture->id_new_img}})" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>
                                             </div>
                                             
                                         </div>
