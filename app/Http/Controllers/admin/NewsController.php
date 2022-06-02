@@ -144,7 +144,7 @@ class NewsController extends Controller
                 $imgcover = new_image::whereIn('id_new_img',$request->deletedkey)->get();
 
                 foreach($imgcover as $key => $item) {
-                    unlink('storage/app/news/'.$item->img_name);
+                    unlink('storage/app/news/'.$item->name);
                 }
                 
                 new_image::whereIn('id_new_img',$request->deletedkey)->delete();
