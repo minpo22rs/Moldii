@@ -140,6 +140,16 @@ class NewsController extends Controller
             }
             $news->save();
 
+            if($request->deletedkey != null){
+                $imgcover = new_image::whereIn('id_new_img',$request->deletedkey)->get();
+
+                foreach($imgcover as $key => $item) {
+                    unlink('storage/app/news/'.$item->img_name);
+                }
+                
+                new_image::whereIn('id_new_img',$request->deletedkey)->delete();
+
+            }
 
             if ($request->file('sub_gallery') !== null)
             {
