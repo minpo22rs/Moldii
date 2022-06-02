@@ -108,6 +108,11 @@ Route::get('/index', [MainController::class, 'indexpage']);
 Route::get('logout', [LoginController::class, 'logout']); 
 
 
+Route::post('user/search', [ContentController::class, 'search']); 
+Route::get('user/searcha/{id}/{text}', [ContentController::class, 'searcha']); 
+
+
+
 
 // content
 Route::post('userpostcontent', [ContentController::class, 'userpostcontent']); 

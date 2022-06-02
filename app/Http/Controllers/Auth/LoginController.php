@@ -52,6 +52,7 @@ class LoginController extends Controller
         if ( Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])
             || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password])) {
             Session::put('cid',$user->customer_id);
+            Session::put('recent',[]);
             
             // dd(Session::all());
             return redirect('/index');

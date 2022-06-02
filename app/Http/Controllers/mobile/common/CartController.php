@@ -112,7 +112,7 @@ class CartController extends Controller
                     if (($key = array_search($mycarts->cart_id, $colors)) !== false) {
                         unset($colors[$key]);
                         // dd('sssssss');
-                    // $chkcount += $mycarts->count;
+                        // $chkcount += $mycarts->count;
                         $sessioncount =  Session::get('countcart')-$mycarts->count;
                         Session::put('countcart',$sessioncount);
                 

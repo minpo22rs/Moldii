@@ -26,11 +26,7 @@ class MainController extends Controller
         $group = DB::Table('tb_familys')->get();
         $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
         $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
-        Session::put('recent',[]);
-        Session::push('recent','model');
-        Session::push('recent','robot');
-        Session::push('recent','one pice');
-        // dd(Session::get('recent'));
+   
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat]);
     }
 

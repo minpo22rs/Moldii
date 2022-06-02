@@ -110,10 +110,10 @@
                         <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
                         <h5 class="mb-0 ">แชร์</h5>
                     </div>
-                    <div class="col-3 row p-0 justify-content-center  ">
+                    {{-- <div class="col-3 row p-0 justify-content-center  ">
                         <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
                         <h5 class="mb-0 ml-1">โดเนท</h5>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

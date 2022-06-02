@@ -10,7 +10,7 @@
     <title>Moldii</title>
     <meta name="description" content="Moldii">
     <meta name="keywords" content="Moldii" />
-    <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/icon/512x512.png') }}" sizes="512x512">
+    <link rel="icon" type="image/png" href="{{ asset('public/new_assets/img/icon/512x512.png') }}" sizes="512x512">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/new_assets/img/icon/192x192.png') }}">
     <link rel="stylesheet" href="{{ asset('new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('new_assets/custom_assets/__manifest.json') }}">
@@ -74,10 +74,10 @@
                 <span class="text-dark" id="bottom_text_fam">Family</span>
             </div>
         </a>
-        <a href="{{url('user/notification')}}" class="item" id="bottom_button_noti">
+        <a href="#" class="item" id="bottom_button_noti">
             <div class="col">
-                <ion-icon name="notifications" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
-                <span class="text-dark" id="bottom_text_noti">แจ้งเตือน</span>
+                <ion-icon name="podium" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
+                <span class="text-dark" id="bottom_text_noti">ประมูลสินค้า</span>
             </div>
         </a>
         <a href="{{url('store')}}" class="item" id="bottom_button_s">

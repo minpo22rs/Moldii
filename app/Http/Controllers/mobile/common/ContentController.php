@@ -77,6 +77,80 @@ class ContentController extends Controller
         return back()->with('success','โพสต์เรียบร้อยแล้ว');
 
     }
+
+    public function search(Request $request)
+    {
+
+        $colors =  Session::get('recent');
+    
+        if (($key = array_search($request->text, $colors)) !== false) {
+            // unset($colors[$key]);
+        }else{
+            Session::push('recent',$request->text);
+
+        }
+
+        $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$request->text. '%')->where('tag_type','=','C')->get();
+        $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$request->text. '%')->where('tag_type','=','P')->get();
+        $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
+        $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
+        // dd($sqlp);
+        return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat,'ban'=>$ban]);
+    }
+
+    public function searcha($id,$a)
+    {
+        if($id ==1){
+
+            $colors =  Session::get('recent');
+            
+    
+            if (($key = array_search($a, $colors)) !== false) {
+                // unset($colors[$key]);
+            }else{
+                $x =substr($a,-3);
+                if($x != '.js'){
+                    Session::push('recent',$a);
+
+                }
+    
+            }
+    
+            $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
+            $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
+            $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
+            $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
+            // dd( $sql);
+
+
+
+        }else{
+
+            $colors =  Session::get('recent');
+    
+            if (($key = array_search($a, $colors)) !== false) {
+                // unset($colors[$key]);
+            }else{
+                $x =substr($a,-3);
+                if($x != '.js'){
+                    Session::push('recent',$a);
+
+                }
+    
+            }
+    
+            $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
+            $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
+            $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
+            $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
+            // dd( $sql);
+            
+
+
+        }
+       
+        return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat,'ban'=>$ban]);
+    }
     
     
 }

@@ -193,16 +193,22 @@ color: #666;
     <div class="m-1 w-100">
 
         <div class="row">
-            <div class="col-10">
-                <form class="search-form">
+            <div class="col-8">
+                <form action="{{url('user/search')}}" method="POST" class="search-form">
+                    @csrf
                     <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" class="form-control" id="input_search_1" placeholder="Search...">
+                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search...">
                         <i class="input-icon">
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
                         </i>
                     </div>
                     
                 </form>
+            </div>
+            <div class="col-2">
+                <a href="{{url('user/notification')}}">
+                <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
+                </ion-icon></a>
             </div>
             <div class="col-2">
                 <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
@@ -220,7 +226,7 @@ color: #666;
             </div>
             <br><br>     
                 @foreach($cat as $cs)
-                    <a href="#" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
+                    <a href="{{url('user/searcha/2/'. $cs->cat_name.'')}}" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
                 @endforeach  
         </div>
     </div>
@@ -228,15 +234,19 @@ color: #666;
 </div>
 <div id="search_box_2">
     <h3> Recent Search</h3>
-    <p> @if(Session::get('recent') != null)
-            @foreach (Session::get('recent') as $text)
-                {{$text}}<br>
-            @endforeach
-            
-        @else
-            ไม่พบการค้นหาล่าสุด
-        @endif
-    </p>
+
+        <p> @if(Session::get('recent') != null)
+                @foreach (Session::get('recent') as $text)
+                    <a href="{{url('user/searcha/'. $text.'')}}">
+                        {{$text}}<br>
+                    </a>
+                @endforeach
+                
+            @else
+                ไม่พบการค้นหาล่าสุด
+            @endif
+        </p>
+  
  </div>
 @endsection
 
@@ -354,6 +364,7 @@ color: #666;
                 @foreach ($c as $sqls)
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();
                             $countreply = DB::Table('tb_comment_replys')->where('news_id',$sqls->new_id)->get();
+                            $imggal = DB::Table('tb_new_imgs')->where('new_id',$sqls->new_id)->get();
                     ?>
                     
                     <div class="card my-3">
@@ -380,8 +391,33 @@ color: #666;
                         <div class="card-body p-2">
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
+                            
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                    </div>
+                                    @if($imggal->count() != 0)
+                                        @foreach($imggal as $imgs)
+                                            <div class="carousel-item">
+                                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                        
+                                </div>
+                            
+                            </div>
+                        {{-- <a href="{{url('content/'.$sqls->new_id.'')}}">
+                            
+                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
                         
-                        <a href="{{url('content/'.$sqls->new_id.'')}}"><img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;"></a>
+                        </a> --}}
 
                         <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
                             <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
@@ -404,10 +440,10 @@ color: #666;
                                 <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1">แชร์</h5>
                             </div>
-                            <div class="col-2 row p-0 align-items-center">
+                            {{-- <div class="col-2 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1">โดเนท</h5>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -596,6 +632,7 @@ color: #666;
 
 
     @section('custom_script')
+    {{-- searchBox --}}
         <script>
             var a = "{{Session::get('success')}}";
             if (a) {
@@ -640,9 +677,11 @@ color: #666;
                 }
             }
         </script>
-        <script src="script.js">
+        <script src="script.js"></script>
 
-        </script>
+    {{-- img slide --}}
+
+    {{-- addimagegallery --}}
         <script>
 
             function addimagegallery(){

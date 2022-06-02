@@ -201,7 +201,7 @@
                         </div>
                     </a>
                 </li> --}}
-                {{-- <li>
+                <li>
                     <a href="{{url('selectpaymentmethod/6/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Rabbit.svg')}}" alt="image" class="image mr-1">
 
@@ -211,7 +211,7 @@
 
                         </div>
                     </a>
-                </li> --}}
+                </li>
                
 
             </ul>
