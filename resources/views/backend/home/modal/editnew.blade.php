@@ -121,7 +121,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-12">
                                                 <input type="file" style="display: none;" name="sub_gallery[{{$picture->product_img_id}}]" class="form-control" id="slidepicture{{$picture->product_img_id}}" multiple="multiple" onchange="readGalleryURL2(this,{{$picture->product_img_id}})">
-                                                <img id="gallerypreview{{$picture->product_img_id}}" style="max-height:250px ;" src="{{asset('storage/app/product_img/'.$picture->img_name)}}" />
+                                                <img id="gallerypreview{{$picture->product_img_id}}" style="max-height:250px ;" src="{{asset('storage/app/news/'.$picture->img_name)}}" />
                                                 <button  type="button" class="btn btn-danger" onclick="deletegallery({{$picture->product_img_id}})" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>
                                             </div>
                                             
@@ -227,5 +227,5 @@
         }
     }
 
-    
+
 </script>
