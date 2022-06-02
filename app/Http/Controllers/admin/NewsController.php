@@ -108,7 +108,8 @@ class NewsController extends Controller
     public function edit($id)
     {
         $new = news::findOrFail($id);
-        $data = array('new' => $new, );
+        $img = new_image::where('new_id',$id)->get();
+        $data = array('new' => $new,'img'=>$img );
         return view('backend.home.modal.editnew', $data);
     }
 
@@ -138,6 +139,22 @@ class NewsController extends Controller
                 }
             }
             $news->save();
+
+
+            if ($request->file('sub_gallery') !== null)
+            {
+                $img = $request->file('sub_gallery');
+                foreach($img as $key => $item) {
+                    $image = new new_image();
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('news',  $name);
+                    $image->new_id  = $news->new_id;
+                    $image->name  = $name;
+                    $image->save();
+                }
+            }
+
+
 
             DB::commit();
             return redirect('admin/news')->with('success', 'Successful');

@@ -18,7 +18,7 @@
                                 <span class="tooltip-item2">Image <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 712 x 390 px.
+                                        Image Size: 375 x 197 px.
                                     </span>
                                 </span>
                             </span>
@@ -41,11 +41,11 @@
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item2">Link </span>
-                                <span class="tooltip-content4 clearfix">
+                                {{-- <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 712 x 390 px.
+                                        Image Size: 375 x 197 px.
                                     </span>
-                                </span>
+                                </span> --}}
                             </span>
                         </label>
                         <div class="col-sm-10">
@@ -108,6 +108,37 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Image Gallery</label>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                @if(!empty($img))
+                                    @foreach($img as $key => $picture)
+                                    <div id="gal{{$picture->product_img_id }}">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <input type="file" style="display: none;" name="sub_gallery[{{$picture->product_img_id}}]" class="form-control" id="slidepicture{{$picture->product_img_id}}" multiple="multiple" onchange="readGalleryURL2(this,{{$picture->product_img_id}})">
+                                                <img id="gallerypreview{{$picture->product_img_id}}" style="max-height:250px ;" src="{{asset('storage/app/product_img/'.$picture->img_name)}}" />
+                                                <button  type="button" class="btn btn-danger" onclick="deletegallery({{$picture->product_img_id}})" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div id="delete"></div>
+                            <div id="newgallery" class="row"></div>
+                            <button type="button" class="btn btn-primary" onclick="addimagegallery()">Add Image</button>
+                            <br>
+                        </div>                
+                    </div>
+
+
+
                 </div>
             </form>
             <div class="modal-footer">
@@ -150,4 +181,51 @@
         });
         edit_count_tag--;
     }
+
+
+
+    
+    count = 0;
+    gallery = count + 1000;
+
+    function addimagegallery(){
+
+        gallery++;
+
+        newimage =  '<div id="gal'+gallery+'">'+
+            '<div class="form-group">'+
+                '<div class="col-sm-12">'+
+                    '<input type="file" style="display: none;"  name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL2(this,'+gallery+')">'+
+                    '<img id="gallerypreview'+gallery+'" style="max-height:250px ;" src="{{asset('images/brows.png')}}" onclick="browsImage('+gallery+')" />'+
+                    '<button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
+        $('#newgallery').append(newimage);
+    }
+
+    function browsImage(id){
+        $('.chooseImage'+id).click();
+    }
+
+    function deletegallery(num){
+
+        $('#gal'+num).remove();
+        //gallery--;
+        $('#delete').append('<input type="hidden" name="deletedkey[]" value="'+num+'">');
+
+    }
+    
+    function readGalleryURL2(input,id) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#gallerypreview'+id).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    
 </script>
