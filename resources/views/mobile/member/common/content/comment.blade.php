@@ -176,7 +176,7 @@
                 <h5 class="font-weight-bold m-0 mt-1">Line</h5>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
-                <img src="{{ asset('new_assets/img/icon/share/ig_instagram.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                 <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
 
             </a>
