@@ -11,8 +11,8 @@ class TestUiController extends Controller
         return view('mobile.common.main.index');
     }
 
-    public function testbox(){
-        return view('mobile.testbox');
+    public function p(){
+        return view('mobile..member.common.groups');
         
     }
 

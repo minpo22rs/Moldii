@@ -35,6 +35,7 @@
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
                 $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
+                $carttt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->whereIn('cart_id',Session::get('cartid'))->get(); 
                 $sum = 0;
                 $countt = 0;
                 
@@ -55,7 +56,7 @@
 
         </div>
 
-        @foreach($cartt as $cartts)
+        @foreach($carttt as $cartts)
             <?php   $product = DB::Table('tb_products')->where('product_id',$cartts->product_id)->first();
                     if( $product->product_discount == null){
                         $sum += (float)$product->product_price*(int)$cartts->count;
@@ -90,7 +91,7 @@
             <h5 class="m-0  mt-1 mb-1 font-weight-bold " style="color:rgba(80, 202, 101, 1);">ตัวเลือกการจัดส่ง</h5>
             <div class="col-12 row m-0 p-0 pt-1 justify-content-between border-top">
                 <div class="col-8 p-0">
-                    <h5 class="m-0">{{$ship->name_company}} - ส่งธรรมดาในประเทศ </h5>
+                    <h5 class="m-0">Moldii - ส่งธรรมดาในประเทศ </h5>
                     <h5 class="m-0">จะได้รับใน {{date('d-m-Y', strtotime('+2 days'))}} - {{date('d-m-Y', strtotime('+5 days'))}} </h5>
                 </div>
                 <a href="" class="col-3 p-0 pr-1  row justify-content-end" style="color:black;">

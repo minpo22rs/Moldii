@@ -73,12 +73,12 @@
         </div>
         <div class="col-2 row p-0 justify-content-center ml-1 ">
             <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-            <h5 class="mb-0 ">แชร์</h5>
+            <h5 class="mb-0 " id="icon-share">แชร์</h5>
         </div>
-        <div class="col-3 row p-0 justify-content-center  ">
+        {{-- <div class="col-3 row p-0 justify-content-center  ">
             <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
             <h5 class="mb-0 ml-1">โดเนท</h5>
-        </div>
+        </div> --}}
     </div>
 
 
@@ -159,6 +159,48 @@
         </form>
 
     </div>
+
+</div>
+@endsection
+
+@section('choice')
+<div class="" id="share_container">
+    <?php $urlen = urlencode("https://modii.sapapps.work/content/$c->new_id")?>
+    <div class="share-box p-2" id="share_box">
+        <div class="text-center">
+            <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
+        </div>
+        <div class="row justify-content-around p-1 ">
+            <a href="" class="m-0 text-center align-self-end  share-item">
+                <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                <img src="{{ asset('new_assets/img/icon/share/ig_instagram.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+            </a>
+            <a href="" class="m-0 text-center align-self-end  share-item">
+                <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+            </a>
+            <a href="" class="m-0 text-center align-self-end  share-item">
+                <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+            </a>
+            <a href="" class="m-0 text-center align-self-end  share-item">
+                <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                <h5 class="font-weight-bold m-0 mt-1">Email</h5>
+            </a>
+            <div class="row col-11 mt-4 p-0">
+                <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

@@ -57,7 +57,7 @@ class CartController extends Controller
             $cart->save();
         }
         if($request->back == 2){
-            return back();
+            return back()->with('success','เพิ่มในตระกร้าเรียบร้อยแล้ว');
         }else{
             // $mycart = Tb_order::where('customer_id',Session::get('cid'))->get();
             $mycart = Tb_cart::where('customer_id',Session::get('cid'))->groupBy('store_id')->get();
@@ -321,7 +321,7 @@ class CartController extends Controller
         $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
         $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
         $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
-       
+        // dd($mycart);
         return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'p'=>$p,'a'=>$a,'t'=>$t]);
     }
 

@@ -39,7 +39,7 @@
                 <div class="row w-100 mx-3 my-2 text-center">
                     <img src="{{ asset('new_assets/img/icon/$.svg')}}" width="15%">
                     <span class="ml-2 align-self-center font-weight-bold"><?php //number_format($available_point) 
-                                                                            ?> คะแนน</span>
+                                                                            ?> คอยน์</span>
                 </div>
             </div>
         </div>
