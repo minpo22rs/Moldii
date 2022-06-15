@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Customer</h4>
+                <h4 class="modal-title">เเก้ไขลูกค้า </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
                 {{method_field('PUT')}}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Phone <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">โทรศัพท์ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">อีเมล <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Password <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">รหัสผ่าน <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -57,8 +57,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_banner">Submit</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ปิด </button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_banner">ยืนยัน </button>
             </div>
         </div>
     </div>
