@@ -21,7 +21,7 @@
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">บัญญชีผู้ใช้</a>
+                    <li class="breadcrumb-item"><a href="">บัญชีผู้ใช้</a>
                     </li>
                     <li class="breadcrumb-item"><a href="">ลูกค้า</a>
                     </li>
@@ -55,7 +55,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-product"><i class="icofont icofont-ui-add"></i>
-                สร้างบัญญชีลูกค้า</button>
+                สร้างบัญชีลูกค้า</button>
         </div>
     </div>
     <div class="card-block">
@@ -103,7 +103,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">สร้างบัญญชีลูกค้า</h4>
+                <h4 class="modal-title">สร้างบัญชีลูกค้า</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

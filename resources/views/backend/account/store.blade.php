@@ -11,13 +11,13 @@
             </div>
             <div class="d-inline-block">
                 <h5>Store</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Account</a>
+                    <li class="breadcrumb-item"><a href="">บัญชีผู้ใช้</a>
                     </li>
                     <li class="breadcrumb-item"><a href="">Store</a>
                     </li>
