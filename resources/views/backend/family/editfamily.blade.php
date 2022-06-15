@@ -12,7 +12,7 @@
                 {{method_field('PUT')}}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image </label>
+                        <label class="col-sm-2 col-form-label">รูปภาพ </label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-5">
