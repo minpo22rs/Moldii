@@ -57,7 +57,7 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ปิด </button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ยกเลิก </button>
                 <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_banner">ยืนยัน </button>
             </div>
         </div>
