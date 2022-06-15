@@ -76,7 +76,7 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">Name</th>
+                        <th style="text-align: center;">ชื่อกลุ่ม</th>
                         <th style="text-align: center;">Description</th>
          
                         <th style="text-align: center;">Published</th>

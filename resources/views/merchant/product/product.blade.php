@@ -33,14 +33,14 @@
                 <i class="icofont icofont-cubes"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Product</h5>
-                <span>Status: <label class="label label-primary">Merchant</label></span>
+                <h5>สินค้า</h5>
+                <span>สถานะ: <label class="label label-primary">ร้านค้า</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="{{url('merchant/product')}}">Product</a>
+                    <li class="breadcrumb-item"><a href="{{url('merchant/product')}}">สินค้า</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-product"><i class="icofont icofont-ui-add"></i>
-                Add Product</button>
+                เพิ่มสินค้า</button>
         </div>
     </div>
     <div class="card-block">
@@ -63,12 +63,12 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">image</th>
-                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">รูปภาพหน้าปก</th>
+                            <th style="text-align: center;">ชื่อสินค้า</th>
                             {{-- <th style="text-align: center;">Description</th> --}}
-                            <th style="text-align: center;">Price</th>
-                            <th style="text-align: center;">Amount</th>
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">ราคา</th>
+                            <th style="text-align: center;">จำนวนสินค้า</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,16 +80,20 @@
                             </td>
                             <td class="text-center text-middle">{{$item->product_name}}</td>
                             {{-- <td class="text-center text-middle">{{ Str::limit($item->product_description, 50) }}</td> --}}
-                            <td class="text-center text-middle">{{$item->product_price}} ฿</td>
+                            <td class="text-center text-middle">
+                                <span style="color: #2ed8b6;">ราคา: </span>{{$item->product_price}} ฿<br>
+                                <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br>
+                                <span style="color: #FFB64D;">ราคาที่ลดแล้ว:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
+                            </td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">
-                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$item->product_id}})"><i class="icofont icofont-speech-comments"></i> View Comment</a>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_product({{$item->product_id}})"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$item->product_id}})"><i class="icofont icofont-speech-comments"></i> ดูความคิดเห้น</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_product({{$item->product_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                     </div>
                                 </div>
                             </td>
@@ -106,7 +110,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Product</h4>
+                <h4 class="modal-title">เพิ่มสินค้า</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -115,48 +119,48 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            <span class="mytooltip tooltip-effect-1">
+                        <label class="col-sm-2 col-form-label">รูปภาพหน้าปก <span class="text-danger">*</span>
+                            {{-- <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
                                         Image Size: 357 x 357 px.
                                     </span>
                                 </span>
-                            </span>
+                            </span> --}}
                         </label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
                                     <input type="file" name="cover[]" style="display: none;" id="adddocument" required>
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Cover</button> 
+                                        <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Name..." required>
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อสินค้า..." required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Description</label>
+                        <label class="col-sm-2 col-form-label">รายละเอียด</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Description..." required></textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="รายละเอียด..." required></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Category</label>
+                        <label class="col-sm-2 col-form-label">หมวดหมู่สินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
@@ -171,14 +175,52 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Options</label>
+                        <label class="col-sm-2 col-form-label">ขนาดสินค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="col-form-label" >น้ำหนัก (กรัม)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความกว้าง(เซนติเมตร)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความยาว (เซนติเมตร)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความสูง (เซนติเมตร)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-3">
+                                    <input type="text" name="weight" class="form-control" placeholder="น้ำหนัก..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="width" class="form-control" placeholder="ความกว้าง..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="length" class="form-control" placeholder="ความยาว..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="height" class="form-control" placeholder="ความสูง..." required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ตัวเลือกเพิ่มเติม</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group input-group-button">
-                                        <input type="text" class="form-control" placeholder="Options Name..." id="option">
+                                        <input type="text" class="form-control" placeholder="ตัวเลือกเพิ่มเติม..." id="option">
                                         <span class="input-group-addon btn btn-primary" id="addoption">
-                                            <span class="">Add</span>
+                                            <span class="">เพิ่ม</span>
                                         </span>
                                     </div>
                                 </div>
@@ -199,27 +241,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Amount</label>
+                        <label class="col-sm-2 col-form-label">จำนวนสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount" required>
+                                    <input type="number" name="amount" class="form-control" placeholder="จำนวนสินค้า" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Value</label>
+                        <label class="col-sm-2 col-form-label">ราคาสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">Price</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">ราคา</label>
                                 </div>
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #FF5370;">GPoint</label>
+                                    <label class="col-sm-2 col-form-label" style="color: #FF5370;">คะแนน</label>
                                 </div>
                                 <div class="col-4">
-                                    <label class="col-sm-2 col-form-label" style="color: #FFB64D;">Discount</label>
+                                    <label class="col-form-label" style="color: #FFB64D;">ราคาที่ลดแล้ว</label>
                                 </div>
                             </div>
                         </div>
@@ -229,10 +271,10 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="number" name="price" class="form-control form-control-success" placeholder="Price..." required>
+                                    <input type="number" name="price" class="form-control form-control-success" placeholder="ราคา..." required>
                                 </div>
                                 <div class="col-4">
-                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="GPoint..." required>
+                                    <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="คะแนน..." required>
                                 </div>
                                 <div class="col-4">
                                     <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
@@ -242,7 +284,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
-                            Shipping cost</label>
+                            ค่าขนส่ง<span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 @foreach($s as $sc)
@@ -268,14 +310,14 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Tags</label>
+                        <label class="col-sm-2 col-form-label">แท็ก</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group input-group-button">
-                                        <input type="text" class="form-control" placeholder="Tag Name..." id="tag">
+                                        <input type="text" class="form-control" placeholder="แท็ก..." id="tag">
                                         <span class="input-group-addon btn btn-primary" id="addtags">
-                                            <span class="">Add</span>
+                                            <span class="">เพิ่ม</span>
                                         </span>
                                     </div>
                                 </div>
@@ -298,7 +340,7 @@
 
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image Gallery</label>
+                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ<span class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
                         </div>                
@@ -307,8 +349,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addproduct">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ปิด</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addproduct">ยืนยัน</button>
             </div>
         </div>
     </div>

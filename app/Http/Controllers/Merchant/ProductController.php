@@ -68,6 +68,15 @@ class ProductController extends Controller
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
+            $product->weight                = $request->weight;
+            $product->width                 = $request->width;
+            $product->length                = $request->length;
+            $product->height                = $request->height;
+
+
+
+
+
             if ($request->discount != null) {
                 if ( ((float)$request->discount) >= ((float)$request->price)) {
                     return back()->withError('Discount can not be more or equal to the price!.');
@@ -159,8 +168,9 @@ class ProductController extends Controller
         $product = product::findOrFail($id);
         $s = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
         $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
+        $category = category::all();
         
-        $data = array('product' => $product,'s'=>$s,'img'=>$img );
+        $data = array('product' => $product,'s'=>$s,'img'=>$img, 'category' => $category, );
         return view('merchant.product.modal.edit_product', $data);
     }
 
@@ -184,6 +194,12 @@ class ProductController extends Controller
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
             $product->product_bpoint        = $request->bpoint;
+            $product->weight                = $request->weight;
+            $product->width                 = $request->width;
+            $product->length                = $request->length;
+            $product->height                = $request->height;
+
+            
             if ($request->file('cover') !== null)
             {
                 $imgcover = $request->file('cover');

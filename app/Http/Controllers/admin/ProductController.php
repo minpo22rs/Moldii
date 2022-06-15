@@ -55,6 +55,11 @@ class ProductController extends Controller
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
             $product->product_merchant_id   = 1;
+            $product->weight                = $request->weight;
+            $product->width                 = $request->width;
+            $product->length                = $request->length;
+            $product->height                = $request->height;
+
 
             if ($request->discount != null) {
                 if ( ((float)$request->discount) >= ((float)$request->price)) {
@@ -129,10 +134,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $category = category::findOrFail($id);
+        $cat = category::all();
         $product = product::where('product_cat_id', $id)->get();
         $data = array(
             'category' => $category, 
             'product' => $product, 
+            'cat'=>$cat
         );
         return view('backend.product.product_index', $data);
     }
@@ -146,8 +153,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::findOrFail($id);
+        $category = category::all();
         $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
-        $data = array('product' => $product,'img'=>$img );
+        $data = array('product' => $product,'img'=>$img ,'category'=>$category);
         return view('backend.product.modal.edit_product', $data);
     }
 
@@ -169,6 +177,11 @@ class ProductController extends Controller
             $product->product_price         = $request->price;
             $product->product_gpoint        = $request->gpoint;
             $product->product_bpoint        = $request->bpoint;
+            $product->weight                = $request->weight;
+            $product->width                 = $request->width;
+            $product->length                = $request->length;
+            $product->height                = $request->height;
+
             if ($request->file('cover') !== null)
             {
                 $imgcover = $request->file('cover');
