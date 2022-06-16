@@ -29,16 +29,16 @@
                 <i class="icofont icofont-image"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Slide Banner</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>หน้าปกสไลด์</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Home</a>
+                    <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">Slide Banner</a>
+                    <li class="breadcrumb-item"><a href="">หน้าปกสไลด์</a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +51,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-banner"><i class="icofont icofont-ui-add"></i>
-                Add Slide Banner</button>
+                เพิ่มหน้าปกสไลด์</button>
         </div>
     </div>
     <div class="card-block">
@@ -61,10 +61,10 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Image</th>
-                            <th style="text-align: center;">Type</th>
-                            <th style="text-align: center;">Published</th>
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">รูปภาพ</th>
+                            <th style="text-align: center;">ประเภท</th>
+                            <th style="text-align: center;">เผยเเพร่</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,11 +85,11 @@
                             </td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">
-                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_banner({{$item->banner_id}})"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_banner({{$item->banner_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_banner({{$item->banner_id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_banner({{$item->banner_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                     </div>
                                 </div>
                             </td>
@@ -107,7 +107,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Slide Banner</h4>
+                <h4 class="modal-title">เพิ่มหน้าปกสไลด์</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -118,10 +118,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Banner <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">หน้าปก <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 357 x 205 px.
+                                        รูปภาพขนาด: 357 x 205 px.
                                     </span>
                                 </span>
                             </span>
@@ -131,19 +131,19 @@
                                 <div class="col-6">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Banner</button> 
+                                        <i class="icofont icofont-image"></i> เพิ่มหน้าปก</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
 
-                        <label class="col-sm-2 col-form-label">Type </label>
+                        <label class="col-sm-2 col-form-label">ประเภท </label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
                                     <select class="form-control col-sm-12" name="bannertype">
-                                        <option value="1">Please Select</option>
+                                        <option value="1">โปรดเลือก</option>
                                         <option value="1">Index</option>
                                         <option value="2">Store</option>
                                     </select>
@@ -155,8 +155,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addbanner">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addbanner">ยืนยัน</button>
             </div>
         </div>
     </div>

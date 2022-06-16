@@ -77,7 +77,7 @@
             </div>
             <div class="d-inline-block">
                 <h5>Flash Sale</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
@@ -96,7 +96,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-flashsale"><i class="icofont icofont-ui-add"></i>
-                Create Flash Sale</button>
+                สร้าง Flash Sale</button>
         </div>
     </div>
     <div class="card-block">
@@ -105,10 +105,10 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">Image</th>
-                        <th style="text-align: center;">Name</th>
-                        <th style="text-align: center;">Data</th>
-                        <th style="text-align: center;">Management</th>
+                        <th style="text-align: center;">รูปภาพ</th>
+                        <th style="text-align: center;">ชื่อ</th>
+                        <th style="text-align: center;">ข้อมูล</th>
+                        <th style="text-align: center;">การจัดการ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,12 +122,12 @@
                         <td class="text-center text-middle">{{date('d/m/Y', strtotime($item->fs_datestart))}} - {{date('d/m/Y', strtotime($item->fs_dateend))}}</td>
                         <td class="text-center text-middle">
                             <div class="dropdown-primary dropdown open">
-                                <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_fs({{$item->fs_id}})"><i class="icofont icofont-page"></i> View Detail</a>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_fs({{$item->fs_id}})"><i class="fa fa-edit"></i> Edit</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_fs({{$item->fs_id}})"><i class="icofont icofont-page"></i> ดูรายละเอียด</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_fs({{$item->fs_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_fs({{$item->fs_id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_fs({{$item->fs_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                 </div>
                             </div>
                         </td>
@@ -143,7 +143,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Flash Sale</h4>
+                <h4 class="modal-title">สร้าง Flash Sale</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -155,10 +155,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Image <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">รูปภาพ <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 357 x 205 px.
+                                        รูปภาพขนาด: 357 x 205 px.
                                     </span>
                                 </span>
                             </span>
@@ -168,17 +168,17 @@
                                 <div class="col-12">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Image</button> 
+                                        <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Name..." required>
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อ..." required>
                                 </div>
                             </div>
                         </div>
@@ -186,10 +186,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Registeration <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">การลงทะเบียน <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        These day is Registeration of Merchants before deal start.
+                                        วันลงทะเบียนสำหรับผู้ค้าก่อนเริ่มดีล.
                                     </span>
                                 </span>
                             </span>
@@ -199,10 +199,10 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="Start At..." required autocomplete="off">
+                                            <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="เริ่มวันที่..." required autocomplete="off">
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="End At..." required autocomplete="off">
+                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="จบวันที่..." required autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Content </label>
+                        <label class="col-sm-2 col-form-label">เนื้อหา </label>
                         <div class="col-sm-10">
                             <textarea name="content" class="form-control" cols="30" rows="10"></textarea>
                         </div>
@@ -218,10 +218,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Start At <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">เรื่มวันที่ <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        This Deal will start at.
+                                       ดีลนี้จะเริ่มวันที่.
                                     </span>
                                 </span>
                             </span>
@@ -229,20 +229,20 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="datestart" class="form-control datepicker" placeholder="Start At..." autocomplete="off" required>
+                                    <input type="text" name="datestart" class="form-control datepicker" placeholder="เริ่มวันที่..." autocomplete="off" required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="End At..." autocomplete="off" required>
+                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="หยุดวันที่..." autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Maximum Sale <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ส่วนลดสูงสุด <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="number" name="maxsale" class="form-control" min="0" max="100" placeholder="Min = 0%, Max = 100%" required>
+                                    <input type="number" name="maxsale" class="form-control" min="0" max="100" placeholder="ต่ำสุด = 0%, สูงสุง = 100%" required>
                                 </div>
                             </div>
                         </div>
@@ -254,9 +254,9 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center;">#</th>
-                                            <th style="text-align: center;">Image</th>
-                                            <th style="text-align: center;">Merchant Name</th>
-                                            <th style="text-align: center;">Action</th>
+                                            <th style="text-align: center;">รูปภาพ</th>
+                                            <th style="text-align: center;">ชื่อผู้ค้า</th>
+                                            <th style="text-align: center;">การกระทำ</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -267,8 +267,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addflashsale">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addflashsale">แก้ไข</button>
             </div>
         </div>
     </div>

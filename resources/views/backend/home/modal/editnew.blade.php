@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Content</h4>
+                <h4 class="modal-title">เเก้ไขเนื่อหา</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,10 +15,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Image <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">รูปภาพ <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 375 x 197 px.
+                                        รูปภาพขนาด: 375 x 197 px.
                                     </span>
                                 </span>
                             </span>
@@ -28,7 +28,7 @@
                                 <div class="col-6">
                                     <input type="file" name="editnew[]" style="display: none;" id="editdocument{{$new->new_id}}">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('editdocument{{$new->new_id}}').click();">
-                                        <i class="icofont icofont-image"></i> Change Image</button> 
+                                        <i class="icofont icofont-image"></i> เปลี่ยนรูปภาพ</button> 
                                 </div>
                                 <div class="col-6">
                                     <img class="img-fluid" src="{{asset('storage/app/news/'.$new->new_img.'')}}" alt="" width="712" height="390">
@@ -40,10 +40,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Link </span>
+                                <span class="tooltip-item2">ลิงค์ </span>
                                 {{-- <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 375 x 197 px.
+                                        รูปภาพขนาด: 375 x 197 px.
                                     </span>
                                 </span> --}}
                             </span>
@@ -51,7 +51,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="link" class="form-control" placeholder="Link..." value="{{$new->new_img}}">
+                                    <input type="text" name="link" class="form-control" placeholder="ลิงค์..." value="{{$new->new_img}}">
                                 </div>
                                 <div class="col-6">
                                     <iframe class="img-fluid" src="https://www.youtube.com/embed/{{$new->new_img}}"
@@ -64,26 +64,26 @@
                     </div>
                     @endif 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title</label>
+                        <label class="col-sm-2 col-form-label">หัวข้อ</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Title..." value="{{$new->new_title}}" name="title" required>
+                            <input type="text" class="form-control" placeholder="หัวข้อ..." value="{{$new->new_title}}" name="title" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Content</label>
+                        <label class="col-sm-2 col-form-label">เนื้อหา</label>
                         <div class="col-sm-10">
-                            <textarea name="content" class="form-control" cols="30" rows="10" placeholder="Write Something...">{{$new->new_content}}</textarea>
+                            <textarea name="content" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง...">{{$new->new_content}}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Tags</label>
+                        <label class="col-sm-2 col-form-label">เเท็ก</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group input-group-button">
-                                        <input type="text" class="form-control" placeholder="Tag Name..." id="edit_tag">
+                                        <input type="text" class="form-control" placeholder="ชื่อเเท็ก..." id="edit_tag">
                                         <span class="input-group-addon btn btn-primary" id="edit_addtags">
-                                            <span class="">Add</span>
+                                            <span class="">เพิ่ม</span>
                                         </span>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
 
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image Gallery</label>
+                        <label class="col-sm-2 col-form-label">แกลเลอรี่ภาพ</label>
                         <div class="col-sm-7">
                             <div class="row">
                                 @if(!empty($img))
@@ -142,8 +142,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_new">Submit</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_new">ยืนยัน</button>
             </div>
         </div>
     </div>

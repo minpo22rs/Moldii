@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <img src="{{asset('storage/app/flashsale/'.$fs->fs_img.'')}}" class="img-fluid" width="100%">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Registeration</label>
+                    <label class="col-sm-2 col-form-label">การลงทะเบียน</label>
                     <div class="col-sm-10">
                         <div class="row">
                             <label class="col-sm-12 col-form-label">
@@ -21,13 +21,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Content</label>
+                    <label class="col-sm-2 col-form-label">เนื้อหา</label>
                     <div class="col-sm-10">
                         <label class="col-form-label">{{$fs->fs_content}}</label>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Event Start</label>
+                    <label class="col-sm-2 col-form-label">เริ่มกิจกรรม</label>
                     <div class="col-sm-10">
                         <div class="row">
                             <label class="col-sm-12 col-form-label">
@@ -38,13 +38,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Maximum Sale</label>
+                    <label class="col-sm-2 col-form-label">ส่วนลดสูงสุด</label>
                     <div class="col-sm-10">
                         <label class="col-form-label">{{$fs->fs_maximum_sale}} %</label>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Applicants</label>
+                    <label class="col-sm-2 col-form-label">ผู้สมัคร</label>
                     <div class="col-sm-10">
                         <label class="col-form-label">{{$fs->fs_event_applicant($fs->fs_id)}}</label>
                     </div>
@@ -56,9 +56,9 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center;">#</th>
-                                        <th style="text-align: center;">Image</th>
-                                        <th style="text-align: center;">Merchant Name</th>
-                                        <th style="text-align: center;">Action</th>
+                                        <th style="text-align: center;">รูปภาพ</th>
+                                        <th style="text-align: center;">ชื่อผู้ค้า</th>
+                                        <th style="text-align: center;">การกระทำ</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>

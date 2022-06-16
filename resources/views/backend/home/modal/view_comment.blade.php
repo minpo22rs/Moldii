@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">View Comment</h4>
+                <h4 class="modal-title">ดูความคิดเห็น</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,7 +29,7 @@
                     </li>
                     @empty
                     <li>
-                        <h6>No Comment</h6>
+                        <h6>ไม่มีความคิดเห็น</h6>
                     </li>
                     @endforelse
                 </ul>
