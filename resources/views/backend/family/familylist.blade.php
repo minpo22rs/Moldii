@@ -45,16 +45,16 @@
                 <i class="icofont icofont-ui-note"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Family</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>ครอบครัว</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Home</a>
+                    <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">Family</a>
+                    <li class="breadcrumb-item"><a href="">ครอบครัว</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +67,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-news"><i class="icofont icofont-ui-add"></i>
-                Create Group</button>
+                สร้างกลุ่ม</button>
         </div>
     </div>
     <div class="card-block">
@@ -77,11 +77,11 @@
                     <tr>
                         <th style="text-align: center;">#</th>
                         <th style="text-align: center;">ชื่อกลุ่ม</th>
-                        <th style="text-align: center;">Description</th>
+                        <th style="text-align: center;">รายละเอียด</th>
          
-                        <th style="text-align: center;">Published</th>
-                        <th style="text-align: center;">Create At</th>
-                        <th style="text-align: center;">Management</th>
+                        <th style="text-align: center;">เผยเเพร่</th>
+                        <th style="text-align: center;">สร้างเมื่อ</th>
+                        <th style="text-align: center;">การจัดการ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,11 +103,11 @@
                         <td class="text-center text-middle">{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td>
                         <td class="text-center text-middle">
                             <div class="dropdown-primary dropdown open">
-                                <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_content({{$item->id}})"><i class="fa fa-edit"></i> Edit</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_content({{$item->id}})"><i class="fa fa-edit"></i> เเก้ไข</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_content({{$item->id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_content({{$item->id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                 </div>
                             </div>
                         </td>
@@ -124,7 +124,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Group</h4>
+                <h4 class="modal-title">สร้างกลุ่ม</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -133,44 +133,44 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image</label>
+                        <label class="col-sm-2 col-form-label">รูปภาพ</label>
                      
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Image</button> 
+                                        <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                    
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Group Name</label>
+                        <label class="col-sm-2 col-form-label">ชื่อกลุ่ม</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Name..." name="name" required>
+                            <input type="text" class="form-control" placeholder="ชื่อ..." name="name" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Description</label>
+                        <label class="col-sm-2 col-form-label">รายละเอียด</label>
                         <div class="col-sm-10">
-                            <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Write Something..." required ></textarea>
+                            <textarea name="description" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง..." required ></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
 
-                        <label class="col-sm-2 col-form-label">Type Group</label>
+                        <label class="col-sm-2 col-form-label">กลุ่มประเภท</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
                                     <select class="form-control col-sm-12" name="type_group">
-                                        <option value="">Please Select</option>
-                                        <option value="1">Model</option>
-                                        <option value="2">Game</option>
-                                        <option value="3">Music</option>
-                                        <option value="4">Food</option>
-                                        <option value="5">News</option>
+                                        <option value="">โปรดเลือก</option>
+                                        <option value="1">โมเดล</option>
+                                        <option value="2">เกมส์</option>
+                                        <option value="3">เพลง</option>
+                                        <option value="4">อาหาร</option>
+                                        <option value="5">ข่าวสาร</option>
                                     </select>
                                 </div>
                             </div>
@@ -180,8 +180,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
             </div>
         </div>
     </div>
