@@ -12,27 +12,27 @@
                 {{method_field('PUT')}}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">หัวข้อ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="title" class="form-control" placeholder="Title..." value="{{$noti->noti_title}}">
+                                    <input type="text" name="title" class="form-control" placeholder="หัวข้อ..." value="{{$noti->noti_title}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Date <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="date" class="form-control datepicker" placeholder="Date..." autocomplete="off" value="{{date('d/m/Y', strtotime($noti->noti_date))}}">
+                                    <input type="text" name="date" class="form-control datepicker" placeholder="วันที่..." autocomplete="off" value="{{date('d/m/Y', strtotime($noti->noti_date))}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Detail <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">รายละเอียด <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -46,8 +46,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_banner">Submit</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="edit_banner">ยืนยัน</button>
             </div>
         </div>
     </div>
