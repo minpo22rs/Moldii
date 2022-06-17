@@ -184,7 +184,7 @@
                             </span>
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="link" class="form-control" placeholder="Link...">
+                            <input type="text" name="link" class="form-control" placeholder="ลิงค์...">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -197,7 +197,7 @@
                         <label class="col-sm-2 col-form-label">เนื้อหา</label>
                         <div class="col-sm-10">
                             <textarea name="content" class="form-control" cols="30" rows="10"
-                                placeholder="Write Something..."></textarea>
+                                placeholder="เขียนบางอย่าง..."></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -317,12 +317,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

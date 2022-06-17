@@ -132,7 +132,7 @@
                             </div>
                             <div id="delete"></div>
                             <div id="newgallery" class="row"></div>
-                            <button type="button" class="btn btn-primary" onclick="addimagegallery()">Add Image</button>
+                            <button type="button" class="btn btn-primary" onclick="addimagegallery()">เพิ่มรูปภาพ</button>
                             <br>
                         </div>                
                     </div>

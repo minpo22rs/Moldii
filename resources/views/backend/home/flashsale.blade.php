@@ -202,7 +202,7 @@
                                             <input type="text" name="regis_datestart" class="form-control datepicker" placeholder="เริ่มวันที่..." required autocomplete="off">
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="จบวันที่..." required autocomplete="off">
+                                            <input type="text" name="regis_dateend" class="form-control datepicker" placeholder="สิ้นสุดวันที่..." required autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@
                                     <input type="text" name="datestart" class="form-control datepicker" placeholder="เริ่มวันที่..." autocomplete="off" required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="หยุดวันที่..." autocomplete="off" required>
+                                    <input type="text" name="dateend" class="form-control datepicker" placeholder="สิ้นสุดวันที่..." autocomplete="off" required>
                                 </div>
                             </div>
                         </div>
@@ -388,12 +388,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

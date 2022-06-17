@@ -307,12 +307,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

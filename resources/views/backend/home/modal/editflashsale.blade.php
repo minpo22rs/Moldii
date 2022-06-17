@@ -91,10 +91,10 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="datestart" class="form-control datepicker" value="{{date('d/m/Y', strtotime($fs->fs_datestart))}}" placeholder="เริ่มเมื่อ..." required>
+                                    <input type="text" name="datestart" class="form-control datepicker" value="{{date('d/m/Y', strtotime($fs->fs_datestart))}}" placeholder="เริ่มวันที่..." required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" value="{{date('d/m/Y', strtotime($fs->fs_dateend))}}" placeholder="หยุดเมื่อ..." required>
+                                    <input type="text" name="dateend" class="form-control datepicker" value="{{date('d/m/Y', strtotime($fs->fs_dateend))}}" placeholder="สิ้นสุดวันที่..." required>
                                 </div>
                             </div>
                         </div>
