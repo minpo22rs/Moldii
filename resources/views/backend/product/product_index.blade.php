@@ -39,7 +39,7 @@
             </div>
             <div class="d-inline-block">
                 <h5>{{$category->cat_name}}</h5>
-                <span>สถานะ: <label class="label label-primary">Admin Level 1</label></span>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
@@ -139,7 +139,7 @@
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 357 x 357 px.
+                                        รูปภาพขนาด: 357 x 357 px.
                                     </span>
                                 </span>
                             </span> --}}
@@ -237,7 +237,7 @@
                                     <div class="input-group input-group-button">
                                         <input type="text" class="form-control" placeholder="ตัวเลือกเพิ่มเติม..." id="option">
                                         <span class="input-group-addon btn btn-primary" id="addoption">
-                                            <span class="">Add</span>
+                                            <span class="">เพิ่ม</span>
                                         </span>
                                     </div>
                                 </div>
@@ -422,12 +422,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนไได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
