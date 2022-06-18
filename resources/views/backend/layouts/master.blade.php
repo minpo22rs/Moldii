@@ -121,18 +121,18 @@
                                 <ul class="show-notification profile-notification">
                                     <li>
                                         <a href="{{url('admin/profile', Auth::user()->admin_id)}}">
-                                            <i class="ti-user"></i> Profile
+                                            <i class="ti-user"></i> ข้อมูลประจำตัว
                                         </a>
                                     </li>
                                     {{-- <li>
                                         <a href="">
-                                            <i class="ti-user"></i> Setting
+                                            <i class="ti-user"></i> การตั้งค่า
                                         </a>
                                     </li> --}}
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out"></i> Sign Out
+                                            <i class="fa fa-sign-out"></i> ออกจากระบบ
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             style="display: none;">
@@ -159,17 +159,17 @@
                                 <li class="">
                                     <a href="{{url("admin/index")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mtext">หน้าเเรก</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Order Management</div>
+                            <div class="pcoded-navigation-label">การจัดการคำสั่งซื้อ</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="{{url("admin/order")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-cart"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Order</span>
+                                        <span class="pcoded-mtext">คำสั่งซื้อ</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -177,24 +177,24 @@
                                 <li class="">
                                     <a href="{{url("merchant/order")}}">
                                         <span class="pcoded-micon"><i class="icofont-check-circled"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Transfer confirmation</span>
+                                        <span class="pcoded-mtext">ยืนยันการโอนเงิน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Product Management</div>
+                            <div class="pcoded-navigation-label">การจัดการคำสั่งซื้อ</div>
                             <ul class="pcoded-item pcoded-left-item"> 
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-cubes"></i><b>C</b></span>
-                                        <span class="pcoded-mtext">Product</span>
+                                        <span class="pcoded-mtext">คำสั่งซื้อ</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="{{url("admin/category")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Category</span>
+                                                <span class="pcoded-mtext">หมวดหมู่</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -224,19 +224,19 @@
                                     </li>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Content Management</div>
+                            <div class="pcoded-navigation-label">การจัดการเนื้อหา</div>
                             <ul class="pcoded-item pcoded-left-item"> 
                                 {{-- <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-home"></i><b>C</b></span>
-                                        <span class="pcoded-mtext">Home Setting</span>
+                                        <span class="pcoded-mtext">การตั้งค่าหน้าแรก</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="{{url("admin/banner")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Slide Banner</span>
+                                                <span class="pcoded-mtext">หน้าปกสไลด์</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -250,21 +250,21 @@
                                         <li class="">
                                             <a href="{{url("admin/promotion")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Promotion</span>
+                                                <span class="pcoded-mtext">โปรโมชั่น</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="{{url("admin/news")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">News</span>
+                                                <span class="pcoded-mtext">ข่าวสาร</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="{{url("admin/bestseller")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">News Product & Best Seller</span>
+                                                <span class="pcoded-mtext">สินค้าใหม่ & สินค้าขายดี</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -273,21 +273,21 @@
                                 <li class="">
                                     <a href="{{url("admin/banner")}}">
                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                        <span class="pcoded-mtext">Slide Banner</span>
+                                        <span class="pcoded-mtext">หน้าปกสไลด์</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="{{url("admin/news")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-note"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Contents</span>
+                                        <span class="pcoded-mtext">เนื้อหา</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="{{url("admin/videos")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-video-play"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Videos</span>
+                                        <span class="pcoded-mtext">วิดีโอ</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -295,64 +295,64 @@
                                 <li class="">
                                     <a href="{{url("admin/familys")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-user-group"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Family</span>
+                                        <span class="pcoded-mtext">ครอบครัว</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 {{-- <li class="">
                                     <a href="{{url("admin/podcasts")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-radio-mic"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Podcasts</span>
+                                        <span class="pcoded-mtext">พอดคาสต์</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-head-phone"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Live & Streaming</span>
+                                        <span class="pcoded-mtext">ถ่ายทอดสด และ สตรีมมิ่ง</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li> --}}
                                 {{-- <li class="">
                                     <a href="{{url("admin/notification")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-bell-alt"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Notification</span>
+                                        <span class="pcoded-mtext">การแจ้งเตือน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li> --}}
                             </ul>
-                            <div class="pcoded-navigation-label">Marketing Section</div>
+                            <div class="pcoded-navigation-label">ส่วนการตลาด</div>
                             <ul class="pcoded-item pcoded-left-item"> 
                                 <li class="pcoded-hasmenu">
                                     <li class="">
                                         <a href="{{url('admin/notification')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-alarm"></i><b>D</b></span>
-                                            <span class="pcoded-mtext">Notification</span>
+                                            <span class="pcoded-mtext">การแจ้งเตือน</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li class="">
                                         <a href="{{url('admin/voucher')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-ticket"></i><b>D</b></span>
-                                            <span class="pcoded-mtext">Voucher</span>
+                                            <span class="pcoded-mtext">บัตรกำนัล</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li class="">
                                         <a href="{{url('admin/calendar')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-ui-calendar"></i><b>D</b></span>
-                                            <span class="pcoded-mtext">Calendar</span>
+                                            <span class="pcoded-mtext">ปฏิทิน</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Admin Section</div>
+                            <div class="pcoded-navigation-label">ส่วนผู้ดูแล</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-users"></i><b>C</b></span>
-                                        <span class="pcoded-mtext">Account</span>
+                                        <span class="pcoded-mtext">บัญชี</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
@@ -366,14 +366,14 @@
                                         <li class="">
                                             <a href="{{url("admin/merchant")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Merchant</span>
+                                                <span class="pcoded-mtext">ผู้ค้า</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="{{url("admin/admin")}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">Admin</span>
+                                                <span class="pcoded-mtext">ผู้ดูแล</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -389,24 +389,24 @@
                                 {{-- <li class="">
                                     <a href="{{url("admin/rolesetting")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-gear"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Role Setting</span>
+                                        <span class="pcoded-mtext">การตั้งค่าบทบาท</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li> --}}
                             </ul>
-                            <div class="pcoded-navigation-label">Contact Support</div>
+                            <div class="pcoded-navigation-label">ติดต่อฝ่ายสนับสนุน</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 {{-- <li class="">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="icofont icofont-support-faq"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">FAQ</span>
+                                        <span class="pcoded-mtext">คำถามที่พบบ่อย</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li> --}}
                                 <li class="">
                                     <a href="{{url('admin/ticket')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-support"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Support Ticket</span>
+                                        <span class="pcoded-mtext">ตั๋วสนับสนุน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
