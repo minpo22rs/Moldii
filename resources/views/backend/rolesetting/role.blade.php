@@ -29,16 +29,16 @@
                 <i class="icofont icofont-gear"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Role Setting</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>การตั้งค่าบทบาท</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Home</a>
+                    <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">Role Setting</a>
+                    <li class="breadcrumb-item"><a href="">การตั้งค่าบทบาท</a>
                     </li>
                 </ul>
             </div>

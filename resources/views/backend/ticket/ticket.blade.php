@@ -24,14 +24,14 @@
                 <i class="icofont icofont-support"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Support Ticket</h5>
+                <h5>ติดต่อฝ่ายสนับสนุน</h5>
                 <span>Status: <label class="label label-primary">Admin Level 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Support Ticket</a>
+                    <li class="breadcrumb-item"><a href="">ติดต่อฝ่ายสนับสนุน</a>
                     </li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@
                 <img class="media-object img-radius msg-img-h" src="{{asset('storage/app/profile/'.Auth::user()->admin_img.'')}}" alt="">
             </a>
             <div class="media-body">
-                <div class="txt-white">Sign in as</div>
+                <div class="txt-white">เข้าสู่ระบบในฐานะ</div>
                 <div class="f-13 txt-white">{{ Auth::user()->admin_name }} {{ Auth::user()->admin_lname }}</div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                     <div class="media user_contact">
                         <div class="media-left media-middle photo-table">
                             <a href="#">
-                                <label class="label label-primary">Shipping</label>
+                                <label class="label label-primary">การส่งสินค้า</label>
                             </a>
                         </div>
                         <div class="media-body">
@@ -69,7 +69,7 @@
                     <div class="media user_contact">
                         <div class="media-left media-middle photo-table">
                             <a href="#">
-                                <label class="label label-warning">Claim</label>
+                                <label class="label label-warning">เรียกร้อง</label>
                             </a>
                         </div>
                         <div class="media-body">
@@ -80,7 +80,7 @@
                     <div class="media user_contact">
                         <div class="media-left media-middle photo-table">
                             <a href="#">
-                                <label class="label label-danger">Payment</label>
+                                <label class="label label-danger">การชำระ</label>
                             </a>
                         </div>
                         <div class="media-body">

@@ -406,7 +406,7 @@
                                 <li class="">
                                     <a href="{{url('admin/ticket')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-support"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">ตั๋วสนับสนุน</span>
+                                        <span class="pcoded-mtext">ติดต่อฝ่ายสนับสนุน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
