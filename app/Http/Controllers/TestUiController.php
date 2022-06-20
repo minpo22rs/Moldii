@@ -12,7 +12,7 @@ class TestUiController extends Controller
     }
 
     public function p(){
-        return view('mobile..member.common.groups');
+        return view('mobile.member.common.notice_of_payment');
         
     }
 
