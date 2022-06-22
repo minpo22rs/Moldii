@@ -53,8 +53,10 @@ class ContentController extends Controller
         {
 
             foreach($request->file('sub_gallery') as $key => $item) {
+                    $ext = $item->getClientOriginalExtension();
+                    // dd($ext);
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('public/content_img',  $name);
+                    $item->storeAs('content_img',  $name);
                     $contentimg = new Tb_content_img();
                     $contentimg->id_content  = $content->id;
                     $contentimg->name  = $name;

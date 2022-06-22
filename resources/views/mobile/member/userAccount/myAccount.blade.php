@@ -38,8 +38,7 @@
             <div class="card">
                 <div class="row w-100 mx-3 my-2 text-center">
                     <img src="{{ asset('new_assets/img/icon/$.svg')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold"><?php //number_format($available_point) 
-                                                                            ?> คอยน์</span>
+                    <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_point}} คอยน์</span>
                 </div>
             </div>
         </div>
@@ -56,7 +55,7 @@
     </div>
 </a>
 
-<div class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="#" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
         <i class="fas fa-heart "></i>
         <h5 class="m-0 ml-2 font-weight-bold">สิ่งที่ถูกใจ</h5>
@@ -64,7 +63,7 @@
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
-</div>
+</a>
 
 <a href="{{url('/user/creditCard')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
