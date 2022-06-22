@@ -74,6 +74,9 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
 
     // order
     Route::resource('order', 'OrderController');
+    Route::get('tranfer', 'OrderController@tranfer');
+    Route::get('confirmslip/{id}', 'OrderController@confirmslip');
+    Route::post('rejectslip', 'OrderController@rejectslip');
 
     Route::resource('familys', 'FamilyController');
     Route::post('addgroup', 'FamilyController@store');
@@ -108,7 +111,7 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     Route::resource('ordermerchant', 'OrderMerchantController');
     Route::get('orderdetail/{id}', 'OrderMerchantController@orderdetail');
     Route::get('cancelorder/{id}', 'OrderMerchantController@cancelorder');
-    Route::get('createbooking/{id}', 'OrderMerchantController@createbooking');
+    Route::post('createbooking', 'OrderMerchantController@createbooking');
 });
 
 

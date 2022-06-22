@@ -46,7 +46,8 @@ class OrderMerchantController extends Controller
 
 
     
-    public function createbooking($id){
+    public function createbooking(Request $request){
+        // dd($request->all());
         $sql = Orders::leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
                         ->select('tb_customers.customer_name','tb_customers.customer_lname'
                         ,'tb_orders.*')
@@ -57,11 +58,6 @@ class OrderMerchantController extends Controller
         $province = DB::Table('provinces')->where('id',$sqlsel->merchant_province)->first();
         $tumbon = DB::Table('districts')->where('id',$sqlsel->merchant_tumbon)->first();
         $amphure = DB::Table('amphures')->where('id',$sqlsel->merchant_district)->first();
-        // dd($sql);
-
-
-        // district == tumbon 
-        // state == amphure
 
 
         $url = 'https://mkpservice.shippop.dev/booking/'; 
@@ -97,13 +93,19 @@ class OrderMerchantController extends Controller
             "from" => $from,
             "to" => $to,
             "parcel" => $parcel,
-            "courier_code" => "FLE",
+            "courier_code" => $request->ship,
 
         );
+        // $url = array(
+        //     "success"=> "https://testgit.sapapps.work/moldii/merchant/",
+        //     "fail"=>"http:\/\/shippop.com\/?fail"
+
+        // );
         
         $datasend = array(
             'api_key' => "dv66f6883421f7c83185b476ece358f3d7608bedf36e5a917739e9b6e8f0cbce6b4627d5ad5b9274741654066970",
             'email' => "moldiiship@gmail.com",
+            // "url"=> array($url),
             "data" => array($arraysum),
         );
 
@@ -124,7 +126,7 @@ class OrderMerchantController extends Controller
             $jsondata = (array)$json->data;
             if($json->status === 'false'){
                 // dd('whattttttt');
-                Orders::where('id_order',$id)->update(['status_order'=>'5']);
+                DB::Table('tb_order_details')->where('id_order',$id)->update(['status_order'=>'4']);
                 return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
 
@@ -136,6 +138,8 @@ class OrderMerchantController extends Controller
                     return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
                 }else{
+                    DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1','company_shipping'=>$request->ship]);
+
                     return redirect('merchant/ordermerchant')->with('success','successfully');
 
                 }
@@ -165,12 +169,12 @@ class OrderMerchantController extends Controller
         $jsonres = json_decode($result);
         
         if($jsonres->status === 'false'){
-            Orders::where('id_order',$id)->update(['status_order'=>'5']);
+            DB::Table('tb_order_details')->where('id_order',$id)->update(['status_order'=>'4']);
             return 1;
         }else{
 
             // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
-            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'5']);
+            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1']);
             return 0;
 
         }

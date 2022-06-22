@@ -175,8 +175,8 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="{{url("merchant/order")}}">
-                                        <span class="pcoded-micon"><i class="icofont-check-circled"></i><b>D</b></span>
+                                    <a href="{{url("admin/tranfer")}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-check-circled"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Transfer confirmation</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>

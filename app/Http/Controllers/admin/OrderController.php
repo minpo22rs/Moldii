@@ -16,7 +16,32 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('backend.order.order');
+        $sql = DB::Table('tb_orders')->leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')->get();
+        return view('backend.order.order')->with(['sql'=>$sql]);
+    }
+
+    public function tranfer()
+    {
+        $sql= DB::Table('tb_tranfers')->leftJoin('tb_customers', 'tb_tranfers.customer_id', '=', 'tb_customers.customer_id')
+                    ->where('status',1)
+                // ->leftJoin('tb_orders', 'tb_tranfers.id_order', '=', 'tb_orders.id_order')
+                ->latest('tb_tranfers.created_at')->get();
+        // dd( $sql);
+        return view('backend.order.tranfer')->with(['sql'=>$sql]);
+    }
+
+    public function confirmslip($id)
+    {
+        // dd($request->all());
+        DB::Table('tb_tranfers')->where('id_tranfer',$id)->update(['status'=>2]);
+        return redirect('admin/tranfer')->with('success', 'Successful');
+    }
+
+    public function rejectslip(Request $request)
+    {
+        // dd($request->all());
+        DB::Table('tb_tranfers')->where('id_tranfer',$request->oid)->update(['reason'=>$request->reason,'status'=>3]);
+        return redirect('admin/tranfer')->with('success', 'Successful');
     }
 
     /**

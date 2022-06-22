@@ -104,25 +104,10 @@
                                         <div class="dropdown-primary dropdown open">
                                             <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                                @if($nums->status_order==2)
-                                                    <a  href="javascript:"
-                                                        onclick="Swal.fire({
-                                                        title: 'ยืนยันจัดส่งออเดอร์ใช่หรือไม่',
-                                                        showDenyButton: true,
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#377dff',
-                                                        cancelButtonColor: '#363636',
-                                                        confirmButtonText: `Yes`,
-                                                        denyButtonText: `No`,
-                                                        }).then((result) => {
-                                                            if (result.value) {
-                                                                location.href='{{url('merchant/createbooking',$nums->id_order)}}';
-                                                            } else{
-                                                                Swal.fire('Canceled', '', 'info')
-                                                            }
-                                                        })"  class="dropdown-item waves-light waves-effect" >
-                                                            <i class="fa fa-edit"></i> จัดส่งออเดอร์
-                                                        </a>
+                                                @if($sql[0]->tracking_code!=null)
+                                                    <a href="javascript:;" class="dropdown-item waves-light waves-effect" onclick="openmd({{$nums->id_order}});">
+                                                        <i class="fa fa-edit"></i> จัดส่งออเดอร์
+                                                    </a>
                                                 @endif
                                                 <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
                                                 <div class="dropdown-divider"></div>
@@ -158,8 +143,56 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form action="{{url('merchant/createbooking')}}" method="POST">
+            @csrf
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">ยืนยันทำการจัดส่งออเดอร์ใช่หรือไม่</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                    <input type="hidden" name="oid" id="oid">
+                    <div class="row">
+                        <div class="col-3"> เลือกขนส่ง :</div>
+                        <div class="col-6"> 
+                                <select class="form-control" name="ship" >
+                                    <option value=""> Please Select</option>
+                                    <option value="THP">ไปรษณีย์ไทย EMS</option>
+                                    <option value="TP2">ไปรษณีย์ ลงทะเบียน</option>
+                                    <option value="FLE">Flash Express</option>
+                                    <option value="KRYD">Kerry Express (Drop off)</option>
+                                    <option value="KRYP">Kerry Express (Pickup)</option>
+                                </select>
+                        </div>
+                    </div>
+                
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 @endsection
 @section('js')
+
 @include('flash-message')
 
+<script>
+    
+    function openmd(params) {
+        document.getElementById('oid').value = params;
+        $('#exampleModalCenter').modal('show');
+    }
+
+</script>
 @endsection
