@@ -10,14 +10,14 @@
                 <i class="icofont icofont-home"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Dashboard</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>หน้าเเรก</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Dashboard</a>
+                    <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
                 </ul>
             </div>
@@ -86,7 +86,7 @@
                     <a href="{{url('admin/calendar')}}">
                         <div class="b-t-default transection-footer row">
                             <div class="col-12  b-r-default bg-c-blue">
-                                <span style="color: white;">More Event</span>
+                                <span style="color: white;">เหตุการณ์เพิ่มเติม</span>
                             </div>
                         </div>
                     </a>
@@ -97,7 +97,7 @@
                 <div class="card">
                     <div class="card-block text-center">
                         <i class="icofont icofont-notification text-c-blue d-block f-40"></i>
-                        <h4 class="m-b-40">No Event</h4>
+                        <h4 class="m-b-40">ไม่มีเหตุการณ์</h4>
                         <a href="{{url('admin/calendar')}}" class="btn btn-primary btn-sm btn-round">More Event</a>
                     </div>
                 </div>
@@ -110,20 +110,20 @@
             <div class="col-xl-12 col-md-6 col-12">
                 <div class="card bg-1 order-card">
                     <div class="card-block">
-                        <h6>Merchant</h6>
+                        <h6>ผู้ค้า</h6>
                         <h2 class="text-right"><i class="icofont icofont-users f-left"></i><span>{{$merchant_count}}</span></h2>
                         <br>
-                        <p class="m-b-0">Management <a href="{{url('admin/merchant')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        <p class="m-b-0">การจัดการ <a href="{{url('admin/merchant')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
                     </div>
                 </div>
             </div>
             <div class="col-xl-12 col-md-6 col-12">
                 <div class="card bg-3 order-card">
                     <div class="card-block">
-                        <h6>Customer</h6>
+                        <h6>ลูกค้า</h6>
                         <h2 class="text-right"><i class="icofont icofont-users f-left"></i><span>{{$customer_count}}</span></h2>
                         <br>
-                        <p class="m-b-0">Management <a href="{{url('admin/customer')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        <p class="m-b-0">การจัดการ <a href="{{url('admin/customer')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
                     </div>
                 </div>
             </div>

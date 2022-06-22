@@ -14,16 +14,16 @@
                 <i class="icofont icofont-users"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Merchant</h5>
-                <span>Status: <label class="label label-primary">Merchant Level 1</label></span>
+                <h5>ผู้ค้า</h5>
+                <span>สถานะ: <label class="label label-primary">ระดับผู้ค้า 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Account</a>
+                    <li class="breadcrumb-item"><a href="">บัญชีผู้ใช้</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">Merchant</a>
+                    <li class="breadcrumb-item"><a href="">ผู้ค้า</a>
                     </li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-product"><i class="icofont icofont-ui-add"></i>
-                Create Merchant</button>
+                สร้างบัญชีผู้ค้า</button>
         </div>
     </div>
     <div class="card-block">
@@ -65,11 +65,11 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Image</th>
-                            <th style="text-align: center;">Email</th>
-                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">รูปภาพ</th>
+                            <th style="text-align: center;">อีเมล</th>
+                            <th style="text-align: center;">ชื่อ</th>
 
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,11 +87,11 @@
                             <td class="text-center text-middle">{{$item->merchant_name}} {{$item->merchant_lname}}</td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">
-                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_merchant({{$item->merchant_id}})"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_merchant({{$item->merchant_id}})"><i class="fa fa-edit"></i> เเก้ไข</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_merchant({{$item->merchant_id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_merchant({{$item->merchant_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                     </div>
                                 </div>
                             </td>
@@ -108,7 +108,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Merchant</h4>
+                <h4 class="modal-title">สร้างบัญชีผู้ค้า</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -117,34 +117,34 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Profile Image</label>
+                        <label class="col-sm-2 col-form-label">รูปประจำตัว</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Upload</button> 
+                                        <i class="icofont icofont-image"></i> อัพโหลด</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="name" class="form-control" placeholder="First Name...">
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อ...">
                                     @error('name')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="lname" class="form-control" placeholder="Last Name...">
+                                    <input type="text" name="lname" class="form-control" placeholder="นามสกุล...">
                                     @error('lname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Email <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">อีเมล <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
@@ -155,11 +155,11 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Password <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">รหัสผ่าน <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="password" name="password" class="form-control" placeholder="Password...">
+                                    <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน...">
                                     @error('password')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -168,8 +168,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addmerchant">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addmerchant">ยืนยัน</button>
             </div>
         </div>
     </div>

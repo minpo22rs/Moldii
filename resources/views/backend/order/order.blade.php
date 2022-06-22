@@ -16,14 +16,14 @@
                 <i class="icofont icofont-cart"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Orders</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>คำสั่งซื้อ</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Orders</a>
+                    <li class="breadcrumb-item"><a href="">คำสั่งซื้อ</a>
                     </li>
                 </ul>
             </div>
@@ -39,10 +39,10 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Code</th>
-                            <th style="text-align: center;">Name</th>
-                            <th style="text-align: center;">Price</th>
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">รหัส</th>
+                            <th style="text-align: center;">ชื่อ</th>
+                            <th style="text-align: center;">ราคา</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>

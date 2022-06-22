@@ -56,16 +56,16 @@
                 <i class="icofont icofont-ui-video-play"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Videos</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>วิดีโอ</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Home</a>
+                    <li class="breadcrumb-item"><a href="">หน้าแรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">Videos</a>
+                    <li class="breadcrumb-item"><a href="">วิดีโอ</a>
                     </li>
                 </ul>
             </div>
@@ -78,7 +78,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-news"><i class="icofont icofont-ui-add"></i>
-                Create Video</button>
+                สร้างวิดีโอ</button>
         </div>
     </div>
     <div class="card-block">
@@ -87,12 +87,12 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">Preview</th>
-                        <th style="text-align: center;">Title</th>
-                        <th style="text-align: center;">Action</th>
-                        <th style="text-align: center;">Published</th>
-                        <th style="text-align: center;">Create At</th>
-                        <th style="text-align: center;">Management</th>
+                        <th style="text-align: center;">ตัวอย่าง</th>
+                        <th style="text-align: center;">หัวข้อ</th>
+                        <th style="text-align: center;">การกระทำ</th>
+                        <th style="text-align: center;">เผยเเพร่</th>
+                        <th style="text-align: center;">สร้างเมื่อ</th>
+                        <th style="text-align: center;">การจัดการ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,19 +142,19 @@
                                 <button
                                     class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light "
                                     type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">More</button>
+                                    aria-expanded="true">เพิ่มเติม</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                                     data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
                                     <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal"
                                         data-target="#edit-Modal" onclick="view_comment({{$item->new_id}})"><i
-                                            class="icofont icofont-comment"></i> View Comment</a>
+                                            class="icofont icofont-comment"></i> ดูความคิดเห็น</a>
                                     <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal"
                                         data-target="#edit-Modal" onclick="edit_content({{$item->new_id}})"><i
-                                            class="fa fa-edit"></i> Edit</a>
+                                            class="fa fa-edit"></i> แก้ไข</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item waves-light waves-effect"
                                         onclick="del_content({{$item->new_id}})"><i class="icofont icofont-bin"></i>
-                                        Delete</a>
+                                        ลบ</a>
                                 </div>
                             </div>
                         </td>
@@ -177,7 +177,7 @@ height="390">
 <div class="top-cap-text m-10 text-center">
     <button type="button" class="btn btn-warning btn-outline-warning btn-round" data-toggle="modal"
         data-target="#edit-Modal" onclick="edit_news({{$item->new_id}})">
-        <i class="icofont icofont-image"></i> Select Image </button>
+        <i class="icofont icofont-image"></i> เลือกรูปภาพ </button>
 </div>
 </div>
 </div>
@@ -188,7 +188,7 @@ height="390">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Content</h4>
+                <h4 class="modal-title">สร้างเนื้อหา</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -201,40 +201,40 @@ height="390">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Link <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">ลิงค์ <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 712 x 390 px.
+                                        รูปภาพขนาด: 712 x 390 px.
                                     </span>
                                 </span>
                             </span>
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="link" class="form-control" placeholder="Link...">
+                            <input type="text" name="link" class="form-control" placeholder="ลิงค์...">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Title</label>
+                        <label class="col-sm-2 col-form-label">หัวข้อ</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Title..." name="title" required>
+                            <input type="text" class="form-control" placeholder="หัวข้อ..." name="title" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Content</label>
+                        <label class="col-sm-2 col-form-label">เนื้อหา</label>
                         <div class="col-sm-10">
                             <textarea name="content" class="form-control" cols="30" rows="10"
-                                placeholder="Write Something..."></textarea>
+                                placeholder="เขียนบางอย่าง..."></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Tags</label>
+                        <label class="col-sm-2 col-form-label">แท็ก</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group input-group-button">
-                                        <input type="text" class="form-control" placeholder="Tag Name..." id="tag">
+                                        <input type="text" class="form-control" placeholder="ชื่อแท็ก..." id="tag">
                                         <span class="input-group-addon btn btn-primary" id="addtags">
-                                            <span class="">Add</span>
+                                            <span class="">เพิ่ม</span>
                                         </span>
                                     </div>
                                 </div>
@@ -257,8 +257,8 @@ height="390">
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
             </div>
         </div>
     </div>
@@ -347,12 +347,12 @@ height="390">
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

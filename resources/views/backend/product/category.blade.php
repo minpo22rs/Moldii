@@ -32,14 +32,14 @@
                 <i class="icofont icofont-cubes"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Product Category</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>หมวดหมู่สินค้า</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Product Category</a>
+                    <li class="breadcrumb-item"><a href="">หมวดหมู่สินค้า</a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +52,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-product"><i class="icofont icofont-ui-add"></i>
-                Add Product Category</button>
+                เพิ่มหมวดหมู่สินค้า</button>
         </div>
     </div>
     <div class="card-block">
@@ -62,9 +62,9 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Image</th>
-                            <th style="text-align: center;">Name</th>
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">รูปภาพ</th>
+                            <th style="text-align: center;">ชื่อ</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,12 +77,12 @@
                             <td class="text-center text-middle">{{$item->cat_name}}</td>
                             <td class="text-center text-middle">
                                 <div class="dropdown-primary dropdown open">
-                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                        <a href="{{url('admin/product', $item->cat_id)}}" class="dropdown-item waves-light waves-effect"><i class="icofont icofont-ui-add"></i> Add Products</a>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_category({{$item->cat_id}})"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="{{url('admin/product', $item->cat_id)}}" class="dropdown-item waves-light waves-effect"><i class="icofont icofont-ui-add"></i> เพิ่มสินค้า</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_category({{$item->cat_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_category({{$item->cat_id}})"><i class="icofont icofont-bin"></i> Delete</a>
+                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_category({{$item->cat_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                     </div>
                                 </div>
                             </td>
@@ -90,7 +90,7 @@
                         @empty
                         <tr>
                             <td class="text-center text-middle"></td>
-                            <td class="text-center text-middle">No record</td>
+                            <td class="text-center text-middle">ไม่บันทึก</td>
                             <td class="text-center text-middle"></td>
                         </tr>
                         @endforelse
@@ -105,7 +105,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Product Category</h4>
+                <h4 class="modal-title">เพิ่มหมวดหมู่สินค้า/h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,10 +116,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
+                                <span class="tooltip-item2">รูปภาพปก<span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 57 x 57 px.
+                                        รูปภาพขนาด: 57 x 57 px.
                                     </span>
                                 </span>
                             </span>
@@ -129,27 +129,27 @@
                                 <div class="col-6">
                                     <input type="file" name="cover[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> Add Cover</button> 
+                                        <i class="icofont icofont-image"></i>เพิ่มรูปปก</button> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Category Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อหมวดหมู่<span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Category Name...">
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อหมวดหมู่...">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Category Code <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">รหัสหมวดหมู่ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="code" class="form-control" placeholder="Category Code..." maxlength="2" style="text-transform:uppercase">
+                                    <input type="text" name="code" class="form-control" placeholder="รหัสหมวดหมู่..." maxlength="2" style="text-transform:uppercase">
                                 </div>
                             </div>
                         </div>
@@ -157,8 +157,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addproduct">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addproduct">ยืนยัน</button>
             </div>
         </div>
     </div>
@@ -210,12 +210,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนไได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

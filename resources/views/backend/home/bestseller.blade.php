@@ -40,16 +40,16 @@
                 <i class="icofont icofont-bullhorn"></i>
             </div>
             <div class="d-inline-block">
-                <h5>New Products & Best Seller</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <h5>สินค้าใหม่ & สินค้าขายดี</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Home</a>
+                    <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">New Products & Best Seller</a>
+                    <li class="breadcrumb-item"><a href="">สินค้าใหม่ & สินค้าขายดี</a>
                     </li>
                 </ul>
             </div>
@@ -65,9 +65,9 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Image</th>
-                            <th style="text-align: center;">Name</th>
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">รูปภาพ</th>
+                            <th style="text-align: center;">ชื่อ</th>
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
