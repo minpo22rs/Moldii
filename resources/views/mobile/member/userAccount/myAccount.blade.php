@@ -89,6 +89,17 @@
     </div>
 </a>
 
+
+<a href="{{url('user/sendslip')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row ">
+        <i class="far fa fa-file-invoice"></i>
+        <h5 class="m-0 ml-2 font-weight-bold">หน้าแจ้งชำระเงิน</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+
 <a href="{{url('logout')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row ">
         <i class="far fa fa-sign-out"></i>
@@ -99,21 +110,6 @@
     </div>
 </a>
 
-<a href="{{url('p')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row ">
-        <i class="far fa fa-sign-out"></i>
-        <h5 class="m-0 ml-2 font-weight-bold">หน้าแจ้งชำระเงิน</h5>
-    </div>
-    <div class="col-4 mx-0 text-right">
-        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
-    </div>
-</a>
-
-<!-- <div class="row py-1  border-top border-bottom text-danger">
-    <div class="col-12 mx-0">
-        <div class="mx-2 my-2 ml-2" onclick="window.location.replace('../logout.php');">ออกจากระบบ</div>
-    </div>
-</div> -->
 @endsection
 
 @section('custom_script')

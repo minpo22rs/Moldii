@@ -329,6 +329,7 @@
 @section('choice')
 <div class="" id="share_container">
 
+    <?php $urlen = urlencode("https://modii.sapapps.work/shopping/product/$product->product_id")?>
     <div class="share-box p-2" id="share_box">
         <div class="text-center">
             <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
@@ -338,8 +339,8 @@
                 <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                 <h5 class="font-weight-bold m-0 mt-1">Line</h5>
             </a>
-            <a href="" class="m-0 text-center  align-self-end share-item">
-                <img src="{{ asset('new_assets/img/icon/share/ig_instagram.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                 <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
 
             </a>
@@ -353,10 +354,7 @@
                 <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
 
             </a>
-            <a href="" class="m-0 text-center align-self-end  share-item">
-                <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
-                <h5 class="font-weight-bold m-0 mt-1">Email</h5>
-            </a>
+          
             <div class="row col-11 mt-4 p-0">
                 <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
 

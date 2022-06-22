@@ -476,6 +476,12 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.deliveryStatus');
 
     }
+
+
+    public function sendslip(){
+        return view('mobile.member.common.notice_of_payment');
+        
+    }
     
     
 }

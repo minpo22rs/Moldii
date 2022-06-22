@@ -182,6 +182,8 @@ color: #666;
 }
 
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="appHeader bg-danger text-light">
 
     <div class="pageTitle">
@@ -360,8 +362,113 @@ color: #666;
 
 
             <div id="home" class="tab-pane fade in active show">
+                
+                @foreach ($cp as $cps)
+                    <?php   $count = DB::Table('tb_post_comments')->where('comment_object_id', $cps->id_user_content)->get();
+                            $countreply = DB::Table('tb_post_comment_replys')->where('post_id',$cps->id_user_content)->get();
+                            $pugall = DB::Table('tb_content_imgs')->where('id_content',$cps->id_user_content)->get();
+                            $puser = DB::Table('tb_customers')->where('customer_id',$cps->customer_id)->first();
+                    ?>
+                
+                    <div class="card my-3">
+                        <div class="card-body row col-12 justify-content-center m-0">
+                            <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
 
-              
+                            <div class="card-title col-8  align-self-center m-0 ">
+                                <div class="card-title m-0 row align-self-center">
+                                    <h4 class=" m-0 p-0">{{$puser->customer_username}}</h4>
+                                    <a href="#" class="ml-1 align-self-center" onclick="followContent({{$cps->id_user_content}},{{$puser->customer_id}})"> 
+                                        <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);" id="follow{{$cps->id_user_content}}">ติดตาม</h6>
+                                    </a>
+                                </div>
+                                <h6 class=" m-0 p-0">{{$cps->created_at}}</h6>
+                            </div>
+
+                            <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
+                                <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
+                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
+                                    <a class="dropdown-item" href="#">ซ่อนโพสต์</a>
+                                    <a class="dropdown-item" href="#">ลบโพสต์</a>
+                                    <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    <a class="dropdown-item" href="#">report</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="card-body p-2">
+                            <a href="{{url('content/'.$cps->id_user_content.'')}}" class="card-text">{{$cps->new_title}}</a>
+                        </div>
+                            
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    
+                                    @if($pugall->count() != 0)
+                                        <div class="carousel-item active">
+                                            <img src="{{asset('/storage/app/public/content_img/'.$pugall[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                        </div>
+                                        @foreach($pugall as $imgs)
+                                            @if($imgs->type =='I')
+                                                <div class="carousel-item">
+                                                    <img src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                </div>
+                                            @else
+                                                <div class="carousel-item">
+                                                    <video width="auto" height="197" controls >
+                                                        <source src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                        <source src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                                    </video>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                        
+                                </div>
+                            
+                            </div>
+                        {{-- <a href="{{url('content/'.$sqls->new_id.'')}}">
+                            
+                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                        
+                        </a> --}}
+
+                        <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
+                            <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$cps->like?''.$cps->like.'':'0'}} ชื่นชอบ</h6>
+                            <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$count->count() + $countreply->count()}} รายการ</h6>
+                            <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
+
+                        </div>
+
+                        <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
+
+                            <div class="col-3 row p-0 align-items-center" onclick="myLike({{$cps->id_user_content}})">
+                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
+                                {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
+                                <h5 class="mb-0 ml-1 " id="myLike{{$cps->id_user_content}}">ถูกใจ</h5>
+                            </div>
+                            <div class="col-5 row p-0 align-items-center">
+                                <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <a href="{{url('content/'.$cps->id_user_content.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
+                            </div>
+                            <div class="col-2 row p-0 align-items-center">
+                                <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <h5 class="mb-0 ml-1">แชร์</h5>
+                            </div>
+                            {{-- <div class="col-2 row p-0 align-items-center">
+                                <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <h5 class="mb-0 ml-1">โดเนท</h5>
+                            </div> --}}
+
+                        </div>
+                    </div>
+                @endforeach
 
                 @foreach ($c as $sqls)
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();
@@ -376,16 +483,23 @@ color: #666;
                             <div class="card-title col-8  align-self-center m-0 ">
                                 <div class="card-title m-0 row align-self-center">
                                     <h4 class=" m-0 p-0">{{$sqls->created_by}}</h4>
-                                    <a href="#" class="ml-1 align-self-center">
+                                    {{-- <a href="#" class="ml-1 align-self-center" > 
                                         <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
-                                    </a>
+                                    </a> --}}
                                 </div>
                                 <h6 class=" m-0 p-0">{{$sqls->created_at}}</h6>
                             </div>
 
                             <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
                                 <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
-                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
+                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
+                                    <a class="dropdown-item" href="#">ซ่อนโพสต์</a>
+                                    <a class="dropdown-item" href="#">ลบโพสต์</a>
+                                    <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    <a class="dropdown-item" href="#">report</a>
+                                </div>
                             </div>
                         </div>
                         
@@ -430,9 +544,10 @@ color: #666;
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                            <div class="col-3 row p-0 align-items-center">
+                            <div class="col-3 row p-0 align-items-center" onclick="myLike({{$sqls->new_id}})">
                                 <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
+                                {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
+                                <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}">ถูกใจ</h5>
                             </div>
                             <div class="col-5 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -680,6 +795,51 @@ color: #666;
             }
         </script>
         <script src="script.js"></script>
+
+        <script>
+            function myLike(id) {
+                var chk = 0;
+                var x = document.getElementById("myLike"+id);
+                if (x.innerHTML === "ถูกใจ") {
+                    x.innerHTML = "ถูกใจแล้ว";
+                    document.getElementById("myLike"+id).style.color = "green";
+                    chk = 1;
+                } else {
+                    x.innerHTML = "ถูกใจ";
+                    document.getElementById("myLike"+id).style.color = "black";
+                    chk = 0; //เลิกตาม
+                }
+            }
+
+            function followContent(v,id) {
+                var chk = 0;
+                var x = document.getElementById("follow"+v);
+                if (x.innerHTML === "ติดตาม") {
+                    x.innerHTML = "ติดตามแล้ว";
+                    document.getElementById("follow"+v).style.color = "green";
+                    chk = 1;
+                } else {
+                    x.innerHTML = "ติดตาม";
+                    document.getElementById("follow"+v).style.color = "red";
+                    chk = 0; //เลิกตาม
+                }
+
+                $.ajax({
+                    url: '{{ url("/followwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'chk':chk,'id':id},
+                    success: function(data) {
+                    
+                        alert('ติดตามผู้เขียนแล้ว');
+                    
+                    }
+                });
+        
+               
+            }
+
+        </script>
 
     {{-- img slide --}}
 

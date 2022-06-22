@@ -75,6 +75,9 @@ Route::get('user/settingNotification', [UserAccController::class, 'settingNotifi
 Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
+Route::get('user/sendslip', [UserAccController::class, 'sendslip']);// แจ้งชำระเงิน
+
+
 
 Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceive']);// รายการของฉัน
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
@@ -105,6 +108,7 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 
 Route::get('/', [MainController::class, 'index']); 
 Route::get('/index', [MainController::class, 'indexpage']); 
+Route::get('/followwriter', [MainController::class, 'followwriter']); 
 Route::get('logout', [LoginController::class, 'logout']); 
 
 

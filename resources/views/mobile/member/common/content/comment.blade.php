@@ -190,10 +190,10 @@
                 <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
 
             </a>
-            <a href="" class="m-0 text-center align-self-end  share-item">
+            {{-- <a href="" class="m-0 text-center align-self-end  share-item">
                 <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                 <h5 class="font-weight-bold m-0 mt-1">Email</h5>
-            </a>
+            </a> --}}
             <div class="row col-11 mt-4 p-0">
                 <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
 
