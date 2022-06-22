@@ -35,11 +35,37 @@ class MainController extends Controller
     }
 
     public function followwriter(Request $request){
-        if( $request->chk ==1){
-            DB::Table('tb_followers')->insert(['id_customer'=>Session::get('cid'),'id_c_follower'=>$request->id]);
-        }
-
+      
+        DB::Table('tb_followers')->insert(['id_customer'=>Session::get('cid'),'id_c_follower'=>$request->id]);
+      
+        return 1 ;
     }
+
+    public function unfollowwriter(Request $request){
+       
+        DB::Table('tb_followers')->where('id_customer',Session::get('cid'))->where('id_c_follower',$request->id)->delete();
+
+        
+        return 1 ;
+    }
+
+
+    public function likecontent(Request $request){
+      
+        DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id]);
+      
+        return 1 ;
+    }
+
+    public function unlikecontent(Request $request){
+       
+        DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)->delete();
+
+        
+        return 1 ;
+    }
+
+
 
 
 

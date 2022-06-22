@@ -37,13 +37,15 @@ class OrderController extends Controller
         // dd($request->all());
      
         if($request->resultCode == '55'){
+            Tb_order::where('id_order',$rid)->update(['status_order'=>5]);
             return redirect('cartindex');
         }elseif($request->resultCode == '01'){ //customer cancel
+            Tb_order::where('id_order',$rid)->update(['status_order'=>5]);
             return redirect('cartindex');
 
         }else{
 
-            Tb_order::where('id_order',$rid)->update(['status_order'=>3]);
+            Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
             Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
             'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
             return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
@@ -67,7 +69,7 @@ class OrderController extends Controller
         $order = new Tb_order();
         $order->customer_id = Session::get('cid');
         $order->order_total = number_format(Session::get('totalcart'),2,'.','');
-        $order->status_order = 4;
+        $order->status_order = 6;
 
         if(Session::get('coin')!=null){
             $order->order_coin = Session::get('coin');
@@ -107,10 +109,6 @@ class OrderController extends Controller
         }
 
         DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->delete();
-
-
-
-
 
 
         // dd(Session::all());
@@ -289,7 +287,7 @@ class OrderController extends Controller
 
         $chargeResp = json_decode($result, true);
 
-        dd($result);
+        // dd($result);
         if(Session::get('typepayment') == 'Wechat Pay'){
             return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
 

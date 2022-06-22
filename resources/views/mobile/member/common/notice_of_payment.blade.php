@@ -12,14 +12,15 @@
 @section('content')
 <div class="mt-3 p-2 col-md-12">
 
-    <form runat="server">
+    <form action="{{url('user/submitslip')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <input type="text" name="oid" placeholder="หมายเลขอ้างอิง" class="form-control"><br>
-        <input type="text" name="oid" placeholder="ชื่อ-นามสกุล ของบัญชีที่ใช้ทำการโอนเงิน" class="form-control">
+        <input type="text" name="name" placeholder="ชื่อ-นามสกุล ของบัญชีที่ใช้ทำการโอนเงิน" class="form-control">
         <br>
-        แนบสลิป :  <input accept="image/*" type='file' id="imgInp" name="imgProfileChange" accept="image/*;capture=camera">
+        แนบสลิป :  <input accept="image/*" type='file' id="imgInp" name="img" accept="image/*;capture=camera">
         <center><br><img id="blah" src="#" alt="" width ="80%"></center>
         <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยันยันการชำระเงิน</button>
-        <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset -->
+        {{-- <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset --> --}}
     </form>
 
 </div>
@@ -28,13 +29,18 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
+
+    var a = "{{Session::get('msg')}}";
+    if(a){
+        alert(a);
+    }
 
     imgInp.onchange = evt => {
-    const [file] = imgInp.files
-    if (file) {
-        blah.src = URL.createObjectURL(file)
-    }
+        const [file] = imgInp.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
     }
 
 </script>

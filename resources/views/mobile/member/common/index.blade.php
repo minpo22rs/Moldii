@@ -234,6 +234,7 @@ color: #666;
     </div>
     <!-- Show List Menu btn_search_2 [End]--> 
 </div>
+{{-- Recent Search --}}
 <div id="search_box_2">
     <h3> Recent Search</h3>
 
@@ -245,7 +246,7 @@ color: #666;
                 @endforeach
                 
             @else
-                ไม่พบการค้นหาล่าสุด
+                <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
             @endif
         </p>
   
@@ -368,6 +369,8 @@ color: #666;
                             $countreply = DB::Table('tb_post_comment_replys')->where('post_id',$cps->id_user_content)->get();
                             $pugall = DB::Table('tb_content_imgs')->where('id_content',$cps->id_user_content)->get();
                             $puser = DB::Table('tb_customers')->where('customer_id',$cps->customer_id)->first();
+                            $f = DB::Table('tb_followers')->where('id_c_follower',$cps->customer_id)->where('id_customer',Session::get('cid'))->first();
+                            $l = DB::Table('tb_content_likes')->where('content_id',$cps->id_user_content )->where('customer_id',Session::get('cid'))->first();
                     ?>
                 
                     <div class="card my-3">
@@ -377,9 +380,16 @@ color: #666;
                             <div class="card-title col-8  align-self-center m-0 ">
                                 <div class="card-title m-0 row align-self-center">
                                     <h4 class=" m-0 p-0">{{$puser->customer_username}}</h4>
-                                    <a href="#" class="ml-1 align-self-center" onclick="followContent({{$cps->id_user_content}},{{$puser->customer_id}})"> 
-                                        <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);" id="follow{{$cps->id_user_content}}">ติดตาม</h6>
-                                    </a>
+                                    @if($puser->customer_id !== Session::get('cid'))
+                                        <a href="#" class="ml-1 align-self-center" > 
+                                            @if($f == null)
+                                                <h6 class="m-0 p-0 " onclick="followContent({{$cps->id_user_content}},{{$puser->customer_id}})" style="color: rgba(255, 92, 99, 1);" id="follow{{$cps->id_user_content}}">ติดตาม</h6>
+                                            @else
+                                                <h6 class="m-0 p-0 " onclick="UNfollowContent({{$cps->id_user_content}},{{$puser->customer_id}})" style="color: green;" id="unfollow{{$cps->id_user_content}}">ติดตามแล้ว</h6>
+                                            @endif
+                                            
+                                        </a>
+                                    @endif
                                 </div>
                                 <h6 class=" m-0 p-0">{{$cps->created_at}}</h6>
                             </div>
@@ -388,10 +398,12 @@ color: #666;
                                 <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
                                 <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
-                                    <a class="dropdown-item" href="#">ซ่อนโพสต์</a>
-                                    <a class="dropdown-item" href="#">ลบโพสต์</a>
-                                    <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    @if($cps->customer_id == Session::get('cid'))
+                                        <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
+                                        <a class="dropdown-item" href="#">ซ่อนโพสต์</a>
+                                        <a class="dropdown-item" href="#">ลบโพสต์</a>
+                                        <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    @endif
                                     <a class="dropdown-item" href="#">report</a>
                                 </div>
                             </div>
@@ -448,10 +460,14 @@ color: #666;
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                            <div class="col-3 row p-0 align-items-center" onclick="myLike({{$cps->id_user_content}})">
+                            <div class="col-3 row p-0 align-items-center" >
                                 <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
                                 {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
-                                <h5 class="mb-0 ml-1 " id="myLike{{$cps->id_user_content}}">ถูกใจ</h5>
+                                @if($l == null)
+                                    <h5 class="mb-0 ml-1 " id="myLike{{$cps->id_user_content}}" onclick="myLike({{$cps->id_user_content}})">ถูกใจ</h5>
+                                @else
+                                    <h5 class="mb-0 ml-1 " id="unmyLike{{$cps->id_user_content}}" style="color: green" onclick="UNmyLike({{$cps->id_user_content}})">ถูกใจแล้ว</h5>
+                                @endif
                             </div>
                             <div class="col-5 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -474,6 +490,7 @@ color: #666;
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();
                             $countreply = DB::Table('tb_comment_replys')->where('news_id',$sqls->new_id)->get();
                             $imggal = DB::Table('tb_new_imgs')->where('new_id',$sqls->new_id)->get();
+                            $la = DB::Table('tb_content_likes')->where('content_id',$sqls->new_id )->where('customer_id',Session::get('cid'))->first();
                     ?>
                     
                     <div class="card my-3">
@@ -492,14 +509,14 @@ color: #666;
 
                             <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
                                 <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
-                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
-                                <div class="dropdown-menu dropdown-menu-right">
+                                {{-- <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon> --}}
+                                {{-- <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
                                     <a class="dropdown-item" href="#">ซ่อนโพสต์</a>
                                     <a class="dropdown-item" href="#">ลบโพสต์</a>
                                     <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                                     <a class="dropdown-item" href="#">report</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         
@@ -544,10 +561,14 @@ color: #666;
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                            <div class="col-3 row p-0 align-items-center" onclick="myLike({{$sqls->new_id}})">
+                            <div class="col-3 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
                                 {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
-                                <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}">ถูกใจ</h5>
+                                @if($la == null)
+                                    <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
+                                @else
+                                    <h5 class="mb-0 ml-1 " id="unmyLike{{$sqls->new_id}}" style="color: green" onclick="UNmyLike({{$sqls->new_id}})">ถูกใจแล้ว</h5>
+                                @endif
                             </div>
                             <div class="col-5 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -798,45 +819,87 @@ color: #666;
 
         <script>
             function myLike(id) {
-                var chk = 0;
+               
                 var x = document.getElementById("myLike"+id);
-                if (x.innerHTML === "ถูกใจ") {
-                    x.innerHTML = "ถูกใจแล้ว";
-                    document.getElementById("myLike"+id).style.color = "green";
-                    chk = 1;
-                } else {
-                    x.innerHTML = "ถูกใจ";
-                    document.getElementById("myLike"+id).style.color = "black";
-                    chk = 0; //เลิกตาม
-                }
+                
+                x.innerHTML = "ถูกใจแล้ว";
+                document.getElementById("myLike"+id).style.color = "green";
+                $.ajax({
+                    url: '{{ url("/likecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+                   
+            }
+
+
+            function UNmyLike(id) {
+               
+                var x = document.getElementById("unmyLike"+id);
+               
+              
+                x.innerHTML = "ถูกใจ";
+                document.getElementById("unmyLike"+id).style.color = "black";
+                $.ajax({
+                    url: '{{ url("/unlikecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    
+                    }
+                });
+                   
+                
             }
 
             function followContent(v,id) {
-                var chk = 0;
+               
                 var x = document.getElementById("follow"+v);
-                if (x.innerHTML === "ติดตาม") {
-                    x.innerHTML = "ติดตามแล้ว";
-                    document.getElementById("follow"+v).style.color = "green";
-                    chk = 1;
-                } else {
-                    x.innerHTML = "ติดตาม";
-                    document.getElementById("follow"+v).style.color = "red";
-                    chk = 0; //เลิกตาม
-                }
+      
+                x.innerHTML = "ติดตามแล้ว";
+                document.getElementById("follow"+v).style.color = "green";
 
                 $.ajax({
                     url: '{{ url("/followwriter")}}',
                     type: 'GET',
                     dataType: 'HTML',
-                    data: {'chk':chk,'id':id},
+                    data: {'id':id},
                     success: function(data) {
-                    
-                        alert('ติดตามผู้เขียนแล้ว');
+                       
+                            alert('ติดตามผู้เขียนแล้ว');
+
                     
                     }
                 });
         
                
+            }
+
+            function UNfollowContent(v,id){
+                var x = document.getElementById("unfollow"+v);
+      
+                x.innerHTML = "ติดตาม";
+                document.getElementById("unfollow"+v).style.color = "rgba(255, 92, 99, 1)";
+
+                $.ajax({
+                    url: '{{ url("/unfollowwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        
+                            alert('เลิกติดตามผู้เขียนแล้ว');
+
+                    
+                    }
+                });
+
             }
 
         </script>

@@ -8473,9 +8473,9 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 .tabs-btn {
     border: none;
-    width: 33.33%;
+    width: 23.33%;
     color: rgba(196, 196, 196, 1);
-    font-size: 18px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     background-color: transparent;

@@ -11,6 +11,7 @@ use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\Tb_credit;
 use App\Models\Tb_review;
+use App\Models\Tb_tranfer;
 use App\Models\Tb_review_img;
 use App\Models\User;
 
@@ -312,7 +313,7 @@ class UserAccController extends Controller
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->latest('tb_order_details.created_at')
-            ->select('tb_order_details.*','tb_products.product_img','tb_merchants.merchant_name')
+            ->select('tb_order_details.*','tb_products.product_img','tb_merchants.merchant_name','tb_orders.status_order','tb_orders.order_code')
             ->get();
             // dd($sql );
         return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
@@ -478,8 +479,27 @@ class UserAccController extends Controller
     }
 
 
-    public function sendslip(){
+    public function sendslip(Request $request){
+        // dd($request->all());
         return view('mobile.member.common.notice_of_payment');
+        
+    }
+
+    public function submitslip(Request $request){
+        // dd($request->all());
+        $tran  = new Tb_tranfer();
+        $tran->id_order = $request->oid;
+        $tran->customer_id	= Session::get('cid');
+        $tran->name = $request->name;
+
+        $name = rand().time().'.'.$request->file('img')->getClientOriginalExtension();
+        $request->file('img')->storeAs('public/payment',$name);
+        $tran->file = $name;
+                
+
+        $tran->save();
+
+        return redirect('user/sendslip')->with('msg','แจ้งชำระเงินเรียบร้อยแล้ว กรุณารอการตรวจสอบหลักฐาน');
         
     }
     

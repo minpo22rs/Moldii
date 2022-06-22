@@ -87,7 +87,7 @@
             @endforeach
             
         @else
-            ไม่พบการค้นหาล่าสุด
+            <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
         @endif
     </p>
 </div>
@@ -193,7 +193,7 @@
                         </div>
                     @endforeach
                 @else
-                    ไม่พบการค้นหา
+                    <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
                 @endif
             </div>
 
@@ -232,7 +232,7 @@
                        
                     @endforeach
                 @else
-                    ไม่พบการค้นหา
+                    <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
                 @endif
             </div>
 

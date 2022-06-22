@@ -76,6 +76,7 @@ Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป
 
 Route::get('user/sendslip', [UserAccController::class, 'sendslip']);// แจ้งชำระเงิน
+Route::post('user/submitslip', [UserAccController::class, 'submitslip']);// แจ้งชำระเงิน
 
 
 
@@ -109,6 +110,9 @@ Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCent
 Route::get('/', [MainController::class, 'index']); 
 Route::get('/index', [MainController::class, 'indexpage']); 
 Route::get('/followwriter', [MainController::class, 'followwriter']); 
+Route::get('/unfollowwriter', [MainController::class, 'unfollowwriter']); 
+Route::get('/likecontent', [MainController::class, 'likecontent']); 
+Route::get('/unlikecontent', [MainController::class, 'unlikecontent']); 
 Route::get('logout', [LoginController::class, 'logout']); 
 
 
