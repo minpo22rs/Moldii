@@ -176,7 +176,7 @@
 
                                 <li class="">
                                     
-                                    <a href="{{url("merchant/order")}}">
+                                    <a href="{{url("admin/tranfer")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-check-circled"></i><b>D</b></span>
                                         <span class="pcoded-mtext">ตรวจสอบการโอนเงิน</span>
                                         <span class="pcoded-mcaret"></span>
