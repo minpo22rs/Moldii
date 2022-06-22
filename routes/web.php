@@ -113,6 +113,8 @@ Route::get('/followwriter', [MainController::class, 'followwriter']);
 Route::get('/unfollowwriter', [MainController::class, 'unfollowwriter']); 
 Route::get('/likecontent', [MainController::class, 'likecontent']); 
 Route::get('/unlikecontent', [MainController::class, 'unlikecontent']); 
+Route::get('/bookmarkadd', [MainController::class, 'bookmarkadd']); 
+Route::get('/unbookmark', [MainController::class, 'unbookmark']); 
 Route::get('logout', [LoginController::class, 'logout']); 
 
 

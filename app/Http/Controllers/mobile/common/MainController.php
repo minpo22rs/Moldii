@@ -65,6 +65,21 @@ class MainController extends Controller
         return 1 ;
     }
 
+    public function bookmarkadd(Request $request){
+      
+        DB::Table('tb_bookmarks')->insert(['customer_id'=>Session::get('cid'),'id_ref'=>$request->id]);
+      
+        return 1 ;
+    }
+
+    public function unbookmark(Request $request){
+       
+        DB::Table('tb_bookmarks')->where('customer_id',Session::get('cid'))->where('id_ref',$request->id)->delete();
+
+        
+        return 1 ;
+    }
+
 
 
 

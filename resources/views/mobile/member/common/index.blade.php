@@ -371,6 +371,7 @@ color: #666;
                             $puser = DB::Table('tb_customers')->where('customer_id',$cps->customer_id)->first();
                             $f = DB::Table('tb_followers')->where('id_c_follower',$cps->customer_id)->where('id_customer',Session::get('cid'))->first();
                             $l = DB::Table('tb_content_likes')->where('content_id',$cps->id_user_content )->where('customer_id',Session::get('cid'))->first();
+                            $bm = DB::Table('tb_bookmarks')->where('id_ref',$cps->id_user_content)->where('customer_id',Session::get('cid'))->first();
                     ?>
                 
                     <div class="card my-3">
@@ -395,7 +396,30 @@ color: #666;
                             </div>
 
                             <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
-                                <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
+                                @if($bm !== null)
+
+                                    <div id="bmm{{$cps->id_user_content}}" >
+                                        <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark({{$cps->id_user_content}})" ></ion-icon>
+                                    </div>
+                                   
+
+                                @else
+                                    <div id="bmoll{{$cps->id_user_content}}" >
+                                        <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd({{$cps->id_user_content}})"></ion-icon>
+                                    </div>
+                                   
+                                @endif
+
+                                <div style="display: none" id="bmol{{$cps->id_user_content}}" >
+                                    <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd2({{$cps->id_user_content}})"></ion-icon>
+
+                                </div>
+
+                                <div style="display: none" id="bm{{$cps->id_user_content}}" >
+                                    <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark2({{$cps->id_user_content}})" ></ion-icon>
+                                </div>
+
+
                                 <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     @if($cps->customer_id == Session::get('cid'))
@@ -414,37 +438,37 @@ color: #666;
                             <a href="{{url('content/'.$cps->id_user_content.'')}}" class="card-text">{{$cps->new_title}}</a>
                         </div>
                             
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                
+                                @if($pugall->count() != 0)
+                                    <div class="carousel-item active">
+                                        <img src="{{asset('storage/app/public/content_img/'.$pugall[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                    </div>
+                                    @foreach($pugall as $imgs)
+                                        @if($imgs->type =='I')
+                                            <div class="carousel-item">
+                                                <img src="{{asset('storage/app/public/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                            </div>
+                                        @else
+                                            <div class="carousel-item">
+                                                <video width="auto" height="197" controls >
+                                                    <source src="{{asset('storage/app/public/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                    <source src="{{asset('storage/app/public/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                                </video>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
                                     
-                                    @if($pugall->count() != 0)
-                                        <div class="carousel-item active">
-                                            <img src="{{asset('/storage/app/public/content_img/'.$pugall[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                        </div>
-                                        @foreach($pugall as $imgs)
-                                            @if($imgs->type =='I')
-                                                <div class="carousel-item">
-                                                    <img src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                                </div>
-                                            @else
-                                                <div class="carousel-item">
-                                                    <video width="auto" height="197" controls >
-                                                        <source src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" type=video/ogg>
-                                                        <source src="{{asset('/storage/app/public/content_img/'.$imgs->name.'')}}" type=video/mp4>
-                                                    </video>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                        
-                                </div>
-                            
                             </div>
+                        
+                        </div>
                         {{-- <a href="{{url('content/'.$sqls->new_id.'')}}">
                             
                             <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
@@ -818,6 +842,74 @@ color: #666;
         <script src="script.js"></script>
 
         <script>
+
+            function bookmarkadd(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmoll'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+            function unbookmark(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+            function bookmarkadd2(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmol'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+            function unbookmark2(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+
             function myLike(id) {
                
                 var x = document.getElementById("myLike"+id);
