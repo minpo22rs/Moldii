@@ -1,8 +1,8 @@
 {
     "name": "Moldii",
     "short_name": "Moldii",
-    "start_url": "index.html",
-    "display": "standalone",
+    "start_url": "/",
+    "display": "fullscreen",
     "scope" : "/",
     "background_color": "#000000",
     "theme_color": "#000000",
