@@ -3,7 +3,7 @@
     "short_name": "Moldii",
     "start_url": "/",
     "display": "fullscreen",
-    "scope" : "/",
+    "scope" : "https://modii.sapapps.work/",
     "background_color": "#000000",
     "theme_color": "#000000",
     "orientation": "portrait",
