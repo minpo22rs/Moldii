@@ -505,7 +505,7 @@ color: #666;
                             </div>
                             <div class="col-5 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <a href="{{url('content/'.$cps->id_user_content.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
+                                <a href="#"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                             </div>
                             <div class="col-2 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">

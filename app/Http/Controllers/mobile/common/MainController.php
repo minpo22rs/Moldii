@@ -27,9 +27,9 @@ class MainController extends Controller
         $group = DB::Table('tb_familys')->get();
         $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
         $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
-        $cp = DB::Table('tb_user_contents')->get();
+        $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         // $result = $cp->merge($c);
-        
+        // dd( $cp );
    
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp]);
     }

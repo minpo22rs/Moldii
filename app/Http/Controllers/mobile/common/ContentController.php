@@ -39,6 +39,11 @@ class ContentController extends Controller
         return back();
     }
 
+
+    // $validator = Validator::make($request->all(), [
+    //     'file' => 'max:500000',
+    // ]);
+
     public function userpostcontent(Request $request){
         // dd($request->all());
         $content = new Tb_user_content();
