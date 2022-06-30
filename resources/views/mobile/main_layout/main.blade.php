@@ -267,13 +267,6 @@
             alert('triggered');
         }
 
-        window.addEventListener("load",function() {
-            setTimeout(function(){
-                // This hides the address bar:
-                window.scrollTo(0, 1);
-            }, 0);
-        });
-
 
         function bottom_now(position) {
             document.getElementById('bottom_button_home').className = 'item';
