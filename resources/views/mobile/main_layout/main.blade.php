@@ -68,15 +68,15 @@
                 <span class="text-dark" id="bottom_text_yt">คลิป</span>
             </div>
         </a>
-        <?php $sql = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
-        <a href="{{url('cartindex')}}" class="item" id="bottom_button_bk">
+       
+        {{-- <a href="{{url('cartindex')}}" class="item" id="bottom_button_bk">
             
             <div class="col ">
                 <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span>
                 <ion-icon name="cart" class="text-dark md hydrated" id="bottom_icon_bk"></ion-icon>
                 <span class="text-dark" id="bottom_text_bk">ตะกร้า</span>
             </div>
-        </a>
+        </a> --}}
         <a href="{{url('group')}}" class="item" id="bottom_button_fam">
             <div class="col">
                 <ion-icon name="people-circle-outline" class="text-dark md hydrated" id="bottom_icon_fam"></ion-icon>
@@ -85,7 +85,7 @@
         </a>
         <a href="#" class="item" id="bottom_button_noti">
             <div class="col">
-                <ion-icon name="podium" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
+                <ion-icon name="hammer" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
                 <span class="text-dark" id="bottom_text_noti">ประมูลสินค้า</span>
             </div>
         </a>
@@ -273,9 +273,9 @@
             document.getElementById('bottom_icon_home').className = 'text-white md hydrated';
             document.getElementById('bottom_text_home').className = 'text-white';
 
-            document.getElementById('bottom_button_bk').className = 'item';
-            document.getElementById('bottom_icon_bk').className = 'text-white md hydrated';
-            document.getElementById('bottom_text_bk').className = 'text-white';
+            // document.getElementById('bottom_button_bk').className = 'item';
+            // document.getElementById('bottom_icon_bk').className = 'text-white md hydrated';
+            // document.getElementById('bottom_text_bk').className = 'text-white';
 
             document.getElementById('bottom_button_noti').className = 'item';
             document.getElementById('bottom_icon_noti').className = 'text-white md hydrated';
@@ -305,10 +305,10 @@
                 document.getElementById('bottom_button_yt').className = 'item bg-white p-1';
                 document.getElementById('bottom_icon_yt').className = 'text-dark md hydrated';
                 document.getElementById('bottom_text_yt').className = 'text-dark';
-            } else if (Number(position) == 3) {
-                document.getElementById('bottom_button_bk').className = 'item bg-white p-1';
-                document.getElementById('bottom_icon_bk').className = 'text-dark md hydrated';
-                document.getElementById('bottom_text_bk').className = 'text-dark';
+            // } else if (Number(position) == 3) {
+            //     document.getElementById('bottom_button_bk').className = 'item bg-white p-1';
+            //     document.getElementById('bottom_icon_bk').className = 'text-dark md hydrated';
+            //     document.getElementById('bottom_text_bk').className = 'text-dark';
             } else if (Number(position) == 4) {
                 document.getElementById('bottom_button_fam').className = 'item bg-white p-1';
                 document.getElementById('bottom_icon_fam').className = 'text-dark md hydrated';

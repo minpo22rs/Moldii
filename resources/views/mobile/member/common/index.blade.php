@@ -195,7 +195,7 @@ color: #666;
     <div class="m-1 w-100">
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
@@ -207,10 +207,20 @@ color: #666;
                     
                 </form>
             </div>
+            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
+            <div class="col-2">
+                <a href="{{url('cartindex')}}">
+                    {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span> --}}
+                    <ion-icon name="cart" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
+                    </ion-icon>
+                </a>
+            </div>
+
             <div class="col-2">
                 <a href="{{url('user/notification')}}">
-                <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
-                </ion-icon></a>
+                    <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
+                    </ion-icon>
+                </a>
             </div>
             <div class="col-2">
                 <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
@@ -250,7 +260,7 @@ color: #666;
             @endif
         </p>
   
- </div>
+</div>
 @endsection
 
 @section('content')
@@ -438,7 +448,7 @@ color: #666;
                             <a href="{{url('content/'.$cps->id_user_content.'')}}" class="card-text">{{$cps->new_title}}</a>
                         </div>
                             
-                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -841,6 +851,8 @@ color: #666;
         </script>
         <script src="script.js"></script>
 
+        
+        {{-- bookmarkadd --}}
         <script>
 
             function bookmarkadd(id)

@@ -49,6 +49,16 @@
                     
                 </form>
             </div>
+
+            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
+            <div class="col-2">
+                <a href="{{url('cartindex')}}">
+                    {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span> --}}
+                    <ion-icon name="cart" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
+                    </ion-icon>
+                </a>
+            </div>
+            
             <div class="col-2">
                 <a href="{{url('user/notification')}}">
                 <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
