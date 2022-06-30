@@ -41,13 +41,13 @@
             </div>
             <div class="d-inline-block">
                 <h5>Calendar</h5>
-                <span>Status: <label class="label label-primary">Admin Level 1</label></span>
+                <span>Status: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Calendar</a>
+                    <li class="breadcrumb-item"><a href="">ปฏิทิน</a>
                     </li>
                 </ul>
             </div>

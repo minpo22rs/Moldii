@@ -122,18 +122,18 @@
                                 <ul class="show-notification profile-notification">
                                     <li>
                                         <a href="{{url('merchant/profile')}}">
-                                            <i class="ti-user"></i> Profile
+                                            <i class="ti-user"></i> ข้อมูลประจำตัว
                                         </a>
                                     </li>
                                     {{-- <li>
                                         <a href="">
-                                            <i class="ti-user"></i> Setting
+                                            <i class="ti-user"></i> ตั้งค่า
                                         </a>
                                     </li> --}}
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out"></i> Sign Out
+                                            <i class="fa fa-sign-out"></i> ออกจากระบบ
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             style="display: none;">
@@ -166,34 +166,34 @@
                                 <li class="">
                                     <a href="{{url("merchant/ordermerchant")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-list"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Order</span>
+                                        <span class="pcoded-mtext">คำสั่งซื้อ</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
 
                                
                             </ul>
-                            <div class="pcoded-navigation-label">Product Management</div>
+                            <div class="pcoded-navigation-label">การจัดการสินค้า</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="{{url('merchant/product')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-cubes"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Product</span>
+                                        <span class="pcoded-mtext">สินค้า</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">marketing section</div>
+                            <div class="pcoded-navigation-label">ส่วนการตลาด</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="{{url('merchant/calendar')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-calendar"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Calendar</span>
+                                        <span class="pcoded-mtext">ปฏิทิน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Contact Support</div>
+                            <div class="pcoded-navigation-label">ช่วยเหลือ</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="">
@@ -205,7 +205,7 @@
                                 <li class="">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="icofont icofont-support"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">Support Ticket</span>
+                                        <span class="pcoded-mtext">ติดต่อฝ่ายสนับสนุน</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

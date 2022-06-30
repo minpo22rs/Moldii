@@ -204,7 +204,7 @@
                                             <input type="text" name="regis_datestart" class="form-control datepicker" autocomplete="off" placeholder="เริ่มวันที่..." required>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" name="regis_dateend" class="form-control datepicker" autocomplete="off" placeholder="หยุดวันที่..." required>
+                                            <input type="text" name="regis_dateend" class="form-control datepicker" autocomplete="off" placeholder="สิ้นสุดวันที่..." required>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +234,7 @@
                                     <input type="text" name="datestart" class="form-control datepicker" autocomplete="off" placeholder="เริ่มวันที่..." required>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="dateend" class="form-control datepicker" autocomplete="off" placeholder="หยุดวันที่..." required>
+                                    <input type="text" name="dateend" class="form-control datepicker" autocomplete="off" placeholder="สิ้นสุดวันที่..." required>
                                 </div>
                             </div>
                         </div>
