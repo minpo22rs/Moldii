@@ -65,7 +65,7 @@
                             <th style="text-align: center;">#</th>
                             <th style="text-align: center;">รูปภาพหน้าปก</th>
                             <th style="text-align: center;">ชื่อสินค้า</th>
-                            {{-- <th style="text-align: center;">Description</th> --}}
+                            {{-- <th style="text-align: center;">คำอธิบาย</th> --}}
                             <th style="text-align: center;">ราคา</th>
                             <th style="text-align: center;">จำนวนสินค้า</th>
                             <th style="text-align: center;">การจัดการ</th>
@@ -124,7 +124,7 @@
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 357 x 357 px.
+                                        รูปภาพขนาด : 357 x 357 px.
                                     </span>
                                 </span>
                             </span> --}}
@@ -438,12 +438,13 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+            reverseButtons: true
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

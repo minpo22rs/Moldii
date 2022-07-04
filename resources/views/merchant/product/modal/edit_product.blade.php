@@ -19,7 +19,7 @@
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
-                                        Image Size: 357 x 357 px.
+                                        รูปภาพขนาด: 357 x 357 px.
                                     </span>
                                 </span>
                             </span> --}}
