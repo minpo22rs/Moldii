@@ -16,14 +16,14 @@
                 <i class="icofont icofont-cart"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Orders</h5>
+                <h5>คำสั่งซื้อ</h5>
               
             </div>
         </div>
         <div class="col">
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item"><a href="">Orders</a>
+                    <li class="breadcrumb-item"><a href="">คำสั่งซื้อ</a>
                     </li>
                 </ul>
             </div>
@@ -38,16 +38,16 @@
                 <table id="example1" class="table example1">
                     <thead>
                         <tr>
-                            <th style="text-align: center;">Order</th>
-                            <th style="text-align: center;">Customer Name</th>
-                            <th style="text-align: center;">Product list</th>
+                            <th style="text-align: center;">คำสั่งซื้อ</th>
+                            <th style="text-align: center;">ชื่อลูกค้า</th>
+                            <th style="text-align: center;">รายการสินค้า</th>
              
-                            <th style="text-align: center;">Price</th>
-                            <th style="text-align: center;">Amount</th>
-                            <th style="text-align: center;">Tracking Code</th>
-                            <th style="text-align: center;">Status Payment</th>
-                            {{-- <th style="text-align: center;">Status Order</th> --}}
-                            <th style="text-align: center;">Management</th>
+                            <th style="text-align: center;">ราคา</th>
+                            <th style="text-align: center;">จำนวน</th>
+                            <th style="text-align: center;">รหัสติดตาม</th>
+                            <th style="text-align: center;">สถานะการชำระเงิน</th>
+                            {{-- <th style="text-align: center;">สถานะคำสั่งซื้อ</th> --}}
+                            <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,7 +161,7 @@
                         <div class="col-3"> เลือกขนส่ง :</div>
                         <div class="col-6"> 
                                 <select class="form-control" name="ship" >
-                                    <option value=""> Please Select</option>
+                                    <option value=""> โปรดเลือก</option>
                                     <option value="THP">ไปรษณีย์ไทย EMS</option>
                                     <option value="TP2">ไปรษณีย์ ลงทะเบียน</option>
                                     <option value="FLE">Flash Express</option>

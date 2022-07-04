@@ -15,7 +15,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{url('merchant/ordermerchant')}}">Orders</a>
+                                                           href="{{url('merchant/ordermerchant')}}">คำสั่งซื้อ</a>
                             </li>
                             <li class="breadcrumb-item active"
                                 aria-current="page">ข้อมูลคำสั่งซื้อ </li>
