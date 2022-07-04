@@ -32,7 +32,7 @@
 
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
-                <h4 class=" m-0 p-0">{{$c->created_by}}</h4>
+                {{-- <h4 class=" m-0 p-0">{{$c->created_by}}</h4> --}}
                 <a href="#" class="ml-1 align-self-center">
                     <h6 class="m-0 p-0 font-weight-bold " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
                 </a>
