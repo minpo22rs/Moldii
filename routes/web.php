@@ -165,6 +165,12 @@ Route::get('coinswitch2', [CartController::class, 'coinswitch2']);
 Route::get('video', [videoController::class, 'index']); 
 
 
+Route::get('/boss', function() {
+	Artisan::call('storage :link');
+
+	return "boss!";
+});
+
 
 Route::get('/clc', function() {
 	Artisan::call('cache:clear');
