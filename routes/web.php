@@ -166,7 +166,7 @@ Route::get('video', [videoController::class, 'index']);
 
 
 Route::get('/boss', function() {
-	Artisan::call('storage :link');
+	Artisan::call('storage:link');
 
 	return "boss!";
 });
