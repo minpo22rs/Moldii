@@ -9,6 +9,6 @@ class Tb_content_img extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_content_imgs';
+    protected $table = 'tb_new_imgs';
 
 }

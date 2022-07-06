@@ -467,18 +467,18 @@ color: #666;
                                 
                                 @if($pugall->count() != 0)
                                     <div class="carousel-item active">
-                                        <img src="{{asset('content_img/'.$pugall[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                        <img src="{{asset('storage/content_img/'.$pugall[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
                                     </div>
                                     @foreach($pugall as $imgs)
                                         @if($imgs->type =='I')
                                             <div class="carousel-item">
-                                                <img src="{{asset('content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
                                             </div>
                                         @else
                                             <div class="carousel-item">
                                                 <video width="auto" height="197" controls >
-                                                    <source src="{{asset('content_img/'.$imgs->name.'')}}" type=video/ogg>
-                                                    <source src="{{asset('content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                                    <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                    <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
                                                 </video>
                                             </div>
                                         @endif
@@ -568,26 +568,42 @@ color: #666;
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
                             
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                @if($sqls->new_type == 'C')
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                        </div>
+                                        @if($imggal->count() != 0)
+                                            @foreach($imggal as $imgs)
+                                                <div class="carousel-item">
+                                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                            
                                     </div>
-                                    @if($imggal->count() != 0)
-                                        @foreach($imggal as $imgs)
-                                            <div class="carousel-item">
-                                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                        
-                                </div>
-                            
+                                @else
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                        </div>
+                                        @if($imggal->count() != 0)
+                                            @foreach($imggal as $imgs)
+                                                <div class="carousel-item">
+                                                    <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                            
+                                    </div>
+                                @endif
+                                
                             </div>
                         {{-- <a href="{{url('content/'.$sqls->new_id.'')}}">
                             

@@ -18,7 +18,7 @@ class MainController extends Controller
     public function indexpage()
     {
 
-        $c = DB::Table('tb_news')->where('new_type','C')->get();
+        $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->get();
         $v = DB::Table('tb_news')->where('new_type','V')->get();
         $p = DB::Table('tb_news')->where('new_type','P')->get();
         $s = DB::Table('tb_merchants')->get();
@@ -29,7 +29,7 @@ class MainController extends Controller
         $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         // $result = $cp->merge($c);
-        // dd( $cp );
+        // dd( $c );
    
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp]);
     }

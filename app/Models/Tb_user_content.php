@@ -9,6 +9,6 @@ class Tb_user_content extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_user_contents';
+    protected $table = 'tb_news';
 
 }

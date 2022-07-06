@@ -48,11 +48,15 @@ class ContentController extends Controller
         // dd($request->all());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');
+        $content->new_type          = 'U';
         if(isset($request->post)){
             $content->new_title        = $request->post;
 
         }
         $content->save();
+
+
+
 
         if ($request->file('sub_gallery') !== null)
         {
@@ -61,9 +65,9 @@ class ContentController extends Controller
                     $ext = $item->getClientOriginalExtension();
                     // dd($ext);
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('content_img',  $name);
+                    $item->storeAs('public/content_img',  $name);
                     $contentimg = new Tb_content_img();
-                    $contentimg->id_content  = $content->id;
+                    $contentimg->new_id  = $content->id;
                     $contentimg->name  = $name;
                     if($ext =='mp4'){
                         $contentimg->type  = 'V';
