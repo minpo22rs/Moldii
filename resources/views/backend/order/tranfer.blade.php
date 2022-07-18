@@ -89,7 +89,7 @@
                         
                         <td class="text-center text-middle">{{ $item->customer_name }} {{ $item->customer_lname }}</td>
                         <td class="text-center text-middle">{{$item->name}}</td>
-                        <td class="text-center text-middle"><img id="myImg" src="{{('https://modii.sapapps.work/storage/app/public/payment/'.$item->file.'')}}" style="width:100%;max-width:300px"></td>
+                        <td class="text-center text-middle"><img id="myImg" src="{{('https://modii.sapapps.work/storage/payment/'.$item->file.'')}}" style="width:50%;max-width:150px"></td>
                        
                         <td class="text-center text-middle">
                             <div class="dropdown-primary dropdown open">
@@ -137,7 +137,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <img id="img01">
+                        <img id="img01" style="width: 100%">
                     </div>
 
                 </div>
