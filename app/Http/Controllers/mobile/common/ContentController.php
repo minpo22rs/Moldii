@@ -69,7 +69,7 @@ class ContentController extends Controller
                     $contentimg = new Tb_content_img();
                     $contentimg->new_id  = $content->id;
                     $contentimg->name  = $name;
-                    if($ext =='mp4'){
+                    if($ext =='mp4' || $ext =='MOV'){
                         $contentimg->type  = 'V';
     
                     }else{
