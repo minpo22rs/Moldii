@@ -18,7 +18,9 @@ class MainController extends Controller
     public function indexpage()
     {
 
-        $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->get();
+        $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')
+                ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
+                ->latest('tb_news.created_at','DESC')->get();
         $v = DB::Table('tb_news')->where('new_type','V')->get();
         $p = DB::Table('tb_news')->where('new_type','P')->get();
         $s = DB::Table('tb_merchants')->get();
@@ -53,13 +55,15 @@ class MainController extends Controller
     public function likecontent(Request $request){
       
         DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id]);
-      
+        DB::Table('tb_news')->where('new_id',$request->id)->increment('like', 1);
+
         return 1 ;
     }
 
     public function unlikecontent(Request $request){
        
         DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)->delete();
+        DB::Table('tb_news')->where('new_id',$request->id)->decrement('like', 1);
 
         
         return 1 ;
