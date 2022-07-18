@@ -22,7 +22,7 @@
             </div>
             <div class="d-inline-block">
                 <h5>Flash Sale</h5>
-                <span>Status: <label class="label label-primary">Merchant</label></span>
+                <span>สถานะ: <label class="label label-primary">ผู้ค้า</label></span>
             </div>
         </div>
         <div class="col">
@@ -41,7 +41,7 @@
             @csrf
             <div class="form-group row">
                 <div class="col-sm-2 col-form-label">
-                    <h6>Date & Time</h6>
+                    <h6>วัน & เวลา</h6>
                 </div>
                 <div class="col-sm-5">
                     <select name="date" class="form-control form-control-primary time" id="date">
@@ -66,7 +66,7 @@
                         <div class="form-group row m-t-10">
                             <div class="col-sm-6">
                                 <select class="form-control" name="product[{{ $item_event->event_sp_id }}]" id="product_{{$key}}">
-                                    <option disabled>Select Product</option>
+                                    <option disabled>เลือกสินค้า</option>
                                     @foreach ($product as $item)
                                     <option value="{{$item->product_id}}" {{ $item_event->event_sp_product_id == $item->product_id ? "selected" : "" }}>{{$item->product_name}}</option>
                                     @endforeach
@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <input type="number" name="discount[{{ $item_event->event_sp_id }}]" id="discount_{{$key}}" class="form-control" value="{{ $item_event->event_sp_value }}" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
+                                    <input type="number" name="discount[{{ $item_event->event_sp_id }}]" id="discount_{{$key}}" class="form-control" value="{{ $item_event->event_sp_value }}" placeholder="ยอดขายสูงสุด = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
                                     <span class="input-group-addon" id="basic-addon3">{{$fs->fs_maximum_sale}}%</span>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                         <div class="form-group row m-t-10">
                             <div class="col-6">
                                 <select class="form-control" name="new_product[]" id="new_product_{{$i}}">
-                                    <option selected disabled>Select Product</option>
+                                    <option selected disabled>เลือกสินค้า</option>
                                     @foreach ($product as $item)
                                     <option value="{{$item->product_id}}">{{$item->product_name}}</option>
                                     @endforeach
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="input-group">
-                                    <input type="number" name="new_discount[]" class="form-control" placeholder="Maximun Sale = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
+                                    <input type="number" name="new_discount[]" class="form-control" placeholder="ยอดขายสูงสุด = {{$fs->fs_maximum_sale}}%" max="{{$fs->fs_maximum_sale}}" min="0">
                                     <span class="input-group-addon" id="basic-addon3">{{$fs->fs_maximum_sale}}%</span>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
             </div>
         </form>
         <div class="card-footer text-right">
-            <button type="submit" class="btn btn-primary" form="event_selectproduct">Submit</button>
+            <button type="submit" class="btn btn-primary" form="event_selectproduct">ยืนยัน</button>
         </div>
     </div>
 </div>

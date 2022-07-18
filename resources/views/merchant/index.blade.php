@@ -46,8 +46,8 @@
                 <i class="icofont icofont-dashboard-web"></i>
             </div>
             <div class="d-inline-block">
-                <h5>Dashboard</h5>
-                <span>Status: <label class="label label-primary">Merchant</label></span>
+                <h5>หน้าหลัก</h5>
+                <span>สถานะ: <label class="label label-primary">ผู้ค้า</label></span>
             </div>
         </div>
         <div class="col">
@@ -73,7 +73,7 @@
                         <h6 class="f-w-600 m-t-25 m-b-10">{{Auth::guard('merchant')->user()->merchant_name}} {{Auth::guard('merchant')->user()->merchant_lname}}</h6>
                         <p class="text-muted">Active | Male | Born 23.05.1992</p>
                         <hr/>
-                        <p class="text-muted m-t-15">Activity Level: 87%</p>
+                        <p class="text-muted m-t-15">ระดับกิจกรรม: 87%</p>
                         <ul class="list-unstyled activity-leval">
                             <li class="active"></li>
                             <li class="active"></li>
@@ -136,10 +136,10 @@
                     @if (Carbon\Carbon::create($current)->between($fs->fs_regis_start, $fs->fs_regis_end))
                     <div class="b-t-default transection-footer row">
                         <div class="col-6  b-r-default bg-c-green" data-toggle="modal" data-target="#accept">
-                            <a href="#!" class="" style="color: white;"><i class="icofont icofont-ui-check m-r-10"></i> Accept</a>
+                            <a href="#!" class="" style="color: white;"><i class="icofont icofont-ui-check m-r-10"></i> ยอมรับ</a>
                         </div>
                         <div class="col-6 bg-c-pink" onclick="event_decline({{$fs->fs_id}})">
-                            <a href="#!" class="" style="color: white;"><i class="icofont icofont-ui-close m-r-10"></i> Decline</a>
+                            <a href="#!" class="" style="color: white;"><i class="icofont icofont-ui-close m-r-10"></i> ปฏิเสธ</a>
                         </div>
                     </div> 
                     @endif
@@ -152,7 +152,7 @@
                     <div class="card-block text-center">
                         <i class="icofont icofont-notification text-c-blue d-block f-40"></i>
                         <h4 class="m-b-40">No Event</h4>
-                        <a href="{{url('merchant/calendar')}}" class="btn btn-primary btn-sm btn-round">More Event</a>
+                        <a href="{{url('merchant/calendar')}}" class="btn btn-primary btn-sm btn-round">กิจกรรมเพิ่มเติม</a>
                     </div>
                 </div>
             </div>
@@ -164,20 +164,20 @@
             <div class="col-xl-12 col-md-6 col-12">
                 <div class="card bg-1 order-card">
                     <div class="card-block">
-                        <h6>Our Product</h6>
+                        <h6>สินค้าของเรา</h6>
                         <h2 class="text-right"><i class="icofont icofont-cubes f-left"></i><span>{{$product_count}}</span></h2>
                         <br>
-                        <p class="m-b-0">More detail <a href="{{url('merchant/product')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="{{url('merchant/product')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
                     </div>
                 </div>
             </div>
             <div class="col-xl-12 col-md-6 col-12">
                 <div class="card bg-7 order-card">
                     <div class="card-block">
-                        <h6>Order</h6>
+                        <h6>สินค้า</h6>
                         <h2 class="text-right"><i class="icofont icofont-ui-cart f-left"></i><span>123</span></h2>
                         <br>
-                        <p class="m-b-0">More detail <a href="" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="" style="color: white"><span class="f-right icon-gopage"></span></a></p>
                     </div>
                 </div>
             </div>
@@ -190,7 +190,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Registeration</h4>
+                <h4 class="modal-title">การลงทะเบียน</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -199,26 +199,26 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">ชื่อ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="name" class="form-control" placeholder="First Name..." value="{{Auth::guard('merchant')->user()->merchant_name}}" readonly>
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อ..." value="{{Auth::guard('merchant')->user()->merchant_name}}" readonly>
                                     @error('name')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="lname" class="form-control" placeholder="Last Name..." value="{{Auth::guard('merchant')->user()->merchant_lname}}" readonly>
+                                    <input type="text" name="lname" class="form-control" placeholder="นามสกุล..." value="{{Auth::guard('merchant')->user()->merchant_lname}}" readonly>
                                     @error('lname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Phone <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone...">
+                                    <input type="text" name="phone" class="form-control" placeholder="เบอร์โทรศัพท์...">
                                     @error('phone')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                                     <div class="tab-content card-block">
                                         <div class="tab-pane active" id="phase1{{$i}}" role="tabpanel">
                                             <div class="form-group row m-t-10">
-                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <label class="col-sm-2 col-form-label">เลือกสินค้า</label>
                                                 <div class="col-sm-4">
                                                     <select class="js-example-basic-multiple col-sm-12" name="product_phase1_{{$i}}[]">
                                                         @foreach ($product as $item)
@@ -270,7 +270,7 @@
                                         </div>
                                         <div class="tab-pane" id="phase2{{$i}}" role="tabpanel">
                                             <div class="form-group row m-t-10">
-                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <label class="col-sm-2 col-form-label">เลือกสินค้า</label>
                                                 <div class="col-sm-10">
                                                     <select class="js-example-basic-multiple col-sm-12" name="product_phase2_{{$i}}[]" multiple="multiple">
                                                         @foreach ($product as $item)
@@ -282,7 +282,7 @@
                                         </div>
                                         <div class="tab-pane" id="phase3{{$i}}" role="tabpanel">
                                             <div class="form-group row m-t-10">
-                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <label class="col-sm-2 col-form-label">เลือกสินค้า</label>
                                                 <div class="col-sm-10">
                                                     <select class="js-example-basic-multiple col-sm-12" name="product_phase3_{{$i}}[]" multiple="multiple">
                                                         @foreach ($product as $item)
@@ -294,7 +294,7 @@
                                         </div>
                                         <div class="tab-pane" id="phase4{{$i}}" role="tabpanel">
                                             <div class="form-group row m-t-10">
-                                                <label class="col-sm-2 col-form-label">Select Product</label>
+                                                <label class="col-sm-2 col-form-label">เลือกสินค้า</label>
                                                 <div class="col-sm-10">
                                                     <select class="js-example-basic-multiple col-sm-12" name="product_phase4_{{$i}}[]" multiple="multiple">
                                                         @foreach ($product as $item)
@@ -316,8 +316,8 @@
                 <input type="hidden" name="fs_id" value="{{$fs->fs_id}}">
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addcustomer">Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addcustomer">ยืนยืน</button>
             </div>
         </div>
     </div>
@@ -341,12 +341,12 @@
             buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be accept this event again!",
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
-            cancelButtonText: 'Cancel',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

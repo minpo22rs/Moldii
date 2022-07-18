@@ -15,30 +15,30 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{url('merchant/ordermerchant')}}">Orders</a>
+                                                           href="{{url('merchant/ordermerchant')}}">คำสั่งซื้อ</a>
                             </li>
                             <li class="breadcrumb-item active"
-                                aria-current="page">Order details </li>
+                                aria-current="page">ข้อมูลคำสั่งซื้อ </li>
                         </ol>
                     </nav>
 
                     <div class="d-sm-flex align-items-sm-center">
-                        <h5 class="page-header-title">Order #{{$order->order_code}}</h5>
+                        <h5 class="page-header-title">คำสั่งซื้อ #{{$order->order_code}}</h5>
 
                         @if($order->status_order==1)
                             <span class="badge badge-soft-success ml-sm-3">
-                                <span class="legend-indicator bg-success"></span>Unpaid
+                                <span class="legend-indicator bg-success"></span>ยังไม่ได้ชำระ
                             </span>
                         @else
                             <span class="badge badge-soft-danger ml-sm-3">
-                                <span class="legend-indicator bg-danger"></span>Paid
+                                <span class="legend-indicator bg-danger"></span>ชำระเเล้ว
                             </span>
                         @endif
 
                         
 
                         <span class="ml-2 ml-sm-3">
-                        <i class="tio-date-range"></i>Transaction Date : {{$order->created_at}}
+                        <i class="tio-date-range"></i>วันที่ทำรายการ : {{$order->created_at}}
                 </span>
                     </div>
                     {{-- <div class="col-md-6 mt-2">
@@ -108,7 +108,7 @@
                         <div class="row">
                             <div class="col-12 pb-2 border-bottom">
                                 <h6 class="card-header-title">
-                                   Order details
+                                   ข้อมูลคำสั่งซื้อ
                                     <span
                                         {{-- class="badge badge-soft-dark rounded-circle ml-1">{{$order->details->count()}}</span> --}}
                                         class="badge badge-soft-dark rounded-circle ml-1">{{$ordetail->count()}}</span>
@@ -139,29 +139,29 @@
                     <div class="card-body">
                         <div class="media">
                             {{-- <div class="avatar avatar-xl mr-3">
-                                <p>Image</p>
+                                <p>รูปภาพ</p>
                             </div> --}}
 
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-md-3 ">
-                                        <p> Product code</p>
+                                        <p> รหัสสินค้า</p>
                                     </div>
                                     <div class="col-md-3 ">
-                                        <p> Name</p>
+                                        <p> ชื่อ</p>
                                     </div>
 
                                     <div class="col col-md-2 align-self-center p-0 ">
-                                        <p> Price</p>
+                                        <p> ราคา</p>
                                     </div>
 
                                     <div class="col col-md-2 align-self-center">
-                                        <p>Amount</p>
+                                        <p>จำนวน</p>
                                     </div>
                                    
 
                                     <div class="col col-md-2 align-self-center text-right  ">
-                                        <p> Subtotal</p>
+                                        <p> ยอดรวม</p>
                                     </div>
                                 </div>
                             </div>
@@ -233,17 +233,17 @@
                     <div class="row justify-content-md-end mb-3">
                         <div class="col-md-9 col-lg-8">
                             <dl class="row text-sm-right">
-                                <dt class="col-sm-6">Shipping</dt>
+                                <dt class="col-sm-6">การส่งสินค้า</dt>
                                 <dd class="col-sm-6 border-bottom">
                                     <strong>{{$shipping}}฿</strong>
                                 </dd>
 
-                                <dt class="col-sm-6">Total</dt>
+                                <dt class="col-sm-6">ทั้งหมด</dt>
                                 <dd class="col-sm-6">
                                     <strong>{{number_format($total+$shipping)}}฿</strong>
                                 </dd>
 
-                                <dt class="col-sm-6">Tracking Code</dt>
+                                <dt class="col-sm-6">รหัสติดตาม</dt>
                                 <dd class="col-sm-6 border-bottom">
                                     <strong>{{$ordetail[0]->tracking_code!=null?$ordetail[0]->tracking_code:'No tracking'}}</strong>
                                 </dd>
@@ -264,7 +264,7 @@
                 <div class="card">
                     <!-- Header -->
                     <div class="card-header">
-                        <h5 class="card-header-title">Customer</h5>
+                        <h5 class="card-header-title">ลูกค้า</h5>
                     </div>
                     <!-- End Header -->
 
@@ -308,7 +308,7 @@
                             <hr>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h6>Contact info</h6>
+                                <h6>ข้อมูลติดต่อ</h6>
                             </div>
 
                             <ul class="list-unstyled list-unstyled-py-2">
@@ -326,25 +326,25 @@
 
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h6>shipping_address</h6>
+                                <h6>ที่อยู่จัดส่ง</h6>
 
                             </div>
 
                             <span class="d-block">
-                                Name :
+                                ชื่อ :
                                 <strong>{{$people['customer_name'].' '.$people['customer_lname']}}</strong><br>
-                                Address :
+                                ที่อยู่ :
                                 <strong>{{$order->order_address ? $order->order_address : "Empty"}}</strong><br>
-                                Sub District :
+                                ตำบล :
                                 <strong>{{$order->order_tumbon ? $order->order_tumbon : "Empty"}}</strong><br>
-                                District :
+                                อำเภอ :
                                 <strong>{{$order->order_district ? $order->order_district : "Empty"}}</strong><br>
-                                Province :
+                                จังหวัด :
                                 <strong>{{$order->order_province ? $order->order_province : "Empty"}}</strong><br>
-                                Postcode :
+                                รหัสไปรษณีย์ :
                                 <strong>{{$order->order_postcode ? $order->order_postcode  : "Empty"}}</strong><br>
                                
-                                Phone :
+                                เบอร์โทรศัพท์ :
                                 <strong>{{$people['customer_phone']}}</strong>
 
                                 </span>
