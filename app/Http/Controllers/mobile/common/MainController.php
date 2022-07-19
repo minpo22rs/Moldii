@@ -18,8 +18,9 @@ class MainController extends Controller
     public function indexpage()
     {
 
-        $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')
+        $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->where('new_published',1)
                 ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
+                ->select('tb_news.*','tb_customers.customer_username')
                 ->latest('tb_news.created_at','DESC')->get();
         $v = DB::Table('tb_news')->where('new_type','V')->get();
         $p = DB::Table('tb_news')->where('new_type','P')->get();

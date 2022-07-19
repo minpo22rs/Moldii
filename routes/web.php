@@ -116,6 +116,8 @@ Route::get('/unlikecontent', [MainController::class, 'unlikecontent']);
 Route::get('/bookmarkadd', [MainController::class, 'bookmarkadd']); 
 Route::get('/unbookmark', [MainController::class, 'unbookmark']); 
 Route::get('logout', [LoginController::class, 'logout']); 
+Route::get('/hidecontent', [ContentController::class, 'hidecontent']); 
+Route::get('/deletecontent', [ContentController::class, 'deletecontent']); 
 
 
 Route::post('user/search', [ContentController::class, 'search']); 

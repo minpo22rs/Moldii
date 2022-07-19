@@ -167,7 +167,7 @@
 
 @section('custom_script')
 <script>
-    bottom_now(3);
+    bottom_now(1);
     var countchk  = 0;
     function editButton(v){  
         // console.log('asdasd');

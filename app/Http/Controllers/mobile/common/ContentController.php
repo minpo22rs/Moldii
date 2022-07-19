@@ -45,7 +45,7 @@ class ContentController extends Controller
     // ]);
 
     public function userpostcontent(Request $request){
-        // dd($request->all());
+        // dd($request->file('sub_gallery')[0]->getClientOriginalExtension());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');
         $content->new_type          = 'U';
@@ -63,7 +63,7 @@ class ContentController extends Controller
 
             foreach($request->file('sub_gallery') as $key => $item) {
                     $ext = $item->getClientOriginalExtension();
-                    // dd($ext);
+                    // dd($ext); exit();
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
                     $item->storeAs('public/content_img',  $name);
                     $contentimg = new Tb_content_img();
@@ -159,6 +159,23 @@ class ContentController extends Controller
        
         return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat,'ban'=>$ban]);
     }
+
+
+    public function deletecontent(Request $request){
+      
+        DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>3]);
+      
+        return 1 ;
+    }
+
+    public function hidecontent(Request $request){
+       
+        DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>2]);
+
+        
+        return 1 ;
+    }
+
     
     
 }
