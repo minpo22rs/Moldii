@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
+use App\Models\news;
 
 class news extends Model
 {
@@ -43,13 +44,15 @@ class news extends Model
 
     public function count_like($type = null)
     {
-        $like = Comment::where('comment_type', $type)->where('comment_object_id', $this->new_id)->sum('comment_like');
+        // $like = Comment::where('comment_type', $type)->where('comment_object_id', $this->new_id)->sum('comment_like');
+        $like = news::where('new_id', $this->new_id)->sum('like');
         return $like;
     }
 
     public function count_dislike($type = null)
     {
-        $dislike = Comment::where('comment_type', $type)->where('comment_object_id', $this->new_id)->sum('comment_dislike');
+        // $dislike = Comment::where('comment_type', $type)->where('comment_object_id', $this->new_id)->sum('comment_dislike');
+        $dislike = news::where('new_id', $this->new_id)->sum('dislike');
         return $dislike;
     }
 

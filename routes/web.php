@@ -83,6 +83,12 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     Route::post('publishedgroup/{id}', 'FamilyController@publishedgroup');
 
 
+    // auction
+    Route::get('auction', 'AuctionController@index');
+    Route::post('addauction', 'AuctionController@store');
+
+
+
 });
 
 Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'merchant.', 'middleware' => 'merchant'], function () {

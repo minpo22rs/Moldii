@@ -210,6 +210,13 @@
                                         @endforeach
                                     </ul>
                                     <li class="">
+                                        <a href="{{url("admin/auction")}}">
+                                            <span class="pcoded-micon"><i class="icofont icofont-court-hammer"></i><b>D</b></span>
+                                            <span class="pcoded-mtext">การประมูล</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
                                         <a href="{{url("admin/flashsale")}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-flash"></i><b>D</b></span>
                                             <span class="pcoded-mtext">Flash Sale</span>
@@ -296,7 +303,7 @@
                                 <li class="">
                                     <a href="{{url("admin/familys")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-ui-user-group"></i><b>D</b></span>
-                                        <span class="pcoded-mtext">ครอบครัว</span>
+                                        <span class="pcoded-mtext">กลุ่ม</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

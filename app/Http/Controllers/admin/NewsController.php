@@ -20,6 +20,7 @@ class NewsController extends Controller
      */
     public function index()
     {
+        // dd('adasasdasdas');
         $new = news::where('new_type', 'C')->get();
         // $img = DB::Table('tb_new_imgs')->where('new_id', '=',36)->get();
         $g = Family::where('published','=','1')->get();

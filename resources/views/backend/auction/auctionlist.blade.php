@@ -45,7 +45,7 @@
                 <i class="icofont icofont-ui-note"></i>
             </div>
             <div class="d-inline-block">
-                <h5>กลุ่ม</h5>
+                <h5>การประมูล</h5>
                 <span>สถานะ: <label class="label label-primary">ผู้ดูเเลระดับ 1</label></span>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item"><a href="">หน้าเเรก</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">กลุ่ม</a>
+                    <li class="breadcrumb-item"><a href="">การประมูล</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +67,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-news"><i class="icofont icofont-ui-add"></i>
-                สร้างกลุ่ม</button>
+                สร้างการประมูล</button>
         </div>
     </div>
     <div class="card-block">
@@ -76,38 +76,30 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">ชื่อกลุ่ม</th>
-                        <th style="text-align: center;">รายละเอียด</th>
+                        <th style="text-align: center;">เลขที่การประมูล</th>
          
-                        <th style="text-align: center;">เผยเเพร่</th>
-                        <th style="text-align: center;">สร้างเมื่อ</th>
+                        <th style="text-align: center;">วันที่</th>
+                        <th style="text-align: center;">เวลาเริ่มต้นสิ้นสุด</th>
                         <th style="text-align: center;">การจัดการ</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($Family as $key => $item)
+                    @foreach ($auction as $key => $item)
                     <tr>
                         <td class="text-center text-middle">{{$key+1}}</td>
                         
-                        <td class="text-center text-middle">{{ $item->name }}</td>
-                        <td class="text-center text-middle">{{ $item->description }}</td>
-                       
-                        <td class="text-center text-middle">
-                            <label class="switch">
-                                <label class="switch">
-                                    <input type="checkbox" name="published" class="published" value="{{ $item->id}}" {{ $item->published == 1 ? "checked" : "" }}>
-                                    <span class="slider round"></span>
-                                  </label>
-                            </label>
-                        </td>
-                        <td class="text-center text-middle">{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td>
+                        <td class="text-center text-middle">{{ $item->code }}</td>
+                        <td class="text-center text-middle">{{ $item->date_start }}</td>
+                        <td class="text-center text-middle">{{ $item->time_start }}-{{ $item->time_finish }}</td>
+                        
+                        {{-- <td class="text-center text-middle">{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}-{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td> --}}
                         <td class="text-center text-middle">
                             <div class="dropdown-primary dropdown open">
                                 <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_content({{$item->id}})"><i class="fa fa-edit"></i> เเก้ไข</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_content({{$item->id_auction}})"><i class="fa fa-edit"></i> เเก้ไข</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_content({{$item->id}})"><i class="icofont icofont-bin"></i> ลบ</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="view_content({{$item->id_auction}})"><i class="icofont icofont-bin"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
                         </td>
@@ -124,59 +116,65 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">สร้างกลุ่ม</h4>
+                <h4 class="modal-title">สร้างการประมูล</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('admin/addgroup')}}" method="POST" enctype="multipart/form-data" id="addnews" onsubmit="return news()">
+            <form action="{{url('admin/addauction')}}" method="POST"  id="addnews">
                 @csrf
                 <div class="modal-body">
+                    
+                 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">รูปภาพ</label>
-                     
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="file" name="img[]" style="display: none;" id="adddocument">
-                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
-                                </div>
-                            </div>
+                        <label class="col-sm-2 col-form-label">วันที่</label>
+                        <div class="col-sm-3">
+                            <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required>
                         </div>
-                    </div>
-                   
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">ชื่อกลุ่ม</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="ชื่อ..." name="name" required>
-                        </div>
+                       
+                        
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">รายละเอียด</label>
-                        <div class="col-sm-10">
-                            <textarea name="description" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง..." required ></textarea>
+                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น</label>
+                        <div class="col-sm-3">
+                            <input type="time" class="form-control" id="timefrom" name="time_start"  required>
+                        </div>
+                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด</label>
+                        <div class="col-sm-3">
+                            <input type="time" class="form-control" id="timeto" name="time_finish" required>
                         </div>
                     </div>
-                    <div class="form-group row">
 
-                        <label class="col-sm-2 col-form-label">กลุ่มประเภท</label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-6">
-                                    <select class="form-control col-sm-12" name="type_group">
-                                        <option value="">โปรดเลือก</option>
-                                        <option value="1">โมเดล</option>
-                                        <option value="2">เกมส์</option>
-                                        <option value="3">เพลง</option>
-                                        <option value="4">อาหาร</option>
-                                        <option value="5">ข่าวสาร</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <div class="form-group row">
+                       
+                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" required>
                         </div>
 
+                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="bit" required>
+                        </div>
+                        
                     </div>
+                    
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">เลือกรายการสินค้าที่จะเข้าร่วม</label>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        {{-- <label class="col-sm-3 col-form-label">รายการสินค้า</label> --}}
+                        @foreach($product as $products)
+                                <div class="col-sm-3 form-inline">
+                                    <input type="checkbox" class="form-control" name="pid[]" value="{{$products->product_id}}" style="margin-right: 5px;margin-top;5px">  {{$products->product_name}}
+                                </div>
+                        @endforeach
+                    </div>
+
+                    
                 </div>
             </form>
             <div class="modal-footer">
@@ -197,7 +195,38 @@
 @section('js')
 @include('flash-message')
 <script>
+
     $(".example1").DataTable();
+
+    var chk =0;
+
+    // $('#dateto').change(function(){
+    //     from =   $('#datefrom').val();
+    //     to    =  $(this).val();
+       
+    //     if(to < from){
+    //         alert('ตั้งค่าวันที่สิ้นสุดให้มากกว่าวันที่เริ่มต้น');
+    //         $(this).val('');
+    //         chk =1;
+    //     }else{
+    //         chk =0;
+    //     }
+    // });
+
+    $('#timeto').change(function(){
+        from =   $('#timefrom').val();
+        to    =  $(this).val();
+
+        if(to <= from){
+            
+            alert('ตั้งค่าเวลาสิ้นสุดให้มากกว่าเวลาเริ่มต้น');
+            $(this).val('');
+        }else{
+          
+        }
+
+    });
+
 
     $(document).ready(function () {
         $('.published').change(function () { 

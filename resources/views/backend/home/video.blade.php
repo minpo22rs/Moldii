@@ -122,10 +122,10 @@
                                 {{$item->new_numberformat($item->viewer)}}
                             </div>
                             <hr>
-                            <div class="col-12">
+                            {{-- <div class="col-12">
                                 <i class="icofont icofont-star" style="font-size: 22px; color: #ffc107;"></i> :
                                 {{$item->rating('C')}}
-                            </div>
+                            </div> --}}
                         </td>
                         <td class="text-center text-middle">
                             <label class="switch">
