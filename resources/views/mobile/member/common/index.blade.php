@@ -482,9 +482,18 @@ color: #666;
                                     <div class="carousel-inner">
 
                                         @if($imggal->count() != 0)
-                                            {{-- <div class="carousel-item active">
-                                                <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                            </div> --}}
+                                            @if($imgs->type =='I')
+                                                <div class="carousel-item active">
+                                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                </div>
+                                            @else
+                                                <div class="carousel-item">
+                                                    <video width="auto" height="197" controls >
+                                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
+                                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
+                                                    </video>
+                                                </div>
+                                            @endif
                                             @foreach($imggal as $imgs)
                                                 @if($imgs->type =='I')
                                                     <div class="carousel-item">
