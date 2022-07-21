@@ -482,9 +482,9 @@ color: #666;
                                     <div class="carousel-inner">
 
                                         @if($imggal->count() != 0)
-                                            <div class="carousel-item active">
+                                            {{-- <div class="carousel-item active">
                                                 <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                            </div>
+                                            </div> --}}
                                             @foreach($imggal as $imgs)
                                                 @if($imgs->type =='I')
                                                     <div class="carousel-item">
