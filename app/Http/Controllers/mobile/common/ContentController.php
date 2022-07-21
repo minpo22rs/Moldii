@@ -24,11 +24,14 @@ class ContentController extends Controller
         $countreply = DB::Table('tb_comment_replys')->where('news_id',$id)->get();
         $bm = DB::Table('tb_bookmarks')->where('id_ref',$id)->where('customer_id',Session::get('cid'))->first();
         $imggal = DB::Table('tb_new_imgs')->where('new_id',$id)->get();
+        $f = DB::Table('tb_followers')->where('id_c_follower',$c->customer_id)->where('id_customer',Session::get('cid'))->first();
+        $la = DB::Table('tb_content_likes')->where('content_id',$c->new_id )->where('customer_id',Session::get('cid'))->first();
+
         // dd($imggal);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 
        
-        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal]);
+        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la]);
     }
 
     public function sendcomment(Request $request)

@@ -140,7 +140,11 @@
     <div class="card-footer row justify-content-center ">
         <div class="col-3 row p-0  justify-content-center">
             <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-            <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
+            @if($la == null)
+                <h5 class="mb-0 ml-1 " id="myLike{{$c->new_id}}" onclick="myLike({{$c->new_id}})">ถูกใจ</h5>
+            @else
+                <h5 class="mb-0 ml-1 " id="unmyLike{{$c->new_id}}" style="color: green" onclick="UNmyLike({{$c->new_id}})">ถูกใจแล้ว</h5>
+            @endif
         </div>
         <div class="col-5 row p-0 justify-content-center ml-1 ">
             <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
