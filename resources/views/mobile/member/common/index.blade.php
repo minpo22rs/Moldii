@@ -418,24 +418,24 @@ color: #666;
                             <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
                                 @if($bm !== null)
 
-                                    <div id="bmm{{$sqls->new_id}}" >
+                                    <div id="bmm{{$sqls->new_id}}" style="margin-right: 10px">
                                         <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark({{$sqls->new_id}})" ></ion-icon>
                                     </div>
                                    
 
                                 @else
-                                    <div id="bmoll{{$sqls->new_id}}" >
+                                    <div id="bmoll{{$sqls->new_id}}" style="margin-right: 10px">
                                         <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd({{$sqls->new_id}})"></ion-icon>
                                     </div>
                                    
                                 @endif
 
-                                <div style="display: none" id="bmol{{$sqls->new_id}}" >
+                                <div style="display: none" id="bmol{{$sqls->new_id}}" style="margin-right: 10px">
                                     <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd2({{$sqls->new_id}})"></ion-icon>
 
                                 </div>
 
-                                <div style="display: none" id="bm{{$sqls->new_id}}" >
+                                <div style="display: none" id="bm{{$sqls->new_id}}" style="margin-right: 10px">
                                     <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark2({{$sqls->new_id}})" ></ion-icon>
                                 </div>
 

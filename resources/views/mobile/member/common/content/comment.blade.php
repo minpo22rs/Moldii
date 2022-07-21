@@ -32,28 +32,104 @@
 
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
-                {{-- <h4 class=" m-0 p-0">{{$c->created_by}}</h4> --}}
-                <a href="#" class="ml-1 align-self-center">
-                    <h6 class="m-0 p-0 font-weight-bold " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
-                </a>
+                @if($c->new_type == 'C')
+                    <h4 class=" m-0 p-0">{{$c->created_by}}</h4>
+                @else
+                    <h4 class=" m-0 p-0">{{$c->customer_username}}</h4>
+                    @if($c->customer_id !== Session::get('cid'))
+                        <a href="#" class="ml-1 align-self-center" > 
+                            @if($f == null)
+                                <h6 class="m-0 p-0 " onclick="followContent({{$c->new_id}},{{$c->customer_id}})" style="color: rgba(255, 92, 99, 1);" id="follow{{$c->new_id}}">ติดตาม</h6>
+                            @else
+                                <h6 class="m-0 p-0 " onclick="UNfollowContent({{$c->new_id}},{{$c->customer_id}})" style="color: green;" id="unfollow{{$c->new_id}}">ติดตามแล้ว</h6>
+                            @endif
+                            
+                        </a>
+                    @endif
+                    
+                @endif
             </div>
             <h6 class=" m-0 p-0">{{$c->created_at}}</h6>
         </div>
 
         <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
-            <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
-            <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
+            @if($bm !== null)
+
+                <div id="bmm{{$c->new_id}}" style="margin-right: 10px">
+                    <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark({{$c->new_id}})" ></ion-icon>
+                </div>
+                
+
+            @else
+                <div id="bmoll{{$c->new_id}}" style="margin-right: 10px">
+                    <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd({{$c->new_id}})"></ion-icon>
+                </div>
+                
+            @endif
+
+            <div style="display: none" id="bmol{{$c->new_id}}" style="margin-right: 10px">
+                <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd2({{$c->new_id}})"></ion-icon>
+
+            </div>
+
+            <div style="display: none" id="bm{{$c->new_id}}" style="margin-right: 10px">
+                <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark2({{$c->new_id}})" ></ion-icon>
+            </div>
+
+
+
+            <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
+            <div class="dropdown-menu dropdown-menu-right">
+                @if($c->customer_id == Session::get('cid'))
+                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
+                    <a class="dropdown-item" href="#" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a>
+                    <a class="dropdown-item" href="#" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a>
+                    <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                @endif
+                <a class="dropdown-item" href="#">report</a>
+            </div>
+
+
         </div>
     </div>
     <div class="card-body p-2">
-        <p class="card-text">{{$c->new_content}}</p>
-
+        @if($c->new_type=='C')
+            <p class="card-text">{{$c->new_content}}</p>
+        @elseif($c->new_type=='U')
+            <p class="card-text">{{$c->new_title}}</p>
+        @endif
     </div>
-    @if($c->new_type=='C')
-        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
-    @else
-        <iframe width="390" height="215" src="https://www.youtube.com/embed/{{$c->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    @endif
+    
+        @if($c->new_type=='C')
+                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                @if($imggal->count() != 0)
+                    @foreach($imggal as $imgs)
+                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                    @endforeach
+                @endif
+            
+        @elseif($c->new_type=='V')
+
+                {{-- @foreach($imggal as $imgs) --}}
+                    <iframe width="auto" height="215" src="https://www.youtube.com/embed/{{$c->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {{-- @endforeach --}}
+        @else
+            @if($imggal->count() != 0)
+                @foreach($imggal as $imgs)
+                    @if($imgs->type =='I')
+                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                    @else
+                        <video width="auto" height="197" controls >
+                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                        </video>
+                    @endif
+                @endforeach
+                
+            @endif
+        @endif
+   
+    
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()+$countreply->count()}} รายการ</h6>
@@ -240,159 +316,198 @@
         bottom_now(1);
     </script>
 
-    {{-- bookmarkadd --}}
-    <script>
+     
+        {{-- bookmarkadd like followContent--}}
+        <script>
 
-        function bookmarkadd(id)
-        {
-                            
-            document.getElementById('bm'+id).style.display = '';
-            document.getElementById('bmoll'+id).style.display = 'none';
-            // document.getElementById('bmol'+id).style.display = 'none';
-            $.ajax({
-                url: '{{ url("/bookmarkadd")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                }
-            });
-        }
-
-        function unbookmark(id)
-        {
-            document.getElementById('bm'+id).style.display = 'none';
-            document.getElementById('bmol'+id).style.display = '';
-            $.ajax({
-                url: '{{ url("/unbookmark")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                }
-            });
-        }
-
-
-        function bookmarkadd2(id)
-        {
-                            
-            document.getElementById('bm'+id).style.display = '';
-            document.getElementById('bmol'+id).style.display = 'none';
-            // document.getElementById('bmol'+id).style.display = 'none';
-            $.ajax({
-                url: '{{ url("/bookmarkadd")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                }
-            });
-        }
-
-        function unbookmark2(id)
-        {
-            document.getElementById('bm'+id).style.display = 'none';
-            document.getElementById('bmol'+id).style.display = '';
-            $.ajax({
-                url: '{{ url("/unbookmark")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                }
-            });
-        }
-
-
-
-        function myLike(id) {
-           
-            var x = document.getElementById("myLike"+id);
-            
-            x.innerHTML = "ถูกใจแล้ว";
-            document.getElementById("myLike"+id).style.color = "green";
-            $.ajax({
-                url: '{{ url("/likecontent")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                }
-            });
-               
-        }
-
-
-        function UNmyLike(id) {
-           
-            var x = document.getElementById("unmyLike"+id);
-           
-          
-            x.innerHTML = "ถูกใจ";
-            document.getElementById("unmyLike"+id).style.color = "black";
-            $.ajax({
-                url: '{{ url("/unlikecontent")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                
-                
-                }
-            });
-               
-            
-        }
-
-        function followContent(v,id) {
-           
-            var x = document.getElementById("follow"+v);
-  
-            x.innerHTML = "ติดตามแล้ว";
-            document.getElementById("follow"+v).style.color = "green";
-
-            $.ajax({
-                url: '{{ url("/followwriter")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
-                   
-                        alert('ติดตามผู้เขียนแล้ว');
-
-                
-                }
-            });
-    
-           
-        }
-
-        function UNfollowContent(v,id){
-            var x = document.getElementById("unfollow"+v);
-  
-            x.innerHTML = "ติดตาม";
-            document.getElementById("unfollow"+v).style.color = "rgba(255, 92, 99, 1)";
-
-            $.ajax({
-                url: '{{ url("/unfollowwriter")}}',
-                type: 'GET',
-                dataType: 'HTML',
-                data: {'id':id},
-                success: function(data) {
+            function bookmarkadd(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmoll'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
                     
-                        alert('เลิกติดตามผู้เขียนแล้ว');
+                    }
+                });
+            }
 
+            function unbookmark(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+            function bookmarkadd2(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmol'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+            function unbookmark2(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+
+            function myLike(id) {
+               
+                var x = document.getElementById("myLike"+id);
                 
-                }
-            });
+                x.innerHTML = "ถูกใจแล้ว";
+                document.getElementById("myLike"+id).style.color = "green";
+                $.ajax({
+                    url: '{{ url("/likecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+                   
+            }
 
-        }
 
-    </script>
+            function UNmyLike(id) {
+               
+                var x = document.getElementById("unmyLike"+id);
+               
+              
+                x.innerHTML = "ถูกใจ";
+                document.getElementById("unmyLike"+id).style.color = "black";
+                $.ajax({
+                    url: '{{ url("/unlikecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    
+                    }
+                });
+                   
+                
+            }
+
+            function followContent(v,id) {
+               
+                var x = document.getElementById("follow"+v);
+      
+                x.innerHTML = "ติดตามแล้ว";
+                document.getElementById("follow"+v).style.color = "green";
+
+                $.ajax({
+                    url: '{{ url("/followwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                       
+                            alert('ติดตามผู้เขียนแล้ว');
+
+                    
+                    }
+                });
+        
+               
+            }
+
+            function UNfollowContent(v,id){
+                var x = document.getElementById("unfollow"+v);
+      
+                x.innerHTML = "ติดตาม";
+                document.getElementById("unfollow"+v).style.color = "rgba(255, 92, 99, 1)";
+
+                $.ajax({
+                    url: '{{ url("/unfollowwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        
+                            alert('เลิกติดตามผู้เขียนแล้ว');
+
+                    
+                    }
+                });
+
+            }
+
+        </script>
+
+        {{-- hide delete --}}
+        <script>
+               function hidecontent(id){
+
+                    $.ajax({
+                        url: '{{ url("/hidecontent")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'id':id},
+                        success: function(data) {
+                            alert('ซ่อนโพสต์เรียบร้อยแล้ว');
+                            window.location.reload();
+                        }
+                    });
+               } 
+
+
+               function deletecontent(id){
+                    if (confirm("ยืนยันการลบโพสต์ใช่หรือไม่") == true) {
+                        $.ajax({
+                            url: '{{ url("/deletecontent")}}',
+                            type: 'GET',
+                            dataType: 'HTML',
+                            data: {'id':id},
+                            success: function(data) {
+                                alert('ลบโพสต์เรียบร้อยแล้ว');
+                                window.location.reload();
+                            
+                            }
+                        });
+                    } else {
+                        
+                    }
+
+                   
+               }
+        </script>
 @endsection

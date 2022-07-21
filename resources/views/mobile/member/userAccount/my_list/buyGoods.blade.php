@@ -91,6 +91,7 @@
             <h5 class="m-0  mt-1 mb-1 font-weight-bold " style="color:rgba(80, 202, 101, 1);">ตัวเลือกการจัดส่ง</h5>
             <div class="col-12 row m-0 p-0 pt-1 justify-content-between border-top">
                 <div class="col-8 p-0">
+                    <input type="radio">
                     <h5 class="m-0">Moldii - ส่งธรรมดาในประเทศ </h5>
                     <h5 class="m-0">จะได้รับใน {{date('d-m-Y', strtotime('+2 days'))}} - {{date('d-m-Y', strtotime('+5 days'))}} </h5>
                 </div>
@@ -216,7 +217,7 @@
 @section('custom_script')
     <script>
 
-        bottom_now(3);
+        bottom_now(1);
 
         function coinswitch(){
             var  chk = 0;
@@ -251,7 +252,7 @@
 
         function submitform(){
             var chk = "{{Session::get('typepayment')}}";
-            console.log(chk);
+            // console.log(chk);
             if(chk==''){
                 alert('กรุณาเลือกวิธีการชำระเงิน');
 

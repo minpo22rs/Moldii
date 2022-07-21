@@ -136,7 +136,12 @@ class OrderController extends Controller
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
             return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
-
+        }elseif(Session::get('typepayment') == 'เก็บเงินปลายทาง'){
+            Tb_order::where('id_order',$order->id)->update(['status_order'=>4]);
+            
+            $total =  Session::get('totalcart')+ Session::get('sumship');
+            return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+            
         }elseif(Session::get('typepayment') == 'Credit card'){//
             $url='https://api.globalprimepay.com/v2/tokens/charge';
             $headers = array(
@@ -396,6 +401,9 @@ class OrderController extends Controller
         }else if($type==7){
             Session::put('typepayment','Moldii wallet');
             Session::put('bankcode',null);
+        }else if($type==8){
+            Session::put('typepayment','เก็บเงินปลายทาง');
+            Session::put('bankcode','COD');
         }
 
         // dd(Session::all());

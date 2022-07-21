@@ -16,13 +16,19 @@ class ContentController extends Controller
     
     public function index($id)
     {
-        $c = DB::Table('tb_news')->where('new_id',$id)->first();
+        $c = DB::Table('tb_news')->where('new_id',$id)
+                    ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
+                    ->select('tb_news.*','tb_customers.customer_username')
+                    ->first();
         $comment = DB::Table('tb_comments')->where('comment_object_id',$id)->get();
         $countreply = DB::Table('tb_comment_replys')->where('news_id',$id)->get();
+        $bm = DB::Table('tb_bookmarks')->where('id_ref',$id)->where('customer_id',Session::get('cid'))->first();
+        $imggal = DB::Table('tb_new_imgs')->where('new_id',$id)->get();
+        // dd($imggal);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 
        
-        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply]);
+        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal]);
     }
 
     public function sendcomment(Request $request)
@@ -57,33 +63,40 @@ class ContentController extends Controller
 
 
 
+        DB::beginTransaction();
+        try {
+            if ($request->file('sub_gallery') !== null)
+            {
 
-        if ($request->file('sub_gallery') !== null)
-        {
-
-            foreach($request->file('sub_gallery') as $key => $item) {
-                    $ext = $item->getClientOriginalExtension();
-                    // dd($ext); exit();
-                    $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('public/content_img',  $name);
-                    $contentimg = new Tb_content_img();
-                    $contentimg->new_id  = $content->id;
-                    $contentimg->name  = $name;
-                    if($ext =='mp4' || $ext =='MOV'){
-                        $contentimg->type  = 'V';
-    
-                    }else{
-                        $contentimg->type  = 'I';
-    
-                    }
-                    $contentimg->save();
+                foreach($request->file('sub_gallery') as $key => $item) {
+                        $ext = $item->getClientOriginalExtension();
+                        // dd($ext); exit();
+                        $name = rand().time().'.'.$item->getClientOriginalExtension();
+                        $item->storeAs('public/content_img',  $name);
+                        $contentimg = new Tb_content_img();
+                        $contentimg->new_id  = $content->id;
+                        $contentimg->name  = $name;
+                        if($ext =='mp4' || $ext =='MOV'){
+                            $contentimg->type  = 'V';
+        
+                        }else{
+                            $contentimg->type  = 'I';
+        
+                        }
+                        $contentimg->save();
+                    
                 
-               
+                }
             }
+            // dd('rrr//rr');
+            DB::commit();
+            return back()->with('success','โพสต์เรียบร้อยแล้ว');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+        
+            return redirect('admin/news')->withError('Something Wrong! New can not Updated.');
         }
-        // dd('rrr//rr');
-        return back()->with('success','โพสต์เรียบร้อยแล้ว');
-
     }
 
     public function search(Request $request)

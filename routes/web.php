@@ -12,6 +12,7 @@ use App\Http\Controllers\mobile\common\ShoppingController;
 use App\Http\Controllers\mobile\common\ContentController;
 use App\Http\Controllers\mobile\common\StoreController;
 use App\Http\Controllers\mobile\common\VideoController;
+use App\Http\Controllers\mobile\common\AuctionController;
 use App\Http\Controllers\mobile\common\GroupController;
 use App\Http\Controllers\mobile\common\CartController;
 use App\Http\Controllers\mobile\user\OtpController;
@@ -134,7 +135,6 @@ Route::get('content/{id}', [ContentController::class, 'index']);
 Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
 Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']); 
 
-Route::get('content/{id}', [ContentController::class, 'index']); 
 Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
 
 
@@ -184,6 +184,11 @@ Route::get('/clc', function() {
     // session()->forget('key');
 	return "Cleared!";
 });
+
+
+//auction
+Route::get('auction',[AuctionController::class,'index']);
+
 
 
 

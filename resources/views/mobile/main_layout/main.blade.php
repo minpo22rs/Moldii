@@ -83,7 +83,7 @@
                 <span class="text-dark" id="bottom_text_fam">กลุ่ม</span>
             </div>
         </a>
-        <a href="#" class="item" id="bottom_button_noti">
+        <a href="{{url('auction')}}" class="item" id="bottom_button_noti">
             <div class="col">
                 <ion-icon name="hammer" class="text-dark md hydrated" id="bottom_icon_noti"></ion-icon>
                 <span class="text-dark" id="bottom_text_noti">ประมูลสินค้า</span>

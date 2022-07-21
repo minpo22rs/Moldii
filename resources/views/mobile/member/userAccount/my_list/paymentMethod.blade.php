@@ -167,7 +167,7 @@
             <!-- sub menu -->
             <ul class="listview image-listview pb-0">
 
-                <li>
+                {{-- <li>
                     <a href="{{url('selectpaymentmethod/3/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Wechat.svg')}}" alt="image" class="image mr-1">
 
@@ -177,7 +177,7 @@
 
                         </div>
                     </a>
-                </li>
+                </li> --}}
                
                 <li>
                     <a href="{{url('selectpaymentmethod/4/0')}}" class="item border-top pr-3">
@@ -219,8 +219,8 @@
         </li>
 
         {{-- moldii wallet --}}
-        <li class="multi-level">
-            <a href="{{url('selectpaymentmethod/7/0')}}" class="item">
+        <li>
+            <a href="{{url('selectpaymentmethod/7/0')}}" >
                 <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
                 <div class="row">
                     <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
@@ -229,7 +229,16 @@
                 
             </a>
         </li>
+        <li >
+            <a href="{{url('selectpaymentmethod/8/0')}}" >
+                <h5 class="m-0  font-weight-bold align-self-center">เก็บเงินปลายทาง</h5>
+                {{-- <div class="row">
+                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
 
+                </div> --}}
+                
+            </a>
+        </li>
 
 
 
@@ -238,30 +247,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 @endsection
 
 @section('custom_script')
 <script>
-    bottom_now(3);
+    bottom_now(1);
 </script>
 @endsection
