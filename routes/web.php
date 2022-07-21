@@ -188,6 +188,7 @@ Route::get('/clc', function() {
 
 //auction
 Route::get('auction',[AuctionController::class,'index']);
+Route::get('auction/detail/{pid}/{aid}',[AuctionController::class,'detail']);
 
 
 
