@@ -297,7 +297,7 @@ class OrderController extends Controller
         // dd($chargeResp['wechat']);
         if(Session::get('typepayment') == 'Wechat Pay'){
 
-            return Redirect::to("https://doc.gbprimepay.com/wechat");
+            return Redirect::to($chargeResp['wechat']);
             // return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
 
         }
