@@ -167,7 +167,7 @@
             <!-- sub menu -->
             <ul class="listview image-listview pb-0">
 
-                <li>
+                {{-- <li>
                     <a href="{{url('selectpaymentmethod/3/0')}}" class="item border-top pr-3">
                         <img src="{{ asset('new_assets/img/icon/logo_bank/Wechat.svg')}}" alt="image" class="image mr-1">
 
@@ -177,7 +177,7 @@
 
                         </div>
                     </a>
-                </li>
+                </li> --}}
                
                 <li>
                     <a href="{{url('selectpaymentmethod/4/0')}}" class="item border-top pr-3">
