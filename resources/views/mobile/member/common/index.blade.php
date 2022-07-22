@@ -395,7 +395,7 @@ color: #666;
 
                             <div class="card-title col-8  align-self-center m-0 ">
                                 <div class="card-title m-0 row align-self-center">
-                                    @if($sqls->new_type == 'C')
+                                    @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
                                         <h4 class=" m-0 p-0">{{$sqls->created_by}}</h4>
                                     @else
                                         <h4 class=" m-0 p-0">{{$sqls->customer_username}}</h4>
@@ -448,7 +448,7 @@ color: #666;
                                         <a class="dropdown-item" href="#" onclick="deletecontent({{$sqls->new_id}})">ลบโพสต์</a>
                                         <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                                     @endif
-                                    <a class="dropdown-item" href="#">report</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">report</a>
                                 </div>
                             </div>
                         </div>
@@ -542,7 +542,7 @@ color: #666;
                             </div>
                             <div class="col-2 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1" id="icon-share">แชร์</h5>
+                                <h5 class="mb-0 ml-1" id="icon-share{{$sqls->new_id}}">แชร์</h5>
                             </div>
                             {{-- <div class="col-2 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">

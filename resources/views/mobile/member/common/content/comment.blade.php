@@ -32,7 +32,7 @@
 
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
-                @if($c->new_type == 'C')
+                @if($c->new_type == 'C' || $c->new_type == 'V')
                     <h4 class=" m-0 p-0">{{$c->created_by}}</h4>
                 @else
                     <h4 class=" m-0 p-0">{{$c->customer_username}}</h4>
@@ -86,14 +86,14 @@
                     <a class="dropdown-item" href="#" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a>
                     <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                 @endif
-                <a class="dropdown-item" href="#">report</a>
+                <a class="dropdown-item" href="{{url('contentreport/'.$c->new_id.'')}}">report</a>
             </div>
 
 
         </div>
     </div>
     <div class="card-body p-2">
-        @if($c->new_type=='C')
+        @if($c->new_type=='C' || $c->new_type == 'V')
             <p class="card-text">{{$c->new_content}}</p>
         @elseif($c->new_type=='U')
             <p class="card-text">{{$c->new_title}}</p>
@@ -111,7 +111,7 @@
         @elseif($c->new_type=='V')
 
                 {{-- @foreach($imggal as $imgs) --}}
-                    <iframe width="auto" height="215" src="https://www.youtube.com/embed/{{$c->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="400px" height="215" src="https://www.youtube.com/embed/{{$c->new_img}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 {{-- @endforeach --}}
         @else
             @if($imggal->count() != 0)
@@ -119,7 +119,7 @@
                     @if($imgs->type =='I')
                         <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
                     @else
-                        <video width="auto" height="197" controls >
+                        <video width="auto" height="215" controls >
                             <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                             <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
                         </video>
@@ -133,7 +133,7 @@
     <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->like?$c->like:'0'}} ชื่นชอบ</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$comment->count()+$countreply->count()}} รายการ</h6>
-        <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
+        <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sh->count()}} แชร์</h6>
         <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$c->viewer}} รับชม</h6>
     </div>
 
@@ -148,7 +148,7 @@
         </div>
         <div class="col-5 row p-0 justify-content-center ml-1 ">
             <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
-            <h5 class="mb-0 ml-1 "><a href="{{url('test/ui')}}">แสดงความคิดเห็น</a> </h5>
+            <h5 class="mb-0 ml-1 text-primary">แสดงความคิดเห็น </h5>
             <!--เมื่อคลิก จะส่ง id และ ทำการดึงมาเสดงในหน้า Comment -->
         </div>
         <div class="col-2 row p-0 justify-content-center ml-1 ">

@@ -14,8 +14,14 @@ class AuctionController extends Controller
         date_default_timezone_set('Asia/Bangkok');
         // dd(date('H:i:s'));
         $auction = DB::Table('tb_auctions')->where('date_start',date('Y-m-d'))->first();
-        $detail = DB::Table('tb_auction_details')->where('id_auction',$auction->id_auction)
-                    ->leftJoin('tb_products','tb_auction_details.product_id','=','tb_products.product_id')->get();
+        if($auction != null){
+            $detail = DB::Table('tb_auction_details')->where('id_auction',$auction->id_auction)
+                        ->leftJoin('tb_products','tb_auction_details.product_id','=','tb_products.product_id')->get();
+        }else{
+            $auction =0;
+            $detail =0;
+        }
+        
         // $auction = DB::Table('tb_auctions')->where('date_start',date('Y-m-d'))->where('time_start','>',date('H:i:s'))->where('time_finish','<',date('H:i:s'))->first();
         // dd($auction);
         

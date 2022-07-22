@@ -26,12 +26,13 @@ class ContentController extends Controller
         $imggal = DB::Table('tb_new_imgs')->where('new_id',$id)->get();
         $f = DB::Table('tb_followers')->where('id_c_follower',$c->customer_id)->where('id_customer',Session::get('cid'))->first();
         $la = DB::Table('tb_content_likes')->where('content_id',$c->new_id )->where('customer_id',Session::get('cid'))->first();
+        $sh = DB::Table('tb_content_shares')->where('new_id',$c->new_id)->get();
 
-        // dd($imggal);
+        // dd($c);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 
        
-        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la]);
+        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la,'sh'=>$sh]);
     }
 
     public function sendcomment(Request $request)
@@ -190,6 +191,20 @@ class ContentController extends Controller
 
         
         return 1 ;
+    }
+
+    public function contentreport($id){
+        $sql =  DB::Table('tb_content_reports')->where('new_id',$id)->first();
+        if($sql != null){
+            DB::Table('tb_content_reports')->where('new_id',$id)->increment('count',1);
+
+        }else{
+            DB::Table('tb_content_reports')->insert(['new_id'=>$id]);
+
+        }
+
+        
+        return back() ;
     }
 
     

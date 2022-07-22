@@ -18,24 +18,28 @@
 
 
         <div class="col-12 row m-0 justify-content-center ">
+            @if( $auction != 0)
 
-            @foreach($detail as $details)
-                <a href="{{url('auction/detail/'.$details->product_id.'/'.$details->id_auction_detail.'')}}" style="width: 50%;">
-                    <div class=" card  my-2 mx-2 align-self-center justify-content-center">
-                        <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$details->product_img.'')}}" alt="alt" style=" height:120px;">
-                        <div class="card-body col-12 p-1 ">
-                            <div class="row pl-1">
-                                <h5 class=" font-weight-bolder m-0">{{$details->product_name}}</h5>
-                            </div>
-                            <div class=" row ">
-                                <h6 class="mt-1 pl-1 m-0 col-6">{{$details->product_price}}</h6>
-                                <h6 class="mt-1 pl-1 m-0 col-6 text-danger text-right result" >00:00:25</h6>
-                                
+                @foreach($detail as $details)
+                    <a href="{{url('auction/detail/'.$details->product_id.'/'.$details->id_auction_detail.'')}}" style="width: 50%;">
+                        <div class=" card  my-2 mx-2 align-self-center justify-content-center">
+                            <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$details->product_img.'')}}" alt="alt" style=" height:120px;">
+                            <div class="card-body col-12 p-1 ">
+                                <div class="row pl-1">
+                                    <h5 class=" font-weight-bolder m-0">{{$details->product_name}}</h5>
+                                </div>
+                                <div class=" row ">
+                                    <h6 class="mt-1 pl-1 m-0 col-6">{{$details->product_price}}</h6>
+                                    <h6 class="mt-1 pl-1 m-0 col-6 text-danger text-right result" >00:00:25</h6>
+                                    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            @endforeach
+                    </a>
+                @endforeach
+            @else
+                    ไม่พบข้อมูล
+            @endif
 
         </div>
 
