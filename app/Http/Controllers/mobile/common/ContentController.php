@@ -144,7 +144,6 @@ class ContentController extends Controller
             $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
             $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
             $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
-            $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
             // dd( $sql);
 
 
@@ -167,14 +166,13 @@ class ContentController extends Controller
             $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
             $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
             $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
-            $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
             // dd( $sql);
             
 
 
         }
        
-        return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat,'ban'=>$ban]);
+        return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat]);
     }
 
 

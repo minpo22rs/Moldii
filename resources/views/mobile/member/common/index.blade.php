@@ -252,7 +252,7 @@ color: #666;
 
         <p> @if(Session::get('recent') != null)
                 @foreach (Session::get('recent') as $text)
-                    <a href="{{url('user/searcha/'. $text.'')}}">
+                    <a href="{{url('user/searcha/0/'. $text.'')}}">
                         {{$text}}<br>
                     </a>
                 @endforeach
@@ -459,17 +459,18 @@ color: #666;
                         </div>
                             
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
+                                
                                 @if($sqls->new_type == 'C')
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
                                         </div>
-                                        @if($imggal->count() != 0)
+                                        @if($imggal->count() >1)
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                            </ol>
                                             @foreach($imggal as $imgs)
                                                 <div class="carousel-item">
                                                     <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
@@ -494,20 +495,29 @@ color: #666;
                                                     </video>
                                                 </div>
                                             @endif
-                                            @foreach($imggal as $imgs)
-                                                @if($imgs->type =='I')
-                                                    <div class="carousel-item">
-                                                        <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
-                                                    </div>
-                                                @else
-                                                    <div class="carousel-item">
-                                                        <video width="auto" height="197" controls >
-                                                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
-                                                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
-                                                        </video>
-                                                    </div>
-                                                @endif
-                                            @endforeach
+                                            @if($imggal->count() > 1)
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                                </ol>
+                                                @foreach($imggal as $imgs)
+                                                    @if($imgs->type =='I')
+                                                        
+                                                        <div class="carousel-item">
+                                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                        </div>
+                                                    @else
+                                                       
+                                                        <div class="carousel-item">
+                                                            <video width="auto" height="197" controls >
+                                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                                            </video>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         @endif
 
 
@@ -540,9 +550,9 @@ color: #666;
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                             </div>
-                            <div class="col-2 row p-0 align-items-center">
+                            <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#share" >
                                 <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1" id="icon-share{{$sqls->new_id}}">แชร์</h5>
+                                <h5 class="mb-0 ml-1" >แชร์</h5>
                             </div>
                             {{-- <div class="col-2 row p-0 align-items-center">
                                 <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -553,6 +563,61 @@ color: #666;
                     </div>
                 @endforeach
             </div>
+
+
+             <!-- Modal share -->
+             <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" >แบ่งปันข้อมูล</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            
+                        
+                            <?php $urlen = urlencode("https://modii.sapapps.work/content/1")?>
+                        
+                                <br>
+                                <div class="row justify-content-around p-1 ">
+                                    <a href="" class="m-0 text-center align-self-end  share-item">
+                                        <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                                        <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+                                    </a>
+                                    <a href="" class="m-0 text-center align-self-end  share-item">
+                                        <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+                                    </a>
+                                    <a href="" class="m-0 text-center align-self-end  share-item">
+                                        <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+                                    </a>
+                                    {{-- <a href="" class="m-0 text-center align-self-end  share-item">
+                                        <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Email</h5>
+                                    </a> --}}
+                                    <div class="row col-11 mt-4 p-0">
+                                        <button type="button" data-dismiss="modal" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+                                    </div>               
+                                </div>
+                            <br>
+
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+            <!-- /end Modal share -->
 
 
             {{-- <div id="video" class="tab-pane fade">

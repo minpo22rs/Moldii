@@ -18,7 +18,7 @@
 
 
         <div class="col-12 row m-0 justify-content-center ">
-            @if( $auction != 0)
+            @if( $chk != 0)
 
                 @foreach($detail as $details)
                     <a href="{{url('auction/detail/'.$details->product_id.'/'.$details->id_auction_detail.'')}}" style="width: 50%;">

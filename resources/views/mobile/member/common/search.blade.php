@@ -2,42 +2,41 @@
 
 @section('app_header')
 <style>
-#search_box_2 {
-    width: 100%;
-    height: auto;
-    padding: 60px 0;
-    text-align: center;
-    background-color: white ;
-    margin-top: 30px;
-    position: sticky;
-    display: none;
-    transform: translateY( 0%);
-    transition: transform 0.5s;
-}
+    #search_box_2 {
+        width: 100%;
+        height: auto;
+        padding: 60px 0;
+        text-align: center;
+        background-color: white ;
+        margin-top: 30px;
+        position: sticky;
+        display: none;
+        transform: translateY( 0%);
+        transition: transform 0.5s;
+    }
 
-#search_2 {
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-    background-color: #fc684b ;
-    margin-top: 30px;
-    position: fixed;
-    display: none;
-}
-
+    #search_2 {
+        width: 100%;
+        padding: 30px 0;
+        text-align: center;
+        background-color: #fc684b ;
+        margin-top: 30px;
+        position: fixed;
+        display: none;
+    }
 </style>
 <div class="appHeader bg-danger text-light">
 
     {{-- <div class="pageTitle">
 
     </div> --}}
-    <div class="left">
+    {{-- <div class="left">
         <ion-icon name="arrow-back-outline" onclick="window.location.replace('/index')"></ion-icon>
-    </div>
+    </div> --}}
     <div class="pageTitle">
 
         <div class="row ml-3">
-            <div class="col-8">
+            <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
@@ -51,11 +50,13 @@
             </div>
 
             <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
-            <div class="col-2">
-                <a href="{{url('cartindex')}}">
-                    {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span> --}}
-                    <ion-icon name="cart" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
-                    </ion-icon>
+           
+            <div class="col-2 mt-1">
+                <a href="{{url('cartindex')}}" > 
+                    <div class="  md hydrated  bg-white text-danger rounded  h5 text-center" style="  padding: 6px 5px 4px 5px ; ">
+                        <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon>
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt}}</span> 
+                    </div>
                 </a>
             </div>
             
@@ -126,6 +127,10 @@
                                 // dd($post);
                                 $count = DB::Table('tb_comments')->where('comment_object_id', $post->new_id)->get();
                                 $countreply = DB::Table('tb_comment_replys')->where('news_id',$post->new_id)->get();
+                                $bm = DB::Table('tb_bookmarks')->where('id_ref',$post->new_id)->where('customer_id',Session::get('cid'))->first();
+                                $la = DB::Table('tb_content_likes')->where('content_id',$post->new_id )->where('customer_id',Session::get('cid'))->first();
+                                $sh = DB::Table('tb_content_shares')->where('new_id',$post->new_id)->get();
+                                $imggal = DB::Table('tb_new_imgs')->where('new_id',$post->new_id)->get();
                         ?>
                         
                         <div class="card my-3">
@@ -135,16 +140,42 @@
                                 <div class="card-title col-8  align-self-center m-0 ">
                                     <div class="card-title m-0 row align-self-center">
                                         <h4 class=" m-0 p-0">{{$post->created_by}}</h4>
-                                        <a href="#" class="ml-1 align-self-center">
-                                            <h6 class="m-0 p-0 " style="color:  rgba(255, 92, 99, 1);">ติดตาม</h6>
-                                        </a>
+                                        
                                     </div>
                                     <h6 class=" m-0 p-0">{{$post->created_at}}</h6>
                                 </div>
 
                                 <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
-                                    <ion-icon name="bookmark-outline" style="font-size:25px"></ion-icon>
-                                    <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"></ion-icon>
+                                    @if($bm !== null)
+    
+                                        <div id="bmm{{$post->new_id}}" style="margin-right: 10px">
+                                            <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark({{$post->new_id}})" ></ion-icon>
+                                        </div>
+                                        
+    
+                                    @else
+                                        <div id="bmoll{{$post->new_id}}" style="margin-right: 10px">
+                                            <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd({{$post->new_id}})"></ion-icon>
+                                        </div>
+                                        
+                                    @endif
+    
+                                    <div style="display: none" id="bmol{{$post->new_id}}" style="margin-right: 10px">
+                                        <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd2({{$post->new_id}})"></ion-icon>
+    
+                                    </div>
+    
+                                    <div style="display: none" id="bm{{$post->new_id}}" style="margin-right: 10px">
+                                        <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark2({{$post->new_id}})" ></ion-icon>
+                                    </div>
+    
+    
+                                    <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px" data-toggle="dropdown" aria-expanded="false"></ion-icon>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        
+                                        <a class="dropdown-item" href="{{url('contentreport/'.$post->new_id.'')}}">report</a>
+                                    </div>
+    
                                 </div>
                             </div>
                             
@@ -153,30 +184,31 @@
                                 <a href="{{url('content/'.$post->new_id.'')}}" class="card-text">{{$post->new_title}}</a>
                             </div>
 
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+                               
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$post->new_img.'')}}" class="d-block w-100" alt="...">
+                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$post->new_img.'')}}" class="d-block w-100" alt="...">
                                     </div>
-                                    <div class="carousel-item">
-                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$post->new_img.'')}}" class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$post->new_img.'')}}" class="d-block w-100" alt="...">
-                                    </div>
+                                    @foreach($imggal as $imgs)
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        </ol>
+                                        <div class="carousel-item">
+                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                        </div>
+                                    @endforeach
+                                  
                                 </div>
                             </div>
                             
-                            {{-- <a href="{{url('content/'.$sqls->new_id.'')}}">
-                                
-                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
-                            
-                            </a> --}}
 
                             <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
                                 <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$post->like?''.$post->like.'':'0'}} ชื่นชอบ</h6>
                                 <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$count->count() + $countreply->count()}} รายการ</h6>
-                                <h6 class="mb-0 ml-1 card-subtitle text-muted">4 แชร์</h6>
+                                <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sh->count()}} แชร์</h6>
 
                             </div>
 
@@ -184,13 +216,17 @@
 
                                 <div class="col-3 row p-0 align-items-center">
                                     <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-                                    <h5 class="mb-0 ml-1 ">ชื่นชอบ</h5>
+                                    @if($la == null)
+                                        <h5 class="mb-0 ml-1 " id="myLike{{$post->new_id}}" onclick="myLike({{$post->new_id}})">ถูกใจ</h5>
+                                    @else
+                                        <h5 class="mb-0 ml-1 " id="unmyLike{{$post->new_id}}" style="color: green" onclick="UNmyLike({{$post->new_id}})">ถูกใจแล้ว</h5>
+                                    @endif
                                 </div>
                                 <div class="col-5 row p-0 align-items-center">
                                     <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
                                     <a href="{{url('content/'.$post->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                                 </div>
-                                <div class="col-2 row p-0 align-items-center">
+                                <div class="col-2 row p-0 align-items-center"  data-toggle="modal" data-target="#share" >
                                     <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
                                     <h5 class="mb-0 ml-1">แชร์</h5>
                                 </div>
@@ -250,6 +286,61 @@
 
         </div>
 
+
+           <!-- Modal share -->
+           <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" >แบ่งปันข้อมูล</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        
+                    
+                        <?php $urlen = urlencode("https://modii.sapapps.work/content/1")?>
+                    
+                            <br>
+                            <div class="row justify-content-around p-1 ">
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+                                </a>
+                                {{-- <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Email</h5>
+                                </a> --}}
+                                <div class="row col-11 mt-4 p-0">
+                                    <button type="button" data-dismiss="modal" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+                                </div>               
+                            </div>
+                        <br>
+
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- /end Modal share -->
+
 @endsection
 
 
@@ -262,12 +353,7 @@
 
             bottom_now(1);
 
-            imgInp.onchange = evt => {
-                const [file] = imgInp.files
-                if (file) {
-                    blah.src = URL.createObjectURL(file)
-                }
-            }
+          
             
             // const btnSearch = document.getElementById('btn_search_2');
             // const offSearch = document.getElementById('off_search_2');
@@ -304,8 +390,200 @@
                 }
             }
         </script>
-        <script src="script.js">
+        <script src="script.js"> </script>
 
+        {{-- bookmarkadd like followContent--}}
+        <script>
+
+            function bookmarkadd(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmoll'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+            function unbookmark(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+            function bookmarkadd2(id)
+            {
+                                
+                document.getElementById('bm'+id).style.display = '';
+                document.getElementById('bmol'+id).style.display = 'none';
+                // document.getElementById('bmol'+id).style.display = 'none';
+                $.ajax({
+                    url: '{{ url("/bookmarkadd")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+            function unbookmark2(id)
+            {
+                document.getElementById('bm'+id).style.display = 'none';
+                document.getElementById('bmol'+id).style.display = '';
+                $.ajax({
+                    url: '{{ url("/unbookmark")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+            }
+
+
+
+            function myLike(id) {
+               
+                var x = document.getElementById("myLike"+id);
+                
+                x.innerHTML = "ถูกใจแล้ว";
+                document.getElementById("myLike"+id).style.color = "green";
+                $.ajax({
+                    url: '{{ url("/likecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    }
+                });
+                   
+            }
+
+
+            function UNmyLike(id) {
+               
+                var x = document.getElementById("unmyLike"+id);
+               
+              
+                x.innerHTML = "ถูกใจ";
+                document.getElementById("unmyLike"+id).style.color = "black";
+                $.ajax({
+                    url: '{{ url("/unlikecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                    
+                    
+                    }
+                });
+                   
+                
+            }
+
+            function followContent(v,id) {
+               
+                var x = document.getElementById("follow"+v);
+      
+                x.innerHTML = "ติดตามแล้ว";
+                document.getElementById("follow"+v).style.color = "green";
+
+                $.ajax({
+                    url: '{{ url("/followwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                       
+                            alert('ติดตามผู้เขียนแล้ว');
+
+                    
+                    }
+                });
+        
+               
+            }
+
+            function UNfollowContent(v,id){
+                var x = document.getElementById("unfollow"+v);
+      
+                x.innerHTML = "ติดตาม";
+                document.getElementById("unfollow"+v).style.color = "rgba(255, 92, 99, 1)";
+
+                $.ajax({
+                    url: '{{ url("/unfollowwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        
+                            alert('เลิกติดตามผู้เขียนแล้ว');
+
+                    
+                    }
+                });
+
+            }
+
+        </script>
+
+        {{-- hide delete --}}
+        <script>
+               function hidecontent(id){
+
+                    $.ajax({
+                        url: '{{ url("/hidecontent")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'id':id},
+                        success: function(data) {
+                            alert('ซ่อนโพสต์เรียบร้อยแล้ว');
+                            window.location.reload();
+                        }
+                    });
+               } 
+
+
+               function deletecontent(id){
+                    if (confirm("ยืนยันการลบโพสต์ใช่หรือไม่") == true) {
+                        $.ajax({
+                            url: '{{ url("/deletecontent")}}',
+                            type: 'GET',
+                            dataType: 'HTML',
+                            data: {'id':id},
+                            success: function(data) {
+                                alert('ลบโพสต์เรียบร้อยแล้ว');
+                                window.location.reload();
+                            
+                            }
+                        });
+                    } else {
+                        
+                    }
+
+                   
+               }
         </script>
         
     @endsection

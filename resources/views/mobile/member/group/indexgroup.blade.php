@@ -207,7 +207,7 @@
                                 <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                             </div>
-                            <div class="col-2 row p-0 align-items-center">
+                            <div class="col-2 row p-0 align-items-center"  data-toggle="modal" data-target="#share">
                                 <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1">แชร์</h5>
                             </div>
@@ -219,6 +219,60 @@
                         </div>
                     </div>
                 @endforeach
+
+        <!-- Modal share -->
+        <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" >แบ่งปันข้อมูล</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        
+                    
+                        <?php $urlen = urlencode("https://modii.sapapps.work/content/1")?>
+                    
+                            <br>
+                            <div class="row justify-content-around p-1 ">
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+                                </a>
+                                {{-- <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Email</h5>
+                                </a> --}}
+                                <div class="row col-11 mt-4 p-0">
+                                    <button type="button" data-dismiss="modal" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+                                </div>               
+                            </div>
+                        <br>
+
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- /end Modal share -->
 
     @endsection
 
@@ -241,41 +295,40 @@
     {{-- searchBox --}}
     <script>
            
+            // const btnSearch = document.getElementById('btn_search_2');
+            // const offSearch = document.getElementById('off_search_2');
+            // const offSearch_2 = document.querySelector('.off');
+            const searchCon = document.getElementById('input_search_1');
+            const searchBox = document.getElementById('search_box_2');
 
-        // const btnSearch = document.getElementById('btn_search_2');
-        // const offSearch = document.getElementById('off_search_2');
-        // const offSearch_2 = document.querySelector('.off');
-        const searchCon = document.getElementById('input_search_1');
-        const searchBox = document.getElementById('search_box_2');
+            
+            searchCon.addEventListener('click', () => {
+                // searchCon.classList.add('search-container-2');
+                // searchBox.classList.add('show-search-box');
+                if (searchBox.style.display === "none") {
+                    searchBox.style.display = "block";
+                } else {
+                    searchBox.style.display = "none";
+                }
+            });
+            // offSearch.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
+            // offSearch_2.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
 
-        
-        searchCon.addEventListener('click', () => {
-            // searchCon.classList.add('search-container-2');
-            // searchBox.classList.add('show-search-box');
-            if (searchBox.style.display === "none") {
-                searchBox.style.display = "block";
-            } else {
-                searchBox.style.display = "none";
+
+            function myFunction() {
+                var x = document.getElementById("search_2");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
             }
-        });
-        // offSearch.addEventListener('click', () => {
-        //     searchCon.classList.remove('search-container-2');
-        //     searchBox.classList.remove('show-search-box');
-        // });
-        // offSearch_2.addEventListener('click', () => {
-        //     searchCon.classList.remove('search-container-2');
-        //     searchBox.classList.remove('show-search-box');
-        // });
-
-
-        function myFunction() {
-            var x = document.getElementById("search_2");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
     </script>
 
     

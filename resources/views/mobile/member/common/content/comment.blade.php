@@ -13,7 +13,7 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/index')}}');">
+        <a href="javascript:;" class="headerButton" onclick="window.history.back();">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
