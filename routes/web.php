@@ -211,6 +211,8 @@ Route::get('otp',[OtpController::class,'index']);
 Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
 Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
+Route::get('tag',[RegisterController::class,'tag']);
+Route::post('selecttag',[RegisterController::class,'selecttag']);
 
 
 //resetpass

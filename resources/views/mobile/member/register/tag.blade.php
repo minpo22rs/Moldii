@@ -1,120 +1,142 @@
+@extends('mobile.main_layout.guest')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <style>
-a:link {
-  text-decoration: none;
-}
+  a:link {
+    text-decoration: none;
+  }
 
-a:visited {
-  text-decoration: none;
-  color:#808080;
-}
+  a:visited {
+    text-decoration: none;
+    color:#808080;
+  }
 
-a:hover {
-  text-decoration: none;
-  color:red;
-}
-
+  a:hover {
+    text-decoration: none;
+    color:red;
+  }
+  #bg {
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+    }
+    #bg img {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin: auto; 
+        min-width: 50%;
+        min-height: 50%;
+    }
 
 </style>
+{{-- <div id="bg">
+  <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
+</div> --}}
+<br>
 <div class="container mt-3">
-    <div class="row">
+    {{-- <div class="row">
         <div class="mb-5">
             <a href="#" style="position: absolute ; right: 15px;">SKIP</a>
             <a href="#" style="position: absolute ; left: 15px; font-size:20;"><</a>
         </div>
-    </div>
-    <h2>Interests</h2>
-    <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt molestias recusandae enim soluta quam ab hic, dolor ducimus molestiae eligendi minima voluptas architecto repudiandae non eum facere nam beatae nobis. </small>
+    </div> --}}
+    <h2>สิ่งที่คุณสนใจ</h2>
+    <small>เลือกได้มากกว่า 1 ตัวเลือก</small>
     <div class="row">
         <div class="col-md-12 mt-4 mb-5">
-             <form action="#">
-             <div style="overflow: auto;width: 100%; height: 450;">
-             <button type="checkbox" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox1" value="Art Toys"> Art Toys</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox2" value="Vintage Toy"> Vintage Toy</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2 "> <input type="checkbox"   name="checkbox3" value="ของเก่า Retro"> ของเก่า Retro</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox4" value="Dragon bal"> Dragon bal</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox5" value="Mario"> Mario</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox6" value="One Piece"> One Piece</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox7" value="One Punch Man"> One Punch Man</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox8" value="Slam Dunk"> Slam Dunk</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox9" value="Doraemon"> Doraemon</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox10" value="Pokemon" >Pokemon</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox11" value="Harry Potter"> Harry Potter</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox12" value="Car Model"> Car Model</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">  <input type="checkbox"   name="checkbox13" value="Scale Mode"> Scale Mode</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">รถก่อสร้าง</button> <!-- ใส่ checkbox ต่อนะพี่ตั้ง ชื่อไว้เป็นตัวอย่างเนสตั้งเป็นชื่ออื่นก็ได้ -->
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Motorcycle</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Vespa & สกู๊ตเตอร์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เครื่องบิน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Rare Item</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Marvel</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">DC Comic</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Hero</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Masked Rider</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">หุ่นยนต์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Transformers</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ไดโนเสาร์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ก๊อตซิลล่า</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">สัตว์ประหลาด</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เจ้าหญิง</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Toystory</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Radfink</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ฉากโมเดล</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Majorette</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Ghost ผี</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Kaws</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Astro boy</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ดาบพิฆาตอสูร</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">นารูโตะ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ชินจัง มารูโกะ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">การ์ตูนสัตว์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ดร.สลัมป์ กับหนูน้อยอาราเล</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">โคนัน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Star wars</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">โตเกียวรีเวนเจอร์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">มายฮีโร่</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เอเลี่ยน พรีเดเตอร์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ศิลปิน ดารา</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">มวยปล้ำ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">JADA TOY</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Minnion</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Disney</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">LOL</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Lego ตัวต่อ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ของเล่นเด็ก</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เสริมพัฒนาการ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ปืน และอาวุธ ของเล่น</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2" >การ์ดพลัง</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เทพนิยาย</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">บอร์ดเกม</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Q Posket</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2"> POP MART</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เดทโน๊ต</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Captain Tsubasa</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">Labubu</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">นินจาฮาโตริ</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">มนุษย์หินฟริ้นสโตน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">พาวเวอร์พัพเกิล</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เซเลอร์มูน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2"> Tom and Jerry</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เต่านินจา</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ดิจิม่อน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">อิคคิวซัง</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">บุริน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">บัคบันนี่</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">TAMIYA</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ตัวละครภาพยนต์</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">การ์ตูนยุค 70-80</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">การ์ตูนตลก</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">หมา แมว</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ของแต่งบ้าน</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">ของใช้</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">เสื้อผ้า</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">แฟชั่น</button>
-             <button type="button" class="btn btn-outline-secondary btn-sm mt-2">อื่นๆ</button>
-             </div>
-            <br><br>
-            <button type="button" class="btn btn-danger btn-lg btn-block">CONTINUE 4/5</button>
+              <form action="{{url('selecttag')}}" method="POST">
+                @csrf
+                <div style="overflow: auto;width: 100%; height: 450;">
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Art Toys"> Art Toys</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Vintage Toy"> Vintage Toy</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ของเก่า Retro"> ของเก่า Retro</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Dragon bal"> Dragon bal</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Mario"> Mario</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="One Piece"> One Piece</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="One Punch Man"> One Punch Man</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Slam Dunk"> Slam Dunk</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Doraemon"> Doraemon</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Pokemon" >Pokemon</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Harry Potter"> Harry Potter</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Car Model"> Car Model</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Scale Mode"> Scale Mode</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="รถก่อสร้าง">รถก่อสร้าง</button> <!-- ใส่ checkbox ต่อนะพี่ตั้ง ชื่อไว้เป็นตัวอย่างเนสตั้งเป็นชื่ออื่นก็ได้ -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Motorcycle">Motorcycle</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Vespa & สกู๊ตเตอร์">Vespa & สกู๊ตเตอร์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เครื่องบิน">เครื่องบิน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Rare Item">Rare Item</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Marvel">Marvel</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="DC Comic">DC Comic</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Hero">Hero</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Masked Rider">Masked Rider</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="หุ่นยนต์">หุ่นยนต์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Transformers">Transformers</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ไดโนเสาร์">ไดโนเสาร์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ก๊อตซิลล่า">ก๊อตซิลล่า</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="สัตว์ประหลาด">สัตว์ประหลาด</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เจ้าหญิง">เจ้าหญิง</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Toystory">Toystory</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Radfink">Radfink</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ฉากโมเดล">ฉากโมเดล</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Majorette">Majorette</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Ghost ผี">Ghost ผี</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Kaws">Kaws</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Astro boy">Astro boy</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ดาบพิฆาตอสูร">ดาบพิฆาตอสูร</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="นารูโตะ">นารูโตะ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ชินจัง มารูโกะ">ชินจัง มารูโกะ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="การ์ตูนสัตว์">การ์ตูนสัตว์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ดร.สลัมป์ กับหนูน้อยอาราเล">ดร.สลัมป์ กับหนูน้อยอาราเล</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="โคนัน">โคนัน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Star wars">Star wars</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="โตเกียวรีเวนเจอร์">โตเกียวรีเวนเจอร์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="มายฮีโร่">มายฮีโร่</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เอเลี่ยน พรีเดเตอร์">เอเลี่ยน พรีเดเตอร์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ศิลปิน ดารา">ศิลปิน ดารา</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="มวยปล้ำ">มวยปล้ำ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="JADA TOY">JADA TOY</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Minnion">Minnion</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Disney">Disney</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="LOL">LOL</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Lego ตัวต่อ">Lego ตัวต่อ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ของเล่นเด็ก">ของเล่นเด็ก</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เสริมพัฒนาการ">เสริมพัฒนาการ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ปืน และอาวุธ ของเล่น">ปืน และอาวุธ ของเล่น</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="การ์ดพลัง">การ์ดพลัง</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เทพนิยาย">เทพนิยาย</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="บอร์ดเกม">บอร์ดเกม</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Q Posket">Q Posket</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="POP MART">POP MART</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เดทโน๊ต">เดทโน๊ต</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Captain Tsubasa">Captain Tsubasa</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Labubu">Labubu</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="นินจาฮาโตริ">นินจาฮาโตริ</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="มนุษย์หินฟริ้นสโตน">มนุษย์หินฟริ้นสโตน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="พาวเวอร์พัพเกิล">พาวเวอร์พัพเกิล</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เซเลอร์มูน">เซเลอร์มูน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="Tom and Jerry">Tom and Jerry</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เต่านินจา">เต่านินจา</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="">ดิจิม่อน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ดิจิม่อน">อิคคิวซัง</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="บุริน">บุริน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="บัคบันนี่">บัคบันนี่</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="TAMIYA">TAMIYA</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ตัวละครภาพยนต์">ตัวละครภาพยนต์</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="การ์ตูนยุค 70-80">การ์ตูนยุค 70-80</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="การ์ตูนตลก">การ์ตูนตลก</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="หมา แมว">หมา แมว</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ของแต่งบ้าน">ของแต่งบ้าน</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="ของใช้">ของใช้</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="เสื้อผ้า">เสื้อผ้า</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="แฟชั่น">แฟชั่น</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="อื่นๆ">อื่นๆ</button>
+                </div>
+              <br><br>
+              <button type="submit" class="btn btn-danger btn-lg btn-block">ยืนยัน</button>
             </form>
         </div>
     </div>
@@ -123,3 +145,11 @@ a:hover {
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+<script>
+  var a = "{{Session::get('success')}}";
+    if (a) {
+        alert(a);
+    }
+
+</script>

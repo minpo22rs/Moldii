@@ -23,7 +23,7 @@
     <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
 </div>
 <br>
-<div class="m-1">
+
     <div class="m-1">
         <div class="row align-items-center">
             <div class="col-12 text-left">
@@ -46,19 +46,19 @@
             <form action="{{url('checkregister')}}" method="POST" class="form-group row" id="formregis">
                 @csrf
                 <div class="col-10 offset-1 text-center">
-                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="firstname" id="firstname" value="" placeholder="Firstname">
+                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="firstname" id="firstname" value="" placeholder="ชื่อ">
                 </div>
                 <div class="col-10 offset-1 text-center">
-                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="lastname" id="lastname" value="" placeholder="Lastname">
+                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="lastname" id="lastname" value="" placeholder="นามสกุล">
                 </div>
                 <div class="col-10 offset-1 text-center">
-                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="username" id="username" value="" onchange="checkusername(this.value);" placeholder="Username">
+                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="username" id="username" value="" onchange="checkusername(this.value);" placeholder="ชื่อผู้ใช้">
                 </div>
+                {{-- <div class="col-10 offset-1 text-center">
+                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="mn" id="mn" value="" onchange="checkmn(this.value);" placeholder="เบอร์โทรศัพท์ (ใช้ในการรับ OTP)">
+                </div> --}}
                 <div class="col-10 offset-1 text-center">
-                    <input type="text" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="mn" id="mn" value="" onchange="checkmn(this.value);" placeholder="Mobile Number">
-                </div>
-                <div class="col-10 offset-1 text-center">
-                    <input type="password" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="password" id="password" value="" minlength="8" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="password" id="password" value="" minlength="8" placeholder="รหัสผ่าน">
                 </div>
                 <div class="col-5 offset-1 text-center">
                     <input type="button" class="btn btn-index btn-block font-weight-bold my-3 rounded-pill" 
@@ -88,7 +88,7 @@
         </div>
 
     </div>
-</div>
+
 
 {{-- เบอร์โทรศัพท์นี้ได้ทำการใช้งานไปเรียบร้อยแล้วค่ะ --}}
 @endsection

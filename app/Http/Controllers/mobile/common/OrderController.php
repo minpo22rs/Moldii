@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Redirect;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\User;
@@ -66,6 +67,7 @@ class OrderController extends Controller
                 ->select('tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
                             ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
                 ->first();
+
         $order = new Tb_order();
         $order->customer_id = Session::get('cid');
         $order->order_total = number_format(Session::get('totalcart'),2,'.','');
@@ -292,9 +294,11 @@ class OrderController extends Controller
 
         $chargeResp = json_decode($result, true);
 
-        // dd($result);
+        // dd($chargeResp['wechat']);
         if(Session::get('typepayment') == 'Wechat Pay'){
-            return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
+
+            return Redirect::to("https://doc.gbprimepay.com/wechat");
+            // return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
 
         }
         if($chargeResp == null){

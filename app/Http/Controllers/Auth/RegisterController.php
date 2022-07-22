@@ -81,7 +81,7 @@ class RegisterController extends Controller
         $p->customer_name = $request->firstname;
         $p->customer_lname = $request->lastname;
         $p->customer_username = $request->username;
-        $p->customer_phone = $request->mn;
+        // $p->customer_phone = $request->mn;
         $p->customer_password = Hash::make($request['password']);
         $p->save();
 
@@ -104,5 +104,19 @@ class RegisterController extends Controller
         if($chk != null){
             return 1;
         }
+    }
+
+    public function tag()
+    {
+        return view('mobile.member.register.tag');
+    }
+
+    public function selecttag(Request $request)
+    {
+       
+        DB::table('tb_customers')->where('customer_id',Session::get('u_id'))->update(['tag'=> $request->checkbox]);
+
+
+        return redirect('index');
     }
 }

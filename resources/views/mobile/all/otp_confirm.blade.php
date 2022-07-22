@@ -7,44 +7,62 @@
         alert(a);
     }
 </script>
-
+<style>
+    #bg {
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+    }
+    #bg img {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin: auto; 
+        min-width: 50%;
+        min-height: 50%;
+    }
+</style>
 
 <!-- App Capsule -->
 <div id="appCapsule" class="pt-0">
 
-    <div class="login-form" style = "margin-top: 150px;">
-            <!-- <div class="section">
-                <img src="new_assets/custom_assets/icons/mangkorn_logo.jpg" alt="image" class="form-image">
-            </div> -->
-        <div class="section mt-1">
-            <h1>OTP</h1>
-            <h4>Type your telephone number for getting the OTP</h4>
+    <div class="login-form" style = "margin-top: 270px;">
+        <div id="bg">
+            <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
         </div>
+        
         <div class="section mt-1 mb-5">
             <form action="{{route('Check_OTP')}}" method="post">
                 @csrf
+                
 
                 <div class="form-group boxed">
+                   
                     <div class="input-wrapper">
+                        <h2>กรอกรหัส OTP</h2>
+
                         <input type="text" class="form-control" name="tel" id="tel" placeholder="หมายเลขโทรศัพท์" value="{{Session::get('phone')}}" readonly>
-                        <i class="clear-input">
-                            <ion-icon name="close-circle"></ion-icon>
-                        </i>
+                        
                     </div>
                 </div>
           
                 <div class="form-group boxed">
                     <div class="input-wrapper">
-                        <input type="text" class="form-control" name="otp" id="otp" placeholder="เลข OTP" >
-                        <i class="clear-input">
-                            <ion-icon name="close-circle"></ion-icon>
-                        </i>
+                        <input type="number" class="form-control" name="otp" id="otp" placeholder="กรอกเลข OTP ที่ได้รับ" required>
+                        
+
+                        <br><br><br>
+                        <button type="submit" class="btn btn-danger btn-block btn-lg" style="width:150px!important">ยืนยัน OTP</button>
                     </div>
+
+                    
                 </div>
 
-                <div class="form-button-group">
-                    <button type="submit" class="btn btn-danger btn-block btn-lg">ยืนยัน OTP</button>
-                </div>
+               
 
             </form>
         </div>
@@ -58,4 +76,11 @@
 @endsection
 
 @section('custom_script')
+<script>
+     var a = "{{Session::get('success')}}";
+        if(a){
+            alert(a);
+        }
+
+</script>
 @endsection

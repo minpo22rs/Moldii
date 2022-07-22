@@ -23,10 +23,10 @@ class OtpController extends Controller
     {
 
         $request->validate([
-            'tel' => ['required',  'min:10'],
+            'mn' => ['required',  'min:10'],
         ]);
 
-        $post_tel = $request->tel;
+        $post_tel = $request->mn;
         $phone = $post_tel; //'0900000001';
         $otp = rand(1000, 9999); //4 Digits
 
@@ -110,16 +110,16 @@ class OtpController extends Controller
             Tb_otp::where('otp_id', $id)
                     ->update(['otp_verified' => Carbon::now()]);
 
-            User::where('customer_id',Session::get('u_id'))->update(['customer_phone'=>$tel]);
+            User::where('customer_id',Session::get('u_id'))->update(['customer_phone'=>$tel,'customer_verified'=>1]);
             
-            return redirect('user/index')->with('success','คุณสมัครสมาชิกเรียบร้อยแล้ว');
+            return redirect('tag')->with('success','คุณสมัครสมาชิกเรียบร้อยแล้ว');
         } else {
             // User::where('customer_id',Session::get('u_id'))->increment('customer_count', 1);
             // if(){
 
             // }
 
-            return redirect('confirm/otp')->with(['phone'=>$tel]);
+            return redirect('confirm/otp')->with(['phone'=>$tel,'success'=>'รหัส OTP ไม่ตรงกัน กรุณากรอกใหม่']);
         }
     }
 }
