@@ -190,7 +190,8 @@ Route::get('/clc', function() {
 
 //auction
 Route::get('auction',[AuctionController::class,'index']);
-Route::get('auction/detail/{pid}/{aid}',[AuctionController::class,'detail']);
+Route::get('auction/detail/{aid}',[AuctionController::class,'detail']);
+Route::post('addauction',[AuctionController::class,'addauction']);
 
 
 
@@ -198,8 +199,12 @@ Route::get('auction/detail/{pid}/{aid}',[AuctionController::class,'detail']);
 
 //shopping
 Route::get('shopping/category/{id}',[ShoppingController::class,'category']);
+Route::get('shopping/category/latest/{id}',[ShoppingController::class,'latest']);
+Route::get('shopping/category/bestseller/{id}',[ShoppingController::class,'bestseller']);
 Route::get('shopping/product/{id}',[ShoppingController::class,'product']);
 Route::get('shopping/merchant/{id}',[ShoppingController::class,'merchant']);
+Route::get('/likeproduct', [ShoppingController::class, 'likeproduct']); 
+Route::get('/unlikeproduct', [ShoppingController::class, 'unlikeproduct']); 
 
 
 //process register

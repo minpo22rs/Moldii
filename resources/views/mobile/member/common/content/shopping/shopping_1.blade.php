@@ -2,12 +2,12 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/index')}}');">
+        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/store')}}');">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
     <div class="pageTitle">
-
+        {{$cat->cat_name}}
     </div>
     <div class="right"></div>
     <!-- <div class="m-1 w-100">
@@ -36,71 +36,59 @@
 @section('content')
 <div class="m-1">
     <ul class="col-12 row justify-content-around m-0 p-1 cate-container">
-        <li class="mx-1 text-center category-shopping active">
-            <h3 class="m-0 p-1"><a href="{{url('#')}} " class="">เกี่ยวข้อง</a></h3>
+        <li class="mx-1 text-center category-shopping {{Request::is('shopping/category/'.$id.'')?'active':''}}">
+            <h3 class="m-0 p-1"><a href="{{url('shopping/category/'.$id.'')}} " class="">เกี่ยวข้อง</a></h3>
         </li>
-        <li class="mx-1 text-center category-shopping {{Request::is('#')?'active':''}}">
-            <h3 class="m-0 p-1"><a href="{{url('#')}} ">ล่าสุด</a></h3>
+        <li class="mx-1 text-center category-shopping {{Request::is('shopping/category/latest/'.$id.'')?'active':''}}">
+            <h3 class="m-0 p-1"><a href="{{url('shopping/category/latest/'.$id.'')}} ">ล่าสุด</a></h3>
         </li>
-        <li class="mx-1 text-center category-shopping {{Request::is('#')?'active':''}}">
-            <h3 class="m-0 p-1"><a href="{{url('#')}} ">สินค้าขายดี</a></h3>
+        <li class="mx-1 text-center category-shopping {{Request::is('shopping/category/bestseller/'.$id.'')?'active':''}}">
+            <h3 class="m-0 p-1"><a href="{{url('shopping/category/bestseller/'.$id.'')}} ">สินค้าขายดี</a></h3>
         </li>
-        <li class="mx-1 text-center category-shopping {{Request::is('#')?'active':''}}">
-            <h3 class="m-0 p-1"><a href="{{url('#')}} ">ราคา</a></h3>
-        </li>
+        
     </ul>
 
 
     <div class="col-12 row m-0 justify-content-center ">
-        @foreach($product as $products)
-            <?php $detail = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
+        @if($product->count() != 0)
+            @foreach($product as $products)
+                <?php $detail = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
 
-            <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
-                <div class=" card  my-2 mx-2 align-self-center justify-content-center border-product">
-                    <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
-                    <div class="card-body col-12 p-1 ">
-                        <div class="row pl-1">
-                            <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>
-                        </div>
-                        <div class=" row ">
-                            @if($products->product_discount!=null)
-                                <div class="row col-7">
-                                    <h6 class="mt-1 pl-1 m-0 "><s>฿{{$products->product_price}}</s></h6>
-                                    <h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$products->product_discount}}</h6>
-
-                                </div>
-                            @else
-                                <div class="row col-7">
-                                    <h6 class="mt-1 pl-1 m-0 ">฿{{$products->product_price}}</h6>
-
-                                </div>
-                            @endif
-                            <div class="pl-2">
-                                <h6 class="m-0"><small>ขายได้ {{$detail->count()}} ชิ้น</small></h6>
-                                <div class="rating-system2">
-
-                                    <input type="radio" name='rate2' id="star5_2" />
-                                    <label for="star5_2"></label>
-
-                                    <input type="radio" name='rate2' id="star4_2" />
-                                    <label for="star4_2"></label>
-
-                                    <input type="radio" name='rate2' id="star3_2" />
-                                    <label for="star3_2"></label>
-
-                                    <input type="radio" name='rate2' id="star2_2" />
-                                    <label for="star2_2"></label>
-
-                                    <input type="radio" name='rate2' id="star1_2" />
-                                    <label for="star1_2"></label>
-                                </div>
+                <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
+                    <div class=" card  my-2 mx-2 align-self-center justify-content-center border-product">
+                        <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
+                        <div class="card-body col-12 p-1 ">
+                            <div class="row pl-1">
+                                <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>
                             </div>
+                            <div class=" row ">
+                                @if($products->product_discount!=null)
+                                    <div class="row col-7">
+                                        <h6 class="mt-1 pl-1 m-0 "><s>฿{{$products->product_price}}</s></h6><h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$products->product_discount}}</h6>
+
+                                    </div>
+                                @else
+                                    <div class="row col-7">
+                                        <h6 class="mt-1 pl-1 m-0 ">฿{{$products->product_price}}</h6>
+                                      
+                                    </div>
+                                @endif
+                                <div class="col-5 mt-1">
+                                    <h6 class="m-0">ขายได้ {{$detail->count()}} ชิ้น</h6>
+                                </div>
+                                
+                            </div>
+                           
+
                         </div>
                     </div>
-                </div>
-            </a>
-        
-        @endforeach
+                </a>
+            
+            @endforeach
+        @else
+            <br>
+                ไม่พบข้อมูล
+        @endif
     </div>
 </div>
 @endsection

@@ -62,7 +62,28 @@
             <h3 class="mb-0">{{$product->product_name}}</h3>
             <div class="row pr-1" style="font-size: 18px;">
                 <ion-icon name="share-outline" id="icon-share" style="color:rgba(177, 176, 176, 1);"></ion-icon>
-                <i class="fas fa-heart ml-1" style="color:rgba(235, 235, 235, 1);"></i>
+                @if($like != null )
+                    <div id="unheart">
+                        <i class="fas fa-heart ml-1" style="color:red;"  onclick="unheart({{$product->product_id }});"></i>
+
+                    </div>
+                    <div id="addheart" style="display: none">
+                        <i class="fas fa-heart ml-1" style="color:rgba(235, 235, 235, 1);" onclick="addheart({{$product->product_id }});"></i>
+
+                    </div>
+                @else
+                    <div id="unheart" style="display: none">
+                        <i class="fas fa-heart ml-1" style="color:red;"  onclick="unheart({{$product->product_id }});"></i>
+
+                    </div>
+                    <div id="addheart">
+                        <i class="fas fa-heart ml-1" style="color:rgba(235, 235, 235, 1);" onclick="addheart({{$product->product_id }});"></i>
+
+                    </div>
+                @endif
+                
+
+                {{-- <i class="fas fa-heart ml-1" style="color:rgba(235, 235, 235, 1);" id="heart" onclick="heart();"></i> --}}
             </div>
         </div>
         <div class="row justify-content-between w-100 px-2 mx-2">
@@ -74,8 +95,14 @@
             <div class="row pr-1 align-self-center" style="font-size: 18px;">
                 
                 <div class="rating-system2">
+                    <i class="fas fa-star " style="color: #F1F437"></i>
+                    <i class="fas fa-star " style="color: #F1F437"></i>
+                    <i class="fas fa-star " style="color: #F1F437"></i>
+                    <i class="fas fa-star " style="color: #F1F437"></i>
+                    <i class="fas fa-star " style="color: #F1F437"></i>
+                    
 
-                    <input type="radio" name='rate2' id="star5_2" />
+                    {{-- <input type="radio" name='rate2' id="star5_2" />
                     <label for="star5_2" class="ml-1" style="width:10px; height:10px;"></label>
 
                     <input type="radio" name='rate2' id="star4_2" />
@@ -88,9 +115,9 @@
                     <label for="star2_2" class="ml-1" style="width:10px; height:10px;"></label>
 
                     <input type="radio" name='rate2' id="star1_2" />
-                    <label for="star1_2" class="ml-1" style="width:10px; height:10px;"></label>
+                    <label for="star1_2" class="ml-1" style="width:10px; height:10px;"></label> --}}
                 </div>
-                <h6 class=" ml-1 font-weight-bold">5/5</h6>
+                <h5 class=" ml-1 mt-1 font-weight-bold">3.8/5</h5>
                 
                
             </div>
@@ -148,7 +175,7 @@
 
             <div class="col-4 p-1 align-self-center">
                 <h5 class=" m-0 p-0 font-weight-bold">82%</h5>
-                <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">การตอบกลับแขก</h6>
+                <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">การตอบกลับแชท</h6>
             </div>
         </div>
         <hr>
@@ -168,10 +195,10 @@
         <hr class="my-1">
         <div class="col-12 p-1 ">
             <h4 class="text-break ">{{$product->product_description}}</h4>
-            <a href="" class="text-center">
+            {{-- <a href="" class="text-center">
                 <h6 class="   m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">เพิ่มเติม</h6>
             </a>
-        </div>
+        </div> --}}
         <br>
 
         {{-- รีวิวจากลูกค้า --}}
@@ -179,33 +206,30 @@
         <div class="col-12 card-footer p-1">
             <br>
             <h5 class="font-weight-bold">รีวิวจากลูกค้า</h5>
-            <div class="col-12 row p-0  m-0">
-                <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
-                <div class="align-self-center pl-1">
-                  
-                    <h5 class=" m-0 p-0">ชื่อลูกค้า</h5>
-                    <div class="rating-system2 row pl-1">
 
-                        <input type="radio" name='rate2' id="star5_2" />
-                        <label for="star5_2" class="ml_4" style="width:6px; height:6px;"></label>
+            @if($review->count()!=0)
+                @foreach($review as $reviews)
+                    <div class="col-12 row p-0  m-0">
+                        <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                        <div class="align-self-center pl-1">
+                        
+                            <h5 class=" m-0 p-0">{{$reviews->customer_username}}</h5>
+                            <div class="rating-system2 row pl-1">
+                                @for($i=0;$i<$reviews->score;$i++)
+                                    <i class="fas fa-star " style="color: #F1F437"></i>
+                                    
+                                @endfor
+                               
 
-                        <input type="radio" name='rate2' id="star4_2" />
-                        <label for="star4_2" class="ml_4" style="width:6px; height:6px;margin-left: 4px;"></label>
+                            </div>
 
-                        <input type="radio" name='rate2' id="star3_2" />
-                        <label for="star3_2" class="ml_4" style="width:6px; height:6px;margin-left: 4px;"></label>
-
-                        <input type="radio" name='rate2' id="star2_2" />
-                        <label for="star2_2" class="ml_4" style="width:6px; height:6px;margin-left: 4px;"></label>
-
-                        <input type="radio" name='rate2' id="star1_2" />
-                        <label for="star1_2" class="ml_4" style="width:6px; height:6px;margin-left: 4px;"></label>
-
+                        </div>
                     </div>
-
-                </div>
-            </div>
-            <h4 class="text-break m-0 mt-1 ">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h4>
+                    <h4 class="text-break m-0 mt-1 ">{{$reviews->text}}</h4>
+                @endforeach
+            @else
+                ยังไม่มีรวิว
+            @endif
         </div>
         <br>
         <hr class="my-1">
@@ -327,111 +351,115 @@
 
 @endsection
 @section('choice')
-<div class="" id="share_container">
+    <div class="" id="share_container">
 
-    <?php $urlen = urlencode("https://modii.sapapps.work/shopping/product/$product->product_id")?>
-    <div class="share-box p-2" id="share_box">
-        <div class="text-center">
-            <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
-        </div>
-        <div class="row justify-content-around p-1 ">
-            <a href="" class="m-0 text-center align-self-end  share-item">
-                <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
-                <h5 class="font-weight-bold m-0 mt-1">Line</h5>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
-                <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
-                <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
-
-            </a>
-            <a href="" class="m-0 text-center align-self-end  share-item">
-                <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
-                <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
-
-            </a>
-            <a href="" class="m-0 text-center align-self-end  share-item">
-                <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
-                <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
-
-            </a>
-          
-            <div class="row col-11 mt-4 p-0">
-                <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
-
+        <?php $urlen = urlencode("https://modii.sapapps.work/shopping/product/$product->product_id")?>
+        <div class="share-box p-2" id="share_box">
+            <div class="text-center">
+                <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
+                <input type="hidden" id="clink" value="{{$urlen}}">
             </div>
-        </div>
-    </div>
+            <div class="row justify-content-around p-1 ">
+                <a href="https://social-plugins.line.me/lineit/share?url={{$urlen}}" class="m-0 text-center align-self-end  share-item">
+                    <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                    <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                    <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                    <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
 
+                </a>
+                <a href="javascript:;" class="m-0 text-center align-self-end  share-item" onclick="clink();">
+                    <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                    <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
 
-</div>
-<div class="" id="buy_goods_container">
+                </a>
+                <a href="" class="m-0 text-center align-self-end  share-item" >
+                    <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                    <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
 
-    <div class="buy-good-box p-2" id="buy_goods_box">
-        <div class="row ">
-            <div class="col-6 p-1">
-                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" style="border-radius: 4px;" class=" imaged w-100 square">
-
-            </div>
-            <div class="col-6 pt-2">
-                <h4 class="m-0 font-weight-bold">{{$product->product_name}}</h4>
-                <h4 class="m-0 font-weight-bold" style="color:#E81F12;">฿{{$product->product_price}}</h4>
-                <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">คลัง: {{$product->product_amount}}</h6>
-
-
-            </div>
-
-        </div>
-        <hr class="my-2 ">
-            <form action="{{url('cart')}}" method="POST" id="formcart">
-                @csrf
-                <input type="hidden" name="back" value="1" id="backpage">
-                <input type="hidden" name="id" value="{{$product->product_id}}">
-                <input type="hidden" name="store_id" value="{{$store->merchant_id}}">
-                <input type="hidden" name="total" value="{{$product->product_discount!=null?$product->product_discount:$product->product_price}}">
-                <div class="row justify-content-between  p-1">
-                    <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3>
-
-                    <div class="stepper stepper-dark align-self-center" style="font-size: 17px; ">
-                        <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
-                        <input type="text" class="form-control font-weight-bold " value="1" readonly style="border:none;" name="count" />
-                        <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
-                    </div>
+                </a>
+            
+                <div class="row col-11 mt-4 p-0">
+                    <button type="button" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
 
                 </div>
-                <hr class="my-2 ">
-                <div class="row justify-content-around p-1 ">
+            </div>
+        </div>
 
-                    
-                        <div class="row col-11  mt-2 p-0">
-                            <button type="submit" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(80, 202, 101, 1); color:#FFF; font-size:15px; border-radius: 8px;">
-                               ซื้อสินค้า
-                            </button>
 
+    </div>
+    <div class="" id="buy_goods_container">
+
+        <div class="buy-good-box p-2" id="buy_goods_box">
+            <div class="row ">
+                <div class="col-6 p-1">
+                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" style="border-radius: 4px;" class=" imaged w-100 square">
+
+                </div>
+                <div class="col-6 pt-2">
+                    <h4 class="m-0 font-weight-bold">{{$product->product_name}}</h4>
+                    <h4 class="m-0 font-weight-bold" style="color:#E81F12;">฿{{$product->product_price}}</h4>
+                    <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">คลัง: {{$product->product_amount}}</h6>
+
+
+                </div>
+
+            </div>
+            <hr class="my-2 ">
+                <form action="{{url('cart')}}" method="POST" id="formcart">
+                    @csrf
+                    <input type="hidden" name="back" value="1" id="backpage">
+                    <input type="hidden" name="id" value="{{$product->product_id}}">
+                    <input type="hidden" name="store_id" value="{{$store->merchant_id}}">
+                    <input type="hidden" name="total" value="{{$product->product_discount!=null?$product->product_discount:$product->product_price}}">
+                    <div class="row justify-content-between  p-1">
+                        <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3>
+
+                        <div class="stepper stepper-dark align-self-center" style="font-size: 17px; ">
+                            <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
+                            <input type="text" class="form-control font-weight-bold " value="1" readonly style="border:none;" name="count" />
+                            <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
                         </div>
-                    
-                </div>
-            </form>
+
+                    </div>
+                    <hr class="my-2 ">
+                    <div class="row justify-content-around p-1 ">
+
+                        
+                            <div class="row col-11  mt-2 p-0">
+                                <button type="submit" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(80, 202, 101, 1); color:#FFF; font-size:15px; border-radius: 8px;">
+                                ซื้อสินค้า
+                                </button>
+
+                            </div>
+                        
+                    </div>
+                </form>
+        </div>
+
+
     </div>
-
-
-</div>
 
 @endsection
 @section('choices')
-<div class="row w-100 choice-container m-0" id="choice_container">
-    <div class="col-6 m-0 p-1  add-to-cart text-center ">
-            <a href="javascript:;" onclick="subcart();">
-                <div class="item-cart" >
-                    <i class="fal fa-shopping-bag" style="font-size:24px;"></i>
-                    <h5 class="font-weight-bold m-0">เพิ่มในตะกร้า</h5>
-                </div>
-            </a>
+    <div class="row w-100 choice-container m-0" id="choice_container">
+        <div class="col-6 m-0 p-1  add-to-cart text-center ">
+                <a href="javascript:;" onclick="subcart();">
+                    <div class="item-cart" >
+                        <i class="fal fa-shopping-bag" style="font-size:24px;"></i>
+                        <h5 class="font-weight-bold m-0">เพิ่มในตะกร้า</h5>
+                    </div>
+                </a>
+        </div>
+        <div id="buy-goods" class="col-6 m-0 p-2  row justify-content-center align-items-center buy-goods h3">
+            ซื้อสินค้า
+        </div>
     </div>
-    <div id="buy-goods" class="col-6 m-0 p-2  row justify-content-center align-items-center buy-goods h3">
-        ซื้อสินค้า
-    </div>
-</div>
 @endsection
+
+
+
 @section('custom_script')
     <script>
         var a = "{{Session::get('success')}}";
@@ -447,5 +475,61 @@
        
    
         bottom_now(6);
+
+        function clink() {
+            /* Get the text field */
+            var copyText = document.getElementById("clink");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+            
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+        var chk=0;
+
+        function addheart(id) {
+               
+            //    document.getElementById("heart").style.color = "red";
+               document.getElementById('unheart').style.display = '';
+               document.getElementById('addheart').style.display = 'none';
+               $.ajax({
+                   url: '{{ url("/likeproduct")}}',
+                   type: 'GET',
+                   dataType: 'HTML',
+                   data: {'id':id},
+                   success: function(data) {
+
+                   }
+               });
+                  
+           }
+
+
+           function unheart(id) {
+              
+              
+             
+            //    document.getElementById("heart").style.color = "rgba(235, 235, 235, 1)";
+               document.getElementById('unheart').style.display = 'none';
+               document.getElementById('addheart').style.display = '';
+               $.ajax({
+                   url: '{{ url("/unlikeproduct")}}',
+                   type: 'GET',
+                   dataType: 'HTML',
+                   data: {'id':id},
+                   success: function(data) {
+                   
+                   
+                   }
+               });
+                  
+               
+           }
     </script>
 @endsection

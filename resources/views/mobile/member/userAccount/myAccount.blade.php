@@ -46,35 +46,31 @@
    
 </div>
 
-
-<div class="row my-2 mb-3">
-    <div class="col-3 pl-0">
+<div class="row my-2">
+    <div class="col-6 pr-0">
         <div class="m-1">
-            <div class="card">
-                
-            </div>
+            <a href="๒" style="color: black">
+                <div class="card">
+                    <div class="row w-100 mx-3 my-2 text-center">
+                        <img src="{{ asset('new_assets/img/icon/giftbox.svg')}}" width="15%">
+                        <span class="ml-2 align-self-center font-weight-bold"> โดเนท</span>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
-    
     <div class="col-6 pl-0">
         <div class="m-1">
             <div class="card">
                 <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/img/icon/giftbox.svg')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold">โดเนท</span>
+                    <img src="{{ asset('new_assets/img/icon/$.svg')}}" width="15%">
+                    <span class="ml-2 align-self-center font-weight-bold">ขอเปิดร้านค้า</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-3 pl-0">
-        <div class="m-1">
-            <div class="card">
-                
-            </div>
-        </div>
-    </div>
+   
 </div>
-
 
 <a href="{{url('user/myList')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">

@@ -40,6 +40,13 @@
     <div class="m-1 w-100">
 
         <div class="row">
+
+            <div class="col-2">
+                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="list" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                </ion-icon>
+            </div>
+
+
             <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
@@ -69,10 +76,7 @@
                     </ion-icon>
                 </a>
             </div>
-            <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
-                </ion-icon>
-            </div>
+            
         </div>
 
     </div>
@@ -131,6 +135,8 @@
 
             <div class="carousel-multiple owl-carousel owl-theme">
                 @foreach($pro as $pros)
+                    <?php $detail = DB::Table('tb_order_details')->where('product_id',$pros->product_id)->get()?>
+
                     <a href="{{url('shopping/product/'.$pros->product_id.'')}}">
                         <div class="item">
                             <div class="card ">
@@ -140,28 +146,23 @@
                                         <h5 class=" font-weight-bolder m-0">{{$pros->product_name}}</h5>
                                     </div>
                                     <div class=" row ">
-                                        <h6 class="mt-1 pl-1 m-0 col-6">{{$pros->product_price}}</h6>
-                                        {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
-                                        <div class="pl-2">
-                                            <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                            <div class="rating-system2">
+                                        @if($pros->product_discount!=null)
+                                            <div class="row col-6">
+                                                <h6 class="mt-1 pl-1 m-0 "><s>฿{{$pros->product_price}}</s></h6>
+                                                <h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$pros->product_discount}}</h6>
 
-                                                <input type="radio" name='rate2' id="star5_2" />
-                                                <label for="star5_2"></label>
-
-                                                <input type="radio" name='rate2' id="star4_2" />
-                                                <label for="star4_2"></label>
-
-                                                <input type="radio" name='rate2' id="star3_2" />
-                                                <label for="star3_2"></label>
-
-                                                <input type="radio" name='rate2' id="star2_2" />
-                                                <label for="star2_2"></label>
-
-                                                <input type="radio" name='rate2' id="star1_2" />
-                                                <label for="star1_2"></label>
                                             </div>
+                                        @else
+                                            <div class="row col-6">
+                                                <h6 class="mt-1 pl-1 m-0 ">฿{{$pros->product_price}}</h6>
+                                            
+                                            </div>
+                                        @endif
+
+                                        <div class="col-6 mt-1 text-right">
+                                            <h6 class="m-0">ขายได้ {{$detail->count()}} ชิ้น</h6>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -177,6 +178,8 @@
         <div class="col-12 row m-0 justify-content-center ">
 
             @foreach($pro as $products)
+                <?php $details = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
+
                 <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
                     <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                         <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
@@ -185,27 +188,19 @@
                                 <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>
                             </div>
                             <div class=" row ">
-                                <h6 class="mt-1 pl-1 m-0 col-6">{{$products->product_price}}</h6>
-                                {{-- <h6 class="mt-1 pl-1 m-0 col-6">฿350 ฿250</h6> --}}
-                                <div class="pl-2">
-                                    <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
-                                    <div class="rating-system2">
+                                @if($products->product_discount!=null)
+                                    <div class="row col-7">
+                                        <h6 class="mt-1 pl-1 m-0 "><s>฿{{$products->product_price}}</s></h6><h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$products->product_discount}}</h6>
 
-                                        <input type="radio" name='rate2' id="star5_2" />
-                                        <label for="star5_2"></label>
-
-                                        <input type="radio" name='rate2' id="star4_2" />
-                                        <label for="star4_2"></label>
-
-                                        <input type="radio" name='rate2' id="star3_2" />
-                                        <label for="star3_2"></label>
-
-                                        <input type="radio" name='rate2' id="star2_2" />
-                                        <label for="star2_2"></label>
-
-                                        <input type="radio" name='rate2' id="star1_2" />
-                                        <label for="star1_2"></label>
                                     </div>
+                                @else
+                                    <div class="row col-7">
+                                        <h6 class="mt-1 pl-1 m-0 ">฿{{$products->product_price}}</h6>
+                                      
+                                    </div>
+                                @endif
+                                <div class="col-5 mt-1 text-right">
+                                    <h6 class="m-0">ขายได้ {{$details->count()}} ชิ้น</h6>
                                 </div>
                             </div>
                         </div>
@@ -232,25 +227,25 @@
                 alert(a);
             }
 
-            const btnSearch = document.getElementById('btn_search_2');
-            const offSearch = document.getElementById('off_search_2');
-            const offSearch_2 = document.querySelector('.off');
-            const searchCon = document.getElementById('search_container_2');
-            const searchBox = document.getElementById('search_box_2');
+            // const btnSearch = document.getElementById('btn_search_2');
+            // const offSearch = document.getElementById('off_search_2');
+            // const offSearch_2 = document.querySelector('.off');
+            // const searchCon = document.getElementById('search_container_2');
+            // const searchBox = document.getElementById('search_box_2');
 
 
-            btnSearch.addEventListener('click', () => {
-                searchCon.classList.add('search-container-2');
-                searchBox.classList.add('show-search-box');
-            });
-            offSearch.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
-            offSearch_2.addEventListener('click', () => {
-                searchCon.classList.remove('search-container-2');
-                searchBox.classList.remove('show-search-box');
-            });
+            // btnSearch.addEventListener('click', () => {
+            //     searchCon.classList.add('search-container-2');
+            //     searchBox.classList.add('show-search-box');
+            // });
+            // offSearch.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
+            // offSearch_2.addEventListener('click', () => {
+            //     searchCon.classList.remove('search-container-2');
+            //     searchBox.classList.remove('show-search-box');
+            // });
         </script>
 
         {{-- searchBox --}}
@@ -264,7 +259,7 @@
             const searchBox = document.getElementById('search_box_2');
 
             
-            searchCon.addEventListener('click', () => {
+            searchCon.addEventListener('onmouseenter', () => {
                 // searchCon.classList.add('search-container-2');
                 // searchBox.classList.add('show-search-box');
                 if (searchBox.style.display === "none") {

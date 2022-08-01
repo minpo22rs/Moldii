@@ -16,8 +16,32 @@ class ShoppingController extends Controller
     {
         $product = DB::Table('tb_products')->where('product_cat_id',$id)->where('product_published',1)->get();
         // dd($c);
+        $cat = DB::Table('tb_category')->where('cat_id',$id)->first();
        
-        return view('mobile.member.common.content.shopping.shopping_1')->with(['product'=>$product]);
+        return view('mobile.member.common.content.shopping.shopping_1')->with(['product'=>$product,'id'=>$id,'cat'=>$cat]);
+    }
+
+    public function latest($id)
+    {
+        $product = DB::Table('tb_products')->where('product_cat_id',$id)->where('product_published',1)->orderBy('created_at','DESC')->get();
+        // dd($c);
+        $cat = DB::Table('tb_category')->where('cat_id',$id)->first();
+       
+        return view('mobile.member.common.content.shopping.shopping_1')->with(['product'=>$product,'id'=>$id,'cat'=>$cat]);
+    }
+
+    public function bestseller($id)
+    {
+
+        $sql = DB::Table('tb_order_details')->select(DB::raw('COUNT(product_id) as count'),'product_id')
+                    ->groupBy('product_id')->orderBy('count','DESC')->limit(3)->get();
+       
+        $product = DB::Table('tb_products')->whereIn('product_id',$sql->pluck('product_id'))
+                    ->where('product_cat_id',$id)->where('product_published',1)->get();
+        $cat = DB::Table('tb_category')->where('cat_id',$id)->first();
+        // dd($c);
+       
+        return view('mobile.member.common.content.shopping.shopping_1')->with(['product'=>$product,'id'=>$id,'cat'=>$cat]);
     }
 
     public function product($id)
@@ -28,8 +52,12 @@ class ShoppingController extends Controller
         $productstore = DB::Table('tb_products')->where('product_merchant_id',$store->merchant_id)->get();
         $detail = DB::Table('tb_order_details')->where('product_id',$id)->get();
         $imggal = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
+        $review = DB::Table('tb_reviews')->where('product_id',$id)
+                    ->leftJoin('tb_customers','tb_reviews.customer_id','=','tb_customers.customer_id')->get();
+        $like = DB::Table('tb_content_likes')->where('content_id',$id)->where('customer_id',Session::get('cid'))->first();
+
         // dd($productcat->count());
-        return view('mobile.member.common.content.shopping.shopping_2')->with(['product'=>$product,'productcat'=>$productcat,'store'=>$store,'productstore'=>$productstore,'detail'=>$detail,'imggal'=>$imggal]);
+        return view('mobile.member.common.content.shopping.shopping_2')->with(['product'=>$product,'productcat'=>$productcat,'store'=>$store,'productstore'=>$productstore,'detail'=>$detail,'imggal'=>$imggal,'review'=>$review,'like'=>$like]);
     }
 
 
@@ -45,6 +73,23 @@ class ShoppingController extends Controller
         // dd($product);
        
         return view('mobile.member.common.content.shopping.shopping_7')->with(['product'=>$product,'merchant'=>$merchant,'category'=>$category,'productnew'=>$productnew]);
+    }
+
+
+    
+    public function likeproduct(Request $request){
+      
+        DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id]);
+
+        return 1 ;
+    }
+
+    public function unlikeproduct(Request $request){
+       
+        DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)->delete();
+
+        
+        return 1 ;
     }
     
 }

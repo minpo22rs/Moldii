@@ -195,6 +195,11 @@ color: #666;
     <div class="m-1 w-100">
         {{-- search --}}
         <div class="row">
+            <div class="col-2">
+                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="list" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                </ion-icon>
+            </div>
+            
             <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
@@ -224,10 +229,7 @@ color: #666;
                     </ion-icon>
                 </a>
             </div>
-            <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
-                </ion-icon>
-            </div>
+            
         </div>
 
     </div>
@@ -301,7 +303,32 @@ color: #666;
     @include("mobile.member.common.content.prelive")
 
     <br> --}}
-    @include("mobile.member.common.content.story")
+    {{-- @include("mobile.member.common.content.story") --}}
+
+    <div class="row">
+        <div class="col-6 pr-0">
+            <div class="m-1">
+                <a href="{{url('user/wallet')}}" style="color: black">
+                    <div class="card">
+                        <div class="row w-100 mx-3 my-2 text-center">
+                            <img src="{{ asset('new_assets/img/icon/pig.svg')}}" width="15%">
+                            <span class="ml-2 align-self-center font-weight-bold"> ฿ {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-6 pl-0">
+            <div class="m-1">
+                <div class="card">
+                    <div class="row w-100 mx-3 my-2 text-center">
+                        <img src="{{ asset('new_assets/img/icon/$.svg')}}" width="15%">
+                        <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_point}} คอยน์</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Write Me --}}
     <br>

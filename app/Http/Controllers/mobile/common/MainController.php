@@ -31,10 +31,11 @@ class MainController extends Controller
         $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
         $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
+        $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
         // $result = $cp->merge($c);
         // dd( $c );
    
-        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp]);
+        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
     }
 
     public function followwriter(Request $request){

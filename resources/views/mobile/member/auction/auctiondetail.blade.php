@@ -7,7 +7,7 @@
         </a>
     </div>
     <div class="pageTitle">
-
+        การประมูล
     </div>
     <div class="right"></div>
     <!-- <div class="m-1 w-100">
@@ -60,73 +60,109 @@
     <div class="row">
         <div class="row justify-content-between w-100 p-1  mx-2">
             <h3 class="mb-0">{{$product->product_name}}</h3>
-            <p class="text-danger">ราคาปัจจุบัน {{$product->product_price}}</p>
-            <div id="result">00:00:25</div>
-        </div>
-        {{-- <div class="row justify-content-between w-100 px-2 mx-2">
-           
-            <div class="row pr-1 align-self-center" style="font-size: 18px;">
+            <h3 class="text-danger">ราคาปัจจุบัน {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
+            <p class="time">
+                <br>
+                <!-- hours -->
+                <span id='hour-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
+                <span id='hour-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
+                <span className="indicate" style="font-size: 40px">:</span>
                 
-               ราคาปัจจุบัน {{$product->product_price}}
+                <!-- min -->
+                <span id='min-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
+                <span id='min-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
+                <span className="indicate" style="font-size: 40px">:</span>
                 
-                
-               
-            </div>
+                <!-- sec -->
+                <span id='sec-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
+                <span id='sec-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                0
+                </span>
             
-
-        </div> --}}
-
-{{--        
-        @if($product->product_discount!=null)
-            <div class="row justify-content-between w-100 px-2 mx-2">
-                <h5 class="mb-0 font-weight-bold" style="color:rgba(180, 182, 186, 1);"><s>฿{{$product->product_price}}</s></h5>
-                <div class="row pr-1" style="font-size: 18px;">
-                    <h6 class="m-0"> ขายได้ {{$detail->count()}} ชิ้น</h6>
-                </div>
-            </div>
-        @else
-            <div class="row justify-content-between w-100 px-2 mx-2">
-                <div class="row pr-1" style="font-size: 18px;">
-                    <h6 class="m-0 pl-1"> ขายได้ {{$detail->count()}} ชิ้น</h6>
-                </div>
-            </div>
-        @endif
-       --}}
+            </p>
+        </div>
+       
 
     </div>
   
-    {{-- merchant --}}
+   
     <div class="col-12">
-        
+        <hr class="my-1">
+        <form action="{{url('addauction')}}" method="POST">
+            @csrf
+            <div class="row justify-content-between  p-1">
+                {{-- <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3> --}}
+                <?php   $p = 0;
+                        if($log->count()!=0){
+                            $p = number_format($log[0]->price+$auction->bit,2,'.','');
+                        }else{
+                            $p = number_format($auction->price+$auction->bit,2,'.','');
+                        }
+                
+                ?>
+                <div class="stepper stepper-dark align-self-center" style="font-size: 32px; ">
+                    <a href="#" class=" stepper-downs align-self-center " style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
+                    <input type="number" class="form-control font-weight-bold " value="{{$p}}" id="bitcount" style="border:none;font-size: 24px;width:100px" name="count" />
+                    <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
+                </div>
+                <button class="btn btn-info">ประมูลเลย</button>
+                <input type="hidden" name="pid" value="{{$product->product_id}}">
+                <input type="hidden" name="adid" value="{{$detail->id_auction_detail}}">
+                <input type="hidden" name="aid" value="{{$auction->id_auction}}">
+
+            </div>
+        </form>
+        @if($log->count()!=0)
+            <hr class="my-1">
+            <div class="col-12 p-1  ">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ชื่อผู้ใช้</th>
+                        <th>ราคา</th>
+                        <th>เวลา</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($log as $key => $logs)
+                            <?php $u = DB::Table('tb_customers')->where('customer_id',$logs->customer_id)->first();?>
+                            <tr>
+                                <th scope="row">{{$key+1}}</th>
+                                <td>{{$u->customer_username}}</td>
+                                <td>{{$logs->price}}</td>
+                                <td>{{ $logs->created_at}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
         <hr class="my-1">
         <div class="col-12 p-1  ">
-            รายละเอีดสินค้า
+            รายละเอียดสินค้า
             <h4 class="text-break ">{{$product->product_description}}</h4>
            
-            <h4 class="text-break ">น้ำหนัก : {{$product->weight}}</h4>
+            <h4 class="text-break ">น้ำหนัก : {{$product->weight}} กรัม</h4>
            
-            <h4 class="text-break ">ความกว้าง : {{$product->width}}</h4>
+            <h4 class="text-break ">ความกว้าง : {{$product->width}} เซนติเมตร</h4>
            
-            <h4 class="text-break ">ความสูง : {{$product->height}}</h4>
+            <h4 class="text-break ">ความสูง : {{$product->height}} เซนติเมตร</h4>
            
-            <h4 class="text-break ">ความยาว : {{$product->length}}</h4>
+            <h4 class="text-break ">ความยาว : {{$product->length}} เซนติเมตร</h4>
             
-            {{-- <a href="" class="text-center">
-                <h6 class="   m-0 font-weight-bold" style="color: rgba(255, 92, 99, 1);">เพิ่มเติม</h6>
-            </a> --}}
         </div>
         <hr class="my-1">
-        <div class="row justify-content-between  p-1">
-            {{-- <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3> --}}
-            <?php $p = number_format($auction->price+$auction->bit,2,'.','');?>
-            <div class="stepper stepper-dark align-self-center" style="font-size: 28px; ">
-                <a href="#" class=" stepper-downs align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
-                <input type="text" class="form-control font-weight-bold " value="{{$p}}" readonly style="border:none;" name="count" />
-                <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
-            </div>
-            <button class="btn btn-info" id="buy-goods">ประมูลเลย</button>
-
-        </div>
         
         <br>
        
@@ -137,87 +173,109 @@
 </div>
 
 @endsection
-@section('choice')
 
-<div class="" id="buy_goods_container">
-
-    <div class="buy-good-box p-2" id="buy_goods_box">
-       
-        <hr class="my-2 ">
-            <form action="{{url('cart')}}" method="POST" id="formcart">
-                @csrf
-                <input type="hidden" name="back" value="1" id="backpage">
-                <input type="hidden" name="id" value="{{$product->product_id}}">
-
-               
-                <hr class="my-2 ">
-                <div class="row justify-content-around p-1 ">
-
-                    
-                        <div class="row col-11  mt-2 p-0">
-                            <button type="submit" id="off_share_btn" class="btn  btn-block font-weight-bold" style="background-color:rgba(80, 202, 101, 1); color:#FFF; font-size:15px; border-radius: 8px;">
-                               ซื้อสินค้า
-                            </button>
-
-                        </div>
-                    
-                </div>
-            </form>
-    </div>
-
-
-</div>
-
-@endsection
 
 @section('custom_script')
     <script>
+
+        bottom_now(5);
+
+
+
         var a = "{{Session::get('success')}}";
         if(a){
             alert(a);
         }
 
-        var p = "{{$auction->price}}";
+        var p = "{{$minbit}}";
         var b = "{{$auction->bit}}";
-        var min = parseInt(p)+parseInt(b);
-        function subcart(){
-            document.getElementById('backpage').value =2;
-            $('#formcart').submit();
-        }
 
-        $("body").on("click", ".stepper-ups", function () {
-            var valueInput = $(this).parent(".stepper").children(".form-control");
-            valueInput.val((parseInt(valueInput.val()) + parseInt(b)).toFixed(2));
+
+        var min = parseInt(p)+parseInt(b);
+        
+
+        $(".stepper-ups").on("click", function () {
+            var valueInput = document.getElementById('bitcount').value;
+            document.getElementById('bitcount').value = (parseInt(valueInput) + parseInt(b)).toFixed(2);
+            // var valueInput = document.getElementById('bitcount').value;
+            // valueInput.val((parseInt(valueInput.val()) + parseInt(b)).toFixed(2));
         });
-        $("body").on("click", ".stepper-downs", function () {
-      
-            var valueInput = $(this).parent(".stepper").children(".form-control");
-            if (parseInt(valueInput.val()) < min) {
+        $(".stepper-downs").on("click", function () {
+           
+            var valueInput = document.getElementById('bitcount').value;
+            if (parseInt(valueInput) <= min) {
+                // valueInput.val(parseInt(min).toFixed(2));
+                document.getElementById('bitcount').value = (parseInt(min)).toFixed(2);
                 
             }
             else{
-                valueInput.val((parseInt(valueInput.val()) - b).toFixed(2));
+                // valueInput.val((parseInt(valueInput.val()) - b).toFixed(2));
+                document.getElementById('bitcount').value = (parseInt(valueInput) - b).toFixed(2);
             }
         });
        
+        const getLastDigit = (number) => {
+            return number % 10;
+        };
 
-        let c = 25;
-        var counter = setInterval(() => {
+        const getTenDigit = (number) => {
+            return Math.floor((number % 100) / 10);
+        };
 
-            document.getElementById("result").innerHTML = '00:00:'+c;
-            c--;
-            if(c <10){
-                document.getElementById("result").innerHTML = '00:00:0'+c;
-                
-            }
-            if( c == -1 ) {
-                clearInterval( counter );
-                document.getElementById("result").innerHTML = "Finish";
 
-            }
-        }, 1000);
+
+           
+            var limit = "{{$limit}}";
+        
+        
+            // Set the date we're counting down to
+            var countDownDate = new Date(limit).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                // document.getElementById("demo").innerHTML = hours + "h "
+                // + minutes + "m " + seconds + "s ";
+
+                document.getElementById('hour-ten-digit').innerHTML = getTenDigit(hours);
+                document.getElementById('hour-last-digit').innerHTML = getLastDigit(hours);
+                document.getElementById('min-ten-digit').innerHTML = getTenDigit(minutes);
+                document.getElementById('min-last-digit').innerHTML = getLastDigit(minutes);
+                document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
+                document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
+
+
+
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById('hour-ten-digit').innerHTML = '0';
+                    document.getElementById('hour-last-digit').innerHTML ='0';
+                    document.getElementById('min-ten-digit').innerHTML = '0';
+                    document.getElementById('min-last-digit').innerHTML ='0';
+                    document.getElementById('sec-ten-digit').innerHTML = '0';
+                    document.getElementById('sec-last-digit').innerHTML ='0';
+                    $('#exp').modal('show');
+                    // window.location.replace("{{url('auction')}}");
+                    // document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+
+            
 
    
-        bottom_now(5);
     </script>
 @endsection

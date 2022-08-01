@@ -10,7 +10,11 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
 <div class="appHeader bg-danger text-light">
-    
+    <div class="left">
+        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/index')}}');">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </a>
+    </div>
     <div class="pageTitle">
         ตะกร้าสินค้า
     </div>

@@ -31,27 +31,27 @@
                             <div class = "col-12 text-center">
                                 <img src="{{asset('new_assets/img/Moldii.png')}}" style="width: 25%;height:25%;margin-top: 100px;">
                                 <b><h1 class = ""  style = "margin-top: 10px;">
-                                    LOGIN
+                                    เข้าสู่ระบบ
                                 </h1></b>
                             </div>
                         
                                 <div class = "col-10 offset-1 text-center">
                                     <input  type = "text" class = "form-control form-control-lg my-3" style = "border-radius: 10px;"
                                             name = "username" id = "username" 
-                                            value = "" placeholder = "Username or Mobile Number" >
+                                            value = "" placeholder = "ชื่อผู้ใช้" >
                                 </div>
                                 <div class = "col-10 offset-1 text-center">
                                     <input  type = "password" class = "form-control form-control-lg my-3" style = "border-radius: 10px;"
                                             name = "password" id = "password" 
-                                            value = "" placeholder = "Password" >
+                                            value = "" placeholder = "รหัสผ่าน" >
                                 </div>
                                 <div class = "col-10 offset-1 text-right">
-                                    <a href="{{url('user/forgotPassword')}}"><span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">Forgot password?</span></a>
+                                    <a href="{{url('user/forgotPassword')}}"><span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">ลืมรหัสผ่าน?</span></a>
                                 </div>
                                 <div class = "col-10 offset-1 text-center">
                                     <input  type = "submit" class = "btn btn-index btn-block font-weight-bold my-3 rounded-pill" 
                                             style = "   font-size: 18px; 
-                                                        align-items: center; height: 50px;" value = "Login">
+                                                        align-items: center; height: 50px;" value = "เข้าสู่ระบบ">
                                 </div>
                     
 
@@ -68,19 +68,19 @@
 
                             <div class = "col-12 text-left">
                                 <span class = "custom_hover font-weight-bold mx-2 my-3" style = "font-size: 16px;">
-                                    ลงทะเบียนได้ที่นี่
+                                    ลงทะเบียนได้ที่นี่  <a href="{{url('user/register')}}">สมัครสมาชิก</a>
                                 </span>
                             </div>
-                            <div class = "col-12 text-left">
+                            {{-- <div class = "col-12 text-left">
                             
                                 <span class = "custom_hover font-weight-bold ml-1 my-3" style = "font-size: 16px;">
                                     New Here ? 
                                 </span>
                                 <span class = "custom_hover my-3" style = "font-size: 16px; font-weight: bold;">
-                                <a href="{{url('user/register')}}">Register</a>
+                                <a href="{{url('user/register')}}">สมัครสมาชิก</a>
                                 </span>
                                 
-                            </div>
+                            </div> --}}
 
                         </div>
                 </form>

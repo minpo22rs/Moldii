@@ -1,9 +1,9 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
 <div class="appHeader bg-danger text-light">
-    {{-- <div class="left">
-        <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
-    </div> --}}
+    <div class="left">
+        <ion-icon name="arrow-back-outline" onclick="window.location.replace('{{url('/index')}}');"></ion-icon>
+    </div>
     <div class="pageTitle">
         การแจ้งเตือน
     </div>

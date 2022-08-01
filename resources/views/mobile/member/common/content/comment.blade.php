@@ -249,9 +249,10 @@
         <div class="share-box p-2" id="share_box">
             <div class="text-center">
                 <h4 class="font-weight-bold">แบ่งปันข้อมูล</h4>
+                <input type="hidden" id="clink" value="{{$urlen}}">
             </div>
             <div class="row justify-content-around p-1 ">
-                <a href="" class="m-0 text-center align-self-end  share-item">
+                <a href="https://social-plugins.line.me/lineit/share?url={{$urlen}}" class="m-0 text-center align-self-end  share-item">
                     <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                     <h5 class="font-weight-bold m-0 mt-1">Line</h5>
                 </a>
@@ -260,7 +261,7 @@
                     <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
 
                 </a>
-                <a href="" class="m-0 text-center align-self-end  share-item">
+                <a href="javascript:;" class="m-0 text-center align-self-end  share-item" onclick="clink();">
                     <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                     <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
 
@@ -291,6 +292,8 @@
 @section('custom_script')
     <script>
        
+        bottom_now(1);
+
         var a = "{{Session::get('success')}}";
         if(a){
             alert(a);
@@ -317,7 +320,23 @@
             }
         }
    
-        bottom_now(1);
+        
+
+        function clink() {
+            /* Get the text field */
+            var copyText = document.getElementById("clink");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+            
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
     </script>
 
      

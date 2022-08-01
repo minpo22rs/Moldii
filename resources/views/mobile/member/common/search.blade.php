@@ -36,6 +36,11 @@
     <div class="pageTitle">
 
         <div class="row ml-3">
+            <div class="col-2">
+                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="list" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
+                </ion-icon>
+            </div>
+
             <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
@@ -65,10 +70,7 @@
                 <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
                 </ion-icon></a>
             </div>
-            <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="funnel" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
-                </ion-icon>
-            </div>
+            
         </div>
 
     </div>

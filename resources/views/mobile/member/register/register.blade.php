@@ -29,18 +29,20 @@
             <div class="col-12 text-left">
                 <a href="{{url('/user/login')}}"><ion-icon name="arrow-back-outline" class="text-dark font-weight-bold" style="color: black; margin-top: 25px; font-size: 25px;"></ion-icon></a>
             </div>
-            <div class="col-6 text-right" style="margin-top: 100px;">
+
+
+            <div class="col-7 text-right " style="margin-top: 100px;">
                 <h1 class="">
-                    Register
+                    สมัครสมาชิก
                 </h1>
             </div>
 
             
-            <div class="col-6 text-center" style="margin-top: 100px;">
+            <div class="col-5 text-center" style="margin-top: 100px;">
                 <div class="m-1">
 
-                    <img src="{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight: 50px; height: 50px;">
-                    <img src="{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight: 50px; height: 50px;">
+                    <img src="{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;">
+                    <img src="{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;">
                 </div>
             </div>
             <form action="{{url('checkregister')}}" method="POST" class="form-group row" id="formregis">
@@ -60,24 +62,27 @@
                 <div class="col-10 offset-1 text-center">
                     <input type="password" class="form-control form-control-lg my-1" style="border-radius: 10px;" name="password" id="password" value="" minlength="8" placeholder="รหัสผ่าน">
                 </div>
+                <div class="col-12  offset-1 mt-1">
+                    <input type="checkbox" class="mr-1" name="chk" id="chk" required>ยอมรับเงื่อนไขการให้บริการ <br>และ นโยบายความเป็นส่วนตัว
+                </div>
                 <div class="col-5 offset-1 text-center">
                     <input type="button" class="btn btn-index btn-block font-weight-bold my-3 rounded-pill" 
-                                        style="font-size: 18px; align-items: center; height: 50px;" value="Sign-up" 
+                                        style="font-size: 18px; align-items: center; height: 50px;" value="สมัครสมาชิก" 
                                         id="subbutton" onclick="subform();">
                 </div>
                 
                 <div class="col-6 text-left">
                     <div class = "row align-items-center my-3">
-                        <div class = "col-12">
+                        <div class = "col-12 mt-2">
                             <span class="custom_hover font-weight-bold" style="font-size: 16px;">
-                                Already a member ?
+                                มีบัญชีแล้ว ? <a href="{{url('user/login')}}">เข้าสู่ระบบ</a>
                             </span>
                         </div>
-                        <div class = "col-12">
+                        {{-- <div class = "col-12">
                             <span class="custom_hover" style="font-size: 16px; font-weight: bold;">
-                                <a href="{{url('user/login')}}">Login</a>
+                                <a href="{{url('user/login')}}">เข้าสู่ระบบ</a>
                             </span>
-                        </div>
+                        </div> --}}
                         
                         
                     </div>
@@ -155,10 +160,18 @@
             var f =  document.getElementById("firstname").value;
             var l =  document.getElementById("lastname").value;
             var p =  document.getElementById("password").value;
+            var x = $("#chk").is(":checked");
+            console.log(x);
           
             if(cn ==0 && cm ==0 && f !='' && l !='' && p !=''){
+                if(x !=false){
+                    $('#formregis').submit();
+
+                }else{
+                    alert('กรุณายอมรับเงื่อนไขการให้บริการของ Moldii');
+
+                }
                
-                $('#formregis').submit();
             }else{
                 alert('กรุณาข้อมูลให้ครบถ้วน');
             }
