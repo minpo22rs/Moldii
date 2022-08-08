@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -20,8 +21,9 @@ class TestUiController extends Controller
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->get();
         $order = Tb_order::where('id_order',1)->first();
+        $cus = User::where('customer_id',$order->customer_id)->first();
         // return view('mobile.member.register.tag');
-        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order]);
+        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order,'cus'=>$cus]);
 
         
     }

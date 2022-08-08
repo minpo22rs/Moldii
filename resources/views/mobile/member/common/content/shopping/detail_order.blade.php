@@ -28,14 +28,22 @@
         <div class="card ">
           <h5 class="card-header">ได้รับคำสั่งซื้อแล้ว : {{$order->order_code}}</h5>
           <div class="card-body">
-            <h5 class="card-title">สถานะ : รอชำระเงิน</h5>
-            <p class="card-text">ชำระเงิน 300 บาท ก่อนวันที่ 12 / 11 / 2556</p>
-            <p class="card-text">กสิกร : 1121-1215-1212-2-21</p> <!-- หรือจะใส่เป็นรูปก็ได้-->
-            <form runat="server">
-              <input accept="image/*" type='file' id="imgInp" /><br><br>
-              <img id="blah"  width ="40%" /><br><br>
-              <button type="submit" class="btn btn-success col-md-12 btn-lg mt-2">อัพโหลดใบเสร็จรับเงิน</button>
-            </form>
+            @if($order->status_order ==1 )
+              <h5 class="card-title">สถานะ : รอชำระเงิน</h5>
+            @else
+              <h5 class="card-title">สถานะ : ชำระเงินแล้ว</h5>
+            @endif
+            @if($order->status_order ==1 )
+              <form runat="server">
+                <br>
+                <input type="text" name="name" placeholder="ชื่อ-นามสกุล ของบัญชีที่ใช้ทำการโอนเงิน" class="form-control">
+                <input type="hidden" name="oid" value="{{$order->order_code}}">
+                <br>
+                <input accept="image/*" type='file' id="imgInp" /><br><br>
+                <img id="blah"  width ="40%" /><br><br>
+                <button type="submit" class="btn btn-success col-md-12 btn-lg mt-2">อัพโหลดใบเสร็จรับเงิน</button>
+              </form>
+            @endif
           </div>
         </div>
       <!-- -->
@@ -44,8 +52,8 @@
       <!-- -->
       <table class="table table-striped">
         <tbody>
-          <tr style="background-color : #17a2b8 ; color : #fff ;">
-            <td>รอชำระเงิน - พร้อมจัดส่ง 23 Jul 2022 ถึง 25 Jul 2022</td>
+          <tr style="background-color : #495057 ; color : #fff ;">
+            <td>รายการสินค้า <br>พร้อมจัดส่ง {{date('d-m-Y', strtotime('+2 days'))}}  ถึง {{date('d-m-Y', strtotime('+5 days'))}} </td>
             <td align="right"> {{$sql->count()}} รายการ</td>
           </tr>
           @foreach($sql as $sqls)
@@ -58,28 +66,37 @@
 
           <tr>
             <td ><b>ค่าจัดส่ง</b></td>
-            <td align="right"><b>50 THB</b></td>
+            <td align="right"><b>{{$order->shipping_cost}} THB</b></td>
           </tr>
-          <tr style="background-color : #17a2b8 ; color : #fff ;">
+          <tr style="background-color : #495057 ; color : #fff ;">
             <td><b>รวมทั้งสิ้น</b></td>
-            <td align="right"><b>550 THB</b></td>
+            <td align="right"><b>{{number_format($order->order_total+$order->shipping_cost,2,'.',',')}} THB</b></td>
           </tr>
         </tbody>
       </table>
       <!-- -->
-<br>
+      <br>
       <!-- -->
       <div class="card">
         <div class="card-body">
           ที่อยู่สำหรับจัดส่ง <hr>
-          <p style="color:#17a2b8;"><b>Name User </b></p> 
-          - 92/2 หมู๋บ้าน หนองหิน ต.ศรีโคตร อ.จตุรพักพิมาน จ.สารคาม 45180 <br>
-          - เบอร์โทร : 063 004 9185
+          <p style="color:#17a2b8;"><b>{{$order->order_address_name}}</b></p> 
+          - {{$order->order_address}} {{$order->order_tumbon}} {{$order->order_district}} {{$order->order_province}} {{$order->order_postcode}} <br>
+          - เบอร์โทร : {{$order->order_phone}}
         </div>
       </div>
       <!-- -->
       <br><br>
+      <div class="row">
+          <div class="col-6">
+            <a href="{{url('/index')}}" type="button" class="btn btn-secondary btn-lg mt-2">กลับหน้าหลัก</a>
+          </div>
+          <div class="col-6 text-right">
+            <a href="{{url('user/myList')}}"  type="button" class="btn btn-info btn-lg mt-2">รายการของฉัน</a>
+          </div>
+      </div>
 
+      <br><br>
       </div> <!-- /container-->
     
         

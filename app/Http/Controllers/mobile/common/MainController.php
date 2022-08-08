@@ -33,7 +33,7 @@ class MainController extends Controller
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
         // $result = $cp->merge($c);
-        // dd( $c );
+        // dd(Session::get('cid'));
    
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
     }

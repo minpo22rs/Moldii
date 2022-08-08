@@ -80,6 +80,7 @@ class OrderController extends Controller
         }
         $order->shipping_cost = Session::get('sumship');
         $order->order_code = substr(md5(mt_rand()), 0, 8);
+        $order->order_address_name = $address->customer_name;
         $order->order_address = $address->customer_address;
         $order->order_phone = $address->customer_phone;
         $order->order_tumbon = $address->tth;
@@ -138,7 +139,7 @@ class OrderController extends Controller
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
             return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
-            
+
         }elseif(Session::get('typepayment') == 'เก็บเงินปลายทาง'){
             Tb_order::where('id_order',$order->id)->update(['status_order'=>4]);
             
