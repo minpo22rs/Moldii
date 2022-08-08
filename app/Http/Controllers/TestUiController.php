@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use DB;
+use App\Models\Tb_order_detail;
+use App\Models\Tb_order;
 
 use Illuminate\Http\Request;
 
@@ -12,8 +14,15 @@ class TestUiController extends Controller
     }
 
     public function p(){
-        
-        return view('mobile.member.register.tag');
+        $sql = Tb_order_detail::where('tb_order_details.order_id',1)
+           
+            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+            ->get();
+        $order = Tb_order::where('id_order',1)->first();
+        // return view('mobile.member.register.tag');
+        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order]);
+
         
     }
 

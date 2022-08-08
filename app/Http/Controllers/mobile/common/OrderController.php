@@ -29,7 +29,7 @@ class OrderController extends Controller
 
         // dd($sql);
 
-        return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
+        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=>$sql]);
     }
 
     public function addorder(Request $request,$id,$rid)
@@ -48,7 +48,7 @@ class OrderController extends Controller
 
             Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
             Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
-            'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
+                            'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
             return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }
@@ -138,6 +138,7 @@ class OrderController extends Controller
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
             return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+            
         }elseif(Session::get('typepayment') == 'เก็บเงินปลายทาง'){
             Tb_order::where('id_order',$order->id)->update(['status_order'=>4]);
             

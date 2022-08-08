@@ -1,4 +1,4 @@
-@extends('mobile.main_layout.guest')
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <style>
   a:link {
@@ -7,47 +7,25 @@
 
   a:visited {
     text-decoration: none;
-    color:#808080;
+    color:#fff;
   }
 
   a:hover {
     text-decoration: none;
-    color:red;
+    color:#FFC300;
   }
-  #bg {
-        position: fixed; 
-        top: -50%; 
-        left: -50%; 
-        width: 200%; 
-        height: 200%;
-    }
-    #bg img {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        right: 0; 
-        bottom: 0; 
-        margin: auto; 
-        min-width: 50%;
-        min-height: 50%;
-    }
 
 </style>
-{{-- <div id="bg">
-  <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
-</div> --}}
+
 <br>
-<div class="container mt-3">
-    {{-- <div class="row">
-        <div class="mb-5">
-            <a href="#" style="position: absolute ; right: 15px;">SKIP</a>
-            <a href="#" style="position: absolute ; left: 15px; font-size:20;"><</a>
-        </div>
-    </div> --}}
-    <h2>สิ่งที่คุณสนใจ</h2>
-    <small>เลือกได้มากกว่า 1 ตัวเลือก</small>
+<body style="background-color : #dc3545 ; "> <!-- แก้สีพื้นหลังตรงนี้ -->
+  <div class="container mt-3 ">
+    <div style="color: #fff;">
+      <h2>สิ่งที่คุณสนใจ</h2>
+      <small>เลือกได้มากกว่า 1 ตัวเลือก</small>
+    </div>
     <div class="row">
-        <div class="col-md-12 mt-4 mb-5">
+        <div class="col-md-12 mt-4 mb-5" style="background-color : #fff ; ">
               <form action="{{url('selecttag')}}" method="POST">
                 @csrf
                 <div style="overflow: auto;width: 100%; height: 450;">
@@ -140,7 +118,8 @@
             </form>
         </div>
     </div>
-</div>
+  </div>
+</body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

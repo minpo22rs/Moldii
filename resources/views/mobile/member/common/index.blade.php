@@ -516,7 +516,7 @@ color: #666;
                                                 </div>
                                             @else
                                                 <div class="carousel-item active">
-                                                    <video width="auto" height="197" controls >
+                                                    <video width="100%" height="197" controls >
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
                                                     </video>
@@ -536,8 +536,8 @@ color: #666;
                                                         </div>
                                                     @else
                                                        
-                                                        <div class="carousel-item">
-                                                            <video width="auto" height="197" controls >
+                                                        <div class="carousel-item" >
+                                                            <video width="100%" height="197" controls >
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
                                                             </video>
