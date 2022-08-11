@@ -73,7 +73,7 @@ class OrderController extends Controller
                 ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
                 ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
                 ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
-                ->select('tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
+                ->select('tb_customer_addresss.customer_name','tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
                             ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
                 ->first();
 
