@@ -79,6 +79,7 @@ Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// กา�
 Route::get('user/sendslip', [UserAccController::class, 'sendslip']);// แจ้งชำระเงิน
 Route::post('user/submitslip', [UserAccController::class, 'submitslip']);// แจ้งชำระเงิน
 
+Route::get('user/mylike', [UserAccController::class, 'mylike']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
 
 
 Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceive']);// รายการของฉัน
@@ -231,7 +232,7 @@ Route::get('home', [HomeController::class, 'index']);
 
 
 //order
-Route::get('ordertoship', [OrderController::class, 'ordertoship']);
+Route::get('ordertoship/{id}', [OrderController::class, 'ordertoship']);
 Route::match(['GET', 'POST'],'addorder', [OrderController::class, 'addorder']);
 Route::get('bankcode', [OrderController::class, 'bankcode']);
 Route::get('choosecode/{ship}', [OrderController::class, 'choosecode']);

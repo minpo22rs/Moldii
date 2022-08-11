@@ -78,8 +78,13 @@ class ShoppingController extends Controller
 
     
     public function likeproduct(Request $request){
+        $sql = DB::Tbale('tb_content_likes')->where('customer_id',Session::get('cid'))
+                    ->where('type_like','P')->where('content_id',$request->id)->first();
+        if($sql ==null){
+            DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'P']);
+
+        }
       
-        DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id]);
 
         return 1 ;
     }

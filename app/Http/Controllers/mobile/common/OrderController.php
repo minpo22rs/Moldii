@@ -16,20 +16,29 @@ use App\Models\Tb_payment_log;
 class OrderController extends Controller
 {
     //
-    public function ordertoship(Request $request)
+    public function ordertoship($id)
     {
-        $sql = Tb_order_detail::where('tb_order_details.customer_id',Session::get('cid'))->where('status_order','!=',4)
-            ->leftJoin('tb_orders','tb_order_details.order_id','=','tb_orders.id_order')
+        // $sql = Tb_order_detail::where('tb_order_details.customer_id',Session::get('cid'))->where('status_order','!=',4)
+        //     ->leftJoin('tb_orders','tb_order_details.order_id','=','tb_orders.id_order')
+        //     ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+        //     ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+        //     ->get();
+
+        $sql = Tb_order_detail::where('tb_order_details.order_id',$id)
+           
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
             ->get();
+        $order = Tb_order::where('id_order',$id)->first();
+        $cus = User::where('customer_id',$order->customer_id)->first();
+
         Session::put('totalcart',0);
         Session::put('countcart',0);
         Session::put('cartid',null);
 
         // dd($sql);
 
-        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=>$sql]);
+        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order,'cus'=>$cus]);
     }
 
     public function addorder(Request $request,$id,$rid)
@@ -49,7 +58,7 @@ class OrderController extends Controller
             Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
             Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
                             'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
-            return redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+            return redirect('ordertoship/'.$rid.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }
 
@@ -72,6 +81,7 @@ class OrderController extends Controller
         $order->customer_id = Session::get('cid');
         $order->order_total = number_format(Session::get('totalcart'),2,'.','');
         $order->status_order = 6;
+        $order->order_method = Session::get('typepayment');
 
         if(Session::get('coin')!=null){
             $order->order_coin = Session::get('coin');
@@ -296,6 +306,8 @@ class OrderController extends Controller
 
         $chargeResp = json_decode($result, true);
 
+        Tb_order::where('id_order',$order->id)->update(['order_ref_gb'=>$chargeResp['gbpReferenceNo']]);
+
         // dd($chargeResp['wechat']);
         if(Session::get('typepayment') == 'Wechat Pay'){
 
@@ -305,7 +317,9 @@ class OrderController extends Controller
         }
         if($chargeResp == null){
             return view('mobile.member.userAccount.threedsecure')->with(['res'=>$result]);
+
         }else{
+
             if($chargeResp['resultCode']=='00'){
                 $res = self::threed( $chargeResp['gbpReferenceNo']);
                 return view('mobile.member.userAccount.threedsecure')->with(['res'=>$res]);

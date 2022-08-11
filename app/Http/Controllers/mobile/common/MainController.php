@@ -55,10 +55,14 @@ class MainController extends Controller
 
 
     public function likecontent(Request $request){
-      
-        DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id]);
-        DB::Table('tb_news')->where('new_id',$request->id)->increment('like', 1);
-
+        $sql = DB::Tbale('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)
+                    ->where('type_like','C')->first();
+        if($sql ==null){
+            DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'P']);
+            DB::Table('tb_news')->where('new_id',$request->id)->increment('like', 1);
+    
+        }
+       
         return 1 ;
     }
 

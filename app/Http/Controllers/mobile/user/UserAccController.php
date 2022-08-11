@@ -283,6 +283,12 @@ class UserAccController extends Controller
 
     }
 
+    public function mylike(){
+        $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->get();
+        return view('mobile.member.userAccount.mylike')->with(['sql' => $sql ]);
+
+    }
+
     public function notification(){// การแจ้งเตือน
         return view('mobile.member.userAccount.notification.notification');
 

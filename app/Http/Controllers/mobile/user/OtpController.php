@@ -43,7 +43,7 @@ class OtpController extends Controller
         $username = 'apinya';
         $password = 'apinya';
         $password = md5($password);
-        $sender = 'Maemod';
+        $sender = 'MOLDII';
         $msisdn = $phone;
         $msg = 'รหัสยืนยันระบบสมาชิก ' . $otp;
 

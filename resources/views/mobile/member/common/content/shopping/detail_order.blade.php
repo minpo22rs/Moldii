@@ -29,7 +29,8 @@
           <h5 class="card-header">ได้รับคำสั่งซื้อแล้ว : {{$order->order_code}}</h5>
           <div class="card-body">
             @if($order->status_order ==1 )
-              <h5 class="card-title">สถานะ : รอชำระเงิน</h5>
+              <h5 class="card-title">สถานะ : รอแจ้งชำระเงิน </h5> 
+              {{-- <h6>กรุณาแจ้งชำระเงินภายใน</h6> --}}
             @else
               <h5 class="card-title">สถานะ : ชำระเงินแล้ว</h5>
             @endif
@@ -111,6 +112,15 @@
   <script>
 
       bottom_now(6);
+
+
+
+      var a = "{{Session::get('msg')}}";
+      if(a){
+          alert(a);
+      }
+
+
       imgInp.onchange = evt => {
         const [file] = imgInp.files
         if (file) {

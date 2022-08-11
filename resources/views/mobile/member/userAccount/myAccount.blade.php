@@ -82,7 +82,7 @@
     </div>
 </a>
 
-<a href="#" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/mylike')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
         <i class="fas fa-heart "></i>
         <h5 class="m-0 ml-2 font-weight-bold">สิ่งที่ถูกใจ</h5>
