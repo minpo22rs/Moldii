@@ -119,8 +119,8 @@ class UserAccController extends Controller
 
 
     public function myAddress(){// โชว์ที่อยู่ของฉัน
-        $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->first();
-        $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->get();
+        $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->where('customer_id',Session::get('cid'))->first();
+        $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->where('customer_id',Session::get('cid'))->get();
         $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();
         $ona = DB::Table('amphures')->where('id',$addon->customer_district)->first();
         $ont = DB::Table('districts')->where('id',$addon->customer_tumbon)->first();
@@ -128,6 +128,8 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.address.myAddress')->with(['addon'=>$addon,'addoff'=>$addoff,'onp'=>$onp,'ona'=>$ona,'ont'=>$ont]);
 
     }
+
+
     public function newAddress(){// เพิ่มที่อยู่ใหม่
         $p = DB::Table('provinces')->get();
         
