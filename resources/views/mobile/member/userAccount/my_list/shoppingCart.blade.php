@@ -38,8 +38,8 @@
 
                         <img src="{{ asset('new_assets/img/icon/shop.svg')}}" alt="alt" style="font-size:1rem;">
                         <h5 class="m-0 ml-1 font-weight-bold align-self-center">{{$store->merchant_name}}</h5>
-                        <i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i>
-                        {{-- <a href="{{url('shopping/merchant/'.$store->merchant_id.'')}}" style="color: black"><i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i></a> --}}
+                        {{-- <i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i> --}}
+                        <a href="{{url('shopping/merchant/'.$store->merchant_id.'')}}" style="color: black"><i class="far fa-angle-right ml-1" style="font-size:1.5rem;"></i></a>
                     </div>
                     <div class="col-4 mx-0 text-right align-self-center">
                         <div class="edit-cart" id="edit_cart" onclick='editButton({{$key}})' name="edit_cart{{$key}}"  >
