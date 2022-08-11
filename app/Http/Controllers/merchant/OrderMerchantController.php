@@ -50,12 +50,9 @@ class OrderMerchantController extends Controller
     
     public function createbooking(Request $request){
         // dd($request->all());
-        $sql = Orders::leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
-                        ->select('tb_customers.customer_name','tb_customers.customer_lname'
-                        ,'tb_orders.*')
-                        ->where('id_order',$id)->first();
+        $sql = Orders::where('id_order',$request->oid)->first();
 
-
+        // dd($sql );
         $sqlsel = Merchant::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->first();
         $province = DB::Table('provinces')->where('id',$sqlsel->merchant_province)->first();
         $tumbon = DB::Table('districts')->where('id',$sqlsel->merchant_tumbon)->first();
@@ -74,7 +71,7 @@ class OrderMerchantController extends Controller
         );
 
         $to = array (
-            "name"=> $sql->customer_name.$sql->customer_lname,
+            "name"=> $sql->order_address_name,
             "address"=> $sql->order_address,
             "district"=> $sql->order_tumbon, //tumbon
             "state"=> $sql->order_district,
@@ -124,23 +121,24 @@ class OrderMerchantController extends Controller
             $content = curl_exec( $ch );
             curl_close($ch);
             $json = json_decode($content);
-            // dd($content);
             $jsondata = (array)$json->data;
+            dd($jsondata);
+            
             if($json->status === 'false'){
                 // dd('whattttttt');
-                DB::Table('tb_order_details')->where('id_order',$id)->update(['status_order'=>'4']);
+                DB::Table('tb_order_details')->where('id_order',$request->oid)->update(['status_order'=>'4']);
                 return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
 
             }else{
                 // dd('ok');
-                Orders::where('id_order',$id)->update(['purchase_id'=>$json->purchase_id]);
-                $res = self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$id);
+                Orders::where('id_order',$request->oid)->update(['purchase_id'=>$json->purchase_id]);
+                $res = self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$request->oid);
                 if($res == 1){
                     return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
                 }else{
-                    DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1','company_shipping'=>$request->ship]);
+                    DB::Table('tb_order_details')->where('order_id',$request->oid)->update(['tracking_code'=>$jsondata['0']->courier_tracking_code,'status_detail'=>'1','company_shipping'=>$request->ship]);
 
                     return redirect('merchant/ordermerchant')->with('success','successfully');
 

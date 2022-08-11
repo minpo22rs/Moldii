@@ -163,7 +163,7 @@
                     <div class="row">
                         <div class="col-3"> เลือกขนส่ง :</div>
                         <div class="col-6"> 
-                                <select class="form-control" name="ship" >
+                                <select class="form-control" name="ship" required>
                                     <option value=""> โปรดเลือก</option>
                                     <option value="THP">ไปรษณีย์ไทย EMS</option>
                                     <option value="TP2">ไปรษณีย์ ลงทะเบียน</option>
