@@ -21,9 +21,11 @@ class OrderMerchantController extends Controller
     {
         $sql = DB::Table('tb_order_details')->where('store_id',Auth::guard('merchant')->user()->merchant_id)->get();
         $pluck = $sql->pluck('order_id');
-        $num = Orders::whereIn('id_order',$pluck)->where('status_order','!=',4)
+        $num = Orders::whereIn('id_order',$pluck)->where('status_order','!=',5)
                         ->leftJoin('tb_customers','tb_orders.customer_id','=','tb_customers.customer_id')
                         ->get();
+
+        // dd($sql );
         return view('merchant.order.order')->with(['num'=>$num]);
     }
 
@@ -155,7 +157,7 @@ class OrderMerchantController extends Controller
 
     public function confirm( $purchase_id ,$tracking_code,$id) {
         $post_data = array(
-            'api_key'=>'dv0b807c69926747664783d53c9de9bf0e65391dce97a3c4a24a0b689ccf0728449668c9318667fc2c1638935079',
+            'api_key'=>'pd66f6883421f7c83185b476ece358f3d7608bedf3c8859cba162937677e087480439a610c89e3280c1649670055',
             'purchase_id' => $purchase_id
         );
         $post_data = http_build_query($post_data);

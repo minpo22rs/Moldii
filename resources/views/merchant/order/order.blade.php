@@ -68,7 +68,7 @@
                                     
                                       
                                         
-                                    <td style="text-align: center;">@foreach ($sql as $sqls){{$sqls->product_code}}<br><br> @endforeach</td>
+                                    <td style="text-align: center;">@foreach ($sql as $sqls){{$sqls->product_name}}<br><br> @endforeach</td>
                                     <td style="text-align: center;">@foreach ($sql as $sqls){{$sqls->price}}<br><br> @endforeach</td>
                                     <td style="text-align: center;">@foreach ($sql as $sqls){{$sqls->amount}}<br><br>@endforeach</td>
                                     <td style="text-align: center;color:green">
@@ -82,6 +82,8 @@
                                             Waiting for payment
                                         @elseif($nums->status_order==2)
                                             Paid
+                                        @elseif($nums->status_order==6)
+                                            Pendding
                                         @else
                                             -
                                         @endif
@@ -104,14 +106,15 @@
                                         <div class="dropdown-primary dropdown open">
                                             <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                                @if($sql[0]->tracking_code!=null)
+                                                @if($nums->status_order==2 || $nums->status_order==4 && $sql[0]->tracking_code==null)
+                                                    {{-- @if($sql[0]->tracking_code==null) --}}
                                                     <a href="javascript:;" class="dropdown-item waves-light waves-effect" onclick="openmd({{$nums->id_order}});">
                                                         <i class="fa fa-edit"></i> จัดส่งออเดอร์
                                                     </a>
                                                 @endif
                                                 <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
                                                 <div class="dropdown-divider"></div>
-                                                @if($nums->status_order!=4)
+                                                @if($nums->status_order!=5)
                                                     <a  href="javascript:"
                                                         onclick="Swal.fire({
                                                         title: 'ยืนยันการยกเลิกออเดอร์ใช่หรือไม่',

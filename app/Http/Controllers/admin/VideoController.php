@@ -48,6 +48,7 @@ class VideoController extends Controller
             $news->new_content          = $request->content;
             $news->new_type             = 'V';
             $news->new_img              = $request->link;
+            $news->created_by             = 'Admin';
             $news->save();
 
             if ($request->tag != null) {

@@ -121,14 +121,16 @@
                                 <div class="text-right">
                                     <h6 class="" style="color: #8a8a8a;">
                                        Payment Method
-                                        : Credit Card
+                                        : {{$order->order_method}}
                                         {{-- : {{str_replace('_',' ',$order['payment_method'])}} --}}
                                     </h6>
-                                    <h6 class="" style="color: #8a8a8a;">
-                                        Payment reference
-                                        :{{$order->order_ref_gb}}
-                                        {{-- : {{str_replace('_',' ',$order['refno'])}} --}}
-                                    </h6>
+                                    @if($order->order_ref_gb!=null)
+                                        <h6 class="" style="color: #8a8a8a;">
+                                            Payment reference
+                                            :{{$order->order_ref_gb}}
+                                            {{-- : {{str_replace('_',' ',$order['refno'])}} --}}
+                                        </h6>
+                                    @endif
                                 </div>
                             </div>
                         </div>
