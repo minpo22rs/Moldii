@@ -193,6 +193,7 @@ class UserAccController extends Controller
         $a->customer_postcode  =  $request->zip_code;
         if(isset($request->chk)){
             $a->address_status  =  $request->chk;
+            DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->update(['address_status','=','off']);
 
         }
         $a->save();
@@ -326,7 +327,7 @@ class UserAccController extends Controller
 
     }
 
-    
+
     public function orderDetails(){// รายละเอียดคำสั่งซื้อ
         return view('mobile.member.userAccount.my_list.orderDetails');
 
