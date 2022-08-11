@@ -34,7 +34,10 @@ class OrderController extends Controller
 
         Session::put('totalcart',0);
         Session::put('countcart',0);
+        Session::put('coin',0);
+        Session::put('sumship',0);
         Session::put('cartid',null);
+        Session::put('typepayment',null);
 
         // dd($sql);
 
@@ -68,7 +71,7 @@ class OrderController extends Controller
 
     public function paymentgateway(Request $request){
 
-
+        dd($request->all());
         $address = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->where('address_status','=','on')
                 ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
                 ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')

@@ -31,7 +31,7 @@
 
         </a>
     </div>
-    <?php  $sumship = 0;$countt = 0;?>
+    <?php  $sumship = 0; $countt = 0;?>
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
                 $cartt = DB::Table('tb_carts')->where('store_id',$store->merchant_id)->where('customer_id',Session::get('cid'))->get(); 
