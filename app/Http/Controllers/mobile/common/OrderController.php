@@ -71,7 +71,7 @@ class OrderController extends Controller
 
     public function paymentgateway(Request $request){
 
-        dd($request->all());
+        // dd($request->all());
         $address = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->where('address_status','=','on')
                 ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
                 ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
@@ -79,6 +79,7 @@ class OrderController extends Controller
                 ->select('tb_customer_addresss.customer_name','tb_customer_addresss.customer_address','tb_customer_addresss.customer_phone','tb_customer_addresss.customer_postcode'
                             ,'districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
                 ->first();
+        Session::put('sumship',$request->sumship);
 
         $order = new Tb_order();
         $order->customer_id = Session::get('cid');
@@ -141,7 +142,6 @@ class OrderController extends Controller
 
         $amount = number_format(Session::get('totalcart'),2,'.','');
         $sql = Tb_credit::where('customer_id',Session::get('cid'))->where('num',Session::get('bankcode'))->first();
-        Session::put('sumship',$request->sumship);
 
 
 
