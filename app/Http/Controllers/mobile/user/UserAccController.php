@@ -325,6 +325,8 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.myList')->with(['sql'=>$sql]);
 
     }
+
+    
     public function orderDetails(){// รายละเอียดคำสั่งซื้อ
         return view('mobile.member.userAccount.my_list.orderDetails');
 

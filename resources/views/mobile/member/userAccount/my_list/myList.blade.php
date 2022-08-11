@@ -45,31 +45,33 @@
 
                 <!-- รอตรวจสอบ -->
                 <div id="pendding" class="tabcontent">
-                    @foreach($sql as $sqls)
-                        @if($sqls->status_order=='1')
-                            <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
-                                <div class="mx-1">
-                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
-                                </div>
-                                <div class="col-10 row align-self-center justify-content-between pl-2">
-                                    <div class="col-6 p-0 ">
-                                        <h5 class="m-0">หมายเลขอ้างอิง : </h5>
-                                        <h5 class="m-0">ร้านค้า : {{$sqls->merchant_name}}</h5>
-                                        <h5 class="m-0">จำนวนสินค้า :{{$sqls->amount}}</h5>
-                                        <h5 class="m-0">รวมราคา : {{number_format($sqls->price*$sqls->amount,2,'.',',')}}</h5>
+                    @if($sql->count()>0)
+                        @foreach($sql as $sqls)
+                            @if($sqls->status_order=='1')
+                                <a href="{{url('user/orderDetails')}}" class="row p-2  border-top border-bottom">
+                                    <div class="mx-1">
+                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$sqls->product_img.'')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
                                     </div>
-                                    <div class="col-4 p-0 ">
-                                        <h5 class="m-0  text-right" style="color: red"> {{$sqls->order_code}}</h5>
-                                        <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
-                                        <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
-                                        <h5 class="m-0  text-right" style="color:rgb(47, 16, 185);">รอตรวจสอบหลักฐานการโอนเงิน</h5>
+                                    <div class="col-10 row align-self-center justify-content-between pl-2">
+                                        <div class="col-6 p-0 ">
+                                            <h5 class="m-0">หมายเลขอ้างอิง : </h5>
+                                            <h5 class="m-0">ร้านค้า : {{$sqls->merchant_name}}</h5>
+                                            <h5 class="m-0">จำนวนสินค้า :{{$sqls->amount}}</h5>
+                                            <h5 class="m-0">รวมราคา : {{number_format($sqls->price*$sqls->amount,2,'.',',')}}</h5>
+                                        </div>
+                                        <div class="col-4 p-0 ">
+                                            <h5 class="m-0  text-right" style="color: red"> {{$sqls->order_code}}</h5>
+                                            <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sqls->created_at))}}</h5>
+                                            <h5 class="m-0  text-right">{{date('H:i',strtotime($sqls->created_at))}}</h5>
+                                            <h5 class="m-0  text-right" style="color:rgb(47, 16, 185);">รอตรวจสอบหลักฐานการโอนเงิน</h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        @endif
-                    @endforeach
-                    {{-- <h2>รอตรวจสอบ</h2> <!-- Test --> --}}
-
+                                </a>
+                            @endif
+                        @endforeach
+                    @else
+                        <p class="text-center">ไม่พบข้อมูล</p>
+                    @endif  
                 </div>
                 <!-- รอตรวจสอบ -->
 
