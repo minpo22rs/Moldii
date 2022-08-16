@@ -41,12 +41,12 @@
                            <input type="text" name="name" class="form-control" placeholder="Category Name..." value="{{$category->cat_name}}">
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รหัสหมวดหมู่</label>
                         <div class="col-sm-4">
                            <input type="text" name="code" class="form-control" placeholder="Category Code..." value="{{$category->cat_code}}">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </form>
             <div class="modal-footer">
