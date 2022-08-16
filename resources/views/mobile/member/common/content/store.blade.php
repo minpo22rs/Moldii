@@ -120,45 +120,14 @@
 
         <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}"  alt="alt">
         <div class="col-12 p-2 row justify-content-center m-0">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
+            <div class="carousel-multiple owl-carousel owl-theme">
                 
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="text-center " >
-                            <a href="{{url('/shopping/category/'.$cat[0]->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cat[0]->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
-                            <h6 class="mt-1">{{$cat[0]->cat_name}}</h6>
-                        </div>
+                @foreach($cat as $cats)
+                    <div class="text-center ">
+                        <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
+                        <h6 class="mt-1">{{$cats->cat_name}}</h6>
                     </div>
-                   
-            
-                    @foreach($cat as $cats)
-                        <div class="carousel-item">
-                            <div class="text-center " >
-                                <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
-                                <h6 class="mt-1">{{$cats->cat_name}}</h6>
-                            </div>
-                        </div>
-
-                    @endforeach
-
-                   
-
-                    
-                </div>
-
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
+                @endforeach
                     
             </div>
 
