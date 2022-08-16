@@ -124,11 +124,16 @@
                 
                   
                 @foreach($cat as $cats)
-                    <div class="text-center ">
+                    <div class="text-center " style="margin: 0%">
                         <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
                         <h6 class="mt-1">{{$cats->cat_name}}</h6>
                     </div>
                 @endforeach
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
             </div>
 
 
