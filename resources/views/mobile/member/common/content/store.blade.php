@@ -124,10 +124,10 @@
                 
                   
                 @foreach($cat as $cats)
-                    {{-- <div class="col-3 p-1 text-center "> --}}
+                    <div class="col-3 text-center ">
                         <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
                         <h6 class="mt-1">{{$cats->cat_name}}</h6>
-                    {{-- </div> --}}
+                    </div>
                 @endforeach
             </div>
 
