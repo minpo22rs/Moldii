@@ -120,14 +120,26 @@
 
         <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}"  alt="alt">
         <div class="col-12 p-2 row justify-content-center m-0">
-            <div class="carousel-multiple owl-carousel owl-theme" style="margin-right: 0% !important">
-                
-                @foreach($cat as $cats)
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
                     <div class="text-center " >
-                        <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
-                        <h6 class="mt-1">{{$cats->cat_name}}</h6>
+                        <a href="{{url('/shopping/category/'.$cat[0]->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cat[0]->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
+                        <h6 class="mt-1">{{$cat[0]->cat_name}}</h6>
                     </div>
-                @endforeach
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-item active">
+                        @foreach($cat as $cats)
+                            <div class="text-center " >
+                                <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
+                                <h6 class="mt-1">{{$cats->cat_name}}</h6>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                     
             </div>
 
