@@ -183,7 +183,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">การจัดการ Event </div>
+                            <div class="pcoded-navigation-label">การจัดการสินค้า </div>
                             <ul class="pcoded-item pcoded-left-item"> 
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
