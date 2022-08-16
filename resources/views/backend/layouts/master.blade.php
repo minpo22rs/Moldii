@@ -183,12 +183,12 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">การจัดการคำสั่งซื้อ</div>
+                            <div class="pcoded-navigation-label">การจัดการ Event </div>
                             <ul class="pcoded-item pcoded-left-item"> 
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-cubes"></i><b>C</b></span>
-                                        <span class="pcoded-mtext">คำสั่งซื้อ</span>
+                                        <span class="pcoded-mtext">หมวดหมู่</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">

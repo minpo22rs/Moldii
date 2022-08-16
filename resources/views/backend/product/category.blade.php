@@ -105,7 +105,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">เพิ่มหมวดหมู่สินค้า/h4>
+                <h4 class="modal-title">เพิ่มหมวดหมู่สินค้า</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -129,7 +129,7 @@
                                 <div class="col-6">
                                     <input type="file" name="cover[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i>เพิ่มรูปปก</button> 
+                                        <i class="icofont icofont-image"></i>เพิ่มรูปภาพปก</button> 
                                 </div>
                             </div>
                         </div>
