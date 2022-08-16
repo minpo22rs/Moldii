@@ -55,7 +55,7 @@ class ContentController extends Controller
     // ]);
 
     public function userpostcontent(Request $request){
-        // dd($request->file('sub_gallery')[0]->getClientOriginalExtension());
+        dd($request->all());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');
         $content->new_type          = 'U';
