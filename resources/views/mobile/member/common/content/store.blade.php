@@ -122,23 +122,31 @@
         <div class="col-12 p-2 row justify-content-center m-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div class="carousel-inner">
-                    <div class="text-center " >
-                        <a href="{{url('/shopping/category/'.$cat[0]->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cat[0]->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
-                        <h6 class="mt-1">{{$cat[0]->cat_name}}</h6>
-                    </div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
                     <div class="carousel-item active">
-                        @foreach($cat as $cats)
+                        <div class="text-center " >
+                            <a href="{{url('/shopping/category/'.$cat[0]->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cat[0]->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
+                            <h6 class="mt-1">{{$cat[0]->cat_name}}</h6>
+                        </div>
+                    </div>
+                   
+            
+                    @foreach($cat as $cats)
+                        <div class="carousel-item">
                             <div class="text-center " >
                                 <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
                                 <h6 class="mt-1">{{$cats->cat_name}}</h6>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+
+                    @endforeach
+
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+
+                    
                 </div>
                     
             </div>
