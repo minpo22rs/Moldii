@@ -52,7 +52,7 @@ class CategoryController extends Controller
                 }
             }
             $category->cat_name      = $request->name;
-            $category->cat_code      = $request->code;
+            // $category->cat_code      = $request->code;
             $category->save();
 
             DB::commit();
@@ -102,7 +102,7 @@ class CategoryController extends Controller
         try {
             $category = category::findOrFail($id);
             $category->cat_name     = $request->name;
-            $category->cat_code     = $request->code;
+            // $category->cat_code     = $request->code;
             if ($request->file('cover') != null)
             {
                 

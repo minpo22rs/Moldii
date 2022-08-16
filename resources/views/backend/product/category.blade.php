@@ -144,7 +144,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รหัสหมวดหมู่ <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </form>
             <div class="modal-footer">
