@@ -119,20 +119,33 @@
     <div class="container p-1 my-3">
 
         <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}"  alt="alt">
-        <div class="col-12 p-2 row justify-content-center m-0">
-            <div class="carousel-multiple owl-carousel owl-theme">
-                
+       
+
+
+        <div class="card-title my-1 font-weight-bold font-weight-bolder pt-2">หมวดหมู่ </div>
+
+        <div class="col-12 pt-1  m-0" >
+            <div class="row " style="overflow: auto ; width: 100%; height: 200px; justify-content: center;" >
+
                 @foreach($cat as $cats)
-                    <div class="text-center ">
+                    
+                    
+                    <div class="text-center p-1 col-3">                      
                         <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
                         <h6 class="mt-1">{{$cats->cat_name}}</h6>
                     </div>
+            
+                  
                 @endforeach
-                    
             </div>
-
-
         </div>
+
+
+
+
+        
+        <br>
+
         <div class="card-title my-1 font-weight-bold font-weight-bolder">คัดสรรมาเพื่อคุณ </div>
 
         <div class="" name="story_videos_section" id="story_videos_section">
