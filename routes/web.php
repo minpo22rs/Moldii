@@ -42,8 +42,8 @@ Route::get('user/register', [UserAccController::class, 'register'])->name('regis
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);// ลืมรหัสผ่าน(Log in)
 
 //////login with facebook and google
-Route::get('login/{provider}', [UserAccController::class, 'redirectToProvider'])->name('redirectToProvider');
-Route::get('login/{provider}/callback', [UserAccController::class, 'handleProviderCallback'])->name('handleProviderCallback');
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('redirectToProvider');
+Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('handleProviderCallback');
 
 
 Route::get('user/myAccount', [UserAccController::class, 'myAccount']);// หน้าบัญชีของฉัน
