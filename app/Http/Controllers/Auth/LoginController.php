@@ -55,7 +55,7 @@ class LoginController extends Controller
     public function handleProviderCallback($provider,Request $request)
     {      
         if(!empty($request->error_code)){
-            return redirect('login-customer');
+            return redirect('user/login');
         }
         $random = mt_rand(1000000000, 9999999999);
         try {
@@ -69,7 +69,7 @@ class LoginController extends Controller
             $input['avatar']=  $user->getAvatar();
 
             
-            $authUser = $this->findOrCreate($input,$provider,$user->getId(),$random );
+            // $authUser = $this->findOrCreate($input,$provider,$user->getId(),$random );
             Session::put('username',$user->getName()); 
             Session::put('currency','THB');
             $this->getIP( Session::get('customer_id'),$request->getClientIp());
