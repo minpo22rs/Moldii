@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use Session;
-use Socialite;
+// use Socialite;
+use Laravel\Socialite\SocialiteServiceProvider;
+
 
 class LoginController extends Controller
 {
