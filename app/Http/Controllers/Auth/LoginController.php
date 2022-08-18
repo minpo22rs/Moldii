@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use Session;
+use Socialite;
 
 class LoginController extends Controller
 {
