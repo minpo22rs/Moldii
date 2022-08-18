@@ -48,7 +48,7 @@ class LoginController extends Controller
     public function redirectToProvider($provider)
     {
 
-        dd('facebook');
+        // dd('facebook');
        return Socialite::driver($provider)->redirect();
     }
     public function handleProviderCallback($provider,Request $request)
@@ -59,7 +59,7 @@ class LoginController extends Controller
         $random = mt_rand(1000000000, 9999999999);
         try {
             $user = Socialite::driver($provider)->stateless()->user();
-            // dd( $user);
+            dd( $user);
             $input['customer_id']=  $random ;
             $input['name'] = $user->getName();
             $input['email'] = $user->getEmail();
