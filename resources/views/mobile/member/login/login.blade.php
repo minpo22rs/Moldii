@@ -57,12 +57,17 @@
 
                             <div class = "col-12 text-left" style = "margin-top: 70px;">
                                 <div class = "m-1">
-                                    <img    src = "{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}"
+                                    <a href="{{route('redirectToProvider','google')}}">
+                                        <img    src = "{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}"
                                             class = "m-1 p-1 bg-white rounded custom_hover"
                                             style = "weight: 50px; height: 50px;">
-                                    <img    src = "{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}"
+                                    </a>
+
+                                    <a href="{{route('redirectToProvider','facebook')}}">
+                                        <img    src = "{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}"
                                             class = "m-1 p-1 bg-white rounded custom_hover"
                                             style = "weight: 50px; height: 50px;">
+                                    </a>
                                 </div>
                             </div>
 

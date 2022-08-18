@@ -312,17 +312,23 @@ class CartController extends Controller
 
     public function checkoutaddress(Request $request)
     {
+
+        $chk = 0;
         
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
        
         $my = User::where('customer_id',Session::get('cid'))->first();
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
-        // dd(Session::get('cid'));
-        $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
-        $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
-        $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
+        if($add != null){
+            $chk = 0;
+
+        }else{
+            $chk = 1;
+
+        }
+       
         // dd($mycart);
-        return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'p'=>$p,'a'=>$a,'t'=>$t]);
+        return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'chk'=>$chk]);
     }
 
     public function countdown(Request $request){

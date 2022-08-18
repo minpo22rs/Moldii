@@ -12,25 +12,47 @@
 @section('content')
 <div class="container m-0 p-0">
     
-    <div  class=" p-2 col-12  border-bottom " style="height:144px;">
-        <div class="row col-12 m-0">
-            <h5 class="font-weight-bold">{{$add->customer_name}}  {{$add->customer_phone}}</h5>
+        @if($add!=null)
+            <?php  
+                    $p = DB::Table('provinces')->where('id',$add->customer_province)->first();
+                    $a = DB::Table('amphures')->where('id',$add->customer_district)->first();
+                    $t = DB::Table('districts')->where('id',$add->customer_tumbon)->first();
+            
+            
+            ?>
+            <div  class=" p-2 col-12 " style="height:144px;">
+                <div class="row col-12 m-0">
+                        <h5 class="font-weight-bold">{{$add->customer_name}}  {{$add->customer_phone}}</h5>
 
-        </div>
-       
-        <a href="{{url('user/chooseAddress')}}" class="row col-12 p-0 m-0" style="color:rgba(14, 18, 66, 1);">
-            <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
-            <div class="text-start col-10">
-                <h5 class="m-0 " style="height:70px;">รายละเอียดที่อยู่ <br> <br> {{$add->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$add->customer_postcode}}</h5>
-                
+                </div>
+            
+                <a href="{{url('user/chooseAddress')}}" class="row col-12 p-0 m-0" style="color:rgba(14, 18, 66, 1);">
+                    <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
+                    <div class="text-start col-10">
+                        <h5 class="m-0 " style="height:70px;">รายละเอียดที่อยู่ <br> <br> {{$add->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$add->customer_postcode}}</h5>
+                        
+                    </div>
+
+                    <i class="far fa-angle-right col-1 p-0 align-self-center text-right" style="font-size:1.7rem;"></i>
+
+
+
+                </a>
             </div>
+        @else
+            <div  class=" p-2 col-12 " style="height:90px;">
+                <br>
+                <div class="row col-12 m-0">
+                    <a href="{{url('user/chooseAddress')}}" class="row col-12 p-0 m-0" >
+                        <h5 class="font-weight-bold" style="color:red"><u>กรุณาเลือกที่อยู่การจัดส่ง</u></h5>
+                    </a>
 
-            <i class="far fa-angle-right col-1 p-0 align-self-center text-right" style="font-size:1.7rem;"></i>
+                </div>
+            </div>
+        @endif
+  
 
 
-
-        </a>
-    </div>
     <?php  $sumship = 0; $countt = 0;?>
     @foreach($mycart as $mycarts)
         <?php   $store = DB::Table('tb_merchants')->where('merchant_id',$mycarts->store_id)->first();
@@ -199,8 +221,6 @@
                     <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
                 </div>
 
-
-
                 <button style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square " onclick="submitform();">สั่งสินค้า</button>
             </div>
         </div>
@@ -252,12 +272,19 @@
 
         function submitform(){
             var chk = "{{Session::get('typepayment')}}";
+            var check = "{{$chk}}";
             // console.log(chk);
             if(chk==''){
                 alert('กรุณาเลือกวิธีการชำระเงิน');
 
             }else{
-                $('#formsubmit').submit();
+                if(parseInt(check) ==1){
+                    alert('กรุณาเลือกที่อยู่การจัดส่ง');
+
+                }else{
+                    $('#formsubmit').submit();
+
+                }
             }
         }
 

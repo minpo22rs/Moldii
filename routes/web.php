@@ -41,6 +41,11 @@ Route::get('user/login', [UserAccController::class, 'login'])->name('login');
 Route::get('user/register', [UserAccController::class, 'register'])->name('register');
 Route::get('user/forgotPassword', [UserAccController::class, 'forgotPassword']);// ลืมรหัสผ่าน(Log in)
 
+//////login with facebook and google
+Route::get('login/{provider}', [UserAccController::class, 'redirectToProvider'])->name('redirectToProvider');
+Route::get('login/{provider}/callback', [UserAccController::class, 'handleProviderCallback'])->name('handleProviderCallback');
+
+
 Route::get('user/myAccount', [UserAccController::class, 'myAccount']);// หน้าบัญชีของฉัน
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
 Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
@@ -58,6 +63,7 @@ Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โ�
 Route::post('user/addnewaddress', [UserAccController::class, 'addnewaddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changevalueaddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);// โชว์ที่อยู่ของฉัน
+Route::get('user/deleteAddress/{id}', [UserAccController::class, 'deleteAddress']);// โชว์ที่อยู่ของฉัน
 
 Route::get('getAmphure',[UserAccController::class, 'getAmphure']);//
 Route::get('getSubDistrict',[UserAccController::class, 'getSubDistrict']);//
@@ -174,6 +180,13 @@ Route::get('/boss', function() {
 	Artisan::call('storage:link');
 
 	return "boss!";
+});
+
+
+Route::get('/policy', function() {
+	
+
+	return "policy!";
 });
 
 

@@ -11,6 +11,13 @@
 @endsection
 @section('content')
         
+        @if($addon != null)
+            <?php 
+                $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();
+                $ona = DB::Table('amphures')->where('id',$addon->customer_district)->first();
+                $ont = DB::Table('districts')->where('id',$addon->customer_tumbon)->first();
+            
+            ?>
             <div class=" p-2 col-12  border-bottom ">
                 <div class="row col-12 m-0">
                     <h5 class="font-weight-bold">{{$addon->customer_name}}  {{$addon->customer_phone}}</h5>
@@ -27,6 +34,8 @@
 
                 </div>
             </div>
+        @endif
+
         @foreach($addoff as $adds)
             <?php 
                 $p = DB::Table('provinces')->where('id',$adds->customer_province)->first();
@@ -44,8 +53,8 @@
                     <div class="text-start col-10">
                         <h5 class="m-0 ">รายละเอียดที่อยู่ <br><br> {{$adds->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$adds->customer_postcode}}</h5>
                     </div>
+                    <i class="fa fa-trash" style="margin-top: 5px" onclick="da({{$adds->id_customer_address}});"></i> 
 
-                    <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
 
 
                 </div>
@@ -75,5 +84,23 @@
 @section('custom_script')
 <script>
     bottom_now(7);
+
+    var msg = "{{Session::get('msg')}}"; 
+    if(msg){
+        alert(msg);
+    }
+
+
+
+    function da(v){
+        // alert('ยืนยันการลบบัตรเครดิตนี้ใช่หรือไม่');
+        if (confirm("ยืนยันการลบที่อยู่นี้ใช่หรือไม่") == true) {
+            window.location.replace ('deleteAddress/'+v)
+        } else {
+            
+        }
+    }
+
+
 </script>
 @endsection

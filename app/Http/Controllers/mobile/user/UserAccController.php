@@ -119,13 +119,17 @@ class UserAccController extends Controller
 
 
     public function myAddress(){// โชว์ที่อยู่ของฉัน
+       
         $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->where('customer_id',Session::get('cid'))->first();
         $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->where('customer_id',Session::get('cid'))->get();
-        $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();
-        $ona = DB::Table('amphures')->where('id',$addon->customer_district)->first();
-        $ont = DB::Table('districts')->where('id',$addon->customer_tumbon)->first();
+        // if($addon != null){
+        //     $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();
+        //     $ona = DB::Table('amphures')->where('id',$addon->customer_district)->first();
+        //     $ont = DB::Table('districts')->where('id',$addon->customer_tumbon)->first();
+        // }
+        
 
-        return view('mobile.member.userAccount.address.myAddress')->with(['addon'=>$addon,'addoff'=>$addoff,'onp'=>$onp,'ona'=>$ona,'ont'=>$ont]);
+        return view('mobile.member.userAccount.address.myAddress')->with(['addon'=>$addon,'addoff'=>$addoff]);
 
     }
 
@@ -136,6 +140,16 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.address.newAddress')->with(['p'=>$p]);
 
     }
+
+
+    public function deleteAddress($id){// เพิ่มที่อยู่ใหม่
+        $p = DB::Table('tb_customer_addresss')->where('id_customer_address',$id)->delete();
+
+        return redirect('user/myAddress')->with('msg','ลบข้อมูลเรียบร้อยแล้ว');
+        
+
+    }
+
 
     public function changevalueaddress($id){// เพิ่มที่อยู่ใหม่
         $p = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->update(['address_status'=>'off']);
@@ -218,7 +232,7 @@ class UserAccController extends Controller
         // dd($id);
         Tb_credit::where('id_customer_credits', $id)->delete();
 
-        return redirect('user/creditCard')->with('msg','ลบบัตรเรียบร้อยแล้ว');
+        return redirect('user/creditCard')->with('msg','ลบข้อมูลเรียบร้อยแล้ว');
     }
 
 
@@ -389,12 +403,10 @@ class UserAccController extends Controller
 
     }
     public function chooseAddress(){// เลือกที่อยู่
-        $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->first();
-        $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->get();
-        $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();
-        $ona = DB::Table('amphures')->where('id',$addon->customer_district)->first();
-        $ont = DB::Table('districts')->where('id',$addon->customer_tumbon)->first();
-        return view('mobile.member.userAccount.my_list.chooseAddress')->with(['addon'=>$addon,'addoff'=>$addoff,'onp'=>$onp,'ona'=>$ona,'ont'=>$ont]);
+        $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->where('customer_id',Session::get('cid'))->first();
+        $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->where('customer_id',Session::get('cid'))->get();
+       
+        return view('mobile.member.userAccount.my_list.chooseAddress')->with(['addon'=>$addon,'addoff'=>$addoff]);
 
     }
 
