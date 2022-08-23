@@ -1,4 +1,4 @@
-@extends('Customer.main_layout.guest')
+@extends('mobile.main_layout.guest')
     @section('content')
     <!-- App Capsule -->
     <div id="appCapsule" class="pt-0">

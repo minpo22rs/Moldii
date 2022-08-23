@@ -186,7 +186,7 @@ Route::get('/boss', function() {
 Route::get('/policy', function() {
 	
 
-	return "policy!";
+	return view('policy');
 });
 
 

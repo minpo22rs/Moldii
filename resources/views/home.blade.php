@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('mobile.main_layout.guest')
 
 @section('content')
 <div class="container">
