@@ -155,6 +155,7 @@ Route::get('store', [StoreController::class, 'index']);
 
 //family
 Route::get('group', [GroupController::class, 'index']); 
+Route::get('groupid/{id}', [GroupController::class, 'groupid']); 
 
 
 //cart

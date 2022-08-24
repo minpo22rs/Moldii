@@ -18,6 +18,7 @@
     
     #search_2 {
         width: 100%;
+        height: auto;
         padding: 30px 0;
         text-align: center;
         background-color: #fc684b ;
@@ -85,9 +86,13 @@
                  <ion-icon name="close" onclick="myFunction()"  aria-label="search outline" ></ion-icon>
             </div>
             <br><br>     
-                @foreach($cat as $cs)
-                    <a href="{{url('user/searcha/2/'. $cs->cat_name.'')}}" style="color:#fff;" class="mr-3  ml-3">{{$cs->cat_name}}</a> 
-                @endforeach  
+                <div class="row">
+                    @foreach($cat as $cs)
+                        <div class="col-4 mt-1">
+                            <a href="{{url('user/searcha/2/'. $cs->cat_name.'')}}" style="color:#fff;" >{{$cs->cat_name}}</a> 
+                        </div>
+                    @endforeach  
+                </div>
         </div>
     </div>
     <!-- Show List Menu btn_search_2 [End]--> 

@@ -444,7 +444,15 @@
 @endsection
 @section('choices')
     <div class="row w-100 choice-container m-0" id="choice_container">
-        <div class="col-6 m-0 p-1  add-to-cart text-center ">
+        <div class="col-3 m-0 p-1 text-center " style="background-color: #17a2b8">
+            <a href="javascript:;">
+                <div class="item-cart" >
+                    <i class="fa fa-comment" style="font-size:24px;"></i>
+                    <h5 class="font-weight-bold m-0">แชทเลย</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-3 m-0 p-1  add-to-cart text-center ">
                 <a href="javascript:;" onclick="subcart();">
                     <div class="item-cart" >
                         <i class="fal fa-shopping-bag" style="font-size:24px;"></i>

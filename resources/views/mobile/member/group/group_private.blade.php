@@ -7,7 +7,7 @@
     <div class="row">
 
     <div class="col-md-12" style="background-color: #D5D8DC ; display: grid; grid-template-columns: auto;  grid-template-rows: 250px 100px; "> 
-        image : cover
+        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/group_cover/'.$group->group_img.'')}}" alt="alt" >
     </div>
     
     <div class="col-md-12">
