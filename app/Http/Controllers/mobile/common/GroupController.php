@@ -13,7 +13,7 @@ class GroupController extends Controller
     public function index()
     {
         $c = DB::Table('tb_news')->where('family_id','!=',null)->get();
-        $cat = DB::Table('tb_category')->where('deleted_at','=',null)->limit(6)->get();
+        $cat = DB::Table('tb_category')->where('deleted_at','=',null)->get();
 
         $group = DB::Table('tb_familys')->get();
         // dd( $cat);

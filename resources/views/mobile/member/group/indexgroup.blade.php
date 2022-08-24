@@ -79,23 +79,29 @@
 
     </div>
 
-     <!-- Show List Menu btn_search_2 [Start]-->
-     <div id="search_2" >
-        <div class="mt-2">
+    <!-- Show List Menu btn_search_2 [Start]-->
+     
+    <div id="search_2" >
+        <div class="col-md-12 mt-2"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+ 
             <div style="left: 16px;  position: absolute; " class="mt-2">
                  <ion-icon name="close" onclick="myFunction()"  aria-label="search outline" ></ion-icon>
+            </div><br><br>
+            <div class="row" style="overflow: auto ; width: 100%; height: 450px; justify-content: center;">
+              @foreach($cat as $cats)
+                    <div class="text-center p-1 ">                      
+                        <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"> 
+                            <h4 class="mt-1" style="color:#fff;">{{$cats->cat_name}}</h4>
+                        </a>
+                    </div>
+                @endforeach
             </div>
-            <br><br>     
-                <div class="row">
-                    @foreach($cat as $cs)
-                        <div class="col-4 mt-1">
-                            <a href="{{url('user/searcha/2/'. $cs->cat_name.'')}}" style="color:#fff;" >{{$cs->cat_name}}</a> 
-                        </div>
-                    @endforeach  
-                </div>
+
         </div>
     </div>
-    <!-- Show List Menu btn_search_2 [End]--> 
+
+    <!-- Show List Menu btn_search_2 [End]-->
 </div>
 {{-- Recent Search --}}
 <div id="search_box_2">
