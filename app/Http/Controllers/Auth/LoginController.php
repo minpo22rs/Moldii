@@ -56,13 +56,14 @@ class LoginController extends Controller
     }
     public function handleProviderCallback($provider,Request $request)
     {      
+        // dd('callback');
         if(!empty($request->error_code)){
             return redirect('user/login');
         }
         $random = mt_rand(1000000000, 9999999999);
         try {
             $user = Socialite::driver($provider)->stateless()->user();
-            dd( $user);
+            // dd( $user);
             // $input['customer_id']=  $random ;
             $input['customer_username'] = $user->getName();
             $input['customer_name'] = $user->getName();
@@ -91,7 +92,7 @@ class LoginController extends Controller
                            ->first();
 
         if(!empty($checkIfExist)){
-            Session::put('customer_id',$checkIfExist->customer_id);
+            Session::put('cid',$checkIfExist->customer_id);
 
             return $checkIfExist;
         }else{
@@ -100,7 +101,7 @@ class LoginController extends Controller
     
             $customer = User::where('provider',$provider)->where('provider_id',$provider_id)->first();
 
-            Session::put('customer_id',$customer->customer_id);
+            Session::put('cid',$customer->customer_id);
            
           
             return '0';
