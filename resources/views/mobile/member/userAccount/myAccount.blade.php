@@ -12,7 +12,13 @@
 @section('content')
 <div>
     <div class="col-12 text-center">
-        <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @if($sql->provider ==null && $sql->customer_img == null)
+            <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @elseif($sql->provider ==null)
+            <img src="{{asset('storage/profile_cover/'.$sql->customer_img.'')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @else
+            <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @endif
         <span class="font-weight-bold">
             <h3 class="mb-0"><?php //$my_name 
                                 ?></h3>

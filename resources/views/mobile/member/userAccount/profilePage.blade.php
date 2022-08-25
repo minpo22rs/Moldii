@@ -25,11 +25,11 @@
 
 
 
-        <a href="{{'imgProfileChange'}}"><h5 class="m-0 text-center" style="color:white;">แก้ไข</h5></a>
+        <a href="{{'imgProfileChange'}}"><h5 class="m-0 text-center" style="color:white;">แตะเพื่อแก้ไข</h5></a>
 
     </div>
     
-    <div  class="btn  btn-sm btn-block square mt-2" style="height:1.4rem; background-color:rgba(196, 196, 196, 0.4); color:white;"  >แตะเพื่อเปลี่ยน</div>
+    {{-- <div  class="btn  btn-sm btn-block square mt-2" style="height:1.4rem; background-color:rgba(196, 196, 196, 0.4); color:white;"  >แตะเพื่อเปลี่ยน</div> --}}
 
 </div>
 
