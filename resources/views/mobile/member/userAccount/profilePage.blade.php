@@ -10,10 +10,22 @@
 </div>
 @endsection
 @section('content')
-<div class="bg_image" style="background-image: url('/new_assets/img/bg_image.svg');">
+
+
+<div class="bg_image" style="background-image: url('https://testgit.sapapps.work/moldii/storage/app/banner/{{$banner->banner_name}}');">
     <div class="col-12 text-center">
-        <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
-        <h5 class="m-0 text-center" style="color:white;">แก้ไข</h5>
+
+        @if($sql->provider ==null && $sql->customer_img == null)
+            <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @elseif($sql->provider ==null)
+            <img src="{{asset('storage/profile_cover/'.$sql->customer_img.'')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @else
+            <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+        @endif
+
+
+
+        <a href="{{'imgProfileChange'}}"><h5 class="m-0 text-center" style="color:white;">แก้ไข</h5></a>
 
     </div>
     
@@ -30,13 +42,13 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold ">MR.xxx</h5>
+            <h5 class="m-0 mr-2 font-weight-bold ">{{$sql->customer_username}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
     </div>
 </a>
-<a href="" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
+{{-- <a href="" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">Bio</h5>
@@ -49,8 +61,8 @@
             <i class="far fa-angle-right"></i>
         </div>
     </div>
-</a>
-<a href="" class="row py-1 border-top pl-2 mt-3" style="color:black; font-size:18px">
+</a> --}}
+<a href="{{url('user/sexChange')}}" class="row py-1 border-top pl-2 mt-3" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">เพศ</h5>
@@ -58,13 +70,13 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">ชาย</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_gender}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
     </div>
 </a>
-<a href="" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/birthdayChange')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">วันเกิด</h5>
@@ -72,7 +84,7 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">DD-MM-YYYY</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_birthday}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
@@ -86,7 +98,7 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">********39</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_phone}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
@@ -100,7 +112,7 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">*********@gmail.com</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_email}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
@@ -120,7 +132,7 @@
         </div>
     </div>
 </a>
-<a href="{{url('user/changePassword')}}" class="row py-1 border-top border-bottom  mt-4 pl-2" style="color:black; font-size:18px">
+<a href="{{url('logout')}}" class="row py-1 border-top border-bottom  mt-4 pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 
         <h5 class="m-0 ml-1 font-weight-bold">ลงชื่อออก</h5>
@@ -147,5 +159,11 @@
 @section('custom_script')
 <script>
     bottom_now(7);
+
+
+    var a = "{{Session::get('success')}}";
+      if(a){
+          alert(a);
+      }
 </script>
 @endsection

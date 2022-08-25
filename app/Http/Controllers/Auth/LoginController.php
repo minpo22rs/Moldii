@@ -63,7 +63,7 @@ class LoginController extends Controller
         $random = mt_rand(1000000000, 9999999999);
         try {
             $user = Socialite::driver($provider)->stateless()->user();
-            // dd( $user);
+            dd( $user);
             // $input['customer_id']=  $random ;
             $input['customer_username'] = $user->getName();
             $input['customer_name'] = $user->getName();

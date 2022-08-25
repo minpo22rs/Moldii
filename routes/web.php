@@ -48,8 +48,17 @@ Route::get('login/{provider}/callback', [LoginController::class, 'handleProvider
 
 Route::get('user/myAccount', [UserAccController::class, 'myAccount']);// หน้าบัญชีของฉัน
 Route::get('user/profile/setting', [UserAccController::class, 'profileSetting']);
+Route::get('user/imgProfileChange', [UserAccController::class, 'imgProfileChange']);
+Route::post('user/imgProfileSave', [UserAccController::class, 'imgProfileSave']);
+Route::get('user/birthdayChange', [UserAccController::class, 'birthdayChange']);
+Route::post('user/birthdaySave', [UserAccController::class, 'birthdaySave']);
+Route::get('user/sexChange', [UserAccController::class, 'sexChange']);
+Route::post('user/sexSave', [UserAccController::class, 'sexSave']);
+Route::get('user/rule', [UserAccController::class, 'rule']);
+Route::get('user/policy', [UserAccController::class, 'policy']);
 Route::get('user/profilePage', [UserAccController::class, 'profilePage']);// หน้าโปรไฟล์
 Route::get('user/nameChange', [UserAccController::class, 'nameChange']);// เปลี่ยนชื่อ
+Route::post('user/nameSave', [UserAccController::class, 'nameSave']);
 Route::get('user/phoneNumber', [UserAccController::class, 'phoneNumber']);// หน้าโชว์เบอร์
 Route::get('user/newPhoneNumber', [UserAccController::class, 'newPhoneNumber']);// กรอกเบอร์ใหม่ รับ OTP
 Route::get('user/OTP_PhoneNumber', [UserAccController::class, 'OTP_PhoneNumber']);// กรอกOTP
@@ -111,7 +120,9 @@ Route::post('user/paymentWallet', [WalletController::class, 'paymentWallet']); /
 Route::post('walletgateway/response/{id}', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 
 
+
 Route::get('user/profileHelpCenter', [UserAccController::class, 'profileHelpCenter']);// ศูนย์ความช่วยเหลือ
+Route::get('user/agreement', [UserAccController::class, 'agreement']);// ศูนย์ความช่วยเหลือ
 
 
 

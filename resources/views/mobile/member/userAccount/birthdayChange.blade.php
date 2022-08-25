@@ -5,17 +5,17 @@
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
     </div>
     <div class="pageTitle">
-        เปลี่ยนวันเกิด
+        การตั้งค่า
     </div>
 </div>
 @endsection
 @section('content')
 <div class="mt-3 p-2 col-12">
 
-    <form action="">
-    @csrf
+    <form action="{{url('user/birthdaySave')}}" method="POST">
+        @csrf
         <h3 class="ml-1">เปลี่ยนวันเกิด</h3>
-        <input type="date" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="birthdayChange" id="birthdayChange" value="" >
+        <input type="date" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="bd" id="birthdayChange" required>
    
         <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">บันทึก</button>
     </form>
@@ -27,6 +27,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

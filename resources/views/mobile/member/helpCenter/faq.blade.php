@@ -75,7 +75,7 @@
     </div>
 </a> --}}
 
-<a href="{{url('user/agreement')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+<a href="" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row  p-0">
         <div class="row col-1 m-0 p-0 justify-content-center">
             <i class="far fa-ballot"></i>

@@ -62,19 +62,90 @@ class UserAccController extends Controller
     {
         return view('mobile.member.userAccount.profileSetting');
     }
+
+    public function rule()
+    {
+        return view('mobile.member.userAccount.rule');
+    }
+
+    public function policy()
+    {
+        return view('mobile.member.userAccount.policy');
+    }
+
+
+
     public function profileHelpCenter(){
         return view('mobile.member.helpCenter.helpCenter');
+
+    }
+    public function agreement(){
+        return view('mobile.member.helpCenter.agreement');
 
     }
 
 
 
     public function profilePage(){// หน้าโปรไฟล์
-        return view('mobile.member.userAccount.profilePage');
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        $banner = DB::Table('tb_banners')->where('banner_type',1)->first();
+
+        return view('mobile.member.userAccount.profilePage')->with(['sql'=>$sql,'banner'=>$banner]);
 
     }
+
     public function nameChange(){// เปลี่ยนชื่อ
-        return view('mobile.member.userAccount.nameChange');
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.userAccount.nameChange')->with(['sql'=>$sql]);
+
+    }
+
+    public function nameSave(Request $request){
+        User::where('customer_id',Session::get('cid'))->update(['customer_username'=>$request->nname,'customer_name'=>$request->fname,'customer_lname'=>$request->lname]);
+
+        return redirect('user/profilePage')->with('success','บันทึกข้อมูลเรียบร้อยแล้ว');
+
+    }
+
+
+
+    public function imgProfileChange(){
+        return view('mobile.member.userAccount.imgProfileChange');
+
+    }
+
+    public function imgProfileSave(Request $request){
+        // dd( $request->all());
+        $name = rand().time().'.'.$request->imgProfileChange->getClientOriginalExtension();
+        $request->imgProfileChange->storeAs('public/profile_cover',  $name);
+        User::where('customer_id',Session::get('cid'))->update(['customer_img'=>$name]);
+
+        return redirect('user/profilePage')->with('success','บันทึกข้อมูลเรียบร้อยแล้ว');
+
+
+    }
+
+
+    public function birthdayChange(){
+        return view('mobile.member.userAccount.birthdayChange');
+
+    }
+
+    public function birthdaySave(Request $request){
+        User::where('customer_id',Session::get('cid'))->update(['customer_birthday'=>$request->bd]);
+
+        return redirect('user/profilePage')->with('success','บันทึกข้อมูลเรียบร้อยแล้ว');
+
+    }
+
+    public function sexChange(){
+        return view('mobile.member.userAccount.sexChange');
+
+    }
+
+    public function sexSave(Request $request){
+        User::where('customer_id',Session::get('cid'))->update(['customer_gender'=>$request->sex]);
+        return redirect('user/profilePage')->with('success','บันทึกข้อมูลเรียบร้อยแล้ว');
 
     }
 

@@ -12,11 +12,18 @@
 @section('content')
 <div class="mt-3 p-2 col-12">
 
-    <form action="">
-    @csrf
-        <h3 class="ml-1">ชื่อใหม่</h3>
-        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="nameChange" id="nameChange" value="" maxlength="50" placeholder="xxxxx">
-        <h6 class="ml-1"><small>ห้ามเกิน 50 ตัวอักษร</small></h6>
+    <form action="{{url('user/nameSave')}}" method="POST">
+        @csrf
+        <h3 class="ml-1">ชื่อผู้ใช้</h3>
+        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="nname" maxlength="20" value="{{$sql->customer_username}}" placeholder="xxxxx" required>
+        <h6 class="ml-1"><small>ห้ามเกิน 20 ตัวอักษร</small></h6>
+        
+        <h3 class="ml-1">ชื่อ</h3>
+        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="fname" value="{{$sql->customer_name}}" placeholder="xxxxx" required>
+
+        <h3 class="ml-1">นามสกุล</h3>
+        <input type="text" class="form-control form-control-lg mt-2 mb-1" style="border-radius: 10px;" name="lname" value="{{$sql->customer_lname}}" placeholder="xxxxx" required> 
+
         <button type="submit" class="btn btn-success col-12" style="font-size:1.3rem;">บันทึก</button>
     </form>
 </div>
