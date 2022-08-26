@@ -17,6 +17,7 @@ class MainController extends Controller
     }
     public function indexpage()
     {
+        dd(Session::get('cid'));
 
         $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->where('new_published',1)
                 ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
@@ -33,7 +34,6 @@ class MainController extends Controller
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
         // $result = $cp->merge($c);
-        // dd(Session::get('cid'));
    
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
     }
