@@ -17,7 +17,7 @@ class MainController extends Controller
     }
     public function indexpage()
     {
-        dd(Session::get('cid'));
+        // dd(Session::get('cid'));
 
         $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->where('new_published',1)
                 ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
