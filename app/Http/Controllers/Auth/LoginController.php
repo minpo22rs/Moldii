@@ -75,7 +75,7 @@ class LoginController extends Controller
             
             $authUser = $this->findOrCreate($input,$provider,$user->getId());
             Session::put('recent',[]);
-            dd(Session::get('cid'));
+            // dd(Session::get('cid'));
             
            
             return redirect('/index');
