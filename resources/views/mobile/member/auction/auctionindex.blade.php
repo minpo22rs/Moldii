@@ -168,7 +168,7 @@
         @endif
         <div class="col-12 row m-0 justify-content-center ">
             @if( $chk != 0)
-                 <br><br>
+                 <br><br><br>
                 @foreach($detail as $details)
                     <a href="{{url('auction/detail/'.$details->id_auction_detail.'')}}" style="width: 50%;">
                         <div class=" card  my-2 mx-2 align-self-center justify-content-center">
@@ -219,7 +219,7 @@
                     </a>
                 @endforeach
             @else
-            <br><br>
+              <br><br>
                     ยังไม่มีรายการสินค้าประมูล
             @endif
 
