@@ -242,6 +242,7 @@ class ProductController extends Controller
             DB::commit();
             return back()->with('success', 'Successful');
         } catch (\Throwable $th) {
+            dd( $th);
             DB::rollback();
             return back()->withError('Something Wrong! New Product can not Updated.');
         }
