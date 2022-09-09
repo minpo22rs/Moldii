@@ -132,7 +132,7 @@
     <div class="container p-1 my-3">
         @if( $chk != 0)
             <div class="col-12 row m-0 justify-content-center ">
-                {{-- <p id="demo"></p> --}}
+              <br><br>
                             <p class="time">
                                                 
                                                 
@@ -168,7 +168,7 @@
         @endif
         <div class="col-12 row m-0 justify-content-center ">
             @if( $chk != 0)
-                 <br><br><br>
+                 
                 @foreach($detail as $details)
                     <a href="{{url('auction/detail/'.$details->id_auction_detail.'')}}" style="width: 50%;">
                         <div class=" card  my-2 mx-2 align-self-center justify-content-center">
@@ -178,42 +178,7 @@
                                     <h5 class=" font-weight-bolder m-0">{{$details->product_name}}</h5>
                                     <h5 class="font-weight-bolder m-0 ml-5">{{$details->product_price}}</h5>
                                 </div>
-                                {{-- <div class=" row ">
-                                    <h6 class="mt-1 pl-1 m-0 col-6">{{$details->product_price}}</h6>
-                                    <p class="time">
-                                       
-                                       
-                                        
-                                        <!-- hours -->
-                                        <span id='hour-ten-digit' class="show">
-                                          0
-                                        </span>
-                                        <span id='hour-last-digit' class="show">
-                                          0
-                                        </span>
-                                        <span className="indicate">:</span>
-                                        
-                                        <!-- min -->
-                                        <span id='min-ten-digit' class="show">
-                                          0
-                                        </span>
-                                        <span id='min-last-digit' class="show">
-                                          0
-                                        </span>
-                                        <span className="indicate">:</span>
-                                        
-                                        <!-- sec -->
-                                        <span id='sec-ten-digit' class="show">
-                                          0
-                                        </span>
-                                        <span id='sec-last-digit' class="show">
-                                          0
-                                        </span>
-                                       
-                                      </p>
-                                    {{-- <h6 class="mt-1 pl-1 m-0 col-6 text-danger text-right result" >00:00:25</h6> 
-                                    
-                                </div> --}}
+                                
                             </div>
                         </div>
                     </a>
