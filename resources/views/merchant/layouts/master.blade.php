@@ -193,7 +193,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">ช่วยเหลือ</div>
+                            {{-- <div class="pcoded-navigation-label">ช่วยเหลือ</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="">
@@ -209,7 +209,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </nav>
                     <div class="pcoded-content">

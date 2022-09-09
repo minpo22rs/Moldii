@@ -133,13 +133,26 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">รูปภาพ</label>
+                        <label class="col-sm-2 col-form-label">รูปภาพโปรไฟล์</label>
                      
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="file" name="img[]" style="display: none;" id="adddocument">
+                                    <input type="file" name="img[]" style="display: none;" id="adddocument" required>
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
+                                        <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">รูปภาพหน้าปก</label>
+                     
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="file" name="imgcover[]" style="display: none;" id="adddocuments" required>
+                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocuments').click();">
                                         <i class="icofont icofont-image"></i> เพิ่มรูปภาพ</button> 
                                 </div>
                             </div>
@@ -158,7 +171,7 @@
                             <textarea name="description" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง..." required ></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
 
                         <label class="col-sm-2 col-form-label">กลุ่มประเภท</label>
                         <div class="col-sm-10">
@@ -176,7 +189,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
             </form>
             <div class="modal-footer">

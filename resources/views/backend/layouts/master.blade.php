@@ -216,7 +216,7 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    {{-- <li class="">
                                         <a href="{{url("admin/flashsale")}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-flash"></i><b>D</b></span>
                                             <span class="pcoded-mtext">Flash Sale</span>
@@ -229,7 +229,7 @@
                                             <span class="pcoded-mtext">Hot Deals</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </li>
                             </ul>
                             <div class="pcoded-navigation-label">การจัดการเนื้อหา</div>
@@ -402,15 +402,15 @@
                                     </a>
                                 </li> --}}
                             </ul>
-                            <div class="pcoded-navigation-label">ติดต่อฝ่ายสนับสนุน</div>
+                            {{-- <div class="pcoded-navigation-label">ติดต่อฝ่ายสนับสนุน</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                {{-- <li class="">
+                                <li class="">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="icofont icofont-support-faq"></i><b>D</b></span>
                                         <span class="pcoded-mtext">คำถามที่พบบ่อย</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li> --}}
+                                </li>
                                 <li class="">
                                     <a href="{{url('admin/ticket')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-support"></i><b>D</b></span>
@@ -418,7 +418,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </nav>
                     <div class="pcoded-content">

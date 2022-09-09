@@ -12,7 +12,7 @@
                 {{method_field('PUT')}}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">รูปภาพ </label>
+                        <label class="col-sm-2 col-form-label">รูปภาพโปรไฟล์ </label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-5">
@@ -28,6 +28,23 @@
                     </div>
                     <br>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">รูปภาพหน้าปก </label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-5">
+                                    <input type="file" name="editnews[]" style="display: none;" id="editdocuments{{$Family->id}}">
+                                    <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('editdocuments{{$Family->id}}').click();">
+                                        <i class="icofont icofont-image"></i> เปลี่ยนรูป</button> 
+                                </div>
+                                <div class="col-5">
+                                    <img class="img-fluid" src="{{asset('storage/app/group_cover/'.$Family->group_cover.'')}}" alt="" width="auto" height="auto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ชื่อ</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="หัวข้อ..." value="{{$Family->name}}" name="name" required>
@@ -39,7 +56,7 @@
                             <textarea name="description" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง...">{{$Family->description}}</textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
 
                         <label class="col-sm-2 col-form-label">กลุ่มประเภท</label>
                         <div class="col-sm-10">
@@ -57,7 +74,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
                     
                 </div>
             </form>

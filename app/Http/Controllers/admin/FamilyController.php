@@ -22,13 +22,14 @@ class FamilyController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         
         DB::beginTransaction();
         try {
             $Family = new Family();
             $Family->name            = $request->name;
             $Family->description     = $request->description;
-            $Family->type_group      = $request->type_group;
+            // $Family->type_group      = $request->type_group;
             if ($request->file('img') !== null)
             {
                 $img = $request->file('img');
@@ -38,6 +39,17 @@ class FamilyController extends Controller
                     $Family->group_img = $name;
                 }
             }
+
+            if ($request->file('imgcover') !== null)
+            {
+                $img = $request->file('imgcover');
+                foreach($img as $key => $item) {
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('group_cover',  $name);
+                    $Family->group_cover = $name;
+                }
+            }
+
             $Family->save();
             DB::commit();
             return redirect('admin/familys')->with('success', 'Successful');
@@ -69,7 +81,7 @@ class FamilyController extends Controller
             $Family = Family::findOrFail($id);
             $Family->name            = $request->name;
             $Family->description     = $request->description;
-            $Family->type_group      = $request->type_group;
+            // $Family->type_group      = $request->type_group;
             if ($request->file('editnew') != null)
             {
                 $img = $request->file('editnew');
@@ -80,6 +92,18 @@ class FamilyController extends Controller
                     $Family->group_img = $name;
                 }
             }
+
+            if ($request->file('editnews') !== null)
+            {
+                $img = $request->file('editnews');
+                foreach($img as $key => $item) {
+                    unlink('storage/app/group_cover/'.$Family->group_cover);
+                    $name = rand().time().'.'.$item->getClientOriginalExtension();
+                    $item->storeAs('group_cover',  $name);
+                    $Family->group_cover = $name;
+                }
+            }
+
           
             $Family->save();
 
