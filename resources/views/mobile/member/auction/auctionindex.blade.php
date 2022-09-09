@@ -131,39 +131,38 @@
 @section('content')
     <div class="container p-1 my-3">
         @if( $chk != 0)
-            <div class="col-12 row m-0 justify-content-center ">
-              <br><br>
-                            <p class="time">
-                                                
-                                                
-                                                    
-                                <!-- hours -->
-                                <span id='hour-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                                <span id='hour-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                                <span className="indicate" style="font-size: 40px">:</span>
-                                
-                                <!-- min -->
-                                <span id='min-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                                <span id='min-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                                <span className="indicate" style="font-size: 40px">:</span>
-                                
-                                <!-- sec -->
-                                <span id='sec-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                                <span id='sec-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
-                                0
-                                </span>
-                            
-                            </p>
+            <div class="col-12 row m-0 justify-content-center mt-4">
+                    <p class="time">
+                                        
+                                        
+                                            
+                        <!-- hours -->
+                        <span id='hour-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                        <span id='hour-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                        <span className="indicate" style="font-size: 40px">:</span>
+                        
+                        <!-- min -->
+                        <span id='min-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                        <span id='min-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                        <span className="indicate" style="font-size: 40px">:</span>
+                        
+                        <!-- sec -->
+                        <span id='sec-ten-digit' class="show p-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                        <span id='sec-last-digit' class="show p-1 ml-1" style="border-radius: 5px ; background-color: rgb(88, 182, 88);font-size:24px;font-weight:700;">
+                        0
+                        </span>
+                    
+                    </p>
             </div>
         @endif
         <div class="col-12 row m-0 justify-content-center ">
