@@ -593,7 +593,7 @@ color: #666;
                                 <img src="{{ asset('new_assets/icon/แชร์.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1" >แชร์</h5>
                             </div>
-                            <div class="col-2 row p-0 align-items-center">
+                            <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#donate">
                                 <img src="{{asset('new_assets/icon/โดเนท.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1">โดเนท</h5>
                             </div>
@@ -658,6 +658,312 @@ color: #666;
             </div>
             <!-- /end Modal share -->
 
+            <!-- Modal donate -->
+            <div class="modal fade" id="donate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" >Donate</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            
+                          <div class=" row" style="overflow: auto ; width: 100%; height: 450px; justify-content: center;">
+                             <!-- Start img Donate -->
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1" > 
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/ghost.png') }}" alt="alt" class="rounded-circle" width="100%"  style="background-color:#e4e8eb ;  "  >
+                                            <h3 class="card-text">ghost</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1 ">  
+                                            <a href="#">                      
+                                            <img src="{{  asset('new_assets/img/IconDonate/Hi.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
+                                            <h3 class="card-text">Hi</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/iloveyou.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
+                                            <h3 class="card-text">iloveyou</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center  p-1">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/Supercar.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; ">
+                                            <h3 class="card-text">Supercar</h3>
+                                            </a> 
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">     
+                                            <a href="#">                  
+                                            <img src="{{  asset('new_assets/img/IconDonate/UFO.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">UFO</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1">  
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/กระโหลก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">กระโหลก</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1 ">     
+                                            <a href="#">                  
+                                            <img src="{{  asset('new_assets/img/IconDonate/กล้อง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">กล้อง</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1 ">  
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/เกมบอย.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เกมบอย</h3>
+                                            </a> 
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">        
+                                            <a href="#">                
+                                            <img src="{{  asset('new_assets/img/IconDonate/ของขวัญ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ของขวัญ</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                        
+                                            <img src="{{  asset('new_assets/img/IconDonate/เข็มฉีดยา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เข็มฉีดยา</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1 "> 
+                                            <a href="#">                       
+                                            <img src="{{  asset('new_assets/img/IconDonate/เค้ก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เค้ก</h3>
+                                            </a> 
+                                        </div>                      
+                                        <div class="text-center p-1 ">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/เครื่องบิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เครื่องบิน</h3>
+                                            </a> 
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/จอยเกม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">จอยเกม</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/จักรยาน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">จักรยาน</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1 ">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/เจ๋ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เจ๋ง</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1 ">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/ดวงอาทิตย์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ดวงอาทิตย์</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/ดอกไม้.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ดอกไม้</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ดาว.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ดาว</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/โดนัท.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">โดนัท</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/ตุ๊กตา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ตุ๊กตา</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 1.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ถ้วยรางวัลที่ 1</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 2.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ถ้วยรางวัลที่ 2</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1 ">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 3.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ถ้วยรางวัลที่ 3</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/ถุงเงิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ถุงเงิน</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/ทามาก๊อต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ทามาก๊อต</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ทีวี.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ทีวี</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/เทปคาสเซ็ต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เทปคาสเซ็ต</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/ปั้มน้ำมัน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ปั้มน้ำมัน</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/ไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ไฟ</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ภูเขาไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ภูเขาไฟ</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1 ">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/มงกุฎ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">มงกุฎ</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/มอเตอร์ไซค์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">มอเตอร์ไซค์</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/แมวกวัก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">แมวกวัก</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ยานอวกาศ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ยานอวกาศ</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1 ">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/ระเบิด.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ระเบิด</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/รุ้ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">รุ้ง</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/ลูกโป่ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ลูกโป่ง</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/ลูกอม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ลูกอม</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/สายฟ้า.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">สายฟ้า</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">    
+                                            <a href="#">                    
+                                            <img src="{{  asset('new_assets/img/IconDonate/หีบสมบัติ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">หีบสมบัติ</h3>
+                                            </a>
+                                        </div>                                                                        
+                            </div> 
+                            <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                        <div class="text-center p-1">       
+                                            <a href="#">                 
+                                            <img src="{{  asset('new_assets/img/IconDonate/หุ่นยนต์.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">หุ่นยนต์</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center p-1">   
+                                            <a href="#">                     
+                                            <img src="{{  asset('new_assets/img/IconDonate/เห็ดเพิ่มพลัง.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">เห็ดเพิ่มพลัง</h3>
+                                            </a>
+                                        </div>                      
+                                        <div class="text-center  p-1">     
+                                            <a href="#">                   
+                                            <img src="{{  asset('new_assets/img/IconDonate/ไอศกรีม.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                            <h3 class="card-text">ไอศกรีม</h3>
+                                            </a>
+                                        </div>                      
+                                                                                                      
+                            </div> 
+                            <!-- End img Donate -->           
+                          
+                          </div>
+
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+            <!-- /end Modal donate -->
 
             {{-- <div id="video" class="tab-pane fade">
                 @foreach ($v as $item)
