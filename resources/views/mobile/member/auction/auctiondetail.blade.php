@@ -132,8 +132,10 @@
         {{-- <div id="here">
             tested
         </div> --}}
-        @if($log->count()!=0)
+        {{-- @if($log->count()!=0) --}}
             <hr class="my-1">
+            <br>
+            <h4>ตารางอันดับการประมูลสินค้า</h4>
             <div class="col-12 p-1  " id="here">
                 <table class="table">
                     <thead>
@@ -145,23 +147,34 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($log as $key => $logs)
-                            <?php $u = DB::Table('tb_customers')->where('customer_id',$logs->customer_id)->first();?>
+                        @if($log->count() > 0)
+                            @foreach($log as $key => $logs)
+                                <?php $u = DB::Table('tb_customers')->where('customer_id',$logs->customer_id)->first();?>
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$u->customer_username}}</td>
+                                    <td>{{$logs->price}}</td>
+                                    <td>{{ $logs->created_at}}</td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$u->customer_username}}</td>
-                                <td>{{$logs->price}}</td>
-                                <td>{{ $logs->created_at}}</td>
+                                <th scope="row">-</th>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                             </tr>
-                        @endforeach
+                                    
+                        @endif
                     </tbody>
                 </table>
             </div>
-        @endif
+        {{-- @endif --}}
         <hr class="my-1">
+        <br>
         <div class="col-12 p-1  ">
-            รายละเอียดสินค้า
-            <h4 class="text-break ">{{$product->product_description}}</h4>
+            <h4 > รายละเอียดสินค้า</h4>
+            <p class="text-break ">{{$product->product_description}}</p>
            
             <h4 class="text-break ">น้ำหนัก : {{$product->weight}} กรัม</h4>
            
