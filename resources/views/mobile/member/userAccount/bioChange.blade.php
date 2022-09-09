@@ -27,6 +27,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

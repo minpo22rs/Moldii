@@ -218,7 +218,7 @@ Route::get('/clc', function() {
 Route::get('auction',[AuctionController::class,'index']);
 Route::get('auction/detail/{aid}',[AuctionController::class,'detail']);
 Route::post('addauction',[AuctionController::class,'addauction']);
-
+Route::get('checkauction', [AuctionController::class,'checkauction']);
 
 
 

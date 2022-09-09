@@ -40,38 +40,42 @@
     <div class="m-1 w-100">
 
         <div class="row">
-            <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="list" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
-                </ion-icon>
+            
+            <div class="col-2 ">
+                <div id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()"  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-0 h5 text-center">
+                 <img  src="{{ asset('new_assets/icon/ตัวกรอง.png')}}" >
+                </div>
             </div>
-
-
+            
             <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search...">
-                        <i class="input-icon">
+                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
+                        <!-- <i class="input-icon" >
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                        </i>
+                        </i> -->
                     </div>
                     
                 </form>
             </div>
-            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
+            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first(); ?>
            
             <div class="col-2 mt-1">
                 <a href="{{url('cartindex')}}" > 
-                    <div class="  md hydrated  bg-white text-danger rounded  h5 text-center" style="  padding: 6px 5px 4px 5px ; ">
-                        <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon>
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
+                        <img  src="{{ asset('new_assets/icon/ตะกร้า.png')}}" >
                         <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span> 
                     </div>
                 </a>
             </div>
+
             <div class="col-2">
                 <a href="{{url('user/notification')}}">
-                    <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
-                    </ion-icon>
+                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+                        <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                    </div>
                 </a>
             </div>
             
@@ -125,6 +129,7 @@
 @section('content')
 
 
+    <br>
     <br>
     <div class="row">
         <div class="col-6 text-left">
@@ -210,7 +215,8 @@
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
                             <div class="col-3 row p-0 align-items-center">
-                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <img src="{{ asset('new_assets/icon/ถูกใจ.png')}}" alt="alt" style="width:17px; height:17px;">
+                                {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
                                 @if($la == null)
                                     <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
                                 @else
@@ -218,17 +224,17 @@
                                 @endif
                             </div>
                             <div class="col-5 row p-0 align-items-center">
-                                <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                             </div>
-                            <div class="col-2 row p-0 align-items-center"  data-toggle="modal" data-target="#share">
-                                <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1">แชร์</h5>
+                            <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#share" >
+                                <img src="{{ asset('new_assets/icon/แชร์.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <h5 class="mb-0 ml-1" >แชร์</h5>
                             </div>
-                            {{-- <div class="col-2 row p-0 align-items-center">
-                                <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
+                            <div class="col-2 row p-0 align-items-center">
+                                <img src="{{asset('new_assets/icon/โดเนท.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1">โดเนท</h5>
-                            </div> --}}
+                            </div>
 
                         </div>
                     </div>

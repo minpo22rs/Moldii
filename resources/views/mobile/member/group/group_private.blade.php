@@ -11,8 +11,8 @@
     </div>
     
     <div class="col-md-12">
-        <div class="pt-4" style="font-weight: bold; color: #1C2833 ; font-size: 130% ; " > กลุ่มสินค้าออนไลน์ Thailand 2022  </div> 
-        <div class="pt-1"><small >[icon] Private Group <b>153.8K</b> members</small></div>
+        <div class="pt-4" style="font-weight: bold; color: #1C2833 ; font-size: 200% ; " > กลุ่มสินค้าออนไลน์ Thailand 2022  </div> 
+        <div class="pt-1 pb-2"><i class="fa fa-solid fa-lock"></i> Private Group<b>{{$cg->count()}}</b> members</div>
         <div class="pt-3 pb-2"><a href="#" type="button" class="btn btn-primary btn-block"><b>Join Group</b></a></div>
         <hr> <!-- ------------------ -->
         <div class="pt-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > About </div> 

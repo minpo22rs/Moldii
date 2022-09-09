@@ -81,9 +81,9 @@
             <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
             <div class="dropdown-menu dropdown-menu-right">
                 @if($c->customer_id == Session::get('cid'))
-                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
-                    <a class="dropdown-item" href="#" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a>
-                    <a class="dropdown-item" href="#" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a>
+                    {{-- <a class="dropdown-item" href="#">แก้ไขโพสต์</a> --}}
+                    <a class="dropdown-item" href="javascript:;" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a>
                     <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                 @endif
                 <a class="dropdown-item" href="{{url('contentreport/'.$c->new_id.'')}}">report</a>

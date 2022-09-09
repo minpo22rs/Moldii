@@ -1,5 +1,6 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
+{{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
 <div class="appHeader bg-danger text-light">
     <div class="left">
         <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('auction')}}');">
@@ -57,10 +58,11 @@
            
         </div>
     </div>
+    {{-- ราคาปัจจุบัน --}}
     <div class="row">
         <div class="row justify-content-between w-100 p-1  mx-2">
             <h3 class="mb-0">{{$product->product_name}}</h3>
-            <h3 class="text-danger">ราคาปัจจุบัน {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
+            <h3 class="text-danger" id="pricenow">ราคาปัจจุบัน {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
             <p class="time">
                 <br>
                 <!-- hours -->
@@ -98,15 +100,16 @@
    
     <div class="col-12">
         <hr class="my-1">
-        <form action="{{url('addauction')}}" method="POST">
-            @csrf
-            <div class="row justify-content-between  p-1">
+        {{-- <form action="{{url('addauction')}}" method="POST">
+            @csrf --}}
+            @csrf 
+            <div class="row justify-content-between  p-1" id="divbit">
                 {{-- <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3> --}}
                 <?php   $p = 0;
                         if($log->count()!=0){
-                            $p = number_format($log[0]->price+$auction->bit,2,'.','');
+                            $p = $log[0]->price+$auction->bit;
                         }else{
-                            $p = number_format($auction->price+$auction->bit,2,'.','');
+                            $p = $auction->price+$auction->bit;
                         }
                 
                 ?>
@@ -115,16 +118,23 @@
                     <input type="number" class="form-control font-weight-bold " value="{{$p}}" id="bitcount" style="border:none;font-size: 24px;width:100px" name="count" />
                     <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
                 </div>
-                <button class="btn btn-info">ประมูลเลย</button>
-                <input type="hidden" name="pid" value="{{$product->product_id}}">
-                <input type="hidden" name="adid" value="{{$detail->id_auction_detail}}">
-                <input type="hidden" name="aid" value="{{$auction->id_auction}}">
+                <button class="btn btn-info" onclick="updateDiv();">ประมูลเลย</button>
+                <input type="hidden" name="pid" id="pid" value="{{$product->product_id}}">
+                <input type="hidden" name="adid" id="adid" value="{{$detail->id_auction_detail}}">
+                <input type="hidden" name="aid" id="aid" value="{{$auction->id_auction}}">
 
             </div>
-        </form>
+        {{-- </form> --}}
+
+        {{-- <button class="btn btn-info" onclick="updateDiv();">button</button> --}}
+
+
+        {{-- <div id="here">
+            tested
+        </div> --}}
         @if($log->count()!=0)
             <hr class="my-1">
-            <div class="col-12 p-1  ">
+            <div class="col-12 p-1  " id="here">
                 <table class="table">
                     <thead>
                     <tr>
@@ -172,15 +182,39 @@
 
 </div>
 
+
+<div class="modal" tabindex="-1" role="dialog" id="exp">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        {{-- <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> --}}
+        <div class="modal-body text-center">
+          <p id="text_exp">สิ้นสุดการประมูล</p>
+          <a href="{{url('auction')}}" type="button" class="btn btn-primary">ปิด</a>
+
+        </div>
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="{{url('auction')}}" type="button" class="btn btn-primary">ปิด</a>
+        </div> --}}
+      </div>
+    </div>
+</div>
+
+
+
 @endsection
 
 
 @section('custom_script')
+
     <script>
 
         bottom_now(5);
-
-
 
         var a = "{{Session::get('success')}}";
         if(a){
@@ -189,30 +223,63 @@
 
         var p = "{{$minbit}}";
         var b = "{{$auction->bit}}";
-
-
+        var limit = "{{$limit}}";
+        var countDownDate = new Date(limit).getTime();
+        // Set the date we're counting down to
+        var _token = $('input[name="_token"]').val();
+        var pid = document.getElementById('pid').value ;
+        var adid = document.getElementById('adid').value ;
+        var aid = document.getElementById('aid').value ;
         var min = parseInt(p)+parseInt(b);
         
 
         $(".stepper-ups").on("click", function () {
             var valueInput = document.getElementById('bitcount').value;
-            document.getElementById('bitcount').value = (parseInt(valueInput) + parseInt(b)).toFixed(2);
+            document.getElementById('bitcount').value = (parseInt(valueInput) + parseInt(b));
             // var valueInput = document.getElementById('bitcount').value;
-            // valueInput.val((parseInt(valueInput.val()) + parseInt(b)).toFixed(2));
+            // valueInput.val((parseInt(valueInput.val()) + parseInt(b)));
         });
         $(".stepper-downs").on("click", function () {
            
             var valueInput = document.getElementById('bitcount').value;
             if (parseInt(valueInput) <= min) {
-                // valueInput.val(parseInt(min).toFixed(2));
-                document.getElementById('bitcount').value = (parseInt(min)).toFixed(2);
+                // valueInput.val(parseInt(min));
+                document.getElementById('bitcount').value = (parseInt(min));
                 
             }
             else{
-                // valueInput.val((parseInt(valueInput.val()) - b).toFixed(2));
-                document.getElementById('bitcount').value = (parseInt(valueInput) - b).toFixed(2);
+                // valueInput.val((parseInt(valueInput.val()) - b));
+                document.getElementById('bitcount').value = (parseInt(valueInput) - b);
             }
         });
+
+        function updateDiv()
+        { 
+           
+            var bitcount = document.getElementById('bitcount').value ;
+
+            $.ajax({
+                url: '{{ url("/addauction")}}',
+                type: 'POST',
+                dataType: 'HTML',
+                data: {'pid':pid,'adid':adid,'aid':aid,'count':bitcount,'_token':_token},
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    limit = json['limit'];
+                    console.log(limit);
+                    document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+
+                    document.getElementById('bitcount').value = json['bit'];
+                    $( "#here" ).load(window.location.href + " #here" );
+                    // $( "#here" ).load(window.location.href + " #here" );
+
+                    // $( "#divbit" ).load(window.location.href + " #divbit" );
+                }
+            });
+
+            
+        }
+
        
         const getLastDigit = (number) => {
             return number % 10;
@@ -225,54 +292,66 @@
 
 
            
-            var limit = "{{$limit}}";
         
         
-            // Set the date we're counting down to
-            var countDownDate = new Date(limit).getTime();
+          
 
             // Update the count down every 1 second
-            var x = setInterval(function() {
+        var x = setInterval(function() {
+            countDownDate = new Date(limit).getTime();
+            // Get today's date and time
+            var now = new Date().getTime();
 
-                // Get today's date and time
-                var now = new Date().getTime();
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+                // console.log(distance);
+            // Time calculations for days, hours, minutes and seconds
+            // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
+            // Display the result in the element with id="demo"
+            // document.getElementById("demo").innerHTML = hours + "h "
+            // + minutes + "m " + seconds + "s ";
 
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the result in the element with id="demo"
-                // document.getElementById("demo").innerHTML = hours + "h "
-                // + minutes + "m " + seconds + "s ";
-
-                document.getElementById('hour-ten-digit').innerHTML = getTenDigit(hours);
-                document.getElementById('hour-last-digit').innerHTML = getLastDigit(hours);
-                document.getElementById('min-ten-digit').innerHTML = getTenDigit(minutes);
-                document.getElementById('min-last-digit').innerHTML = getLastDigit(minutes);
-                document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
-                document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
+            document.getElementById('hour-ten-digit').innerHTML = getTenDigit(hours);
+            document.getElementById('hour-last-digit').innerHTML = getLastDigit(hours);
+            document.getElementById('min-ten-digit').innerHTML = getTenDigit(minutes);
+            document.getElementById('min-last-digit').innerHTML = getLastDigit(minutes);
+            document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
+            document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
 
 
 
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById('hour-ten-digit').innerHTML = '0';
-                    document.getElementById('hour-last-digit').innerHTML ='0';
-                    document.getElementById('min-ten-digit').innerHTML = '0';
-                    document.getElementById('min-last-digit').innerHTML ='0';
-                    document.getElementById('sec-ten-digit').innerHTML = '0';
-                    document.getElementById('sec-last-digit').innerHTML ='0';
-                    $('#exp').modal('show');
-                    // window.location.replace("{{url('auction')}}");
-                    // document.getElementById("demo").innerHTML = "EXPIRED";
-                }
-            }, 1000);
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById('hour-ten-digit').innerHTML = '0';
+                document.getElementById('hour-last-digit').innerHTML ='0';
+                document.getElementById('min-ten-digit').innerHTML = '0';
+                document.getElementById('min-last-digit').innerHTML ='0';
+                document.getElementById('sec-ten-digit').innerHTML = '0';
+                document.getElementById('sec-last-digit').innerHTML ='0';
+                $.ajax({
+                    url: '{{ url("/checkauction")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'pid':pid,'adid':adid,'aid':aid},
+                    success: function(data) {
+                        if(data==1){
+                            document.getElementById('text_exp').innerHTML ='คุณชนะการประมูล ตรวจสอบสินค้าได้ที่ตระกร้า';
+                            $('#exp').modal('show');
+
+                        }else{
+                            $('#exp').modal('show');
+
+                        }
+                       
+                    }
+                });
+            }
+        }, 1000);
 
             
 

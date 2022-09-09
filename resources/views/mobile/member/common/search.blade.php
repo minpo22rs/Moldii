@@ -36,39 +36,43 @@
     <div class="pageTitle">
 
         <div class="row ml-3">
-            <div class="col-2">
-                <ion-icon id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()" name="list" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline">
-                </ion-icon>
+            
+            <div class="col-2 ">
+                <div id="btn_search_2" style="cursor: pointer;"  onclick="myFunction()"  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-0 h5 text-center">
+                 <img  src="{{ asset('new_assets/icon/ตัวกรอง.png')}}" >
+                </div>
             </div>
-
+            
             <div class="col-6">
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search...">
-                        <i class="input-icon">
+                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
+                        <!-- <i class="input-icon" >
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                        </i>
+                        </i> -->
                     </div>
                     
                 </form>
             </div>
-
-            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first();?>
+            <?php $countcart = DB::Table('tb_carts')->select(DB::raw('SUM(count) as countt'))->where('customer_id',Session::get('cid'))->first(); ?>
            
             <div class="col-2 mt-1">
                 <a href="{{url('cartindex')}}" > 
-                    <div class="  md hydrated  bg-white text-danger rounded  h5 text-center" style="  padding: 6px 5px 4px 5px ; ">
-                        <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon>
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
+                        <img  src="{{ asset('new_assets/icon/ตะกร้า.png')}}" >
                         <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span> 
                     </div>
                 </a>
             </div>
-            
+
             <div class="col-2">
                 <a href="{{url('user/notification')}}">
-                <ion-icon name="notifications" class="md hydrated font-weight-bold bg-white text-danger rounded p-1 mt-1 mb-0 h5" role="img" aria-label="search outline" >
-                </ion-icon></a>
+                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+                        <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                    </div>
+                </a>
             </div>
             
         </div>

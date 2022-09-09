@@ -27,7 +27,7 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 
     imgInp.onchange = evt => {
     const [file] = imgInp.files
