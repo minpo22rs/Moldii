@@ -115,7 +115,7 @@
             <div class="row border-top mx-3 my-3 text-dark">
                 <div class="col-6 mt-1 text-left">
                     <div class="row">
-                        <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">แลกคอยน์</span></div>
+                        <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมคอยน์</span></div>
                     </div>
                     <div class="row">
                         <div class="col-12"><span>{{$ps->created_at}}</span></div>
