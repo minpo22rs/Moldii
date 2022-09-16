@@ -49,6 +49,8 @@ class UserAccController extends Controller
     public function forgotPassword ()
     {   
         // Session::forget('phone');
+        // Session::put('verify',null);
+        // Session::put('tel',null);
         return view('mobile.member.forgotPassword.forgotPassword');
     }
 

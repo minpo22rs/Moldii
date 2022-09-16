@@ -20,7 +20,7 @@
 </style>
     @section('content')
     <div id="bg">
-        <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
+        <img src="{{asset('/new_assets/img/login_new.JPG')}}" alt="">
     </div>
     <br>
         <div class = "m-1">
@@ -70,7 +70,7 @@
                                                 name = "otp" id = "otp" 
                                                 value = "" placeholder = "OTP" >
                                     </div>
-                                    <div class = "col-3 text-left">
+                                    <div class = "col-3 text-left" id="btnotp" style="display: none">
                                         <ion-icon   name = "arrow-forward-outline"
                                                     class = "text-white font-weight-bold bg-danger p-1 rounded-circle" 
                                                     style = "color: black; margin-top: 10%; font-size: 25px;background-color: rgb(31, 164, 226) !important"
@@ -119,10 +119,12 @@
 
         $( document ).ready(function() {
             if(verify == 1){
-                console.log('v1')
                 document.getElementById('password').readOnly = 'false';
                 document.getElementById('confirm_password').readOnly = 'false';
                 document.getElementById('btnsend').disabled = 'false';
+            }else if(verify == 2){
+                document.getElementById('btnotp').style.display='';
+
             }
         });
 

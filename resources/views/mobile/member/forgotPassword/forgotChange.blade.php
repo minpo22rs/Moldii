@@ -20,17 +20,17 @@
 </style>
     @section('content')
     <div id="bg">
-        <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
+        <img src="{{asset('/new_assets/img/login_new.JPG')}}" alt="">
     </div>
     <br>
         <div class = "m-1">
             <div class = "m-1">
                 <div class = "row align-items-center">
-                    <div class = "col-12 text-left">
+                    {{-- <div class = "col-12 text-left">
                         <a href="{{url('/user/login')}}"><ion-icon   name="arrow-back-outline"
                                     class = "text-dark font-weight-bold" 
                                     style = "color: black; margin-top: 10%; font-size: 25px;"></ion-icon></a>
-                    </div>
+                    </div> --}}
                     <div class = "col-12 text-left" style = "margin-top: 30%;">
                         <h1 class = "ml-4">
                             Forgot
@@ -41,11 +41,14 @@
                     </div>
                     
                   
-                        <div class = "col-8 offset-1 text-center"  >
-                
+                        <div class = "col-8 offset-1 text-center "  >
                             <input  type = "text" class = "form-control form-control-lg my-1" style = "border-radius: 10px;"
                                     name = "tel" id = "tel" 
-                                    value = "{{Session::get('phone')}}" placeholder = "Mobile Number" minlength="10">
+                                    value = "{{Session::get('phone')}}" readonly>
+                       
+                            <input  type = "text" class = "form-control form-control-lg my-1 mt-1" style = "border-radius: 10px;"
+                                    name = "un"
+                                    value = "{{Session::get('un')}}" readonly>
                         </div>
                                    
                          <br>  <br> 
