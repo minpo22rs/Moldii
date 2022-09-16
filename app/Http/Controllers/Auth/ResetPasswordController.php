@@ -152,8 +152,8 @@ class ResetPasswordController extends Controller
     public function formresetpassword(Request $request)
     {
         // dd($request->all());
-        // $pass  = Hash::make($request->password);
-        // User::where('customer_phone',$request->phone)->update(['customer_password'=> $pass]);
+        $pass  = Hash::make($request->password);
+        User::where('customer_phone',$request->phone)->update(['customer_password'=> $pass]);
         return redirect('user/login')->with('error','เปลี่ยนรหัสผ่านสำเร็จแล้ว');
 
     }

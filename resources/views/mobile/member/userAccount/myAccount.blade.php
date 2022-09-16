@@ -41,12 +41,14 @@
     </div>
     <div class="col-6 pl-0">
         <div class="m-1">
-            <div class="card">
-                <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_coin}} คอยน์</span>
+            <a href="{{url('user/convert')}}" style="color: black">
+                <div class="card">
+                    <div class="row w-100 mx-3 my-2 text-center">
+                        <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
+                        <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_coin}} คอยน์</span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
    
