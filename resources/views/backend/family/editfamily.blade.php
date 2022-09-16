@@ -51,6 +51,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
+
+                        <label class="col-sm-2 col-form-label">ประเภทกลุ่ม</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="form-control col-sm-12" name="type_group">
+                                        <option value="">โปรดเลือก</option>
+                                        <option value="1" {{$Family->group_show==1?'selected':''}}>กลุ่มสาธารณะ</option>
+                                        <option value="2" {{$Family->group_show==2?'selected':''}}>กลุ่มส่วนตัว</option>
+                                       
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> 
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รายละเอียด</label>
                         <div class="col-sm-10">
                             <textarea name="description" class="form-control" cols="30" rows="10" placeholder="เขียนบางอย่าง...">{{$Family->description}}</textarea>

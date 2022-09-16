@@ -29,7 +29,7 @@ class FamilyController extends Controller
             $Family = new Family();
             $Family->name            = $request->name;
             $Family->description     = $request->description;
-            // $Family->type_group      = $request->type_group;
+            $Family->group_show      = $request->type_group;
             if ($request->file('img') !== null)
             {
                 $img = $request->file('img');
@@ -92,6 +92,7 @@ class FamilyController extends Controller
                     $Family->group_img = $name;
                 }
             }
+            $Family->group_show      = $request->type_group;
 
             if ($request->file('editnews') !== null)
             {
