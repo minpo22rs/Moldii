@@ -16,7 +16,7 @@
         @csrf
         <h3>ยอดเงินคงเหลือ : {{number_format($sql->customer_wallet,2,'.',',')}}</h3>
         <br>
-        จำนวนเงินที่ต้องการแลก (ขั้นต่ำ 100 บาท)<input type="number" name="money" placeholder="จำนวนเงินที่ต้องการแลก" class="form-control" id="money" min="100" max="{{$sql->customer_wallet}}" onchange="ccoin(this.value);" required><br>
+        จำนวนเงินที่ต้องการแลก (ขั้นต่ำ 100 บาท)<input type="number" name="money" placeholder="จำนวนเงินที่ต้องการแลก" class="form-control" id="money" min="100" max="{{$sql->customer_wallet}}" onkeyup="ccoin(this.value);" required><br>
         จำนวนคอยน์ที่ได้ <input type="text" name="coin" placeholder="จำนวนคอยน์ที่ได้" class="form-control" id="coin" readonly>
         <br>
        
