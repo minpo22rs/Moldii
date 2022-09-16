@@ -118,6 +118,11 @@ Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); //
 Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 Route::post('user/paymentWallet', [WalletController::class, 'paymentWallet']); // Top-up wallet
 Route::post('walletgateway/response/{id}', [WalletController::class, 'Top_upWallet']); // Top-up wallet
+Route::get('user/convert', [WalletController::class, 'convert']); 
+Route::post('user/submitconvert', [WalletController::class, 'submitconvert']); 
+Route::get('submitdonate', [WalletController::class, 'submitdonate']); 
+Route::get('user/donate', [WalletController::class, 'donate']); 
+Route::post('user/submitdonateexchange', [WalletController::class, 'submitdonateexchange']); 
 
 
 
@@ -164,9 +169,10 @@ Route::get('user/helpCenter', [HelpCenterController::class, 'index']);
 Route::get('store', [StoreController::class, 'index']); 
 
 
-//family
+//group
 Route::get('group', [GroupController::class, 'index']); 
 Route::get('groupid/{id}', [GroupController::class, 'groupid']); 
+Route::get('requestjoingroup/{type}/{id}', [GroupController::class, 'requestjoingroup']); 
 
 
 //cart

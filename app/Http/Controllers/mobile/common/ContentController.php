@@ -10,6 +10,8 @@ use App\Models\Tb_user_content;
 use Auth;
 use DB;
 use Session;
+use App\Models\User;
+
 
 class ContentController extends Controller
 {
@@ -27,12 +29,13 @@ class ContentController extends Controller
         $f = DB::Table('tb_followers')->where('id_c_follower',$c->customer_id)->where('id_customer',Session::get('cid'))->first();
         $la = DB::Table('tb_content_likes')->where('content_id',$c->new_id )->where('customer_id',Session::get('cid'))->first();
         $sh = DB::Table('tb_content_shares')->where('new_id',$c->new_id)->get();
+        $u = User::where('customer_id',Session::get('cid'))->first();
 
         // dd($c);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 
        
-        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la,'sh'=>$sh]);
+        return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la,'sh'=>$sh,'u'=>$u]);
     }
 
     public function sendcomment(Request $request)

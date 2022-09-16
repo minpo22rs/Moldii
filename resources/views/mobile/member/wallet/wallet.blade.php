@@ -39,6 +39,14 @@
                     <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
                 </div>
             </a>
+            <a href="{{url('user/convert')}}"class="row mt-1 border-top font-weight-bold" style="color:#fff;">
+                <div class="col-10 mt-2">
+                    เติมคอยน์
+                </div>
+                <div class="col-2 mt-2 text-right">
+                    <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
+                </div>
+            </a>
         </div>
     </div>
 </div>
@@ -94,7 +102,30 @@
                     <div class="row mt-1">
                         <div class="col-10 pr-0">
                             <span class="font-weight-bold" style="font-size: 18px;">
-                                THB {{number_format($ps->amount )}}
+                                THB -{{number_format($ps->amount )}}
+                            </span>
+                        </div>
+                        {{-- <div class="col-2">
+                            <ion-icon name="chevron-forward-outline" style="font-size: 24px;"></ion-icon>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+        @elseif($ps->payment_type == 'CONVERT')
+            <div class="row border-top mx-3 my-3 text-dark">
+                <div class="col-6 mt-1 text-left">
+                    <div class="row">
+                        <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">แลกคอยน์</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12"><span>{{$ps->created_at}}</span></div>
+                    </div>
+                </div>
+                <div class="col-6 mt-1 text-right">
+                    <div class="row mt-1">
+                        <div class="col-10 pr-0">
+                            <span class="font-weight-bold" style="font-size: 18px;">
+                                THB -{{number_format($ps->amount )}}
                             </span>
                         </div>
                         {{-- <div class="col-2">

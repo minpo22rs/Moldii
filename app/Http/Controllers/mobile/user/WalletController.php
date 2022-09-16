@@ -9,6 +9,8 @@ use Session;
 use DB;
 use App\Models\Tb_credit;
 use App\Models\Tb_payment_log;
+use App\Models\Tb_donate_log;
+
 
 class WalletController extends Controller
 {
@@ -18,7 +20,7 @@ class WalletController extends Controller
         Session::put('wallettypepayment',null);
         Session::put('walletbankcode',null);
         $sql = User::where('customer_id',Session::get('cid'))->first();
-        $p = Tb_payment_log::where('customer_id',Session::get('cid'))->get();
+        $p = Tb_payment_log::where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
         return view('mobile.member.wallet.wallet')->with(['sql'=>$sql,'p'=>$p]);
     }
     public function addMoney ()//เติมเงิน
@@ -296,4 +298,86 @@ class WalletController extends Controller
         User::where('customer_id',$id)->increment('customer_wallet',$request->amount);
         return redirect('user/wallet')->with('msg','เติมเงินเรียบร้อยแล้ว');
     }
+
+
+    public function convert ()
+    { 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.wallet.convert')->with(['sql'=>$sql]);
+    }
+
+
+    public function submitconvert (Request $request)
+    { 
+        $sqls = User::where('customer_id',Session::get('cid'))->first();
+        $del = $sqls->customer_wallet -  $request->money;
+        $add = $sqls->customer_coin + $request->coin;
+
+        User::where('customer_id',Session::get('cid'))->update(['customer_wallet'=>$del,'customer_coin'=>$add]);
+
+
+        $sql  =  new Tb_payment_log();
+        $sql->customer_id  = Session::get('cid');
+        $sql->payment_type  = 'CONVERT';
+        $sql->amount  = $request->money;
+        $sql->save();
+
+        return redirect('user/myAccount')->with('msg','เติมคอยน์เรียบร้อยแล้ว');
+    }
+
+
+    public function submitdonate (Request $request)
+    { 
+        // dd($request->all());
+
+
+        $g = User::where('customer_id',Session::get('cid'))->first();
+
+        $del = $g->customer_coin - $request->coin;
+        // dd($del );
+        User::where('customer_id',Session::get('cid'))->update(['customer_coin'=>$del]);
+
+        if($request->recive != 0 ){
+            $r = User::where('customer_id',$request->recive)->first();
+            $add = $r->customer_coin + $request->coin;
+            User::where('customer_id',$request->recive)->update(['customer_donate'=> $add]);
+            
+        }
+
+
+     
+        $sql  =  new Tb_donate_log();
+        $sql->g_customer_id  = Session::get('cid');
+        $sql->r_customer_id  =  $request->recive;
+        $sql->donate  = $request->name;
+        $sql->coin  = $request->coin;
+  
+        $sql->save();
+
+        return 1;
+    }
+
+
+    public function donate ()
+    { 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.userAccount.donate')->with(['sql'=>$sql]);
+    }
+
+
+    public function submitdonateexchange (Request $request)
+    { 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        $del = $sql->customer_donate - $request->money;
+        $add = $sql->customer_coin + $request->coin;
+
+        User::where('customer_id',Session::get('cid'))->update(['customer_donate'=>$del,'customer_coin'=>$add]);
+
+
+        return redirect('user/myAccount')->with('msg','แลกคอยน์เรียบร้อยแล้ว');
+    }
+
+
+
+
 }

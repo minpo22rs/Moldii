@@ -335,7 +335,7 @@ color: #666;
                 <div class="card">
                     <div class="row w-100 mx-3 my-2 text-center">
                         <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
-                        <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_point}} คอยน์</span>
+                        <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_coin}} คอยน์</span>
                     </div>
                 </div>
             </div>
@@ -576,7 +576,7 @@ color: #666;
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                            <div class="col-3 row p-0 align-items-center">
+                            <div class="col-3 row p-0 align-items-center ml-1">
                                 <img src="{{ asset('new_assets/icon/ถูกใจ.png')}}" alt="alt" style="width:17px; height:17px;">
                                 {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
                                 @if($la == null)
@@ -593,10 +593,12 @@ color: #666;
                                 <img src="{{ asset('new_assets/icon/แชร์.png')}}" alt="alt" style="width:17px; height:17px;">
                                 <h5 class="mb-0 ml-1" >แชร์</h5>
                             </div>
-                            <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#donate">
-                                <img src="{{asset('new_assets/icon/โดเนท.png')}}" alt="alt" style="width:17px; height:17px;">
-                                <h5 class="mb-0 ml-1">โดเนท</h5>
-                            </div>
+                            @if($sqls->customer_id != 0)
+                                <div class="col-2 row p-0 align-items-center ml-1" onclick="donatebtn({{$sqls->customer_id}});">
+                                    <img src="{{asset('new_assets/icon/โดเนท.png')}}" alt="alt" style="width:17px; height:17px;">
+                                    <h5 class="mb-0 ml-1">โดเนท</h5>
+                                </div>
+                            @endif
 
                         </div>
                     </div>
@@ -614,6 +616,7 @@ color: #666;
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <input type="hidden" name="urlencode" value="1">
 
                         <div class="modal-body">
                             
@@ -622,7 +625,7 @@ color: #666;
                         
                                 <br>
                                 <div class="row justify-content-around p-1 ">
-                                    <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <a href="https://social-plugins.line.me/lineit/share?url={{$urlen}}" class="m-0 text-center align-self-end  share-item">
                                         <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
                                         <h5 class="font-weight-bold m-0 mt-1">Line</h5>
                                     </a>
@@ -668,288 +671,288 @@ color: #666;
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
+                        <input type="hidden" name="donateid" value="0" id="donateid">
                         <div class="modal-body">
                             
                           <div class=" row" style="overflow: auto ; width: 100%; height: 450px; justify-content: center;">
                              <!-- Start img Donate -->
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1" > 
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(66,'Ghost');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/ghost.png') }}" alt="alt" class="rounded-circle" width="100%"  style="background-color:#e4e8eb ;  "  >
-                                            <h3 class="card-text">ghost</h3>
+                                            <h6 class="card-text">66 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1 ">  
-                                            <a href="#">                      
+                                            <a href="javascript:;" onclick="donate(9,'Hi');">                     
                                             <img src="{{  asset('new_assets/img/IconDonate/Hi.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
-                                            <h3 class="card-text">Hi</h3>
+                                            <h6 class="card-text">9 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(26,'Iloveyou');">             
                                             <img src="{{  asset('new_assets/img/IconDonate/iloveyou.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
-                                            <h3 class="card-text">iloveyou</h3>
+                                            <h6 class="card-text">26 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center  p-1">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(3789,'Supercar');">                   
                                             <img src="{{  asset('new_assets/img/IconDonate/Supercar.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; ">
-                                            <h3 class="card-text">Supercar</h3>
+                                            <h6 class="card-text">3,789 เหรียญ</h6>
                                             </a> 
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">     
-                                            <a href="#">                  
+                                            <a href="javascript:;" onclick="donate(4444,'UFO');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/UFO.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">UFO</h3>
+                                            <h6 class="card-text">4,444 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1">  
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(666,'กระโหลก');">                     
                                             <img src="{{  asset('new_assets/img/IconDonate/กระโหลก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">กระโหลก</h3>
+                                            <h6 class="card-text">666 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1 ">     
-                                            <a href="#">                  
+                                            <a href="javascript:;" onclick="donate(1550,'กล้อง');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/กล้อง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">กล้อง</h3>
+                                            <h6 class="card-text">1,550 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1 ">  
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(1234,'เกมบอย');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/เกมบอย.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เกมบอย</h3>
+                                            <h6 class="card-text">1,234 เหรียญ</h6>
                                             </a> 
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">        
-                                            <a href="#">                
+                                            <a href="javascript:;" onclick="donate(75,'ของขวัญ');">              
                                             <img src="{{  asset('new_assets/img/IconDonate/ของขวัญ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ของขวัญ</h3>
+                                            <h6 class="card-text">75 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                        
+                                            <a href="javascript:;" onclick="donate(360,'เข็มฉีดยา');">                         
                                             <img src="{{  asset('new_assets/img/IconDonate/เข็มฉีดยา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เข็มฉีดยา</h3>
+                                            <h6 class="card-text">360 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1 "> 
-                                            <a href="#">                       
+                                            <a href="javascript:;" onclick="donate(130,'เค้ก');">                       
                                             <img src="{{  asset('new_assets/img/IconDonate/เค้ก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เค้ก</h3>
+                                            <h6 class="card-text">130 เหรียญ</h6>
                                             </a> 
                                         </div>                      
                                         <div class="text-center p-1 ">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(5000,'เครื่องบิน');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/เครื่องบิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เครื่องบิน</h3>
+                                            <h6 class="card-text">5,000 เหรียญ</h6>
                                             </a> 
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(1000,'จอยเกม');">              
                                             <img src="{{  asset('new_assets/img/IconDonate/จอยเกม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">จอยเกม</h3>
+                                            <h6 class="card-text">1,000 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(969,'จักรยาน');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/จักรยาน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">จักรยาน</h3>
+                                            <h6 class="card-text">969 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1 ">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(88,'เจ๋ง');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/เจ๋ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เจ๋ง</h3>
+                                            <h6 class="card-text">88 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1 ">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(999,'ดวงอาทิตย์');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/ดวงอาทิตย์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ดวงอาทิตย์</h3>
+                                            <h6 class="card-text">999 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(1,'ดอกไม้');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/ดอกไม้.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ดอกไม้</h3>
+                                            <h6 class="card-text">1 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(12,'ดาว');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/ดาว.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ดาว</h3>
+                                            <h6 class="card-text">12 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(20,'โดนัท');">                 
                                             <img src="{{  asset('new_assets/img/IconDonate/โดนัท.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">โดนัท</h3>
+                                            <h6 class="card-text">20 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(18,'ตุ๊กตา');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/ตุ๊กตา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ตุ๊กตา</h3>
+                                            <h6 class="card-text">18 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(800 ,'ถ้วยรางวัลที่ 1');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 1.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ถ้วยรางวัลที่ 1</h3>
+                                            <h6 class="card-text">800 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(700,'ถ้วยรางวัลที่ 2');">                     
                                             <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 2.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ถ้วยรางวัลที่ 2</h3>
+                                            <h6 class="card-text">700 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1 ">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(600,'ถ้วยรางวัลที่ 3');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 3.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ถ้วยรางวัลที่ 3</h3>
+                                            <h6 class="card-text">600 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(234,'ถุงเงิน');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/ถุงเงิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ถุงเงิน</h3>
+                                            <h6 class="card-text">234 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(456,'ทามาก๊อต');">                 
                                             <img src="{{  asset('new_assets/img/IconDonate/ทามาก๊อต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ทามาก๊อต</h3>
+                                            <h6 class="card-text">456 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(1888,'ทีวี');">                      
                                             <img src="{{  asset('new_assets/img/IconDonate/ทีวี.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ทีวี</h3>
+                                            <h6 class="card-text">1,888 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(300,'เทปคาสเซ็ต');">                   
                                             <img src="{{  asset('new_assets/img/IconDonate/เทปคาสเซ็ต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เทปคาสเซ็ต</h3>
+                                            <h6 class="card-text">300 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(45,'ปั้มน้ำมัน');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/ปั้มน้ำมัน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ปั้มน้ำมัน</h3>
+                                            <h6 class="card-text">45 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(444,'ไฟ');">               
                                             <img src="{{  asset('new_assets/img/IconDonate/ไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ไฟ</h3>
+                                            <h6 class="card-text">444 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(2444,'ภูเขาไฟ');">                     
                                             <img src="{{  asset('new_assets/img/IconDonate/ภูเขาไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ภูเขาไฟ</h3>
+                                            <h6 class="card-text">2,444 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1 ">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(3333,'มงกุฎ');">                   
                                             <img src="{{  asset('new_assets/img/IconDonate/มงกุฎ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">มงกุฎ</h3>
+                                            <h6 class="card-text">3,333 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(2850,'มอเตอร์ไซค์');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/มอเตอร์ไซค์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">มอเตอร์ไซค์</h3>
+                                            <h6 class="card-text">2,850 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(168,'แมวกวัก');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/แมวกวัก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">แมวกวัก</h3>
+                                            <h6 class="card-text">168 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(5555,'ยานอวกาศ');">                     
                                             <img src="{{  asset('new_assets/img/IconDonate/ยานอวกาศ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ยานอวกาศ</h3>
+                                            <h6 class="card-text">5,555 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1 ">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(555,'ระเบิด');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/ระเบิด.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ระเบิด</h3>
+                                            <h6 class="card-text">555 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(99,'รุ้ง');">                   
                                             <img src="{{  asset('new_assets/img/IconDonate/รุ้ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">รุ้ง</h3>
+                                            <h6 class="card-text">99 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(33,'ลูกโป่ง');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/ลูกโป่ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ลูกโป่ง</h3>
+                                            <h6 class="card-text">33 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(5,'ลูกอม');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/ลูกอม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ลูกอม</h3>
+                                            <h6 class="card-text">5 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(888,'สายฟ้า');">                  
                                             <img src="{{  asset('new_assets/img/IconDonate/สายฟ้า.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">สายฟ้า</h3>
+                                            <h6 class="card-text">888 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">    
-                                            <a href="#">                    
+                                            <a href="javascript:;" onclick="donate(6666,'หีบสมบัติ');">                    
                                             <img src="{{  asset('new_assets/img/IconDonate/หีบสมบัติ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">หีบสมบัติ</h3>
+                                            <h6 class="card-text">6,666 เหรียญ</h6>
                                             </a>
                                         </div>                                                                        
                             </div> 
                             <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
                                         <div class="text-center p-1">       
-                                            <a href="#">                 
+                                            <a href="javascript:;" onclick="donate(269,'หุ่นยนต์');">                
                                             <img src="{{  asset('new_assets/img/IconDonate/หุ่นยนต์.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">หุ่นยนต์</h3>
+                                            <h6 class="card-text">269 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center p-1">   
-                                            <a href="#">                     
+                                            <a href="javascript:;" onclick="donate(55,'เห็ดเพิ่มพลัง');">                   
                                             <img src="{{  asset('new_assets/img/IconDonate/เห็ดเพิ่มพลัง.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">เห็ดเพิ่มพลัง</h3>
+                                            <h6 class="card-text">55 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                         <div class="text-center  p-1">     
-                                            <a href="#">                   
+                                            <a href="javascript:;" onclick="donate(30,'ไอศกรีม');">              
                                             <img src="{{  asset('new_assets/img/IconDonate/ไอศกรีม.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
-                                            <h3 class="card-text">ไอศกรีม</h3>
+                                            <h6 class="card-text">30 เหรียญ</h6>
                                             </a>
                                         </div>                      
                                                                                                       
@@ -1234,6 +1237,40 @@ color: #666;
                     x.style.display = "block";
                 } else {
                     x.style.display = "none";
+                }
+            }
+
+            function donatebtn(v){
+                document.getElementById("donateid").value = v ;
+                $('#donate').modal('show');
+                
+            }
+
+            function donate(x,t){
+        
+                var donate = document.getElementById("donateid").value;
+
+                var c= "{{$u->customer_coin}}";
+                if(x > c){
+                    if(confirm('จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่? ')){
+                        window.location.replace('/user/convert');
+                    }else{
+
+                        
+                    }
+                    
+                }else{
+                    $.ajax({
+                        url: '{{ url("/submitdonate")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'recive':donate,'name':t,'coin':x},
+                        success: function(data) {
+                            alert('โดเนทเรียบร้อยแล้ว');
+                            window.location.reload();
+                        }
+                    });
+
                 }
             }
         </script>

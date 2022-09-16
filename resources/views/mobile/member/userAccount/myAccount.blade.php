@@ -44,7 +44,7 @@
             <div class="card">
                 <div class="row w-100 mx-3 my-2 text-center">
                     <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_point}} คอยน์</span>
+                    <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_coin}} คอยน์</span>
                 </div>
             </div>
         </div>
@@ -55,11 +55,11 @@
 <div class="row my-2">
     <div class="col-6 pr-0">
         <div class="m-1">
-            <a href="๒" style="color: black">
+            <a href="{{url('user/donate')}}" style="color: black">
                 <div class="card">
                     <div class="row w-100 mx-3 my-2 text-center">
                         <img src="{{ asset('new_assets/icon/โดเนท.png')}}" width="15%">
-                        <span class="ml-2 align-self-center font-weight-bold"> โดเนท</span>
+                        <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_donate}} โดเนท</span>
                     </div>
                 </div>
             </a>
@@ -147,5 +147,12 @@
 @section('custom_script')
 <script>
     bottom_now(7);
+
+    var a = "{{Session::get('msg')}}";
+    if(a){
+        alert(a);
+    }
+
+    
 </script>
 @endsection
