@@ -15,7 +15,7 @@ class GroupController extends Controller
         $c = DB::Table('tb_news')->where('family_id','!=',null)->get();
         $cat = DB::Table('tb_category')->where('deleted_at','=',null)->get();
 
-        $group = DB::Table('tb_familys')->get();
+        $group = DB::Table('tb_familys')->where('published',1)->get();
         // dd( $cat);
         return view('mobile.member.group.indexgroup')->with(['c'=>$c,'cat'=>$cat,'group'=>$group]);
     }
