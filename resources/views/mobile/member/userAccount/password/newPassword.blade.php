@@ -12,17 +12,19 @@
 @section('content')
 <div class="mt-1 p-2 col-12">
 
-    <form action="">
+    <form action="{{url('user/savenewPassword')}}" method="POST" id="formchangepass">
         @csrf
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">เพื่อความปลอดภัยของบัญชีคุณ</small> </h6>
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณายืนยันรหัสผ่านเพื่อดำเนินการต่อ</small> </h6>
+        <h3 class="my-1"><small style="color:rgba(181, 181, 181, 1);">เพื่อความปลอดภัยของบัญชีคุณ</small> </h3>
+        <h3 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณายืนยันรหัสผ่านเพื่อดำเนินการต่อ</small> </h3>
+        <h3 class="my-1"><small style="color:red">ขั้นต่ำ 8 ตำแหน่ง</small> </h3>
 
-        <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="newPassword" id="newPassword" value="" placeholder="รหัสผ่านใหม่">
+        <input type="password" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="password" id="password" value="" minlength="8" placeholder="รหัสผ่านใหม่ ">
+        <input type="password" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="confirm_password" id="confirm_password" value="" minlength="8"  placeholder="ยืนยันรหัสผ่านใหม่">
 
 
 
 
-        <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;">ยืนยัน</button>
+        <button type="button" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;" onclick="confirmpass();">ยืนยัน</button>
 
 
 
@@ -83,17 +85,33 @@
 <script>
     bottom_now(7);
     //_______________[Buy_goods]__________________//
-    const showNum = document.getElementById("newPassword");
-    const boxNum = document.getElementById("numpad_box");
-    const conNum = document.getElementById("numpad_container");
+    // const showNum = document.getElementById("newPassword");
+    // const boxNum = document.getElementById("numpad_box");
+    // const conNum = document.getElementById("numpad_container");
 
-    showNum.addEventListener("click", () => {
-        boxNum.classList.add("numpad-show");
+    // showNum.addEventListener("click", () => {
+    //     boxNum.classList.add("numpad-show");
 
-    });
+    // });
 
 
 
+    function confirmpass(){
+        var p2 = document.getElementById('confirm_password').value ;
+        var p1 = document.getElementById('password').value ;
+        if(p1  != p2){
+                alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
+        }else{
+            if(p2.length < 8 || p1.length < 8){
+                alert('รหัสผ่านนี้ไม่เป็นไปตามข้อกำหนดขั้นต่ำ');
+
+            }else{
+                $('#formchangepass').submit();
+
+            }
+
+        }
+    }
 
 
 

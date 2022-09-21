@@ -40,12 +40,14 @@ class ContentController extends Controller
 
     public function sendcomment(Request $request)
     {
+        date_default_timezone_set('Asia/Bangkok');
         DB::Table('tb_comments')->insert(['comment_text'=> $request->comment,'comment_object_id'=>$request->cid,'comment_type'=>'C','comment_author'=>Session::get('cid')]);
         return back();
     }
 
     public function sendcommentreply(Request $request)
     {
+        date_default_timezone_set('Asia/Bangkok');
         // dd($request->all());
         DB::Table('tb_comment_replys')->insert(['comment_reply_text'=> $request->reply,'news_id'=>$request->newsid,'id_tb_comment'=>$request->cid,'customer_id'=>Session::get('cid')]);
         DB::Table('tb_comments')->where('comment_id',$request->cid)->update(['comment_reply'=> 1]);
@@ -58,6 +60,7 @@ class ContentController extends Controller
     // ]);
 
     public function userpostcontent(Request $request){
+        date_default_timezone_set('Asia/Bangkok');
         // dd($request->all());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');

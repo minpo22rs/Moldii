@@ -2,184 +2,184 @@
 
 @section('app_header')
 <style>
-  
+        
 
-/* * Post widget * */
+        /* * Post widget * */
 
-input[type="file"] {
-display: none;
-}
-ul {
-list-style-type: none;
-}
+        input[type="file"] {
+        display: none;
+        }
+        ul {
+        list-style-type: none;
+        }
 
-.btn {
-padding: .5em 1em;
+        .btn {
+        padding: .5em 1em;
 
-background-color: transparent;
-color: #6b7270;
+        background-color: transparent;
+        color: #6b7270;
 
-border: none;
-cursor: pointer;
-}
+        border: none;
+        cursor: pointer;
+        }
 
-.widget-post {
-width: auto;
-min-height: 100px;
-height: auto;
+        .widget-post {
+        width: auto;
+        min-height: 100px;
+        height: auto;
 
-border: 1px solid #eaeaea;
-border-radius: 6px;
-box-shadow: 0 1px 2px 1px rgba(130, 130, 130, 0.1);
+        border: 1px solid #eaeaea;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px 1px rgba(130, 130, 130, 0.1);
 
-background-color: #fff;
+        background-color: #fff;
 
-margin: auto;
-overflow: hidden;
-}
+        margin: auto;
+        overflow: hidden;
+        }
 
-.widget-post__header {
-padding: .2em .5em;
+        .widget-post__header {
+        padding: .2em .5em;
 
-background-color: #eaeaea;
-color: #3f5563;
-}
-.widget-post__title {
-font-size: 18px;
-margin-top:10px;
-}
+        background-color: #eaeaea;
+        color: #3f5563;
+        }
+        .widget-post__title {
+        font-size: 18px;
+        margin-top:10px;
+        }
 
-.widget-post__content {
-width: 100%;
-height: 50%;
-}
-.widget-post__textarea {
-width: 100%;
-height: 100%;
-padding: .5em;
+        .widget-post__content {
+        width: 100%;
+        height: 50%;
+        }
+        .widget-post__textarea {
+        width: 100%;
+        height: 100%;
+        padding: .5em;
 
-border: none;
-resize: none;
-}
-.widget-post__textarea:focus {
-outline: none;
-}
+        border: none;
+        resize: none;
+        }
+        .widget-post__textarea:focus {
+        outline: none;
+        }
 
-.widget-post__options {
-padding: .5em;
-}
-.widget-post___input {
-display: inline-block;
+        .widget-post__options {
+        padding: .5em;
+        }
+        .widget-post___input {
+        display: inline-block;
 
-width: 24%;
-padding: .2em .5em;
+        width: 24%;
+        padding: .2em .5em;
 
-border: 1px solid #eaeaea;
-border-radius: 1.5em;
-}
-.post-actions__label {
-cursor: pointer;
-margin-top:10px;
+        border: 1px solid #eaeaea;
+        border-radius: 1.5em;
+        }
+        .post-actions__label {
+        cursor: pointer;
+        margin-top:10px;
 
-}
+        }
 
-.widget-post__actions {
-width: 100%;
-padding: .5em;
-}
-.post--actions {
-position: relative;
-padding: .5em;
+        .widget-post__actions {
+        width: 100%;
+        padding: .5em;
+        }
+        .post--actions {
+        position: relative;
+        padding: .5em;
 
-background-color: #f5f5f5;
-color: #a2a6a7;
-}
-.post-actions__attachments {
-display: inline-block;
-width: 60%;
-}
-.attachments--btn {
-background-color: #eaeaea;
-color: #007582;
+        background-color: #f5f5f5;
+        color: #a2a6a7;
+        }
+        .post-actions__attachments {
+        display: inline-block;
+        width: 60%;
+        }
+        .attachments--btn {
+        background-color: #eaeaea;
+        color: #007582;
 
-border-radius: 1.5em;
-}
+        border-radius: 1.5em;
+        }
 
-.post-actions__widget {
-display: inline-block;
-width: 38%;
-text-align: right;
-}
-.post-actions__publish {
-width: 120px;
+        .post-actions__widget {
+        display: inline-block;
+        width: 38%;
+        text-align: right;
+        }
+        .post-actions__publish {
+        width: 120px;
 
-background-color: #008391;
-color: #fff;
+        background-color: #008391;
+        color: #fff;
 
-border-radius: 1.5em;
-}
+        border-radius: 1.5em;
+        }
 
-.scroller::-webkit-scrollbar {
-display: none;
-}
+        .scroller::-webkit-scrollbar {
+        display: none;
+        }
 
-.is--hidden {
-display: none;
-}
+        .is--hidden {
+        display: none;
+        }
 
-.sr-only {
-width: 1px;
-height: 1px;
+        .sr-only {
+        width: 1px;
+        height: 1px;
 
-clip: rect(1px, 1px, 1px, 1px);
--webkit-clip-path: inset(50%);
-clip-path: inset(50%);
+        clip: rect(1px, 1px, 1px, 1px);
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
 
-overflow: hidden;
-white-space: nowrap;
+        overflow: hidden;
+        white-space: nowrap;
 
-position: absolute;
-top: 0;
+        position: absolute;
+        top: 0;
 
-}
+        }
 
 
-/* *  Placeholder contrast * */
-::-webkit-input-placeholder {
-color: #666;
-}
-::-moz-placeholder {
-color: #666;
-}
-:-ms-input-placeholder {
-color: #666;
-}
-:-moz-placeholder {
-color: #666;
-}
+        /* *  Placeholder contrast * */
+        ::-webkit-input-placeholder {
+        color: #666;
+        }
+        ::-moz-placeholder {
+        color: #666;
+        }
+        :-ms-input-placeholder {
+        color: #666;
+        }
+        :-moz-placeholder {
+        color: #666;
+        }
 
-#search_box_2 {
-    width: 100%;
-    height: auto;
-    padding: 60px 0;
-    text-align: center;
-    background-color: white ;
-    margin-top: 30px;
-    position: sticky;
-    display: none;
-    transform: translateY( 0%);
-    transition: transform 0.5s;
-}
+        #search_box_2 {
+            width: 100%;
+            height: auto;
+            padding: 60px 0;
+            text-align: center;
+            background-color: white ;
+            margin-top: 30px;
+            position: sticky;
+            display: none;
+            transform: translateY( 0%);
+            transition: transform 0.5s;
+        }
 
-#search_2 {
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-    background-color: #fc684b ;
-    margin-top: 30px;
-    position: fixed;
-    display: none;
-}
+        #search_2 {
+            width: 100%;
+            padding: 30px 0;
+            text-align: center;
+            background-color: #fc684b ;
+            margin-top: 30px;
+            position: fixed;
+            display: none;
+        }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -281,6 +281,8 @@ color: #666;
 
 @section('content')
 
+    <br>
+
 
     <div>
         <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}" alt="alt">
@@ -288,6 +290,7 @@ color: #666;
     </div>
 
     <br>
+    
     {{-- <div style="background-color: gray" >
         <div class="row">
             <div class="col-6">
@@ -430,8 +433,17 @@ color: #666;
                     
                     <div class="card my-3">
                         <div class="card-body row col-12 justify-content-center m-0">
-                            <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
-
+                            @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
+                                <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                            @else
+                                @if($user->customer_img != null)
+                                    <img src="{{asset('storage/profile_cover/'.$user->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                                @else
+                                    <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                            
+                            
+                                @endif
+                            @endif
                             <div class="card-title col-8  align-self-center m-0 ">
                                 <div class="card-title m-0 row align-self-center">
                                     @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
@@ -502,7 +514,7 @@ color: #666;
                                 @if($sqls->new_type == 'C')
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                         </div>
                                         @if($imggal->count() >1)
                                             <ol class="carousel-indicators">
@@ -512,7 +524,7 @@ color: #666;
                                             </ol>
                                             @foreach($imggal as $imgs)
                                                 <div class="carousel-item">
-                                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                 </div>
                                             @endforeach
                                         @endif
@@ -524,7 +536,7 @@ color: #666;
                                         @if($imggal->count() != 0)
                                             @if($imggal[0]->type =='I')
                                                 <div class="carousel-item active">
-                                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                 </div>
                                             @else
                                                 <div class="carousel-item active">
@@ -544,7 +556,7 @@ color: #666;
                                                     @if($imgs->type =='I')
                                                         
                                                         <div class="carousel-item">
-                                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                         </div>
                                                     @else
                                                        

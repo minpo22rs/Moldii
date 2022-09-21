@@ -87,7 +87,7 @@ class RegisterController extends Controller
         $p->customer_password = Hash::make($request['password']);
         $p->save();
 
-        Session::put('u_id',$p->id);
+        Session::put('cid',$p->id);
         // dd($p);
         return redirect()->to('otp');
     }
@@ -116,7 +116,7 @@ class RegisterController extends Controller
     public function selecttag(Request $request)
     {
        
-        DB::table('tb_customers')->where('customer_id',Session::get('u_id'))->update(['tag'=> $request->checkbox]);
+        DB::table('tb_customers')->where('customer_id',Session::get('cid'))->update(['tag'=> $request->checkbox]);
 
 
         return redirect('index');

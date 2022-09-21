@@ -144,27 +144,27 @@
            }
        }
 
-       function sendotp(){
-           var otp = document.getElementById('otp').value ;
-           if(otp == ''){
-                alert('กรุณากรอกหมายเลข OTP');
-           }else{
-                $('#sendotp').submit();
+        function sendotp(){
+            var otp = document.getElementById('otp').value ;
+            if(otp == ''){
+                    alert('กรุณากรอกหมายเลข OTP');
+            }else{
+                    $('#sendotp').submit();
 
-           }
-       }
+            }
+        }
 
 
-       function confirmpass(){
-           var p2 = document.getElementById('confirm_password').value ;
-           var p1 = document.getElementById('password').value ;
-           if(p1  != p2){
-                alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
-           }else{
-                $('#formchangepass').submit();
+        function confirmpass(){
+            var p2 = document.getElementById('confirm_password').value ;
+            var p1 = document.getElementById('password').value ;
+            if(p1  != p2){
+                    alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
+            }else{
+                    $('#formchangepass').submit();
 
-           }
-       }
+            }
+        }
 
 
     </script>

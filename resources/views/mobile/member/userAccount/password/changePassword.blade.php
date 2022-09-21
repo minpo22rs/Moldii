@@ -12,22 +12,27 @@
 @section('content')
 <div class="mt-1 p-2 col-12">
 
-    <form action="{{url('user/newPassword')}}">
+    <form action="{{url('checkotpchangepassword')}}" method="POST">
         @csrf
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">เพื่อความปลอดภัยของบัญชีคุณ</small> </h6>
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณายืนยันรหัสผ่านเพื่อดำเนินการต่อ</small> </h6>
+        <h3 class="my-1"><small style="color:rgba(181, 181, 181, 1);">เพื่อความปลอดภัยของบัญชีคุณ</small> </h3>
+        <h3 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณายืนยันรหัส OTP เพื่อดำเนินการต่อ</small> </h6>
 
-        <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="pass" id="otp" value="" placeholder="รหัสผ่านปัจจุบัน">
-        <a href="{{url('user/profile/forgotPassword')}}">
+        <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " value="" placeholder="รหัส OTP จะถูกส่งไปที่เบอร์ {{substr($sql->customer_phone,0,6)}}****" readonly>
+        {{-- <a href="{{url('user/profile/forgotPassword')}}">
             <h6 class="my-1 mr-2 text-right"><small style="color:rgba(80, 202, 101, 1);">ลืมรหัสผ่าน</small> </h6>
-        </a>
+        </a> --}}
 
 
-
-        <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;">ดำเนินการต่อ</button>
-
-
-
+        @if($btn != 1)
+            <button type="button" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;" id="btnold">ดำเนินการต่อ</button>
+        @endif
+        @if($btn == 0)
+            <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px;display:none " id="newPassword" name="otp" value="" placeholder="รหัส OTP" minlength="4" maxlength="4">
+            <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;display:none" id="btnnew" >ดำเนินการต่อ</button>
+        @else
+            <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="otp" value=""  id="newPassword" placeholder="รหัส OTP" minlength="4" maxlength="4">
+            <button type="submit" class="btn btn-success mt-3 col-12" style="font-size:1.3rem;" id="btnnew" >ดำเนินการต่อ</button>
+        @endif
     </form>
 </div>
 
@@ -35,71 +40,41 @@
 
 @endsection
 
-@section('numpad')
-    <div class="" id="numpad_container">
 
-        <div class="numpad-box " id="numpad_box">
-            <div class="wrapper">
-
-
-                <section class="calc-btn_row">
-
-                    <div class="calc_btn_row">
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '1';">1</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '2';">2</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '3';">3</button>
-
-
-                    </div>
-                    <div class="calc_btn_row">
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '4';">4</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '5';">5</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '6';">6</button>
-
-                    </div>
-                    <div class="calc_btn_row">
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '7';">7</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '8';">8</button>
-                        <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '9';">9</button>
-
-                    </div>
-                    <div class="calc_btn_row justify-content-end">
-
-                        <button class="calc_btn_2 none-bg" onclick=""></button>
-                        <button class="calc_btn " onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '0';">0</button>
-                        <button class="calc_btn_2 none-bg" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
-
-                    </div>
-
-
-
-                </section>
-            </div>
-        </div>
-
-
-    </div>
-@endsection
 @section('custom_script')
 
 <script>
     bottom_now(7);
-    //_______________[Buy_goods]__________________//
-    const showNum = document.getElementById("newPassword");
-    const boxNum = document.getElementById("numpad_box");
-    const conNum = document.getElementById("numpad_container");
 
-    showNum.addEventListener("click", () => {
-        boxNum.classList.add("numpad-show");
+    var a = "{{Session::get('success')}}";
+      if(a){
+          alert(a);
+      }
 
+
+      
+    $('#btnold').on("click",()=> {
+        console.log('asasasas');
+        var tel = "{{$sql->customer_phone}}";
+        $.ajax({
+            url: '{{ url("/sendotpchangepassword")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'tel':tel},
+            success: function(data) {
+                if(data =='1'){
+                    document.getElementById('newPassword').style.display = '';
+                    document.getElementById('btnnew').style.display = '';
+                    document.getElementById('btnold').style.display = 'none';
+                }else{
+                    alert('กรุณาลองใหม่อีกครั้งในภายหลังค่ะ');
+                    window.location.reload();
+                }
+                
+            }
+        });
     });
 
-
-
-
-
-
-    //_______________[Buy_goods]__________________//
 </script>
 
 @endsection

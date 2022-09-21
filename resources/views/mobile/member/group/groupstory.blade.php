@@ -24,7 +24,7 @@
                                 <a href="{{url('groupid/'.$groups->id.'')}}">
                                     <div class="item test-1057 ">
                                         <div class = "card">
-                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/group_cover/'.$groups->group_img.'')}}" alt="alt" class="imaged w-100" style=" height:180px;">
+                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/group_cover/'.$groups->group_img.'')}}" alt="alt" class="imaged w-100" style=" height:120px;">
                                             <div class="row col-12 item-1057">
                                                 <div class="name row align-self-end mb-1">
                                                     

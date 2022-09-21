@@ -16,11 +16,11 @@
     <div class="col-12 text-center">
 
         @if($sql->provider ==null && $sql->customer_img == null)
-            <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+            <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
         @elseif($sql->provider ==null)
-            <img src="{{asset('storage/profile_cover/'.$sql->customer_img.'')}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+            <img src="{{asset('storage/profile_cover/'.$sql->customer_img.'')}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
         @else
-            <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="25%" height="auto"><br>
+            <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
         @endif
 
 
@@ -98,26 +98,28 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_phone}}</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">{{substr($sql->customer_phone,0,6)}}****</h5>
 
             <i class="far fa-angle-right"></i>
         </div>
     </div>
 </a>
-<a href="{{url('user/changeEmail')}}" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
-    <div class="col-6 mx-0 align-self-center row">
+@if($sql->provider_id ==null)
+    <a href="{{url('user/changeEmail')}}" class="row py-1 border-top border-bottom pl-2" style="color:black; font-size:18px">
+        <div class="col-6 mx-0 align-self-center row">
 
-        <h5 class="m-0 ml-1 font-weight-bold">E-mail</h5>
-    </div>
-    <div class="col-6 mx-0 text-right">
-
-        <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">{{$sql->customer_email}}</h5>
-
-            <i class="far fa-angle-right"></i>
+            <h5 class="m-0 ml-1 font-weight-bold">E-mail</h5>
         </div>
-    </div>
-</a>
+        <div class="col-6 mx-0 text-right">
+
+            <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
+                <h5 class="m-0 mr-2 font-weight-bold">{{substr($sql->customer_email,0,5)}}******</h5>
+
+                <i class="far fa-angle-right"></i>
+            </div>
+        </div>
+    </a>
+@endif
 <a href="{{url('user/changePassword')}}" class="row py-1 border-top border-bottom  mt-4 pl-2" style="color:black; font-size:18px">
     <div class="col-6 mx-0 align-self-center row">
 

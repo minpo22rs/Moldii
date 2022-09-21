@@ -14,6 +14,9 @@ use App\Models\Tb_review;
 use App\Models\Tb_tranfer;
 use App\Models\Tb_review_img;
 use App\Models\User;
+use App\Http\Controllers\mobile\user\OtpChangepasswordController;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserAccController extends Controller
 {
@@ -166,11 +169,46 @@ class UserAccController extends Controller
     }
 
 
-    public function changePassword(){// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
-        return view('mobile.member.userAccount.password.changePassword');
+    public function sendotpchangepassword(Request $request){// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+        $otp = OtpChangepasswordController::create();
+        if($otp['status'] =='success'){
+            return 1;
+
+        }else{
+
+            return 0;
+        }
+        return view('mobile.member.userAccount.password.changePassword')->with(['sql'=>$sql]);
 
     }
+
+    public function checkotpchangepassword(Request $request){// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+        $otp = OtpChangepasswordController::check($request->otp);
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        if($otp == 1){
+            return redirect('user/newPassword')->with(['success'=>'กรุณากรอกรหัสผ่านที่ต้องการ']);
+
+        }else{
+
+            return view('mobile.member.userAccount.password.changePassword')->with(['success'=>'หมายเลข OTP ไม่ตรงกัน กรุณากรอกใหม่','btn'=>1,'sql'=>$sql]);
+        }
+
+    }
+
+
+    public function changePassword(){// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+
+        return view('mobile.member.userAccount.password.changePassword')->with(['sql'=>$sql,'btn'=>0]);
+
+    }
+
+    public function savenewPassword(Request $request){
+        User::where('customer_id',Session::get('cid'))->update(['customer_password'=>Hash::make($request['password'])]);
+        return redirect('user/profilePage')->with('success','บันทึกข้อมูลเรียบร้อยแล้ว');
+    }
     public function newPassword(){// กรอกรหัสผ่านใหม่
+
         
         return view('mobile.member.userAccount.password.newPassword');
 
@@ -182,11 +220,18 @@ class UserAccController extends Controller
 
 
     public function changeEmail(){// E-mail
-        return view('mobile.member.userAccount.email.changeEmail');
+        return view('mobile.member.userAccount.email.newEmail');
 
     }
     public function newEmail(){// กรอก E-mail ใหม่
         return view('mobile.member.userAccount.email.newEmail');
+
+    }
+
+    public function emailSave(Request $request){// กรอก E-mail ใหม่
+        DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->update(['customer_email'=>$request->email]);
+
+        return redirect('user/profilePage')->with('msg','บันทึกข้อมูลเรียบร้อยแล้ว');
 
     }
 
@@ -374,13 +419,14 @@ class UserAccController extends Controller
     }
 
     public function mylike(){
-        $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->get();
+        $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
         return view('mobile.member.userAccount.mylike')->with(['sql' => $sql ]);
 
     }
 
     public function notification(){// การแจ้งเตือน
-        return view('mobile.member.userAccount.notification.notification');
+        $sql = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ]);
 
     }
     public function settingNotification(){// ตั้งค่าการแจ้งเตือน

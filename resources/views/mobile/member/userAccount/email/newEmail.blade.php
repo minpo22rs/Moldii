@@ -12,12 +12,12 @@
 @section('content')
 <div class="mt-1 p-2 col-12">
 
-    <form action="">
+    <form action="{{url('user/emailSave')}}">
 
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่ E-mail เพื่อรับจดหมายยืนยันตัวตน</small> </h6>
+        <h3 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณากรอก E-mail ใหม่ที่ต้องการ</small> </h3>
 
 
-        <input type="text" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="otp" id="otp" value="" placeholder="E-mail">
+        <input type="email" class="form-control form-control-lg  my-3 mb-1 input" style="border-radius: 10px; " name="email" value="" placeholder="E-mail">
        
 
 
@@ -35,6 +35,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

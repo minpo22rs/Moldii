@@ -30,7 +30,7 @@ class MainController extends Controller
         $pro = DB::Table('tb_products')->get();
         $group = DB::Table('tb_familys')->get();
         $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
-        $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
+        $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
         // $result = $cp->merge($c);
@@ -55,7 +55,7 @@ class MainController extends Controller
 
 
     public function likecontent(Request $request){
-        $sql = DB::Tbale('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)
+        $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)
                     ->where('type_like','C')->first();
         if($sql ==null){
             DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'P']);

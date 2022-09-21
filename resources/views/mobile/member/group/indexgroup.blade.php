@@ -160,8 +160,17 @@
     
     <div class="card my-3">
         <div class="card-body row col-12 justify-content-center m-0">
-            <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
-
+            @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
+                <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+            @else
+                @if($user->customer_img != null)
+                    <img src="{{asset('storage/profile_cover/'.$user->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                @else
+                    <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+            
+            
+                @endif
+            @endif
             <div class="card-title col-8  align-self-center m-0 ">
                 <div class="card-title m-0 row align-self-center">
                     @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
@@ -233,7 +242,7 @@
                 @if($sqls->new_type == 'C')
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                         </div>
                         @if($imggal->count() >1)
                             <ol class="carousel-indicators">
@@ -243,7 +252,7 @@
                             </ol>
                             @foreach($imggal as $imgs)
                                 <div class="carousel-item">
-                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                 </div>
                             @endforeach
                         @endif
@@ -255,7 +264,7 @@
                         @if($imggal->count() != 0)
                             @if($imggal[0]->type =='I')
                                 <div class="carousel-item active">
-                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                 </div>
                             @else
                                 <div class="carousel-item active">
@@ -275,7 +284,7 @@
                                     @if($imgs->type =='I')
                                         
                                         <div class="carousel-item">
-                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: 197px;">
+                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                         </div>
                                     @else
                                        

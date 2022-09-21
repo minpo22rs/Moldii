@@ -64,7 +64,7 @@
         </a>
         <a href="{{url('video')}}" class="item" id="bottom_button_yt">
             <div class="col">
-                <div style="padding: 8px 0px 5px 0px"><img src="{{ asset('new_assets/icon/คลิป.png')}}" id="bottom_icon_yt"></div> 
+                <div style="padding: 8px 0px 8px 0px"><img src="{{ asset('new_assets/icon/คลิป.png')}}" id="bottom_icon_yt"></div> 
                 <span class="text-white" id="bottom_text_yt">คลิป</span>
             </div>
         </a>
@@ -79,25 +79,25 @@
         </a> --}}
         <a href="{{url('group')}}" class="item" id="bottom_button_fam">
             <div class="col">
-                <div style="padding: 0px 0px 3px 0px"><img src="{{ asset('new_assets/icon/กลุ่ม.png')}}" id="bottom_icon_fam"></div> 
+                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/กลุ่ม.png')}}" id="bottom_icon_fam"></div> 
                 <span class="text-white" id="bottom_text_fam">กลุ่ม</span>
             </div>
         </a>
         <a href="{{url('auction')}}" class="item" id="bottom_button_noti">
             <div class="col">
-                <div style="padding: 0px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ประมูลสินค้า.png')}}" id="bottom_icon_noti"></div> 
+                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ประมูลสินค้า.png')}}" id="bottom_icon_noti"></div> 
                 <span class="text-white" id="bottom_text_noti">ประมูลสินค้า</span>
             </div>
         </a>
         <a href="{{url('store')}}" class="item" id="bottom_button_s">
             <div class="col">
-            <div style="padding: 0px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ร้านค้า.png')}}" id="bottom_icon_s"></div> 
+            <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ร้านค้า.png')}}" id="bottom_icon_s"></div> 
                 <span class="text-white" id="bottom_text_s">ร้านค้า</span>
             </div>
         </a>
         <a href="{{url('user/myAccount')}}" class="item" id="bottom_button_acc">
             <div class="col">
-                <div style="padding: 0px 0px 3px 0px"><img src="{{ asset('new_assets/icon/โปรไฟล์.png')}}" id="bottom_icon_acc"></div> 
+                <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/โปรไฟล์.png')}}" id="bottom_icon_acc"></div> 
                 <span class="text-white" id="bottom_text_acc">โปรไฟล์</span>
             </div>
         </a>

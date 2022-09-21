@@ -138,7 +138,8 @@
             ?>
             <div class="card my-3">
                 <div class="card-body row col-12 justify-content-center m-0">
-                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                    <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                   
 
                     <div class="card-title col-8  align-self-center m-0 ">
                         <div class="card-title m-0 row align-self-center">

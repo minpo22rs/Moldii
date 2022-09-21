@@ -125,7 +125,7 @@
 
         <ul class="nav nav-tabs style1 mt-2" role="tablist">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#post" role="tab">Posts</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#product" role="tab">Prodcuts</a></li> 
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#product" role="tab">Products</a></li> 
 
         </ul>
 

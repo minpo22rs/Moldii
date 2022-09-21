@@ -7,7 +7,7 @@
         </a>
     </div>
     <div class="pageTitle">
-
+        {{$product->product_name}}
     </div>
     <div class="right"></div>
     <!-- <div class="m-1 w-100">
@@ -228,7 +228,7 @@
                     <h4 class="text-break m-0 mt-1 ">{{$reviews->text}}</h4>
                 @endforeach
             @else
-                ยังไม่มีรวิว
+                ยังไม่มีรีวิว
             @endif
         </div>
         <br>

@@ -165,7 +165,7 @@
         @else
         <br>
         <br>
-            <p style="text-align: center;">ไม่มีสินค้าในตระกร้า</p>
+            <p style="text-align: center;">ไม่มีสินค้าในตะกร้า</p>
         @endif
 
     </div>

@@ -60,6 +60,8 @@ class LoginController extends Controller
         if(!empty($request->error_code)){
             return redirect('user/login');
         }
+        
+        
         $random = mt_rand(1000000000, 9999999999);
         try {
             $user = Socialite::driver($provider)->stateless()->user();

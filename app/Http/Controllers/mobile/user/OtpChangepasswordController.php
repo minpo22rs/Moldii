@@ -4,37 +4,28 @@ namespace App\Http\Controllers\mobile\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Tb_otp;
+use App\Models\Tb_otp_changepassword;
 use App\Models\User;
 use Carbon\Carbon;
 use Session;
 
-class OtpController extends Controller
+class OtpChangepasswordController extends Controller
 {
-    public function index()
+    
+    public function create()
     {
-        // dd('otppppppp');
-        return view('mobile.all.otp_request');
-    }
+        $sql = User::where('customer_id',Session::get('cid'))->first();
 
-
-
-    public function create(Request $request)
-    {
-
-        $request->validate([
-            'mn' => ['required',  'min:10'],
-        ]);
-
-        $post_tel = $request->mn;
+        $post_tel = $sql->customer_phone;
         $phone = $post_tel; //'0900000001';
         $otp = rand(1000, 9999); //4 Digits
 
         // ส่วนการบันทึก OTP เข้า database
-        Tb_otp::create([
+        Tb_otp_changepassword::create([
             'otp_code' => $otp,
             'tel' => $phone,
-            'otp_ref' => hexdec(uniqid())
+            'otp_ref' => hexdec(uniqid()),
+            'otp_customer_id' => Session::get('cid'),
 
         ]);
 
@@ -45,7 +36,7 @@ class OtpController extends Controller
         $password = md5($password);
         $sender = 'Maemod';
         $msisdn = $phone;
-        $msg = 'รหัสยืนยันระบบสมาชิก ' . $otp;
+        $msg = 'รหัสยืนยันการเปลี่ยนรหัสผ่าน ' . $otp;
 
 
         $url = "http://v2.arcinnovative.com/APIConnect.php";
@@ -81,45 +72,32 @@ class OtpController extends Controller
         }
         curl_close($ch);
 
-        return redirect()->route('Confirm_OTP')->with(['phone'=>$phone]);
+        return $results;
     }
 
 
-
-
-    public function confirm()
+    public function check($otp)
     {
-        return view('mobile.all.otp_confirm');
-    }
+        $sql = User::where('customer_id',Session::get('cid'))->first();
 
-    public function check(Request $request)
-    {
-        $tel = $request->tel;
-        $otp = $request->otp;
+        $tel = $sql->customer_phone;
+        $otp = $otp;
 
-        $request->validate([
-            'tel' => ['required',  'min:10'],
-            'otp' => ['required',  'min:4']
-
-        ]);
+        date_default_timezone_set('Asia/Bangkok');
         
-        $tel_otp = Tb_otp::where(['otp_code' => $otp,'tel'=>$tel])->first();
+        $tel_otp = Tb_otp_changepassword::where(['otp_code' => $otp,'tel'=>$tel])->first();
        
         if ($tel_otp != null) {
             $id =$tel_otp->otp_id;
-            Tb_otp::where('otp_id', $id)
+            Tb_otp_changepassword::where('otp_changepassword_id', $id)
                     ->update(['otp_verified' => Carbon::now()]);
 
             User::where('customer_id',Session::get('cid'))->update(['customer_phone'=>$tel,'customer_verified'=>1]);
             
-            return redirect('tag')->with('success','คุณสมัครสมาชิกเรียบร้อยแล้ว');
+            return 1;
         } else {
-            // User::where('customer_id',Session::get('u_id'))->increment('customer_count', 1);
-            // if(){
-
-            // }
-
-            return redirect('confirm/otp')->with(['phone'=>$tel,'success'=>'รหัส OTP ไม่ตรงกัน กรุณากรอกใหม่']);
+            
+            return 0;
         }
     }
 }

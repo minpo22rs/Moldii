@@ -41,8 +41,9 @@
             <div class="col-5 text-center" style="margin-top: 100px;">
                 <div class="m-1">
 
-                    <img src="{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;">
-                    <img src="{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;">
+                    <a href="{{route('redirectToProvider','google')}}"> <img src="{{asset('new_assets/custom_assets/contact_icons/google_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;"></a>
+                    <a href="{{route('redirectToProvider','facebook')}}"><img src="{{asset('new_assets/custom_assets/contact_icons/facebook_logo.png')}}" class="m-1 p-1 bg-white rounded custom_hover" style="weight:45px; height:45px;"></a>
+
                 </div>
             </div>
             <form action="{{url('checkregister')}}" method="POST" class="form-group row" id="formregis">
