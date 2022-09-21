@@ -211,6 +211,7 @@
                     </div>
                     @if($comments->comment_reply != null)
                         <?php $reply = DB::Table('tb_comment_replys')->where('id_tb_comment',$comments->comment_id)
+                            ->select('tb_comment_replys.*','tb_customers.customer_username')
                             ->leftJoin('tb_customers', 'tb_comment_replys.customer_id', '=', 'tb_customers.customer_id')->get()?>
                         @foreach ($reply as $replys)
                             <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" >
