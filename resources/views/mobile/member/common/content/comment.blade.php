@@ -200,7 +200,7 @@
                                 <input type="hidden" name="newsid" value="{{$c->new_id}}">
 
                                 <div class="emojireply ml-1 p-1 mt-1">
-                                <img src="{{ asset('new_assets/img/icon/send-message-icon.jpg')}}" alt="alt" style="width:24px; height:24px;margin-top:1px" onclick="sendcommentreply({{$comments->comment_id}});">
+                                <img src="{{ asset('new_assets/img/icon/chaticon.png')}}" alt="alt" style="width:24px; height:24px;margin-top:1px" onclick="sendcommentreply({{$comments->comment_id}});">
                     
                                 </div>
                     
@@ -246,7 +246,7 @@
             <textarea class="comment-form form-control col-9 mr-2" placeholder="Comment" id="comment" name="comment" rows="1"></textarea>
             <input type="hidden" name="cid" value="{{$c->new_id}}">
             <div class="emoji ml-1 p-1 ">
-               <img src="{{ asset('new_assets/img/icon/send-message-icon.jpg')}}" alt="alt" style="width:35px; height:35px;" onclick="sendcomment();">
+               <img src="{{ asset('new_assets/img/icon/chaticon.png')}}" alt="alt" style="width:35px; height:35px;" onclick="sendcomment();">
 
             </div>
 
