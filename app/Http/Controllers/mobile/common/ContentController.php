@@ -20,7 +20,7 @@ class ContentController extends Controller
     {
         $c = DB::Table('tb_news')->where('new_id',$id)
                     ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
-                    ->select('tb_news.*','tb_customers.customer_username')
+                    ->select('tb_news.*','tb_customers.customer_username','tb_customers.customer_img')
                     ->first();
         $comment = DB::Table('tb_comments')->where('comment_object_id',$id)->get();
         $countreply = DB::Table('tb_comment_replys')->where('news_id',$id)->get();

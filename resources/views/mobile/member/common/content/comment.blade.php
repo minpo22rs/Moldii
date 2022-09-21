@@ -28,7 +28,17 @@
 @section('content')
 <div class="container p-0">
     <div class="card-body row col-12 justify-content-center m-0">
-        <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+        @if($c->new_type == 'C' || $c->new_type == 'V')
+            <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+        @else
+            @if($c->customer_img != null)
+                <img src="{{asset('storage/profile_cover/'.$c->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+            @else
+                <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+        
+        
+            @endif
+        @endif
 
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
@@ -58,13 +68,13 @@
                 <div id="bmm{{$c->new_id}}" style="margin-right: 10px">
                     <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark({{$c->new_id}})" ></ion-icon>
                 </div>
-                
+            
 
             @else
                 <div id="bmoll{{$c->new_id}}" style="margin-right: 10px">
                     <ion-icon name="bookmark-outline" style="font-size:25px" onclick="bookmarkadd({{$c->new_id}})"></ion-icon>
                 </div>
-                
+            
             @endif
 
             <div style="display: none" id="bmol{{$c->new_id}}" style="margin-right: 10px">
@@ -75,6 +85,7 @@
             <div style="display: none" id="bm{{$c->new_id}}" style="margin-right: 10px">
                 <ion-icon name="bookmark" style="font-size:25px" onclick="unbookmark2({{$c->new_id}})" ></ion-icon>
             </div>
+
 
 
 
@@ -103,10 +114,10 @@
         @if($c->new_type=='C')
                 @if($imggal->count() > 1)
                     @foreach($imggal as $imgs)
-                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
                     @endforeach
                 @else
-                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
                 @endif
             
         @elseif($c->new_type=='V')
@@ -118,7 +129,7 @@
             @if($imggal->count() != 0)
                 @foreach($imggal as $imgs)
                     @if($imgs->type =='I')
-                        <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: 197px;">
+                        <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
                     @else
                         <video width="100%" height="215" controls >
                             <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
@@ -683,7 +694,7 @@
         {{-- bookmarkadd like followContent--}}
         <script>
 
-            function bookmarkadd(id)
+function bookmarkadd(id)
             {
                                 
                 document.getElementById('bm'+id).style.display = '';
@@ -747,6 +758,7 @@
                     }
                 });
             }
+
 
 
 
