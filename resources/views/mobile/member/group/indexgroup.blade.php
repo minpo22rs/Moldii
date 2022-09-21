@@ -163,8 +163,10 @@
             @if($sqls->new_type == 'C' || $sqls->new_type == 'V')
                 <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
             @else
-                @if($user->customer_img != null)
+                @if($user->provider == null)
                     <img src="{{asset('storage/profile_cover/'.$user->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                @if($user->customer_img != null)
+                    <img src="{{$user->customer_img}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
                 @else
                     <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
             

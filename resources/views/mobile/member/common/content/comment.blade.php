@@ -31,8 +31,10 @@
         @if($c->new_type == 'C' || $c->new_type == 'V')
             <img src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
         @else
-            @if($c->customer_img != null)
+            @if($c->provider == null)
                 <img src="{{asset('storage/profile_cover/'.$c->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+            @elseif($c->customer_img != null)
+                <img src="{{$c->customer_img}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
             @else
                 <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
         
