@@ -20,7 +20,9 @@ class MerchantController extends Controller
     public function index()
     {
         $merchant = Merchant::all();
-        $data = array('merchant' => $merchant, );
+        $p = DB::Table('provinces')->get();
+
+        $data = array('merchant' => $merchant,'p'=>$p );
         return view('backend.account.merchant', $data);
     }
 
@@ -61,11 +63,22 @@ class MerchantController extends Controller
 
         DB::beginTransaction();
         try {
+            $number = str_replace("-", "", $request->phone);
+
             $merchant = new Merchant();
+            $merchant->merchant_shopname        = $request->shopname;
             $merchant->merchant_name            = $request->name;
             $merchant->merchant_lname           = $request->lname;
             $merchant->merchant_email           = $request->email;
             $merchant->password                 = Hash::make($request->password);
+            $merchant->merchant_address           = $request->address;
+            $merchant->merchant_tumbon           = $request->tumbon;
+            $merchant->merchant_district           = $request->district;
+            $merchant->merchant_province           = $request->province;
+            $merchant->merchant_postcode           = $request->zip_code;
+            $merchant->merchant_phone           = $number ;
+            $merchant->merchant_type            = $request->type;
+
             if ($request->img != null) {
                 foreach ($request->img as $key => $value) {
                     $name = $value->getClientOriginalName();
@@ -80,8 +93,9 @@ class MerchantController extends Controller
             DB::commit();
             return redirect('admin/merchant')->with('success', 'Successful');
         } catch (\Throwable $th) {
+            // dd( $th);
             DB::rollback();
-            return redirect('admin/employee')->withError('Something Wrong! New Merchant can not saved.');
+            return redirect('admin/merchant')->withError('Something Wrong! New Merchant can not saved.');
         }
     }
 
@@ -162,5 +176,42 @@ class MerchantController extends Controller
     public function merchantindex()
     {
         return view('merchant.merchantindex');
+    }
+
+
+    public function getAmphure(Request $request){
+
+        $amphures = DB::table('amphures')
+            ->where('province_id',$request->v)
+            ->get();
+        $html = '<option value="">เลือกเขต/อำเภอ</option>';
+            foreach($amphures as $_amphures => $item){
+                $html .=  '<option value="'.$item->id.'">'.$item->name_th.'</option>';
+            }
+        echo $html;
+    }
+
+    public function getSubDistrict(Request $request){
+
+        $districts = DB::table('districts')
+            ->where('amphure_id',$request->v)
+            ->get();
+        
+        $html = '<option value="">เลือกแขวง/ตำบล</option>';
+        foreach($districts as $_districts => $item){
+            $html .=  '<option value="'.$item->id.'">'.$item->name_th.'</option>';
+        }
+        echo $html;
+    
+    }
+
+    public function getZipcode(Request $request){
+
+        $districts = DB::table('districts')
+            ->where('id',$request->v)
+            ->first();
+        // dd($districts );
+           
+        return $districts->zip_code;
     }
 }

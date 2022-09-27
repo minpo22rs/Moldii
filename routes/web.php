@@ -56,6 +56,9 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     Route::resource('customer', 'CustomerController');
     //merchant
     Route::resource('merchant', 'MerchantController');
+    Route::get('getAmphure','MerchantController@getAmphure');//
+    Route::get('getSubDistrict','MerchantController@getSubDistrict');//
+    Route::get('getZipcode','MerchantController@getZipcode');//
 
     //notification
     Route::resource('notification', 'NotificationController');

@@ -110,7 +110,7 @@
             <div class="col-xl-12 col-md-6 col-12">
                 <div class="card bg-1 order-card">
                     <div class="card-block">
-                        <h6>ผู้ค้า</h6>
+                        <h6>ร้านค้า</h6>
                         <h2 class="text-right"><i class="icofont icofont-users f-left"></i><span>{{$merchant_count}}</span></h2>
                         <br>
                         <p class="m-b-0">การจัดการ <a href="{{url('admin/merchant')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>

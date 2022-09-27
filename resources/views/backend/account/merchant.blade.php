@@ -14,8 +14,8 @@
                 <i class="icofont icofont-users"></i>
             </div>
             <div class="d-inline-block">
-                <h5>ผู้ค้า</h5>
-                <span>สถานะ: <label class="label label-primary">ระดับผู้ค้า 1</label></span>
+                <h5>ร้านค้า</h5>
+                <span>สถานะ: <label class="label label-primary">ระดับร้านค้า 1</label></span>
             </div>
         </div>
         <div class="col">
@@ -23,7 +23,7 @@
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item"><a href="">บัญชีผู้ใช้</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">ผู้ค้า</a>
+                    <li class="breadcrumb-item"><a href="">ร้านค้า</a>
                     </li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-product"><i class="icofont icofont-ui-add"></i>
-                สร้างบัญชีผู้ค้า</button>
+                สร้างบัญชีร้านค้า</button>
         </div>
     </div>
     <div class="card-block">
@@ -108,7 +108,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">สร้างบัญชีผู้ค้า</h4>
+                <h4 class="modal-title">สร้างบัญชีร้านค้า</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -117,7 +117,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">รูปประจำตัว</label>
+                        <label class="col-sm-2 col-form-label">รูปภาพร้านค้า</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
@@ -133,11 +133,11 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" name="name" class="form-control" placeholder="ชื่อ...">
+                                    <input type="text" name="name" class="form-control" placeholder="ชื่อเจ้าของร้านค้า...">
                                     @error('name')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" name="lname" class="form-control" placeholder="นามสกุล...">
+                                    <input type="text" name="lname" class="form-control" placeholder="นามสกุลเจ้าของร้านค้า...">
                                     @error('lname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -147,6 +147,7 @@
                         <label class="col-sm-2 col-form-label">อีเมล <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
+                               
                                 <div class="col-12">
                                     <input type="text" name="email" class="form-control" placeholder="Email...">
                                     @error('email')<span class="messages text-danger">{{ $message }}</span>@enderror
@@ -158,9 +159,75 @@
                         <label class="col-sm-2 col-form-label">รหัสผ่าน <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน...">
                                     @error('password')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="phone" class="form-control" placeholder="เบอร์โทรศัพท์..." onkeyup="autoTab(this);">
+                                    @error('password')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ชื่อร้านค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                               
+                                <div class="col-6">
+                                    <input type="text" name="shopname" class="form-control" placeholder="ชื่อร้านค้า...">
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="type" class="form-control" placeholder="ประเภทร้านค้า...">
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ที่อยู่ร้านค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                               
+                                <div class="col-12">
+                                    <input type="text" name="address" class="form-control" placeholder="รายละเอียดที่อยู่...">
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <br>
+                                <br>
+                                
+                                
+                                <div class="col-6">
+                                    <select  class="form-control" name="province" id="province" onchange="getAmphure(this.value);" required>
+            
+                                        <option value="" >เลือกจังหวัด</option>
+                                        @foreach($p as  $ps)
+                                            <option value="{{$ps->id}}" >{{$ps->name_th}}</option>
+                                        @endforeach
+                                    
+                                </select>
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="col-6">
+                                    <select  class="form-control" name="district" id="county" onchange="getSubDistrict(this.value);" required>
+                                        <option>เลือกเขต/อำเภอ</option>
+                                    </select>
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-6">
+                                    <select  class="form-control" name="tumbon" id="tumbon" onchange="getZipcode(this.value);" required>
+                                        <option>เลือกแขวง/ตำบล</option>
+                                    </select>
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="zip_code" id="zip_code" class="form-control" placeholder="รหัสไปรษณีย์..." readonly>
+                                    @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                         </div>
@@ -238,5 +305,76 @@
             }
         })
     };
+
+    function getAmphure(v){
+        $.ajax({
+            url: '{{ url("admin/getAmphure")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#county').html(data);
+               
+            }
+        });
+
+    }
+
+    function getSubDistrict(v){
+        $.ajax({
+            url: '{{ url("admin/getSubDistrict")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+               
+                $('#tumbon').html(data);
+               
+            }
+        });
+
+    }
+
+
+    function getZipcode(v){
+        $.ajax({
+            url: '{{ url("admin/getZipcode")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'v':v},
+            success: function(data) {
+                document.getElementById('zip_code').value = data;
+                // $('#zip_code').value(data);data
+               
+            }
+        });
+
+    }
+
+    function autoTab(obj){
+            /* กำหนดรูปแบบข้อความโดยให้ _ แทนค่าอะไรก็ได้ แล้วตามด้วยเครื่องหมาย
+            หรือสัญลักษณ์ที่ใช้แบ่ง เช่นกำหนดเป็น  รูปแบบเลขที่บัตรประชาชน
+            4-2215-54125-6-12 ก็สามารถกำหนดเป็น  _-____-_____-_-__
+            รูปแบบเบอร์โทรศัพท์ 08-4521-6521 กำหนดเป็น __-____-____
+            หรือกำหนดเวลาเช่น 12:45:30 กำหนดเป็น __:__:__
+            ตัวอย่างข้างล่างเป็นการกำหนดรูปแบบเลขบัตรประชาชน
+            */
+                var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้
+                var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้
+                var returnText=new String("");
+                var obj_l=obj.value.length;
+                var obj_l2=obj_l-1;
+                for(i=0;i<pattern.length;i++){           
+                    if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){
+                        returnText+=obj.value+pattern_ex;
+                        obj.value=returnText;
+                    }
+                }
+                if(obj_l>=pattern.length){
+                    obj.value=obj.value.substr(0,pattern.length);           
+                }
+    }
+
 </script>
 @endsection

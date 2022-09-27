@@ -355,8 +355,8 @@
                                     </li>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">ส่วนผู้ดูแล</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                            {{-- <div class="pcoded-navigation-label">ส่วนผู้ดูแล</div> --}}
+                            {{-- <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-users"></i><b>C</b></span>
@@ -386,22 +386,22 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    {{-- <li class="">
+                                    <li class="">
                                         <a href="">
                                             <span class="pcoded-micon"><i class="icofont icofont-history"></i><b>D</b></span>
                                             <span class="pcoded-mtext">Logs</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                    </li> --}}
+                                    </li>
                                 </li>
-                                {{-- <li class="">
+                                <li class="">
                                     <a href="{{url("admin/rolesetting")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-gear"></i><b>D</b></span>
                                         <span class="pcoded-mtext">การตั้งค่าบทบาท</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li> --}}
-                            </ul>
+                                </li>
+                            </ul> --}}
                             {{-- <div class="pcoded-navigation-label">ติดต่อฝ่ายสนับสนุน</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
