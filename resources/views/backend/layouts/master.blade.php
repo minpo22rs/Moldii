@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <a href="{{url("admin/index")}}">
-                            <img class="img-fluid" src="{{asset('storage/app/logo/Moldii.png')}}" alt="Theme-Logo" style="width: 27% !important"  />
+                            <img class="img-fluid" src="{{asset('/storage/app/logo/moldii.png')}}" alt="Theme-Logo" style="width: 27% !important"  />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>
@@ -386,13 +386,13 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <li class="">
+                                    {{-- <li class="">
                                         <a href="">
                                             <span class="pcoded-micon"><i class="icofont icofont-history"></i><b>D</b></span>
                                             <span class="pcoded-mtext">Logs</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </li>
                                 {{-- <li class="">
                                     <a href="{{url("admin/rolesetting")}}">
