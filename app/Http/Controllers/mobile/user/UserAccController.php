@@ -14,6 +14,8 @@ use App\Models\Tb_review;
 use App\Models\Tb_tranfer;
 use App\Models\Tb_review_img;
 use App\Models\User;
+use App\Models\Merchant;
+use App\Http\Controllers\mobile\user\OtpChangephoneController;
 use App\Http\Controllers\mobile\user\OtpChangepasswordController;
 use Illuminate\Support\Facades\Hash;
 
@@ -78,7 +80,39 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.policy');
     }
 
+    public function store(){
+        $p = DB::Table('provinces')->get();
 
+        return view('mobile.member.userAccount.store')->with('p',$p);
+
+    }
+
+    public function submitstore(Request $request){
+        // dd($request->all());
+        $number = str_replace("-", "", $request->phone);
+        $merchant = new Merchant();
+        $merchant->merchant_shopname        = $request->shopname;
+        $merchant->merchant_name            = $request->fname;
+        $merchant->merchant_lname           = $request->lname;
+        $merchant->merchant_email           = $request->email;
+        $merchant->merchant_phone           = $number ;
+        $merchant->merchant_type            = $request->type;
+        $merchant->password                 = Hash::make($request->password);
+        $merchant->merchant_img             = 'noimg.jpg';
+        $merchant->merchant_address           = $request->address;
+        $merchant->merchant_tumbon           = $request->tumbon;
+        $merchant->merchant_district           = $request->district;
+        $merchant->merchant_province           = $request->province;
+        $merchant->merchant_postcode           = $request->zip_code;
+
+        $name = rand().time().'.'.$request->img->getClientOriginalExtension();
+        $request->img->storeAs('public/store',  $name);
+        $merchant->merchant_document          = $name;
+
+        $merchant->save();
+
+        return redirect('user/myAccount')->with('msg','บันทึกข้อมูลเรียบร้อยแล้ว');
+    }
 
     public function profileHelpCenter(){
         return view('mobile.member.helpCenter.helpCenter');
@@ -156,16 +190,43 @@ class UserAccController extends Controller
 
 
     public function phoneNumber(){// หน้าโชว์เบอร์
-        return view('mobile.member.userAccount.phone.showPhoneNumber');
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.userAccount.phone.showPhoneNumber')->with(['sql'=>$sql]);
 
     }
-    public function newPhoneNumber(){// กรอกเบอร์ใหม่
+    public function newPhoneNumber(Request $request){// กรอกเบอร์ใหม่
         return view('mobile.member.userAccount.phone.newPhoneNumber');
 
     }
-    public function OTP_PhoneNumber(){// กรอกOTP
-        return view('mobile.member.userAccount.phone.OTP_PhoneNumber');
+    public function OTP_PhoneNumber(Request $request){// กรอกOTP
+        $number = str_replace("-", "", $request->newPhone);
+        // dd($number);
+        $sql =  User::where('customer_phone',$number)->first();
+        
+        if($sql == null){
+            // User::where('customer_id',Session::get('cid'))->update(['customer_phone'=>$number]);
+            $otp = OtpChangephoneController::create($number);
+            return view('mobile.member.userAccount.phone.OTP_PhoneNumber')->with('number',$number);
 
+        }else{
+
+            return redirect('user/newPhoneNumber')->with('msg','มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่');
+
+        }
+
+    }
+
+    public function checkotpchangephone(Request $request)
+    {
+        $otp = OtpChangephoneController::check($request->otp,$request->phone);
+        
+        if($otp == 1){
+            return redirect('user/profilePage')->with(['success'=>'บันทึกข้อมูลเรียบร้อยแล้ว']);
+
+        }else{
+
+            return back()->with(['success'=>'หมายเลข OTP ไม่ตรงกัน กรุณากรอกใหม่']);
+        }
     }
 
 
@@ -316,10 +377,12 @@ class UserAccController extends Controller
 
     public function addnewaddress(Request $request){
         // dd($request->all());
+        $number = str_replace("-", "", $request->phone);
+
         $a = new Tb_address();
         $a->customer_id  =  Session::get('cid');
         $a->customer_name  =  $request->name;
-        $a->customer_phone  =  $request->phone;
+        $a->customer_phone  =  $number;
         $a->customer_address  =  $request->address_details;
         $a->customer_tumbon  =  $request->tumbon;
         $a->customer_district  =  $request->district;
@@ -420,7 +483,15 @@ class UserAccController extends Controller
 
     public function mylike(){
         $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
+        
         return view('mobile.member.userAccount.mylike')->with(['sql' => $sql ]);
+
+    }
+
+    public function mybookmark(){
+        $sql = DB::Table('tb_bookmarks')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
+        
+        return view('mobile.member.userAccount.mybookmark')->with(['sql' => $sql ]);
 
     }
 

@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div>
     <div class="col-12 text-center">
         @if($sql->provider ==null && $sql->customer_img == null)
@@ -69,12 +70,14 @@
     </div>
     <div class="col-6 pl-0">
         <div class="m-1">
-            <div class="card">
-                <div class="row w-100 mx-3 my-2 text-center">
-                    <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
-                    <span class="ml-2 align-self-center font-weight-bold">ขอเปิดร้านค้า</span>
+            <a href="{{url('user/store')}}" style="color: black">
+                <div class="card">
+                    <div class="row w-100 mx-3 my-2 text-center">
+                        <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
+                        <span class="ml-2 align-self-center font-weight-bold">ขอเปิดร้านค้า</span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
    
@@ -94,6 +97,17 @@
     <div class="col-8 mx-0 align-self-center row">
     <img  src="{{ asset('new_assets/icon/สิ่งที่ถูกใจ.png')}}" >
         <h5 class="m-0 ml-2 font-weight-bold">สิ่งที่ถูกใจ</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
+
+
+<a href="{{url('user/mybookmark')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row">
+        <ion-icon name="bookmark" style="font-size:25px"></ion-icon>
+        <h5 class="m-0 ml-2 mt-1 font-weight-bold">สิ่งที่บุ๊คมาร์ก</h5>
     </div>
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>

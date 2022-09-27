@@ -28,7 +28,7 @@
                                             <div class="row col-12 item-1057">
                                                 <div class="name row align-self-end mb-1">
                                                     
-                                                    <h5 class="ml-1 align-self-center m-0">{{$groups->name}}</h5>
+                                                    {{-- <h5 class="ml-1 align-self-center m-0">{{$groups->name}}</h5> --}}
                                                 </div>
                                             </div>
                                         </div>

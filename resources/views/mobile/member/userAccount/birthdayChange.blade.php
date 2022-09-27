@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="mt-3 p-2 col-12">
 
     <form action="{{url('user/birthdaySave')}}" method="POST">

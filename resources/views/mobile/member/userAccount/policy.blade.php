@@ -9,6 +9,7 @@
     </div>
 </div>
 @endsection
+<br>
 @section('content')
 
     <div class="col-12 m-0 p-2">

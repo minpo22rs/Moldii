@@ -22,66 +22,78 @@ class OtpController extends Controller
     public function create(Request $request)
     {
 
-        $request->validate([
-            'mn' => ['required',  'min:10'],
-        ]);
+        // $request->validate([
+        //     'mn' => ['required',  'min:10'],
+        // ]);
 
-        $post_tel = $request->mn;
-        $phone = $post_tel; //'0900000001';
-        $otp = rand(1000, 9999); //4 Digits
+        $number = str_replace("-", "", $request->mn);
 
-        // ส่วนการบันทึก OTP เข้า database
-        Tb_otp::create([
-            'otp_code' => $otp,
-            'tel' => $phone,
-            'otp_ref' => hexdec(uniqid())
+        $sql =  User::where('customer_phone',$number)->first();
 
-        ]);
+        if($sql != null){
+            return back()->with('msg','มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่');
+        }else{
+
+                    
+            $post_tel = $number;
+            $phone = $post_tel; //'0900000001';
+            $otp = rand(1000, 9999); //4 Digits
+
+            // ส่วนการบันทึก OTP เข้า database
+            Tb_otp::create([
+                'otp_code' => $otp,
+                'tel' => $phone,
+                'otp_ref' => hexdec(uniqid())
+
+            ]);
 
 
-        //ส่วนการส่ง OTP ไปที่มือถือ
-        $username = 'apinya';
-        $password = 'apinya';
-        $password = md5($password);
-        $sender = 'Maemod';
-        $msisdn = $phone;
-        $msg = 'รหัสยืนยันระบบสมาชิก ' . $otp;
+            //ส่วนการส่ง OTP ไปที่มือถือ
+            $username = 'apinya';
+            $password = 'apinya';
+            $password = md5($password);
+            $sender = 'Maemod';
+            $msisdn = $phone;
+            $msg = 'รหัสยืนยันการสมัครสมาชิก ' . $otp;
 
 
-        $url = "http://v2.arcinnovative.com/APIConnect.php";
+            $url = "http://v2.arcinnovative.com/APIConnect.php";
 
-        $msg = str_replace("%", "%25", $msg);
-        $msg = str_replace("&", "%26", $msg);
-        $msg = str_replace("+", "[2B]", $msg);
+            $msg = str_replace("%", "%25", $msg);
+            $msg = str_replace("&", "%26", $msg);
+            $msg = str_replace("+", "[2B]", $msg);
 
-        $sender = str_replace("%", "%25", $sender);
-        $sender = str_replace("&", "%26", $sender);
-        $sender = str_replace("+", "[2B]", $sender);
+            $sender = str_replace("%", "%25", $sender);
+            $sender = str_replace("&", "%26", $sender);
+            $sender = str_replace("+", "[2B]", $sender);
 
-        $Parameter = "";
-        $Parameter .= "sender=$sender&";
-        $Parameter .= "msisdn=$msisdn&";
-        $Parameter .= "msg=$msg&";
-        $Parameter .= "smstype=sms&";
-        $Parameter .= "username=$username&";
-        $Parameter .= "password=$password&";
-        $Parameter .= "ntype=in&";
+            $Parameter = "";
+            $Parameter .= "sender=$sender&";
+            $Parameter .= "msisdn=$msisdn&";
+            $Parameter .= "msg=$msg&";
+            $Parameter .= "smstype=sms&";
+            $Parameter .= "username=$username&";
+            $Parameter .= "password=$password&";
+            $Parameter .= "ntype=in&";
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "$url");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $Parameter);
-        $status = curl_exec($ch);
-        $err = curl_error($ch);
-        if ($err) {
-            $results = array('status' => 'fail', 'message' => "cURL Error #:" . $err);
-        } else {
-            $results = array('status' => 'success', 'message' => '');
-        }
-        curl_close($ch);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "$url");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $Parameter);
+            $status = curl_exec($ch);
+            $err = curl_error($ch);
+            if ($err) {
+                $results = array('status' => 'fail', 'message' => "cURL Error #:" . $err);
+            } else {
+                $results = array('status' => 'success', 'message' => '');
+            }
+            curl_close($ch);
 
-        return redirect()->route('Confirm_OTP')->with(['phone'=>$phone]);
+            return redirect()->route('Confirm_OTP')->with(['phone'=>$phone]);
+
+            }
+
     }
 
 

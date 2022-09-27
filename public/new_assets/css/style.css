@@ -74,9 +74,8 @@ button:focus {
     left: 0;
     right: 0;
     z-index: 1100;
-    background: #FFF;
     color: #141515;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08); */
 }
 
 .appHeader:before {
@@ -537,7 +536,7 @@ button:focus {
 }
 
 #appCapsule {
-    padding: 56px 0;
+    padding: 26px 0;
     margin-bottom: env(safe-area-inset-bottom);
     margin-top: env(safe-area-inset-top);
 }
@@ -8061,7 +8060,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
     width: 100%;
     height: 100%;
     bottom: 0px;
-    background: linear-gradient(0deg, rgb(251, 251, 251, 1) 15.891476934522958%, rgba(255, 255, 255, 0) 71.31783482977168%);
+    /* background: linear-gradient(0deg, rgb(251, 251, 251, 1) 15.891476934522958%, rgba(255, 255, 255, 0) 71.31783482977168%); */
     border-radius: 8px;
     margin: 0;
 }

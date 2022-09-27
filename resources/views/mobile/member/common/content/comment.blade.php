@@ -26,6 +26,7 @@
 @endsection
 
 @section('content')
+<br>
 <div class="container p-0">
     <div class="card-body row col-12 justify-content-center m-0">
         @if($c->new_type == 'C' || $c->new_type == 'V')
@@ -117,9 +118,12 @@
                 @if($imggal->count() > 1)
                     @foreach($imggal as $imgs)
                         <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
+                        <br>
+                        <br>
                     @endforeach
                 @else
                     <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$c->new_img.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
+                  
                 @endif
             
         @elseif($c->new_type=='V')
@@ -132,11 +136,14 @@
                 @foreach($imggal as $imgs)
                     @if($imgs->type =='I')
                         <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" alt="alt" class="w-100" style="width: 375px; height: auto;">
+                        <br>
+                        <br>
                     @else
-                        <video width="100%" height="215" controls >
+                        <video width="100%" height="auto" controls >
                             <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                             <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
                         </video>
+                        <br>
                     @endif
                 @endforeach
                 

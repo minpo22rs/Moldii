@@ -62,6 +62,7 @@ Route::post('user/nameSave', [UserAccController::class, 'nameSave']);
 Route::get('user/phoneNumber', [UserAccController::class, 'phoneNumber']);// หน้าโชว์เบอร์
 Route::get('user/newPhoneNumber', [UserAccController::class, 'newPhoneNumber']);// กรอกเบอร์ใหม่ รับ OTP
 Route::get('user/OTP_PhoneNumber', [UserAccController::class, 'OTP_PhoneNumber']);// กรอกOTP
+Route::post('checkotpchangephone', [UserAccController::class, 'checkotpchangephone']);// กรอกOTP
 Route::get('user/changePassword', [UserAccController::class, 'changePassword']);// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
 Route::get('user/newPassword', [UserAccController::class, 'newPassword']);// กรอกรหัสผ่านใหม่
 Route::post('user/savenewPassword', [UserAccController::class, 'savenewPassword']);// กรอกรหัสผ่านใหม่
@@ -77,6 +78,10 @@ Route::post('user/addnewaddress', [UserAccController::class, 'addnewaddress']);/
 Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changevalueaddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);// โชว์ที่อยู่ของฉัน
 Route::get('user/deleteAddress/{id}', [UserAccController::class, 'deleteAddress']);// โชว์ที่อยู่ของฉัน
+
+Route::get('user/store', [UserAccController::class, 'store']);
+Route::post('user/submitstore', [UserAccController::class, 'submitstore']);
+
 
 Route::get('getAmphure',[UserAccController::class, 'getAmphure']);//
 Route::get('getSubDistrict',[UserAccController::class, 'getSubDistrict']);//
@@ -98,7 +103,8 @@ Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// กา�
 Route::get('user/sendslip', [UserAccController::class, 'sendslip']);// แจ้งชำระเงิน
 Route::post('user/submitslip', [UserAccController::class, 'submitslip']);// แจ้งชำระเงิน
 
-Route::get('user/mylike', [UserAccController::class, 'mylike']);// รายการบัญชีธนาคาร/บัตรที่บันทึก
+Route::get('user/mylike', [UserAccController::class, 'mylike']);
+Route::get('user/mybookmark', [UserAccController::class, 'mybookmark']);
 
 
 Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceive']);// รายการของฉัน
@@ -177,6 +183,7 @@ Route::get('store', [StoreController::class, 'index']);
 Route::get('group', [GroupController::class, 'index']); 
 Route::get('groupid/{id}', [GroupController::class, 'groupid']); 
 Route::get('requestjoingroup/{type}/{id}', [GroupController::class, 'requestjoingroup']); 
+Route::get('groupall', [GroupController::class, 'groupall']); 
 
 
 //cart

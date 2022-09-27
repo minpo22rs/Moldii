@@ -2,56 +2,73 @@
     "name": "Moldii",
     "short_name": "Moldii",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "scope" : "https://modii.sapapps.work/",
-    "background_color": "#000000",
-    "theme_color": "#000000",
+    "background_color": "#fc684b",
+    "theme_color": "#fc684b",
     "orientation": "portrait",
+    "description": "Moldii รวมของเล่น ของสะสมไว้ในที่นี่ที่เดียว",
+    "prefer_related_applications": "false",
+    "screenshots": [
+        {
+            "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "A screenshot of the home page"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name":"Moldii",
+            "url":"/",
+            "description":"A description of the functionality of this shortcut"
+        }
+    ],
     "icons": [
         {
-            "src": "/new_assets/img/icon/72x72.png",
+            "src": "/new_assets/img/Moldii-72x72-01.ico",
             "type": "image/png",
             "sizes": "72x72",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/96x96.png",
+            "src": "/new_assets/img/Moldii-96x96-01.ico",
             "type": "image/png",
             "sizes": "96x96",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/128x128.png",
+            "src": "/new_assets/img/Moldii-128x128-01.ico",
             "type": "image/png",
             "sizes": "128x128",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/144x144.png",
+            "src": "/new_assets/img/Moldii-144x144-01.ico",
             "type": "image/png",
             "sizes": "144x144",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/152x152.png",
+            "src": "/new_assets/img/Moldii-152x152-01.ico",
             "type": "image/png",
             "sizes": "152x152",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/192x192.png",
+            "src": "/new_assets/img/Moldii-192x192-01.ico",
             "type": "image/png",
             "sizes": "192x192",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/384x384.png",
+            "src": "/new_assets/img/Moldii-384x384-01.ico",
             "type": "image/png",
             "sizes": "384x384",
             "purpose": "any maskable"
         },
         {
-            "src": "/new_assets/img/icon/512x512.png",
+            "src": "/new_assets/img/Moldii-512x512-01.ico",
             "type": "image/png",
             "sizes": "512x512",
             "purpose": "any maskable"

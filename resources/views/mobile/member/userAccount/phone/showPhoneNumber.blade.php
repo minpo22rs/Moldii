@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="mt-3  col-12">
     <div  class="row py-1 border-top border-bottom pl-1" style="color:black; font-size:18px">
         <div class="col-6 mx-0 p-0 align-self-center row">
@@ -19,15 +20,15 @@
         <div class="col-6 mx-0 text-right">
 
             <a href="{{url('user/newPhoneNumber')}}" class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-                <h5 class="m-0  align-self-center font-weight-bold">********39</h5>
+                <h5 class="m-0  align-self-center font-weight-bold">********{{substr($sql->customer_phone,-2)}}</h5>
                 <div class="col-2 p-0">
-                    <h6 class="m-0 p-0"><small style="color:rgba(80, 202, 101, 1);">แก้ไข</small></h6>
+                    <h6 class="mt-1 pl-1" style="color:rgba(80, 202, 101, 1);">แก้ไข</h6>
                 </div>
 
             </a>
         </div>
     </div>
-    <h6 class="text-center my-3"><small style="color:rgba(181, 181, 181, 1);">หากคุณแก้ไขหมายเลขโทรศัพท์ที่นี่ หมายเลขโทรศัพท์ของบัญชีทั้งหมดที่ผูกกับบัญชีผู้ใช้นี้จะถูกแก้ไขตามไปด้วย</small> </h6>
+    <h6 class="text-center my-3" style="color:rgba(181, 181, 181, 1);">หากคุณแก้ไขหมายเลขโทรศัพท์ที่นี่ หมายเลขโทรศัพท์ของบัญชีทั้งหมดที่ผูกกับบัญชีผู้ใช้นี้<br>จะถูกแก้ไขตามไปด้วย</h6>
 
 
 </div>
@@ -38,6 +39,6 @@
 
 @section('custom_script')
 <script>
-    bottom_now(4);
+    bottom_now(7);
 </script>
 @endsection

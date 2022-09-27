@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
 
 <div class="bg_image" style="background-image: url('https://testgit.sapapps.work/moldii/storage/app/banner/{{$banner->banner_name}}');">
     <div class="col-12 text-center">
@@ -98,7 +98,7 @@
     <div class="col-6 mx-0 text-right">
 
         <div class="mx-2 my-1 ml-2 mr-2 row justify-content-end">
-            <h5 class="m-0 mr-2 font-weight-bold">{{substr($sql->customer_phone,0,6)}}****</h5>
+            <h5 class="m-0 mr-2 font-weight-bold">********{{substr($sql->customer_phone,-2)}}</h5>
 
             <i class="far fa-angle-right"></i>
         </div>

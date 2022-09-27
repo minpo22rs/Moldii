@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="mt-3 p-2 col-md-12">
 
     <form action="{{url('user/submitdonateexchange')}}" method="POST">

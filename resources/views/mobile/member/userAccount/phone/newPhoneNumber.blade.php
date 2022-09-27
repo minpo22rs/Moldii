@@ -11,18 +11,18 @@
 @endsection
 @section('content')
 <div class="mt-3 p-2 col-12">
-
-    <form action="{{url('user/OTP_PhoneNumber')}}">
+<br>
+    <form action="{{url('user/OTP_PhoneNumber')}}" method="GET" id="OTP_PhoneNumber">
         @csrf
-        <h6 class="my-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลขโทรศัพท์เพื่อรับ OTP</small> </h6>
+        <h6 class="my-1" style="color:rgba(181, 181, 181, 1);">กรุณาใส่หมายเลขโทรศัพท์ที่ต้องการเลี่ยนแปลงและเพื่อรับรหัส OTP </h6>
 
-        <input type="number" class="form-control form-control-lg mt-1 mb-1 input" style="border-radius: 10px; " name="newPhone" id="phone" placeholder="หมายเลขโทรศัพท์" data-operand-current>
+        <input type="text" class="form-control form-control-lg mt-1 mb-1 input" style="border-radius: 10px; " name="newPhone" id="phone" onkeyup="autoTab(this);"  placeholder="หมายเลขโทรศัพท์" data-operand-current required>
 
-        <h6 class="text-center my-3"><small style="color:rgba(181, 181, 181, 1);">หากคุณแก้ไขหมายเลขโทรศัพท์ที่นี่ หมายเลขโทรศัพท์ของบัญชีทั้งหมดที่ผูกกับบัญชีผู้ใช้นี้จะถูกแก้ไขตามไปด้วย</small> </h6>
+        <h6 class="text-center my-3" style="color:rgba(181, 181, 181, 1);">หากคุณแก้ไขหมายเลขโทรศัพท์ที่นี่ หมายเลขโทรศัพท์ของบัญชีทั้งหมดที่ผูกกับ<br>บัญชีผู้ใช้นี้จะถูกแก้ไขตามไปด้วย </h6>
 
 
 
-        <button type="submit" class="btn btn-success col-12" style="font-size:1.3rem;">ดำเนินการต่อ</button>
+        <button type="submit" class="btn btn-success col-12" style="font-size:1.3rem;" >ดำเนินการต่อ</button>
     </form>
 </div>
 
@@ -31,67 +31,64 @@
 
 @endsection
 
-@section('numpad')
-<div class="" id="numpad_container">
+@section('custom_script')
 
-    <div class="numpad-box " id="numpad_box">
-        <div class="wrapper">
-
-
-            <section class="calc-btn_row">
-
-                <div class="calc_btn_row">
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '1';">1</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '2';">2</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '3';">3</button>
-
-
-                </div>
-                <div class="calc_btn_row">
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '4';">4</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '5';">5</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '6';">6</button>
-
-                </div>
-                <div class="calc_btn_row">
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '7';">7</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '8';">8</button>
-                    <button class="calc_btn" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '9';">9</button>
-
-                </div>
-                <div class="calc_btn_row justify-content-end">
-
-                    <button class="calc_btn_2 none-bg" onclick=""></button>
-                    <button class="calc_btn " onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value + '0';">0</button>
-                    <button class="calc_btn_2 none-bg" onclick="document.getElementById('newPassword').value=document.getElementById('newPassword').value.slice(0, -1);"><i class="far fa-backspace"></i></button>
-
-                </div>
-
-
-
-            </section>
-        </div>
-    </div>
-
-
-</div>
 <script>
-    //_______________[Buy_goods]__________________//
-    const showNum = document.getElementById("newPassword");
-    const boxNum = document.getElementById("numpad_box");
-    const conNum = document.getElementById("numpad_container");
+    bottom_now(7);
 
-    showNum.addEventListener("click", () => {
-        boxNum.classList.add("numpad-show");
-
-    });
+    var a = "{{Session::get('msg')}}";
+    if (a) {
+        alert(a);
+    }
 
 
+        // function checkmn(){
+            
+        //     var p = document.getElementById("phone").value;
+        //     $.ajax({
+        //         url: '{{ url("checkmn")}}',
+        //         type: 'GET',
+        //         dataType: 'HTML',
+        //         data: {'mn':p},
+        //         success: function(data) {
+        //             if(data == 1){
+                       
+        //                 alert('มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่');
+        //                 document.getElementById("phone").value = '';
+        //                 $('#phone').focus();
+        //             }else{
+        //                 $('#OTP_PhoneNumber').submit();
+                        
 
+        //             }
+        //         }
+        //     });
+        // }
 
+        function autoTab(obj){
+            /* กำหนดรูปแบบข้อความโดยให้ _ แทนค่าอะไรก็ได้ แล้วตามด้วยเครื่องหมาย
+            หรือสัญลักษณ์ที่ใช้แบ่ง เช่นกำหนดเป็น  รูปแบบเลขที่บัตรประชาชน
+            4-2215-54125-6-12 ก็สามารถกำหนดเป็น  _-____-_____-_-__
+            รูปแบบเบอร์โทรศัพท์ 08-4521-6521 กำหนดเป็น __-____-____
+            หรือกำหนดเวลาเช่น 12:45:30 กำหนดเป็น __:__:__
+            ตัวอย่างข้างล่างเป็นการกำหนดรูปแบบเลขบัตรประชาชน
+            */
+                var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้
+                var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้
+                var returnText=new String("");
+                var obj_l=obj.value.length;
+                var obj_l2=obj_l-1;
+                for(i=0;i<pattern.length;i++){           
+                    if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){
+                        returnText+=obj.value+pattern_ex;
+                        obj.value=returnText;
+                    }
+                }
+                if(obj_l>=pattern.length){
+                    obj.value=obj.value.substr(0,pattern.length);           
+                }
+        }
 
-
-    //_______________[Buy_goods]__________________//
 </script>
 
 @endsection

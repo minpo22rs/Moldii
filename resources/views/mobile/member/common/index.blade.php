@@ -181,10 +181,16 @@
             display: none;
         }
 
+        .bg-danger-app-bar {
+            opacity: 90%;
+            /* background: #fff ; */
+            color: #fff;
+        }
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="appHeader bg-danger text-light">
+<div class="appHeader bg-danger-app-bar text-light">
 
     <div class="pageTitle">
 
@@ -260,6 +266,11 @@
     </div>
     <!-- Show List Menu btn_search_2 [End]--> 
 </div>
+
+<div>
+    <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}" alt="alt" height="auto">
+
+</div>
 {{-- Recent Search --}}
 <div id="search_box_2">
     <h3> Recent Search</h3>
@@ -280,16 +291,6 @@
 @endsection
 
 @section('content')
-
-    <br>
-
-
-    <div>
-        <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}" alt="alt">
-
-    </div>
-
-    <br>
     
     {{-- <div style="background-color: gray" >
         <div class="row">
@@ -319,27 +320,40 @@
 
     <br> --}}
     {{-- @include("mobile.member.common.content.story") --}}
-
-    <div class="row">
-        <div class="col-6 pr-0">
-            <div class="m-1">
-                <a href="{{url('user/wallet')}}" style="color: black">
+    <div  style="overflow: auto ; width: 100%; hight: 150px ; justify-content: center;">
+        <div class="row">
+            <div class="col-4 pr-0">
+                <div class="m-1">
+                    <a href="{{url('user/wallet')}}" style="color: black">
+                        <div class="card">
+                            <div class="row w-100 mx-3 my-2 text-center">
+                                <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" width="15%">
+                                <span class="ml-2 align-self-center font-weight-bold"> ฿ {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4 pl-0">
+                <div class="m-1">
                     <div class="card">
                         <div class="row w-100 mx-3 my-2 text-center">
-                            <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" width="15%">
-                            <span class="ml-2 align-self-center font-weight-bold"> ฿ {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                            <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
+                            <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_coin}} </span>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-        </div>
-        <div class="col-6 pl-0">
-            <div class="m-1">
-                <div class="card">
-                    <div class="row w-100 mx-3 my-2 text-center">
-                        <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
-                        <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_coin}} คอยน์</span>
-                    </div>
+            <div class="col-4 pr-0">
+                <div class="m-1">
+                    <a href="{{url('user/wallet')}}" style="color: black">
+                        <div class="card">
+                            <div class="row w-100 mx-3 my-2 text-center">
+                                <img src="{{ asset('new_assets/icon/โดเนท.png')}}" width="15%">
+                                <span class="ml-2 align-self-center font-weight-bold"> {{$u->customer_donate}}</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -510,7 +524,7 @@
                         <div class="card-body p-2">
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
-                            
+                        <a href="{{url('content/'.$sqls->new_id.'')}}">
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                                 
                                 @if($sqls->new_type == 'C')
@@ -542,7 +556,7 @@
                                                 </div>
                                             @else
                                                 <div class="carousel-item active">
-                                                    <video width="100%" height="197" controls >
+                                                    <video width="100%" height="auto" controls >
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
                                                     </video>
@@ -563,7 +577,7 @@
                                                     @else
                                                        
                                                         <div class="carousel-item" >
-                                                            <video width="100%" height="197" controls >
+                                                            <video width="100%" height="auto" controls >
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
                                                             </video>
@@ -579,6 +593,7 @@
                                 @endif
                                 
                             </div>
+                        </a>
                      
 
                         <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">

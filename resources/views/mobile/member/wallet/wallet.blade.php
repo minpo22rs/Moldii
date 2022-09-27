@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+ิ<br>
 <div class="section full mt-3 mb-3">
     <div class="card bg-danger mx-3" >
         <div class="card-body p-2 pb-1">
@@ -33,7 +34,7 @@
           
             <a href="{{url('user/addMoney')}}"class="row mt-1 border-top font-weight-bold" style="color:#fff;">
                 <div class="col-10 mt-2">
-                    เติมเงินเพื่อใช้ในการชำระ
+                    เติมเงิน
                 </div>
                 <div class="col-2 mt-2 text-right">
                     <i class="far fa-angle-right" style="font-size:1.5rem;"></i>
