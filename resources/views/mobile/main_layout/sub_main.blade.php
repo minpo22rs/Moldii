@@ -17,9 +17,9 @@
     <meta name="title" content="Moldii รวมของเล่น ของสะสมไว้ในที่นี่ที่เดียว">
     <meta name="description" content="Moldii">
     <meta name="keywords" content="Moldii" />
-    <meta property="og:image" content="https://modii.sapapps.work/new_assets/img/icon/512x512.png">
-    <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/icon/512x512.png') }}" sizes="512x512">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/new_assets/img/icon/192x192.png') }}">
+    <meta property="og:image" content="https://modii.sapapps.work/new_assets/img/Moldii-152x152-01.ico">
+    <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/Moldii-152x152-01.ico') }}" sizes="512x512">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/new_assets/img/Moldii-192x192-01.ico') }}">
     <link rel="stylesheet" href="{{ asset('/new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('/new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
