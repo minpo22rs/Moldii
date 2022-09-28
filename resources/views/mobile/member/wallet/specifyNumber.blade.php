@@ -223,9 +223,17 @@
         var v = document.getElementById("input_Top_Up").value;
         console.log(v.length);
         if(v == ''){
-            alert('กรุณาระบุจำนวนเงิน');
+            Swal.fire({
+                text : "กรุณาระบุจำนวนเงิน",
+                confirmButtonColor: "#fc684b",
+            })
+
         }else if(v.length>5){
-            alert('กรอกได้สูงสุด : ฿99,999');
+            Swal.fire({
+                text : "กรอกได้สูงสุด : ฿99,999",
+                confirmButtonColor: "#fc684b",
+            })
+
         }else{
             $('#amountt').html('฿'+new Intl.NumberFormat().format(v));
             $('#amounttt').html('฿'+new Intl.NumberFormat().format(v));

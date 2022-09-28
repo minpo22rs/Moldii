@@ -117,7 +117,10 @@
 
       var a = "{{Session::get('msg')}}";
       if(a){
-          alert(a);
+          Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
       }
 
 

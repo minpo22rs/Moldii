@@ -115,8 +115,8 @@ class RegisterController extends Controller
 
     public function selecttag(Request $request)
     {
-       
-        DB::table('tb_customers')->where('customer_id',Session::get('cid'))->update(['tag'=> $request->checkbox]);
+        // dd(json_encode($request->checkbox, JSON_UNESCAPED_UNICODE));
+        DB::table('tb_customers')->where('customer_id',Session::get('cid'))->update(['tag'=> json_encode($request->checkbox, JSON_UNESCAPED_UNICODE)]);
 
 
         return redirect('index');

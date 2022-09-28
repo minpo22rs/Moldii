@@ -188,6 +188,7 @@
     <script src="assets/js/base.js"></script>
     <!--reCAPTCHA v3-->
     <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('custom_script')
 </body>

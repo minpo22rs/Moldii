@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="bg-white ">
+<body >
 
     <!-- loader -->
     <div id="loader">

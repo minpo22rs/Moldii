@@ -1,3 +1,4 @@
+@extends('mobile.main_layout.bgtag')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <style>
@@ -114,7 +115,7 @@
                   <button type="button" class="btn btn-outline-secondary btn-sm mt-2"><input type="checkbox"   name="checkbox[]" value="อื่นๆ">อื่นๆ</button>
                 </div>
               <br><br>
-              <button type="submit" class="btn btn-danger btn-lg btn-block">ยืนยัน</button>
+              <button type="submit" class="btn btn-lg btn-block" style="background-color: #fc684b;color:white">ยืนยัน</button>
             </form>
         </div>
     </div>
@@ -128,7 +129,10 @@
 <script>
   var a = "{{Session::get('success')}}";
     if (a) {
-        alert(a);
+        Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
     }
 
 </script>

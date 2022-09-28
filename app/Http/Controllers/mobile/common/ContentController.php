@@ -184,7 +184,16 @@ class ContentController extends Controller
 
     public function deletecontent(Request $request){
       
-        DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>3]);
+        DB::Table('tb_news')->where('new_id',$request->id)->delete();
+        $sql = DB::Table('tb_new_imgs')->where('new_id',$request->id)->get();
+        if( $sql != null){
+            foreach($sql as $sqls){
+                $image_path = Storage::delete('public/content_img'.$sqls->new_img);
+
+            }
+
+        }
+        DB::Table('tb_new_imgs')->where('new_id',$request->id)->delete();
       
         return 1 ;
     }

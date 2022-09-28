@@ -48,7 +48,10 @@
 
     var a = "{{Session::get('success')}}";
       if(a){
-          alert(a);
+          Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
       }
 
 
@@ -67,7 +70,11 @@
                     document.getElementById('btnnew').style.display = '';
                     document.getElementById('btnold').style.display = 'none';
                 }else{
-                    alert('กรุณาลองใหม่อีกครั้งในภายหลังค่ะ');
+                    Swal.fire({
+                        text : "กรุณาลองใหม่อีกครั้งในภายหลังค่ะ",
+                        confirmButtonColor: "#fc684b",
+                    })
+
                     window.location.reload();
                 }
                 

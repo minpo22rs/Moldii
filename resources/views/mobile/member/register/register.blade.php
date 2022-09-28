@@ -190,7 +190,10 @@
     <script>
         var a = "{{Session::get('success')}}";
         if(a){
-            alert(a);
+            Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
         }
 
         var cn =0 ;
@@ -207,7 +210,11 @@
                 success: function(data) {
                     if(data == 1){
                         cn = 1;
-                        alert('มีชื่อบัญชีนี้ในระบบแล้ว กรุณากรอกใหม่');
+                        Swal.fire({
+                            text : "มีชื่อบัญชีนี้ในระบบแล้ว กรุณากรอกใหม่",
+                            confirmButtonColor: "#fc684b",
+                        })
+                        
                         document.getElementById("username").value = '';
                         $('#username').focus();
                     }else{
@@ -229,7 +236,11 @@
                 success: function(data) {
                     if(data == 1){
                         cm = 1;
-                        alert('มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่');
+                        Swal.fire({
+                            text : "มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่",
+                            confirmButtonColor: "#fc684b",
+                        })
+
                         document.getElementById("mn").value = '';
                         $('#mn').focus();
                     }else{
@@ -257,12 +268,19 @@
                     $('#formregis').submit();
 
                 }else{
-                    alert('กรุณายอมรับเงื่อนไขการให้บริการของ Moldii');
+                    Swal.fire({
+                        text : "กรุณายอมรับเงื่อนไขการให้บริการของ Moldii",
+                        confirmButtonColor: "#fc684b",
+                    })
+
 
                 }
                
             }else{
-                alert('กรุณาข้อมูลให้ครบถ้วน');
+                Swal.fire({
+                    text : "กรุณาข้อมูลให้ครบถ้วน",
+                    confirmButtonColor: "#fc684b",
+                })
             }
         }
 

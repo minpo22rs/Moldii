@@ -88,14 +88,21 @@
     
 
         if (a) {
-            alert(a);
+            Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
         }
 
        function confirmpass(){
            var p2 = document.getElementById('confirm_password').value ;
            var p1 = document.getElementById('password').value ;
            if(p1  != p2){
-                alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
+                Swal.fire({
+                    text : "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่",
+                    confirmButtonColor: "#fc684b",
+                })
+
                 $('#confirm_password').focus();
            }else{
                 $('#formchangepass').submit();

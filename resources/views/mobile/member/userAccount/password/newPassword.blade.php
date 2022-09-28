@@ -100,11 +100,18 @@
         var p2 = document.getElementById('confirm_password').value ;
         var p1 = document.getElementById('password').value ;
         if(p1  != p2){
-                alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
+            Swal.fire({
+                text : "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่",
+                confirmButtonColor: "#fc684b",
+            })
+
+
         }else{
             if(p2.length < 8 || p1.length < 8){
-                alert('รหัสผ่านนี้ไม่เป็นไปตามข้อกำหนดขั้นต่ำ');
-
+                Swal.fire({
+                    text : "รหัสผ่านนี้ไม่เป็นไปตามข้อกำหนดขั้นต่ำ",
+                    confirmButtonColor: "#fc684b",
+                })
             }else{
                 $('#formchangepass').submit();
 

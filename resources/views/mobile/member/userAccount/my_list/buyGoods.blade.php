@@ -275,11 +275,19 @@
             var check = "{{$chk}}";
             // console.log(chk);
             if(chk==''){
-                alert('กรุณาเลือกวิธีการชำระเงิน');
+                Swal.fire({
+                    text : "กรุณาเลือกวิธีการชำระเงิน",
+                    confirmButtonColor: "#fc684b",
+                })
+
 
             }else{
                 if(parseInt(check) ==1){
-                    alert('กรุณาเลือกที่อยู่การจัดส่ง');
+                    Swal.fire({
+                        text : "กรุณาเลือกที่อยู่การจัดส่ง",
+                        confirmButtonColor: "#fc684b",
+                    })
+
 
                 }else{
                     $('#formsubmit').submit();

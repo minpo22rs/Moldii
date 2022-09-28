@@ -4,6 +4,7 @@ namespace App\Http\Controllers\mobile\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Storage;
 use DB;
 use Session;
 use App\Models\Tb_address;
@@ -496,8 +497,15 @@ class UserAccController extends Controller
     }
 
     public function notification(){// การแจ้งเตือน
+        $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
+        $id = $n->pluck('new_id');
+        // dd($id);
         $sql = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
-        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ]);
+        $comment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->orderBy('created_at','DESC')->get();
+
+        // dd( $comment);
+
+        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ,'comment'=>$comment]);
 
     }
     public function settingNotification(){// ตั้งค่าการแจ้งเตือน

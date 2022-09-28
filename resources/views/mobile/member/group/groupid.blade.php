@@ -452,7 +452,10 @@
     <script>
         var a = "{{Session::get('success')}}";
         if (a) {
-            alert(a);
+            Swal.fire({
+            text : a,
+            confirmButtonColor: "#fc684b",
+        })
         }
 
         bottom_now(1);

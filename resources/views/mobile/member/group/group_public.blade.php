@@ -609,12 +609,20 @@
             var c= "{{$u->customer_coin}}";
             var id= "{{$id}}";
             if(x > c){
-                if(confirm('จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่? ')){
-                    window.location.replace('/user/convert');
-                }else{
+                Swal.fire({
+                        text: 'จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่?',
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: "#fc684b",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.replace('/user/convert');
+                        } else if (result.isDismissed) {
+                            
+                        }
+                    })
 
-                    
-                }
                 
             }else{
                 $.ajax({
@@ -623,7 +631,10 @@
                     dataType: 'HTML',
                     data: {'recive':donate,'name':t,'coin':x,'id':id},
                     success: function(data) {
-                        alert('โดเนทเรียบร้อยแล้ว');
+                        Swal.fire({
+                                    text : "โดเนทเรียบร้อยแล้ว",
+                                    confirmButtonColor: "#fc684b",
+                                })
                         window.location.reload();
                     }
                 });

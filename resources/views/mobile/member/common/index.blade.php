@@ -232,13 +232,18 @@
                 </a>
             </div>
 
-            <div class="col-2">
-                <a href="{{url('user/notification')}}">
-                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+
+            <div class="col-2 mt-1">
+                <a href="{{url('user/notification')}}" > 
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
+           
+
             
         </div>
 
@@ -256,6 +261,7 @@
               @foreach($cat as $cats)
                     <div class="text-center p-1 ">                      
                         <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"> 
+                            <img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;">
                             <h4 class="mt-1" style="color:#fff;">{{$cats->cat_name}}</h4>
                         </a>
                     </div>
@@ -272,7 +278,7 @@
 
 </div>
 {{-- Recent Search --}}
-<div id="search_box_2">
+<div id="search_box_2" style="position: absolute;">
     <h3> Recent Search</h3>
 
         <p> @if(Session::get('recent') != null)
@@ -320,21 +326,34 @@
 
     <br> --}}
     {{-- @include("mobile.member.common.content.story") --}}
-    <div  style="overflow: auto ; width: 100%; hight: 150px ; justify-content: center;">
+    
         <div class="row">
-            <div class="col-4 pr-0">
+            <div class="col-12 pl-2 pr-2">
                 <div class="m-1">
-                    <a href="{{url('user/wallet')}}" style="color: black">
                         <div class="card">
                             <div class="row w-100 mx-3 my-2 text-center">
-                                <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" width="15%">
-                                <span class="ml-2 align-self-center font-weight-bold"> ฿ {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                                <a href="{{url('user/wallet')}}" style="color: black">
+
+                                    <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" >
+                                    <span class="ml-2 align-self-center font-weight-bold" style=" border-right: 2px solid cornflowerblue;padding-right: 0.5rem; "> ฿ {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                                </a>
+                                <a href="{{url('user/convert')}}" style="color: black">
+
+                                    <img src="{{ asset('new_assets/icon/คอยน์.png')}}"  style="padding-left: 0.6rem;">
+                                    <span class="ml-2 align-self-center font-weight-bold" style=" border-right: 2px solid cornflowerblue;padding-right: 0.5rem; ">{{$u->customer_coin}} </span>
+                                </a>
+                                <a href="{{url('user/donate')}}" style="color: black">
+
+                                    <img src="{{ asset('new_assets/icon/โดเนท.png')}}"  style="padding-left: 0.6rem;"> 
+                                    <span class="ml-2 align-self-center font-weight-bold"> {{$u->customer_donate}}</span>
+                                </a>
                             </div>
+                          
                         </div>
-                    </a>
+                    
                 </div>
             </div>
-            <div class="col-4 pl-0">
+            {{-- <div class="col-4 pl-0">
                 <div class="m-1">
                     <div class="card">
                         <div class="row w-100 mx-3 my-2 text-center">
@@ -344,7 +363,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 pr-0">
+            <div class="col-3 pr-0">
                 <div class="m-1">
                     <a href="{{url('user/wallet')}}" style="color: black">
                         <div class="card">
@@ -355,9 +374,9 @@
                         </div>
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </div>
-    </div>
+  
 
     {{-- Write Me --}}
     <br>
@@ -482,6 +501,7 @@
                                 <h6 class=" m-0 p-0">{{$sqls->created_at}}</h6>
                             </div>
 
+                            {{-- bookmark --}}
                             <div class="card-title col-3 row p-0 mb-0  align-self-center justify-content-center ">
                                 @if($bm !== null)
 
@@ -524,7 +544,7 @@
                         <div class="card-body p-2">
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
-                        <a href="{{url('content/'.$sqls->new_id.'')}}">
+                        {{-- <a href="{{url('content/'.$sqls->new_id.'')}}"> --}}
                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                                 
                                 @if($sqls->new_type == 'C')
@@ -543,6 +563,8 @@
                                                     <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                 </div>
                                             @endforeach
+                                        {{-- @else --}}
+                                            
                                         @endif
                                             
                                     </div>
@@ -593,7 +615,7 @@
                                 @endif
                                 
                             </div>
-                        </a>
+                        {{-- </a> --}}
                      
 
                         <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
@@ -1228,7 +1250,10 @@
         <script>
             var a = "{{Session::get('success')}}";
             if (a) {
-                alert(a);
+                Swal.fire({
+                    text : a,
+                    confirmButtonColor: "#fc684b",
+                })
             }
 
             bottom_now(1);
@@ -1281,12 +1306,21 @@
 
                 var c= "{{$u->customer_coin}}";
                 if(x > c){
-                    if(confirm('จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่? ')){
-                        window.location.replace('/user/convert');
-                    }else{
 
-                        
-                    }
+                    Swal.fire({
+                        text: 'จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่?',
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: "#fc684b",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.replace('/user/convert');
+                        } else if (result.isDismissed) {
+                            
+                        }
+                    })
+
                     
                 }else{
                     $.ajax({
@@ -1295,7 +1329,10 @@
                         dataType: 'HTML',
                         data: {'recive':donate,'name':t,'coin':x},
                         success: function(data) {
-                            alert('โดเนทเรียบร้อยแล้ว');
+                            Swal.fire({
+                                text : "โดเนทเรียบร้อยแล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
                             window.location.reload();
                         }
                     });
@@ -1429,8 +1466,11 @@
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
-                       
-                            alert('ติดตามผู้เขียนแล้ว');
+                        Swal.fire({
+                            text : "ติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
+                        
 
                     
                     }
@@ -1451,8 +1491,10 @@
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
-                        
-                            alert('เลิกติดตามผู้เขียนแล้ว');
+                        Swal.fire({
+                            text : "เลิกติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
 
                     
                     }
@@ -1472,32 +1514,47 @@
                         dataType: 'HTML',
                         data: {'id':id},
                         success: function(data) {
-                            alert('ซ่อนโพสต์เรียบร้อยแล้ว');
+                            Swal.fire({
+                                text : "ซ่อนโพสต์เรียบร้อยแล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
                             window.location.reload();
                         }
                     });
                } 
 
 
-               function deletecontent(id){
-                    if (confirm("ยืนยันการลบโพสต์ใช่หรือไม่") == true) {
-                        $.ajax({
-                            url: '{{ url("/deletecontent")}}',
-                            type: 'GET',
-                            dataType: 'HTML',
-                            data: {'id':id},
-                            success: function(data) {
-                                alert('ลบโพสต์เรียบร้อยแล้ว');
-                                window.location.reload();
+                function deletecontent(id){
+                    Swal.fire({
+                        text: 'ยืนยันการลบโพสต์ใช่หรือไม่',
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: "#fc684b",
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '{{ url("/deletecontent")}}',
+                                type: 'GET',
+                                dataType: 'HTML',
+                                data: {'id':id},
+                                success: function(data) {
+                                    Swal.fire({
+                                        text : "ลบโพสต์เรียบร้อยแล้ว",
+                                        confirmButtonColor: "#fc684b",
+                                    })
+                                    window.location.reload();
+                                
+                                }
+                            });
+                        } else if (result.isDismissed) {
                             
-                            }
-                        });
-                    } else {
-                        
-                    }
+                        }
+                    })
 
                    
-               }
+                }
         </script>
 
        

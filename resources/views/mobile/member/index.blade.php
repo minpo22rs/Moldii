@@ -500,7 +500,10 @@ color: #666;
                                         }
                                         
                                     } else {
-                                        alert("เบราว์เซอร์ของคุณไม่รองรับ File API");
+                                        Swal.fire({
+                                            text : "เบราว์เซอร์ของคุณไม่รองรับ File API",
+                                            confirmButtonColor: "#fc684b",
+                                        })
                                     }
                                 });
                             </script>
@@ -610,7 +613,10 @@ color: #666;
                                         }
                                         
                                     } else {
-                                        alert("เบราว์เซอร์ของคุณไม่รองรับ File API");
+                                        Swal.fire({
+                                            text : "เบราว์เซอร์ของคุณไม่รองรับ File API",
+                                            confirmButtonColor: "#fc684b",
+                                        })
                                     }
                                 });
                             </script>
@@ -1188,7 +1194,10 @@ color: #666;
         <script>
             var a = "{{Session::get('success')}}";
             if (a) {
-                alert(a);
+                Swal.fire({
+                    text : a,
+                    confirmButtonColor: "#fc684b",
+                })
             }
 
 
@@ -1374,10 +1383,11 @@ color: #666;
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
+                        Swal.fire({
+                            text : "ติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
                        
-                            alert('ติดตามผู้เขียนแล้ว');
-
-                    
                     }
                 });
         
@@ -1396,8 +1406,10 @@ color: #666;
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
-                        
-                            alert('เลิกติดตามผู้เขียนแล้ว');
+                        Swal.fire({
+                            text : "เลิกติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
 
                     
                     }
@@ -1417,7 +1429,10 @@ color: #666;
                         dataType: 'HTML',
                         data: {'id':id},
                         success: function(data) {
-                            alert('ซ่อนโพสต์เรียบร้อยแล้ว');
+                            Swal.fire({
+                                text : "ซ่อนโพสต์เรียบร้อยแล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
                             window.location.reload();
                         }
                     });
@@ -1425,24 +1440,36 @@ color: #666;
 
 
                function deletecontent(id){
-                    if (confirm("ยืนยันการลบโพสต์ใช่หรือไม่") == true) {
-                        $.ajax({
-                            url: '{{ url("/deletecontent")}}',
-                            type: 'GET',
-                            dataType: 'HTML',
-                            data: {'id':id},
-                            success: function(data) {
-                                alert('ลบโพสต์เรียบร้อยแล้ว');
-                                window.location.reload();
+                    Swal.fire({
+                        text: 'ยืนยันการลบโพสต์ใช่หรือไม่',
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: "#fc684b",
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '{{ url("/deletecontent")}}',
+                                type: 'GET',
+                                dataType: 'HTML',
+                                data: {'id':id},
+                                success: function(data) {
+                                    Swal.fire({
+                                        text : "ลบโพสต์เรียบร้อยแล้ว",
+                                        confirmButtonColor: "#fc684b",
+                                    })
+                                    window.location.reload();
+                                
+                                }
+                            });
+                        } else if (result.isDismissed) {
                             
-                            }
-                        });
-                    } else {
-                        
-                    }
+                        }
+                    })
 
                    
-               }
+                }
         </script>
 
        

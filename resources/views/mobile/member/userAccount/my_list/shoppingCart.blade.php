@@ -203,7 +203,11 @@
         }
 
         if(countchk == 0){
-            alert('กรุณาเลือกสินค้า');
+            Swal.fire({
+                text : "กรุณาเลือกสินค้า",
+                confirmButtonColor: "#fc684b",
+            })
+
             document.getElementById('customSwitch1').checked=false;
         }else{
             // $('#formcheckoutaddress').submit();
@@ -390,7 +394,11 @@
     function checkoutaddress(){
        
         if(countchk == 0){
-            alert('กรุณาเลือกสินค้า');
+            Swal.fire({
+                text : "กรุณาเลือกสินค้า",
+                confirmButtonColor: "#fc684b",
+            })
+
         }else{
             $('#formcheckoutaddress').submit();
         }

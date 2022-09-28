@@ -33,9 +33,17 @@ class MainController extends Controller
         $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
         $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
+
+        $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
+        $id = $n->pluck('new_id');
+        // dd($id);
+        $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->orderBy('created_at','DESC')->get();
+
+
         // $result = $cp->merge($c);
    
-        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
+        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u,'noti'=>$noti,'ccomment'=>$ccomment]);
     }
 
     public function followwriter(Request $request){

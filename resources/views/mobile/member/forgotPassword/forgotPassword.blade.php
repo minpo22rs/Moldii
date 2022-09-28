@@ -131,14 +131,20 @@
        
 
         if (a) {
-            alert(a);
+            Swal.fire({
+                text : a,
+                confirmButtonColor: "#fc684b",
+            })
         }
 
        function sendmn(){
            var tel = document.getElementById('tel').value ;
-           if(tel == ''){
-                alert('กรุณากรอกเบอร์โทรศัพท์');
-           }else{
+            if(tel == ''){
+                Swal.fire({
+                    text : "กรุณากรอกเบอร์โทรศัพท์",
+                    confirmButtonColor: "#fc684b",
+                })
+            }else{
                 $('#sendmn').submit();
 
            }
@@ -147,7 +153,10 @@
         function sendotp(){
             var otp = document.getElementById('otp').value ;
             if(otp == ''){
-                    alert('กรุณากรอกหมายเลข OTP');
+                Swal.fire({
+                    text : "กรุณากรอกหมายเลข OTP",
+                    confirmButtonColor: "#fc684b",
+                })
             }else{
                     $('#sendotp').submit();
 
@@ -159,7 +168,10 @@
             var p2 = document.getElementById('confirm_password').value ;
             var p1 = document.getElementById('password').value ;
             if(p1  != p2){
-                    alert('รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่');
+                Swal.fire({
+                    text : "รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่",
+                    confirmButtonColor: "#fc684b",
+                })
             }else{
                     $('#formchangepass').submit();
 
