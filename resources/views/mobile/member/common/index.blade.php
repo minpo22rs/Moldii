@@ -160,12 +160,11 @@
 
         #search_box_2 {
             width: 100%;
-            height: auto;
-            padding: 60px 0;
+            padding: 30px ;
             text-align: center;
-            background-color: white ;
-            margin-top: 30px;
-            position: sticky;
+            background-color: #fc684b  ;
+            margin-top: 0px;
+            position: fixed;
             display: none;
             transform: translateY( 0%);
             transition: transform 0.5s;
@@ -187,10 +186,19 @@
             color: #fff;
         }
 
+        .pa-fixed-header {
+            background-color: #fc684b !important;
+            -webkit-transition: background-color 1s ease-out;
+            -moz-transition: background-color 1s ease-out;
+            -o-transition: background-color 1s ease-out;
+            transition: background-color 1s ease-out;
+        }
+
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="appHeader bg-danger-app-bar text-light">
+<div class="pa-fixed-header appHeader text-light " id="navBar">
 
     <div class="pageTitle">
 
@@ -212,7 +220,8 @@
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
+                        <input type="text" name="text" class="form-control" placeholder="Search..." style="padding: 20px "  onclick="out_page()">
+                        {{-- <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px " > --}}
                         <!-- <i class="input-icon" >
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
                         </i> -->
@@ -271,6 +280,42 @@
         </div>
     </div>
     <!-- Show List Menu btn_search_2 [End]--> 
+
+    {{-- Recent Search --}}
+    <div id="search_box_2" class="fixed-top">
+
+        <div style="left: 16px;  position: absolute;">
+            <ion-icon name="close" onclick="out_page()"  aria-label="search outline" ></ion-icon>
+        </div><br><br>
+
+        <div class="col-12">
+                <form action="{{url('user/search')}}" method="POST" class="search-form">
+                    @csrf
+                    <div class="form-group searchbox mt-1 mb-0">
+                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
+                        <!-- <i class="input-icon" >
+                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                        </i> --> &nbsp; &nbsp;
+                        <button class="btn btn-dark"  type="submit">ค้นหา</button>
+                     </div> 
+            </form>
+        </div>
+        <br><hr>
+            <h3> Recent Search</h3>
+
+            <p> @if(Session::get('recent') != null)
+                    @foreach (Session::get('recent') as $text)
+                        <a href="{{url('user/searcha/0/'. $text.'')}}">
+                            {{$text}}<br>
+                        </a>
+                    @endforeach
+                    
+                @else
+                    <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
+                @endif
+            </p>
+    </div>
+
 </div>
 
 <div>
@@ -278,7 +323,7 @@
 
 </div>
 {{-- Recent Search --}}
-<div id="search_box_2" style="position: absolute;">
+{{-- <div id="search_box_2" >
     <h3> Recent Search</h3>
 
         <p> @if(Session::get('recent') != null)
@@ -293,7 +338,7 @@
             @endif
         </p>
   
-</div>
+</div> --}}
 @endsection
 
 @section('content')
@@ -1283,7 +1328,14 @@
             //     searchCon.classList.remove('search-container-2');
             //     searchBox.classList.remove('show-search-box');
             // });
-
+            function out_page() {
+                var x = document.getElementById("search_box_2");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
 
             function myFunction() {
                 var x = document.getElementById("search_2");
@@ -1555,6 +1607,27 @@
 
                    
                 }
+        </script>
+
+        <script>
+            /* Change Navbar Background Color On Scroll */
+
+            // Toggle the .pa-fixed-header class when the user 
+            // scroll 100px 
+
+            window.onscroll = () => {scrollNavbar()};
+
+            scrollNavbar = () => {
+                // Target elements
+                const navBar = document.getElementById("navBar");
+                const links = document.querySelectorAll("#navBar a");
+
+            if (document.documentElement.scrollTop > 120) {
+                navBar.classList.add("pa-fixed-header");
+            } else {
+                navBar.classList.remove("pa-fixed-header");
+            }
+            }
         </script>
 
        

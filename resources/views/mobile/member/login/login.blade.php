@@ -32,9 +32,9 @@
                             <div class="col-md-12"  style="background-color: #fff;   border-radius: 25px;"><br>
                             <div class = "col-12 text-center" >
                                 <!-- <img src="{{asset('new_assets/img/Moldii.png')}}" style="width: 25%;height:25%;margin-top: 100px;"> -->
-                                <b><h1 class = ""  style = "margin-top: 10px;">
+                                <b><h2 class = ""  style = "margin-top: 10px;">
                                     เข้าสู่ระบบ
-                                </h1></b>
+                                </h2></b>
                             </div>
                                     
                        
