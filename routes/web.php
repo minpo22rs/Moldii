@@ -80,6 +80,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     Route::get('tranfer', 'OrderController@tranfer');
     Route::get('confirmslip/{id}', 'OrderController@confirmslip');
     Route::post('rejectslip', 'OrderController@rejectslip');
+    Route::get('orderdetail/{id}', 'OrderController@orderdetail');
 
     Route::resource('familys', 'FamilyController');
     Route::post('addgroup', 'FamilyController@store');
@@ -89,6 +90,12 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     // auction
     Route::get('auction', 'AuctionController@index');
     Route::post('addauction', 'AuctionController@store');
+
+
+    //requeststore
+    Route::get('requeststore', 'StoreController@requeststore');
+    Route::get('store_detail/{id}', 'StoreController@store_detail');
+    Route::post('statusstore', 'StoreController@statusstore');
 
 
 
@@ -114,7 +121,7 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
 
     // product
     Route::resource('product', 'ProductController');
-    Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');
+    // Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');
 
     // order
     Route::resource('ordermerchant', 'OrderMerchantController');

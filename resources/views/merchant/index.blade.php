@@ -72,7 +72,7 @@
                         </div>
                         <h6 class="f-w-600 m-t-25 m-b-10">{{Auth::guard('merchant')->user()->merchant_name}} {{Auth::guard('merchant')->user()->merchant_lname}}</h6>
                         <p class="text-muted">Active | Male | Born 23.05.1992</p>
-                        <hr/>
+                        {{-- <hr/>
                         <p class="text-muted m-t-15">ระดับกิจกรรม: 87%</p>
                         <ul class="list-unstyled activity-leval">
                             <li class="active"></li>
@@ -103,7 +103,7 @@
                             <div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
                             <div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
                             <div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

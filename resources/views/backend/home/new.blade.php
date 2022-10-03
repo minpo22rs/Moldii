@@ -95,13 +95,13 @@
                         <td class="text-center text-middle">{{ $item->new_title }}</td>
                         <td class="text-center text-middle">
                             <div class="col-12">
-                                <i class="icofont icofont-thumbs-up" style="font-size: 22px; color: #4099ff;"></i> : {{$item->count_like('C')}}
+                                <i class="icofont icofont-thumbs-up" style="font-size: 22px; color: #ffc107;"></i> : {{$item->like}}
                             </div>
                             <hr>
-                            <div class="col-12">
+                            {{-- <div class="col-12">
                                 <i class="icofont icofont-thumbs-down" style="font-size: 22px; color: #FF5370;"></i> : {{$item->count_dislike('C')}}
                             </div>
-                            <hr>
+                            <hr> --}}
                             <div class="col-12">
                                 <i class="icofont icofont-eye" style="font-size: 22px; color: #2ed8b6;"></i> : {{$item->new_numberformat($item->viewer)}}
                             </div>
@@ -214,11 +214,17 @@
                     
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">แกลเลอรี่ภาพ ( รูปภาพขนาด: 375 x 197 px.)<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ (สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple">
                         </div>                
                     </div>
+                    {{-- <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">แกลเลอรี่ภาพ ( รูปภาพขนาด: 375 x 197 px.)<span class="text-danger">*</span></label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+                        </div>                
+                    </div> --}}
 
                 </div>
             </form>
@@ -272,7 +278,7 @@
         $.ajax({
             url: '{{ url('admin/view_comment') }}/' + id + '/C',
             type: 'GET',
-            data: {id: id},
+            // data: {id: id},
         }).done(function (data) {
             $('#result-modalview').html(data);
             $("#viewmodal").modal('show');

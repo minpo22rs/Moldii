@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Merchant;
 
 class StoreController extends Controller
 {
@@ -12,9 +13,25 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function requeststore()
     {
+        $merchant = Merchant::where('merchant_status',1)->get();
+
+        return view('backend.store.store')->with(['merchant'=>$merchant]);
         //
+    }
+
+
+    public function store_detail($id)
+    {
+        $merchant = Merchant::where('merchant_id',$id)
+                            ->leftJoin('districts', 'tb_merchants.merchant_tumbon', '=', 'districts.id')
+                            ->leftJoin('amphures', 'tb_merchants.merchant_district', '=', 'amphures.id')
+                            ->leftJoin('provinces', 'tb_merchants.merchant_province', '=', 'provinces.id')
+                            ->select('tb_merchants.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                            ->first();
+        $data = array('merchant' => $merchant, );
+        return view('backend.store.store_detail', $data);
     }
 
     /**
@@ -22,8 +39,10 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function statusstore(Request $request)
     {
+        dd( $request->all());
+        $merchant = Merchant::where('merchant_id',$request->id)->update(['merchant_status'=>$request->status]);
         //
     }
 

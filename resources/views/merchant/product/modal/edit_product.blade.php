@@ -113,7 +113,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ตัวเลือกเพิ่มเติม</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">จำนวนสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -164,9 +164,9 @@
                                 <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">ราคา</label>
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #FF5370;">คะแนน</label>
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <label class="col-form-label" style="color: #FFB64D;">ราคาที่ลดแล้ว</label>
                                 </div>
@@ -180,9 +180,9 @@
                                 <div class="col-4">
                                     <input type="number" name="price" class="form-control form-control-success"  value="{{$product->product_price}}" >
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <input type="number" name="gpoint" class="form-control form-control-danger" value="{{$product->product_gpoint}}" >
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)..." value="{{$product->product_discount}}" >
                                 </div>

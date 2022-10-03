@@ -82,7 +82,7 @@
                             {{-- <td class="text-center text-middle">{{ Str::limit($item->product_description, 50) }}</td> --}}
                             <td class="text-center text-middle">
                                 <span style="color: #2ed8b6;">ราคา: </span>{{$item->product_price}} ฿<br>
-                                <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br>
+                                {{-- <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br> --}}
                                 <span style="color: #FFB64D;">ราคาที่ลดแล้ว:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
                             </td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
@@ -212,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ตัวเลือกเพิ่มเติม</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">จำนวนสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -257,9 +257,9 @@
                                 <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">ราคา</label>
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #FF5370;">คะแนน</label>
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <label class="col-form-label" style="color: #FFB64D;">ราคาที่ลดแล้ว</label>
                                 </div>
@@ -273,9 +273,9 @@
                                 <div class="col-4">
                                     <input type="number" name="price" class="form-control form-control-success" placeholder="ราคา..." required>
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="คะแนน..." required>
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
                                 </div>
@@ -340,7 +340,7 @@
 
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
                         </div>                
@@ -363,109 +363,111 @@
     {{ method_field('delete') }}
 </form>
 @endsection
+
+
+
 @section('js')
 
 
-@include('flash-message')
-<script>
-    var count_option = 1;
-    $('#addoption').click(function () { 
-        var optionname = $('#option').val();
-        if (optionname != '') {
-            $("#resultappend_option").append('<label class="label label-primary label-lg" id="option_'+count_option+'" data-numoption="'+count_option+'">'+
-            ''+optionname+' <i class="icofont icofont-close pointer" onclick="del_option('+count_option+')"></i></label>'+
-            '<input type="hidden" name="option[]" id="inputoption_'+count_option+'" value="'+optionname+'">')
-            count_option++;
-            optionname = $('#option').val('');
-        }
-    });
-
-    function del_option(option_num) {
-        $('#option_'+option_num).fadeOut();
-        $('#inputoption_'+option_num).remove();
-        count_option--;
-    }
-
-    var count_tag = 1;
-    $('#addtags').click(function () { 
-        if (count_tag <= 3) {
-            var tagname = $('#tag').val();
-            if (tagname != '') {
-                $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
-                ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
-                '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
-                count_tag++;
-                tagname = $('#tag').val('');
+    @include('flash-message')
+    <script>
+        var count_option = 1;
+        $('#addoption').click(function () { 
+            var optionname = $('#option').val();
+            if (optionname != '') {
+                $("#resultappend_option").append('<label class="label label-primary label-lg" id="option_'+count_option+'" data-numoption="'+count_option+'">'+
+                ''+optionname+' <i class="icofont icofont-close pointer" onclick="del_option('+count_option+')"></i></label>'+
+                '<input type="hidden" name="option[]" id="inputoption_'+count_option+'" value="'+optionname+'">')
+                count_option++;
+                optionname = $('#option').val('');
             }
+        });
+
+        function del_option(option_num) {
+            $('#option_'+option_num).fadeOut();
+            $('#inputoption_'+option_num).remove();
+            count_option--;
         }
-    });
 
-    function del_tag(tag_num) {
-        $('#tag_'+tag_num).fadeOut();
-        $('#inputtag_'+tag_num).remove();
-        count_tag--;
-    }
-    
-    function edit_product(id) {
-        $.ajax({
-            url: '{{ url('merchant/product') }}/' + id + '/edit',
-            type: 'GET',
-            data: {id: id},
-        }).done(function (data) {
-            $('#result-modal').html(data);
-            $("#editmodal").modal('show');
-        });
-    }
-
-    function view_comment(id) {
-        $.ajax({
-            url: '{{ url('merchant/view_comment') }}/' + id + '/P',
-            type: 'GET',
-            data: {id: id},
-        }).done(function (data) {
-            $('#result-modalview').html(data);
-            $("#viewmodal").modal('show');
-        });
-    }
-
-    function del_product(id) {
-        var urlaction = '{{url('merchant/product')}}' + '/' + id;
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-primary',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-            title: 'คุณแน่ใจหรือไม่?',
-            text: "คุณไม่สามารถกู้คืนได้อีก",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'ยืนยัน',
-            cancelButtonText: 'ยกเลิก',
-            reverseButtons: true
-            reverseButtons: true
-        }).then((result) => {
-            if (result.value) {
-                $("#delete_product").attr('action', urlaction);
-                $("#delete_product").submit();
-                swalWithBootstrapButtons.fire(
-                    'Deleted!',
-                    'Product has been Deleted',
-                    'success'
-                )
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                    'Canceled',
-                    'Product has been Saved',
-                    'error'
-                )
+        var count_tag = 1;
+        $('#addtags').click(function () { 
+            if (count_tag <= 3) {
+                var tagname = $('#tag').val();
+                if (tagname != '') {
+                    $("#resultappend").append('<label class="label label-primary label-lg" id="tag_'+count_tag+'" data-numtag="'+count_tag+'">'+
+                    ''+tagname+' <i class="icofont icofont-close pointer" onclick="del_tag('+count_tag+')"></i></label>'+
+                    '<input type="hidden" name="tag[]" id="inputtag_'+count_tag+'" value="'+tagname+'">')
+                    count_tag++;
+                    tagname = $('#tag').val('');
+                }
             }
-        })
-    };
-</script>
+        });
+
+        function del_tag(tag_num) {
+            $('#tag_'+tag_num).fadeOut();
+            $('#inputtag_'+tag_num).remove();
+            count_tag--;
+        }
+        
+        function edit_product(id) {
+            $.ajax({
+                url: '{{ url('merchant/product') }}/' + id + '/edit',
+                type: 'GET',
+                data: {id: id},
+            }).done(function (data) {
+                $('#result-modal').html(data);
+                $("#editmodal").modal('show');
+            });
+        }
+
+        function view_comment(id) {
+            $.ajax({
+                url: '{{ url('merchant/view_comment') }}/' + id + '/P',
+                type: 'GET',
+                data: {id: id},
+            }).done(function (data) {
+                $('#result-modalview').html(data);
+                $("#viewmodal").modal('show');
+            });
+        }
+
+        function del_product(id) {
+            var urlaction = '{{url('merchant/product')}}' + '/' + id;
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณไม่สามารถกู้คืนได้อีก",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $("#delete_product").attr('action', urlaction);
+                    $("#delete_product").submit();
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Product has been Deleted',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Canceled',
+                        'Product has been Saved',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
 @endsection

@@ -86,7 +86,7 @@ class CommentController extends Controller
 
     public function view_comment($id, $type)
     {
-        $comment = Comment::where('comment_object_id', $id)->where('comment_type', $type)->orderBy('comment_id','DESC')->limit(15)->get();
+        $comment = Comment::where('comment_object_id', $id)->where('comment_type', $type)->get();
         $data = array('comment' => $comment, );
         return view('backend.home.modal.view_comment', $data);
     }

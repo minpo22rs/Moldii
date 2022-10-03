@@ -62,12 +62,12 @@ class ProductController extends Controller
             $product = new product();
             $product->product_name          = $request->name;
             $product->product_cat_id        = $request->category_id;
-            $product->product_material      = $request->material;
+            // $product->product_material      = $request->material;
             $product->product_description   = $request->description;
             $product->product_merchant_id   = Auth::guard('merchant')->user()->merchant_id;
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
-            $product->product_gpoint        = $request->gpoint;
+            // $product->product_gpoint        = $request->gpoint;
             $product->weight                = $request->weight;
             $product->width                 = $request->width;
             $product->length                = $request->length;

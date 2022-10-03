@@ -353,6 +353,13 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
+                                    <li class="">
+                                        <a href="{{url('admin/requeststore')}}">
+                                            <span class="pcoded-micon"><i class="icofont icofont-contact-add"></i><b>D</b></span>
+                                            <span class="pcoded-mtext">คำขอเปิดร้านค้า</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
                                 </li>
                             </ul>
                             {{-- <div class="pcoded-navigation-label">ส่วนผู้ดูแล</div> --}}

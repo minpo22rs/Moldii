@@ -97,7 +97,7 @@
                             </td>
                             <td class="text-center text-middle">
                                 <span style="color: #2ed8b6;">ราคา: </span>{{$item->product_price}} ฿<br>
-                                <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br>
+                                {{-- <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br> --}}
                                 <span style="color: #FFB64D;">ราคาที่ลดแล้ว:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
                             </td>
                             <td class="text-center text-middle">{{$item->product_amount}}</td>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ตัวเลือกเพิ่มเติม</label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -256,7 +256,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">จำนวนสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -274,15 +274,16 @@
                                 <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #2ed8b6;">ราคา </label>
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <label class="col-sm-2 col-form-label" style="color: #FF5370;">คะแนน </label>
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <label class="col-form-label" style="color: #FFB64D;">ราคาที่ลดแล้ว</label>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
@@ -290,16 +291,42 @@
                                 <div class="col-4">
                                     <input type="number" name="price" class="form-control form-control-success" placeholder="ราคา...">
                                 </div>
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <input type="number" name="gpoint" class="form-control form-control-danger" placeholder="คะแนน...">
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <input type="number" name="discount" class="form-control form-control-warning" placeholder="(optional)...">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            ค่าขนส่ง<span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-4">
+                                        <label class="col-sm-2 col-form-label">{{$sc->name_company}}</label>
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-4">
+                                        <input type="number" name="ship[{{$sc->id_shipping_company}}][]" class="form-control" placeholder="{{$sc->name_company}}..." required>
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">แท็ก</label>
                         <div class="col-sm-10">
@@ -331,7 +358,7 @@
 
                     <br>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ</label>
+                        <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ (สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple">
                         </div>                
@@ -423,7 +450,7 @@
         })
         swalWithBootstrapButtons.fire({
             title: 'คุณแน่ใจหรือไม่?',
-            text: "คุณไม่สามารถกู้คืนไได้อีก",
+            text: "คุณไม่สามารถกู้คืนได้อีก",
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'ยืนยัน',

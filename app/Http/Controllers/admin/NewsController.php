@@ -24,7 +24,7 @@ class NewsController extends Controller
         $new = news::where('new_type', 'C')->get();
         // $img = DB::Table('tb_new_imgs')->where('new_id', '=',36)->get();
         $g = Family::where('published','=','1')->get();
-        // dd( $img[0]->name);
+        // dd( $new);
         $data = array('new' => $new, 'g'=>$g);
         return view('backend.home.new', $data);
     }
@@ -111,6 +111,7 @@ class NewsController extends Controller
         $new = news::findOrFail($id);
         $img = new_image::where('new_id',$id)->get();
         $data = array('new' => $new,'img'=>$img );
+        // dd($img );
         return view('backend.home.modal.editnew', $data);
     }
 

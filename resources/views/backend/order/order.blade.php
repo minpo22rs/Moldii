@@ -58,9 +58,9 @@
                                     <div class="dropdown-primary dropdown open">
                                         <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                            <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_content({{$item->id_order}})"><i class="fa fa-edit"></i> ดูรายละเอียด</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_content({{$item->id_order}})"><i class="icofont icofont-bin"></i> ลบ</a>
+                                            <a href="{{url('admin/orderdetail/'.$item->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="fa fa-edit"></i> ดูรายละเอียด</a>
+                                            {{-- <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_content({{$item->id_order}})"><i class="icofont icofont-bin"></i> ลบ</a> --}}
                                         </div>
                                     </div>
                                 </td>

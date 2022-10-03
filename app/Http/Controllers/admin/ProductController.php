@@ -53,7 +53,7 @@ class ProductController extends Controller
             $product->product_description   = $request->description;
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
-            $product->product_gpoint        = $request->gpoint;
+            // $product->product_gpoint        = $request->gpoint;
             $product->product_merchant_id   = 1;
             $product->weight                = $request->weight;
             $product->width                 = $request->width;
@@ -71,6 +71,7 @@ class ProductController extends Controller
             }
 
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
+
             if ($request->file('cover') !== null)
             {
                 $img = $request->file('cover');
@@ -83,6 +84,17 @@ class ProductController extends Controller
 
 
             $product->save();
+
+
+
+            
+            foreach ($request->ship as $key => $value) {
+              
+                DB::Table('tb_product_shippings')->insert(['id_company'=>$key,'id_product'=>$product->product_id,'cost'=>$value[0]]);
+                
+            }
+
+
             if ($request->file('files') !== null)
             {
                 $img = $request->file('files');
@@ -136,10 +148,13 @@ class ProductController extends Controller
         $category = category::findOrFail($id);
         $cat = category::all();
         $product = product::where('product_cat_id', $id)->get();
+        $s = DB::Table('tb_shipping_companys')->get();
+
         $data = array(
             'category' => $category, 
             'product' => $product, 
-            'cat'=>$cat
+            'cat'=>$cat,
+            's'=>$s
         );
         return view('backend.product.product_index', $data);
     }
@@ -153,9 +168,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::findOrFail($id);
+        $s = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
+
         $category = category::all();
         $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
-        $data = array('product' => $product,'img'=>$img ,'category'=>$category);
+        $data = array('product' => $product,'img'=>$img ,'category'=>$category,'s'=>$s);
         return view('backend.product.modal.edit_product', $data);
     }
 
@@ -175,8 +192,8 @@ class ProductController extends Controller
             $product->product_description   = $request->description;
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
-            $product->product_gpoint        = $request->gpoint;
-            $product->product_bpoint        = $request->bpoint;
+            // $product->product_gpoint        = $request->gpoint;
+            // $product->product_bpoint        = $request->bpoint;
             $product->weight                = $request->weight;
             $product->width                 = $request->width;
             $product->length                = $request->length;
@@ -192,7 +209,25 @@ class ProductController extends Controller
                     $product->product_img = $name;
                 }
             }
+
+            if ($request->discount != null) {
+                if ( ((float)$request->discount) >= ((float)$request->price)) {
+                    return back()->withError('Discount can not be more or equal to the price!.');
+                }else{
+                    
+                    $product->product_discount = $request->discount;
+                }
+            }
+
+
             $product->save();
+
+            if(isset($request->ship)){
+                foreach ($request->ship as $key => $value) {
+                    DB::Table('tb_product_shippings')->where('id_company',$key)->where('id_product',$product->product_id)->update(['cost'=>$value[0]]);
+                }
+            }
+
             
 
             if($request->deletedkey != null){

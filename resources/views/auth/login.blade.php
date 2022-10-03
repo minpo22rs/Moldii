@@ -1,5 +1,16 @@
 @extends('layouts.app')
+@section('css')
+<style>
+    .swal2-container {
+        z-index: 99999999999 !important;
+    }
 
+    .swal2-cancel {
+        margin-right: 30px;
+    }
+  
+</style>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -70,4 +81,6 @@
         </div>
     </div>
 </div>
+@include('flash-message')
 @endsection
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

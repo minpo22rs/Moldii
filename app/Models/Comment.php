@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Merchant;
+use App\Models\customer;
 use Carbon\Carbon;
 
 class Comment extends Model
@@ -13,8 +14,8 @@ class Comment extends Model
 
     public function author_name($id = null)
     {
-        $merchant = Merchant::findOrFail($id);
-        return $merchant->merchant_name.' '.$merchant->merchant_lname; 
+        $user = customer::findOrFail($id);
+        return $user->customer_username; 
     }
 
     public function diffForHumans($datetime = null)

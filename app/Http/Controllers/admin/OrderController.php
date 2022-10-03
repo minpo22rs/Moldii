@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Orders;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use DB;
 
@@ -71,9 +71,11 @@ class OrderController extends Controller
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function orderdetail($id)
     {
-        //
+        $order = Orders::where('id_order',$id)->first();
+        $num = Orders::where('customer_id',$order->customer_id)->get();
+        return view('backend.order.order-details')->with(['order'=>$order,'num'=>$num]);
     }
 
     /**

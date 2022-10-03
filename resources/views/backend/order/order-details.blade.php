@@ -1,4 +1,4 @@
-@extends('merchant.layouts.master')
+@extends('backend.layouts.master')
 
 @section('title','Order Details')
 
@@ -15,7 +15,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{url('merchant/ordermerchant')}}">คำสั่งซื้อ</a>
+                                                           href="{{url('admin/order')}}">คำสั่งซื้อ</a>
                             </li>
                             <li class="breadcrumb-item active"
                                 aria-current="page">ข้อมูลคำสั่งซื้อ </li>
@@ -93,9 +93,9 @@
         <!-- End Page Header -->
         <?php 
             $ordetail = DB::Table('tb_order_details')->where('order_id',$order->id_order)
-            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
-            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
-            ->get();
+                            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+                            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
+                            ->get();
         ?>
 
 
@@ -170,7 +170,7 @@
                         </div>
                     @php($subtotal=0)
                     @php($total=0)
-                    {{-- @php($shipping=0) --}}
+                    {{-- @php($shipping=0) ค่าส่งรวม --}}
                     @php($shipping=$order->shipping_cost)
                     @php($discount=0)
                     @php($tax=0)
@@ -225,6 +225,7 @@
 
                             {{-- @php($discount+=$prodetail['discount'])
                             @php($tax+=$prodetail['tax']) --}}
+
                             {{-- @php($shipping+=$detail->shipping_cost ? $detail->shipping_cost :0) --}}
 
                             @php($total+=$subtotal)
@@ -262,6 +263,8 @@
                 <!-- End Card -->
             </div>
 
+
+            {{-- ลูกค้า --}}
             <div class="col-lg-4">
                 <!-- Card -->
                 <div class="card">
@@ -279,11 +282,15 @@
                         <div class="card-body">
                             <div class="media align-items-center" href="javascript:">
                                 <div class="avatar avatar-circle mr-3">
-                                    <img
-                                        class="avatar-img" style="width: 75px;height: 42px"
-                                        {{-- onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'" --}}
-                                        src="{{asset('storage/app/public/profile/'.$people->customer_img)}}"
-                                        alt="Image">
+
+                                    @if($people->provider ==null && $people->customer_img == null)
+                                        <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="avatar-img" style="width:50%;height:50%">
+                                    @elseif($people->provider ==null)
+                                        <img src="{{('https://modii.sapapps.work/storage/profile_cover/'.$people->customer_img.'')}}" class="avatar-img" style="width: 75px;height: 42px">
+                                    @else
+                                        <img src="{{$people->customer_img}}" class="avatar-img" style="width: 75px;height: 42px">
+                                    @endif
+
                                 </div>
                                 <div class="media-body">
                                 <span

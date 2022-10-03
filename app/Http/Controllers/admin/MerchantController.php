@@ -78,6 +78,7 @@ class MerchantController extends Controller
             $merchant->merchant_postcode           = $request->zip_code;
             $merchant->merchant_phone           = $number ;
             $merchant->merchant_type            = $request->type;
+            $merchant->merchant_status            = 3;
 
             if ($request->img != null) {
                 foreach ($request->img as $key => $value) {
