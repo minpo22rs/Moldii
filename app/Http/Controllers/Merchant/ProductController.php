@@ -140,7 +140,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect('merchant/product')->with('success', 'Successful');
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             DB::rollback();
             return redirect('merchant/product')->withError('Something Wrong! New Product can not Saved.');
         }
