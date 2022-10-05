@@ -35,12 +35,13 @@
               <h5 class="card-title">สถานะ : ชำระเงินแล้ว</h5>
             @endif
             @if($order->status_order ==1 )
-              <form runat="server">
+              <form action="{{url('user/submitslip')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <br>
                 <input type="text" name="name" placeholder="ชื่อ-นามสกุล ของบัญชีที่ใช้ทำการโอนเงิน" class="form-control">
                 <input type="hidden" name="oid" value="{{$order->order_code}}">
                 <br>
-                <input accept="image/*" type='file' id="imgInp" /><br><br>
+                <input accept="image/*" type='file' id="imgInp" name="img" accept="image/*;capture=camera"/><br><br>
                 <img id="blah"  width ="40%" /><br><br>
                 <button type="submit" class="btn btn-success col-md-12 btn-lg mt-2">อัพโหลดใบเสร็จรับเงิน</button>
               </form>

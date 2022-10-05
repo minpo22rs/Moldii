@@ -59,14 +59,14 @@ class OrderController extends Controller
         }else{
 
             $sql = Tb_order::where('id_order',$rid)->first();
-            
+
             if($sql->order_method == 'Credit card'){
                 Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>1]);
                 Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
 
             }else{
                 Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>8]);
-                Tb_order::where('id_order',$rid)->update(['status_order'=>1]);
+                Tb_order::where('id_order',$rid)->update(['status_order'=>1,'order_ref_gb'=>$request->gbpReferenceNo]);
 
             }
             Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
@@ -320,11 +320,11 @@ class OrderController extends Controller
         curl_close($ch);
 
         $chargeResp = json_decode($result, true);
+        // dd($result);
 
-        Tb_order::where('id_order',$order->id)->update(['order_ref_gb'=>$chargeResp['gbpReferenceNo']]);
 
-        // dd($chargeResp['wechat']);
         if(Session::get('typepayment') == 'Wechat Pay'){
+            Tb_order::where('id_order',$order->id)->update(['order_ref_gb'=>$chargeResp['gbpReferenceNo']]);
 
             return Redirect::to($chargeResp['wechat']);
             // return view('mobile.member.userAccount.wechat')->with(['res'=>$chargeResp['wechat']]);
@@ -336,6 +336,8 @@ class OrderController extends Controller
         }else{
 
             if($chargeResp['resultCode']=='00'){
+                Tb_order::where('id_order',$order->id)->update(['order_ref_gb'=>$chargeResp['gbpReferenceNo']]);
+
                 $res = self::threed( $chargeResp['gbpReferenceNo']);
                 return view('mobile.member.userAccount.threedsecure')->with(['res'=>$res]);
     

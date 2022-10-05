@@ -35,7 +35,7 @@ class TestUiController extends Controller
         // dd(Session::get('cid'));
         // return view('policy');
         // return view('mobile.member.register.tag');
-        return redirect('ordertoship/1');
+        return redirect('ordertoship/7');
         // return view('mobile.member.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
 
         
