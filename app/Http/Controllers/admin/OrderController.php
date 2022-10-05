@@ -34,6 +34,9 @@ class OrderController extends Controller
     {
         // dd($request->all());
         DB::Table('tb_tranfers')->where('id_tranfer',$id)->update(['status'=>2]);
+        $order = DB::Table('tb_tranfers')->where('id_tranfer',$id)->first();
+        DB::Table('tb_orders')->where('order_code',$id)->update(['status_order'=>2]);
+        DB::Table('tb_order_details')->where('order_id',$order->id_order)->update(['status_detail'=>1]);
         return redirect('admin/tranfer')->with('success', 'Successful');
     }
 
@@ -41,6 +44,10 @@ class OrderController extends Controller
     {
         // dd($request->all());
         DB::Table('tb_tranfers')->where('id_tranfer',$request->oid)->update(['reason'=>$request->reason,'status'=>3]);
+        $order = DB::Table('tb_tranfers')->where('id_tranfer',$request->oid)->first();
+        DB::Table('tb_orders')->where('order_code',$id)->update(['status_order'=>3]);
+        DB::Table('tb_order_details')->where('order_id',$order->id_order)->update(['status_detail'=>2]);
+
         return redirect('admin/tranfer')->with('success', 'Successful');
     }
 
