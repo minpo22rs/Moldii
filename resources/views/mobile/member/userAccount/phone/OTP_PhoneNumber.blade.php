@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+ิ<br>
 <div class="mt-3 p-2 col-12">
 <br>
     <form action="{{url('checkotpchangephone')}}" method="POST">

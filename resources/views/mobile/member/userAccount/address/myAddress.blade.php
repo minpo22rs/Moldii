@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-        
+        <br>
         @if($addon != null)
             <?php 
                 $onp = DB::Table('provinces')->where('id',$addon->customer_province)->first();

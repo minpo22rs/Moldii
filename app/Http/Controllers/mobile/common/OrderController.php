@@ -31,7 +31,7 @@ class OrderController extends Controller
             ->get();
         $order = Tb_order::where('id_order',$id)->first();
         $cus = User::where('customer_id',$order->customer_id)->first();
-
+        $countt = Tb_order_detail::where('order_id',$id)->select(DB::raw('SUM(amount) as countt'))->first();
         Session::put('totalcart',0);
         Session::put('countcart',0);
         Session::put('coin',0);
@@ -41,7 +41,7 @@ class OrderController extends Controller
 
         // dd($sql);
 
-        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order,'cus'=>$cus]);
+        return view('mobile.member.common.content.shopping.detail_order')->with(['sql'=> $sql,'order'=>$order,'cus'=>$cus,'countt'=>$countt]);
     }
 
     public function addorder(Request $request,$id,$rid)
@@ -58,7 +58,17 @@ class OrderController extends Controller
 
         }else{
 
-            Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
+            $sql = Tb_order::where('id_order',$rid)->first();
+            
+            if($sql->order_method == 'Credit card'){
+                Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>1]);
+                Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
+
+            }else{
+                Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>8]);
+                Tb_order::where('id_order',$rid)->update(['status_order'=>1]);
+
+            }
             Tb_payment_log::insert(['payment_type'=>'OUT','customer_id'=>Session::get('cid'),
                             'amount'=>$request->amount,'refno'=>$request->referenceNo,'gbpref'=>$request->gbpReferenceNo]);
             return redirect('ordertoship/'.$rid.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
@@ -114,7 +124,7 @@ class OrderController extends Controller
                 $order_de->price = $p->product_price;
             }else{
 
-             $order_de->price =  $p->product_discount;
+                $order_de->price =  $p->product_discount;
             }
 
 
@@ -148,16 +158,18 @@ class OrderController extends Controller
 
         if(Session::get('typepayment') == 'Moldii wallet'){
             Tb_order::where('id_order',$order->id)->update(['status_order'=>3]);
+            Tb_order_detail::where('id_order',$order->id)->update(['status_detail'=>1]);
             
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
-            return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+            return  redirect('ordertoship/'.$order->id.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }elseif(Session::get('typepayment') == 'เก็บเงินปลายทาง'){
             Tb_order::where('id_order',$order->id)->update(['status_order'=>4]);
+            Tb_order_detail::where('id_order',$order->id)->update(['status_detail'=>9]);
             
-            $total =  Session::get('totalcart')+ Session::get('sumship');
-            return  redirect('ordertoship')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
+            
+            return  redirect('ordertoship/'.$order->id.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
             
         }elseif(Session::get('typepayment') == 'Credit card'){//
             $url='https://api.globalprimepay.com/v2/tokens/charge';

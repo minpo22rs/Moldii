@@ -11,7 +11,7 @@
 @endsection
 @section('content')
 
-
+<br>
 <form action="{{url('user/saveCreditCardonProfile')}}" method="POST">
     @csrf
     <div class="row p-2 col-12 m-0 " style="color:black; font-size:18px">

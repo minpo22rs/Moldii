@@ -21,6 +21,8 @@
 </div>
 @endsection
 @section('content')
+<br>
+<br>
     <div class="container m-0 p-0">
        
 
@@ -156,7 +158,7 @@
                                 <h5 class="m-0 ">ราคาทั้งหมด</h5>
                                 <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);" >฿<span id="chkout">0</span></h5>
                             </div>
-                            <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
+                            {{-- <h5 class="m-0 ">ได้รับ 0 คะแนน</h5> --}}
                         </div>
                         <a href="javascript:;" type="button" class="btn btn-success square" onclick="checkoutaddress();"> ชำระเงิน ( <span id="chkcount">0</span>)</a>
                     </div>
@@ -169,7 +171,7 @@
         @endif
 
     </div>
-
+<br><br>
    
 @endsection
 
@@ -237,8 +239,6 @@
         
         
         if(cv > 0){
-            console.log(v);
-            console.log(cv);
             $.ajax({
                 url: '{{ url("countdown")}}',
                 type: 'GET',
@@ -256,11 +256,6 @@
                 }
             });
         }
-
-       
-
-        
-        
         
     }
 
@@ -268,8 +263,6 @@
         var v = document.getElementById('countupdown'+k).value;
         var s = "{{Session::get('cartid')}}";
       
-        
-            console.log(v);
             $.ajax({
                 url: '{{ url("countup")}}',
                 type: 'GET',

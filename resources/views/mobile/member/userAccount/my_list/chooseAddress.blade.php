@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
 
         @if($addon != null)
             <?php 
@@ -50,7 +50,7 @@
                 <div class=" p-2 col-12  border-bottom ">
                     <div class="row col-12 m-0">
                         <h5 class="font-weight-bold">{{$adds->customer_name}}  {{$adds->customer_phone}}</h5>
-                        <a href="{{url('user/changevalueaddressoncart/'.$adds->id_customer_address.'')}}"><h5 class="font-weight-bold ml-1" style="color:rgb(97, 92, 255);">ตั้งเป็นค่าเริ่มต้น</h5> </a>
+                        <a href="{{url('user/changevalueaddressoncart/'.$adds->id_customer_address.'')}}"><h5 class="font-weight-bold ml-1" style="color:rgb(97, 92, 255);">เลือก</h5> </a>
                     </div>
                     <div class="row col-12 p-0 m-0">
                         <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>

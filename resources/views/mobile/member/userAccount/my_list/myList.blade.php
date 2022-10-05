@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="container m-0 p-0">
     {{-- <div class="section full">
         <div class=" transparent p-0">

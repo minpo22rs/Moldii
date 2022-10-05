@@ -31,7 +31,6 @@ class MainController extends Controller
         $group = DB::Table('tb_familys')->get();
         $ban = DB::Table('tb_banners')->where('banner_type',1)->first();
         $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
-        $cp = DB::Table('tb_user_contents')->orderBy('created_at','DESC')->get();
         $u = DB::Table('tb_customers')->where('customer_id',Session::get('cid'))->first();
 
         $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
@@ -43,7 +42,7 @@ class MainController extends Controller
 
         // $result = $cp->merge($c);
    
-        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u,'noti'=>$noti,'ccomment'=>$ccomment]);
+        return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'u'=>$u,'noti'=>$noti,'ccomment'=>$ccomment]);
     }
 
     public function followwriter(Request $request){

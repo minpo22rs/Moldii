@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
 
 <form action="{{url('user/saveCreditCardonCart')}}" method="POST">
     @csrf

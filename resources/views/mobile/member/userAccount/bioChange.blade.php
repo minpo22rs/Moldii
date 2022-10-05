@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+
 <div class="mt-3 p-2 col-12">
 
     <form action="">

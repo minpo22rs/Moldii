@@ -185,7 +185,7 @@ class CartController extends Controller
         }
 
         $data = array(
-            'sum' => number_format( Session::get('totalcart'),2,'.',''),
+            'sum' => number_format(Session::get('totalcart'),2,'.',','),
             'chkcount' => Session::get('countcart'),
             'colors' =>  Session::get('cartid')
         );
@@ -241,7 +241,7 @@ class CartController extends Controller
 
 
         $data = array(
-            'sum' => number_format(  Session::get('totalcart'),2,'.',''),
+            'sum' => number_format(Session::get('totalcart'),2,'.',','),
             'chkcount' => Session::get('countcart'),
         );
 
@@ -292,7 +292,7 @@ class CartController extends Controller
 
 
         $data = array(
-            'sum' => number_format(Session::get('totalcart'),2,'.',''),
+            'sum' => number_format(Session::get('totalcart'),2,'.',','),
             'chkcount' =>Session::get('countcart'),
         );
 
@@ -341,7 +341,7 @@ class CartController extends Controller
             $sum =  Session::get('totalcart')-$request->p;
             Session::put('totalcart',$sum);
             $data = array(
-                'sum' => number_format( Session::get('totalcart'),2,'.',''),
+                'sum' => number_format( Session::get('totalcart'),2,'.',','),
                 'chkcount' => Session::get('countcart'),
             );
     
@@ -365,7 +365,7 @@ class CartController extends Controller
             $sum =  Session::get('totalcart')+$request->p;
             Session::put('totalcart',$sum);
             $data = array(
-                'sum' => number_format( Session::get('totalcart'),2,'.',''),
+                'sum' => number_format( Session::get('totalcart'),2,'.',','),
                 'chkcount' => Session::get('countcart'),
             );
 
@@ -393,7 +393,7 @@ class CartController extends Controller
         }
 
         $data = array(
-            'sum' => number_format( Session::get('totalcart'),2,'.',''),
+            'sum' => number_format( Session::get('totalcart'),2,'.',','),
         );
 
 
@@ -412,16 +412,16 @@ class CartController extends Controller
             Session::put('coin',-(int)$my->customer_point);
             Session::put('totalcart',Session::get('totalcart')+ Session::get('coin'));
             $s1 = number_format(Session::get('totalcart'),2,'.','');
-            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.','');
-            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
+            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
 
         }else{
             
             Session::put('coin',null);
             Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_point);
             $s1 = number_format(Session::get('totalcart'),2,'.','');
-            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.','');
-            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.','');
+            $s2 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
+            $s3 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
         }
 
         $data = array(

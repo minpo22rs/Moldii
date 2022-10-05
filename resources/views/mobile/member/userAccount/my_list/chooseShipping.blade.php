@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
         <div class=" p-2 col-12  border-bottom ">
             <div class="row col-12 m-0">
                 <h5 class="font-weight-bold">{{$addon->customer_name}}  {{$addon->customer_phone}}</h5>

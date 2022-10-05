@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="container m-0 p-0">
     
         @if($add!=null)
@@ -143,7 +144,7 @@
                 <h5 class="m-0 ml-2 font-weight-bold">คำสั่งซื้อทั้งหมด({{$countt}}ชิ้น):</h5>
             </div>
             <div class="col-4 mx-0 text-right">
-                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+$ship->cost,2,'.','')}}</h5>
+                <h5 class="m-0 font-weight-bold mr-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($sum+$ship->cost,2,'.',',')}}</h5>
 
             </div>
         </a>
@@ -204,9 +205,9 @@
                 <h5 class="m-0 " style="color:rgba(79, 77, 77, 1);">รวมทั้งหมด</h5>
             </div>
             <div class="col-3 text-right pr-0 align-self-end">
-                <h5 class="mb-1 font-weight-bold" style="" id="subsum">฿{{number_format(Session::get('totalcart'),2,'.','')}}</h5>
-                <h5 class="mb-1 font-weight-bold" style="">฿{{$sumship}}</h5>
-                <h5 class="m-0 font-weight-bold" style="" id="subsumship">฿{{number_format((Session::get('totalcart')+$sumship),2,'.','')}}</h5>
+                <h5 class="mb-1 font-weight-bold" style="" id="subsum">฿{{number_format(Session::get('totalcart'),2,'.',',')}}</h5>
+                <h5 class="mb-1 font-weight-bold" style="">฿{{number_format($sumship,2,'.',',')}}</h5>
+                <h5 class="m-0 font-weight-bold" style="" id="subsumship">฿{{number_format((Session::get('totalcart')+$sumship),2,'.',',')}}</h5>
             </div>
         </div>
         <input type="hidden" name="sumship" id="sumship" value="{{number_format($sumship,2,'.','')}}">
@@ -216,9 +217,9 @@
                 <div class="col px-1 py-1 align-self-center">
                     <div class="row p-0 m-0 justify-content-end">
                         <h5 class="m-0 ">ยอดชำระเงินทั้งหมด</h5>
-                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);" id="totalsum">฿{{number_format((Session::get('totalcart')+$sumship),2,'.','')}}</h5>
+                        <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);" id="totalsum">฿{{number_format((Session::get('totalcart')+$sumship),2,'.',',')}}</h5>
                     </div>
-                    <h5 class="m-0 ">ได้รับ 0 คะแนน</h5>
+                    {{-- <h5 class="m-0 ">ได้รับ 0 คะแนน</h5> --}}
                 </div>
 
                 <button style="height:4.125rem;font-weight:800" type="button" class="btn btn-success square " onclick="submitform();">สั่งสินค้า</button>
@@ -227,7 +228,7 @@
 
     </form>
 
-
+<br><br>
 
 
 

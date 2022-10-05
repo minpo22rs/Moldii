@@ -20,7 +20,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
         @foreach($sql as $sqls)
             
             <a href="{{url('selectcode/'.$sqls->voucher_id.'/'.$ship.'')}}">

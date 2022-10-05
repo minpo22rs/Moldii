@@ -4,9 +4,9 @@
 @section('app_header')
 <div class="appHeader bg-danger text-light">
     <div class="left">
-        <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/user/myList')}}');">
+        {{-- <a href="javascript:;" class="headerButton" onclick="window.location.replace('{{url('/user/myList')}}');">
             <ion-icon name="chevron-back-outline"></ion-icon>
-        </a>
+        </a> --}}
     </div>
     <div class="pageTitle">
       รายละเอียดคำสั่งซื้อ
@@ -16,7 +16,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
   <div class="row">
 
     <div class="col-md-12 mt-5">
@@ -54,24 +54,28 @@
       <table class="table table-striped">
         <tbody>
           <tr style="background-color : #495057 ; color : #fff ;">
-            <td>รายการสินค้า <br>พร้อมจัดส่ง {{date('d-m-Y', strtotime('+2 days'))}}  ถึง {{date('d-m-Y', strtotime('+5 days'))}} </td>
-            <td align="right"> {{$sql->count()}} รายการ</td>
+            <td style="width: 50%">รายการสินค้า <br>พร้อมจัดส่ง {{date('d-m-Y', strtotime('+2 days'))}}  ถึง {{date('d-m-Y', strtotime('+5 days'))}} </td>
+            <td align="right" style="width: 25%">ราคาต่อหน่วย </td>
+            <td align="right" style="width: 25%"> จำนวน</td>
           </tr>
           @foreach($sql as $sqls)
             <tr>
               <td>{{$sqls->product_name}}</td>
-              <td align="right">{{$sqls->product_price}} THB</td>
+              <td align="right" style="width: 25%">{{$sqls->price}} THB</td>
+              <td align="right" style="width: 25%">{{$sqls->amount}}</td>
             </tr>
            
           @endforeach
 
           <tr>
-            <td ><b>ค่าจัดส่ง</b></td>
-            <td align="right"><b>{{$order->shipping_cost}} THB</b></td>
+            <td style="width: 50%"><b>ค่าจัดส่ง</b></td>
+            <td style="width: 25%"></td>
+            <td align="right" style="width: 25%"><b>{{$order->shipping_cost}} THB</b></td>
           </tr>
           <tr style="background-color : #495057 ; color : #fff ;">
-            <td><b>รวมทั้งสิ้น</b></td>
-            <td align="right"><b>{{number_format($order->order_total+$order->shipping_cost,2,'.',',')}} THB</b></td>
+            <td style="width: 50%"><b>รวมทั้งสิ้น</b></td>
+            <td style="width: 25%"> </td>
+            <td align="right" style="width: 25%"><b>{{number_format($order->order_total+$order->shipping_cost,2,'.',',')}} THB</b></td>
           </tr>
         </tbody>
       </table>

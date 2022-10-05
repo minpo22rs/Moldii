@@ -10,6 +10,7 @@
 </div>
 @endsection
 @section('content')
+<br>
 <div class="container m-0 p-0">
     <div class="col-12 p-2 " style="background: #DFEDFC;">
         <h5 class="m-0  mt-1 mb-1 font-weight-bold ">คำสั่งซื้อกำลังอยู่ระหว่างส่ง</h5>

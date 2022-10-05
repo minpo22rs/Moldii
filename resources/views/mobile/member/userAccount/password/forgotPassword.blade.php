@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-
+<br>
 <div class="mt-1  col-12">
 
     <h6 class="my-3 pl-1"><small style="color:rgba(181, 181, 181, 1);">กรุณาเลือกช่องทางในการรับรหัสยืนยันสำหรับเปลี่ยนรหัสผ่าน</small> </h6>
