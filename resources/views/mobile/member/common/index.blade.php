@@ -635,11 +635,12 @@
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                                 </ol>
+                                                <?php $imggal = array_shift($imggal) ?>
                                                 @foreach($imggal as $key => $imgs)
                                                     @if($imgs->type =='I')
                                                         
                                                         <div class="carousel-item ">
-                                                            <img src="{{asset('storage/content_img/'.$imgs[$key+1]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                         </div>
                                                     @else
                                                        
