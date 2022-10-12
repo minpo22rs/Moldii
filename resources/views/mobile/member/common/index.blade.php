@@ -635,8 +635,8 @@
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                                 </ol>
-                                                <?php $imggal = array_shift($imggal) ?>
-                                                @foreach($imggal as $key => $imgs)
+                                                <?php  unset( $imggal[0] );?>
+                                                @foreach($imggal as $imgs)
                                                     @if($imgs->type =='I')
                                                         
                                                         <div class="carousel-item ">

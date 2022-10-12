@@ -35,7 +35,7 @@ class MainController extends Controller
 
         $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
         $id = $n->pluck('new_id');
-        // dd($id);
+        // dd($n);
         $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
         $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->where('reader','=','0')->orderBy('created_at','DESC')->get();
 
