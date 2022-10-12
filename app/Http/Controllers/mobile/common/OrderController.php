@@ -100,6 +100,7 @@ class OrderController extends Controller
         if(Session::get('coin')!=null){
             $order->order_coin = Session::get('coin');
             User::where('customer_id',Session::get('cid'))->update(['customer_point'=>0]);
+            DB::Table('tb_coin_logs')->insert(['customer_id'=>Session::get('cid'),'coin'=>Session::get('coin'),'status'=>2]);
 
         }
         $order->shipping_cost = Session::get('sumship');

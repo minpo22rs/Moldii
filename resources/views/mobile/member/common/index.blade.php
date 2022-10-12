@@ -603,6 +603,8 @@
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                             </ol>
+                                            <?php  unset( $imggal[0] );?>
+
                                             @foreach($imggal as $imgs)
                                                 <div class="carousel-item">
                                                     <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">

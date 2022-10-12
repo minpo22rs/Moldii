@@ -131,9 +131,11 @@ Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // T
 Route::post('user/paymentWallet', [WalletController::class, 'paymentWallet']); // Top-up wallet
 Route::post('walletgateway/response/{id}', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 Route::get('user/convert', [WalletController::class, 'convert']); 
+Route::get('user/coin', [WalletController::class, 'coin']); 
 Route::post('user/submitconvert', [WalletController::class, 'submitconvert']); 
 Route::get('submitdonate', [WalletController::class, 'submitdonate']); 
 Route::get('user/donate', [WalletController::class, 'donate']); 
+Route::get('selectdonate', [WalletController::class, 'selectdonate']); 
 Route::post('user/submitdonateexchange', [WalletController::class, 'submitdonateexchange']); 
 
 

@@ -306,6 +306,13 @@ class WalletController extends Controller
         return view('mobile.member.wallet.convert')->with(['sql'=>$sql]);
     }
 
+    public function coin ()
+    { 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        $coin = DB::Table('tb_coin_logs')->where('customer_id',Session::get('cid'))->get();
+        return view('mobile.member.wallet.coin')->with(['sql'=>$sql,'coin'=>$coin]);
+    }
+
 
     public function submitconvert (Request $request)
     { 
@@ -321,6 +328,9 @@ class WalletController extends Controller
         $sql->payment_type  = 'CONVERT';
         $sql->amount  = $request->money;
         $sql->save();
+
+        DB::Table('tb_coin_logs')->insert(['customer_id'=>Session::get('cid'),'coin'=>$request->coin,'status'=>1]);
+
 
         return redirect('user/myAccount')->with('msg','เติมคอยน์เรียบร้อยแล้ว');
     }
@@ -344,6 +354,7 @@ class WalletController extends Controller
             
         }
 
+        DB::Table('tb_coin_logs')->insert(['customer_id'=>Session::get('cid'),'coin'=>$request->coin,'status'=>2]);
 
      
         $sql  =  new Tb_donate_log();
@@ -361,12 +372,22 @@ class WalletController extends Controller
     public function donate ()
     { 
         $sql = User::where('customer_id',Session::get('cid'))->first();
-        return view('mobile.member.userAccount.donate')->with(['sql'=>$sql]);
+        $donate = DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))->get();
+        return view('mobile.member.userAccount.donate')->with(['sql'=>$sql,'donate'=>$donate]);
     }
+
+    public function selectdonate (Request $request)
+    { 
+        $sql = User::where('customer_id',Session::get('cid'))->first();
+        $donate = DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))->get();
+        return view('mobile.member.userAccount.donate')->with(['sql'=>$sql,'donate'=>$donate]);
+    }
+
 
 
     public function submitdonateexchange (Request $request)
     { 
+        dd($request->all());
         $sql = User::where('customer_id',Session::get('cid'))->first();
         $del = $sql->customer_donate - $request->money;
         $add = $sql->customer_coin + $request->coin;
