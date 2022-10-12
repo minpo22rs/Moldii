@@ -617,7 +617,7 @@
                                     <div class="carousel-inner">
 
                                         @if($imggal->count() != 0)
-                                            {{-- @if($imggal[0]->type =='I')
+                                            @if($imggal[0]->type =='I')
                                                 <div class="carousel-item active">
                                                     <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                 </div>
@@ -628,7 +628,7 @@
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
                                                     </video>
                                                 </div>
-                                            @endif --}}
+                                            @endif
                                             @if($imggal->count() > 1)
                                                 <ol class="carousel-indicators">
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
@@ -638,12 +638,12 @@
                                                 @foreach($imggal as $imgs)
                                                     @if($imgs->type =='I')
                                                         
-                                                        <div class="carousel-item active">
+                                                        <div class="carousel-item ">
                                                             <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                         </div>
                                                     @else
                                                        
-                                                        <div class="carousel-item active" >
+                                                        <div class="carousel-item " >
                                                             <video width="100%" height="auto" controls >
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
