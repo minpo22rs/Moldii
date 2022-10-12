@@ -2,10 +2,10 @@
     "name": "Moldii",
     "short_name": "Moldii",
     "start_url": "/",
-    "display": "standalone",
+    "display": "fullscreen",
     "scope" : "https://modii.sapapps.work/",
-    "background_color": "#fc684b",
-    "theme_color": "#fc684b",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "orientation": "portrait",
     "description": "Moldii รวมของเล่น ของสะสมไว้ในที่นี่ที่เดียว",
     "lang": "th",
@@ -48,9 +48,6 @@
             "url": " https://modii.sapapps.work/"
         }
     ],
-    "prefer_related_applications": false,
-    "display_override": [
-        "browser",
-        "standalone"
-    ]
+    "prefer_related_applications":false
+    
 }
