@@ -3,14 +3,14 @@ var filesToCache = [
     '/offline',
     '/css/app.css',
     '/js/app.js',
-    '/images/icons/icon-72x72.png',
-    '/images/icons/icon-96x96.png',
-    '/images/icons/icon-128x128.png',
-    '/images/icons/icon-144x144.png',
-    '/images/icons/icon-152x152.png',
-    '/images/icons/icon-192x192.png',
-    '/images/icons/icon-384x384.png',
-    '/images/icons/icon-512x512.png',
+    '/new_assets/img/logo_icon/logo moldii 72x72.png',
+    '/new_assets/img/logo_icon/logo moldii 96x96.png',
+    '/new_assets/img/logo_icon/logo moldii 128x128.png',
+    '/new_assets/img/logo_icon/logo moldii 144x144.png',
+    '/new_assets/img/logo_icon/logo moldii 152x152.png',
+    '/new_assets/img/logo_icon/logo moldii 192x192.png',
+    '/new_assets/img/logo_icon/logo moldii 384x384.png',
+    '/new_assets/img/logo_icon/logo moldii 512x512.png',
 ];
 
 // Cache on install

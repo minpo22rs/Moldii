@@ -63,7 +63,8 @@ class UserAccController extends Controller
     public function myAccount()// หน้าบัญชีของฉัน
     {
         $sql = User::where('customer_id',Session::get('cid'))->first();
-        return view('mobile.member.userAccount.myAccount')->with(['sql'=>$sql]);
+        $store = DB::Table('tb_merchants')->where('customer_id',Session::get('cid'))->first();
+        return view('mobile.member.userAccount.myAccount')->with(['sql'=>$sql,'store'=>$store]);
     }
 
     public function profileSetting()
@@ -105,11 +106,11 @@ class UserAccController extends Controller
         $merchant->merchant_district           = $request->district;
         $merchant->merchant_province           = $request->province;
         $merchant->merchant_postcode           = $request->zip_code;
+        $merchant->customer_id                  = Session::get('cid');
 
         $name = rand().time().'.'.$request->img->getClientOriginalExtension();
         $request->img->storeAs('public/store',  $name);
         $merchant->merchant_document          = $name;
-
         $merchant->save();
 
         return redirect('user/myAccount')->with('msg','บันทึกข้อมูลเรียบร้อยแล้ว');

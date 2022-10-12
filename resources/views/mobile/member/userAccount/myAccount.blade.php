@@ -70,14 +70,26 @@
     </div>
     <div class="col-6 pl-0">
         <div class="m-1">
-            <a href="{{url('user/store')}}" style="color: black">
-                <div class="card">
-                    <div class="row w-100 mx-3 my-2 text-center">
-                        <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
-                        <span class="ml-2 align-self-center font-weight-bold">ขอเปิดร้านค้า</span>
+            @if($store == null)
+                <a href="{{url('user/store')}}" style="color: black">
+                    <div class="card">
+                        <div class="row w-100 mx-3 my-2 text-center">
+                            <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
+                            <span class="ml-2 align-self-center font-weight-bold">ขอเปิดร้านค้า</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            @else
+                <a href="https://testgit.sapapps.work/moldii/login" style="color: black">
+                    <div class="card">
+                        <div class="row w-100 mx-3 my-2 text-center">
+                            <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
+                            <span class="ml-2 align-self-center font-weight-bold">ไปที่ร้านค้า</span>
+                        </div>
+                    </div>
+                </a>
+            @endif
+                
         </div>
     </div>
    

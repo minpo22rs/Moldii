@@ -37,7 +37,7 @@ class MainController extends Controller
         $id = $n->pluck('new_id');
         // dd($id);
         $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
-        $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->orderBy('created_at','DESC')->get();
+        $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->where('reader','=','0')->orderBy('created_at','DESC')->get();
 
 
         // $result = $cp->merge($c);
@@ -65,12 +65,14 @@ class MainController extends Controller
         $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)
                     ->where('type_like','C')->first();
         if($sql ==null){
-            DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'P']);
+            DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'C']);
             DB::Table('tb_news')->where('new_id',$request->id)->increment('like', 1);
     
         }
+
+        $count = DB::Table('tb_news')->where('new_id',$request->id)->first();
        
-        return 1 ;
+        return $count->like ;
     }
 
     public function unlikecontent(Request $request){
@@ -78,8 +80,9 @@ class MainController extends Controller
         DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)->delete();
         DB::Table('tb_news')->where('new_id',$request->id)->decrement('like', 1);
 
-        
-        return 1 ;
+        $count = DB::Table('tb_news')->where('new_id',$request->id)->first();
+       
+        return $count->like ;
     }
 
     public function bookmarkadd(Request $request){

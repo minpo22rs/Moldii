@@ -20,7 +20,7 @@
         <input type="text" name="lname" placeholder="นามสกุลเจ้าของร้านค้า" class="form-control" required><br>
         <input type="text" name="phone" placeholder="หมายเลขโทรศัพท์" class="form-control" onkeyup="autoTab(this);" required><br>
         <input type="email" name="email" placeholder="อีเมล" class="form-control" required><br>
-        <input type="text" name="shopname" placeholder="ชื่อร้านค้าที่ต้องการเปิด" class="form-control" required><br>
+        <input type="text" name="shopname" placeholder="ชื่อร้านค้า" class="form-control" required><br>
         <input type="text" name="type" placeholder="ประเภทสินค้าที่ต้องการขาย" class="form-control" required><br>
         <input type="text" name="address" placeholder="รายละเอียดที่อยู่" class="form-control" required><br>
     
@@ -44,12 +44,11 @@
 
         <br>
 
-        แนบสลิป :  <input accept="image/*" type='file' id="imgInp" name="img" accept="image/*;capture=camera" required> 
+        แนบรูปบัตรประจำตัวประชาชน หรือ รูปหนังสือรับรองบริษัท :  <input accept="image/*" type='file' id="imgInp" name="img" accept="image/*;capture=camera" required> 
         <center><br><img id="blah" src="#" alt="" width ="80%"></center>
 
-        <br>
-        <input type="checkbox" name="" id="" checked><u data-toggle="modal" data-target="#condition" >เงือนไขการเปิดร้านค้า</u>
-        <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยันยันการขอเปิดร้านค้า</button>
+        <input type="checkbox" name="" id="" checked><u data-toggle="modal" data-target="#condition" >เงื่อนไขการเปิดร้านค้า</u>
+        <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยืนยันการขอเปิดร้านค้า</button>
         {{-- <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset --> --}}
     </form>
 
@@ -144,7 +143,7 @@
     </div>
 </div>
 
-
+<br>
 @endsection
 
 @section('custom_script')

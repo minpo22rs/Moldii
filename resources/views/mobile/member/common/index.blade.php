@@ -617,7 +617,7 @@
                                     <div class="carousel-inner">
 
                                         @if($imggal->count() != 0)
-                                            @if($imggal[0]->type =='I')
+                                            {{-- @if($imggal[0]->type =='I')
                                                 <div class="carousel-item active">
                                                     <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                 </div>
@@ -628,7 +628,7 @@
                                                         <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
                                                     </video>
                                                 </div>
-                                            @endif
+                                            @endif --}}
                                             @if($imggal->count() > 1)
                                                 <ol class="carousel-indicators">
                                                     <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
@@ -638,12 +638,12 @@
                                                 @foreach($imggal as $imgs)
                                                     @if($imgs->type =='I')
                                                         
-                                                        <div class="carousel-item">
+                                                        <div class="carousel-item active">
                                                             <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
                                                         </div>
                                                     @else
                                                        
-                                                        <div class="carousel-item" >
+                                                        <div class="carousel-item active" >
                                                             <video width="100%" height="auto" controls >
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
                                                                 <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
@@ -664,7 +664,7 @@
                      
 
                         <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
+                            <h6 class="mb-0 ml-1 card-subtitle text-muted" id="countlike{{$sqls->new_id}}">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
                             <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$count->count() + $countreply->count()}} รายการ</h6>
                             <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sh->count()}} แชร์</h6>
 
@@ -672,17 +672,29 @@
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                            <div class="col-3 row p-0 align-items-center ml-1">
-                                <img src="{{ asset('new_assets/icon/ถูกใจ.png')}}" alt="alt" style="width:17px; height:17px;">
-                                {{-- <i onclick="myLike(this)" class="fa fa-thumbs-up"  style="width:17px; height:17px;"></i> --}}
+                            <div class="col-3 row p-0  justify-content-center" id="likebutton{{$sqls->new_id}}" style="display: ">
+                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
                                 @if($la == null)
-                                    <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
+                                    <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}" style="color: black" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
                                 @else
                                     <h5 class="mb-0 ml-1 " id="unmyLike{{$sqls->new_id}}" style="color: green" onclick="UNmyLike({{$sqls->new_id}})">ถูกใจแล้ว</h5>
                                 @endif
                             </div>
+        
+        
+                            <div style="display: none" class="col-3 row p-0  justify-content-center" id="myLike2{{$sqls->new_id}}" >
+                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <h5 class="mb-0 ml-1 " style="color: black" onclick="myLike2({{$sqls->new_id}})">ถูกใจ</h5>
+                            </div>
+        
+                            <div style="display: none" class="col-3 row p-0  justify-content-center" id="unmyLike2{{$sqls->new_id}}">
+                                <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <h5 class="mb-0 ml-1 "  style="color: green" onclick="UNmyLike2({{$sqls->new_id}})">ถูกใจแล้ว</h5>
+                            </div>
+
+
                             <div class="col-5 row p-0 align-items-center">
-                                <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;">
+                                <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;margin-left:15px">
                                 <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                             </div>
                             <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#share" >
@@ -1464,32 +1476,33 @@
             }
 
 
-
             function myLike(id) {
-               
-                var x = document.getElementById("myLike"+id);
+            
+                // var x = document.getElementById("myLike"+id);
                 
-                x.innerHTML = "ถูกใจแล้ว";
-                document.getElementById("myLike"+id).style.color = "green";
+                // x.innerHTML = "ถูกใจแล้ว";
+                // document.getElementById("myLike"+id).style.color = "green";
                 $.ajax({
                     url: '{{ url("/likecontent")}}',
                     type: 'GET',
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
-                    
+                        document.getElementById("countlike"+id).innerHTML = data + ' ชื่นชอบ';
+                        document.getElementById("unmyLike2"+id).style.display = '';
+                        document.getElementById("likebutton"+id).style.display = 'none';
                     }
                 });
-                   
+                
             }
 
 
             function UNmyLike(id) {
-               
-                var x = document.getElementById("unmyLike"+id);
-               
-              
-                x.innerHTML = "ถูกใจ";
+            
+                // var x = document.getElementById("unmyLike"+id);
+            
+            
+                // x.innerHTML = "ถูกใจ";
                 document.getElementById("unmyLike"+id).style.color = "black";
                 $.ajax({
                     url: '{{ url("/unlikecontent")}}',
@@ -1497,11 +1510,59 @@
                     dataType: 'HTML',
                     data: {'id':id},
                     success: function(data) {
+                        document.getElementById("countlike"+id).innerHTML = data + ' ชื่นชอบ';
+                        document.getElementById("myLike2"+id).style.display = '';
+                        document.getElementById("likebutton"+id).style.display = 'none';
+                    
+                    }
+                });
+                
+                
+            }
+
+            function myLike2(id) {
+            
+                // var x = document.getElementById("myLike2"+id);
+                
+                // x.innerHTML = "ถูกใจแล้ว";
+                // document.getElementById("myLike2"+id).style.color = "green";
+                $.ajax({
+                    url: '{{ url("/likecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        document.getElementById("countlike"+id).innerHTML = data + ' ชื่นชอบ';
+                        document.getElementById("likebutton"+id).style.display = '';
+                        document.getElementById("myLike2"+id).style.display = 'none';
+                    
+                    }
+                });
+                
+            }
+
+
+            function UNmyLike2(id) {
+            
+                // var x = document.getElementById("unmyLike2"+id);
+            
+            
+                // x.innerHTML = "ถูกใจ";
+                document.getElementById("unmyLike2"+id).style.color = "black";
+                $.ajax({
+                    url: '{{ url("/unlikecontent")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        document.getElementById("countlike"+id).innerHTML = data + ' ชื่นชอบ';
+                        document.getElementById("likebutton"+id).style.display = '';
+                        document.getElementById("unmyLike2"+id).style.display = 'none';
                     
                     
                     }
                 });
-                   
+                
                 
             }
 

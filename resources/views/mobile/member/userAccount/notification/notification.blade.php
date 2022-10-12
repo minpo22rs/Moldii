@@ -24,32 +24,36 @@
 
         <div id="me" class="tab-pane fade in active show">
             @foreach($comment as $comments)
-                <?php $user = DB::Table('tb_customers')->where('customer_id',$comments->comment_author)->first();?>
+                <?php $user = DB::Table('tb_customers')->where('customer_id',$comments->comment_author)->first(); ?>
                 <?php $news = DB::Table('tb_news')->where('new_id',$comments->comment_object_id)->first();?>
+                @if($comments->reader=='0')
+                    <a href="{{url('readnotification/'.$comments->comment_id.'/'.$comments->comment_object_id.'')}}" class="row p-1 pr-0 border-top border-bottom" style="background-color: #6c757d66">
+                @else
+                    <a href="{{url('readnotification/'.$comments->comment_id.'/'.$comments->comment_object_id.'')}}" class="row p-1 pr-0 border-top border-bottom" >
+                @endif
+                        <div class="">
+                            @if($user->provider ==null && $user->customer_img == null)
+                                <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
+                            @elseif($user->provider ==null)
+                                <img src="{{asset('storage/profile_cover/'.$user->customer_img.'')}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
+                            @else
+                                <img src="{{$user->customer_img}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
+                            @endif
 
-                <a href="{{url('content/'.$comments->comment_object_id.'')}}" class="row p-1 pr-0 border-top border-bottom">
-                    <div class="">
-                        @if($user->provider ==null && $user->customer_img == null)
-                            <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
-                        @elseif($user->provider ==null)
-                            <img src="{{asset('storage/profile_cover/'.$user->customer_img.'')}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
-                        @else
-                            <img src="{{$user->customer_img}}" class="rounded-circle" style="width: 60px; height: 60px; border-radius: 6px;"><br>
-                        @endif
 
-
-                    </div>
-                    <div class="col-10 row align-self-center justify-content-between pr-0 pl-2">
-                        <div class="col-9 p-0 ">
-                            <h5 class="m-0 align-self-center" >{{$user->customer_username}}</h5>
-                            <h6 class="m-0  "><small>แสดงความคิดเห็นในโพสต์ของคุณ</small> </h6>
                         </div>
-                        <div class=" p-0 text-center">
-                            <h6 class="m-0  ">{{date('Y-m-d',strtotime($comments->created_at))}}</h6>
-                            <h6 class="m-0  "><small>{{date('H:i',strtotime($comments->created_at))}}</small> </h6>
+                        <div class="col-10 row align-self-center justify-content-between pr-0 pl-2">
+                            <div class="col-9 p-0 ">
+                                <h5 class="m-0 align-self-center" >{{$user->customer_username}}</h5>
+                                <h6 class="m-0  "><small>แสดงความคิดเห็นในโพสต์ของคุณ</small> </h6>
+                            </div>
+                            <div class=" p-0 text-center">
+                                <h6 class="m-0  ">{{date('Y-m-d',strtotime($comments->created_at))}}</h6>
+                                <h6 class="m-0  "><small>{{date('H:i',strtotime($comments->created_at))}}</small> </h6>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                
             @endforeach
 
         </div>

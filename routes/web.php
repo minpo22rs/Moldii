@@ -6,6 +6,7 @@ use App\Http\Controllers\mobile\user\UserAccController;
 use App\Http\Controllers\mobile\user\WalletController;
 use App\Http\Controllers\mobile\user\HelpCenterController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\mobile\common\NotificationController;
 use App\Http\Controllers\mobile\common\OrderController;
 use App\Http\Controllers\mobile\common\MainController;
 use App\Http\Controllers\mobile\common\ShoppingController;
@@ -94,8 +95,9 @@ Route::post('user/saveCreditCardonProfile', [UserAccController::class, 'saveCred
 
 Route::get('user/deleteCredit/{id}', [UserAccController::class, 'deleteCredit']);// รายการของฉัน
 
-Route::get('user/notification', [UserAccController::class, 'notification']);// การแจ้งเตือน
-Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
+Route::get('user/notification', [NotificationController::class, 'notification']);// การแจ้งเตือน
+Route::get('readnotification/{id}/{c}', [NotificationController::class, 'readnotification']);// การแจ้งเตือน
+// Route::get('user/settingNotification', [UserAccController::class, 'settingNotification']);// ตั้งค่าการแจ้งเตือน
 
 Route::get('user/privacySettings', [UserAccController::class, 'privacySettings']);// ตั้งค่าความเป็นส่วนตัว
 Route::get('user/appAccess', [UserAccController::class, 'appAccess']);// การเข้าถึงของแอป

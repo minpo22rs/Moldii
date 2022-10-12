@@ -30,7 +30,7 @@ class ContentController extends Controller
         $la = DB::Table('tb_content_likes')->where('content_id',$c->new_id )->where('customer_id',Session::get('cid'))->first();
         $sh = DB::Table('tb_content_shares')->where('new_id',$c->new_id)->get();
         $u = User::where('customer_id',Session::get('cid'))->first();
-
+       
         // dd($c);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 

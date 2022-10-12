@@ -5,16 +5,31 @@ namespace App\Http\Controllers\mobile\common;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Session;
 
 class NotificationController extends Controller
 {
     //
-    public function index(Request $request)
+    public function readnotification($id,$c)
     {
-        dd( $request->all());
+        // dd( $id);
        
+        DB::Table('tb_comments')->where('comment_id',$id)->update(['reader'=>'1']);
+        return redirect('content/'.$c.'');
+    }
 
-        return view('mobile.member.userAccount.my_list.shoppingCart');
+
+    public function notification(){// การแจ้งเตือน
+        $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
+        $id = $n->pluck('new_id');
+        // dd($id);
+        $sql = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        $comment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->orderBy('created_at','DESC')->get();
+
+        // dd( $comment);
+
+        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ,'comment'=>$comment]);
+
     }
     
 }
