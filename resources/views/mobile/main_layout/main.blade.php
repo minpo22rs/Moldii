@@ -24,8 +24,7 @@
     <link rel="stylesheet" href="{{ asset('/new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('/new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    {{-- @laravelPWA --}}
-    {{-- <link rel="manifest" href="/manifest.json"> --}}
+    
 
 </head>
 
