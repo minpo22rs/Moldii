@@ -8,7 +8,7 @@
     "theme_color": "#fc684b",
     "orientation": "portrait",
     "description": "Moldii รวมของเล่น ของสะสมไว้ในที่นี่ที่เดียว",
-    "lang": " Thai",
+    "lang": " th",
     "dir": "auto",
     "screenshots": [
         {
@@ -45,8 +45,12 @@
     "related_applications": [
         {
             "platform":"windows",
-            "url": " The URL to your app in that app store"
+            "url": " https://modii.sapapps.work/"
         }
     ],
-    "prefer_related_applications": "false"
+    "prefer_related_applications": "false",
+    "display_override": [
+        "browser",
+        "standalone"
+    ]
 }
