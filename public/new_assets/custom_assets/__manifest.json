@@ -48,7 +48,7 @@
             "url": " https://modii.sapapps.work/"
         }
     ],
-    "prefer_related_applications": "false",
+    "prefer_related_applications": false,
     "display_override": [
         "browser",
         "standalone"
