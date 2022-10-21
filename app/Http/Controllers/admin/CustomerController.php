@@ -85,10 +85,31 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function shutdownaccount()
     {
         //
+        $customer = DB::Table('tb_shutdowns')->where('status',1)
+                        ->leftJoin('tb_customers', 'tb_shutdowns.customer_id', '=', 'tb_customers.customer_id')->get();
+        $data = array('customer' => $customer, );
+        return view('backend.account.shutdown', $data);
     }
+
+    public function confirmshutdown($id){
+        $sql = DB::Table('tb_shutdowns')->where('id_shutdown',$id)->first();
+        $idc = $sql->customer_id;
+        DB::Table('tb_shutdowns')->where('id_shutdown',$id)->update(['status'=>2]);
+        DB::Table('tb_customers')->where('customer_id',$idc)->update(['customer_status'=>1]);
+        return redirect('admin/shutdownaccount')->with('success', 'Successful');
+    }
+
+    public function rejectshutdown(Request $request){
+        $sql = DB::Table('tb_shutdowns')->where('id_shutdown',$request->ids)->first();
+        $id = $sql->customer_id;
+        DB::Table('tb_shutdowns')->where('id_shutdown',$request->ids)->update(['status'=>3,'reply'=>$request->reply]);
+        return redirect('admin/shutdownaccount')->with('success', 'Successful');
+       
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -1,4 +1,5 @@
-@extends('backend.layouts.master')
+
+@extends('merchant.layouts.master')
 @section('css')
 <style>
     .swal2-container {
@@ -83,7 +84,6 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">สร้างการประมูลโดย</th>
                         <th style="text-align: center;">เลขที่การประมูล</th>
          
                         <th style="text-align: center;">วันที่</th>
@@ -96,17 +96,7 @@
                     <tr>
                         <td class="text-center text-middle">{{$key+1}}</td>
                         
-
-
-                        @if( $item->created_by == 0)
-                            <td class="text-center text-middle">Admin</td>
-                        @else
-                            <?php $sql = DB::Table('tb_merchants')->where('merchant_id',$item->created_by)->first();?>
-                            <td class="text-center text-middle">{{ $sql->merchant_shopname }}</td>
-                        @endif
-
-
-                        <td class="text-center text-middle">{{ $item->product_name }}</td>
+                        <td class="text-center text-middle">{{ $item->code }}</td>
                         <td class="text-center text-middle">{{ $item->date_start }}</td>
                         <td class="text-center text-middle">{{ $item->time_start }}-{{ $item->time_finish }}</td>
                         
@@ -116,12 +106,12 @@
                                 <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
                                     
-                                    @if(DateTimeDiff($item->date_start.$item->time_start,date('Y-m-d H:i:s')) < 0 && $item->created_by == 0)
+                                    @if(DateTimeDiff($item->date_start.$item->time_start,date('Y-m-d H:i:s')) < 0 )
                                         <a href="#" class="dropdown-item waves-light waves-effect"  onclick="edit_content({{$item->id_auction}})"><i class="fa fa-edit"></i> เเก้ไข</a>
                                     @endif
                                     
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="view_content({{$item->id_auction}},{{$item->created_by}})"><i class="icofont icofont-bin"></i> ดูรายละเอียด</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="view_content({{$item->id_auction}})"><i class="icofont icofont-bin"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
                         </td>
@@ -143,13 +133,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('admin/addauction')}}" method="POST"  id="addnews">
+            <form action="{{url('merchant/addauction')}}" method="POST"  id="addnews" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     
                   
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">วันที่</label>
+                        <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required>
                         </div>
@@ -157,11 +147,11 @@
                         
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น</label>
+                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="time" class="form-control" id="timefrom" name="time_start" min="{{date("H:i")}}" required>
                         </div>
-                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด</label>
+                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="time" class="form-control" id="timeto" name="time_finish" required>
                         </div>
@@ -169,40 +159,104 @@
 
                     <div class="form-group row">
                        
-                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น</label>
+                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="number" class="form-control" name="price" required>
                         </div>
 
-                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ</label>
+                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="number" class="form-control" name="bit" required>
                         </div>
                         
                     </div>
-                    
 
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">เลือกรายการสินค้าที่จะเข้าร่วม</label>
+                       
+                        <label class="col-sm-2 col-form-label">ชื่อสินค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label  text-right">หมวดหมู่สินค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="category_id">
+                                <option value="">เลือกหมวดหมู่สินค้า</option>
+                                @foreach($cat as $cats)
+                                    <option value="{{$cats->cat_id}}">{{$cats->cat_name}}</option>
+
+                                @endforeach
+                            </select>
+                        </div>
                         
                     </div>
 
                     <div class="form-group row">
-                        {{-- <label class="col-sm-3 col-form-label">รายการสินค้า</label> --}}
-                        @foreach($product as $products)
-                                <div class="col-sm-3 form-inline">
-                                    <input type="checkbox" class="form-control" name="pid[]" value="{{$products->product_id}}" style="margin-right: 5px;margin-top;5px">  {{$products->product_name}}
+                        <label class="col-sm-2 col-form-label">รายละเอียด <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea name="description" class="form-control" cols="30" rows="5" placeholder="รายละเอียดสินค้า เช่น สี วัสดุ ปีที่ผลิต แหล่งที่ผลิต ที่มาของสินค้า หรือรายละเอียดที่เกี่ยวข้องกับสินค้า..." required></textarea>
                                 </div>
-                        @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ขนาดสินค้า <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="col-form-label" >น้ำหนักหนัก (กรัม)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความกว้าง(เซนติเมตร)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความยาว (เซนติเมตร)</label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label" >ความสูง (เซนติเมตร)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-3">
+                                    <input type="text" name="weight" class="form-control" placeholder="น้ำหนัก..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="width" class="form-control" placeholder="ความกว้าง..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="length" class="form-control" placeholder="ความยาว..." required>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="height" class="form-control" placeholder="ความสูง..." required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">รูปภาพสินค้า<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
+                        </div>                
                     </div>
 
                     
                 </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
+                </div>
             </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -237,27 +291,21 @@
 
     });
 
-    function view_content(id,t) {
+    function view_content(id) {
         $.ajax({
-            url: '{{ url('admin/detailauction') }}/' + id+'/'+t,
+            url: '{{ url('merchant/detailauction') }}/' + id,
             type: 'GET',
            
         }).done(function (data) {
             $('#result-modal').html(data);
-            if(t == 0){
-                $("#detailauction").modal('show');
-
-            }else{
-                $("#detailauctionmerchant").modal('show');
-                
-            }
+            $("#detailauction").modal('show');
         });
     }
  
 
     function edit_content(id) {
         $.ajax({
-            url: '{{ url('admin/editauction') }}/' + id,
+            url: '{{ url('merchant/editauction') }}/' + id,
             type: 'GET',
            
         }).done(function (data) {

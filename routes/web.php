@@ -90,12 +90,21 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     // auction
     Route::get('auction', 'AuctionController@index');
     Route::post('addauction', 'AuctionController@store');
+    Route::get('editauction/{id}', 'AuctionController@edit');
+    Route::post('updateauction', 'AuctionController@update');
+    Route::get('detailauction/{id}/{t}', 'AuctionController@detailauction');
 
 
     //requeststore
     Route::get('requeststore', 'StoreController@requeststore');
     Route::get('store_detail/{id}', 'StoreController@store_detail');
     Route::post('statusstore', 'StoreController@statusstore');
+
+
+    //requeststore
+    Route::get('shutdownaccount', 'CustomerController@shutdownaccount');
+    Route::post('rejectshutdown', 'CustomerController@rejectshutdown');
+    Route::get('confirmshutdown/{id}', 'CustomerController@confirmshutdown');
 
 
 
@@ -128,6 +137,14 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     Route::get('orderdetail/{id}', 'OrderMerchantController@orderdetail');
     Route::get('cancelorder/{id}', 'OrderMerchantController@cancelorder');
     Route::post('createbooking', 'OrderMerchantController@createbooking');
+
+    // auction
+    Route::get('auction', 'MerchantAuctionController@index');
+    Route::post('addauction', 'MerchantAuctionController@store');
+    Route::get('editauction/{id}', 'MerchantAuctionController@edit');
+    Route::get('detailauction/{id}', 'MerchantAuctionController@detailauction');
+    Route::post('updateauction', 'MerchantAuctionController@update');
+    
 });
 
 

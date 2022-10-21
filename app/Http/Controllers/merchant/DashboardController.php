@@ -9,6 +9,7 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Flashsale;
 use App\Models\Event;
+use App\Models\Auction;
 use App\Models\product;
 
 class DashboardController extends Controller
@@ -18,7 +19,7 @@ class DashboardController extends Controller
         $current = Carbon::now();
         $fs = Flashsale::latest()->first();
         $product_count = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->count();
-        $product = product::where('product_merchant_id', Auth::guard('merchant')->user()->merchant_id)->get();
+        $product = Auction::where('created_by', Auth::guard('merchant')->user()->merchant_id)->get();
         $data = array(
             'current' => $current, 
             'fs' => $fs, 

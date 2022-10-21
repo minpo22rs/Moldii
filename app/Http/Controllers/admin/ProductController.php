@@ -72,20 +72,13 @@ class ProductController extends Controller
 
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
 
-            if ($request->file('cover') !== null)
-            {
-                $img = $request->file('cover');
-                foreach($img as $key => $item) {
-                    $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('product_cover',  $name);
-                    $product->product_img  = $name;
-                }
-            }
+            
+            $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
+            $request->file('files')[0]->storeAs('product_cover',$name);
+            $product->product_img = $name;
 
 
             $product->save();
-
-
 
             
             foreach ($request->ship as $key => $value) {
@@ -94,10 +87,14 @@ class ProductController extends Controller
                 
             }
 
+            $arr = $request->file('files');
+            array_shift($arr);
 
-            if ($request->file('files') !== null)
+            
+            if (count($request->file('files')) > 1)
             {
-                $img = $request->file('files');
+                
+                $img = $arr;
                 foreach($img as $key => $item) {
                     $image = new product_img();
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
@@ -145,9 +142,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        // dd('asasasas');
         $category = category::findOrFail($id);
-        $cat = category::all();
-        $product = product::where('product_cat_id', $id)->get();
+        $cat = category::where('deleted_at',null)->get();
+        $product = product::where('product_cat_id', $id)->where('product_published','=',1)->get();
         $s = DB::Table('tb_shipping_companys')->get();
 
         $data = array(

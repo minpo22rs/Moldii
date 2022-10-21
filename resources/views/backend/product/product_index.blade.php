@@ -84,7 +84,7 @@
                             <td class="text-center text-middle">{{$key+1}}</td>
                             <td class="text-center text-middle">{{$item->product_code}}</td>
                             <td class="text-center text-middle">
-                                <img src="{{asset('storage/app/product_cover/'.$item->product_img.'')}}" alt="" width="100" height="100">
+                                <img src="{{asset('storage/app/product_cover/'.$item->product_img.'')}}" alt="" width="50%" >
                             </td>
                             <td class="text-center text-middle">{{$item->product_name}}</td>
                             {{-- <td>{{ Str::limit($item->product_description, 50) }}</td> --}}
@@ -134,15 +134,21 @@
                 <div class="modal-body">
                     <input type="hidden" name="category_id" value="{{$category->cat_id}}">
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">รูปภาพสินค้า<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
+                        </div>                
+                    </div>
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รูปภาพหน้าปก <span class="text-danger">*</span>
-                            {{-- <span class="mytooltip tooltip-effect-1">
+                            <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
                                         รูปภาพขนาด: 357 x 357 px.
                                     </span>
                                 </span>
-                            </span> --}}
+                            </span>
                         </label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -153,7 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ชื่อสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -169,7 +175,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="รายละเอียด..."></textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="รายละเอียดสินค้า เช่น สี วัสดุ ปีที่ผลิต แหล่งที่ผลิต ที่มาของสินค้า หรือรายละเอียดที่เกี่ยวข้องกับสินค้า..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -357,12 +363,12 @@
                     </div>
 
                     <br>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ (สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple">
                         </div>                
-                    </div>
+                    </div> --}}
 
 
                 </div>
@@ -387,7 +393,11 @@
 <script>
     $(".example1").DataTable();
 
-   
+    $(document).ready(function () {
+        $('select').selectize({
+            sortField: 'text'
+        });
+    });
 
 
     var count_option = 1;

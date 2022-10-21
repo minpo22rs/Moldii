@@ -46,18 +46,18 @@
                     <a class="nav-link active" data-toggle="tab" href="#personal" role="tab">ข้อมูลประจำตัว</a>
                     <div class="slide"></div>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#binfo" role="tab">บริการผู้ใช้</a>
                     <div class="slide"></div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#contacts" role="tab">รายชื่อติดต่อของผู้ใช้</a>
                     <div class="slide"></div>
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#review" role="tab">รีวิว</a>
                     <div class="slide"></div>
-                </li>
+                </li> --}}
             </ul>
         </div>
 
@@ -306,7 +306,7 @@
             </div>
             <!-- tab pane personal end -->
             <!-- tab pane info start -->
-            <div class="tab-pane" id="binfo" role="tabpanel">
+            {{-- <div class="tab-pane" id="binfo" role="tabpanel">
                 <!-- info card start -->
                 <div class="card">
                     <div class="card-header">
@@ -528,10 +528,10 @@
                     </div>
                 </div>
                 <!-- info card end -->
-            </div>
+            </div> --}}
             <!-- tab pane info end -->
             <!-- tab pane contact start -->
-            <div class="tab-pane" id="contacts" role="tabpanel">
+            {{-- <div class="tab-pane" id="contacts" role="tabpanel">
                 <div class="row">
                     <div class="col-xl-3">
                         <!-- user contact card left side start -->
@@ -2189,9 +2189,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- tab pane contact end -->
-            <div class="tab-pane" id="review" role="tabpanel">
+            {{-- <div class="tab-pane" id="review" role="tabpanel">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-header-text">รีวิว</h5>
@@ -2401,7 +2401,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- tab content end -->
     </div>

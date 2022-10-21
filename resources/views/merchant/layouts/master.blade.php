@@ -48,6 +48,7 @@
     <!-- Tags css -->
     <link rel="stylesheet" type="text/css" href="{{asset('/files/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" />
     <!-- Select 2 css -->
+
     <link rel="stylesheet" href="{{asset('/files/bower_components/select2/css/select2.min.css')}}" />
     <!-- My Custom css -->
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}" />
@@ -262,6 +263,7 @@
     <script src="{{asset('files/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
     <!-- Select 2 js -->
+
     <script  src="{{asset('files/bower_components/select2/js/select2.full.min.js')}}"></script>
     <!-- Multiselect js -->
     <script src="{{asset('files/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js')}}"></script>

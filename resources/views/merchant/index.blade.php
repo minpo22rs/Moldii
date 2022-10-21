@@ -162,24 +162,28 @@
     <div class="col-xl-4">
         <div class="row">
             <div class="col-xl-12 col-md-6 col-12">
-                <div class="card bg-1 order-card">
-                    <div class="card-block">
-                        <h6>สินค้าของเรา</h6>
-                        <h2 class="text-right"><i class="icofont icofont-cubes f-left"></i><span>{{$product_count}}</span></h2>
-                        <br>
-                        <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="{{url('merchant/product')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                <a href="{{url('merchant/product')}}" style="color: white">
+                    <div class="card bg-1 order-card">
+                        <div class="card-block">
+                            <h6>สินค้าในร้านของฉัน</h6>
+                            <h2 class="text-right"><i class="icofont icofont-cubes f-left"></i><span>{{$product_count}}</span></h2>
+                            <br>
+                            <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="{{url('merchant/product')}}" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-12 col-md-6 col-12">
-                <div class="card bg-7 order-card">
-                    <div class="card-block">
-                        <h6>สินค้า</h6>
-                        <h2 class="text-right"><i class="icofont icofont-ui-cart f-left"></i><span>123</span></h2>
-                        <br>
-                        <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                <a href="{{url('merchant/auction')}}" style="color: white">
+                    <div class="card bg-7 order-card">
+                        <div class="card-block">
+                            <h6>สินค้าประมูล</h6>
+                            <h2 class="text-right"><i class="icofont icofont-ui-cart f-left"></i><span>123</span></h2>
+                            <br>
+                            <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="" style="color: white"><span class="f-right icon-gopage"></span></a></p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

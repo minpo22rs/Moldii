@@ -1,5 +1,4 @@
 @extends('merchant.layouts.master')
-
 @section('css')
 <style>
     .swal2-container {
@@ -119,15 +118,22 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">รูปภาพสินค้า<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
+                        <div class="col-sm-7">
+                            <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
+                        </div>                
+                    </div>
+
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รูปภาพหน้าปก <span class="text-danger">*</span>
-                            {{-- <span class="mytooltip tooltip-effect-1">
+                            <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item2">Cover <span class="text-danger">*</span></span>
                                 <span class="tooltip-content4 clearfix">
                                     <span class="tooltip-text2">
                                         รูปภาพขนาด : 357 x 357 px.
                                     </span>
                                 </span>
-                            </span> --}}
+                            </span>
                         </label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -138,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">ชื่อสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
@@ -154,7 +160,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="รายละเอียด..." required></textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="10" placeholder="รายละเอียดสินค้า เช่น สี วัสดุ ปีที่ผลิต แหล่งที่ผลิต ที่มาของสินค้า หรือรายละเอียดที่เกี่ยวข้องกับสินค้า..." required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +170,8 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <select class="form-control" name="category_id" required>
-                                        <option value="">Select Category</option>
+                                    <select class="form-control" name="category_id" id="category_id"  required>
+                                        <option value="">เลือกหมวดหมู่สินค้า</option>
                                         @foreach($category as $cats)
                                             <option value="{{$cats->cat_id}}">{{$cats->cat_name}}</option>
                                         @endforeach
@@ -338,13 +344,13 @@
                         </div>
                     </div>
 
-                    <br>
+                    {{-- <br>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">อัลบั้มรูปภาพ<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>
                         <div class="col-sm-7">
                             <input type="file" name="files[]" id="filer_input" multiple="multiple" required>
                         </div>                
-                    </div>
+                    </div> --}}
                    
                 </div>
             </form>
@@ -368,9 +374,15 @@
 
 @section('js')
 
-
     @include('flash-message')
     <script>
+      
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+
         var count_option = 1;
         $('#addoption').click(function () { 
             var optionname = $('#option').val();

@@ -119,11 +119,11 @@
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{url('admin/profile', Auth::user()->admin_id)}}">
                                             <i class="ti-user"></i> ข้อมูลประจำตัว
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     {{-- <li>
                                         <a href="">
                                             <i class="ti-user"></i> การตั้งค่า
@@ -357,6 +357,13 @@
                                         <a href="{{url('admin/requeststore')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-contact-add"></i><b>D</b></span>
                                             <span class="pcoded-mtext">คำขอเปิดร้านค้า</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="{{url('admin/shutdownaccount')}}">
+                                            <span class="pcoded-micon"><i class="icofont icofont-close-circled"></i><b>D</b></span>
+                                            <span class="pcoded-mtext">คำขอปิดบัญชีลูกค้า</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

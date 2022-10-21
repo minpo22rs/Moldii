@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-
+       
         DB::beginTransaction();
 
         
@@ -86,15 +86,14 @@ class ProductController extends Controller
                 }
             }
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
-            if ($request->file('cover') !== null)
-            {
-                $img = $request->file('cover');
-                foreach($img as $key => $item) {
-                    $name = rand().time().'.'.$item->getClientOriginalExtension();
-                    $item->storeAs('product_cover',  $name);
-                    $product->product_img  = $name;
-                }
-            }
+           
+
+            $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
+            $request->file('files')[0]->storeAs('product_cover',$name);
+            $product->product_img = $name;
+
+
+
             $product->save();
            
 
@@ -104,10 +103,15 @@ class ProductController extends Controller
                 
             }
 
+    
+            $arr = $request->file('files');
+            array_shift($arr);
+
             
-            if ($request->file('files') !== null)
+            if (count($request->file('files')) > 1)
             {
-                $img = $request->file('files');
+                
+                $img = $arr;
                 foreach($img as $key => $item) {
                     $image = new product_img();
                     $name = rand().time().'.'.$item->getClientOriginalExtension();
@@ -140,7 +144,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect('merchant/product')->with('success', 'Successful');
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
             return redirect('merchant/product')->withError('Something Wrong! New Product can not Saved.');
         }
@@ -192,8 +196,6 @@ class ProductController extends Controller
             $product->product_description   = $request->description;
             $product->product_amount        = $request->amount;
             $product->product_price         = $request->price;
-            $product->product_gpoint        = $request->gpoint;
-            $product->product_bpoint        = $request->bpoint;
             $product->weight                = $request->weight;
             $product->width                 = $request->width;
             $product->length                = $request->length;
