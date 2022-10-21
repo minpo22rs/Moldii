@@ -84,7 +84,7 @@
                     <tr>
                         <th style="text-align: center;">#</th>
                         <th style="text-align: center;">สร้างการประมูลโดย</th>
-                        <th style="text-align: center;">เลขที่การประมูล</th>
+                        <th style="text-align: center;">ชื่อสินค้า</th>
          
                         <th style="text-align: center;">วันที่</th>
                         <th style="text-align: center;">เวลาเริ่มต้นสิ้นสุด</th>
