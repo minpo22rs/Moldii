@@ -10,6 +10,7 @@ use URL;
 use App\Models\Auction;
 use App\Models\Auction_detail;
 use App\Models\product;
+use App\Models\product_img;
 use App\Models\category;
 
 class AuctionController extends Controller
@@ -19,7 +20,8 @@ class AuctionController extends Controller
     {
         $auction = Auction::leftJoin('tb_products','tb_auctions.product_id','=','tb_products.product_id')->orderBy('tb_auctions.created_at','DESC')->get();
         $product = product::where('product_published',1)->get();
-        $data = array('auction' => $auction,'product'=>$product);
+        $cat = category::where('deleted_at',null)->get();
+        $data = array('auction' => $auction,'product'=>$product,'cat'=>$cat);
         return view('backend.auction.auctionlist', $data);
     }
 
@@ -29,35 +31,89 @@ class AuctionController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try {
-           
-            foreach($request->pid as $key => $item) {
+            if($request->type == 0){
+                foreach($request->pid as $key => $item) {
 
-                $auction = new Auction();
-                $auction->code     = substr(md5(mt_rand()), 0, 8).'%A';
-                $auction->price      = $request->price;
-                $auction->bit      = $request->bit;
-                $auction->date_start      = $request->date_start;
-                $auction->time_start      = $request->time_start;
-                $auction->time_finish      = $request->time_finish;
-                $auction->product_id      = $item;
-               
-                $auction->save();
+                    $auction = new Auction();
+                    $auction->code     = substr(md5(mt_rand()), 0, 8).'%A';
+                    $auction->price      = $request->price;
+                    $auction->bit      = $request->bit;
+                    $auction->date_start      = $request->date_start;
+                    $auction->time_start      = $request->time_start;
+                    $auction->time_finish      = $request->time_finish;
+                    $auction->product_id      = $item;
+                   
+                    $auction->save();
+    
+                    
+                    // $detail = new Auction_detail();
+                    // $detail->id_auction      = $auction->id_auction;
+                    // $detail->product_id      = $item;
+                    
+                    // $detail->save();
+                }
+    
+            }else{
+                        
+                   
 
-                
-                // $detail = new Auction_detail();
-                // $detail->id_auction      = $auction->id_auction;
-                // $detail->product_id      = $item;
-                
-                // $detail->save();
+                    $product = new product();
+                    $product->product_name          = $request->name;
+                    $product->product_cat_id        = $request->category_id;
+                    $product->product_description   = $request->description;
+                    $product->weight                = $request->weight;
+                    $product->width                 = $request->width;
+                    $product->length                = $request->length;
+                    $product->height                = $request->height;
+                    $product->product_published     = 3;
+
+
+                    $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
+                    $request->file('files')[0]->storeAs('product_cover',$name);
+                    $product->product_img = $name;
+
+
+                    $product->save();
+
+
+                    $auction = new Auction();
+                    $auction->code                  = substr(md5(mt_rand()), 0, 8).'%A';
+                    $auction->price                 = $request->price;
+                    $auction->bit                   = $request->bit;
+                    $auction->date_start            = $request->date_start;
+                    $auction->time_start            = $request->time_start;
+                    $auction->time_finish           = $request->time_finish;
+                    $auction->created_by            = 0;
+                    $auction->product_id            = $product->product_id;
+                    $auction->save();
+
+
+                    $arr = $request->file('files');
+                    array_shift($arr);
+
+                    
+                    if (count($request->file('files')) > 1)
+                    {
+                        
+                        $img = $arr;
+                        foreach($img as $key => $item) {
+                            $image = new product_img();
+                            $name = rand().time().'.'.$item->getClientOriginalExtension();
+                            $item->storeAs('product_img',  $name);
+                            $image->product_id  = $product->product_id;
+                            $image->img_name  = $name;
+                            $image->save();
+                        }
+                    }
             }
-
+            
            
 
 
             DB::commit();
             return redirect('admin/auction')->with('success', 'Successful');
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
             return redirect('admin/auction')->withError('Something Wrong! New Content can not Saved.');
         }
@@ -66,24 +122,24 @@ class AuctionController extends Controller
    
     public function detailauction($id,$t)
     {
-        if($t==0){
+        // if($t==0){
 
-            $Auction = Auction::findOrFail($id);
-            $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->get();
-            $id = $ad->pluck('product_id');
-            $product = product::where('product_published',1)->whereNotIn('product_id',$id)->get();
-            $data = array('Auction' => $Auction,'ad'=>$ad,'product'=>$product );
-            return view('backend.auction.detailauction', $data);
-        }else{
+        //     $Auction = Auction::findOrFail($id);
+        //     $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->get();
+        //     $id = $ad->pluck('product_id');
+        //     $product = product::where('product_published',1)->whereNotIn('product_id',$id)->get();
+        //     $data = array('Auction' => $Auction,'ad'=>$ad,'product'=>$product );
+        //     return view('backend.auction.detailauction', $data);
+        // }else{
 
-            $auction = Auction::where('id_auction','=',$id)->first();
-            $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->first();
-            $img  = DB::Table('tb_product_imgs')->where('product_id',$ad->product_id)->get();
-    
-            $cat = category::where('deleted_at',null)->get();
-            $data = array('auction' => $auction,'ad'=>$ad,'cat'=>$cat,'img'=>$img);
-            return view('backend.auction.detailauctionmerchant', $data);
-        }
+        $auction = Auction::where('id_auction','=',$id)->leftJoin('tb_products', 'tb_auctions.product_id', '=', 'tb_products.product_id')->first();
+        // $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->first();
+        $img  = DB::Table('tb_product_imgs')->where('product_id',$auction->product_id)->get();
+        // dd($auction );
+        $cat = category::where('deleted_at',null)->get();
+        $data = array('auction' => $auction,'cat'=>$cat,'img'=>$img);
+        return view('backend.auction.detailauctionmerchant', $data);
+        // }
         
     }
 
@@ -92,11 +148,11 @@ class AuctionController extends Controller
     {
         // dd($id);
         $aid= $id;
-        $Auction = Auction::findOrFail($id);
-        $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->get();
-        $id = $ad->pluck('product_id');
-        $product = product::where('product_published',1)->whereNotIn('product_id',$id)->get();
-        $data = array('Auction' => $Auction,'ad'=>$ad,'product'=>$product,'id'=>$aid );
+        // $Auction = Auction::findOrFail($id);
+        $Auction = Auction::where('id_auction',$id)->leftJoin('tb_products', 'tb_auctions.product_id', '=', 'tb_products.product_id')->first();
+        $cat = category::where('deleted_at',null)->get();
+        $data = array('Auction' => $Auction,'id'=>$id ,'cat'=>$cat);
+
         return view('backend.auction.editauction', $data);
     }
 
@@ -113,23 +169,14 @@ class AuctionController extends Controller
             $auction->time_finish           = $request->time_finish;
             $auction->save();
 
-            Auction_detail::where('id_auction',$request->id)->delete();
-
-            foreach($request->pid as $key => $item) {
-                $detail = new Auction_detail();
-                $detail->id_auction      = $auction->id_auction;
-                $detail->product_id      = $item;
-                
-                $detail->save();
-            }
-
-            foreach($request->epid as $key => $item) {
-                $detail = new Auction_detail();
-                $detail->id_auction      = $auction->id_auction;
-                $detail->product_id      = $item;
-                
-                $detail->save();
-            }
+            $product = product::findOrFail( $request->pid);
+            $product->product_name          = $request->name;
+            $product->product_description   = $request->description;
+            $product->weight                = $request->weight;
+            $product->width                 = $request->width;
+            $product->length                = $request->length;
+            $product->height                = $request->height;
+            $product->save();
 
             DB::commit();
             return redirect('admin/auction')->with('success', 'Successful');

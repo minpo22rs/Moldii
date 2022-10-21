@@ -62,8 +62,6 @@ class MerchantAuctionController extends Controller
 
             $product->save();
 
-            Auction_detail::insert(['id_auction'=>$auction->id_auction ,'product_id'=>$product->product_id]);
-
             $arr = $request->file('files');
             array_shift($arr);
 
