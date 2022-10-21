@@ -37,6 +37,7 @@
 @endsection
 
 @section('content')
+<br>
 <div class="m-1 shopping-container">
     <div class="section full mt-3 mb-3">
         <div class="carousel-full owl-carousel owl-theme">
@@ -151,7 +152,7 @@
                 <img src="{{('https://testgit.sapapps.work/moldii/storage/app/merchant/'.$store->merchant_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 50px; height:50px;">
 
                 <div class="card-title  align-self-center m-0 ml-1 ">
-                    <h5 class=" m-0 p-0">{{$store->merchant_name}}</h5>
+                    <h5 class=" m-0 p-0">{{$store->merchant_shopname}}</h5>
                     <h6 class=" m-0 p-0">จังหวัดกรุงเทพมหานคร</h6>
                 </div>
             </div>

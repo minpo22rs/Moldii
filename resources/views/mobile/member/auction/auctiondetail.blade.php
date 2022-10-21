@@ -38,6 +38,7 @@
 @endsection
 
 @section('content')
+<br>
 <div class="m-1 shopping-container">
     <div class="section full mt-3 mb-3">
         <div class="carousel-full owl-carousel owl-theme">
@@ -62,7 +63,7 @@
     <div class="row">
         <div class="row justify-content-between w-100 p-1  mx-2">
             <h3 class="mb-0">{{$product->product_name}}</h3>
-            <h3 class="text-danger" id="pricenow">ราคาปัจจุบัน {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
+            <h3 class="text-danger" id="pricenow">ราคาปัจจุบัน ฿ {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
             <p class="time">
                 <br>
                 <!-- hours -->
@@ -120,7 +121,7 @@
                 </div>
                 <button class="btn btn-info" onclick="updateDiv();">ประมูลเลย</button>
                 <input type="hidden" name="pid" id="pid" value="{{$product->product_id}}">
-                <input type="hidden" name="adid" id="adid" value="{{$detail->id_auction_detail}}">
+                {{-- <input type="hidden" name="adid" id="adid" value="{{$detail->id_auction_detail}}"> --}}
                 <input type="hidden" name="aid" id="aid" value="{{$auction->id_auction}}">
 
             </div>
@@ -152,7 +153,12 @@
                                 <?php $u = DB::Table('tb_customers')->where('customer_id',$logs->customer_id)->first();?>
                                 <tr>
                                     <th scope="row">{{$key+1}}</th>
-                                    <td>{{$u->customer_username}}</td>
+                                    @if($key == 0)
+                                        <td><h3>{{$u->customer_username}}</h3></td>
+                                    @else
+                                        <td>{{$u->customer_username}}</td>
+
+                                    @endif
                                     <td>{{$logs->price}}</td>
                                     <td>{{ $logs->created_at}}</td>
                                 </tr>
@@ -194,7 +200,7 @@
 
 
 </div>
-
+<br>
 
 <div class="modal" tabindex="-1" role="dialog" id="exp">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -232,9 +238,9 @@
         var a = "{{Session::get('success')}}";
         if(a){
             Swal.fire({
-            text : a,
-            confirmButtonColor: "#fc684b",
-        })
+                text : a,
+                confirmButtonColor: "#fc684b",
+            })
         }
 
         var p = "{{$minbit}}";
@@ -244,7 +250,7 @@
         // Set the date we're counting down to
         var _token = $('input[name="_token"]').val();
         var pid = document.getElementById('pid').value ;
-        var adid = document.getElementById('adid').value ;
+
         var aid = document.getElementById('aid').value ;
         var min = parseInt(p)+parseInt(b);
         
@@ -278,18 +284,26 @@
                 url: '{{ url("/addauction")}}',
                 type: 'POST',
                 dataType: 'HTML',
-                data: {'pid':pid,'adid':adid,'aid':aid,'count':bitcount,'_token':_token},
+                data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
                 success: function(data) {
                     var json = JSON.parse(data);
-                    limit = json['limit'];
-                    console.log(limit);
-                    document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+                    if(parseInt(json['chk']) ==1){
+                        Swal.fire({
+                            text : "ท่านนำประมูลอยู่แล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
+                    }else{
+                        console.log('sdsdsdsww1111');
+                        limit = json['limit'];
+                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
 
-                    document.getElementById('bitcount').value = json['bit'];
-                    $( "#here" ).load(window.location.href + " #here" );
-                    // $( "#here" ).load(window.location.href + " #here" );
+                        document.getElementById('bitcount').value = json['bit'];
+                        $( "#here" ).load(window.location.href + " #here" );
+                    }
+                   
+                    
+                    
 
-                    // $( "#divbit" ).load(window.location.href + " #divbit" );
                 }
             });
 
@@ -306,10 +320,6 @@
         };
 
 
-
-           
-        
-        
           
 
             // Update the count down every 1 second
@@ -338,6 +348,7 @@
             document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
             document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
 
+            $( "#here" ).load(window.location.href + " #here" );
 
 
             // If the count down is finished, write some text
@@ -353,10 +364,10 @@
                     url: '{{ url("/checkauction")}}',
                     type: 'GET',
                     dataType: 'HTML',
-                    data: {'pid':pid,'adid':adid,'aid':aid},
+                    data: {'pid':pid,'aid':aid},
                     success: function(data) {
                         if(data==1){
-                            document.getElementById('text_exp').innerHTML ='คุณชนะการประมูล ตรวจสอบสินค้าได้ที่ตระกร้า';
+                            document.getElementById('text_exp').innerHTML ='คุณชนะการประมูล สามารถตรวจสอบสินค้าได้ที่ตระกร้าสินค้า';
                             $('#exp').modal('show');
 
                         }else{

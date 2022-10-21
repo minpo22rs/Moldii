@@ -29,7 +29,7 @@
     }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    
 <div class="appHeader bg-danger text-light">
 
     <div class="pageTitle">
@@ -72,10 +72,12 @@
                 </a>
             </div>
 
-            <div class="col-2">
-                <a href="{{url('user/notification')}}">
-                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+            <div class="col-2 mt-1">
+                <a href="{{url('user/notification')}}" > 
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
@@ -126,11 +128,12 @@
   
 </div>
 @endsection
-    
+   
 
 @section('content')
+<br>
     <div class="container p-1 my-3">
-        @if( $chk != 0)
+        {{-- @if( $chk != 0)
             <div class="col-12 row m-0 justify-content-center mt-4">
                     <p class="time">
                                         
@@ -164,18 +167,40 @@
                     
                     </p>
             </div>
-        @endif
+        @endif --}}
+        <div class="card-title my-1 font-weight-bold font-weight-bolder pt-2">หมวดหมู่ </div>
+
+        <div class="col-12 pt-1  m-0" >
+            <div class="row " style="overflow: auto ; width: 100%; height: 200px; justify-content: center;" >
+
+                @foreach($cat as $cats)
+                    
+                    
+                    <div class="text-center p-1 col-3">                      
+                        <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"><img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;"></a>
+                        <h6 class="mt-1">{{$cats->cat_name}}</h6>
+                    </div>
+            
+                  
+                @endforeach
+            </div>
+        </div>
+
+        <br>
+        <hr>
         <div class="col-12 row m-0 justify-content-center ">
             @if( $chk != 0)
                  
-                @foreach($detail as $details)
-                    <a href="{{url('auction/detail/'.$details->id_auction_detail.'')}}" style="width: 50%;">
-                        <div class=" card  my-2 mx-2 align-self-center justify-content-center">
+                @foreach($auction as $key => $details)
+                    <a href="{{url('auction/detail/'.$details->id_auction.'')}}" style="width: 50%;">
+                        <div class=" card  my-2 mx-2 align-self-center justify-content-center" id="time{{$details->id_auction}}">
                             <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$details->product_img.'')}}" alt="alt" style=" height:120px;">
                             <div class="card-body col-12 p-1 ">
                                 <div class="row pl-1">
-                                    <h5 class=" font-weight-bolder m-0">{{$details->product_name}}</h5>
-                                    <h5 class="font-weight-bolder m-0 ml-5">{{$details->product_price}}</h5>
+                                    <h5 class=" font-weight-bolder m-0 col-12">ชื่อ : {{$details->product_name}}</h5>
+                                    <h5 class="font-weight-bolder m-0  col-12">ราคาล่าสุด: ฿ {{number_format($log[$key],2,'.',',')}} </h5>
+                                    <div class="font-weight-bolder m-0  col-12" data-countdown={{$adate[$key]}}.{{$atime[$key]}} id="{{$details->id_auction}}"></div>
+
                                 </div>
                                 
                             </div>
@@ -188,7 +213,7 @@
             @endif
 
         </div>
-
+        <br>
         <!-- align-self-center justify-content-center -->
 
     </div>
@@ -219,17 +244,19 @@
 
 @endsection
 @section('custom_script')
+
+    <script src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.0.4/dist/jquery.countdown.min.js"></script>
         <script>
 
             bottom_now(5);
-            var chk = "{{$chk}}";
+            // var chk = "{{$chk}}";
 
             var a = "{{Session::get('success')}}";
             if (a) {
                 Swal.fire({
-            text : a,
-            confirmButtonColor: "#fc684b",
-        })
+                    text : a,
+                    confirmButtonColor: "#fc684b",
+                })
             }
 
             const getLastDigit = (number) => {
@@ -240,59 +267,71 @@
                 return Math.floor((number % 100) / 10);
             };
 
+            $('[data-countdown]').each(function() {
+                var $this = $(this), finalDate = $(this).data('countdown');
+                var id = $this.attr('id');
+               
+
+                $this.countdown(finalDate, function(event) {
+                    $this.html(event.strftime('%H:%M:%S'));
+                }).on('finish.countdown', function() {
+                    document.getElementById('time'+id).remove();
+                });
+            });
 
 
-            if(parseInt(chk) != 0){
-                var limit = "{{$limit}}";
+
+            // if(parseInt(chk) != 0){
+            //  
                 
                 
-                    // Set the date we're counting down to
-                var countDownDate = new Date(limit).getTime();
+            //         // Set the date we're counting down to
+            //     var countDownDate = new Date(limit).getTime();
 
-                    // Update the count down every 1 second
-                var x = setInterval(function() {
+            //         // Update the count down every 1 second
+            //     var x = setInterval(function() {
 
-                    // Get today's date and time
-                    var now = new Date().getTime();
+            //         // Get today's date and time
+            //         var now = new Date().getTime();
 
-                    // Find the distance between now and the count down date
-                    var distance = countDownDate - now;
+            //         // Find the distance between now and the count down date
+            //         var distance = countDownDate - now;
 
-                    // Time calculations for days, hours, minutes and seconds
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            //         // Time calculations for days, hours, minutes and seconds
+            //         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            //         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            //         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            //         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    // Display the result in the element with id="demo"
-                    // document.getElementById("demo").innerHTML = hours + "h "
-                    // + minutes + "m " + seconds + "s ";
+            //         // Display the result in the element with id="demo"
+            //         // document.getElementById("demo").innerHTML = hours + "h "
+            //         // + minutes + "m " + seconds + "s ";
 
-                    document.getElementById('hour-ten-digit').innerHTML = getTenDigit(hours);
-                    document.getElementById('hour-last-digit').innerHTML = getLastDigit(hours);
-                    document.getElementById('min-ten-digit').innerHTML = getTenDigit(minutes);
-                    document.getElementById('min-last-digit').innerHTML = getLastDigit(minutes);
-                    document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
-                    document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
+            //         document.getElementById('hour-ten-digit').innerHTML = getTenDigit(hours);
+            //         document.getElementById('hour-last-digit').innerHTML = getLastDigit(hours);
+            //         document.getElementById('min-ten-digit').innerHTML = getTenDigit(minutes);
+            //         document.getElementById('min-last-digit').innerHTML = getLastDigit(minutes);
+            //         document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
+            //         document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
 
 
 
-                    // If the count down is finished, write some text
-                    if (distance < 0) {
-                        clearInterval(x);
-                        document.getElementById('hour-ten-digit').innerHTML = '0';
-                        document.getElementById('hour-last-digit').innerHTML ='0';
-                        document.getElementById('min-ten-digit').innerHTML = '0';
-                        document.getElementById('min-last-digit').innerHTML ='0';
-                        document.getElementById('sec-ten-digit').innerHTML = '0';
-                        document.getElementById('sec-last-digit').innerHTML ='0';
-                        $('#exp').modal('show');
-                        // window.location.replace("{{url('auction')}}");
-                        // document.getElementById("demo").innerHTML = "EXPIRED";
-                    }
-                }, 1000);
+            //         // If the count down is finished, write some text
+            //         if (distance < 0) {
+            //             clearInterval(x);
+            //             document.getElementById('hour-ten-digit').innerHTML = '0';
+            //             document.getElementById('hour-last-digit').innerHTML ='0';
+            //             document.getElementById('min-ten-digit').innerHTML = '0';
+            //             document.getElementById('min-last-digit').innerHTML ='0';
+            //             document.getElementById('sec-ten-digit').innerHTML = '0';
+            //             document.getElementById('sec-last-digit').innerHTML ='0';
+            //             $('#exp').modal('show');
+            //             // window.location.replace("{{url('auction')}}");
+            //             // document.getElementById("demo").innerHTML = "EXPIRED";
+            //         }
+            //     }, 1000);
 
-            }
+            // }
 
 
         </script>

@@ -71,10 +71,12 @@
                 </a>
             </div>
 
-            <div class="col-2">
-                <a href="{{url('user/notification')}}">
-                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+            <div class="col-2 mt-1">
+                <a href="{{url('user/notification')}}" > 
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
@@ -239,75 +241,75 @@
             <div class="card-body p-2">
                 <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
             </div>
+            
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                 
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-                    
-                    @if($sqls->new_type == 'C')
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                            </div>
-                            @if($imggal->count() >1)
+                @if($sqls->new_type == 'C')
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                        </div>
+                        @if($imggal->count() >1)
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            @foreach($imggal as $imgs)
+                                <div class="carousel-item">
+                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                </div>
+                            @endforeach
+                        @endif
+                            
+                    </div>
+                @else
+                    <div class="carousel-inner">
+
+                        @if($imggal->count() != 0)
+                            @if($imggal[0]->type =='I')
+                                <div class="carousel-item active">
+                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                </div>
+                            @else
+                                <div class="carousel-item active">
+                                    <video width="100%" height="197" controls >
+                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
+                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
+                                    </video>
+                                </div>
+                            @endif
+                            @if($imggal->count() > 1)
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
                                 @foreach($imggal as $imgs)
-                                    <div class="carousel-item">
-                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                    </div>
+                                    @if($imgs->type =='I')
+                                        
+                                        <div class="carousel-item">
+                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                        </div>
+                                    @else
+                                    
+                                        <div class="carousel-item" >
+                                            <video width="100%" height="197" controls >
+                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                            </video>
+                                        </div>
+                                    @endif
                                 @endforeach
                             @endif
-                                
-                        </div>
-                    @else
-                        <div class="carousel-inner">
-
-                            @if($imggal->count() != 0)
-                                @if($imggal[0]->type =='I')
-                                    <div class="carousel-item active">
-                                        <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                    </div>
-                                @else
-                                    <div class="carousel-item active">
-                                        <video width="100%" height="197" controls >
-                                            <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
-                                            <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
-                                        </video>
-                                    </div>
-                                @endif
-                                @if($imggal->count() > 1)
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                    </ol>
-                                    @foreach($imggal as $imgs)
-                                        @if($imgs->type =='I')
-                                            
-                                            <div class="carousel-item">
-                                                <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                            </div>
-                                        @else
-                                        
-                                            <div class="carousel-item" >
-                                                <video width="100%" height="197" controls >
-                                                    <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
-                                                    <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
-                                                </video>
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endif
+                        @endif
 
 
-                                
-                        </div>
-                    @endif
-                    
-                </div>
+                            
+                    </div>
+                @endif
+                
+            </div>
         
 
             <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
@@ -319,36 +321,36 @@
 
             <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
-                <div class="col-3 row p-0  justify-content-center" id="likebutton{{$sqls->new_id}}" style="display: ">
+                <div class="col-3 row p-0  justify-content-center mr-2" id="likebutton{{$sqls->new_id}}" style="display: ">
                     <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
                     @if($la == null)
-                        <h5 class="mb-0 ml-1 " id="myLike{{$sqls->new_id}}" style="color: black" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
+                        <h5 class="mb-0" id="myLike{{$sqls->new_id}}" style="color: black" onclick="myLike({{$sqls->new_id}})">ถูกใจ</h5>
                     @else
-                        <h5 class="mb-0 ml-1 " id="unmyLike{{$sqls->new_id}}" style="color: green" onclick="UNmyLike({{$sqls->new_id}})">ถูกใจแล้ว</h5>
+                        <h5 class="mb-0" id="unmyLike{{$sqls->new_id}}" style="color: green" onclick="UNmyLike({{$sqls->new_id}})">ถูกใจแล้ว</h5>
                     @endif
                 </div>
 
 
-                <div style="display: none" class="col-3 row p-0  justify-content-center" id="myLike2{{$sqls->new_id}}" >
+                <div style="display: none" class="col-3 row p-0 mr-2 justify-content-center" id="myLike2{{$sqls->new_id}}" >
                     <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-                    <h5 class="mb-0 ml-1 " style="color: black" onclick="myLike2({{$sqls->new_id}})">ถูกใจ</h5>
+                    <h5 class="mb-0" style="color: black" onclick="myLike2({{$sqls->new_id}})">ถูกใจ</h5>
                 </div>
 
-                <div style="display: none" class="col-3 row p-0  justify-content-center" id="unmyLike2{{$sqls->new_id}}">
+                <div style="display: none" class="col-3 row p-0 mr-2 justify-content-center" id="unmyLike2{{$sqls->new_id}}">
                     <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
-                    <h5 class="mb-0 ml-1 "  style="color: green" onclick="UNmyLike2({{$sqls->new_id}})">ถูกใจแล้ว</h5>
+                    <h5 class="mb-0"  style="color: green" onclick="UNmyLike2({{$sqls->new_id}})">ถูกใจแล้ว</h5>
                 </div>
 
-                <div class="col-5 row p-0 align-items-center">
+                <div class="col-5 row p-0 align-items-center ml-2">
                     <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;">
-                    <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
+                    <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1">แสดงความคิดเห็น</h5></a>
                 </div>
                 <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#share" >
                     <img src="{{ asset('new_assets/icon/แชร์.png')}}" alt="alt" style="width:17px; height:17px;">
-                    <h5 class="mb-0 ml-1" >แชร์</h5>
+                    <h5 class="mb-0 " >แชร์</h5>
                 </div>
                 @if($sqls->customer_id != 0)
-                    <div class="col-2 row p-0 align-items-center ml-1" onclick="donatebtn({{$sqls->customer_id}});">
+                    <div class="col-2 row p-0 align-items-center " onclick="donatebtn({{$sqls->customer_id}});">
                         <img src="{{asset('new_assets/icon/โดเนท.png')}}" alt="alt" style="width:17px; height:17px;">
                         <h5 class="mb-0 ml-1">โดเนท</h5>
                     </div>
@@ -357,6 +359,7 @@
             </div>
         </div>
     @endforeach
+    <br>
         <!-- Modal share -->
         <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
             <div class="modal-dialog modal-dialog-centered">
@@ -590,7 +593,7 @@
             // var x = document.getElementById("myLike2"+id);
             
             // x.innerHTML = "ถูกใจแล้ว";
-            // document.getElementById("myLike2"+id).style.color = "green";
+            document.getElementById("myLike2"+id).style.color = "green";
             $.ajax({
                 url: '{{ url("/likecontent")}}',
                 type: 'GET',

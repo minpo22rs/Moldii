@@ -34,6 +34,7 @@
 @endsection
 
 @section('content')
+<br>
     <div class="m-1">
         <ul class="col-12 row justify-content-around m-0 p-1 cate-container">
             <li class="mx-1 text-center category-shopping {{Request::is('shopping/category/'.$id.'')?'active':''}}">

@@ -120,10 +120,11 @@ class LoginController extends Controller
         // dd($request->all());
         // dd(Auth::guard('web')->user()->id());
         
-        $user = DB::table('tb_customers')->where('customer_username', $request->username)->orWhere('customer_phone', $request->username)->first();
         // dd($user);
-        if ( Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password])
-            || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password])) {
+        if ( Auth::guard('web')->attempt(['customer_username' => $request->username , 'customer_password' => $request->password,'customer_status'=>null])
+            || Auth::guard('web')->attempt(['customer_phone' => $request->username , 'customer_password' => $request->password,'customer_status'=>null])) {
+            
+            $user = DB::table('tb_customers')->where('customer_username', $request->username)->orWhere('customer_phone', $request->username)->first();
             Session::put('cid',$user->customer_id);
             Session::put('recent',[]);
             

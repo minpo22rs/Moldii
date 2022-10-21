@@ -146,7 +146,7 @@
 @endsection
 
 @section('content')
-
+<br>
 
     <div>
         <img class="justify-content-center w-100" src="{{ asset('new_assets/img/4a1ef46ac4bc5a20dd6ea8c2c5d5f5af.png')}}" alt="alt">

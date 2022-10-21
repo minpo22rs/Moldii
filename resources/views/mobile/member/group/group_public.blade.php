@@ -23,6 +23,7 @@
 
 @endsection
 @section('content')
+<br>
     <!-- ###### content [ Start ]  ###### -->
     <div>
         {{-- <img class="justify-content-center w-100" src="{{('https://testgit.sapapps.work/moldii/storage/app/banner/'.$ban->banner_name.'')}}" alt="alt"> --}}

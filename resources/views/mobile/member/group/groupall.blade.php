@@ -72,10 +72,12 @@
                 </a>
             </div>
 
-            <div class="col-2">
-                <a href="{{url('user/notification')}}">
-                    <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+            <div class="col-2 mt-1">
+                <a href="{{url('user/notification')}}" > 
+                    <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                        <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
@@ -132,7 +134,7 @@
 <br>
 <br>
     <div class="container p-1 my-3">
-       <h3 class="text-center">กลุ่ม</h3>
+       <h3 class="text-center">รายการกลุ่มทั้งหมด</h3>
         <div class="col-12 row m-0 justify-content-center ">
          
                  

@@ -71,14 +71,15 @@
                     </a>
                 </div>
     
-                <div class="col-2">
-                    <a href="{{url('user/notification')}}">
-                        <div  class="md hydrated bg-white text-danger rounded p-1 mt-1 mb-1 h5 text-center">
+                <div class="col-2 mt-1">
+                    <a href="{{url('user/notification')}}" > 
+                        <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
+                            <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                             <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
+                            <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                         </div>
                     </a>
                 </div>
-                
             </div>
 
         </div>
@@ -220,15 +221,13 @@
                     </div>
 
 
-
-
-                    <div class="col-5 row p-0 justify-content-center ml-1 ">
-                        <img src="{{ asset('new_assets/img/icon/chat.png')}}" alt="alt" style="width:17px; height:17px;">
+                    <div class="col-5 row p-0 align-items-center">
+                        <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;margin-left:15px">
                         <a href="{{url('content/'.$sqls->new_id.'')}}"><h5 class="mb-0 ml-1 ">แสดงความคิดเห็น</h5></a>
                     </div>
-                    <div class="col-2 row p-0 justify-content-center ml-1 ">
-                        <img src="{{ asset('new_assets/img/icon/share.png')}}" alt="alt" style="width:17px; height:17px;">
-                        <h5 class="mb-0 ">แชร์</h5>
+                    <div class="col-2 row p-0 align-items-center" data-toggle="modal" data-target="#share" >
+                        <img src="{{ asset('new_assets/icon/แชร์.png')}}" alt="alt" style="width:17px; height:17px;">
+                        <h5 class="mb-0 ml-1" >แชร์</h5>
                     </div>
                     {{-- <div class="col-3 row p-0 justify-content-center  ">
                         <img src="{{ asset('new_assets/img/icon/diamond.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -238,6 +237,63 @@
                 </div>
             </div>
         @endforeach
+
+
+
+          <!-- Modal share -->
+          <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" >แบ่งปันข้อมูล</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="urlencode" value="1">
+
+                    <div class="modal-body">
+                        
+                    
+                        <?php $urlen = urlencode("https://modii.sapapps.work/content/1")?>
+                    
+                            <br>
+                            <div class="row justify-content-around p-1 ">
+                                <a href="https://social-plugins.line.me/lineit/share?url={{$urlen}}" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/LINE.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{$urlen}}" class="m-0 text-center  align-self-end share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/facebook.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Link.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+                                </a>
+                                <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Messenger.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+                                </a>
+                                {{-- <a href="" class="m-0 text-center align-self-end  share-item">
+                                    <img src="{{ asset('new_assets/img/icon/share/Email.svg')}}" alt="alt" class=" " style="width:47px; height:47px;">
+                                    <h5 class="font-weight-bold m-0 mt-1">Email</h5>
+                                </a> --}}
+                                <div class="row col-11 mt-4 p-0">
+                                    <button type="button" data-dismiss="modal" class="btn  btn-block font-weight-bold" style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+                                </div>               
+                            </div>
+                        <br>
+
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- /end Modal share -->
 
 @endsection
 

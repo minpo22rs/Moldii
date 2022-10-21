@@ -121,6 +121,7 @@ Route::get('user/orderDetails', [UserAccController::class, 'orderDetails']);// �
 Route::get('user/shoppingCart', [UserAccController::class, 'shoppingCart']);// ตะกร้าสินค้า
 Route::get('user/score/{id}', [UserAccController::class, 'score']);// ให้คะแนน
 Route::post('user/sendscore', [UserAccController::class, 'sendscore']);// ให้คะแนน
+Route::post('requestdeleteaccount', [UserAccController::class, 'requestdeleteaccount']);
 
 Route::get('user/wallet', [WalletController::class, 'index']); 
 Route::get('user/selectpaymentWallet/{type}/{num}', [WalletController::class, 'selectpaymentWallet']); 

@@ -235,8 +235,9 @@
                 <a href="{{url('cartindex')}}" > 
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
+                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$countcart->countt != null ?$countcart->countt:'0'}}</span>
                         <img  src="{{ asset('new_assets/icon/ตะกร้า.png')}}" >
-                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span> 
+                        {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span>  --}}
                     </div>
                 </a>
             </div>
@@ -246,8 +247,9 @@
                 <a href="{{url('user/notification')}}" > 
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
+                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$noti->count()+$ccomment->count()}}</span>
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
-                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
+                        {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span>  --}}
                     </div>
                 </a>
             </div>
@@ -372,7 +374,7 @@
     <br> --}}
     {{-- @include("mobile.member.common.content.story") --}}
     
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-12 pl-2 pr-2">
                 <div class="m-1">
                         <div class="card">
@@ -385,7 +387,7 @@
                                 <a href="{{url('user/convert')}}" style="color: black">
 
                                     <img src="{{ asset('new_assets/icon/คอยน์.png')}}"  style="padding-left: 0.6rem;">
-                                    <span class="ml-2 align-self-center font-weight-bold" style=" border-right: 2px solid cornflowerblue;padding-right: 0.5rem; ">{{$u->customer_coin}} </span>
+                                    <span class="ml-2 align-self-center font-weight-bold" style=" border-right: 2px solid cornflowerblue;padding-right: 0.5rem; ">{{number_format($u->customer_coin,2,'.',',')}} </span>
                                 </a>
                                 <a href="{{url('user/donate')}}" style="color: black">
 
@@ -398,28 +400,41 @@
                     
                 </div>
             </div>
-            {{-- <div class="col-4 pl-0">
-                <div class="m-1">
-                    <div class="card">
-                        <div class="row w-100 mx-3 my-2 text-center">
-                            <img src="{{ asset('new_assets/icon/คอยน์.png')}}" width="15%">
-                            <span class="ml-2 align-self-center font-weight-bold">{{$u->customer_coin}} </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 pr-0">
-                <div class="m-1">
+           
+        </div> --}}
+
+
+        <div  class="row" style="overflow: auto ; width: 100%; hight: 100px ; justify-content: center;"> 
+            <div class="col-4 ">
                     <a href="{{url('user/wallet')}}" style="color: black">
                         <div class="card">
                             <div class="row w-100 mx-3 my-2 text-center">
-                                <img src="{{ asset('new_assets/icon/โดเนท.png')}}" width="15%">
-                                <span class="ml-2 align-self-center font-weight-bold"> {{$u->customer_donate}}</span>
+                                <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" >
+                                <span class="ml-1 align-self-center font-weight-bold " >  {{number_format($u->customer_wallet,2,'.',',')}}</span>
                             </div>
                         </div>
                     </a>
-                </div>
-            </div> --}}
+            </div>
+            <div class="col-4 ">
+                <a href="{{url('user/convert')}}" style="color: black">
+                    <div class="card">
+                        <div class="row w-100 mx-3 my-2 text-center">
+                            <img src="{{ asset('new_assets/icon/คอยน์.png')}}" >
+                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_coin,2,'.',',')}} </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="{{url('user/donate')}}" style="color: black">
+                    <div class="card">
+                        <div class="row w-100 mx-3 my-2 text-center">
+                            <img src="{{ asset('new_assets/icon/โดเนท.png')}}" >
+                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_donate,2,'.',',')}} </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
   
 
@@ -715,10 +730,11 @@
                     </div>
                 @endforeach
             </div>
+            <br>
 
 
              <!-- Modal share -->
-             <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+            <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">

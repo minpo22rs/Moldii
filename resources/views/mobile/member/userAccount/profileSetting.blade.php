@@ -137,7 +137,7 @@
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 </a>
-<a href="" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
+<a href="javascript:;" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px" data-toggle="modal" data-target="#requestdel">
     <div class="col-8 mx-0 align-self-center row  p-0">
 
 
@@ -147,6 +147,32 @@
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 </a>
+
+<div class="modal" tabindex="-1" role="dialog" id="requestdel">
+    <form action="{{url('requestdeleteaccount')}}" method="POST">
+        @csrf
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">ส่งคำขอปิดบัญชี</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    
+                    @csrf
+                    เหตุผลในการปิดบัญชี : <input type="text" class="form-control" name="reason">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+  </div>
 
 
 {{-- 
@@ -167,5 +193,7 @@
 @section('custom_script')
 <script>
     bottom_now(7);
+
+   
 </script>
 @endsection

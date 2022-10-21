@@ -724,6 +724,13 @@ class UserAccController extends Controller
         return redirect('user/sendslip')->with('msg','แจ้งชำระเงินเรียบร้อยแล้ว กรุณารอการตรวจสอบหลักฐาน');
         
     }
+
+    public function requestdeleteaccount(Request $request){
+        // dd( $request->all());
+        DB::Table('tb_shutdowns')->insert(['customer_id'=>Session::get('cid'),'reason'=> $request->reason]);
+
+        return redirect('user/myAccount')->with('msg','ส่งข้อมูลเรียบร้อยแล้ว');
+    }
     
     
 }

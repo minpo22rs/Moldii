@@ -16,8 +16,16 @@ class GroupController extends Controller
         $cat = DB::Table('tb_category')->where('deleted_at','=',null)->get();
 
         $group = DB::Table('tb_familys')->where('published',1)->get();
+
+        $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
+        $id = $n->pluck('new_id');
+        // dd($n);
+        $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->where('reader','=','0')->orderBy('created_at','DESC')->get();
+
+
         // dd( $cat);
-        return view('mobile.member.group.indexgroup')->with(['c'=>$c,'cat'=>$cat,'group'=>$group]);
+        return view('mobile.member.group.indexgroup')->with(['c'=>$c,'cat'=>$cat,'group'=>$group,'noti'=>$noti,'ccomment'=>$ccomment]);
     }
 
     public function groupid($id)
@@ -73,9 +81,15 @@ class GroupController extends Controller
         $c = DB::Table('tb_news')->where('family_id','!=',null)->get();
         $cat = DB::Table('tb_category')->where('deleted_at','=',null)->get();
 
+        
+        $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
+        $id = $n->pluck('new_id');
+        
+        $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->where('reader','=','0')->orderBy('created_at','DESC')->get();
         $group = DB::Table('tb_familys')->where('published',1)->get();
         // dd( $cat);
-        return view('mobile.member.group.groupall')->with(['c'=>$c,'cat'=>$cat,'group'=>$group]);
+        return view('mobile.member.group.groupall')->with(['c'=>$c,'cat'=>$cat,'group'=>$group,'noti'=>$noti,'ccomment'=>$ccomment]);
     }
 
     
