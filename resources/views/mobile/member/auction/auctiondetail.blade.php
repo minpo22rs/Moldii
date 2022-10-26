@@ -293,7 +293,7 @@
                             confirmButtonColor: "#fc684b",
                         })
                     }else{
-                        console.log('sdsdsdsww1111');
+                       
                         limit = json['limit'];
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
 
@@ -374,6 +374,22 @@
                             $('#exp').modal('show');
 
                         }
+                       
+                    }
+                });
+            }else{
+                $.ajax({
+                    url: '{{ url("/runtime")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'pid':pid,'aid':aid},
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        // limit = json['limit'];
+                        // document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+
+                        // document.getElementById('bitcount').value = json['bit'];
+                        $( "#here" ).load(window.location.href + " #here" );
                        
                     }
                 });

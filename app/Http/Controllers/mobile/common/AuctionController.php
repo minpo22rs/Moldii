@@ -103,7 +103,7 @@ class AuctionController extends Controller
                 $cart->customer_id = Session::get('cid');
                 $cart->product_id  = $request->pid;
                 $cart->store_id  = $product->product_merchant_id;
-                $cart->shipping_cost  = $ship->cost;
+                $cart->shipping_cost  = 40;
                 $cart->shipping_id  = $ship->id_company;
           
                 $cart->save();
@@ -173,4 +173,29 @@ class AuctionController extends Controller
         // return redirect('auction/detail/'.$request->adid.'')->with(['success'=>'ประมูลเรียบร้อยแล้ว']);
     }
     
+
+    public function runtime (Request $request){
+        // dd($request->all());
+        date_default_timezone_set('Asia/Bangkok');
+
+        $auction = DB::Table('tb_auctions')->where('id_auction', $request->aid)->first();
+        $limit = $auction->date_start." ".$auction->time_finish;
+
+        $lognew = DB::Table('tb_auction_logs')->where('id_auction', $request->aid)->orderBy('price','DESC')->first();
+
+
+        $now = $lognew->price;
+        
+        $minbit = $lognew->price+$auction->bit;
+        
+        $data = array(
+            'limit'=>$limit,
+            'now'=>$now,
+        );
+
+        return json_encode($data);
+
+
+        // return redirect('auction/detail/'.$request->adid.'')->with(['success'=>'ประมูลเรียบร้อยแล้ว']);
+    }
 }
