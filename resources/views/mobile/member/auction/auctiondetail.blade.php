@@ -327,15 +327,14 @@
                                 text : "ท่านนำประมูลอยู่แล้ว",
                                 confirmButtonColor: "#fc684b",
                             })
-                        }else{
-                            
-                        
-                            limit = json['limit'];
-                            document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
-
-                            document.getElementById('bitcount').value = json['bit'];
-                            $( "#here" ).load(window.location.href + " #here" );
                         }
+                        
+                        limit = json['limit'];
+                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+
+                        document.getElementById('bitcount').value = json['bit'];
+                        $( "#here" ).load(window.location.href + " #here" );
+                        
                     }
                         
                 });
