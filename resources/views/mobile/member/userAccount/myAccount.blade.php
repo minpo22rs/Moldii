@@ -10,7 +10,7 @@
 </div>
 @endsection
 @section('content')
-<div>
+<br>
     <div class="col-12 text-center">
         @if($sql->provider ==null && $sql->customer_img == null)
             <img src="{{asset('original_assets/img/material_icons/woman.png')}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
@@ -20,11 +20,12 @@
             <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
         @endif
         <span class="font-weight-bold">
-            <h3 class="mb-0"><?php //$my_name 
-                                ?></h3>
+            <h3 class="mb-0">
+                    {{$sql->customer_username}}
+            </h3>
         </span>
     </div>
-</div>
+
 <br>
 <div class="row my-2">
     <div class="col-6 pr-0">
