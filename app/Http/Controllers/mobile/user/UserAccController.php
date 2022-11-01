@@ -82,40 +82,7 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.policy');
     }
 
-    public function store(){
-        $p = DB::Table('provinces')->get();
-
-        return view('mobile.member.userAccount.store')->with('p',$p);
-
-    }
-
-    public function submitstore(Request $request){
-        // dd($request->all());
-        $number = str_replace("-", "", $request->phone);
-        $merchant = new Merchant();
-        $merchant->merchant_shopname        = $request->shopname;
-        $merchant->merchant_name            = $request->fname;
-        $merchant->merchant_lname           = $request->lname;
-        $merchant->merchant_email           = $request->email;
-        $merchant->merchant_phone           = $number ;
-        $merchant->merchant_type            = $request->type;
-        $merchant->password                 = Hash::make($request->password);
-        $merchant->merchant_img             = 'noimg.jpg';
-        $merchant->merchant_address           = $request->address;
-        $merchant->merchant_tumbon           = $request->tumbon;
-        $merchant->merchant_district           = $request->district;
-        $merchant->merchant_province           = $request->province;
-        $merchant->merchant_postcode           = $request->zip_code;
-        $merchant->customer_id                  = Session::get('cid');
-
-        $name = rand().time().'.'.$request->img->getClientOriginalExtension();
-        $request->img->storeAs('public/store',  $name);
-        $merchant->merchant_document          = $name;
-        $merchant->save();
-
-        return redirect('user/myAccount')->with('msg','บันทึกข้อมูลเรียบร้อยแล้ว');
-    }
-
+   
     public function profileHelpCenter(){
         return view('mobile.member.helpCenter.helpCenter');
 

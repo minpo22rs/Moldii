@@ -12,7 +12,7 @@
 @section('content')
 <br>
 
-<div class="bg_image" style="background-image: url('https://testgit.sapapps.work/moldii/storage/app/banner/{{$banner->banner_name}}');">
+{{-- <div class="bg_image" style="background-image: url('https://testgit.sapapps.work/moldii/storage/app/banner/{{$banner->banner_name}}');"> --}}
     <div class="col-12 text-center">
 
         @if($sql->provider ==null && $sql->customer_img == null)

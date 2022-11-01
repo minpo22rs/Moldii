@@ -66,7 +66,7 @@
 @endsection
 
 @section('content')
-
+<br>
 <div class="col-md-12  mt-3 ">
     <div class="container">
         <div class="row justify-content-between">
@@ -162,8 +162,6 @@
                     </div>
                
                     <div class=" mt-2 mb-3 ">
-                        <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
-                        <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
                         <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
                         <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
                 
@@ -326,7 +324,7 @@
             
     </div> <!-- container -->
 </div> <!-- col-md-12  mt-3 -->
-
+<br>
 
 @endsection
 

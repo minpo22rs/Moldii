@@ -188,12 +188,12 @@
 
         <br>
         <hr>
-        <div class="col-12 row m-0 justify-content-center ">
+        <div class="col-12 row m-0 justify-content-center " id="dataall">
             @if( $chk != 0)
                  
                 @foreach($auction as $key => $details)
                     <a href="{{url('auction/detail/'.$details->id_auction.'')}}" style="width: 50%;">
-                        <div class=" card  my-2 mx-2 align-self-center justify-content-center" id="time{{$details->id_auction}}">
+                        <div class=" card  my-2 mx-2 align-self-center justify-content-center number" id="time{{$details->id_auction}}">
                             <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$details->product_img.'')}}" alt="alt" style=" height:120px;">
                             <div class="card-body col-12 p-1 ">
                                 <div class="row pl-1">
@@ -208,9 +208,14 @@
                     </a>
                 @endforeach
             @else
-              <br><br>
-                    ยังไม่มีรายการสินค้าประมูล
+                <br><br>
+                    ไม่พบข้อมูลรายการสินค้าประมูล
             @endif
+            <div id="nodata" style="display: none">
+                <br><br>
+                ไม่พบข้อมูลรายการสินค้าประมูล
+
+            </div>
 
         </div>
         <br>
@@ -270,14 +275,29 @@
             $('[data-countdown]').each(function() {
                 var $this = $(this), finalDate = $(this).data('countdown');
                 var id = $this.attr('id');
+                var elemList = document.getElementsByClassName("number");
                
 
                 $this.countdown(finalDate, function(event) {
                     $this.html(event.strftime('%H:%M:%S'));
+                    
+
                 }).on('finish.countdown', function() {
                     document.getElementById('time'+id).remove();
+                    if(elemList.length == 0){
+                        document.getElementById('nodata').style.display ='';
+
+                        setTimeout(function(){ 
+                           window.location.reload();
+                        }, 4000);
+                        
+                    }
+
                 });
+
             });
+
+        
 
 
 

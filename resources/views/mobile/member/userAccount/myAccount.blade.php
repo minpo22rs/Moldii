@@ -63,7 +63,7 @@
                 <div class="card">
                     <div class="row w-100 mx-3 my-2 text-center">
                         <img src="{{ asset('new_assets/icon/โดเนท.png')}}" width="15%">
-                        <span class="ml-2 align-self-center font-weight-bold">{{$sql->customer_donate}} โดเนท</span>
+                        <span class="ml-2 align-self-center font-weight-bold">{{number_format($sql->customer_donate,2,'.',',')}} โดเนท</span>
                     </div>
                 </div>
             </a>

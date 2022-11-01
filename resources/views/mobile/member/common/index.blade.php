@@ -411,6 +411,7 @@
                             <div class="row w-100 mx-3 my-2 text-center">
                                 <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" >
                                 <span class="ml-1 align-self-center font-weight-bold " >  {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                                กระเป๋าเงิน
                             </div>
                         </div>
                     </a>
@@ -548,11 +549,27 @@
                                         @if($sqls->customer_id !== Session::get('cid'))
                                             <a href="#" class="ml-1 align-self-center" > 
                                                 @if($f == null)
-                                                    <h6 class="m-0 p-0 " onclick="followContent({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: rgba(255, 92, 99, 1);" id="follow{{$sqls->new_id}}">ติดตาม</h6>
+                                                    <div id="follow{{$sqls->new_id}}"  style="display: " class="allidfollow{{$sqls->customer_id}}" >
+                                                        <h6 class="m-0 p-0 "  onclick="followContent({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: rgba(255, 92, 99, 1);" >ติดตาม</h6>
+
+                                                    </div>
+                                                   
                                                 @else
-                                                    <h6 class="m-0 p-0 " onclick="UNfollowContent({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: green;" id="unfollow{{$sqls->new_id}}">ติดตามแล้ว</h6>
+                                                    <div id="unfollow{{$sqls->new_id}}" style="display: "  class="allidunfollow{{$sqls->customer_id}}">
+                                                        <h6 class="m-0 p-0 "  onclick="UNfollowContent({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: green;" >ติดตามแล้ว</h6>
+
+                                                    </div>
+                                                    
                                                 @endif
-                                                
+
+                                                <div id="follows{{$sqls->new_id}}"  style="display:none " class="allidfollows{{$sqls->customer_id}}" >
+                                                    <h6 class="m-0 p-0 " onclick="followContent2({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: rgba(255, 92, 99, 1);" >ติดตาม</h6>
+
+                                                </div>
+                                                <div id="unfollows{{$sqls->new_id}}" style="display: none" class="allidunfollows{{$sqls->customer_id}}" > 
+                                                    <h6 class="m-0 p-0 "  onclick="UNfollowContent2({{$sqls->new_id}},{{$sqls->customer_id}})" style="color: green;" >ติดตามแล้ว</h6>
+
+                                                </div>
                                             </a>
                                         @endif
                                         
@@ -605,79 +622,79 @@
                             <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
                         </div>
                         {{-- <a href="{{url('content/'.$sqls->new_id.'')}}"> --}}
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
-                                
-                                @if($sqls->new_type == 'C')
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                        </div>
-                                        @if($imggal->count() >1)
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+                            
+                            @if($sqls->new_type == 'C')
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$sqls->new_img.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                    </div>
+                                    @if($imggal->count() >1)
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        </ol>
+                                        <?php  unset( $imggal[0] );?>
+
+                                        @foreach($imggal as $imgs)
+                                            <div class="carousel-item">
+                                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                            </div>
+                                        @endforeach
+                                    {{-- @else --}}
+                                        
+                                    @endif
+                                        
+                                </div>
+                            @else
+                                <div class="carousel-inner">
+
+                                    @if($imggal->count() != 0)
+                                        @if($imggal[0]->type =='I')
+                                            <div class="carousel-item active">
+                                                <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                            </div>
+                                        @else
+                                            <div class="carousel-item active">
+                                                <video width="100%" height="auto" controls >
+                                                    <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
+                                                    <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
+                                                </video>
+                                            </div>
+                                        @endif
+                                        @if($imggal->count() > 1)
                                             <ol class="carousel-indicators">
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                             </ol>
                                             <?php  unset( $imggal[0] );?>
-
                                             @foreach($imggal as $imgs)
-                                                <div class="carousel-item">
-                                                    <img src="{{('https://testgit.sapapps.work/moldii/storage/app/news/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                                </div>
+                                                @if($imgs->type =='I')
+                                                    
+                                                    <div class="carousel-item ">
+                                                        <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
+                                                    </div>
+                                                @else
+                                                    
+                                                    <div class="carousel-item " >
+                                                        <video width="100%" height="auto" controls >
+                                                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
+                                                            <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
+                                                        </video>
+                                                    </div>
+                                                @endif
                                             @endforeach
-                                        {{-- @else --}}
-                                            
                                         @endif
-                                            
-                                    </div>
-                                @else
-                                    <div class="carousel-inner">
-
-                                        @if($imggal->count() != 0)
-                                            @if($imggal[0]->type =='I')
-                                                <div class="carousel-item active">
-                                                    <img src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                                </div>
-                                            @else
-                                                <div class="carousel-item active">
-                                                    <video width="100%" height="auto" controls >
-                                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/ogg>
-                                                        <source src="{{asset('storage/content_img/'.$imggal[0]->name.'')}}" type=video/mp4>
-                                                    </video>
-                                                </div>
-                                            @endif
-                                            @if($imggal->count() > 1)
-                                                <ol class="carousel-indicators">
-                                                    <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                                </ol>
-                                                <?php  unset( $imggal[0] );?>
-                                                @foreach($imggal as $imgs)
-                                                    @if($imgs->type =='I')
-                                                        
-                                                        <div class="carousel-item ">
-                                                            <img src="{{asset('storage/content_img/'.$imgs->name.'')}}" class="d-block w-100" style="width: 375px; height: auto;">
-                                                        </div>
-                                                    @else
-                                                       
-                                                        <div class="carousel-item " >
-                                                            <video width="100%" height="auto" controls >
-                                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/ogg>
-                                                                <source src="{{asset('storage/content_img/'.$imgs->name.'')}}" type=video/mp4>
-                                                            </video>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endif
+                                    @endif
 
 
-                                            
-                                    </div>
-                                @endif
-                                
-                            </div>
+                                        
+                                </div>
+                            @endif
+                            
+                        </div>
                         {{-- </a> --}}
                      
 
@@ -1587,10 +1604,35 @@
 
             function followContent(v,id) {
                
-                var x = document.getElementById("follow"+v);
+                // var x = document.getElementById("follows"+v);
       
-                x.innerHTML = "ติดตามแล้ว";
-                document.getElementById("follow"+v).style.color = "green";
+                // x.innerHTML = "ติดตามแล้ว";
+                // document.getElementById("follows"+v).style.color = "green";
+
+
+                document.getElementById('unfollows'+v).style.display = '';
+                document.getElementById('follow'+v).style.display = 'none';
+               
+                var elemList = document.getElementsByClassName("allidunfollows"+id);
+                var elemLists = document.getElementsByClassName("allidfollows"+id);
+                var elem = document.getElementsByClassName("allidfollow"+id);
+                
+
+                
+                for (let i = 0; i < elemList.length; i++) {
+                    // console.log('all');
+                    elemList[i].style.display = '';
+                }
+
+                for (let i = 0; i < elemLists.length; i++) {
+                    // console.log('all');
+                    elemLists[i].style.display = 'none';
+                }
+
+                for (let i = 0; i < elem.length; i++) {
+                    // console.log('all');
+                    elem[i].style.display = 'none';
+                }
 
                 $.ajax({
                     url: '{{ url("/followwriter")}}',
@@ -1603,7 +1645,7 @@
                             confirmButtonColor: "#fc684b",
                         })
                         
-
+                        console.log('11111');
                     
                     }
                 });
@@ -1612,11 +1654,30 @@
             }
 
             function UNfollowContent(v,id){
-                var x = document.getElementById("unfollow"+v);
+                // var x = document.getElementById("follows"+v);
       
-                x.innerHTML = "ติดตาม";
-                document.getElementById("unfollow"+v).style.color = "rgba(255, 92, 99, 1)";
+                // x.innerHTML = "ติดตาม";
+                // document.getElementById("follows"+v).style.color = "rgba(255, 92, 99, 1)";
 
+                var elemList = document.getElementsByClassName("allidunfollows"+id);
+                var elemLists = document.getElementsByClassName("allidfollows"+id);
+                var elem = document.getElementsByClassName("allidunfollow"+id);
+
+                // console.log(elemList);
+                for (let i = 0; i < elemList.length; i++) {
+                    // console.log('all');
+                    elemList[i].style.display = 'none';
+                }
+
+                for (let i = 0; i < elemLists.length; i++) {
+                    // console.log('all');
+                    elemLists[i].style.display = '';
+                }
+
+                for (let i = 0; i < elem.length; i++) {
+                    // console.log('all');
+                    elem[i].style.display = 'none';
+                }
                 $.ajax({
                     url: '{{ url("/unfollowwriter")}}',
                     type: 'GET',
@@ -1627,6 +1688,90 @@
                             text : "เลิกติดตามผู้เขียนแล้ว",
                             confirmButtonColor: "#fc684b",
                         })
+                        console.log('2222');
+
+                    
+                    }
+                });
+
+            }
+
+
+            function followContent2(v,id) {
+                
+                    // var x = document.getElementById("unfollows"+v);
+            
+                    // x.innerHTML = "ติดตามแล้ว";
+                    // document.getElementById("unfollows"+v).style.color = "green";
+
+                    document.getElementById('follows'+v).style.display = 'none';
+                    document.getElementById('unfollows'+v).style.display = '';
+                    
+                    var elemList = document.getElementsByClassName("allidunfollows"+id);
+                    var elemLists = document.getElementsByClassName("allidfollows"+id);
+                    // console.log(elemList);
+                    for (let i = 0; i < elemList.length; i++) {
+                        // console.log('all');
+                        elemList[i].style.display = '';
+                    }
+
+                    for (let i = 0; i < elemLists.length; i++) {
+                        // console.log('all');
+                        elemLists[i].style.display = 'none';
+                    }
+
+
+                    $.ajax({
+                    url: '{{ url("/followwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        Swal.fire({
+                            text : "ติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
+                        
+                        console.log('33333');
+                    
+                    }
+                    });
+        
+                
+            }
+
+            function UNfollowContent2(v,id){
+                // var x = document.getElementById("follows"+v);
+        
+                // x.innerHTML = "ติดตาม";
+                // document.getElementById("follows"+v).style.color = "rgba(255, 92, 99, 1)";
+
+                document.getElementById('unfollows'+v).style.display = 'none';
+                document.getElementById('follows'+v).style.display = '';
+
+                var elemList = document.getElementsByClassName("allidunfollows"+id);
+                var elemLists = document.getElementsByClassName("allidfollows"+id);
+                // console.log(elemList);
+                for (let i = 0; i < elemList.length; i++) {
+                    // console.log('all');
+                    elemList[i].style.display = 'none';
+                }
+
+                for (let i = 0; i < elemLists.length; i++) {
+                    // console.log('all');
+                    elemLists[i].style.display = '';
+                }
+                $.ajax({
+                    url: '{{ url("/unfollowwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        Swal.fire({
+                            text : "เลิกติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
+                        console.log('4444');
 
                     
                     }

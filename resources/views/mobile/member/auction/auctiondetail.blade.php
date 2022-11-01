@@ -114,14 +114,32 @@
                         }
                 
                 ?>
-                <div class="stepper stepper-dark align-self-center" style="font-size: 32px; ">
-                    <a href="#" class=" stepper-downs align-self-center " style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a>
-                    <input type="number" class="form-control font-weight-bold " value="{{$p}}" id="bitcount" style="border:none;font-size: 24px;width:100px" name="count" />
-                    <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a>
+                <div class="stepper-dark align-self-center form-inline" style="font-size: 18px; ">
+                    {{-- <a href="#" class=" stepper-downs align-self-center " style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a> --}}
+                    ราคาประมูล : <input type="number" class="form-control font-weight-bold ml-3" value="{{$p}}" id="bitcount" style="font-size: 18px;width:100px;text-align:center" name="count" />
+                    <button class="btn btn-sm btn-warning ml-3" onclick="resetbit()"> รีเซต</button>
+                    
+                    {{-- <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a> --}}
                 </div>
-                <button class="btn btn-info" onclick="updateDiv();">ประมูลเลย</button>
+                <div class="row mt-3">
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-secondary" onclick="updatebit(50);">50</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-secondary" onclick="updatebit(100);">100</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-secondary" onclick="updatebit(200);">200</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-secondary" onclick="updatebit(500);">500</button>
+                    </div>
+
+
+                </div>
+                <button class="btn btn-info mt-3" onclick="updateDiv();">ประมูลเลย</button>
                 <input type="hidden" name="pid" id="pid" value="{{$product->product_id}}">
-                {{-- <input type="hidden" name="adid" id="adid" value="{{$detail->id_auction_detail}}"> --}}
+                <input type="hidden" name="priceupdate" id="priceupdate" value="">
                 <input type="hidden" name="aid" id="aid" value="{{$auction->id_auction}}">
 
             </div>
@@ -275,37 +293,57 @@
             }
         });
 
+        function resetbit(v){
+            document.getElementById('bitcount').value = parseInt(b)+parseInt(p);
+        }
+
+        function updatebit(v){
+            var a = document.getElementById('bitcount').value;
+            document.getElementById('bitcount').value = parseInt(a)+parseInt(v);
+        }
+
         function updateDiv()
         { 
            
             var bitcount = document.getElementById('bitcount').value ;
-
-            $.ajax({
-                url: '{{ url("/addauction")}}',
-                type: 'POST',
-                dataType: 'HTML',
-                data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    if(parseInt(json['chk']) ==1){
+            var now =document.getElementById('priceupdate').value;
+            // console.log(bitcount);
+            if(bitcount < now){
                         Swal.fire({
-                            text : "ท่านนำประมูลอยู่แล้ว",
+                            text : "กรุณากรอกจำนวนเงินให้มากกว่าราคาปัจจุบัน",
                             confirmButtonColor: "#fc684b",
                         })
-                    }else{
-                       
-                        limit = json['limit'];
-                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+            }else{
+                $.ajax({
+                    url: '{{ url("/addauction")}}',
+                    type: 'POST',
+                    dataType: 'HTML',
+                    data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                    
+                        if(parseInt(json['chk']) ==1){
+                            Swal.fire({
+                                text : "ท่านนำประมูลอยู่แล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
+                        }else{
+                            
+                        
+                            limit = json['limit'];
+                            document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
 
-                        document.getElementById('bitcount').value = json['bit'];
-                        $( "#here" ).load(window.location.href + " #here" );
+                            document.getElementById('bitcount').value = json['bit'];
+                            $( "#here" ).load(window.location.href + " #here" );
+                        }
                     }
-                   
-                    
-                    
+                        
+                });
+                            
+            }
 
-                }
-            });
+
+            
 
             
         }
@@ -348,7 +386,7 @@
             document.getElementById('sec-ten-digit').innerHTML = getTenDigit(seconds);
             document.getElementById('sec-last-digit').innerHTML = getLastDigit(seconds);
 
-            $( "#here" ).load(window.location.href + " #here" );
+            // $( "#here" ).load(window.location.href + " #here" );
 
 
             // If the count down is finished, write some text
@@ -385,10 +423,10 @@
                     data: {'pid':pid,'aid':aid},
                     success: function(data) {
                         var json = JSON.parse(data);
-                        // limit = json['limit'];
-                        // document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+                        limit = json['limit'];
+                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
 
-                        // document.getElementById('bitcount').value = json['bit'];
+                        document.getElementById('priceupdate').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
                        
                     }

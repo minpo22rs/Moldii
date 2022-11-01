@@ -16,12 +16,12 @@
     <form action="{{url('user/submitdonateexchange')}}" method="POST">
         @csrf
         <h3>จำนวนเหรียญโดเนทคงเหลือ : {{number_format($sql->customer_donate,2,'.',',')}}</h3>
-        <br>
-        จำนวนเหรียญโดเนทที่ต้องการแลก (ขั้นต่ำ 10 เหรียญ)<input type="number" name="money" placeholder="จำนวนเหรียญโดเนทที่ต้องการแลก" class="form-control" id="money" min="10" max="{{$sql->customer_donate}}" onchange="ccoin(this.value);" ><br>
+        {{-- <br> --}}
+        {{-- จำนวนเหรียญโดเนทที่ต้องการแลก (ขั้นต่ำ 10 เหรียญ)<input type="number" name="money" placeholder="จำนวนเหรียญโดเนทที่ต้องการแลก" class="form-control" id="money" min="10" max="{{$sql->customer_donate}}" onchange="ccoin(this.value);" ><br> --}}
         จำนวนคอยน์ที่ได้ <input type="text" name="coin" placeholder="จำนวนคอยน์ที่ได้" class="form-control" id="coin" readonly>
         <br>
        
-        <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยันยันการแลกเหรียญโดเนท</button>
+        <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">แลกเลย</button>
         {{-- <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset --> --}}
     </form>
     

@@ -14,7 +14,10 @@ class AuctionController extends Controller
     //
     public function index()
     {
+
+        
         date_default_timezone_set('Asia/Bangkok');
+        
         $cat = DB::Table('tb_category')->where('deleted_at','=',null)->get();
        
         $auction = DB::Table('tb_auctions')->where('date_start',date('Y-m-d'))->where('time_start','<=',date('H:i:s'))
@@ -50,7 +53,6 @@ class AuctionController extends Controller
 
         $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
         $id = $n->pluck('new_id');
-        // dd($tfinish);
         $noti = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
         $ccomment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->where('reader','=','0')->orderBy('created_at','DESC')->get();
 
@@ -74,12 +76,13 @@ class AuctionController extends Controller
         $imggal = DB::Table('tb_product_imgs')->where('product_id',$auction->product_id)->get();
         $limit = $auction->date_start." ".$auction->time_finish;
 
-        // dd( $limit );
+     
         if($log->count()!=0){
             $minbit = $log[0]->price;
         }else{
             $minbit = $auction->price;
         }
+        // dd($auction->date_start." ".$auction->time_finish);
         
 
         return view('mobile.member.auction.auctiondetail')->with(['auction'=>$auction,'product'=>$product,'imggal'=>$imggal,'limit'=>$limit,'log'=>$log,'minbit'=>$minbit]);
@@ -95,19 +98,19 @@ class AuctionController extends Controller
             $ship = DB::Table('tb_product_shippings')->where('id_product',$request->pid)->orderBy('cost','DESC')->first();
             $product = DB::Table('tb_products')->where('product_id',$request->pid)->first();
      
-            if($sql !=null){
-                Tb_cart::where('product_id',$request->pid)->increment('count', 1);
-            }else{
-                $cart = new Tb_cart();
-    
-                $cart->customer_id = Session::get('cid');
-                $cart->product_id  = $request->pid;
-                $cart->store_id  = $product->product_merchant_id;
-                $cart->shipping_cost  = 40;
-                $cart->shipping_id  = $ship->id_company;
-          
-                $cart->save();
-            }
+            
+            $cart = new Tb_cart();
+
+            $cart->customer_id = Session::get('cid');
+            $cart->product_id  = $request->pid;
+            $cart->store_id  = $product->product_merchant_id ;
+            $cart->shipping_cost  = 40;
+            $cart->shipping_id  = 1;
+            $cart->auction  = 1;
+            $cart->price  = $log->price;
+        
+            $cart->save();
+        
             return 1;
         }else{
 
@@ -115,7 +118,7 @@ class AuctionController extends Controller
 
         }
         
-        DB::Table('tb_auctions')->update(['finish'=>1]);
+        DB::Table('tb_auctions')->where('id_auction',$request->aid)->update(['finish'=>1]);
         return view('mobile.member.auction.auctionindex')->with(['auction'=>$auction,'detail'=>$detail,'chk'=>$chk,'limit'=>$limit]);
     }
 
@@ -125,6 +128,7 @@ class AuctionController extends Controller
         // dd($request->all());
         date_default_timezone_set('Asia/Bangkok');
         $chk =0 ;
+        $limt = null;
         $log = DB::Table('tb_auction_logs')->where('id_auction', $request->aid)->orderBy('price','DESC')->first();
         if($log != null && $log->customer_id == Session::get('cid')){
             $chk =1 ;
@@ -146,13 +150,23 @@ class AuctionController extends Controller
         $x = DB::Table('tb_auctions')->where('id_auction',$request->aid)->first();
 
         if(strtotime($x->time_finish) - strtotime(date("H:i:s")) <60 ){
-            DB::Table('tb_auctions')->where('id_auction',$request->aid)->update(['time_finish'=>date('H:i:s',strtotime('+59 second',strtotime($x->time_finish)))]);
-            // dd('rrrr');
+            // DB::Table('tb_auctions')->where('id_auction',$request->aid)->update(['time_finish'=>date('H:i:s',strtotime('+59 second',strtotime($x->time_finish))),
+            //                                                                     'runtime'=>$x->date_start." ".date('H:i:s',strtotime('+59 second',strtotime(date('H:i:s'))))]);
+
+
+            DB::Table('tb_auctions')->where('id_auction',$request->aid)->update(['runtime'=>$x->date_start." ".date('H:i:s',strtotime('+59 second',strtotime(date('H:i:s'))))]);
+          
         }
         
         $auction = DB::Table('tb_auctions')->where('id_auction', $request->aid)->first();
-        $limit = $auction->date_start." ".$auction->time_finish;
 
+        if($auction->runtime != null){
+            $limit = $auction->runtime;
+
+        }else{
+            $limit = $auction->date_start." ".$auction->time_finish;
+
+        }
         $lognew = DB::Table('tb_auction_logs')->where('id_auction', $request->aid)->orderBy('price','DESC')->first();
 
 
@@ -178,17 +192,32 @@ class AuctionController extends Controller
         // dd($request->all());
         date_default_timezone_set('Asia/Bangkok');
 
+        $now =0;
+        
         $auction = DB::Table('tb_auctions')->where('id_auction', $request->aid)->first();
-        $limit = $auction->date_start." ".$auction->time_finish;
+        $limit = null;
 
         $lognew = DB::Table('tb_auction_logs')->where('id_auction', $request->aid)->orderBy('price','DESC')->first();
 
-
-        $now = $lognew->price;
+        if($lognew != null){
+            $now = $lognew->price;
+        }else{
+            $now = $auction->price;
+        }
         
-        $minbit = $lognew->price+$auction->bit;
+        
+        if($auction->runtime != null){
+            $limit = $auction->runtime;
+
+        }else{
+            $limit = $auction->date_start." ".$auction->time_finish;
+
+        }
+        
+        $minbit = $now+$auction->bit;
         
         $data = array(
+            'bit'=>$minbit,
             'limit'=>$limit,
             'now'=>$now,
         );

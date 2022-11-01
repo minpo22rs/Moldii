@@ -108,6 +108,14 @@ class RegisterController extends Controller
         }
     }
 
+    public function checkemail(Request $request)
+    {
+        $chk = DB::table('tb_customers')->where('customer_email',$request->email)->first();
+        if($chk != null){
+            return 1;
+        }
+    }
+
     public function tag()
     {
         return view('mobile.member.register.tag');

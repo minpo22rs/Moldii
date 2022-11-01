@@ -43,6 +43,7 @@
             @endif
         @endif
 
+
         <div class="card-title col-8  align-self-center m-0 ">
             <div class="card-title m-0 row align-self-center">
                 @if($c->new_type == 'C' || $c->new_type == 'V')
@@ -208,7 +209,20 @@
                 <?php $detail = DB::Table('tb_customers')->where('customer_id',$comments->comment_author)->first()?>
 
                 <div class=" row justify-content-end pl-1 my-2">
-                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+
+            
+                    @if($detail->provider == null)
+                        <img src="{{asset('storage/profile_cover/'.$detail->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                    @elseif($detail->customer_img != null)
+                        <img src="{{$detail->customer_img}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                    @else
+                        <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                
+                
+                    @endif
+                          
+
+
                     <div class=" mx-2  col-10 p-1 pl-2" style=" min-height: 85px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
                         <h4 class="m-0 mb-1">{{$detail->customer_username}}</h4>
                         {{-- <h5 class="m-0">ความคิดเห็น</h5> --}}
@@ -235,13 +249,24 @@
                     </div>
                     @if($comments->comment_reply != null)
                         <?php $reply = DB::Table('tb_comment_replys')->where('id_tb_comment',$comments->comment_id)
-                            ->select('tb_comment_replys.*','tb_customers.customer_username')
+                            ->select('tb_comment_replys.*','tb_customers.customer_username','tb_customers.provider','tb_customers.customer_img')
                             ->leftJoin('tb_customers', 'tb_comment_replys.customer_id', '=', 'tb_customers.customer_id')->get()?>
                         @foreach ($reply as $replys)
                             <div class=" mx-2 my-2 p-0 pr-0 col-10 row justify-content-end" >
 
                                 <div class=" pl-0 col-12 row justify-content-end">
-                                    <img src="{{ asset('new_assets/img/sample/photo/2.jpg')}}" alt="alt" class=" rounded-circle  " style="width: 25px; height:25px;">
+
+                                    @if($replys->provider == null)
+                                        <img src="{{asset('storage/profile_cover/'.$replys->customer_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                                    @elseif($replys->customer_img != null)
+                                        <img src="{{$replys->customer_img}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                                    @else
+                                        <img src="{{asset('original_assets/img/material_icons/woman.png')}}" alt="alt" class=" rounded-circle  " style="width: 35px; height:35px;">
+                                
+                                
+                                    @endif
+
+
 
                                     <div class=" mx-3 mr-0 col-10 p-1 pl-2" style=" min-height: 45px; background-color: rgba(000, 000, 000, 0.2); border-radius: 10px;">
                                         <h5 class="m-0 mb-1">{{$replys->customer_username}}</h5>
@@ -939,6 +964,62 @@
                                 text : "เลิกติดตามผู้เขียนแล้ว",
                                 confirmButtonColor: "#fc684b",
                             })
+
+                    
+                    }
+                });
+
+            }
+
+            function followContent2(v,id) {
+                
+                // var x = document.getElementById("unfollows"+v);
+        
+                // x.innerHTML = "ติดตามแล้ว";
+                // document.getElementById("unfollows"+v).style.color = "green";
+
+                document.getElementById('follows'+v).style.display = 'none';
+                document.getElementById('unfollows'+v).style.display = '';
+               
+
+                $.ajax({
+                url: '{{ url("/followwriter")}}',
+                type: 'GET',
+                dataType: 'HTML',
+                data: {'id':id},
+                success: function(data) {
+                    Swal.fire({
+                        text : "ติดตามผู้เขียนแล้ว",
+                        confirmButtonColor: "#fc684b",
+                    })
+                    
+                
+                }
+                });
+    
+            
+            }
+
+            function UNfollowContent2(v,id){
+                // var x = document.getElementById("follows"+v);
+
+                // x.innerHTML = "ติดตาม";
+                // document.getElementById("follows"+v).style.color = "rgba(255, 92, 99, 1)";
+
+                document.getElementById('unfollows'+v).style.display = 'none';
+                document.getElementById('follows'+v).style.display = '';
+
+            
+                $.ajax({
+                    url: '{{ url("/unfollowwriter")}}',
+                    type: 'GET',
+                    dataType: 'HTML',
+                    data: {'id':id},
+                    success: function(data) {
+                        Swal.fire({
+                            text : "เลิกติดตามผู้เขียนแล้ว",
+                            confirmButtonColor: "#fc684b",
+                        })
 
                     
                     }

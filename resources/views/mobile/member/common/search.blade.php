@@ -269,26 +269,27 @@
                                 $count = DB::Table('tb_comments')->where('comment_object_id', $product->product_id )->get();
                                 $countreply = DB::Table('tb_comment_replys')->where('news_id',$product->product_id)->get();
                         ?>
+                        <a href="{{url('shopping/product/'.$product->product_id.'')}}" style="color: black">
+                            <div class="mt-3 p-2 col-md-12">
+                                <div class="row no-gutters">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-4">
+                                                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" class="d-block w-100" alt="..." >
 
-                        <div class="mt-3 p-2 col-md-12">
-                            <div class="row no-gutters">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row no-gutters">
-                                        <div class="col-4">
-                                            <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" class="d-block w-100" alt="..." >
-
-                                        </div>
-                                        <div class="col-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{$product->product_name}}</h5>
-                                                <p class="card-text">{{$product->product_description}}</p>
-                                                <button type="button" class="btn btn-primary btn-sm">ซื้อสินค้า</button>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$product->product_name}}</h5>
+                                                    <p class="card-text">{{$product->product_description}}</p>
+                                                    <button type="button" class="btn btn-primary btn-sm">ซื้อสินค้า</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                        
                     @endforeach
                 @else

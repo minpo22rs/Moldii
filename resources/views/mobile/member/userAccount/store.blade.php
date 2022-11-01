@@ -18,8 +18,8 @@
         
         <input type="text" name="fname" placeholder="ชื่อเจ้าของร้านค้า" class="form-control" required><br>
         <input type="text" name="lname" placeholder="นามสกุลเจ้าของร้านค้า" class="form-control" required><br>
-        <input type="text" name="phone" placeholder="หมายเลขโทรศัพท์" class="form-control" onkeyup="autoTab(this);" required><br>
-        <input type="email" name="email" placeholder="อีเมล" class="form-control" required><br>
+        <input type="text" name="phone" placeholder="หมายเลขโทรศัพท์" class="form-control" id="chkphone" onkeyup="autoTab(this);" required><br>
+        <input type="email" name="email" placeholder="อีเมล" class="form-control" id="chkemail" onchange="checkemailstore(this.value);" required ><br>
         <input type="text" name="shopname" placeholder="ชื่อร้านค้า" class="form-control" required><br>
         <input type="text" name="type" placeholder="ประเภทสินค้าที่ต้องการขาย" class="form-control" required><br>
         <input type="text" name="address" placeholder="รายละเอียดที่อยู่" class="form-control" required><br>
@@ -44,9 +44,19 @@
 
         <br>
 
+        <input type="text" name="nameholder" placeholder="ชื่อบัญชีธนาคาร" class="form-control" required><br>
+        <input type="text" name="numberacc" placeholder="หมายเลขบัญชีธนาคาร" class="form-control" required><br>
+
         แนบรูปบัตรประจำตัวประชาชน หรือ รูปหนังสือรับรองบริษัท :  <input accept="image/*" type='file' id="imgInp" name="img" accept="image/*;capture=camera" required> 
         <center><br><img id="blah" src="#" alt="" width ="80%"></center>
+        <br>
+        แนบรูปหน้าสมุดบัญชีธนาคาร :  <input accept="image/*" type='file' id="imgInps" name="imgs" accept="image/*;capture=camera" required> 
+        <center><br><img id="blahs" src="#" alt="" width ="80%"></center>
 
+        <br>
+        แนบรูปร้านค้า :  <input accept="image/*" type='file' id="imgInpss" name="imgss" accept="image/*;capture=camera" required> 
+        <center><br><img id="blahss" src="#" alt="" width ="80%"></center>
+        <br>
         <input type="checkbox" name="" id="" checked><u data-toggle="modal" data-target="#condition" >เงื่อนไขการเปิดร้านค้า</u>
         <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยืนยันการขอเปิดร้านค้า</button>
         {{-- <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset --> --}}
@@ -165,6 +175,20 @@
         }
     }
 
+    imgInps.onchange = evt => {
+        const [file] = imgInps.files
+        if (file) {
+            blahs.src = URL.createObjectURL(file)
+        }
+    }
+
+    imgInpss.onchange = evt => {
+        const [file] = imgInpss.files
+        if (file) {
+            blahss.src = URL.createObjectURL(file)
+        }
+    }
+
 
 
     function getAmphure(v){
@@ -235,7 +259,54 @@
                 if(obj_l>=pattern.length){
                     obj.value=obj.value.substr(0,pattern.length);           
                 }
+
+
+                if(obj_l ==12){
+                    $.ajax({
+                        url: '{{ url("checkmnstore")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'mn':document.getElementById('chkphone').value},
+                        success: function(data) {
+                            if(data == 1){
+                               
+                                Swal.fire({
+                                    text : "มีเบอร์โทรศัพท์นี้ในระบบแล้ว กรุณากรอกใหม่",
+                                    confirmButtonColor: "#fc684b",
+                                })
+
+                                document.getElementById("chkphone").value = '';
+                                $('#chkphone').focus();
+                            } 
+                        }
+                    });
+                }
     }
+
+
+    function checkemailstore(v){
+        // console.log(v);
+        $.ajax({
+            url: '{{ url("checkemailstore")}}',
+            type: 'GET',
+            dataType: 'HTML',
+            data: {'email':v},
+            success: function(data) {
+                    console.log(data);
+                if(data == 1){
+                 
+                    Swal.fire({
+                        text : "มีอีเมลนี้ในระบบแล้ว กรุณากรอกใหม่",
+                        confirmButtonColor: "#fc684b",
+                    })
+
+                    document.getElementById("chkemail").value = '';
+                    $('#chkemail').focus();
+                }
+            }
+        });
+    }
+
 
 
 </script>

@@ -80,9 +80,6 @@ Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changeval
 Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);// โชว์ที่อยู่ของฉัน
 Route::get('user/deleteAddress/{id}', [UserAccController::class, 'deleteAddress']);// โชว์ที่อยู่ของฉัน
 
-Route::get('user/store', [UserAccController::class, 'store']);
-Route::post('user/submitstore', [UserAccController::class, 'submitstore']);
-
 
 Route::get('getAmphure',[UserAccController::class, 'getAmphure']);//
 Route::get('getSubDistrict',[UserAccController::class, 'getSubDistrict']);//
@@ -181,8 +178,11 @@ Route::get('user/helpCenter', [HelpCenterController::class, 'index']);
 
 
 //store
-Route::get('store', [StoreController::class, 'index']); 
-
+Route::get('store', [StoreController::class, 'index']);  //หน้าร้านค้าขายของ
+Route::get('user/store', [StoreController::class, 'store']); //สมัครร้านค้า
+Route::post('user/submitstore', [StoreController::class, 'submitstore']);
+Route::get('checkmnstore',[StoreController::class,'checkmnstore']);
+Route::get('checkemailstore',[StoreController::class,'checkemailstore']);
 
 //group
 Route::get('group', [GroupController::class, 'index']); 
@@ -260,6 +260,7 @@ Route::get('/unlikeproduct', [ShoppingController::class, 'unlikeproduct']);
 Route::post('checkregister',[RegisterController::class,'create']);
 Route::get('checkusername',[RegisterController::class,'checkusername']);
 Route::get('checkmn',[RegisterController::class,'checkmn']);
+Route::get('checkemail',[RegisterController::class,'checkemail']);
 Route::post('checklogin',[LoginController::class,'checklogin']);
 Route::get('otp',[OtpController::class,'index']);
 Route::post('create/otp',[OtpController::class,'create'])->name('Create_OTP');
