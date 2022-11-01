@@ -170,8 +170,7 @@
 </a>
 
 @endsection
-<br>
-<br>
+
 
 @section('custom_script')
 <script>
