@@ -170,8 +170,10 @@
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 </a>
-<br>
+
 @endsection
+<br>
+<br>
 
 @section('custom_script')
 <script>
