@@ -10,8 +10,6 @@
 </div>
 @endsection
 @section('content')
-<br>
-<br>
 <div>
     <div class="col-12 text-center">
         @if($sql->provider ==null && $sql->customer_img == null)
