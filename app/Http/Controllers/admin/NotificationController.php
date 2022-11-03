@@ -42,12 +42,11 @@ class NotificationController extends Controller
     {
         DB::beginTransaction();
         try {
-            $rawdate = $request->date;
-            $date = explode('/', $rawdate);
+           
 
             $noti = new notification();
             $noti->noti_title       = $request->title;
-            $noti->noti_date        = $date[2].'-'.$date[1].'-'.$date[0];
+            $noti->noti_date        = date('Y-m-d');
             $noti->noti_detail      = $request->detail;
             $noti->noti_create_by   = Auth::user()->admin_id;
             $noti->save();

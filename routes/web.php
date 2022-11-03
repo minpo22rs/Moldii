@@ -128,6 +128,9 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     // calendar
     Route::resource('calendar', 'CalendarController');
 
+    // banner
+    Route::get('banner', 'BannerController@index');
+
     // product
     Route::resource('product', 'ProductController');
     // Route::get('view_comment/{id}/{type}', 'CommentController@view_comment');

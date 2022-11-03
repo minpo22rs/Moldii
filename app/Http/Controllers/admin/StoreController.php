@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Merchant;
+use App\Models\notification;
 
 class StoreController extends Controller
 {
@@ -15,7 +16,7 @@ class StoreController extends Controller
      */
     public function requeststore()
     {
-        $merchant = Merchant::where('merchant_status',1)->get();
+        $merchant = Merchant::where('merchant_status',1)->orderBy('created_at','DESC')->get();
 
         return view('backend.store.store')->with(['merchant'=>$merchant]);
         //
@@ -41,9 +42,15 @@ class StoreController extends Controller
      */
     public function statusstore(Request $request)
     {
-        dd( $request->all());
+    
         $merchant = Merchant::where('merchant_id',$request->id)->update(['merchant_status'=>$request->status]);
-        //
+        $noti = new notification();
+        $noti->noti_title       = $request->title;
+        $noti->noti_date        = date('Y-m-d');
+        $noti->status_store      = $request->status;
+        $noti->noti_detail      = $request->detail;
+        $noti->noti_create_by   = Auth::user()->admin_id;
+        $noti->save();
     }
 
     /**

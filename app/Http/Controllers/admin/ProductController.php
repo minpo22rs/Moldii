@@ -197,6 +197,7 @@ class ProductController extends Controller
             $product->length                = $request->length;
             $product->height                = $request->height;
 
+
             if ($request->file('cover') !== null)
             {
                 $imgcover = $request->file('cover');

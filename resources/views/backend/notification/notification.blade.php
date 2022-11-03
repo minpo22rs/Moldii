@@ -81,7 +81,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">สร้าง Flash Sale</h4>
+                <h4 class="modal-title">สร้างการแจ้งเตือน</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,16 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="text" name="date" class="form-control datepicker" placeholder="วันที่..." autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รายละเอียด <span class="text-danger">*</span></label>
                         <div class="col-sm-10">

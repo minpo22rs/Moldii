@@ -193,6 +193,14 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
+                                <li class="">
+                                    <a href="{{url('merchant/banner')}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-image"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">แบนเนอร์</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
                             {{-- <div class="pcoded-navigation-label">ช่วยเหลือ</div>
                             <ul class="pcoded-item pcoded-left-item">

@@ -53,6 +53,7 @@ class MerchantAuctionController extends Controller
             $product->length                = $request->length;
             $product->height                = $request->height;
             $product->product_published     = 3;
+            $product->product_merchant_id   = Auth::guard('merchant')->user()->merchant_id;
 
 
             $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
