@@ -114,7 +114,8 @@
                         <ul class="nav-right">
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <img src="{{asset('storage/app/profile/'.Auth::user()->admin_img.'')}}" width="35" height="35" class="img-radius" alt="User-Profile-Image">
+                                    <img src="{{asset('/storage/app/logo/Moldii.png')}}" width="35" height="35" class="img-radius" alt="User-Profile-Image">
+                                    {{-- <img src="{{asset('storage/app/profile/'.Auth::user()->admin_img.'')}}" width="35" height="35" class="img-radius" alt="User-Profile-Image"> --}}
                                     <span>{{ Auth::user()->admin_name }} {{ Auth::user()->admin_lname }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>

@@ -62,7 +62,7 @@
                         <tr>
                             <th style="text-align: center;">#</th>
                             <th style="text-align: center;">รูปภาพ</th>
-                            <th style="text-align: center;">ประเภท</th>
+                            <th style="text-align: center;">ตำแหน่ง</th>
                             <th style="text-align: center;">เผยเเพร่</th>
                             <th style="text-align: center;">การจัดการ</th>
                         </tr>
@@ -74,7 +74,7 @@
                             <td class="text-center text-middle">
                                 <img src="{{asset('storage/app/banner/'.$item->banner_name.'')}}" alt="" width="300" height="auto">
                             </td>
-                            <td class="text-center text-middle">{{$item->banner_type==1?'Index':'Store'}}</td>
+                            <td class="text-center text-middle">{{$item->banner_type==1?'หน้าหลัก':'หน้าร้านค้า'}}</td>
                             <td class="text-center text-middle">
                                 <div class="border-checkbox-section">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
@@ -88,8 +88,6 @@
                                     <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
                                         <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_banner({{$item->banner_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_banner({{$item->banner_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
                                     </div>
                                 </div>
                             </td>
@@ -134,6 +132,7 @@
                                         <i class="icofont icofont-image"></i> เพิ่มหน้าปก</button> 
                                 </div>
                             </div>
+                            <center><br><img id="blah" src="#" alt="" width ="80%"></center>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -142,10 +141,10 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-6">
-                                    <select class="form-control col-sm-12" name="bannertype">
-                                        <option value="1">โปรดเลือก</option>
-                                        <option value="1">Index</option>
-                                        <option value="2">Store</option>
+                                    <select class="form-control col-sm-12" name="bannertype" required>
+                                        <option value="">โปรดเลือก</option>
+                                        <option value="1">หน้าหลัก</option>
+                                        <option value="2">หน้าร้านค้า</option>
                                     </select>
                                 </div>
                             </div>
@@ -184,6 +183,16 @@
             $("#editmodal").modal('show');
         });
     }
+
+    adddocument.onchange = evt => {
+        const [file] = adddocument.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+
+    
+    
     
 </script>
 @endsection

@@ -70,8 +70,8 @@
                         <div class="usre-image">
                             <img src="{{asset('storage/app/merchant/'.Auth::guard('merchant')->user()->merchant_img.'')}}" class="img-radius" alt="User-Profile-Image" width="100" height="100">
                         </div>
-                        <h6 class="f-w-600 m-t-25 m-b-10">{{Auth::guard('merchant')->user()->merchant_name}} {{Auth::guard('merchant')->user()->merchant_lname}}</h6>
-                        <p class="text-muted">Active | Male | Born 23.05.1992</p>
+                        <h6 class="f-w-600 m-t-25 m-b-10">{{Auth::guard('merchant')->user()->merchant_shopname}} </h6>
+                        
                         {{-- <hr/>
                         <p class="text-muted m-t-15">ระดับกิจกรรม: 87%</p>
                         <ul class="list-unstyled activity-leval">
@@ -178,7 +178,7 @@
                     <div class="card bg-7 order-card">
                         <div class="card-block">
                             <h6>สินค้าประมูล</h6>
-                            <h2 class="text-right"><i class="icofont icofont-ui-cart f-left"></i><span>123</span></h2>
+                            <h2 class="text-right"><i class="icofont icofont-ui-cart f-left"></i><span>{{$product->count()}}</span></h2>
                             <br>
                             <p class="m-b-0">รายละเอียดเพิ่มเติม <a href="" style="color: white"><span class="f-right icon-gopage"></span></a></p>
                         </div>

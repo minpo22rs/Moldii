@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all());
+        // dd($request->ship);
         DB::beginTransaction();
         try {
             $count = product::count();
@@ -83,7 +83,8 @@ class ProductController extends Controller
             
             foreach ($request->ship as $key => $value) {
               
-                DB::Table('tb_product_shippings')->insert(['id_company'=>$key,'id_product'=>$product->product_id,'cost'=>$value[0]]);
+                DB::Table('tb_product_shippings')->insert(['id_company'=>$value,'id_product'=>$product->product_id]);
+                // DB::Table('tb_product_shippings')->insert(['id_company'=>$key,'id_product'=>$product->product_id,'cost'=>$value[0]]);
                 
             }
 
@@ -147,12 +148,14 @@ class ProductController extends Controller
         $cat = category::where('deleted_at',null)->get();
         $product = product::where('product_cat_id', $id)->where('product_published','=',1)->get();
         $s = DB::Table('tb_shipping_companys')->get();
+        // $sp = DB::Table('tb_product_shippings')->where('id_product', $id)->get();
 
         $data = array(
             'category' => $category, 
             'product' => $product, 
             'cat'=>$cat,
-            's'=>$s
+            's'=>$s,
+            // 'sp'=>$sp
         );
         return view('backend.product.product_index', $data);
     }
@@ -166,11 +169,14 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::findOrFail($id);
-        $s = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
-
+        // $s = DB::Table('tb_shipping_companys')->get();
+        $sp = DB::Table('tb_product_shippings')->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->where('id_product','=',$id)->get();
+        $sppluck = $sp->pluck('id_shipping_company');
         $category = category::all();
         $img = DB::Table('tb_product_imgs')->where('product_id',$id)->get();
-        $data = array('product' => $product,'img'=>$img ,'category'=>$category,'s'=>$s);
+        $s = DB::Table('tb_shipping_companys')->whereNotIn('id_shipping_company',$sppluck)->get();
+
+        $data = array('product' => $product,'img'=>$img ,'category'=>$category,'s'=>$s,'sp'=>$sp);
         return view('backend.product.modal.edit_product', $data);
     }
 
@@ -183,6 +189,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->ship);
         DB::beginTransaction();
         try {
             $product = product::findOrFail($id);
@@ -222,8 +229,9 @@ class ProductController extends Controller
             $product->save();
 
             if(isset($request->ship)){
+                DB::Table('tb_product_shippings')->where('id_product',$product->product_id)->delete();
                 foreach ($request->ship as $key => $value) {
-                    DB::Table('tb_product_shippings')->where('id_company',$key)->where('id_product',$product->product_id)->update(['cost'=>$value[0]]);
+                    DB::Table('tb_product_shippings')->insert(['id_company'=>$value,'id_product'=>$product->product_id]);
                 }
             }
 

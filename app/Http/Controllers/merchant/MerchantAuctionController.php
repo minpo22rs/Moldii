@@ -85,7 +85,7 @@ class MerchantAuctionController extends Controller
             DB::commit();
             return redirect('merchant/auction')->with('success', 'Successful');
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             DB::rollback();
             return redirect('merchant/auction')->withError('Something Wrong! New Content can not Saved.');
         }

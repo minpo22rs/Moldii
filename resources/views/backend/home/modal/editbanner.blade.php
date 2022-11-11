@@ -27,9 +27,11 @@
                                 <div class="col-6">
                                     <input type="file" name="editbanner[]" style="display: none;" id="editdocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('editdocument').click();">
-                                        <i class="icofont icofont-image"></i> เปลี่ยนหน้าปก</button> 
+                                        <i class="icofont icofont-image"></i> เลือกรูปภาพ</button> 
                                 </div>
                             </div>
+                            <center><br><img id="blahs" src="{{asset('storage/app/banner/'.$banner->banner_name.'')}}" alt="" width ="80%"></center>
+
                         </div>
                     </div>
                     <div class="form-group row">
@@ -37,12 +39,17 @@
                         <label class="col-sm-2 col-form-label"> ประเภท  </label>
                         <div class="col-sm-10">
                             <div class="row">
-                                <div class="col-6">
-                                    <select class="form-control col-sm-12" name="bannertype">
+                                <div class="col-6 mt-2">
+                                    @if($banner->banner_type==1)
+                                        หน้าหลัก
+                                    @else
+                                        หน้าร้านค้า
+                                    @endif
+                                    {{-- <select class="form-control col-sm-12" name="bannertype">
                                         <option value="1">โปรเลือกt</option>
                                         <option value="1" {{$banner->banner_type==1?'selected':''}}>Index</option>
                                         <option value="2" {{$banner->banner_type==2?'selected':''}}>Store</option>
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>

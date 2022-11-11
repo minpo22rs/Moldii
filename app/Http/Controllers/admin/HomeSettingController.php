@@ -22,6 +22,7 @@ class HomeSettingController extends Controller
     {
         DB::beginTransaction();
         try {
+            banner::where('banner_type',$request->bannertype)->delete();
             $banner = new banner();
             $banner->banner_status 	 = 1;
             $banner->banner_type 	 = $request->bannertype;
@@ -56,7 +57,6 @@ class HomeSettingController extends Controller
         DB::beginTransaction();
         try {
             $banner = banner::findOrFail($id);
-            $banner->banner_type 	 = $request->bannertype;
 
             if ($request->file('editbanner') !== null)
             {

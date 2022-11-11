@@ -130,6 +130,10 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
 
     // banner
     Route::get('banner', 'BannerController@index');
+    Route::post('addbanner', 'BannerController@addbanner');
+    Route::get('banneredit/{id}', 'BannerController@editbanner');
+    Route::post('updatebanner', 'BannerController@update');
+    Route::post('bannerdelete/{id}', 'BannerController@bannerdelete');
 
     // product
     Route::resource('product', 'ProductController');

@@ -44,6 +44,7 @@ class StoreController extends Controller
     {
     
         $merchant = Merchant::where('merchant_id',$request->id)->update(['merchant_status'=>$request->status]);
+        
         $noti = new notification();
         $noti->noti_title       = $request->title;
         $noti->noti_date        = date('Y-m-d');

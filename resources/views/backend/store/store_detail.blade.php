@@ -12,11 +12,11 @@
                     <div class="col-3">
                         ชื่อร้านค้า
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         {{$merchant->merchant_shopname}}
 
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         สถานะร้านค้า
 
                     </div>
@@ -41,9 +41,16 @@
                     <div class="col-3">
                         ชื่อ-นามสกุล เจ้าของร้าน
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         {{$merchant->merchant_name}} -  {{$merchant->merchant_lname}} 
 
+                    </div>
+                    <div class="col-3">
+                        ชื่อเจ้าของบัญชีธนาคาร
+
+                    </div>
+                    <div class="col-3">
+                        {{$merchant->merchant_nameacc}}
                     </div>
                 </div>
                 <br>
@@ -52,9 +59,16 @@
                     <div class="col-3">
                         อีเมลร้านค้า
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         {{$merchant->merchant_email}}
 
+                    </div>
+                    <div class="col-3">
+                        เลขที่บัญชีธนาคาร
+
+                    </div>
+                    <div class="col-3">
+                        {{$merchant->merchant_numberacc}}
                     </div>
                 </div>
                 <br>
@@ -90,6 +104,17 @@
                         <br>
                         <br>
                         <img src="{{('https://modii.sapapps.work/storage/store/'.$merchant->merchant_document.'')}}" width="50%" height="50%">
+                    </div>
+                </div>
+
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        เอกสารหน้าสมุดบัญชีธนาคาร
+                        <br>
+                        <br>
+                        <img src="{{('https://modii.sapapps.work/storage/store/'.$merchant->merchant_acc_img.'')}}" width="50%" height="50%">
                     </div>
                 </div>
             </div>

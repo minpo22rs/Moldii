@@ -28,7 +28,7 @@
                                 <div class="col-6">
                                     <input type="file" name="cover[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i>เพิ่มรูปภาพ</button> 
+                                        <i class="icofont icofont-image"></i>แก้ไขรูปภาพ</button> 
                                 </div>
                                 <div class="col-6">
                                     <img src="{{asset('storage/app/product_cover/'.$product->product_img.'')}}" class="img-fluid">
@@ -190,21 +190,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            ค่าขนส่ง <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label mt-2">
+                            บริการขนส่ง<span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                                @foreach($s as $sc)
+                                @foreach($sp as $sps)
+                                    <div class="col-5 form-inline">
+                                        <input type="checkbox" name="ship[]" value="{{$sps->id_shipping_company}}" checked><br><p class="mt-3 ml-1">{{$sps->name_company}}</p>
 
-                                    <div class="col-4">
-                                        <label class="col-sm-2 col-form-label">{{$sc->name_company}}</label>
+                                    </div>
+                                @endforeach
+                                @foreach($s as $ss)
+                                    <div class="col-5 form-inline">
+                                        <input type="checkbox" name="ship[]" value="{{$ss->id_shipping_company}}"><br><p class="mt-3 ml-1">{{$ss->name_company}}</p>
+
                                     </div>
                                 @endforeach
                                
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <div class="row">
@@ -216,7 +222,7 @@
                                
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">แท็ก</label>
                         <div class="col-sm-10">
@@ -261,7 +267,7 @@
                                     <div id="gal{{$picture->product_img_id }}">
                                         <div class="form-group">
                                             <div class="col-sm-7">
-                                                <input type="file" style="display: none;" name="sub_gallery[{{$picture->product_img_id}}]" class="form-control" id="slidepicture{{$picture->product_img_id}}" multiple="multiple" onchange="readGalleryURL2(this,{{$picture->product_img_id}})">
+                                                <input type="file" style="display: none;" name="sub_gallery[{{$picture->product_img_id}}]" class="form-control" id="slidepicture{{$picture->product_img_id}}"  onchange="readGalleryURL2(this,{{$picture->product_img_id}})">
                                                 <img id="gallerypreview{{$picture->product_img_id}}" style="max-height:250px ;width:100%" src="{{asset('storage/app/product_img/'.$picture->img_name)}}" />
                                                 <button  type="button" class="btn btn-danger" onclick="deletegallery({{$picture->product_img_id}})" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>
                                             </div>
@@ -361,7 +367,7 @@
         newimage =  '<div id="gal'+gallery+'">'+
             '<div class="form-group">'+
                 '<div class="col-sm-12">'+
-                    '<input type="file" style="display: none;"  name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL2(this,'+gallery+')">'+
+                    '<input type="file" style="display: none;"  name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" onchange="readGalleryURL2(this,'+gallery+')">'+
                     '<img id="gallerypreview'+gallery+'" style="max-height:250px ;" src="{{asset('images/brows.png')}}" onclick="browsImage('+gallery+')" />'+
                     '<button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="icofont icofont-trash"></i></button>'+
                 '</div>'+

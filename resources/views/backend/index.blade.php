@@ -32,7 +32,7 @@
                 <div class="card user-card">
                     <div class="card-block">
                         <div class="usre-image">
-                            <img src="{{asset('storage/app/profile/'.Auth::user()->admin_img.'')}}" class="img-radius" alt="User-Profile-Image" width="100" height="100">
+                            <img src="{{asset('/storage/app/logo/Moldii.png')}}" class="img-radius" alt="User-Profile-Image" width="100" height="100">
                         </div>
                         <h6 class="f-w-600 m-t-25 m-b-10">{{ Auth::user()->admin_name }} {{ Auth::user()->admin_lname }}</h6>
                         <p class="text-muted">Active | {{ Auth::user()->admin_gender }} | Born {{date("d/m/Y", strtotime(Auth::user()->admin_birthday))}}</p>
