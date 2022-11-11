@@ -387,7 +387,7 @@ class WalletController extends Controller
 
     public function submitdonateexchange (Request $request)
     { 
-        dd($request->all());
+        // dd($request->all());
         $sql = User::where('customer_id',Session::get('cid'))->first();
         $del = $sql->customer_donate - $request->money;
         $add = $sql->customer_coin + $request->coin;

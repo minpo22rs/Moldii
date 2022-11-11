@@ -41,6 +41,10 @@
 <div class="m-1 shopping-container">
     <div class="section full mt-3 mb-3">
         <div class="carousel-full owl-carousel owl-theme">
+            <div class="item">
+                        
+                <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" class="imaged w-100 square">
+            </div>
             @if($imggal->count()>0)
                 @foreach($imggal as $imggals)
                     <div class="item">
@@ -48,11 +52,11 @@
                         <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_img/'.$imggals->img_name.'')}}" alt="alt" class="imaged w-100 square">
                     </div>
                 @endforeach
-            @else
+            {{-- @else
                 <div class="item">
                         
                     <img src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$product->product_img.'')}}" alt="alt" class="imaged w-100 square">
-                </div>
+                </div> --}}
             @endif
         
            

@@ -69,10 +69,11 @@ class ShoppingController extends Controller
         $merchant = DB::Table('tb_merchants')->where('merchant_id',$id)->first();
         $product = DB::Table('tb_products')->where('product_merchant_id',$id)->limit(8)->get();
         $productnew = DB::Table('tb_products')->where('product_merchant_id',$id)->orderBy('created_at','DESC')->limit(8)->get();
-        // $productall = DB::Table('tb_products')->leftjoin('tb_category', 'tb_products.product_cat_id', '=', 'tb_category.cat_id')->get();
+        $img = DB::Table('tb_banner_promote_store')->where('merchant_id',$id)->orderBy('index_of','DESC')->get();
         // dd($product);
+        $productstore = DB::Table('tb_products')->where('product_merchant_id',$id)->get();
        
-        return view('mobile.member.common.content.shopping.shopping_7')->with(['product'=>$product,'merchant'=>$merchant,'category'=>$category,'productnew'=>$productnew]);
+        return view('mobile.member.common.content.shopping.shopping_7')->with(['product'=>$product,'merchant'=>$merchant,'category'=>$category,'productnew'=>$productnew,'img'=>$img,'productstore'=>$productstore]);
     }
 
 

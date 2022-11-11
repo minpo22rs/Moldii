@@ -10,6 +10,7 @@ use Session;
 use App\Models\Tb_address;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
+use App\Models\Tb_cart;
 use App\Models\Tb_credit;
 use App\Models\Tb_review;
 use App\Models\Tb_tranfer;
@@ -568,6 +569,132 @@ class UserAccController extends Controller
         return view('mobile.member.userAccount.my_list.buyGoods');
 
     }
+
+    public function chooseShipping($sid){// เลือกขนส่ง
+
+        // dd($pid);
+        $cadd = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')
+                    ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
+                    ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
+                    ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
+                    ->select('tb_customer_addresss.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                    ->first();
+        $sqlsel = DB::Table('tb_merchants')->where('merchant_id',$sid)
+                    ->leftJoin('districts', 'tb_merchants.merchant_tumbon', '=', 'districts.id')
+                    ->leftJoin('amphures', 'tb_merchants.merchant_district', '=', 'amphures.id')
+                    ->leftJoin('provinces', 'tb_merchants.merchant_province', '=', 'provinces.id')
+                    ->select('tb_merchants.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                    ->first();
+
+        $data = array();
+        $shipid =array();
+
+        $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->where('store_id',$sid)->get();
+
+        foreach($mycart as $mycarts){
+            $ship = DB::Table('tb_product_shippings')->where('id_product',$mycarts->product_id)->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
+            $product = DB::Table('tb_products')->where('product_id',$mycarts->product_id)->first();
+            foreach($ship as $key => $ships){
+                $shipid[$key]['id'] = $ships->id_product_shipping;
+                $shipid[$key]['code'] = $ships->code;
+
+                $data[$key]['from']['name'] =$sqlsel->merchant_name.$sqlsel->merchant_lname;
+                $data[$key]['from']['address'] = $sqlsel->merchant_address;
+                $data[$key]['from']['district'] =  $sqlsel->tth;
+                $data[$key]['from']['state'] = $sqlsel->ath;
+                $data[$key]['from']['province'] = $sqlsel->pth;
+                $data[$key]['from']['postcode'] = $sqlsel->merchant_postcode;
+                $data[$key]['from']['tel'] = $sqlsel->merchant_phone;
+
+                $data[$key]['to']['name'] = $cadd->customer_name;
+                $data[$key]['to']['address'] = $cadd->customer_address;
+                $data[$key]['to']['district'] = $cadd->tth;
+                $data[$key]['to']['state'] = $cadd->ath;
+                $data[$key]['to']['province'] = $cadd->pth;
+                $data[$key]['to']['postcode'] = $cadd->customer_postcode;
+                $data[$key]['to']['tel'] = $cadd->customer_phone;
+
+
+                $data[$key]['parcel']['name'] = $product->product_name;
+                $data[$key]['parcel']['weight'] = $product ->weight;
+                $data[$key]['parcel']['width'] = $product ->width;
+                $data[$key]['parcel']['length'] = $product ->length;
+                $data[$key]['parcel']['height'] = $product ->height;
+
+                $data[$key]['courier_code'] = $ships->code;
+            }
+
+
+            $object = array (
+                "api_key"=> "dv66f6883421f7c83185b476ece358f3d7608bedf36e5a917739e9b6e8f0cbce6b4627d5ad5b9274741654066970",
+                "data" => $data,
+            );
+    
+    
+            $datasend = http_build_query($object);
+            $url = 'https://mkpservice.shippop.dev/pricelist/'; 
+    
+            // dd($shipid);
+    
+            $ch = curl_init();
+            curl_setopt( $ch, CURLOPT_URL, $url );
+            curl_setopt( $ch, CURLOPT_POSTFIELDS, $datasend );
+            curl_setopt( $ch, CURLOPT_POST, true );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true);
+            $content = curl_exec( $ch );
+            curl_close($ch);
+            $json = json_decode($content);
+            $jsondata = (array)$json->data;
+    
+            // dd( $jsondata);
+    
+    
+            foreach($shipid as $key =>$value){
+                
+                if($value['code'] == 'NJV'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->NJV->price,
+                        'shipping_day'=> $jsondata[$key]->NJV->estimate_time,
+                        'cost_3per' => $jsondata[$key]->NJV->price +($jsondata[$key]->NJV->price*0.03)]);
+
+                }else if($value['code'] == 'FLE'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->FLE->price,
+                        'shipping_day'=> $jsondata[$key]->FLE->estimate_time,
+                        'cost_3per' => $jsondata[$key]->FLE->price +($jsondata[$key]->FLE->price*0.03)]);
+
+                }else if($value['code'] == 'THP'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->THP->price,
+                        'shipping_day'=> $jsondata[$key]->THP->estimate_time,
+                        'cost_3per' => $jsondata[$key]->THP->price +($jsondata[$key]->THP->price*0.03)]);
+                    
+                }else if($value['code'] == 'TP2'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->TP2->price,
+                        'shipping_day'=> $jsondata[$key]->TP2->estimate_time,
+                        'cost_3per' => $jsondata[$key]->TP2->price +($jsondata[$key]->TP2->price*0.03)]);
+                    
+                }else if($value['code'] == 'JNTD'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->JNTD->price,
+                        'shipping_day'=> $jsondata[$key]->JNTD->estimate_time,
+                        'cost_3per' => $jsondata[$key]->JNTD->price +($jsondata[$key]->JNTD->price*0.03)]);
+                    
+                }else if($value['code'] == 'KRYD'){
+                    DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->KRYD->price,
+                        'shipping_day'=> $jsondata[$key]->KRYD->estimate_time,
+                        'cost_3per' => $jsondata[$key]->KRYD->price +($jsondata[$key]->KRYD->price*0.03)]);
+                    
+                }
+                
+            }
+        }
+
+        $shipnew = DB::Table('tb_product_shippings')->where('id_product',$mycart[0]->product_id)->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
+        
+       
+        return view('mobile.member.userAccount.my_list.chooseShipping')->with(['ship'=>$shipnew]);
+
+    }
+
+
+
     public function chooseAddress(){// เลือกที่อยู่
         $addon = DB::Table('tb_customer_addresss')->where('address_status','=','on')->where('customer_id',Session::get('cid'))->first();
         $addoff = DB::Table('tb_customer_addresss')->where('address_status','=','off')->where('customer_id',Session::get('cid'))->get();

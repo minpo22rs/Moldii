@@ -74,7 +74,7 @@
                         <img src="{{('https://testgit.sapapps.work/moldii/storage/app/merchant/'.$merchant->merchant_img.'')}}" alt="alt" class=" rounded-circle  " style="width: 50px; height:50px;">
 
                         <div class="card-title  align-self-center m-0 ml-1 ">
-                            <h3 class=" m-0 p-0"><b>{{$merchant->merchant_name}}</b></h3>
+                            <h3 class=" m-0 p-0"><b>{{$merchant->merchant_shopname}}</b></h3>
                             <h6 class=" m-0 p-0" style="color: #A0A0A0;">จังหวัดกรุงเทพมหานคร</h6>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
 
         <div class="row text-center mt-1 ">
             <div class="col-4 p-1 line-con align-self-center">
-                <h5 class=" m-0 p-0 font-weight-bold">500</h5>
+                <h5 class=" m-0 p-0 font-weight-bold">{{$productstore->count()}}</h5>
                 <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">รายการสินค้า</h6>
                 <div class="line my-1"></div>
             </div>
@@ -120,7 +120,7 @@
 
 
                 <div id="foryou" class="tab-pane fade in active show">
-                    <div class="carousel-multiple owl-carousel owl-theme mt-2 ">
+                    {{-- <div class="carousel-multiple owl-carousel owl-theme mt-2 ">
                         @foreach ($product as $products)
                             <a href="{{url('shopping/product/'.$products->product_id.'')}}">
                                 <div class="item">
@@ -159,11 +159,46 @@
                             </a>
                         @endforeach
 
+                    </div> --}}
+                    <div class="col-12 row m-0 justify-content-center ">
+
+                        @foreach($product as $products)
+                            <?php $details = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
+            
+                            <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
+                                <div class=" card  my-2 mx-2 align-self-center justify-content-center">
+                                    <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
+                                    <div class="card-body col-12 p-1 ">
+                                        <div class="row pl-1">
+                                            <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>
+                                        </div>
+                                        <div class=" row ">
+                                            @if($products->product_discount!=null)
+                                                <div class="row col-7">
+                                                    <h6 class="mt-1 pl-1 m-0 "><s>฿{{$products->product_price}}</s></h6><h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$products->product_discount}}</h6>
+            
+                                                </div>
+                                            @else
+                                                <div class="row col-7">
+                                                    <h6 class="mt-1 pl-1 m-0 ">฿{{$products->product_price}}</h6>
+                                                  
+                                                </div>
+                                            @endif
+                                            <div class="col-5 mt-1 text-right">
+                                                <h6 class="m-0">ขายได้ {{$details->count()}} ชิ้น</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+            
                     </div>
                
                     <div class=" mt-2 mb-3 ">
-                        <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
-                        <img class="imaged w-100 card-image-top mt-2" src="{{('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxEkv2NtgH8l4MG6BJKpUkuHOgjkdFqXfRDw&usqp=CAU')}}" alt="alt" style=" width:343px; height: 96px;">
+                        @foreach ($img as $imgd)
+                            <img class="imaged w-100 card-image-top mt-2"  src="{{('https://testgit.sapapps.work/moldii/storage/app/banner_store/'.$imgd->banner_promote_img.'')}}" alt="alt" style=" width:343px; height: 96px;">
+                        @endforeach
                 
                     </div>
 

@@ -3,7 +3,16 @@
 @section('app_header')
 <style>
         
+        .dropdown-submenu {
+            position: relative;
+        }
 
+        .dropdown-submenu .dropdown-menu {
+            top: 50px;
+            right: 0;
+            margin-top: -1px;
+            width: 250px;
+        }
         /* * Post widget * */
 
         input[type="file"] {
@@ -411,8 +420,9 @@
                             <div class="row w-100 mx-3 my-2 text-center">
                                 <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" >
                                 <span class="ml-1 align-self-center font-weight-bold " >  {{number_format($u->customer_wallet,2,'.',',')}}</span>
-                                กระเป๋าเงิน
                             </div>
+                            <h6 style="margin-left: 25px">กระเป๋าเงิน</h6>
+
                         </div>
                     </a>
             </div>
@@ -423,6 +433,7 @@
                             <img src="{{ asset('new_assets/icon/คอยน์.png')}}" >
                             <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_coin,2,'.',',')}} </span>
                         </div>
+                        <h6 style="margin-left: 25px">คอยน์</h6>
                     </div>
                 </a>
             </div>
@@ -433,6 +444,7 @@
                             <img src="{{ asset('new_assets/icon/โดเนท.png')}}" >
                             <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_donate,2,'.',',')}} </span>
                         </div>
+                        <h6 style="margin-left: 25px">โดเนท</h6>
                     </div>
                 </a>
             </div>
@@ -455,7 +467,7 @@
 
                     <div class="widget-post__content">
                         <label for="post-content" class="sr-only">Share</label>
-                        <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" required></textarea>
+                        <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" rows="7" required></textarea>
                         <div class="row" id="rowsocial"> </div>
                         
                     </div>
@@ -604,16 +616,78 @@
                                 </div>
 
 
-                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
-                                <div class="dropdown-menu dropdown-menu-right">
+                                <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false"></ion-icon>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    @if($sqls->customer_id== Session::get('cid'))
+                                        {{-- <li><a class="dropdown-item" tabindex="-1" href="#">แก้ไขโพสต์</a></li> --}}
+                                        <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="hidecontent({{$sqls->new_id}})">ซ่อนโพสต์</a></li>
+                                        <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="deletecontent({{$sqls->new_id}})">ลบโพสต์</a></li>
+                                        <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    @endif
+                                    <li><a class="dropdown-item" tabindex="-1" href="{{url('content/'.$sqls->new_id.'')}}">แสดงเพิ่มเติม</a></li>
+                                    <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="donatebtn({{$sqls->customer_id}});">สนับสนุนโพส</a></li>
+                                    <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                                    <li class="dropdown-submenu">
+                                        
+                                        <a class="test dropdown-item" style="background-color: #FFFFFF !important;color:black !important" tabindex="-1" href="#">รายงานโพสต์</a>
+                                            <ul class="dropdown-menu ">
+                                                <h6 class="dropdown-header">ตัวเลือกการรายงาน</h6>
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">ภาพไม่เหมาะสม</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">การขายที่ไม่ได้รับอนุญาต</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">สแปม</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">ความรุนแรง</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">คำพูดที่แสดงความเกลียดชัง</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">ข้อมูลเท็จ</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">การคุกคาม</a></li>
+                                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                
+                                                <li><a class="dropdown-item" tabindex="-1" href="#">อื่นๆ</a></li>
+                                            
+                                            </ul>
+                                    </li>
+                                </ul>
+
+                                {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                                     @if($sqls->customer_id == Session::get('cid'))
-                                        {{-- <a class="dropdown-item" href="#">แก้ไขโพสต์</a> --}}
+                                        <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
                                         <a class="dropdown-item" href="javascript:;" onclick="hidecontent({{$sqls->new_id}})">ซ่อนโพสต์</a>
                                         <a class="dropdown-item" href="javascript:;" onclick="deletecontent({{$sqls->new_id}})">ลบโพสต์</a>
                                         <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                                     @endif
-                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">report</a>
+                                    <a class="dropdown-item" href="{{url('content/'.$sqls->new_id.'')}}">แสดงเพิ่มเติม </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:;" onclick="donatebtn({{$sqls->customer_id}});">สนับสนุนโพส </a>
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a class="dropdown-toggle" href="javascript:;" role="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายงานโพสต์ </a>
+
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">รายงานโพสต์ </a>
                                 </div>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                    <h6 class="dropdown-header">ตัวเลือกการรายงาน</h6>
+                                    <a class="dropdown-item" href="{{url('content/'.$sqls->new_id.'')}}">ภาพไม่เหมาะสม</a>
+                                    <a class="dropdown-item" href="javascript:;" onclick="donatebtn({{$sqls->customer_id}});">การขายที่ไม่ได้รับอนุญาต</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">สแปม</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">ความรุนแรง</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">คำพูดที่แสดงความเกลียดชัง</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">ข้อมูลเท็จ</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">การคุกคาม</a>
+                                    <a class="dropdown-item" href="{{url('contentreport/'.$sqls->new_id.'')}}">อื่นๆ</a>
+                                </div> --}}
                             </div>
                         </div>
                         
@@ -698,12 +772,14 @@
                         {{-- </a> --}}
                      
 
-                        <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted" id="countlike{{$sqls->new_id}}">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$count->count() + $countreply->count()}} รายการ</h6>
-                            <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sh->count()}} แชร์</h6>
+                        <a href="{{url('content/'.$sqls->new_id.'')}}">
+                            <div class="card-title row col-12 mb-0 p-1 pr-0 mt-1 justify-content-end">
+                                <h6 class="mb-0 ml-1 card-subtitle text-muted" id="countlike{{$sqls->new_id}}">{{$sqls->like?''.$sqls->like.'':'0'}} ชื่นชอบ</h6>
+                                <h6 class="mb-0 ml-1 card-subtitle text-muted">ความคิดเห็น {{$count->count() + $countreply->count()}} รายการ</h6>
+                                <h6 class="mb-0 ml-1 card-subtitle text-muted">{{$sh->count()}} แชร์</h6>
 
-                        </div>
+                            </div>
+                        </a>
 
                         <div class="card-footer row justify-content-center align-items-center" style="padding-left: 3px; padding-right: 3px;">
 
@@ -1350,6 +1426,17 @@
             }
 
             bottom_now(1);
+
+            $(document).ready(function(){
+                $('.dropdown-submenu a.test').on("click", function(e){
+                    $(this).next('ul').toggle();
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            });
+
+
+
             var gallery = 1000;
 
             // const btnSearch = document.getElementById('btn_search_2');
@@ -1393,6 +1480,7 @@
                     x.style.display = "none";
                 }
             }
+
 
             function donatebtn(v){
                 document.getElementById("donateid").value = v ;
@@ -1866,7 +1954,7 @@
 
                 gallery++;
                 newimage =  '<div class="col-12" id="div'+gallery+'" style="padding: 10px;">'+
-                            '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL(this,'+gallery+')">'+
+                            '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" onchange="readGalleryURL(this,'+gallery+')">'+
                             '<img id="gallerypreview'+gallery+'" style="max-height:150px ;padding: 10px;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
                             '<button  id="btn'+gallery+'"  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
                 $('#rowsocial').append(newimage);

@@ -9,6 +9,17 @@
         color: rgba(208, 208, 208, 1);
         box-shadow: 2px 2px 8px 0px rgb(0 0 0 / 17%);
     }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+        top: 50px;
+        right: 0;
+        margin-top: -1px;
+        width: 250px;
+    }
 </style>
 @section('app_header')
 <div class="appHeader bg-danger text-light">
@@ -94,15 +105,57 @@
 
 
             <ion-icon name="ellipsis-horizontal-outline" style="font-size:25px"  data-toggle="dropdown" aria-expanded="false"></ion-icon>
-            <div class="dropdown-menu dropdown-menu-right">
+                
+                <ul class="dropdown-menu dropdown-menu-right">
+                    @if($c->customer_id == Session::get('cid'))
+                        {{-- <li><a class="dropdown-item" tabindex="-1" href="#">แก้ไขโพสต์</a></li> --}}
+                        <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a></li>
+                        <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a></li>
+                        <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+                    @endif
+                    
+
+                    <li class="dropdown-submenu">
+                        <a class="test dropdown-item" style="background-color: #FFFFFF !important;color:black !important" tabindex="-1" href="#">รายงานโพสต์</a>
+                            <ul class="dropdown-menu ">
+                                <h6 class="dropdown-header">ตัวเลือกการรายงาน</h6>
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">ภาพไม่เหมาะสม</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">การขายที่ไม่ได้รับอนุญาต</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">สแปม</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">ความรุนแรง</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">คำพูดที่แสดงความเกลียดชัง</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">ข้อมูลเท็จ</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">การคุกคาม</a></li>
+                                <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
+
+                                <li><a class="dropdown-item" tabindex="-1" href="#">อื่นๆ</a></li>
+                            
+                            </ul>
+                    </li>
+                </ul>
+            
+            {{-- <div class="dropdown-menu dropdown-menu-right">
                 @if($c->customer_id == Session::get('cid'))
-                    {{-- <a class="dropdown-item" href="#">แก้ไขโพสต์</a> --}}
+                    <a class="dropdown-item" href="#">แก้ไขโพสต์</a>
                     <a class="dropdown-item" href="javascript:;" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a>
                     <a class="dropdown-item" href="javascript:;" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a>
                     <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                 @endif
                 <a class="dropdown-item" href="{{url('contentreport/'.$c->new_id.'')}}">report</a>
-            </div>
+            </div> --}}
 
 
         </div>
@@ -180,10 +233,6 @@
             <img src="{{ asset('new_assets/img/icon/heart 1.png')}}" alt="alt" style="width:17px; height:17px;">
             <h5 class="mb-0 ml-1 "  style="color: green" onclick="UNmyLike2({{$c->new_id}})">ถูกใจแล้ว</h5>
         </div>
-
-
-
-
         
         <div class="col-5 row p-0 justify-content-center ">
             <img src="{{ asset('new_assets/icon/แสดงความคิดเห็น.png')}}" alt="alt" style="width:17px; height:17px;">
@@ -672,10 +721,18 @@
         var a = "{{Session::get('success')}}";
         if(a){
             Swal.fire({
-            text : a,
-            confirmButtonColor: "#fc684b",
-        })
+                text : a,
+                confirmButtonColor: "#fc684b",
+            })
         }
+
+        $(document).ready(function(){
+            $('.dropdown-submenu a.test').on("click", function(e){
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
 
         function buttonreply(v){
             document.getElementById('reply'+v).style.display = '';

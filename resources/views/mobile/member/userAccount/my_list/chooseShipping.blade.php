@@ -5,13 +5,14 @@
         <ion-icon name="arrow-back-outline" onclick="window.history.back();"></ion-icon>
     </div>
     <div class="pageTitle">
-        เลือกที่อยู่
+        เลือกขนส่ง
     </div>
 </div>
 @endsection
 @section('content')
 <br>
-        <div class=" p-2 col-12  border-bottom ">
+<br>
+        {{-- <div class=" p-2 col-12  border-bottom ">
             <div class="row col-12 m-0">
                 <h5 class="font-weight-bold">{{$addon->customer_name}}  {{$addon->customer_phone}}</h5>
                 <h5 class="font-weight-bold ml-1" style="color:rgba(0, 84, 118, 1);">ค่าเริ่มต้น</h5>
@@ -27,27 +28,27 @@
 
 
             </div>
-        </div>
-        @foreach($addoff as $adds)
-            <?php 
-                $p = DB::Table('provinces')->where('id',$adds->customer_province)->first();
-                $a = DB::Table('amphures')->where('id',$adds->customer_district)->first();
-                $t = DB::Table('districts')->where('id',$adds->customer_tumbon)->first();
+        </div> --}}
+        @foreach($ship as $ships)
             
-            ?>
-            <a href="{{url('user/changevalueaddressoncart/'.$adds->id_customer_address.'')}}">
+            <a href="{{url('user/changevalueaddressoncart/'.$ships->id_product_shipping.'')}}">
                 <div class=" p-2 col-12  border-bottom ">
-                    <div class="row col-12 m-0">
-                        <h5 class="font-weight-bold">{{$adds->customer_name}}  {{$adds->customer_phone}}</h5>
-                        <!-- <h5 class="font-weight-bold ml-1" style="color:rgba(255, 92, 99, 1);">ค่าเริ่มต้น</h5> -->
-                    </div>
-                    <div class="row col-12 p-0 m-0">
-                        <img src="{{asset('new_assets/img/icon/pin.svg')}}" class="col-1 align-self-start"><br>
-                        <div class="text-start col-10">
-                            <h5 class="m-0 ">รายละเอียดที่อยู่ <br><br> {{$adds->customer_address}} {{$t->name_th}} {{$a->name_th}} {{$p->name_th}} {{$adds->customer_postcode}}</h5>
+                    <div class="row">
+
+                        <div class=" col-6 m-0 text-left">
+                            <h5 class="font-weight-bold">{{$ships->name_company}}</h5>
+                        </div>
+                        <div class=" col-6 m-0 text-right">
+                            <h5 class="font-weight-bold " style="color:rgba(255, 92, 99, 1);">฿ {{number_format($ships->cost_3per,2,'.',',')}}</h5> 
                         </div>
 
-                        <!-- <img src="{{asset('new_assets/img/icon/check.svg')}}" style="width:1.4rem; height:1.4rem;" class="col-1 p-0 align-self-center"><br> -->
+                    </div>
+                    
+                    <div class="row col-12 p-0 m-0">
+                        <div class="text-start col-10">
+                            <h5 class="m-0 ">จะได้รับ  {{$ships->shipping_day}}</h5>
+                        </div>
+
 
 
                     </div>
@@ -57,26 +58,11 @@
 
 
 
-<a href="{{url('user/newAddress')}}" class="row p-2 col-12 m-0 mt-2 border-top border-bottom " style="color:black; font-size:18px">
-    <div class="col-8 mx-0 align-self-center row p-0">
-
-        <h5 class="m-0 ml-1 font-weight-bold" style="color:rgba(84, 84, 84, 1);">เพิ่มที่อยู่ใหม่</h5>
-    </div>
-    <div class="col-4 mx-0 p-0 text-right">
-        <div class=" ">
-            <img src="{{asset('new_assets/img/icon/plus_2.svg')}}" style="width:1.48rem; height:1.48rem;" class="align-self-center"><br>
-        </div>
-    </div>
-</a>
-
-
-
-
 
 @endsection
 
 @section('custom_script')
 <script>
-    bottom_now(3);
+    bottom_now(1);
 </script>
 @endsection

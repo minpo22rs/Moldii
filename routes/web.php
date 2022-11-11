@@ -110,6 +110,7 @@ Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceiv
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
 Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำการสั่งซื้อ
 Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);// เลือกที่อยู่
+Route::get('user/chooseShipping/{sid}', [UserAccController::class, 'chooseShipping']);// เลือกขนส่ง
 Route::get('user/paymentMethod', [UserAccController::class, 'paymentMethod']);// ช่องทางการชำระเงิน
 Route::get('user/addCreditCard_2', [UserAccController::class, 'addCreditCard_2']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
 Route::post('user/saveCreditCardonCart', [UserAccController::class, 'saveCreditCardonCart']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)

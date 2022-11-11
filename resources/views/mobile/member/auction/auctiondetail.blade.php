@@ -63,7 +63,7 @@
     <div class="row">
         <div class="row justify-content-between w-100 p-1  mx-2">
             <h3 class="mb-0">{{$product->product_name}}</h3>
-            <h3 class="text-danger" id="pricenow">ราคาปัจจุบัน ฿ {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
+            <h3 class="text-danger" id="pricenow" style="font-size: 22px">ราคาปัจจุบัน ฿ {{$log->count()!=0?$log[0]->price:$auction->price}}</h3>
             <p class="time">
                 <br>
                 <!-- hours -->
@@ -93,6 +93,7 @@
                 </span>
             
             </p>
+            <p>นับต่อเนื่องหลังหมดเวลา 1 นาที</p>
         </div>
        
 
@@ -330,7 +331,7 @@
                         }
                         
                         limit = json['limit'];
-                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
 
                         document.getElementById('bitcount').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
@@ -423,7 +424,7 @@
                     success: function(data) {
                         var json = JSON.parse(data);
                         limit = json['limit'];
-                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน '+json['now'];
+                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
 
                         document.getElementById('priceupdate').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );

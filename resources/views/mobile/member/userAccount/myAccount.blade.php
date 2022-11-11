@@ -19,6 +19,7 @@
         @else
             <img src="{{$sql->customer_img}}" class="rounded-circle mt-5" width="130px" height="130px"><br>
         @endif
+        <br>
         <span class="font-weight-bold">
             <h3 class="mb-0">
                     {{$sql->customer_username}}
