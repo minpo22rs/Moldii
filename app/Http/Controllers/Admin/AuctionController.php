@@ -45,13 +45,6 @@ class AuctionController extends Controller
                     $auction->product_id      = $item;
                    
                     $auction->save();
-    
-                    
-                    // $detail = new Auction_detail();
-                    // $detail->id_auction      = $auction->id_auction;
-                    // $detail->product_id      = $item;
-                    
-                    // $detail->save();
                 }
     
             }else{
