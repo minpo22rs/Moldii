@@ -153,6 +153,7 @@ class AuctionController extends Controller
         $aid= $id;
         // $Auction = Auction::findOrFail($id);
         $Auction = Auction::where('id_auction',$id)->leftJoin('tb_products', 'tb_auctions.product_id', '=', 'tb_products.product_id')->first();
+        $s = DB::Table('tb_shipping_companys')->get();
         $cat = category::where('deleted_at',null)->get();
         $data = array('Auction' => $Auction,'id'=>$id ,'cat'=>$cat);
 

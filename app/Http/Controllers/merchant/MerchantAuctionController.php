@@ -148,10 +148,10 @@ class MerchantAuctionController extends Controller
   
     public function edit($id)
     {
-        $Auction = Auction::findOrFail($id);
-        $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->first();
+        $Auction = Auction::where('id_auction',$id)->leftJoin('tb_products', 'tb_auctions.product_id', '=', 'tb_products.product_id')->first();
         $cat = category::where('deleted_at',null)->get();
-        $data = array('Auction' => $Auction,'ad'=>$ad,'id'=>$id ,'ad'=>$ad,'cat'=>$cat);
+        $s = DB::Table('tb_shipping_companys')->get();
+        $data = array('Auction' => $Auction,'id'=>$id ,'cat'=>$cat);
         return view('merchant.auction.editauction', $data);
     }
 

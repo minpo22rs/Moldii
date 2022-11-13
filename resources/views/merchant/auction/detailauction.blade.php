@@ -118,6 +118,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รูปภาพสินค้า</label>
                         <div class="col-sm-3">
+                            <img src="{{asset('storage/app/product_cover/'.$auction->product_img)}}" width="100%"/> <br>
                             @foreach($img as $imgs)
 
                                 <img src="{{asset('storage/app/product_img/'.$imgs->img_name)}}" width="100%"/> <br>
