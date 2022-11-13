@@ -71,10 +71,17 @@
 
 ?>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header form-inline">
+
         <div class="icon-btn">
             <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
                 data-target="#modal-add-news"><i class="icofont icofont-ui-add"></i>
+                สินค้าที่มีอยู่แล้ว</button>
+        </div>
+
+        <div class="icon-btn ml-4">
+            <button class="btn btn-success btn-outline-success btn-round" data-toggle="modal"
+                data-target="#modal-add"><i class="icofont icofont-ui-add"></i>
                 สร้างการประมูล</button>
         </div>
     </div>
@@ -84,7 +91,8 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">#</th>
-                        <th style="text-align: center;">เลขที่การประมูล</th>
+                        {{-- <th style="text-align: center;">เลขที่การประมูล</th> --}}
+                        <th style="text-align: center;">ชื่อสินค้า</th>
          
                         <th style="text-align: center;">วันที่</th>
                         <th style="text-align: center;">เวลาเริ่มต้นสิ้นสุด</th>
@@ -96,7 +104,8 @@
                     <tr>
                         <td class="text-center text-middle">{{$key+1}}</td>
                         
-                        <td class="text-center text-middle">{{ $item->code }}</td>
+                        {{-- <td class="text-center text-middle">{{ $item->code }}</td> --}}
+                        <td class="text-center text-middle">{{ $item->product_name }}</td>
                         <td class="text-center text-middle">{{ $item->date_start }}</td>
                         <td class="text-center text-middle">{{ $item->time_start }}-{{ $item->time_finish }}</td>
                         
@@ -123,8 +132,83 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="modal-add-news" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">สร้างการประมูล</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{url('merchant/addauction')}}" method="POST"  id="addnews">
+                @csrf
+                <div class="modal-body">
+                    
+                    <input type="hidden" name="type" value="0">
+                  
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">วันที่</label>
+                        <div class="col-sm-3">
+                            <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required>
+                        </div>
+                       
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น</label>
+                        <div class="col-sm-3">
+                            <input type="time" class="form-control" id="timefrom" name="time_start" required>
+                        </div>
+                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด</label>
+                        <div class="col-sm-3">
+                            <input type="time" class="form-control" id="timeto" name="time_finish" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                       
+                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="bit" required>
+                        </div>
+                        
+                    </div>
+                    
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">เลือกรายการสินค้าที่จะเข้าร่วม</label>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        {{-- <label class="col-sm-3 col-form-label">รายการสินค้า</label> --}}
+                        @foreach($product as $products)
+                                <div class="col-sm-3 form-inline">
+                                    <input type="checkbox" class="form-control" name="pid[]" value="{{$products->product_id}}" style="margin-right: 5px;margin-top;5px">  {{$products->product_name}}
+                                </div>
+                        @endforeach
+                    </div>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" >ยืนยัน</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-add" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,7 +225,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required>
+                            <input type="date" class="form-control" id="datefrom" name="date_start" required>
+                            {{-- <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required> --}}
                         </div>
                        
                         
@@ -237,6 +322,22 @@
                                 <div class="col-3">
                                     <input type="text" name="height" class="form-control" placeholder="ความสูง..." required>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            บริการขนส่ง<span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-5 form-inline">
+                                        <input type="checkbox" name="ship[]" value="{{$sc->id_shipping_company}}"><br><p class="mt-3 ml-1">{{$sc->name_company}}</p>
+
+                                    </div>
+                                @endforeach
+                               
                             </div>
                         </div>
                     </div>

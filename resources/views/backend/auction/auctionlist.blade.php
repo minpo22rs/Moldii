@@ -333,6 +333,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            บริการขนส่ง<span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                @foreach($s as $sc)
+                                    <div class="col-5 form-inline">
+                                        <input type="checkbox" name="ship[]" value="{{$sc->id_shipping_company}}"><br><p class="mt-3 ml-1">{{$sc->name_company}}</p>
+
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">รูปภาพสินค้า<span class="text-danger">*</span><br>(สามารถเลือกหลายๆรูปพร้อมกันได้)</label>

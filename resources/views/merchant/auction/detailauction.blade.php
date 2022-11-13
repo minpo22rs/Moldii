@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" value="{{$auction->date_start}}" required>
+                            <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" value="{{$auction->date_start}}" readonly>
                         </div>
                        
                         
@@ -23,11 +23,11 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">เวลาเริ่มต้น <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="time" class="form-control" id="timefrom" name="time_start" min="{{date("H:i")}}"  value="{{$auction->time_start}}" required>
+                            <input type="time" class="form-control" id="timefrom" name="time_start" min="{{date("H:i")}}"  value="{{$auction->time_start}}" readonly>
                         </div>
                         <label class="col-sm-2 col-form-label text-right">สิ้นสุด <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="time" class="form-control" id="timeto" name="time_finish" value="{{$auction->time_finish}}" required>
+                            <input type="time" class="form-control" id="timeto" name="time_finish" value="{{$auction->time_finish}}" readonly>
                         </div>
                     </div>
 
@@ -35,12 +35,12 @@
                        
                         <label class="col-sm-2 col-form-label">ราคาเริ่มต้น <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="number" class="form-control" name="price" value="{{$auction->price}}" required>
+                            <input type="number" class="form-control" name="price" value="{{$auction->price}}" readonly>
                         </div>
 
                         <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="number" class="form-control" name="bit" value="{{$auction->bit}}" required>
+                            <input type="number" class="form-control" name="bit" value="{{$auction->bit}}" readonly>
                         </div>
                         
                     </div>
@@ -49,7 +49,7 @@
                        
                         <label class="col-sm-2 col-form-label">ชื่อสินค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="name" value="{{$ad->product_name}}"  required>
+                            <input type="text" class="form-control" name="name" value="{{$auction->product_name}}"  readonly>
                         </div>
 
                         <label class="col-sm-2 col-form-label  text-right">หมวดหมู่สินค้า <span class="text-danger">*</span></label>
@@ -57,7 +57,7 @@
                             <select class="form-control" name="category_id">
                                 <option value="">เลือกหมวดหมู่สินค้า</option>
                                 @foreach($cat as $cats)
-                                    <option value="{{$cats->cat_id}}" {{$cats->cat_id == $ad->product_cat_id ?'selected':''}}>{{$cats->cat_name}}</option>
+                                    <option value="{{$cats->cat_id}}" {{$cats->cat_id == $auction->product_cat_id ?'selected':''}}>{{$cats->cat_name}}</option>
 
                                 @endforeach
                             </select>
@@ -70,7 +70,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea name="description" class="form-control" cols="30" rows="5" placeholder="รายละเอียดสินค้า เช่น สี วัสดุ ปีที่ผลิต แหล่งที่ผลิต ที่มาของสินค้า หรือรายละเอียดที่เกี่ยวข้องกับสินค้า..." required> {{$ad->product_description}}</textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="5" placeholder="รายละเอียดสินค้า เช่น สี วัสดุ ปีที่ผลิต แหล่งที่ผลิต ที่มาของสินค้า หรือรายละเอียดที่เกี่ยวข้องกับสินค้า..." readonly> {{$auction->product_description}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -100,16 +100,16 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-3">
-                                    <input type="text" name="weight" class="form-control" placeholder="น้ำหนัก..." value="{{$ad->weight}}"  required>
+                                    <input type="text" name="weight" class="form-control" placeholder="น้ำหนัก..." value="{{$auction->weight}}"  readonly>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" name="width" class="form-control" placeholder="ความกว้าง..." value="{{$ad->width}}"  required>
+                                    <input type="text" name="width" class="form-control" placeholder="ความกว้าง..." value="{{$auction->width}}"  readonly>
                                 </div>
                                 <div class="col-3">  
-                                    <input type="text" name="length" class="form-control" placeholder="ความยาว..." value="{{$ad->length}}"  required>
+                                    <input type="text" name="length" class="form-control" placeholder="ความยาว..." value="{{$auction->length}}"  readonly>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" name="height" class="form-control" placeholder="ความสูง..." value="{{$ad->height}}"  required>
+                                    <input type="text" name="height" class="form-control" placeholder="ความสูง..." value="{{$auction->height}}"  readonly>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,6 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
                 </div>
             </form>
             

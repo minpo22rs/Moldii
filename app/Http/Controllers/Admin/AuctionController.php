@@ -21,7 +21,8 @@ class AuctionController extends Controller
         $auction = Auction::leftJoin('tb_products','tb_auctions.product_id','=','tb_products.product_id')->orderBy('tb_auctions.created_at','DESC')->get();
         $product = product::where('product_published',1)->get();
         $cat = category::where('deleted_at',null)->get();
-        $data = array('auction' => $auction,'product'=>$product,'cat'=>$cat);
+        $s = DB::Table('tb_shipping_companys')->get();
+        $data = array('auction' => $auction,'product'=>$product,'cat'=>$cat,'s'=>$s);
         return view('backend.auction.auctionlist', $data);
     }
 
@@ -86,6 +87,14 @@ class AuctionController extends Controller
                     $auction->created_by            = 0;
                     $auction->product_id            = $product->product_id;
                     $auction->save();
+                    
+
+                    foreach ($request->ship as $key => $value) {
+              
+                        DB::Table('tb_product_shippings')->insert(['id_company'=>$value,'id_product'=>$product->product_id]);
+                        // DB::Table('tb_product_shippings')->insert(['id_company'=>$key,'id_product'=>$product->product_id,'cost'=>$value[0]]);
+                        
+                    }
 
 
                     $arr = $request->file('files');
