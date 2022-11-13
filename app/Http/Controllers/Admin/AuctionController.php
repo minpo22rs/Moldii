@@ -61,6 +61,7 @@ class AuctionController extends Controller
                     $product->height                = $request->height;
                     $product->product_published     = 3;
 
+                    $product->product_merchant_id   = 0;
 
                     $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
                     $request->file('files')[0]->storeAs('product_cover',$name);

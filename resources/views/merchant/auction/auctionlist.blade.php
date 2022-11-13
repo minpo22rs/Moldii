@@ -217,7 +217,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('merchant/addauction')}}" method="POST"  id="addnews" enctype="multipart/form-data">
+            <form action="{{url('merchant/addauction')}}" method="POST"  id="add" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     
@@ -354,7 +354,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light" form="addnews">ยืนยัน</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" form="add">ยืนยัน</button>
                 </div>
             </form>
             
