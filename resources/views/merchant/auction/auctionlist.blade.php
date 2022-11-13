@@ -120,7 +120,7 @@
                                     @endif
                                     
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="view_content({{$item->id_auction}})"><i class="icofont icofont-bin"></i> ดูรายละเอียด</a>
+                                    <a href="#" class="dropdown-item waves-light waves-effect" onclick="view_content({{$item->id_auction}})"><i class="icofont icofont-speech-comments"></i> ดูรายละเอียด</a>
                                 </div>
                             </div>
                         </td>
