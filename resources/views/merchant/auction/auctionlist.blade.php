@@ -221,6 +221,7 @@
                 @csrf
                 <div class="modal-body">
                     
+                    <input type="hidden" name="type" value="1">
                   
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
