@@ -46,7 +46,7 @@
                             <th style="text-align: center;">จำนวน</th>
                             <th style="text-align: center;">รหัสติดตาม</th>
                             <th style="text-align: center;">สถานะการชำระเงิน</th>
-                            {{-- <th style="text-align: center;">สถานะคำสั่งซื้อ</th> --}}
+                            <th style="text-align: center;">สถานะสินค้า</th>
                             <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
@@ -56,10 +56,10 @@
                                 <?php $i =1 ;
                                 
                                         $sql = DB::Table('tb_order_details')->where('order_id',$nums->id_order)
-                                            ->where('store_id',Auth::guard('merchant')->user()->merchant_id)
-                                            ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
-                                            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
-                                            ->get();
+                                                    ->where('store_id',Auth::guard('merchant')->user()->merchant_id)
+                                                    ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
+                                                    ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+                                                    ->get();
                                     
                                 ?>
                                 <tr>
@@ -79,15 +79,32 @@
                                    
                                     <td style="text-align: center;">
                                         @if($nums->status_order==1)
-                                            Waiting for payment
+                                            รอตรวจสอบหลักฐานการชำระเงิน
                                         @elseif($nums->status_order==2)
-                                            Paid
+                                            ชำระเงินเรียบร้อยแล้ว
+                                        @elseif($nums->status_order==4)
+                                            เก็บเงินปลายทาง
                                         @elseif($nums->status_order==6)
-                                            Pendding
+                                            รอชำระเงิน
                                         @else
                                             -
                                         @endif
                                     
+                                    </td>
+
+                                    <td style="text-align: center;">
+                                        @foreach ($sql as $sqls)
+                                            @if($sqls->status_detail==5)
+                                                อยู่ระหว่างขนส่ง<br><br>
+                                            @elseif($sqls->status_detail==1 || $sqls->status_detail==9)
+                                                ที่ต้องจัดส่ง<br><br>
+                                           
+                                            @elseif($sqls->status_detail==10)
+                                                ลูกค้าได้รับสินค้าแล้ว<br><br>
+                                            @else
+                                                -<br><br>
+                                            @endif
+                                        @endforeach
                                     </td>
 
                                     {{-- <td style="text-align: center;">
@@ -106,33 +123,36 @@
                                         <div class="dropdown-primary dropdown open">
                                             <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                                @if($nums->status_order==2 || $nums->status_order==4 && $sql[0]->tracking_code==null)
-                                                    {{-- @if($sql[0]->tracking_code==null) --}}
+                                                {{-- @if($nums->status_order==2 || $nums->status_order==4 && $sql[0]->tracking_code==null)
+                                                    @if($sql[0]->tracking_code==null)
                                                     <a href="javascript:;" class="dropdown-item waves-light waves-effect" onclick="openmd({{$nums->id_order}});">
                                                         <i class="fa fa-edit"></i> จัดส่งออเดอร์
                                                     </a>
-                                                @endif
+                                                @endif --}}
                                                 <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
-                                                <div class="dropdown-divider"></div>
-                                                @if($nums->status_order!=5)
-                                                    <a  href="javascript:"
-                                                        onclick="Swal.fire({
-                                                        title: 'ยืนยันการยกเลิกออเดอร์ใช่หรือไม่',
-                                                        showDenyButton: true,
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#377dff',
-                                                        cancelButtonColor: '#363636',
-                                                        confirmButtonText: `Yes`,
-                                                        denyButtonText: `No`,
-                                                        }).then((result) => {
-                                                            if (result.value) {
-                                                                location.href='{{url('merchant/cancelorder',$nums->id_order)}}';
-                                                            } else{
-                                                                Swal.fire('Canceled', '', 'info')
-                                                            }
-                                                        })"  class="dropdown-item waves-light waves-effect" >
-                                                        <i class="icofont icofont-bin"></i> ยกเลิกออเดอร์
-                                                    </a>
+                                                @if($sql[0]->tracking_code==null)
+                                                    <div class="dropdown-divider"></div>
+
+                                                    @if($nums->status_order!=5)
+                                                        <a  href="javascript:"
+                                                            onclick="Swal.fire({
+                                                            title: 'ยืนยันการยกเลิกออเดอร์ใช่หรือไม่',
+                                                            showDenyButton: true,
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#377dff',
+                                                            cancelButtonColor: '#363636',
+                                                            confirmButtonText: `Yes`,
+                                                            denyButtonText: `No`,
+                                                            }).then((result) => {
+                                                                if (result.value) {
+                                                                    location.href='{{url('merchant/cancelorder',$nums->id_order)}}';
+                                                                } else{
+                                                                    Swal.fire('Canceled', '', 'info')
+                                                                }
+                                                            })"  class="dropdown-item waves-light waves-effect" >
+                                                            <i class="icofont icofont-bin"></i> ยกเลิกออเดอร์
+                                                        </a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>

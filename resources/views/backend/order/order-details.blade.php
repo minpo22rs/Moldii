@@ -96,6 +96,7 @@
                             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
                             ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
                             ->get();
+
         ?>
 
 
@@ -147,23 +148,22 @@
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-md-3 ">
-                                        <p> รหัสสินค้า</p>
+                                        <p> ร้านค้า</p>
                                     </div>
+                                   
                                     <div class="col-md-3 ">
                                         <p> ชื่อ</p>
                                     </div>
 
-                                    <div class="col col-md-2 align-self-center p-0 ">
-                                        <p> ราคา</p>
+                                    <div class="col col-md-3 align-self-center p-0 text-right">
+                                        <p> รหัสติดตามพัสดุ</p>
                                     </div>
 
-                                    <div class="col col-md-2 align-self-center">
-                                        <p>จำนวน</p>
-                                    </div>
+                                  
                                    
 
-                                    <div class="col col-md-2 align-self-center text-right  ">
-                                        <p> ยอดรวม</p>
+                                    <div class="col col-md-3 align-self-center text-right  ">
+                                        <p>จำนวน X ราคา</p>
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +179,7 @@
 
                         <?php 
                             $prodetail = \App\Models\product::where('product_id',$detail->product_id)->first();
+                            $shop = \App\Models\Merchant::where('merchant_id',$prodetail->product_merchant_id)->first();
                         ?>
 
 
@@ -195,29 +196,27 @@
                                         <div class="row">
                                             <div class="col-md-3 mb-3 mb-md-0 ">
                                                 <p>
-                                                    {{$prodetail->product_code}}</p>
+                                                    {{$shop->merchant_shopname}}</p>
                                                
                                             </div>
+                                            
                                             <div class="col-md-3 mb-3 mb-md-0 ">
                                                 <p>
                                                     {{$prodetail->product_name}}</p>
                                                
                                             </div>
 
-                                            <div class="col col-md-2 align-self-center p-0 ">
-                                                <h6 style="font-size: 12px">{{number_format($detail->price)}}฿</h6>
+                                            <div class="col col-md-3 align-self-center p-0 text-right">
+                                                <h6 style="font-size: 12px">{{$detail->tracking_code}}</h6>
                                             </div>
 
-                                            <div class="col col-md-2 align-self-center">
-
-                                                <h5 style="font-size: 12px">{{$detail->amount}}</h5>
-                                            </div>
+                                           
                                             
 
-                                            <div class="col col-md-2 align-self-center text-right  ">
+                                            <div class="col col-md-3 align-self-center text-right  ">
                                                 @php($subtotal=$detail->price*$detail->amount)
 
-                                                <h5 style="font-size: 12px">{{number_format($subtotal)}}฿</h5>
+                                                <h5 style="font-size: 12px">{{$detail->amount}} X {{number_format($subtotal,2,'.',',')}}฿</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -237,20 +236,16 @@
                     <div class="row justify-content-md-end mb-3">
                         <div class="col-md-9 col-lg-8">
                             <dl class="row text-sm-right">
-                                <dt class="col-sm-6">การส่งสินค้า</dt>
+                                <dt class="col-sm-6">ค่าขนส่งสินค้า</dt>
                                 <dd class="col-sm-6 border-bottom">
-                                    <strong>{{$shipping}}฿</strong>
+                                    <strong>{{number_format($shipping,2,'.',',')}}฿</strong>
                                 </dd>
 
-                                <dt class="col-sm-6">ทั้งหมด</dt>
+                                <dt class="col-sm-6">ยอดรวมทั้งหมด</dt>
                                 <dd class="col-sm-6">
-                                    <strong>{{number_format($total+$shipping)}}฿</strong>
+                                    <strong>{{number_format($total+$shipping,2,'.',',')}}฿</strong>
                                 </dd>
 
-                                <dt class="col-sm-6">รหัสติดตาม</dt>
-                                <dd class="col-sm-6 border-bottom">
-                                    <strong>{{$ordetail[0]->tracking_code!=null?$ordetail[0]->tracking_code:'No tracking'}}</strong>
-                                </dd>
 
                             </dl>
                             <!-- End Row -->
@@ -301,9 +296,9 @@
                                 </div>
                             </div>
 
-                            <hr>
+                            {{-- <hr> --}}
 
-                            <div class="media align-items-center" href="javascript:">
+                            {{-- <div class="media align-items-center" href="javascript:">
                                 <div class="icon icon-soft-info icon-circle mr-3">
                                     <i class="tio-shopping-basket-outlined"></i>
                                 </div>
@@ -311,9 +306,9 @@
                                     <span class="text-body text-hover-primary"> {{$num->count()}} orders</span>
                                 </div>
                                 <div class="media-body text-right">
-                                    {{--<i class="tio-chevron-right text-body"></i>--}}
+                                    <i class="tio-chevron-right text-body"></i>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <hr>
 

@@ -44,12 +44,17 @@ class StoreController extends Controller
     {
     
         $merchant = Merchant::where('merchant_id',$request->id)->update(['merchant_status'=>$request->status]);
-        
         $noti = new notification();
-        $noti->noti_title       = $request->title;
+        if($request->status == 3){
+            $noti->noti_title       = 'อนุมัติการเปิดร้านค้าบนแอปพลิเคชัน Moldii';
+
+        }else{
+            $noti->noti_title       = 'ปฏิเสธการเปิดร้านค้าบนแอปพลิเคชัน Moldii';
+
+        }
         $noti->noti_date        = date('Y-m-d');
         $noti->status_store      = $request->status;
-        $noti->noti_detail      = $request->detail;
+        // $noti->noti_detail      = $request->detail;
         $noti->noti_create_by   = Auth::user()->admin_id;
         $noti->save();
     }

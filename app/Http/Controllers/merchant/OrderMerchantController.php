@@ -5,6 +5,7 @@ namespace App\Http\Controllers\merchant;
 use App\Http\Controllers\Controller;
 use App\Models\Orders;
 use App\Models\Merchant;
+use App\Models\product;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
@@ -23,17 +24,16 @@ class OrderMerchantController extends Controller
         $pluck = $sql->pluck('order_id');
         $num = Orders::whereIn('id_order',$pluck)->where('status_order','!=',5)
                         ->leftJoin('tb_customers','tb_orders.customer_id','=','tb_customers.customer_id')
-                        ->get();
+                        ->orderBy('tb_orders.created_at','DESC')->get();
 
-        // dd($sql );
+        // dd($num );
         return view('merchant.order.order')->with(['num'=>$num]);
     }
 
 
     public function orderdetail($id)
     {
-        $order = DB::Table('tb_orders')->where('id_order',$id)
-            ->first();
+        $order = Orders::where('id_order',$id)->first();
         $num = Orders::where('customer_id',$order->customer_id)->get();
         return view('merchant.order.order-details')->with(['order'=>$order,'num'=>$num]);
     }
@@ -51,6 +51,10 @@ class OrderMerchantController extends Controller
     public function createbooking(Request $request){
         // dd($request->all());
         $sql = Orders::where('id_order',$request->oid)->first();
+        $od = DB::Table('tb_order_details')->where('id_order_detail',$request->odid)
+                ->orderby('shipping_cost','DESC')->where('store_id',Auth::guard('merchant')->user()->merchant_id)->first();
+        // dd(Auth::guard('merchant')->user()->merchant_id);
+        $pro = product::where('product_id',$od->product_id)->first();
 
         // dd($sql );
         $sqlsel = Merchant::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->first();
@@ -81,11 +85,11 @@ class OrderMerchantController extends Controller
         );
 
         $parcel = array (
-            "name"=> "-",
-            "weight"=> "1",
-            "width"=> "1",
-            "length"=> "1",
-            "height"=> "1"
+            "name"=> $pro->product_name,
+            "weight"=> $pro->weight,
+            "width"=> $pro->width,
+            "length"=> $pro->length,
+            "height"=> $pro->height
         );
 
         $arraysum = array(
@@ -102,7 +106,7 @@ class OrderMerchantController extends Controller
         // );
         
         $datasend = array(
-            'api_key' => "dv66f6883421f7c83185b476ece358f3d7608bedf36e5a917739e9b6e8f0cbce6b4627d5ad5b9274741654066970",
+            'api_key' => "pd66f6883421f7c83185b476ece358f3d7608bedf3c8859cba162937677e087480439a610c89e3280c1649670055",
             'email' => "moldiiship@gmail.com",
             // "url"=> array($url),
             "data" => array($arraysum),
@@ -126,7 +130,8 @@ class OrderMerchantController extends Controller
 
             if($json->status === 'false'){
                 // dd('whattttttt');
-                DB::Table('tb_order_details')->where('id_order',$request->oid)->update(['status_order'=>'4']);
+                DB::Table('tb_order_details')->where('order_id',$request->oid)
+                        ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_order'=>'4']);
                 return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
 
@@ -138,7 +143,8 @@ class OrderMerchantController extends Controller
                     return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
                 }else{
-                    DB::Table('tb_order_details')->where('order_id',$request->oid)->update(['tracking_code'=>$jsondata['0']->courier_tracking_code,'status_detail'=>'1','company_shipping'=>$request->ship]);
+                    DB::Table('tb_order_details')->where('order_id',$request->oid)->where('store_id',Auth::guard('merchant')->user()->merchant_id)
+                            ->update(['tracking_code'=>$jsondata['0']->courier_tracking_code,'status_detail'=>'5']);
 
                     return redirect('merchant/ordermerchant')->with('success','successfully');
 
@@ -169,12 +175,14 @@ class OrderMerchantController extends Controller
         $jsonres = json_decode($result);
         
         if($jsonres->status === 'false'){
-            DB::Table('tb_order_details')->where('id_order',$id)->update(['status_order'=>'4']);
+            DB::Table('tb_order_details')->where('order_id',$id)
+                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_order'=>'4']);
             return 1;
         }else{
 
             // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
-            DB::Table('tb_order_details')->where('order_id',$id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1']);
+            DB::Table('tb_order_details')->where('order_id',$id)
+                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1']);
             return 0;
 
         }

@@ -21,25 +21,15 @@
                                 aria-current="page">ข้อมูลคำสั่งซื้อ </li>
                         </ol>
                     </nav>
-
+             
                     <div class="d-sm-flex align-items-sm-center">
                         <h5 class="page-header-title">คำสั่งซื้อ #{{$order->order_code}}</h5>
 
-                        @if($order->status_order==1)
-                            <span class="badge badge-soft-success ml-sm-3">
-                                <span class="legend-indicator bg-success"></span>ยังไม่ได้ชำระ
-                            </span>
-                        @else
-                            <span class="badge badge-soft-danger ml-sm-3">
-                                <span class="legend-indicator bg-danger"></span>ชำระเเล้ว
-                            </span>
-                        @endif
-
                         
-
-                        <span class="ml-2 ml-sm-3">
-                        <i class="tio-date-range"></i>วันที่ทำรายการ : {{$order->created_at}}
-                </span>
+ 
+                        <span class="ml-2 ml-sm-3 text-right">
+                            <i class="tio-date-range"></i>วันที่ทำรายการ : {{$order->created_at}}
+                        </span>
                     </div>
                     {{-- <div class="col-md-6 mt-2">
                         <a class="text-body mr-3" target="_blank"
@@ -93,9 +83,12 @@
         <!-- End Page Header -->
         <?php 
             $ordetail = DB::Table('tb_order_details')->where('order_id',$order->id_order)
-            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
-            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
-            ->get();
+                            ->where('store_id',Auth::guard('merchant')->user()->merchant_id)
+                            ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
+                            ->leftJoin('tb_customers','tb_order_details.store_id','=','tb_customers.customer_id')
+                            ->orderBy('shipping_cost','DESC')->get();
+            $shipcom = DB::Table('tb_shipping_companys')->where('id_shipping_company',$ordetail[0]->company_shipping)->first();
+            
         ?>
 
 
@@ -114,18 +107,18 @@
                                         class="badge badge-soft-dark rounded-circle ml-1">{{$ordetail->count()}}</span>
                                 </h6>
                             </div>
-                            <div class="col-6 pt-2">
+                            <div class="col-6 ">
 
                             </div>
-                            <div class="col-6 pt-2">
+                            <div class="col-6 ">
                                 <div class="text-right">
-                                    <h6 class="" style="color: #8a8a8a;">
+                                    <h6 class="" style="color: #b60505;">
                                        Payment Method
                                         : {{$order->order_method}}
                                         {{-- : {{str_replace('_',' ',$order['payment_method'])}} --}}
                                     </h6>
                                     @if($order->order_ref_gb!=null)
-                                        <h6 class="" style="color: #8a8a8a;">
+                                        <h6 class="" style="color: #b60505;">
                                             Payment reference
                                             :{{$order->order_ref_gb}}
                                             {{-- : {{str_replace('_',' ',$order['refno'])}} --}}
@@ -171,7 +164,7 @@
                     @php($subtotal=0)
                     @php($total=0)
                     {{-- @php($shipping=0) --}}
-                    @php($shipping=$order->shipping_cost)
+                    @php($shipping=$ordetail[0]->shipping_cost)
                     @php($discount=0)
                     @php($tax=0)
 
@@ -205,10 +198,10 @@
                                             </div>
 
                                             <div class="col col-md-2 align-self-center p-0 ">
-                                                <h6 style="font-size: 12px">{{number_format($detail->price)}}฿</h6>
+                                                <h6 style="font-size: 12px">{{number_format($detail->price,2,'.',',')}}฿</h6>
                                             </div>
 
-                                            <div class="col col-md-2 align-self-center">
+                                            <div class="col col-md-2 align-self-center ">
 
                                                 <h5 style="font-size: 12px">{{$detail->amount}}</h5>
                                             </div>
@@ -217,7 +210,7 @@
                                             <div class="col col-md-2 align-self-center text-right  ">
                                                 @php($subtotal=$detail->price*$detail->amount)
 
-                                                <h5 style="font-size: 12px">{{number_format($subtotal)}}฿</h5>
+                                                <h5 style="font-size: 12px">{{number_format($subtotal,2,'.',',')}}฿</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -236,20 +229,39 @@
                     <div class="row justify-content-md-end mb-3">
                         <div class="col-md-9 col-lg-8">
                             <dl class="row text-sm-right">
-                                <dt class="col-sm-6">การส่งสินค้า</dt>
+                                <dt class="col-sm-6">ค่าขนส่งสินค้า</dt>
                                 <dd class="col-sm-6 border-bottom">
                                     <strong>{{$shipping}}฿</strong>
                                 </dd>
 
                                 <dt class="col-sm-6">ทั้งหมด</dt>
                                 <dd class="col-sm-6">
-                                    <strong>{{number_format($total+$shipping)}}฿</strong>
+                                    <strong>{{number_format($total+$shipping,2,'.',',')}}฿</strong>
                                 </dd>
 
                                 <dt class="col-sm-6">รหัสติดตาม</dt>
                                 <dd class="col-sm-6 border-bottom">
                                     <strong>{{$ordetail[0]->tracking_code!=null?$ordetail[0]->tracking_code:'No tracking'}}</strong>
                                 </dd>
+
+                                <dt class="col-sm-6">บริษัทขนส่ง</dt>
+                                <dd class="col-sm-6 border-bottom">
+                                    <strong>{{$shipcom->name_company}}</strong>
+                                </dd>
+                                <br><br>
+                                @if($order->status_order==2 || $order->status_order==4 && $ordetail[0]->tracking_code==null)
+                                    <dt class="col-sm-6"></dt>
+                                    <dd class="col-sm-6 border-bottom">
+                                        <form action="{{url('merchant/createbooking')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="oid" id="oid" value="{{$order->id_order}}">
+                                            <input type="hidden" name="ship" id="oid" value="{{$shipcom->code}}">
+                                            <input type="hidden" name="odid" id="odid" value="{{$ordetail[0]->id_order_detail}}">
+
+                                            <strong><button class="btn btn-success btn-sm" type="submit">ยืนยันทำการจัดส่งออเดอร์ใช่หรือไม่</button></strong>
+                                        </form>
+                                    </dd>
+                                @endif
 
                             </dl>
                             <!-- End Row -->
@@ -262,6 +274,8 @@
                 <!-- End Card -->
             </div>
 
+
+            {{--  ลูกค้า--}}
             <div class="col-lg-4">
                 <!-- Card -->
                 <div class="card">
@@ -294,7 +308,7 @@
                                 </div>
                             </div>
 
-                            <hr>
+                            {{-- <hr>
 
                             <div class="media align-items-center" href="javascript:">
                                 <div class="icon icon-soft-info icon-circle mr-3">
@@ -304,9 +318,9 @@
                                     <span class="text-body text-hover-primary"> {{$num->count()}} orders</span>
                                 </div>
                                 <div class="media-body text-right">
-                                    {{--<i class="tio-chevron-right text-body"></i>--}}
+                                    <i class="tio-chevron-right text-body"></i>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <hr>
 
@@ -364,6 +378,7 @@
 @endsection
 
 @push('script_2')
+<script
     {{-- <script>
         $(document).on('change', '.payment_status', function () {
             var id = $(this).attr("data-id");

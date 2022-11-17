@@ -42,6 +42,7 @@
                             <th style="text-align: center;">รหัส</th>
                             <th style="text-align: center;">ชื่อ</th>
                             <th style="text-align: center;">ราคา</th>
+                            <th style="text-align: center;">ช่องทางการชำระเงิน</th>
                             <th style="text-align: center;">การจัดการ</th>
                         </tr>
                     </thead>
@@ -52,7 +53,7 @@
                                 <td class="text-center text-middle">{{$item->order_code}}</td>
                                 <td class="text-center text-middle">{{ $item->customer_name }} {{ $item->customer_lname }}</td>
                                 <td class="text-center text-middle">{{ number_format( $item->order_total,2,'.',',')}} ฿</td>
-
+                                <td class="text-center text-middle">{{$item->order_method}}</td>
                                
                                 <td class="text-center text-middle">
                                     <div class="dropdown-primary dropdown open">

@@ -16,7 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $sql = DB::Table('tb_orders')->leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')->get();
+        $sql = DB::Table('tb_orders')->leftJoin('tb_customers', 'tb_orders.customer_id', '=', 'tb_customers.customer_id')
+        ->orderBy('tb_orders.created_at','DESC')->get();
         return view('backend.order.order')->with(['sql'=>$sql]);
     }
 
