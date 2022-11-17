@@ -19,9 +19,9 @@
             </div>
             <div class="col-10 row align-self-center justify-content-between pl-2">
                 <div class="col-4 p-0 text-left">
-                    <h5 class="m-0">{{$sql->merchant_name}}</h5>
-                    <h5 class="m-0">X{{$sql->amount}}</h5>
-                    <h5 class="m-0">{{$sql->price*$sql->amount}}</h5>
+                    <h5 class="m-0">ร้านค้า : {{$sql->merchant_name}}</h5>
+                    <h5 class="m-0">จำนวนสินค้า : {{$sql->amount}}</h5>
+                    <h5 class="m-0">รวมราคา : {{$sql->price*$sql->amount}}</h5>
                 </div>
                 <div class="col-6 p-0 text-right">
                     <h5 class="m-0  text-right">{{date('d/m/Y',strtotime($sql->created_at))}}</h5>

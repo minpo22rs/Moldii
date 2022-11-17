@@ -12,6 +12,7 @@ use App\Models\Tb_order;
 use App\Models\User;
 use App\Models\Tb_credit;
 use App\Models\Tb_payment_log;
+use App\Models\Tb_cart;
 
 class OrderController extends Controller
 {
@@ -51,19 +52,21 @@ class OrderController extends Controller
      
         if($request->resultCode == '55'){
             Tb_order::where('id_order',$rid)->update(['status_order'=>5]);
+            Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>2]);
             return redirect('cartindex');
         }elseif($request->resultCode == '01'){ //customer cancel
             Tb_order::where('id_order',$rid)->update(['status_order'=>5]);
+            Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>2]);
             return redirect('cartindex');
 
         }else{
 
             $sql = Tb_order::where('id_order',$rid)->first();
 
-            if($sql->order_method == 'Credit card'){
+            if($sql->order_method == 'Credit card' || $sql->order_method == 'Mobile Banking' || $sql->order_method == 'TrueMoney Wallet'){
                 Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>1]);
                 Tb_order::where('id_order',$rid)->update(['status_order'=>2]);
-
+           
             }else{
                 Tb_order_detail::where('order_id',$rid)->update(['status_detail'=>8]);
                 Tb_order::where('id_order',$rid)->update(['status_order'=>1,'order_ref_gb'=>$request->gbpReferenceNo]);
@@ -81,7 +84,7 @@ class OrderController extends Controller
 
     public function paymentgateway(Request $request){
 
-        // dd($request->all());
+        // dd($request->all(),Session::all());
         $address = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->where('address_status','=','on')
                 ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
                 ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
@@ -114,7 +117,7 @@ class OrderController extends Controller
         $order->order_postcode = $address->customer_postcode;
         $order->save();
 
-        $sql = DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->get();
+        $sql = Tb_cart::whereIn('cart_id',Session::get('cartid'))->get();
 
         foreach($sql as $sqls){
             $p = DB::Table('tb_products')->where('product_id',$sqls->product_id)->first();
@@ -132,17 +135,19 @@ class OrderController extends Controller
             $order_de->store_id =  $sqls->store_id;
             $order_de->customer_id = Session::get('cid');
             $order_de->amount =  $sqls->count;
+            $order_de->shipping_cost =  $sqls->shipping_3per;
+            $order_de->company_shipping =  $sqls->shipping_id;
 
             $order_de->save();
         }
 
-        DB::Table('tb_carts')->whereIn('cart_id',Session::get('cartid'))->delete();
+        Tb_cart::whereIn('cart_id',Session::get('cartid'))->delete();
 
 
         // dd(Session::all());
         $url='';
-        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
-        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem";
+        $secret_key = "PbqyzQgpWejNZKq8mhShhMyI27WZgcHp";
+        $public = "vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl";
         $data = array();
         $d = date('Ymd');
         $r = rand(0000000,9999999);
@@ -152,22 +157,22 @@ class OrderController extends Controller
         $backgroundUrl = "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."";
 
         $amount = number_format(Session::get('totalcart'),2,'.','');
-        $sql = Tb_credit::where('customer_id',Session::get('cid'))->where('num',Session::get('bankcode'))->first();
 
 
 
 
         if(Session::get('typepayment') == 'Moldii wallet'){
             Tb_order::where('id_order',$order->id)->update(['status_order'=>3]);
-            Tb_order_detail::where('id_order',$order->id)->update(['status_detail'=>1]);
+            Tb_order_detail::where('order_id',$order->id)->update(['status_detail'=>1]);
             
             $total =  Session::get('totalcart')+ Session::get('sumship');
             User::where('customer_id',Session::get('cid'))->decrement('customer_wallet',$total);
             return  redirect('ordertoship/'.$order->id.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
 
         }elseif(Session::get('typepayment') == 'เก็บเงินปลายทาง'){
+            // dd($order->id);
             Tb_order::where('id_order',$order->id)->update(['status_order'=>4]);
-            Tb_order_detail::where('id_order',$order->id)->update(['status_detail'=>9]);
+            Tb_order_detail::where('order_id',$order->id)->update(['status_detail'=>9]);
             
             
             return  redirect('ordertoship/'.$order->id.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
@@ -177,6 +182,7 @@ class OrderController extends Controller
             $headers = array(
                 'Content-Type: application/json',
             );
+            $sql = Tb_credit::where('customer_id',Session::get('cid'))->where('num',Session::get('bankcode'))->first();
 
             $data = array(
                 "amount"=> number_format( Session::get('totalcart'),2,'.',''),
@@ -343,6 +349,8 @@ class OrderController extends Controller
                 return view('mobile.member.userAccount.threedsecure')->with(['res'=>$res]);
     
             }else{
+                Tb_order::where('id_order',$order->id)->update(['status_order'=>6]);
+                Tb_order_detail::where('order_id',$order->id)->update(['status_detail'=>2]);
                 return back()->with(['msg'=>'error']);
             }
 
@@ -376,7 +384,7 @@ class OrderController extends Controller
 
 
 
-    public function choosecode($ship)
+    public function choosecode($ship,$sum)
     {
         $date = date('Y-m-d');
         // $date ="2022-05-02";
@@ -386,28 +394,40 @@ class OrderController extends Controller
         // $sql = DB::Table('tb_vouchers')->where('voucher_start', '>=', $date)->where('voucher_expire', '<=', $date)->get();
         // $sql = DB::Table('tb_vouchers')
         // ->whereRaw("'?' BETWEEN voucher_start AND voucher_expire",[$date])->get();
-        $sql = DB::Table('tb_vouchers')->where('voucher_use_for', 'like', '%discount%')->get();
+        $sql = DB::Table('tb_vouchers')->where('voucher_use_for', 'like', '%discount%')->where('voucher_amount','!=',0)->get();
         // dd($sql);
    
 
-        return view('mobile.member.userAccount.my_list.chooseCode')->with(['sql'=>$sql,'ship'=>$ship]);
+        return view('mobile.member.userAccount.my_list.chooseCode')->with(['sql'=>$sql,'ship'=>$ship,'sum'=>$sum]);
     }
 
     public function selectcode($id,$ship)
     {
 
-       
-        $sql = DB::Table('tb_vouchers')->where('voucher_id', $id)->first();
-        if($sql->voucher_unit=='bath'){
-            $sum =  Session::get('totalcart')-$sql->voucher_value;
-            Session::put('totalcart',$sum);
+        if($id==0){
+
+     
+            Session::put('totalcart',Session::get('before'));
+           
+            Session::put('idcode',null);
+            Session::put('codename','เลือกโค้ดส่วนลด');
+
+
         }else{
-            $sum =  Session::get('totalcart')-(Session::get('totalcart')*$sql->voucher_value/100);
-            Session::put('totalcart',$sum);
-        }
-        Session::put('idcode',$sql->voucher_id);
-        Session::put('codename',$sql->voucher_name);
+            $sql = DB::Table('tb_vouchers')->where('voucher_id', $id)->first();
+            if($sql->voucher_unit=='bath'){
+                $sum =  Session::get('totalcart')-$sql->voucher_value;
+                Session::put('totalcart',$sum);
+            }else{
+                $sum =  Session::get('totalcart')-(Session::get('totalcart')*$sql->voucher_value/100);
+                Session::put('totalcart',$sum);
+            }
+            Session::put('idcode',$sql->voucher_id);
+            Session::put('codename',$sql->voucher_name);
    
+
+        }
+        
 
         return redirect('checkoutaddress');
     }

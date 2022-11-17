@@ -63,7 +63,7 @@ class ContentController extends Controller
 
     public function userpostcontent(Request $request){
         date_default_timezone_set('Asia/Bangkok');
-        // dd($request->all());
+        dd($request->all());
         $content = new Tb_user_content();
         $content->customer_id          = Session::get('cid');
         $content->new_type          = 'U';

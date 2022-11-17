@@ -29,10 +29,12 @@
           <h5 class="card-header">ได้รับคำสั่งซื้อแล้ว : {{$order->order_code}}</h5>
           <div class="card-body">
             @if($order->status_order ==1 )
-              <h5 class="card-title">สถานะ : รอแจ้งชำระเงิน </h5> 
+              <h5 class="card-title">สถานะ : รอส่งหลักฐานการชำระเงิน </h5> 
               {{-- <h6>กรุณาแจ้งชำระเงินภายใน</h6> --}}
-            @else
+            @elseif($order->status_order ==2)
               <h5 class="card-title">สถานะ : ชำระเงินแล้ว</h5>
+            @else
+              <h5 class="card-title">สถานะ : ชำระเงินปลายทาง</h5>
             @endif
             @if($order->status_order ==1 )
               <form action="{{url('user/submitslip')}}" method="POST" enctype="multipart/form-data">
@@ -116,7 +118,7 @@
 @section('custom_script')
   <script>
 
-      bottom_now(6);
+      bottom_now(1);
 
 
 

@@ -23,6 +23,7 @@ class CartController extends Controller
         $mycart = Tb_cart::where('customer_id',Session::get('cid'))->groupBy('store_id')->get();
         // dd( $mycart);
         $my = User::where('customer_id',Session::get('cid'))->first();
+        Session::put('before',0);
         Session::put('totalcart',0);
         Session::put('countcart',0);
         Session::put('cartid',null);
@@ -185,6 +186,9 @@ class CartController extends Controller
     
         }
 
+        Session::put('before',Session::get('totalcart'));
+
+
         $data = array(
             'sum' => number_format(Session::get('totalcart'),2,'.',','),
             'chkcount' => Session::get('countcart'),
@@ -240,6 +244,7 @@ class CartController extends Controller
 
         }
 
+        Session::put('before',Session::get('totalcart'));
 
         $data = array(
             'sum' => number_format(Session::get('totalcart'),2,'.',','),
@@ -291,6 +296,7 @@ class CartController extends Controller
                 // $my = User::where('customer_id',Session::get('cid'))->first();
         }
 
+        Session::put('before',Session::get('totalcart'));
 
         $data = array(
             'sum' => number_format(Session::get('totalcart'),2,'.',','),
@@ -310,6 +316,25 @@ class CartController extends Controller
         return 1;
     }
 
+    public function checkoutaddress2(){
+        $chk = 0;
+        
+        $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
+        $my = User::where('customer_id',Session::get('cid'))->first();
+        $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
+
+        if($add != null){
+            $chk = 0;
+
+        }else{
+            $chk = 1;
+
+        }
+
+        return view('mobile.member.userAccount.my_list.buyGoods')->with(['mycart'=>$mycart,'my'=>$my,'add'=>$add,'chk'=>$chk]);
+
+    }
+
 
     public function checkoutaddress(Request $request)
     {
@@ -321,6 +346,7 @@ class CartController extends Controller
         $cs = Tb_cart::whereIn('cart_id',Session::get('cartid'))->get();
        
         $my = User::where('customer_id',Session::get('cid'))->first();
+
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
 
         $cadd = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')
@@ -343,22 +369,22 @@ class CartController extends Controller
 
         }
 
-        foreach($cs  as $key => $my){
+        foreach($cs  as $key => $css){
 
            
-            $sqlsel = Merchant::where('merchant_id',$my->store_id)
+            $sqlsel = Merchant::where('merchant_id',$css->store_id)
                                 ->leftJoin('districts', 'tb_merchants.merchant_tumbon', '=', 'districts.id')
                                 ->leftJoin('amphures', 'tb_merchants.merchant_district', '=', 'amphures.id')
                                 ->leftJoin('provinces', 'tb_merchants.merchant_province', '=', 'provinces.id')
                                 ->select('tb_merchants.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
                                 ->first();
-            $product = DB::Table('tb_products')->where('product_id',$my->product_id)->first();
+            $product = DB::Table('tb_products')->where('product_id',$css->product_id)->first();
             
-            $ship[$key] = $my->cart_id;
+            $ship[$key] = $css->cart_id;
             
             $data[$key]['from']['name'] =$sqlsel->merchant_name.$sqlsel->merchant_lname;
             $data[$key]['from']['address'] = $sqlsel->merchant_address;
-            $data[$key]['from']['district'] =  $sqlsel->tth;
+            $data[$key]['from']['district'] =  $sqlsel->tth;  //tumbon
             $data[$key]['from']['state'] = $sqlsel->ath;
             $data[$key]['from']['province'] = $sqlsel->pth;
             $data[$key]['from']['postcode'] = $sqlsel->merchant_postcode;
@@ -366,7 +392,7 @@ class CartController extends Controller
 
             $data[$key]['to']['name'] = $cadd->customer_name;
             $data[$key]['to']['address'] = $cadd->customer_address;
-            $data[$key]['to']['district'] = $cadd->tth;
+            $data[$key]['to']['district'] = $cadd->tth; //tumbon
             $data[$key]['to']['state'] = $cadd->ath;
             $data[$key]['to']['province'] = $cadd->pth;
             $data[$key]['to']['postcode'] = $cadd->customer_postcode;
@@ -405,16 +431,39 @@ class CartController extends Controller
         $json = json_decode($content);
         $jsondata = (array)$json->data;
 
-        // dd( $jsondata);
+    
 
 
         foreach($ship as $key =>$value){
-            Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->FLE->price,
-                    'shipping_day'=> $jsondata[$key]->FLE->estimate_time,'shipping_id'=>3,
-                    'shipping_3per' => $jsondata[$key]->FLE->price +($jsondata[$key]->FLE->price*0.03)]);
+            if(array_key_exists('FLE',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->FLE->price,
+                        'shipping_day'=> $jsondata[$key]->FLE->estimate_time,'shipping_id'=>3,
+                        'shipping_3per' => $jsondata[$key]->FLE->price +($jsondata[$key]->FLE->price*0.03)]);
+            }else if(array_key_exists('NJV',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->NJV->price,
+                        'shipping_day'=> $jsondata[$key]->NJV->estimate_time,'shipping_id'=>1,
+                        'shipping_3per' => $jsondata[$key]->NJV->price +($jsondata[$key]->NJV->price*0.03)]);
+            }else if(array_key_exists('THP',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->THP->price,
+                        'shipping_day'=> $jsondata[$key]->THP->estimate_time,'shipping_id'=>4,
+                        'shipping_3per' => $jsondata[$key]->THP->price +($jsondata[$key]->THP->price*0.03)]);
+            }else if(array_key_exists('TP2',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->TP2->price,
+                        'shipping_day'=> $jsondata[$key]->TP2->estimate_time,'shipping_id'=>5,
+                        'shipping_3per' => $jsondata[$key]->TP2->price +($jsondata[$key]->TP2->price*0.03)]);
+            }else if(array_key_exists('JNTD',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->JNTD->price,
+                        'shipping_day'=> $jsondata[$key]->JNTD->estimate_time,'shipping_id'=>7,
+                        'shipping_3per' => $jsondata[$key]->JNTD->price +($jsondata[$key]->JNTD->price*0.03)]);
+            }else if(array_key_exists('KRYD',$jsondata[$key])){
+                Tb_cart::where('cart_id',$value)->update(['shipping_cost'=> $jsondata[$key]->KRYD->price,
+                        'shipping_day'=> $jsondata[$key]->KRYD->estimate_time,'shipping_id'=>8,
+                        'shipping_3per' => $jsondata[$key]->KRYD->price +($jsondata[$key]->KRYD->price*0.03)]);
+            }
+            
         }
 
-        // dd('yeahhhhhhh');
+        // dd($my);
 
 
        
@@ -472,13 +521,13 @@ class CartController extends Controller
         $my = User::where('customer_id',Session::get('cid'))->first();
         Session::put('coin',0);
         if($request->chk == 0){
-            Session::put('coin',-(int)$my->customer_point);
+            Session::put('coin',-(int)$my->customer_coin);
             Session::put('totalcart',Session::get('totalcart')+ Session::get('coin'));
 
         }else{
             
             Session::put('coin',null);
-            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_point);
+            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_coin);
 
         }
 
@@ -499,7 +548,8 @@ class CartController extends Controller
         $s3 =0;
         Session::put('coin',0);
         if($request->chk == 0){
-            Session::put('coin',-(int)$my->customer_point);
+            
+            Session::put('coin',-(int)$my->customer_coin);
             Session::put('totalcart',Session::get('totalcart')+ Session::get('coin'));
             $s1 = number_format(Session::get('totalcart'),2,'.','');
             $s2 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
@@ -508,7 +558,7 @@ class CartController extends Controller
         }else{
             
             Session::put('coin',null);
-            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_point);
+            Session::put('totalcart',Session::get('totalcart')+ (int)$my->customer_coin);
             $s1 = number_format(Session::get('totalcart'),2,'.','');
             $s2 = number_format((Session::get('totalcart')+$request->v),2,'.',',');
             $s3 = number_format((Session::get('totalcart')+$request->v),2,'.',',');

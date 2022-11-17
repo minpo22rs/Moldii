@@ -76,17 +76,17 @@
                                 <div class="col-9 ml-1 row align-self-center justify-content-between ">
                                     <div class="col-6 p-0 text-left ">
                                         <h5 class="m-0">{{$product->product_name}}</h5>
-                                        <select class="  select-2" aria-label=".form-select-sm example">
+                                        {{-- <select class="  select-2" aria-label=".form-select-sm example">
                                             <option class="option-2" selected>ตัวเลือกสินค้า</option>
                                             <option class="option-2" value="1">One</option>
-                                        </select>
+                                        </select> --}}
 
                                         <div class="row col-12">
                                             @if($product->product_discount != null)
-                                                <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>฿{{number_format($product->product_price,2,'.','')}}</s> </h5>
-                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_discount,2,'.','')}}</h5>
+                                                <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>ราคา : ฿{{number_format($product->product_price,2,'.','')}}</s> </h5>
+                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_discount,2,'.','')}}</h5>
                                             @else
-                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">฿{{number_format($product->product_price,2,'.','')}}</h5>
+                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_price,2,'.','')}}</h5>
                                             @endif
                                         </div>
                                         <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">

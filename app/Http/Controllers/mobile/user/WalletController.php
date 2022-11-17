@@ -40,8 +40,8 @@ class WalletController extends Controller
         $payload = '';
         $headers = array();
         $url='';
-        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
-        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem";
+        $secret_key = "PbqyzQgpWejNZKq8mhShhMyI27WZgcHp";
+        $public = "vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl";
         $data = array();
         $d = date('Ymd');
         $r = rand(0000000,9999999);
@@ -372,7 +372,12 @@ class WalletController extends Controller
     public function donate ()
     { 
         $sql = User::where('customer_id',Session::get('cid'))->first();
-        $donate = DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))->get();
+        $donate = DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))
+                    ->select(DB::raw('COUNT(id_donate_log) as countt'),'donate','coin')->groupBy('donate')->get();
+
+        // dd($donate);
+
+
         return view('mobile.member.userAccount.donate')->with(['sql'=>$sql,'donate'=>$donate]);
     }
 

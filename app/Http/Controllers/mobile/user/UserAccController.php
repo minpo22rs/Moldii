@@ -389,8 +389,8 @@ class UserAccController extends Controller
 
     public function saveCreditCardonProfile(Request $request){// การบันทึกบัตร
         // dd($request->all());
-        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
-        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem:";
+        $secret_key = "PbqyzQgpWejNZKq8mhShhMyI27WZgcHp";
+        $public = "vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl:";
         $base64 = base64_encode($public);
         $b = "Basic ";
         $headerskey = $b.$base64;
@@ -469,12 +469,13 @@ class UserAccController extends Controller
         $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();
         $id = $n->pluck('new_id');
         // dd($id);
-        $sql = DB::Table('tb_notifications')->orderBy('created_at','DESC')->get();
+        $sql = DB::Table('tb_notifications')->where('customer_id',null)->orderBy('created_at','DESC')->get();
+        $sqlid = DB::Table('tb_notifications')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
         $comment = DB::Table('tb_comments')->whereIn('comment_object_id',$id)->orderBy('created_at','DESC')->get();
 
-        // dd( $comment);
+        // dd( $sqlid);
 
-        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ,'comment'=>$comment]);
+        return view('mobile.member.userAccount.notification.notification')->with(['sql' => $sql ,'comment'=>$comment,'sqlid'=>$sqlid]);
 
     }
     public function settingNotification(){// ตั้งค่าการแจ้งเตือน
@@ -492,13 +493,13 @@ class UserAccController extends Controller
     
     public function confirmreceive($id){
         // dd($id);
-        Tb_order_detail::where('id_order_detail',$id)->update(['status_detail'=>1]);
+        Tb_order_detail::where('id_order_detail',$id)->update(['status_detail'=>10]);
         return redirect('user/myList')->with('msg','ยืนยันสินค้าเรียบร้อยแล้ว');
     }
     
     
     public function myList(){// รายการของฉัน
-        $sql = Tb_order_detail::where('tb_order_details.customer_id',Session::get('cid'))->where('status_order','!=',4)
+        $sql = Tb_order_detail::where('tb_order_details.customer_id',Session::get('cid'))->where('status_order','!=',5)
             ->leftJoin('tb_orders','tb_order_details.order_id','=','tb_orders.id_order')
             ->leftJoin('tb_products','tb_order_details.product_id','=','tb_products.product_id')
             ->leftJoin('tb_merchants','tb_order_details.store_id','=','tb_merchants.merchant_id')
@@ -570,7 +571,7 @@ class UserAccController extends Controller
 
     }
 
-    public function chooseShipping($sid){// เลือกขนส่ง
+    public function chooseShipping($sid,$id){// เลือกขนส่ง
 
         // dd($pid);
         $cadd = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')
@@ -589,11 +590,12 @@ class UserAccController extends Controller
         $data = array();
         $shipid =array();
 
+        $cart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->where('shipping_id',$id)->first();
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->where('store_id',$sid)->get();
 
         foreach($mycart as $mycarts){
-            $ship = DB::Table('tb_product_shippings')->where('id_product',$mycarts->product_id)->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
-            $product = DB::Table('tb_products')->where('product_id',$mycarts->product_id)->first();
+            $ship = DB::Table('tb_product_shippings')->where('id_product',4)->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
+            $product = DB::Table('tb_products')->where('product_id',4)->first();
             foreach($ship as $key => $ships){
                 $shipid[$key]['id'] = $ships->id_product_shipping;
                 $shipid[$key]['code'] = $ships->code;
@@ -621,6 +623,7 @@ class UserAccController extends Controller
                 $data[$key]['parcel']['length'] = $product ->length;
                 $data[$key]['parcel']['height'] = $product ->height;
 
+                // $data[$key]['courier_code'] = "TP2";
                 $data[$key]['courier_code'] = $ships->code;
             }
 
@@ -634,7 +637,7 @@ class UserAccController extends Controller
             $datasend = http_build_query($object);
             $url = 'https://mkpservice.shippop.dev/pricelist/'; 
     
-            // dd($shipid);
+            // dd($object);
     
             $ch = curl_init();
             curl_setopt( $ch, CURLOPT_URL, $url );
@@ -645,38 +648,38 @@ class UserAccController extends Controller
             curl_close($ch);
             $json = json_decode($content);
             $jsondata = (array)$json->data;
+
+            // dd( $json);
     
-            // dd( $jsondata);
-    
-    
+            
             foreach($shipid as $key =>$value){
                 
-                if($value['code'] == 'NJV'){
+                if($value['code'] == 'NJV' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->NJV->price,
                         'shipping_day'=> $jsondata[$key]->NJV->estimate_time,
                         'cost_3per' => $jsondata[$key]->NJV->price +($jsondata[$key]->NJV->price*0.03)]);
 
-                }else if($value['code'] == 'FLE'){
+                }else if($value['code'] == 'FLE' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->FLE->price,
                         'shipping_day'=> $jsondata[$key]->FLE->estimate_time,
                         'cost_3per' => $jsondata[$key]->FLE->price +($jsondata[$key]->FLE->price*0.03)]);
 
-                }else if($value['code'] == 'THP'){
+                }else if($value['code'] == 'THP' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->THP->price,
                         'shipping_day'=> $jsondata[$key]->THP->estimate_time,
                         'cost_3per' => $jsondata[$key]->THP->price +($jsondata[$key]->THP->price*0.03)]);
                     
-                }else if($value['code'] == 'TP2'){
+                }else if($value['code'] == 'TP2' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->TP2->price,
                         'shipping_day'=> $jsondata[$key]->TP2->estimate_time,
                         'cost_3per' => $jsondata[$key]->TP2->price +($jsondata[$key]->TP2->price*0.03)]);
                     
-                }else if($value['code'] == 'JNTD'){
+                }else if($value['code'] == 'JNTD' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->JNTD->price,
                         'shipping_day'=> $jsondata[$key]->JNTD->estimate_time,
                         'cost_3per' => $jsondata[$key]->JNTD->price +($jsondata[$key]->JNTD->price*0.03)]);
                     
-                }else if($value['code'] == 'KRYD'){
+                }else if($value['code'] == 'KRYD' && $jsondata[$key] != null){
                     DB::Table('tb_product_shippings')->where('id_product_shipping',$value['id'])->update(['cost'=> $jsondata[$key]->KRYD->price,
                         'shipping_day'=> $jsondata[$key]->KRYD->estimate_time,
                         'cost_3per' => $jsondata[$key]->KRYD->price +($jsondata[$key]->KRYD->price*0.03)]);
@@ -685,12 +688,24 @@ class UserAccController extends Controller
                 
             }
         }
-
-        $shipnew = DB::Table('tb_product_shippings')->where('id_product',$mycart[0]->product_id)->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
+        $shipnew = DB::Table('tb_product_shippings')->where('id_product',$cart->product_id)->where('cost','!=',0)
+                    ->leftJoin('tb_shipping_companys','tb_product_shippings.id_company','=','tb_shipping_companys.id_shipping_company')->get();
         
+        // dd($mycart[0]->product_id);
        
-        return view('mobile.member.userAccount.my_list.chooseShipping')->with(['ship'=>$shipnew]);
+        return view('mobile.member.userAccount.my_list.chooseShipping')->with(['ship'=>$shipnew,'sid'=>$sid,'cart'=>$cart]);
 
+    }
+
+    public function changevalueshippingoncart(Request $request){
+        // dd($request->all());
+        Tb_cart::whereIn('cart_id',Session::get('cartid'))->where('store_id',$request->sid)
+                ->update(['shipping_cost'=> $request->cost,
+                'shipping_day'=> $request->day,
+                'shipping_id'=>$request->ship,
+                'shipping_3per' => $request->cost3_per]);
+
+        return redirect('checkoutaddress2');
     }
 
 
@@ -722,8 +737,8 @@ class UserAccController extends Controller
 
     public function saveCreditCardonCart(Request $request){// การบันทึกบัตรจากหน้าตระกร้า
         // dd( $request->all());
-        $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
-        $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem:";
+        $secret_key = "PbqyzQgpWejNZKq8mhShhMyI27WZgcHp";
+        $public = "vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl:";
         $base64 = base64_encode($public);
         $b = "Basic ";
         $headerskey = $b.$base64;

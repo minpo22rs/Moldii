@@ -6,7 +6,7 @@
             <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
     </div>
-    <div class="pageTitle">
+    <div class="pageTitle text-center">
         {{$product->product_name}}
     </div>
     <div class="right"></div>

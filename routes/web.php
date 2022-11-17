@@ -76,9 +76,10 @@ Route::get('user/emailSave', [UserAccController::class, 'emailSave']);// กร�
 Route::get('user/myAddress', [UserAccController::class, 'myAddress']);// โชว์ที่อยู่ของฉัน
 Route::get('user/newAddress', [UserAccController::class, 'newAddress']);// โชว์ที่อยู่ของฉัน
 Route::post('user/addnewaddress', [UserAccController::class, 'addnewaddress']);// โชว์ที่อยู่ของฉัน
-Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changevalueaddress']);// โชว์ที่อยู่ของฉัน
-Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);// โชว์ที่อยู่ของฉัน
-Route::get('user/deleteAddress/{id}', [UserAccController::class, 'deleteAddress']);// โชว์ที่อยู่ของฉัน
+Route::get('user/changevalueaddress/{id}', [UserAccController::class, 'changevalueaddress']);
+Route::get('user/changevalueaddressoncart/{id}', [UserAccController::class, 'changevalueaddressoncart']);
+Route::get('user/deleteAddress/{id}', [UserAccController::class, 'deleteAddress']);
+Route::post('user/changevalueshippingoncart', [UserAccController::class, 'changevalueshippingoncart']);
 
 
 Route::get('getAmphure',[UserAccController::class, 'getAmphure']);//
@@ -110,7 +111,7 @@ Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceiv
 Route::get('user/myList', [UserAccController::class, 'myList']);// รายการของฉัน
 Route::get('user/buyGoods', [UserAccController::class, 'buyGoods']);// ทำการสั่งซื้อ
 Route::get('user/chooseAddress', [UserAccController::class, 'chooseAddress']);// เลือกที่อยู่
-Route::get('user/chooseShipping/{sid}', [UserAccController::class, 'chooseShipping']);// เลือกขนส่ง
+Route::get('user/chooseShipping/{sid}/{id}', [UserAccController::class, 'chooseShipping']);// เลือกขนส่ง
 Route::get('user/paymentMethod', [UserAccController::class, 'paymentMethod']);// ช่องทางการชำระเงิน
 Route::get('user/addCreditCard_2', [UserAccController::class, 'addCreditCard_2']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
 Route::post('user/saveCreditCardonCart', [UserAccController::class, 'saveCreditCardonCart']);// การเพิ่มบัตร(คลิก จากหน้า ช่องทางการชำระเงิน)
@@ -199,6 +200,7 @@ Route::get('calcartstore', [CartController::class, 'calcartstore']);
 Route::get('calcartid', [CartController::class, 'calcartid']); 
 Route::get('calcartall', [CartController::class, 'calcartall']); 
 Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkoutaddress']); 
+Route::get('checkoutaddress2', [CartController::class, 'checkoutaddress2']); 
 Route::get('delcartid', [CartController::class, 'delcartid']); 
 Route::get('countdown', [CartController::class, 'countdown']); 
 Route::get('countup', [CartController::class, 'countup']); 
@@ -285,7 +287,7 @@ Route::get('home', [HomeController::class, 'index']);
 Route::get('ordertoship/{id}', [OrderController::class, 'ordertoship']);
 Route::match(['GET', 'POST'],'addorder', [OrderController::class, 'addorder']);
 Route::get('bankcode', [OrderController::class, 'bankcode']);
-Route::get('choosecode/{ship}', [OrderController::class, 'choosecode']);
+Route::get('choosecode/{ship}/{sum}', [OrderController::class, 'choosecode']);
 Route::get('selectcode/{id}/{ship}', [OrderController::class, 'selectcode']);
 Route::get('selectpaymentmethod/{type}/{name}', [OrderController::class, 'selectpaymentmethod']);
 

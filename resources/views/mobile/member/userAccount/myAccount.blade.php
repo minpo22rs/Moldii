@@ -85,7 +85,7 @@
                     <div class="card">
                         <div class="row w-100 mx-3 my-2 text-center">
                             <img src="{{ asset('new_assets/icon/ขอเปิดร้านค้า.png')}}" width="15%">
-                            <span class="ml-2 align-self-center font-weight-bold">ไปที่ร้านค้า</span>
+                            <span class="ml-2 align-self-center font-weight-bold">ร้านค้าของฉัน</span>
                         </div>
                     </div>
                 </a>
@@ -150,7 +150,7 @@
     </div>
 </a>
 
-
+{{-- 
 <a href="{{url('user/sendslip')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row ">
         <img  src="{{ asset('new_assets/icon/หน้าแจ้งชำระเงิน.png')}}" >
@@ -159,7 +159,7 @@
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
-</a>
+</a> --}}
 
 <a href="{{url('logout')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row ">

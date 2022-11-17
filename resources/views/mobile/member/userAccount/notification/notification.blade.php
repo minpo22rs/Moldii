@@ -60,6 +60,23 @@
 
 
         <div id="system" class="tab-pane fade ">
+            @foreach($sqlid as $sqlids)
+                <a href="{{url('')}}" class="row p-1 pr-0 border-top border-bottom">
+                    <div class="">
+                        <img class="rounded-circle" src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" style="width: 60px; height: 60px; border-radius: 6px;">
+                    </div>
+                    <div class="col-10 row align-self-center justify-content-between pr-0 pl-2">
+                        <div class="col-9 p-0 ">
+                            <h5 class="m-0 align-self-center" >{{$sqlids->noti_title}}</h5>
+                            {{-- <h6 class="m-0  "><small>{{$sqlids->noti_detail}}</small> </h6> --}}
+                        </div>
+                        <div class=" p-0 text-center">
+                            <h6 class="m-0  ">{{date('Y-m-d',strtotime($ssqlidsqls->created_at))}}</h6>
+                            <h6 class="m-0  "><small>{{date('H:i',strtotime($sqlids->created_at))}}</small> </h6>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
             @foreach($sql as $sqls)
                 <a href="{{url('')}}" class="row p-1 pr-0 border-top border-bottom">
                     <div class="">

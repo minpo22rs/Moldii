@@ -13,7 +13,7 @@
 <br>
 <div class="container m-0 p-0">
     <div class="col-12 p-2 " style="background: #DFEDFC;">
-        <h5 class="m-0  mt-1 mb-1 font-weight-bold ">คำสั่งซื้อกำลังอยู่ระหว่างส่ง</h5>
+        <h5 class="m-0  mt-1 mb-1 font-weight-bold ">คำสั่งซื้อกำลังอยู่ระหว่างการจัดส่ง</h5>
         <h5 class=" m-0 ">คุณจะได้รับสินค้าภายใน <a href="" style="color:rgba(0, 0, 0, 1);">26-08-2021</a> </h5>
     </div>
 

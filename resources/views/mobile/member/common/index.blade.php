@@ -256,7 +256,7 @@
                 <a href="{{url('user/notification')}}" > 
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
-                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$noti->count()+$ccomment->count()}}</span>
+                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$noti->count()+$ccomment->count()+$notiid->count()}}</span>
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
                         {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span>  --}}
                     </div>
@@ -693,7 +693,17 @@
                         
 
                         <div class="card-body p-2">
-                            <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text">{{$sqls->new_title}}</a>
+                            @if(strlen($sqls->new_title) >500)
+                               
+                                <a href="{{url('content/'.$sqls->new_id.'')}}" id="read{{$sqls->new_id}}" class="card-text" style="color: black;display:">{{mb_substr($sqls->new_title, 0, 500).'...'}}</a>
+                                <a href="javascript:;" style="color:blue;display:" id="btnread{{$sqls->new_id}}" onclick="readmore({{$sqls->new_id}});"> อ่านต่อ</a>
+
+                                <a href="{{url('content/'.$sqls->new_id.'')}}" id="readmore{{$sqls->new_id}}" class="card-text" style="color: black;display:none">{{$sqls->new_title}}</a>
+
+                            @else
+                                <a href="{{url('content/'.$sqls->new_id.'')}}" class="card-text" style="color: black">{{$sqls->new_title}}</a>
+                            @endif
+
                         </div>
                         {{-- <a href="{{url('content/'.$sqls->new_id.'')}}"> --}}
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -1435,8 +1445,12 @@
                 });
             });
 
-
-
+            function readmore(v){
+                document.getElementById('readmore'+v).style.display='';
+                document.getElementById('read'+v).style.display='none';
+                document.getElementById('btnread'+v).style.display='none';
+            }
+            
             var gallery = 1000;
 
             // const btnSearch = document.getElementById('btn_search_2');
@@ -1972,9 +1986,20 @@
                     $('#gallerypreview'+id).remove();
                     $('#btn'+id).remove();
 
-                    var videotag= '<video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
-                        
-                    $('#div'+id).append(videotag);
+                    var media = new Audio(reader.result);
+                    media.onloadedmetadata = function(){
+                        if(media.duration >15){
+                            alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสวีดีโอได้ไม่เกิน 15 วินาที');
+                            $('#div'+id).remove();
+                        }else{
+                            var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
+                            
+                            $('#div'+id).append(videotag);
+                        }
+                    }; 
+                    
+
+
                 }
                 reader.readAsDataURL(v);
             }
@@ -1992,6 +2017,13 @@
                     var fileName = filelist[i].name;
                     var fileExtension = fileName.split('.').pop();
                     if(fileExtension == 'mp4'){
+                        // var fileURL = URL.createObjectURL(filelist[i]);
+                        // vid.src = fileURL;
+                        // vid.ondurationchange = function() {
+                        //     alert(this.duration);
+                        // };
+                        // console.log(filelist[i].duration);
+
                         writevideo(filelist[i],id);
                         // var imgs = '<input type="file" name=video['+gallery+'] value="'+filelist[i].name+'" >';
                         // $('#rowsocial').append(imgs);

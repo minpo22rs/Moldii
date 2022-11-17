@@ -84,7 +84,6 @@
 
         @foreach($carttt as $cartts)
             <?php   $product = DB::Table('tb_products')->where('product_id',$cartts->product_id)->first();
-   
                     if( $product->product_discount == null){
                         $sum += (float)$product->product_price*(int)$cartts->count;
                     }else{
@@ -117,14 +116,16 @@
         <div class="col-12 p-2 pt-1 " style="background: #DFEDFC;">
             <h5 class="m-0  mt-1 mb-1 font-weight-bold " style="color:rgba(80, 202, 101, 1);">ตัวเลือกการจัดส่ง</h5>
             <div class="col-12 row m-0 p-0 pt-1 justify-content-between border-top">
-                {{-- <?php $sh = DB::?> --}}
-                <div class="col-8 p-0">
+                <?php $sh = DB::Table('tb_shipping_companys')->where('id_shipping_company',$cartt->shipping_id)->first();
                 
-                    <h5 class="m-0">Moldii - ส่งธรรมดาในประเทศ </h5>
+                ?>
+                <div class="col-8 p-0">
+                    
+                    <h5 class="m-0">{{$sh->name_company}} - ส่งธรรมดาในประเทศ </h5>
                     {{-- <h5 class="m-0">จะได้รับใน {{date('d-m-Y', strtotime('+2 days'))}} - {{date('d-m-Y', strtotime('+5 days'))}} </h5> --}}
                     <h5 class="m-0">จะได้รับ{{$cartt->shipping_day}}</h5>
                 </div>
-                <a href="{{url('user/chooseShipping/'.$mycarts->store_id.'')}}" class="col-3 p-0 pr-1  row justify-content-end" style="color:black;">
+                <a href="{{url('user/chooseShipping/'.$mycarts->store_id.'/'.$cartt->shipping_id.'')}}" class="col-3 p-0 pr-1  row justify-content-end" style="color:black;">
                     <h5 class="m-0 align-self-center font-weight-bold mr-1">฿ {{$cartt->shipping_3per}}</h5>
                     <i class="far fa-angle-right col-1 p-0 align-self-center" style="font-size:1.5rem;"></i>
 
@@ -156,12 +157,12 @@
             </div>
         </a>
     @endforeach
-
+   
 
     <form action="{{url('paymentgateway')}}" method="POST" id="formsubmit">
         @csrf
         {{-- โค้ดส่วนลด --}}
-        <a href="{{url('choosecode')}}/{{$sumship}}" class="row py-1 border-top pl-2 mt-1" style="color:black; font-size:18px">
+        <a href="{{url('choosecode')}}/{{$sumship}}/{{$sum}}" class="row py-1 border-top pl-2 mt-1" style="color:black; font-size:18px">
             <div class="col-6 mx-0 pl-0 align-self-center row">
                 <img src="{{ asset('new_assets/img/icon/ticket.svg')}}" alt="alt" style="">
 
@@ -180,10 +181,10 @@
             <div class="row col-8 mx-0 pl-0 align-self-center">
                 <img src="{{ asset('new_assets/img/icon/coin.svg')}}" style="color:black;">
 
-                <h5 class="m-0 ml-2 font-weight-bold align-self-center">คะแนนของคุณ {{$my->customer_point}} คะแนน</h5>
+                <h5 class="m-0 ml-2 font-weight-bold align-self-center">คอยน์ของคุณ {{number_format($my->customer_coin,2,'.',',')}} คอยน์</h5>
             </div>
             <div class="custom-control custom-switch  ">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="coinuser" value="{{$my->customer_point}}" onchange="coinswitch();" {{Session::get('coin')!=0?'checked':''}}  {{$my->customer_point==0?'disabled':''}}>
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="coinuser" value="{{$my->customer_coin}}" onchange="coinswitch();" {{Session::get('coin')!=0?'checked':''}}  {{$my->customer_coin==0 || $my->customer_coin>Session::get('totalcart')?'disabled':''}}>
                 <label class="custom-control-label" for="customSwitch1"></label>
             </div>
         </div>
