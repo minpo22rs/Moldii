@@ -362,6 +362,13 @@
                                         </a>
                                     </li>
                                     <li class="">
+                                        <a href="{{url('admin/requestgroup')}}">
+                                            <span class="pcoded-micon"><i class="icofont icofont-tasks"></i><b>D</b></span>
+                                            <span class="pcoded-mtext">คำขอเปิดกลุ่ม</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
                                         <a href="{{url('admin/shutdownaccount')}}">
                                             <span class="pcoded-micon"><i class="icofont icofont-close-circled"></i><b>D</b></span>
                                             <span class="pcoded-mtext">คำขอปิดบัญชีลูกค้า</span>

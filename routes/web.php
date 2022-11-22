@@ -82,9 +82,14 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin', 'as' => 'Admin.', 'mi
     Route::post('rejectslip', 'OrderController@rejectslip');
     Route::get('orderdetail/{id}', 'OrderController@orderdetail');
 
+
+    // group
     Route::resource('familys', 'FamilyController');
     Route::post('addgroup', 'FamilyController@store');
     Route::post('publishedgroup/{id}', 'FamilyController@publishedgroup');
+    Route::get('requestgroup', 'FamilyController@requestgroup');
+    Route::get('confirmopengroup/{id}', 'FamilyController@confirmopengroup');
+    Route::post('rejectopengroup', 'FamilyController@rejectopengroup');
 
 
     // auction

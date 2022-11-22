@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Models\notification;
+use Auth;
 
 class StoreController extends Controller
 {

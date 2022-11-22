@@ -8,15 +8,23 @@ use DB;
 use Storage;
 use URL;
 use App\Models\Family;
+use App\Models\notification;
+use Auth;
 
 class FamilyController extends Controller
 {
   
     public function index()
     {
-        $Family = Family::get();
+        $Family = Family::where('published',1)->where('type_group',2)->get();
         $data = array('Family' => $Family);
         return view('backend.family.familylist', $data);
+    }
+
+    public function requestgroup(){
+        $Family = Family::where('published',1)->where('type_group',1)->orderby('created_at','DESC')->get();
+        $data = array('Family' => $Family);
+        return view('backend.family.requestlist', $data);
     }
 
 
@@ -30,6 +38,7 @@ class FamilyController extends Controller
             $Family->name            = $request->name;
             $Family->description     = $request->description;
             $Family->group_show      = $request->type_group;
+            $Family->type_group      = 2;
             if ($request->file('img') !== null)
             {
                 $img = $request->file('img');
@@ -60,9 +69,24 @@ class FamilyController extends Controller
     }
 
    
-    public function show($id)
+    public function confirmopengroup($id)
     {
         //
+        Family::where('id',$id)->update(['type_group'=>2]);
+        $sql = Family::where('id',$id)->first();
+        $noti = new notification();
+        
+        $noti->noti_title       = 'อนุมัติคำขอเปิดกลุ่มบนแอปพลิเคชัน Moldii';
+
+        $noti->noti_date        = date('Y-m-d');
+        $noti->customer_id      = $sql->created_by;
+        // $noti->noti_detail      = $request->detail;
+        $noti->noti_create_by   = Auth::user()->admin_id;
+        $noti->save();
+
+
+        return redirect('admin/familys')->with('success', 'Successful');
+
     }
 
   
@@ -111,7 +135,7 @@ class FamilyController extends Controller
             DB::commit();
             return redirect('admin/familys')->with('success', 'Successful');
         } catch (\Throwable $th) {
-          
+            // dd($th);
             DB::rollback();
          
             return redirect('admin/familys')->withError('Something Wrong! New can not Updated.');
@@ -119,18 +143,30 @@ class FamilyController extends Controller
     }
 
   
-    public function destroy($id)
+    public function rejectopengroup(Request $request)
     {
         DB::beginTransaction();
         try {
-            $new = Family::findOrFail($id);
-            $image_path = Storage::delete('group_cover/'.$new->new_img);
-            $new = Family::destroy($id);
+         
+            Family::where('id',$request->ids)->update(['reject'=>$request->reply,'type_group'=>3]);
+            $sql = Family::where('id',$id)->first();
+
+            $noti = new notification();
+            $noti->noti_title       = 'ปฏิเสธคำขอเปิดกลุ่มบนแอปพลิเคชัน Moldii';
+
+            $noti->noti_date        = date('Y-m-d');
+            $noti->customer_id      = $sql->create_by;
+            $noti->noti_detail      = $request->reply;
+            $noti->noti_create_by   = Auth::user()->admin_id;
+            $noti->save();
+            // $image_path = Storage::delete('group_cover/'.$new->new_img);
+            // $new = Family::destroy($id);
             DB::commit();
             return redirect('admin/familys')->with('success', 'Successful');
         } catch (\Throwable $th) {
+      
             DB::rollback();
-            return redirect('admin/familys')->withError('Something Wrong! Your Content can not Deleted.');
+            return redirect('admin/requestgroup')->withError('Something Wrong! Your Content can not Deleted.');
         }
     }
 
