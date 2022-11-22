@@ -76,7 +76,7 @@
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
-                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$notiid->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
@@ -414,6 +414,314 @@
         </div>
         <!-- /end Modal share -->
 
+
+        <!-- Modal donate -->
+        <div class="modal fade" id="donate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  <!--  แก้ ID share ให้ตรงกับ data-target ด้านบน -->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" >Donate</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="donateid" value="0" id="donateid">
+                    <div class="modal-body">
+                        
+                      <div class=" row" style="overflow: auto ; width: 100%; height: 450px; justify-content: center;">
+                         <!-- Start img Donate -->
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1" > 
+                                        <a href="javascript:;" onclick="donate(66,'Ghost');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/ghost.png') }}" alt="alt" class="rounded-circle" width="100%"  style="background-color:#e4e8eb ;  "  >
+                                        <h6 class="card-text">66 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1 ">  
+                                        <a href="javascript:;" onclick="donate(9,'Hi');">                     
+                                        <img src="{{  asset('new_assets/img/IconDonate/Hi.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
+                                        <h6 class="card-text">9 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(26,'Iloveyou');">             
+                                        <img src="{{  asset('new_assets/img/IconDonate/iloveyou.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; " >
+                                        <h6 class="card-text">26 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center  p-1">     
+                                        <a href="javascript:;" onclick="donate(3789,'Supercar');">                   
+                                        <img src="{{  asset('new_assets/img/IconDonate/Supercar.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ; ">
+                                        <h6 class="card-text">3,789 เหรียญ</h6>
+                                        </a> 
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">     
+                                        <a href="javascript:;" onclick="donate(4444,'UFO');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/UFO.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">4,444 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1">  
+                                        <a href="javascript:;" onclick="donate(666,'กระโหลก');">                     
+                                        <img src="{{  asset('new_assets/img/IconDonate/กระโหลก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">666 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1 ">     
+                                        <a href="javascript:;" onclick="donate(1550,'กล้อง');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/กล้อง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">1,550 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1 ">  
+                                        <a href="javascript:;" onclick="donate(1234,'เกมบอย');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/เกมบอย.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">1,234 เหรียญ</h6>
+                                        </a> 
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">        
+                                        <a href="javascript:;" onclick="donate(75,'ของขวัญ');">              
+                                        <img src="{{  asset('new_assets/img/IconDonate/ของขวัญ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">75 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(360,'เข็มฉีดยา');">                         
+                                        <img src="{{  asset('new_assets/img/IconDonate/เข็มฉีดยา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">360 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1 "> 
+                                        <a href="javascript:;" onclick="donate(130,'เค้ก');">                       
+                                        <img src="{{  asset('new_assets/img/IconDonate/เค้ก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">130 เหรียญ</h6>
+                                        </a> 
+                                    </div>                      
+                                    <div class="text-center p-1 ">   
+                                        <a href="javascript:;" onclick="donate(5000,'เครื่องบิน');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/เครื่องบิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">5,000 เหรียญ</h6>
+                                        </a> 
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(1000,'จอยเกม');">              
+                                        <img src="{{  asset('new_assets/img/IconDonate/จอยเกม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">1,000 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(969,'จักรยาน');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/จักรยาน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">969 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1 ">     
+                                        <a href="javascript:;" onclick="donate(88,'เจ๋ง');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/เจ๋ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">88 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1 ">    
+                                        <a href="javascript:;" onclick="donate(999,'ดวงอาทิตย์');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/ดวงอาทิตย์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">999 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(1,'ดอกไม้');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/ดอกไม้.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">1 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(12,'ดาว');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/ดาว.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">12 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">     
+                                        <a href="javascript:;" onclick="donate(20,'โดนัท');">                 
+                                        <img src="{{  asset('new_assets/img/IconDonate/โดนัท.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">20 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(18,'ตุ๊กตา');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/ตุ๊กตา.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">18 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(800 ,'ถ้วยรางวัลที่ 1');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 1.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">800 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(700,'ถ้วยรางวัลที่ 2');">                     
+                                        <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 2.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">700 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1 ">     
+                                        <a href="javascript:;" onclick="donate(600,'ถ้วยรางวัลที่ 3');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/ถ้วยรางวัลที่ 3.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">600 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(234,'ถุงเงิน');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/ถุงเงิน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">234 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(456,'ทามาก๊อต');">                 
+                                        <img src="{{  asset('new_assets/img/IconDonate/ทามาก๊อต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">456 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(1888,'ทีวี');">                      
+                                        <img src="{{  asset('new_assets/img/IconDonate/ทีวี.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">1,888 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">     
+                                        <a href="javascript:;" onclick="donate(300,'เทปคาสเซ็ต');">                   
+                                        <img src="{{  asset('new_assets/img/IconDonate/เทปคาสเซ็ต.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">300 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(45,'ปั้มน้ำมัน');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/ปั้มน้ำมัน.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">45 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(444,'ไฟ');">               
+                                        <img src="{{  asset('new_assets/img/IconDonate/ไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">444 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(2444,'ภูเขาไฟ');">                     
+                                        <img src="{{  asset('new_assets/img/IconDonate/ภูเขาไฟ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">2,444 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1 ">     
+                                        <a href="javascript:;" onclick="donate(3333,'มงกุฎ');">                   
+                                        <img src="{{  asset('new_assets/img/IconDonate/มงกุฎ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">3,333 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(2850,'มอเตอร์ไซค์');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/มอเตอร์ไซค์.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">2,850 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(168,'แมวกวัก');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/แมวกวัก.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">168 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(5555,'ยานอวกาศ');">                     
+                                        <img src="{{  asset('new_assets/img/IconDonate/ยานอวกาศ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">5,555 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1 ">     
+                                        <a href="javascript:;" onclick="donate(555,'ระเบิด');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/ระเบิด.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">555 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(99,'รุ้ง');">                   
+                                        <img src="{{  asset('new_assets/img/IconDonate/รุ้ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">99 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(33,'ลูกโป่ง');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/ลูกโป่ง.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">33 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(5,'ลูกอม');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/ลูกอม.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">5 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">     
+                                        <a href="javascript:;" onclick="donate(888,'สายฟ้า');">                  
+                                        <img src="{{  asset('new_assets/img/IconDonate/สายฟ้า.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">888 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">    
+                                        <a href="javascript:;" onclick="donate(6666,'หีบสมบัติ');">                    
+                                        <img src="{{  asset('new_assets/img/IconDonate/หีบสมบัติ.png') }}" alt="alt" class="rounded-circle" width="100%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">6,666 เหรียญ</h6>
+                                        </a>
+                                    </div>                                                                        
+                        </div> 
+                        <div class="d-flex justify-content-center"> <!-- แถวล่ะ 4 รูป -->
+                                    <div class="text-center p-1">       
+                                        <a href="javascript:;" onclick="donate(269,'หุ่นยนต์');">                
+                                        <img src="{{  asset('new_assets/img/IconDonate/หุ่นยนต์.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">269 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center p-1">   
+                                        <a href="javascript:;" onclick="donate(55,'เห็ดเพิ่มพลัง');">                   
+                                        <img src="{{  asset('new_assets/img/IconDonate/เห็ดเพิ่มพลัง.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">55 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                    <div class="text-center  p-1">     
+                                        <a href="javascript:;" onclick="donate(30,'ไอศกรีม');">              
+                                        <img src="{{  asset('new_assets/img/IconDonate/ไอศกรีม.png') }}" alt="alt" class="rounded-circle" width="50%" style="background-color:#e4e8eb ;  ">
+                                        <h6 class="card-text">30 เหรียญ</h6>
+                                        </a>
+                                    </div>                      
+                                                                                                  
+                        </div> 
+                        <!-- End img Donate -->           
+                      
+                      </div>
+
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- /end Modal donate -->
+
     @endsection
 
 
@@ -470,6 +778,53 @@
                     x.style.display = "block";
                 } else {
                     x.style.display = "none";
+                }
+            }
+
+
+            function donatebtn(v){
+                document.getElementById("donateid").value = v ;
+                $('#donate').modal('show');
+                
+            }
+
+            function donate(x,t){
+        
+                var donate = document.getElementById("donateid").value;
+
+                var c= "{{$u->customer_coin}}";
+                if(x > c){
+
+                    Swal.fire({
+                        text: 'จำนวนเหรียญไม่พอ!! \nต้องการเติมเหรียญหรือไม่?',
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: "#fc684b",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.replace('/user/convert');
+                        } else if (result.isDismissed) {
+                            
+                        }
+                    })
+
+                    
+                }else{
+                    $.ajax({
+                        url: '{{ url("/submitdonate")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'recive':donate,'name':t,'coin':x},
+                        success: function(data) {
+                            Swal.fire({
+                                text : "โดเนทเรียบร้อยแล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
+                            window.location.reload();
+                        }
+                    });
+
                 }
             }
     </script>

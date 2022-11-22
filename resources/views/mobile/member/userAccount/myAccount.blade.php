@@ -138,6 +138,15 @@
 
 </a>
 
+<a href="{{url('mygroup')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row">
+        <img  src="{{ asset('new_assets/icon/รายการของฉัน.png')}}" >
+        <h5 class="m-0 ml-2 font-weight-bold">กลุ่มของฉัน</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
 
 
 <a href="{{url('user/profile/setting')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">

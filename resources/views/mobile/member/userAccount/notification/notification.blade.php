@@ -71,7 +71,7 @@
                             {{-- <h6 class="m-0  "><small>{{$sqlids->noti_detail}}</small> </h6> --}}
                         </div>
                         <div class=" p-0 text-center">
-                            <h6 class="m-0  ">{{date('Y-m-d',strtotime($ssqlidsqls->created_at))}}</h6>
+                            <h6 class="m-0  ">{{date('Y-m-d',strtotime($sqlids->created_at))}}</h6>
                             <h6 class="m-0  "><small>{{date('H:i',strtotime($sqlids->created_at))}}</small> </h6>
                         </div>
                     </div>

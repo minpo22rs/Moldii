@@ -191,6 +191,8 @@ Route::get('group', [GroupController::class, 'index']);
 Route::get('groupid/{id}', [GroupController::class, 'groupid']); 
 Route::get('requestjoingroup/{type}/{id}', [GroupController::class, 'requestjoingroup']); 
 Route::get('groupall', [GroupController::class, 'groupall']); 
+Route::post('opengroup', [GroupController::class, 'opengroup']); 
+Route::get('mygroup', [GroupController::class, 'mygroup']); 
 
 
 //cart
