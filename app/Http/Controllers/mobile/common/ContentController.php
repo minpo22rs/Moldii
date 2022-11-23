@@ -71,6 +71,10 @@ class ContentController extends Controller
             $content->new_title        = $request->post;
 
         }
+        if(isset($request->fam)){
+            $content->family_id        = $request->fam;
+
+        }
         $content->save();
 
 

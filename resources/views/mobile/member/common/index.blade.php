@@ -1957,9 +1957,6 @@
             }
         </script>
 
-       
-
-    {{-- img slide --}}
 
     {{-- addimagegallery --}}
         <script>
@@ -1989,7 +1986,7 @@
                     var media = new Audio(reader.result);
                     media.onloadedmetadata = function(){
                         if(media.duration >15){
-                            alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสวีดีโอได้ไม่เกิน 15 วินาที');
+                            alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที');
                             $('#div'+id).remove();
                         }else{
                             var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';

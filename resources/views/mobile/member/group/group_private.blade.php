@@ -188,6 +188,9 @@
             <img src="{{asset('storage/group/'.$group->group_img.'')}}" alt="alt"  width="100%">
         @endif
 </div>
+
+
+
     <div class="col-md-12">
         <div class="row">
 
@@ -237,6 +240,63 @@
 
 
                 @if($chk != null && $chk->status_group == 2)
+                    {{-- Write Me --}}
+
+                    <div class="row">
+                        <div class="col-12 pl-2 pr-2">
+                            <div class="widget-post" aria-labelledby="post-header-title">
+                                <div class="widget-post__header">
+                                <h2 class="widget-post__title" id="post-header-title">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    Write Me
+                                </h2>
+                                </div>
+                                <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="fam" value="{{$group->id}}">
+                                    <div class="widget-post__content">
+                                        <label for="post-content" class="sr-only">Share</label>
+                                        <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" rows="7" required></textarea>
+                                        <div class="row" id="rowsocial"> </div>
+                                        
+                                    </div>
+                                    <div class="widget-post__options is--hidden" id="stock-options">
+                                    </div>
+                                    <div class="widget-post__actions post--actions">
+                                        <div class="post-actions__attachments">
+                                            {{-- <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+                                                <i class="fa fa-usd" aria-hidden="true"></i>
+                                                stock
+                                            </button> --}}
+
+                                            <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                                <label for="upload-video" class="post-actions__label">
+
+                                                    <i class="fa fa-video " aria-hidden="true"></i> 
+                                                </label>
+                                            </button>
+                                            {{-- <input type="file" id="upload-video" name="video[0]" accept="video/mp4;capture=camera" multiple onclick="addimagegallery()"> --}}
+
+                                            <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                                <label for="upload-image" class="post-actions__label">
+                                                    <i class="fa fa-file-image" aria-hidden="true"></i> 
+                                                </label>
+                                            </button>
+                                            {{-- <input type="file" id="upload-image" name="img[0]" accept="image/*;capture=camera" multiple onchange="addimagegallery()"> --}}
+                                        </div>
+
+                                        <div class="post-actions__widget">
+                                            <button class="btn post-actions__publish">Post</button>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    
                    
 
                     @foreach ($c as $sqls)
@@ -985,11 +1045,14 @@
     {{-- addimagegallery --}}
     <script>
 
+        var gallery = 1000;
+
+
         function addimagegallery(){
 
             gallery++;
             newimage =  '<div class="col-12" id="div'+gallery+'" style="padding: 10px;">'+
-                        '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" multiple="multiple" onchange="readGalleryURL(this,'+gallery+')">'+
+                        '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" onchange="readGalleryURL(this,'+gallery+')">'+
                         '<img id="gallerypreview'+gallery+'" style="max-height:150px ;padding: 10px;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
                         '<button  id="btn'+gallery+'"  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
             $('#rowsocial').append(newimage);
@@ -1007,9 +1070,20 @@
                 $('#gallerypreview'+id).remove();
                 $('#btn'+id).remove();
 
-                var videotag= '<video id="video" width="150" height="150" controls ><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
-                    
-                $('#div'+id).append(videotag);
+                var media = new Audio(reader.result);
+                media.onloadedmetadata = function(){
+                    if(media.duration >15){
+                        alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที');
+                        $('#div'+id).remove();
+                    }else{
+                        var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
+                        
+                        $('#div'+id).append(videotag);
+                    }
+                }; 
+                
+
+
             }
             reader.readAsDataURL(v);
         }
@@ -1018,7 +1092,7 @@
         function readGalleryURL(input,id)
         {
 
-            
+           
             var filelist = input.files;
             for(var i=0; i<filelist.length; i++)
             {
@@ -1027,6 +1101,13 @@
                 var fileName = filelist[i].name;
                 var fileExtension = fileName.split('.').pop();
                 if(fileExtension == 'mp4'){
+                    // var fileURL = URL.createObjectURL(filelist[i]);
+                    // vid.src = fileURL;
+                    // vid.ondurationchange = function() {
+                    //     alert(this.duration);
+                    // };
+                    // console.log(filelist[i].duration);
+
                     writevideo(filelist[i],id);
                     // var imgs = '<input type="file" name=video['+gallery+'] value="'+filelist[i].name+'" >';
                     // $('#rowsocial').append(imgs);
@@ -1037,7 +1118,7 @@
                     // $('#rowsocial').append(imgs);
                 }
             }
-            
+           
         }
 
 

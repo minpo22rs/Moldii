@@ -1,6 +1,163 @@
 <!-- Bootstrap 4.6 CSS --> 
 @extends('mobile.main_layout.main')
 @section('app_header')
+<style>
+  
+
+    /* * Post widget * */
+    
+    input[type="file"] {
+    display: none;
+    }
+    ul {
+    list-style-type: none;
+    }
+    
+    .btn {
+    padding: .5em 1em;
+    
+    background-color: transparent;
+    color: #6b7270;
+    
+    border: none;
+    cursor: pointer;
+    }
+    
+    .widget-post {
+    width: auto;
+    min-height: 100px;
+    height: auto;
+    
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 1px rgba(130, 130, 130, 0.1);
+    
+    background-color: #fff;
+    
+    margin: auto;
+    overflow: hidden;
+    }
+    
+    .widget-post__header {
+    padding: .2em .5em;
+    
+    background-color: #eaeaea;
+    color: #3f5563;
+    }
+    .widget-post__title {
+    font-size: 18px;
+    margin-top:10px;
+    }
+    
+    .widget-post__content {
+    width: 100%;
+    height: 50%;
+    }
+    .widget-post__textarea {
+    width: 100%;
+    height: 100%;
+    padding: .5em;
+    
+    border: none;
+    resize: none;
+    }
+    .widget-post__textarea:focus {
+    outline: none;
+    }
+    
+    .widget-post__options {
+    padding: .5em;
+    }
+    .widget-post___input {
+    display: inline-block;
+    
+    width: 24%;
+    padding: .2em .5em;
+    
+    border: 1px solid #eaeaea;
+    border-radius: 1.5em;
+    }
+    .post-actions__label {
+    cursor: pointer;
+    margin-top:10px;
+    
+    }
+    
+    .widget-post__actions {
+    width: 100%;
+    padding: .5em;
+    }
+    .post--actions {
+    position: relative;
+    padding: .5em;
+    
+    background-color: #f5f5f5;
+    color: #a2a6a7;
+    }
+    .post-actions__attachments {
+    display: inline-block;
+    width: 60%;
+    }
+    .attachments--btn {
+    background-color: #eaeaea;
+    color: #007582;
+    
+    border-radius: 1.5em;
+    }
+    
+    .post-actions__widget {
+    display: inline-block;
+    width: 38%;
+    text-align: right;
+    }
+    .post-actions__publish {
+    width: 120px;
+    
+    background-color: #008391;
+    color: #fff;
+    
+    border-radius: 1.5em;
+    }
+    
+    .scroller::-webkit-scrollbar {
+    display: none;
+    }
+    
+    .is--hidden {
+    display: none;
+    }
+    
+    .sr-only {
+    width: 1px;
+    height: 1px;
+    
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    
+    overflow: hidden;
+    white-space: nowrap;
+    
+    position: absolute;
+    top: 0;
+    
+    }
+    
+    
+    /* *  Placeholder contrast * */
+    ::-webkit-input-placeholder {
+    color: #666;
+    }
+    ::-moz-placeholder {
+    color: #666;
+    }
+    :-ms-input-placeholder {
+    color: #666;
+    }
+    :-moz-placeholder {
+    color: #666;
+    }
+</style>
 {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> --}}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,6 +190,8 @@
             <img src="{{asset('storage/group/'.$group->group_img.'')}}" alt="alt"  width="100%">
         @endif
     </div>
+
+    
 
 
     <div class="col-md-12">
@@ -88,6 +247,65 @@
 
 
             <hr> <!-- ------------------ -->
+            {{-- Write Me --}}
+
+            <div class="row">
+                <div class="col-12 pl-2 pr-2">
+                    <div class="widget-post" aria-labelledby="post-header-title">
+                        <div class="widget-post__header">
+                        <h2 class="widget-post__title" id="post-header-title">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            Write Me
+                        </h2>
+                        </div>
+                        <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="fam" value="{{$group->id}}">
+
+                            <div class="widget-post__content">
+                                <label for="post-content" class="sr-only">Share</label>
+                                <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" rows="7" required></textarea>
+                                <div class="row" id="rowsocial"> </div>
+                                
+                            </div>
+                            <div class="widget-post__options is--hidden" id="stock-options">
+                            </div>
+                            <div class="widget-post__actions post--actions">
+                                <div class="post-actions__attachments">
+                                    {{-- <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+                                        <i class="fa fa-usd" aria-hidden="true"></i>
+                                        stock
+                                    </button> --}}
+
+                                    <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                        <label for="upload-video" class="post-actions__label">
+
+                                            <i class="fa fa-video " aria-hidden="true"></i> 
+                                        </label>
+                                    </button>
+                                    {{-- <input type="file" id="upload-video" name="video[0]" accept="video/mp4;capture=camera" multiple onclick="addimagegallery()"> --}}
+
+                                    <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                        <label for="upload-image" class="post-actions__label">
+                                            <i class="fa fa-file-image" aria-hidden="true"></i> 
+                                        </label>
+                                    </button>
+                                    {{-- <input type="file" id="upload-image" name="img[0]" accept="image/*;capture=camera" multiple onchange="addimagegallery()"> --}}
+                                </div>
+
+                                <div class="post-actions__widget">
+                                    <button class="btn post-actions__publish">Post</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
             @foreach ($c as $sqls)
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();
                             $countreply = DB::Table('tb_comment_replys')->where('news_id',$sqls->new_id)->get();
@@ -954,8 +1172,113 @@
             
             
         }
+        
 
 
+    </script>
+
+    {{-- addimagegallery --}}
+    <script>
+
+        var gallery = 1000;
+
+        function addimagegallery(){
+
+            gallery++;
+            newimage =  '<div class="col-12" id="div'+gallery+'" style="padding: 10px;">'+
+                        '<input type="file" style="display: none;" accept="image/*;capture=camera" name="sub_gallery['+(gallery).toString()+']" class="form-control chooseImage'+gallery+'" id="slidepicture'+gallery+'" onchange="readGalleryURL(this,'+gallery+')">'+
+                        '<img id="gallerypreview'+gallery+'" style="max-height:150px ;padding: 10px;" src="{{asset('new_assets/img/brows.png')}}" onclick="browsImage('+gallery+')" />'+
+                        '<button  id="btn'+gallery+'"  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+            $('#rowsocial').append(newimage);
+        }
+
+        function browsImage(id){
+            $('.chooseImage'+id).click();
+        }
+
+
+        function writevideo(v,id) {
+            gallery++;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#gallerypreview'+id).remove();
+                $('#btn'+id).remove();
+
+                var media = new Audio(reader.result);
+                media.onloadedmetadata = function(){
+                    if(media.duration >15){
+                        alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที');
+                        $('#div'+id).remove();
+                    }else{
+                        var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
+                        
+                        $('#div'+id).append(videotag);
+                    }
+                }; 
+                
+
+
+            }
+            reader.readAsDataURL(v);
+        }
+
+
+        function readGalleryURL(input,id)
+        {
+
+           
+            var filelist = input.files;
+            for(var i=0; i<filelist.length; i++)
+            {
+                gallery++;
+                // console.log(filelist[i].name);
+                var fileName = filelist[i].name;
+                var fileExtension = fileName.split('.').pop();
+                if(fileExtension == 'mp4'){
+                    // var fileURL = URL.createObjectURL(filelist[i]);
+                    // vid.src = fileURL;
+                    // vid.ondurationchange = function() {
+                    //     alert(this.duration);
+                    // };
+                    // console.log(filelist[i].duration);
+
+                    writevideo(filelist[i],id);
+                    // var imgs = '<input type="file" name=video['+gallery+'] value="'+filelist[i].name+'" >';
+                    // $('#rowsocial').append(imgs);
+
+                }else{
+                    writeimg(filelist[i],id);
+                    // var imgs = '<input type="file" name=img['+gallery+'] value="'+filelist[i].name+'" >';
+                    // $('#rowsocial').append(imgs);
+                }
+            }
+           
+        }
+
+
+        function writeimg(v,id) {
+            gallery++;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e.target.result.name);
+                // var imgtag = '<div class="col-6" id="div'+gallery+'"><img  src="'+e.target.result+'" width="150" height="150"><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button></div>';
+                $('#gallerypreview'+id).attr('src', e.target.result);
+                    
+                // $('#rowsocial').append(imgtag);
+            }
+            reader.readAsDataURL(v);
+        }
+
+
+        function deletegallery(num){
+
+            $('#div'+num).remove();
+            //gallery--;
+            // $('#delete').append('<input type="hidden" name="deletedkey[]" value="'+num+'">');
+
+        }
+
+        // myInputimage.addEventListener('change', sendPic, false);
     </script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> --}}
