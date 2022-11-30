@@ -419,9 +419,9 @@
                         <div class="card">
                             <div class="row w-100 mx-3 my-2 text-center">
                                 <img src="{{ asset('new_assets/icon/วอลเล็ท.png')}}" >
-                                <span class="ml-1 align-self-center font-weight-bold " >  {{number_format($u->customer_wallet,2,'.',',')}}</span>
+                                <span class="ml-1 align-self-center font-weight-bold " >  {{number_format($u->customer_wallet,2,'.',',')}} <h6>กระเป๋าเงิน</h6></span>
                             </div>
-                            <h6 style="margin-left: 25px">กระเป๋าเงิน</h6>
+                            
 
                         </div>
                     </a>
@@ -431,9 +431,9 @@
                     <div class="card">
                         <div class="row w-100 mx-3 my-2 text-center">
                             <img src="{{ asset('new_assets/icon/คอยน์.png')}}" >
-                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_coin,2,'.',',')}} </span>
+                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_coin,2,'.',',')}}<h6>คอยน์</h6> </span>
                         </div>
-                        <h6 style="margin-left: 25px">คอยน์</h6>
+                        
                     </div>
                 </a>
             </div>
@@ -442,9 +442,9 @@
                     <div class="card">
                         <div class="row w-100 mx-3 my-2 text-center">
                             <img src="{{ asset('new_assets/icon/โดเนท.png')}}" >
-                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_donate,2,'.',',')}} </span>
+                            <span class="ml-1 align-self-center font-weight-bold">{{number_format($u->customer_donate,2,'.',',')}} <h6>โดเนท</h6></span>
                         </div>
-                        <h6 style="margin-left: 25px">โดเนท</h6>
+                        
                     </div>
                 </a>
             </div>
@@ -1977,7 +1977,7 @@
 
 
             function writevideo(v,id) {
-                gallery++;
+ 
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('#gallerypreview'+id).remove();
@@ -1986,10 +1986,14 @@
                     var media = new Audio(reader.result);
                     media.onloadedmetadata = function(){
                         if(media.duration >15){
-                            alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที');
+                            Swal.fire({
+                                text : 'วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที',
+                                confirmButtonColor: "#fc684b",
+                            })
+
                             $('#div'+id).remove();
                         }else{
-                            var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
+                            var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+id+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
                             
                             $('#div'+id).append(videotag);
                         }
@@ -2036,7 +2040,7 @@
 
 
             function writeimg(v,id) {
-                gallery++;
+              
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     // console.log(e.target.result.name);

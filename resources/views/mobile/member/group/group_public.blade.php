@@ -1197,31 +1197,35 @@
         }
 
 
+        
         function writevideo(v,id) {
-            gallery++;
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#gallerypreview'+id).remove();
-                $('#btn'+id).remove();
+                gallery++;
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#gallerypreview'+id).remove();
+                    $('#btn'+id).remove();
 
-                var media = new Audio(reader.result);
-                media.onloadedmetadata = function(){
-                    if(media.duration >15){
-                        alert('วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที');
-                        $('#div'+id).remove();
-                    }else{
-                        var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
-                        
-                        $('#div'+id).append(videotag);
-                    }
-                }; 
-                
+                    var media = new Audio(reader.result);
+                    media.onloadedmetadata = function(){
+                        if(media.duration >15){
+                            Swal.fire({
+                                text : 'วีดีโอของคุณมีความยาวมากเกินไป สามารถโพสต์วีดีโอได้ไม่เกิน 15 วินาที',
+                                confirmButtonColor: "#fc684b",
+                            })
+
+                            $('#div'+id).remove();
+                        }else{
+                            var videotag= '<video id="video" width="150" height="150" controls id="loadvideo'+id+'"><source src="'+e.target.result+'" type=video/ogg><source src="'+e.target.result+'" type=video/mp4></video><button  type="button" class="btn btn-danger" onclick="deletegallery('+gallery+')" style="position: absolute; top: 0px;"><i class="fa fa-trash"></i></button>';
+                            
+                            $('#div'+id).append(videotag);
+                        }
+                    }; 
+                    
 
 
-            }
-            reader.readAsDataURL(v);
+                }
+                reader.readAsDataURL(v);
         }
-
 
         function readGalleryURL(input,id)
         {

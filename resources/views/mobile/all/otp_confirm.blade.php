@@ -30,7 +30,7 @@
 <!-- App Capsule -->
 <div id="appCapsule" class="pt-0">
 
-    <div class="login-form" style = "margin-top: 270px;">
+    <div class="login-form" style = "margin-top: 170px;">
         <div id="bg">
             <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
         </div>

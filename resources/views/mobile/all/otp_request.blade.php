@@ -26,7 +26,7 @@
         <div id="bg">
             <img src="{{asset('new_assets/img/login_new.JPG')}}" alt="">
         </div>
-        <div class="login-form" style = "margin-top: 200px;">
+        <div class="login-form" style = "margin-top: 170px;">
            
             
             <br>

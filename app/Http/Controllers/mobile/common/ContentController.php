@@ -63,24 +63,24 @@ class ContentController extends Controller
 
     public function userpostcontent(Request $request){
         date_default_timezone_set('Asia/Bangkok');
-        // dd($request->all());
-        $content = new Tb_user_content();
-        $content->customer_id          = Session::get('cid');
-        $content->new_type          = 'U';
-        if(isset($request->post)){
-            $content->new_title        = $request->post;
-
-        }
-        if(isset($request->fam)){
-            $content->family_id        = $request->fam;
-
-        }
-        $content->save();
-
-
-
+   
+        
         DB::beginTransaction();
         try {
+
+            $content = new Tb_user_content();
+            $content->customer_id          = Session::get('cid');
+            $content->new_type          = 'U';
+            if(isset($request->post)){
+                $content->new_title        = $request->post;
+
+            }
+            if(isset($request->fam)){
+                $content->family_id        = $request->fam;
+
+            }
+            $content->save();
+
             if ($request->file('sub_gallery') !== null)
             {
 
@@ -104,14 +104,14 @@ class ContentController extends Controller
                 
                 }
             }
-            // dd('rrr//rr');
+        
             DB::commit();
             return back()->with('success','โพสต์เรียบร้อยแล้ว');
         } catch (\Throwable $th) {
             dd($th);
             DB::rollback();
         
-            return redirect('admin/news')->withError('Something Wrong! New can not Updated.');
+            return back()->with('success','Something Wrong! Content can not Upload.');
         }
     }
 

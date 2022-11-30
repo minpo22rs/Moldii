@@ -635,7 +635,7 @@ class UserAccController extends Controller
     
     
             $datasend = http_build_query($object);
-            $url = 'https://mkpservice.shippop.dev/pricelist/'; 
+            $url = 'https://mkpservice.shippop.com/pricelist/'; 
     
             // dd($object);
     

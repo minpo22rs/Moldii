@@ -28,8 +28,7 @@
 
 
 @section('app_header')
-
-<div class="pa-fixed-header appHeader text-light " id="navBar">
+<div class="appHeader bg-danger text-light">
 
     <div class="pageTitle">
 
@@ -38,7 +37,7 @@
 
     </div>
     <div class="m-1 w-100">
-        {{-- search --}}
+
         <div class="row">
             
             <div class="col-2 ">
@@ -51,8 +50,7 @@
                 <form action="{{url('user/search')}}" method="POST" class="search-form">
                     @csrf
                     <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" name="text" class="form-control" placeholder="Search..." style="padding: 20px "  onclick="out_page()">
-                        {{-- <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px " > --}}
+                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
                         <!-- <i class="input-icon" >
                             <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
                         </i> -->
@@ -66,27 +64,21 @@
                 <a href="{{url('cartindex')}}" > 
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
-                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$countcart->countt != null ?$countcart->countt:'0'}}</span>
                         <img  src="{{ asset('new_assets/icon/ตะกร้า.png')}}" >
-                        {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span>  --}}
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$countcart->countt != null ?$countcart->countt:'0'}}</span> 
                     </div>
                 </a>
             </div>
-
 
             <div class="col-2 mt-1">
                 <a href="{{url('user/notification')}}" > 
                     <div class="  md hydrated  bg-white text-danger rounded p-1 mb-1 h5 text-center">
                         <!-- <ion-icon name="cart" class=" font-weight-bold" role="img"  aria-label="search outline" ></ion-icon> -->
-                        <span style="background-color: #34C759 ; color: #fff ;   padding: 3px 4px 2px 5px  ; position: absolute; left: 50% ; border-radius: 25px ; font-size:7px;"> {{$noti->count()+$ccomment->count()}}</span>
                         <img  src="{{ asset('new_assets/icon/แจ้งเตือน.png')}}" >
-                        {{-- <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span>  --}}
+                        <span style="background-color: #34C759 ; color: #fff ;  padding: 3px 4px 2px 4px ; border-radius: 25px ;  position: absolute; left: 33px ; top: 2px ; font-size:8px; "> {{$noti->count()+$ccomment->count()}}</span> 
                     </div>
                 </a>
             </div>
-           
-
-            
         </div>
 
     </div>
@@ -103,7 +95,6 @@
               @foreach($cat as $cats)
                     <div class="text-center p-1 ">                      
                         <a href="{{url('/shopping/category/'.$cats->cat_id.'')}}"> 
-                            <img class=" rounded-circle  " src="{{('https://testgit.sapapps.work/moldii/storage/app/category_cover/'.$cats->cat_img.'')}}" alt="alt" style="width: 53px; height:53px;">
                             <h4 class="mt-1" style="color:#fff;">{{$cats->cat_name}}</h4>
                         </a>
                     </div>
@@ -113,42 +104,23 @@
         </div>
     </div>
     <!-- Show List Menu btn_search_2 [End]--> 
+</div>
+{{-- Recent Search --}}
+<div id="search_box_2">
+    <h3> Recent Search</h3>
 
-    {{-- Recent Search --}}
-    <div id="search_box_2" class="fixed-top">
-
-        <div style="left: 16px;  position: absolute;">
-            <ion-icon name="close" onclick="out_page()"  aria-label="search outline" ></ion-icon>
-        </div><br><br>
-
-        <div class="col-12">
-                <form action="{{url('user/search')}}" method="POST" class="search-form">
-                    @csrf
-                    <div class="form-group searchbox mt-1 mb-0">
-                        <input type="text" name="text" class="form-control" id="input_search_1" placeholder="Search..." style="padding: 20px ">
-                        <!-- <i class="input-icon" >
-                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                        </i> --> &nbsp; &nbsp;
-                        <button class="btn btn-dark"  type="submit">ค้นหา</button>
-                     </div> 
-            </form>
-        </div>
-        <br><hr>
-            <h3> Recent Search</h3>
-
-            <p> @if(Session::get('recent') != null)
-                    @foreach (Session::get('recent') as $text)
-                        <a href="{{url('user/searcha/0/'. $text.'')}}">
-                            {{$text}}<br>
-                        </a>
-                    @endforeach
-                    
-                @else
-                    <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
-                @endif
-            </p>
-    </div>
-
+        <p> @if(Session::get('recent') != null)
+                @foreach (Session::get('recent') as $text)
+                    <a href="{{url('user/searcha/'. $text.'')}}">
+                        {{$text}}<br>
+                    </a>
+                @endforeach
+                
+            @else
+                <p style="text-align: center;">ไม่พบการค้นหาล่าสุด</p>
+            @endif
+        </p>
+  
 </div>
 
 @endsection
