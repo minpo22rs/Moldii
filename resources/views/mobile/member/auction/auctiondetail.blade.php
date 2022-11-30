@@ -308,39 +308,39 @@
            
             var bitcount = document.getElementById('bitcount').value ;
             var now =document.getElementById('priceupdate').value;
-            // console.log(bitcount);
-            if(bitcount < now){
-                        Swal.fire({
-                            text : "กรุณากรอกจำนวนเงินให้มากกว่าราคาปัจจุบัน",
-                            confirmButtonColor: "#fc684b",
-                        })
-            }else{
-                $.ajax({
-                    url: '{{ url("/addauction")}}',
-                    type: 'POST',
-                    dataType: 'HTML',
-                    data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
-                    success: function(data) {
-                        var json = JSON.parse(data);
+         
+            // if(bitcount < now){
+            //             Swal.fire({
+            //                 text : "กรุณากรอกจำนวนเงินให้มากกว่าราคาปัจจุบัน",
+            //                 confirmButtonColor: "#fc684b",
+            //             })
+            // }else{
+            //     $.ajax({
+            //         url: '{{ url("/addauction")}}',
+            //         type: 'POST',
+            //         dataType: 'HTML',
+            //         data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
+            //         success: function(data) {
+            //             var json = JSON.parse(data);
                     
-                        if(parseInt(json['chk']) ==1){
-                            Swal.fire({
-                                text : "ท่านนำประมูลอยู่แล้ว",
-                                confirmButtonColor: "#fc684b",
-                            })
-                        }
+            //             if(parseInt(json['chk']) ==1){
+            //                 Swal.fire({
+            //                     text : "ท่านนำประมูลอยู่แล้ว",
+            //                     confirmButtonColor: "#fc684b",
+            //                 })
+            //             }
                         
-                        limit = json['limit'];
-                        document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
+            //             limit = json['limit'];
+            //             document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
 
-                        document.getElementById('bitcount').value = json['bit'];
-                        $( "#here" ).load(window.location.href + " #here" );
+            //             document.getElementById('bitcount').value = json['bit'];
+            //             $( "#here" ).load(window.location.href + " #here" );
                         
-                    }
+            //         }
                         
-                });
+            //     });
                             
-            }
+            // }
 
 
             

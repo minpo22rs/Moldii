@@ -70,12 +70,12 @@ class RegisterController extends Controller
 
         // dd($request->all());
   
-        $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string',  'max:255'],
-            'password' => ['required', 'string', 'min:8'],
-        ]);
+        // $request->validate([
+        //     'firstname' => ['required', 'string', 'max:255'],
+        //     'lastname' => ['required', 'string', 'max:255'],
+        //     'username' => ['required', 'string',  'max:255'],
+        //     'password' => ['required', 'string', 'min:8'],
+        // ]);
     
 
         
