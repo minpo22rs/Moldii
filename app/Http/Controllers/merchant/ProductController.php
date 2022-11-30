@@ -86,6 +86,7 @@ class ProductController extends Controller
                 }
             }
             $product->product_code          = substr(md5(mt_rand()), 0, 8).'%P'.$count;
+       
            
 
             $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();

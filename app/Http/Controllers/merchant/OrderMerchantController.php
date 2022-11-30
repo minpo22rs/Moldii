@@ -63,7 +63,7 @@ class OrderMerchantController extends Controller
         $amphure = DB::Table('amphures')->where('id',$sqlsel->merchant_district)->first();
 
 
-        $url = 'https://mkpservice.shippop.dev/booking/'; 
+        $url = 'https://mkpservice.shippop.com/booking/'; 
         $from = array (
             "name"=> $sqlsel->merchant_name.$sqlsel->merchant_lname,
             "address"=> $sqlsel->merchant_address,
@@ -166,7 +166,7 @@ class OrderMerchantController extends Controller
         );
         $post_data = http_build_query($post_data);
         $curl = curl_init();
-        curl_setopt($curl,CURLOPT_URL, 'https://mkpservice.shippop.dev/confirm/');
+        curl_setopt($curl,CURLOPT_URL, 'https://mkpservice.shippop.com/confirm/');
   
         curl_setopt($curl,CURLOPT_POSTFIELDS, $post_data);
         curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
