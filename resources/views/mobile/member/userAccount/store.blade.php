@@ -20,6 +20,7 @@
         <input type="text" name="lname" placeholder="นามสกุลเจ้าของร้านค้า" class="form-control" required><br>
         <input type="text" name="phone" placeholder="หมายเลขโทรศัพท์" class="form-control" id="chkphone" onkeyup="autoTab(this);" required><br>
         <input type="email" name="email" placeholder="อีเมล" class="form-control" id="chkemail" onchange="checkemailstore(this.value);" required ><br>
+        <input type="text" name="pass" placeholder="รหัสผ่าน" class="form-control" required><br>
         <input type="text" name="shopname" placeholder="ชื่อร้านค้า" class="form-control" required><br>
         <input type="text" name="type" placeholder="ประเภทสินค้าที่ต้องการขาย" class="form-control" required><br>
         <input type="text" name="address" placeholder="รายละเอียดที่อยู่" class="form-control" required><br>

@@ -67,8 +67,8 @@ class ShoppingController extends Controller
         // dd($id);
         $category = DB::Table('tb_category')->get();
         $merchant = DB::Table('tb_merchants')->where('merchant_id',$id)->first();
-        $product = DB::Table('tb_products')->where('product_merchant_id',$id)->limit(8)->get();
-        $productnew = DB::Table('tb_products')->where('product_merchant_id',$id)->orderBy('created_at','DESC')->limit(8)->get();
+        $product = DB::Table('tb_products')->where('product_merchant_id',$id)->where('product_published',1)->limit(8)->get();
+        $productnew = DB::Table('tb_products')->where('product_merchant_id',$id)->orderBy('created_at','DESC')->where('product_published',1)->limit(8)->get();
         $img = DB::Table('tb_banner_promote_store')->where('merchant_id',$id)->orderBy('index_of','DESC')->get();
         // dd($product);
         $productstore = DB::Table('tb_products')->where('product_merchant_id',$id)->get();

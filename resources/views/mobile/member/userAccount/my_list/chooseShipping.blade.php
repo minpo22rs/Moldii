@@ -29,7 +29,7 @@
 
             </div>
         </div> --}}
-        {{-- <?php $sh= DB::Table('tb_shipping_companys')->where('id_shipping_company',$cart->shipping_id)->first();?>
+        <?php $sh= DB::Table('tb_shipping_companys')->where('id_shipping_company',$cart->shipping_id)->first();?>
         <a href="{{url('checkoutaddress')}}">
             <div class=" p-2 col-12  border-bottom ">
                 <div class="row">
@@ -53,7 +53,7 @@
 
                 </div>
             </div>
-        </a> --}}
+        </a>
         @foreach($ship as $ships)
             <form action="{{url('user/changevalueshippingoncart')}}" method="POST" id="formship{{$ships->id_product_shipping}}"> 
                 @csrf

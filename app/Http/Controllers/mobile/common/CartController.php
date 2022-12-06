@@ -340,7 +340,19 @@ class CartController extends Controller
     {
 
         $chk = 0;
-        
+        $cadd = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')
+                        ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
+                        ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
+                        ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
+                        ->select('tb_customer_addresss.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
+                        ->first();
+
+
+        if($cadd == null){
+            return redirect('/user/myAddress')->with('msg','กรุณาเพิ่มที่อยู่จัดส่ง');
+        }
+                
+                        
         $mycart = Tb_cart::whereIn('cart_id',Session::get('cartid'))->groupBy('store_id')->get();
 
         $cs = Tb_cart::whereIn('cart_id',Session::get('cartid'))->get();
@@ -349,18 +361,12 @@ class CartController extends Controller
 
         $add = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')->first();
 
-        $cadd = Tb_address::where('customer_id',Session::get('cid'))->where('address_status','=','on')
-                        ->leftJoin('districts', 'tb_customer_addresss.customer_tumbon', '=', 'districts.id')
-                        ->leftJoin('amphures', 'tb_customer_addresss.customer_district', '=', 'amphures.id')
-                        ->leftJoin('provinces', 'tb_customer_addresss.customer_province', '=', 'provinces.id')
-                        ->select('tb_customer_addresss.*','districts.name_th as tth','amphures.name_th as ath','provinces.name_th as pth')
-                        ->first();
-
+        
         $data = array();
         $ship = array();
         // dd($cs);
 
-        
+       
         if($add != null){
             $chk = 0;
 
@@ -429,6 +435,7 @@ class CartController extends Controller
         $content = curl_exec( $ch );
         curl_close($ch);
         $json = json_decode($content);
+        // dd($json);
         $jsondata = (array)$json->data;
 
     

@@ -17,7 +17,7 @@ class StoreController extends Controller
       
         $s = DB::Table('tb_merchants')->get();
         $cat = DB::Table('tb_category')->where('deleted_at',null)->get();
-        $pro = DB::Table('tb_products')->get();
+        $pro = DB::Table('tb_products')->where('product_published',1)->get();
         $ban = DB::Table('tb_banners')->where('banner_type',2)->first();
 
         $n = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->get();

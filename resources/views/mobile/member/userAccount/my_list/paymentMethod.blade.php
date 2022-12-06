@@ -31,24 +31,26 @@
             </a>
             <!-- sub menu -->
             <ul class="listview image-listview pb-0">
-                <li>
-                    <a href="{{url('selectpaymentmethod/1/'.$on->num.'')}}" class="item border-top pr-3">
-                        @if($on->typecard == 'VIS')
-                            <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
-                        @else
-                            <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
-                        @endif
-                        <div class="in" >
-                            <h5 class="m-0  font-weight-bold align-self-center"></h5>
-                            <div class="row">
-                                <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$on->num}}</span>
-                                <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
+                @if($on != null)
+                    <li>
+                        <a href="{{url('selectpaymentmethod/1/'.$on->num.'')}}" class="item border-top pr-3">
+                            @if($on->typecard == 'VIS')
+                                <img src="{{ asset('new_assets/img/icon/logo_visa.svg')}}" alt="image" class="image mr-1">
+                            @else
+                                <img src="{{ asset('new_assets/img/icon/MasterCard_big.svg')}}" alt="image" class="image mr-1">
+                            @endif
+                            <div class="in" >
+                                <h5 class="m-0  font-weight-bold align-self-center"></h5>
+                                <div class="row">
+                                    <span class="font-weight-bold align-self-center mr-1" style="color:rgba(84, 84, 84, 1);">*{{$on->num}}</span>
+                                    <img src="{{asset('new_assets/img/icon/check_2.svg')}}" style="width:1.4rem; height:1.4rem;" class=" p-0 align-self-center"><br>
+
+                                </div>
 
                             </div>
-
-                        </div>
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                @endif
                 @foreach($off as $sqls)
                     <li>
                         <a href="{{url('selectpaymentmethod/1/'.$sqls->num.'')}}" class="item border-top pr-3">
@@ -221,14 +223,25 @@
 
         {{-- moldii wallet --}}
         <li>
-            <a href="{{url('selectpaymentmethod/7/0')}}" >
-                <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
-                <div class="row">
-                    <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
+            @if($user->customer_wallet == 0)
+                <a href="" style="background-color: lightgray">
+                    <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
+                    <div class="row">
+                        <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
 
-                </div>
-                
-            </a>
+                    </div>
+                    
+                </a>
+            @else
+                <a href="{{url('selectpaymentmethod/7/0')}}" >
+                    <h5 class="m-0  font-weight-bold align-self-center">Moldii wallet</h5>
+                    <div class="row">
+                        <span class="font-weight-bold align-self-center mr-2" style="color:rgba(84, 84, 84, 1);">{{number_format($user->customer_wallet,2,'.',',');}}</span>
+
+                    </div>
+                    
+                </a>
+            @endif
         </li>
         <li >
             <a href="{{url('selectpaymentmethod/8/0')}}" >

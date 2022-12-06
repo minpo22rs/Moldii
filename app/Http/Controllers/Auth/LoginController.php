@@ -62,7 +62,7 @@ class LoginController extends Controller
         }
         
         
-        $random = mt_rand(1000000000, 9999999999);
+        // $random = mt_rand(1000000000, 9999999999);
         try {
             $user = Socialite::driver($provider)->stateless()->user();
             // dd( $user);
@@ -79,8 +79,12 @@ class LoginController extends Controller
             Session::put('recent',[]);
             // dd(Session::get('cid'));
             
-           
-            return redirect('/index');
+            if( $authUser == 0){
+                return redirect('tag')->with('success','คุณสมัครสมาชิกเรียบร้อยแล้ว');
+            }else{
+                return redirect('/index');
+
+            }
 
            
         } catch (Exception $e) {
@@ -97,7 +101,7 @@ class LoginController extends Controller
         if(!empty($checkIfExist)){
             Session::put('cid',$checkIfExist->customer_id);
 
-            return $checkIfExist;
+            return 1;
         }else{
             // dd($input);
             User::insert($input);
@@ -107,7 +111,7 @@ class LoginController extends Controller
             Session::put('cid',$customer->customer_id);
            
           
-            return '0';
+            return 0;
         }
 	}
 

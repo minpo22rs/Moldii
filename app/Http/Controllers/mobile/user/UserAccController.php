@@ -358,11 +358,21 @@ class UserAccController extends Controller
         $a->customer_district  =  $request->district;
         $a->customer_province  =  $request->province;
         $a->customer_postcode  =  $request->zip_code;
-        if(isset($request->chk)){
-            $a->address_status  =  $request->chk;
-            DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->update(['address_status'=>'off']);
+
+        $sql = DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->get();
+        if($sql->count() != 0 ){
+            if(isset($request->chk)){
+                $a->address_status  =  $request->chk;
+                DB::Table('tb_customer_addresss')->where('customer_id',Session::get('cid'))->update(['address_status'=>'off']);
+    
+            }
+
+        }else{
+            $a->address_status  =  'on';
 
         }
+        
+
         $a->save();
         return redirect('user/myAddress');
     }
