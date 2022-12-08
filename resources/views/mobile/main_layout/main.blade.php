@@ -20,7 +20,17 @@
     <meta name="keywords" content="Moldii" />
     <meta property="og:image" content="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png">
     <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/logo_icon/Moldii Logo 512x512.png') }}" sizes="512x512">
+
     <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('/new_assets/img/logo_icon/Moldii Logo 192x192.png') }}">
+    
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+
     <link rel="stylesheet" href="{{ asset('/new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('/new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
