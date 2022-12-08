@@ -3,6 +3,7 @@
     "short_name": "Moldii",
     "start_url": "/",
     "display": "standalone",
+    "display_override": "standalone",
     "scope" : "https://modii.sapapps.work/",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
@@ -42,6 +43,7 @@
         }
 
     ],
+    
     "related_applications": [
         {
             "platform":"windows",
