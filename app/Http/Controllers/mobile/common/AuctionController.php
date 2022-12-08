@@ -172,7 +172,8 @@ class AuctionController extends Controller
 
         $now = $lognew->price;
         
-        $minbit = $lognew->price+$auction->bit;
+        $minbit = $lognew->price;
+        // $minbit = $lognew->price+$auction->bit;
         
         $data = array(
             'bit'=>$minbit,

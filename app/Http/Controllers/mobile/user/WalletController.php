@@ -309,7 +309,7 @@ class WalletController extends Controller
     public function coin ()
     { 
         $sql = User::where('customer_id',Session::get('cid'))->first();
-        $coin = DB::Table('tb_coin_logs')->where('customer_id',Session::get('cid'))->get();
+        $coin = DB::Table('tb_coin_logs')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
         return view('mobile.member.wallet.coin')->with(['sql'=>$sql,'coin'=>$coin]);
     }
 
@@ -393,11 +393,23 @@ class WalletController extends Controller
     public function submitdonateexchange (Request $request)
     { 
         // dd($request->all());
+        $ep = explode(",",$request->iddonate);
+        // dd($ep);
         $sql = User::where('customer_id',Session::get('cid'))->first();
         $del = $sql->customer_donate - $request->money;
         $add = $sql->customer_coin + $request->coin;
 
         User::where('customer_id',Session::get('cid'))->update(['customer_donate'=>$del,'customer_coin'=>$add]);
+        if($ep[0]=='null'){
+            DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))->delete();
+
+        }else{
+            DB::Table('tb_customer_donate_logs')->where('r_customer_id',Session::get('cid'))->whereIn('donate',$ep)->delete();
+
+        }
+
+        DB::Table('tb_coin_logs')->insert(['customer_id'=>Session::get('cid'),'coin'=>$request->coin,'status'=>3]);
+
 
 
         return redirect('user/myAccount')->with('msg','แลกคอยน์เรียบร้อยแล้ว');

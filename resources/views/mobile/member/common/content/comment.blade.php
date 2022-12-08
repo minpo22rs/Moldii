@@ -109,7 +109,12 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     @if($c->customer_id == Session::get('cid'))
                         {{-- <li><a class="dropdown-item" tabindex="-1" href="#">แก้ไขโพสต์</a></li> --}}
-                        <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a></li>
+                        @if($c->new_published ==1)
+                            <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="hidecontent({{$c->new_id}})">ซ่อนโพสต์</a></li>
+
+                        @else
+                            <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="unhidecontent({{$c->new_id}})">เลิกซ่อนโพสต์</a></li>
+                        @endif
                         <li><a class="dropdown-item" tabindex="-1" href="javascript:;" onclick="deletecontent({{$c->new_id}})">ลบโพสต์</a></li>
                         <div class="dropdown-divider"></div> <!-- เส้นคั้น -->
                     @endif
@@ -1105,6 +1110,23 @@
                         }
                     });
                } 
+
+                function unhidecontent(id){
+                    $.ajax({
+                        url: '{{ url("/unhidecontent")}}',
+                        type: 'GET',
+                        dataType: 'HTML',
+                        data: {'id':id},
+                        success: function(data) {
+                            Swal.fire({
+                                text : "เลิกซ่อนโพสต์เรียบร้อยแล้ว",
+                                confirmButtonColor: "#fc684b",
+                            })
+                            
+                            window.location.reload();
+                        }
+                    });
+               }
 
 
                 function deletecontent(id){

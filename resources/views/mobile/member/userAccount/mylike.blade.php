@@ -47,7 +47,7 @@
                             <div class="col-9 p-0 ">
                             
                                 <h5 class="m-0 align-self-center" >{{$u==null?'Admin':$u->customer_username}}</h5>
-                                <h5 class="m-0 align-self-center" >{{$c->new_title}}</h5>
+                                <h5 class="m-0 align-self-center" >{{mb_substr($c->new_title, 0, 100).'...'}}</h5>
                             </div>
                     
                         {{-- <div class=" p-0 text-center">

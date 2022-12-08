@@ -106,28 +106,30 @@
     </div>
 </a>
 
-<a href="{{url('user/mylike')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+{{-- <a href="{{url('user/mylike')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
-    <img  src="{{ asset('new_assets/icon/สิ่งที่ถูกใจ.png')}}" >
+        <img  src="{{ asset('new_assets/icon/สิ่งที่ถูกใจ.png')}}" >
         <h5 class="m-0 ml-2 font-weight-bold">สิ่งที่ถูกใจ</h5>
     </div>
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
-</a>
+</a> --}}
 
 
-<a href="{{url('user/mybookmark')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+<a href="{{url('user/postList')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
-        <ion-icon name="bookmark" style="font-size:25px"></ion-icon>
-        <h5 class="m-0 ml-2 mt-1 font-weight-bold">สิ่งที่บุ๊คมาร์ก</h5>
+        <ion-icon name="book" style="font-size:25px"></ion-icon>
+        <h5 class="m-0 ml-2 mt-1 font-weight-bold">โพสต์</h5>
     </div>
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 </a>
 
-<a href="{{url('/user/creditCard')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+
+
+{{-- <a href="{{url('/user/creditCard')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
     <img  src="{{ asset('new_assets/icon/Credit card.png')}}" >
         <h5 class="m-0 ml-2 font-weight-bold">รายการบัญชีธนาคาร/บัตรที่บันทึก</้>
@@ -136,11 +138,11 @@
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 
-</a>
+</a> --}}
 
 <a href="{{url('mygroup')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
-        <img  src="{{ asset('new_assets/icon/รายการของฉัน.png')}}" >
+        <img  src="{{ asset('new_assets/icon/กลุ่มดำ.png')}}" >
         <h5 class="m-0 ml-2 font-weight-bold">กลุ่มของฉัน</h5>
     </div>
     <div class="col-4 mx-0 text-right">
@@ -149,14 +151,22 @@
 </a>
 <a href="{{url('cartindex')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row">
-        <img  src="{{ asset('new_assets/icon/ตะกร้า.png')}}" >
+        <img  src="{{ asset('new_assets/icon/ตะกร้าสีดำ.png')}}" >
         <h5 class="m-0 ml-2 font-weight-bold">ตะกร้าสินค้า</h5>
     </div>
     <div class="col-4 mx-0 text-right">
         <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
     </div>
 </a>
-
+<a href="{{url('user/taged')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
+    <div class="col-8 mx-0 align-self-center row">
+        <img  src="{{ asset('new_assets/icon/หมวดหมู่.png')}}" >
+        <h5 class="m-0 ml-2 mt-1 font-weight-bold">หมวดหมู่ที่สนใจ</h5>
+    </div>
+    <div class="col-4 mx-0 text-right">
+        <div class="mx-2 my-1 ml-2 mr-2"><i class="far fa-angle-right"></i></div>
+    </div>
+</a>
 <a href="{{url('user/profile/setting')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row ">
         <img  src="{{ asset('new_assets/icon/การตั้งค่า.png')}}" >

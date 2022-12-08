@@ -129,4 +129,13 @@ class RegisterController extends Controller
 
         return redirect('index');
     }
+
+    public function updatetag(Request $request)
+    {
+        dd($request->all());
+        DB::table('tb_customers')->where('customer_id',Session::get('cid'))->update(['tag'=> json_encode($request->checkbox, JSON_UNESCAPED_UNICODE)]);
+
+
+        return redirect('user/myAccount');
+    }
 }

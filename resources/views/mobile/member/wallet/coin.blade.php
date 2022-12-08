@@ -71,6 +71,8 @@
                     <div class="row">
                         @if($coins->status == '1')
                             <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">เติมคอยน์</span></div>
+                        @elseif($coins->status == '3')
+                            <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;">แลกคอยน์</span></div>
                         @else
                             <div class="col-12"><span class="font-weight-bold" style="font-size: 18px;color:red">ใช้คอยน์</span></div>
                         @endif
@@ -85,6 +87,9 @@
                            
                                 @if($coins->status == '1')
                                     <span class="font-weight-bold" style="font-size: 18px;">+ {{number_format($coins->coin )}} คอยน์ </span>
+                                @elseif($coins->status == '3')
+                                    <span class="font-weight-bold" style="font-size: 18px;">+ {{number_format($coins->coin )}} คอยน์ </span>
+
                                 @else
                                     <span class="font-weight-bold" style="font-size: 18px;color:red">- {{number_format($coins->coin )}} คอยน์ </span>
                                 @endif

@@ -21,6 +21,7 @@
         จำนวนคอยน์ที่ได้ <input type="text" name="coin" placeholder="จำนวนคอยน์ที่ได้" class="form-control" id="coin" readonly>
         <br>
         <input type="hidden" name="money" id="money" >
+        <input type="hidden" name="iddonate" id="iddonate" >
         <button type="submit" class="btn btn-success col-12 mt-4" style="font-size:1.3rem;">ยืนยันการแลกไอคอน</button>
         {{-- <a href="#"><button type="button" class="btn btn-danger col-12 mt-2" style="font-size:1.3rem;">ยกเลิก</button></a> <!-- ให้ลิงค์กลับมาหน้าเดิม คล้ายการทำ  Reset --> --}}
     </form>
@@ -35,7 +36,7 @@
                 <th>#</th>
                 <th>รายการ</th>
                 <th>จำนวน</th>
-                <th><input type="checkbox" class="mr-1" onclick="selectdonate(0,this);">ทั้งหมด</th>
+                <th><input type="checkbox" class="mr-1" onclick="selectdonate(0,this,'null');">ทั้งหมด</th>
             </tr>
             </thead>
             <tbody>
@@ -133,7 +134,7 @@
                             @endif
                             <td>{{$logs->countt}}</td>
                            
-                            <td><input type="checkbox" name="chk" value="{{$logs->coin*$logs->countt}}" onclick="selectdonate(1,this);"></td>
+                            <td><input type="checkbox" name="chk" value="{{$logs->coin*$logs->countt}}" onclick="selectdonate(1,this,'{{$logs->donate}}');"></td>
                         </tr>
                         <?php $all += $logs->coin*$logs->countt; ?>
                     @endforeach
@@ -162,8 +163,11 @@
 
    
     var id = 0;
+    var ids = 0;
+    const iddonate = ["0"];
 
-    function selectdonate(v,t){
+    function selectdonate(v,t,d){
+
         var all  = "{{$all}}";
         var ele=document.getElementsByName('chk');  
         if( v ==0){
@@ -172,6 +176,7 @@
                 var allint = parseInt(all);
                 document.getElementById('coin').value = allint-(allint*0.1);
                 document.getElementById('money').value = allint;
+                document.getElementById('iddonate').value = 'null';
                 for(var i=0; i<ele.length; i++){  
                     if(ele[i].type=='checkbox')  
                         ele[i].checked=true;  
@@ -182,17 +187,22 @@
                         ele[i].checked=false;  
                       
                 }  
+                id = 0
                 document.getElementById('money').value = '';
                 document.getElementById('coin').value = '';
+                document.getElementById('iddonate').value = '';
             }
             
 
         }else{
+           
             if(t.checked == true){
+                iddonate.push(d);
                 id += parseInt(t.value);
                 document.getElementById('coin').value = id-(id*0.1);
                 document.getElementById('money').value = id;
             }else{
+                iddonate.pop(d);
                 id -= parseInt(t.value);
                 document.getElementById('coin').value = id-(id*0.1);
                 document.getElementById('money').value = id;
@@ -202,7 +212,13 @@
 
                 }
             }
+
+            document.getElementById('iddonate').value = iddonate;
+
+            console.log(iddonate);
+
         }
+
         
     }
 

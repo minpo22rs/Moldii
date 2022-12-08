@@ -205,7 +205,7 @@
         
         <div class="col-md-12 pb-2">
             <div class="pt-4" style="font-weight: bold; color: #1C2833 ; font-size: 200% ; " > {{$group->name}} </div> 
-            <div class="pt-1 pb-2"><i class="fa fa-solid fa-globe"></i> Public Group <b>{{$cg->count()}}</b> members</div>
+            <div class="pt-1 pb-2"><i class="fa fa-solid fa-globe"></i> กลุ่มสาธารณะ <b> สมาชิก {{$cg->count()}}</b> คน</div>
             @foreach($cg as $cgs)
 
                 <img class=" rounded-circle  " src="{{asset('storage/profile_cover/'.$cgs->customer_img.'')}}" alt="alt" style="width: 50px; height:50px;" >
@@ -248,63 +248,63 @@
 
             <hr> <!-- ------------------ -->
             {{-- Write Me --}}
+            @if($chk != null && $chk->status_group == 2)
+                <div class="row">
+                    <div class="col-12 pl-2 pr-2">
+                        <div class="widget-post" aria-labelledby="post-header-title">
+                            <div class="widget-post__header">
+                            <h2 class="widget-post__title" id="post-header-title">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                Write Me
+                            </h2>
+                            </div>
+                            <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="fam" value="{{$group->id}}">
 
-            <div class="row">
-                <div class="col-12 pl-2 pr-2">
-                    <div class="widget-post" aria-labelledby="post-header-title">
-                        <div class="widget-post__header">
-                        <h2 class="widget-post__title" id="post-header-title">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                            Write Me
-                        </h2>
+                                <div class="widget-post__content">
+                                    <label for="post-content" class="sr-only">Share</label>
+                                    <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" rows="7" required></textarea>
+                                    <div class="row" id="rowsocial"> </div>
+                                    
+                                </div>
+                                <div class="widget-post__options is--hidden" id="stock-options">
+                                </div>
+                                <div class="widget-post__actions post--actions">
+                                    <div class="post-actions__attachments">
+                                        {{-- <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                            stock
+                                        </button> --}}
+
+                                        <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                            <label for="upload-video" class="post-actions__label">
+
+                                                <i class="fa fa-video " aria-hidden="true"></i> 
+                                            </label>
+                                        </button>
+                                        {{-- <input type="file" id="upload-video" name="video[0]" accept="video/mp4;capture=camera" multiple onclick="addimagegallery()"> --}}
+
+                                        <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
+                                            <label for="upload-image" class="post-actions__label">
+                                                <i class="fa fa-file-image" aria-hidden="true"></i> 
+                                            </label>
+                                        </button>
+                                        {{-- <input type="file" id="upload-image" name="img[0]" accept="image/*;capture=camera" multiple onchange="addimagegallery()"> --}}
+                                    </div>
+
+                                    <div class="post-actions__widget">
+                                        <button class="btn post-actions__publish">Post</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
                         </div>
-                        <form id="widget-form" class="widget-post__form" name="form" action="{{url('userpostcontent')}}" method="POST" aria-label="post widget" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="fam" value="{{$group->id}}">
-
-                            <div class="widget-post__content">
-                                <label for="post-content" class="sr-only">Share</label>
-                                <textarea name="post" id="post-content" class="widget-post__textarea scroller" placeholder="What's happening?" rows="7" required></textarea>
-                                <div class="row" id="rowsocial"> </div>
-                                
-                            </div>
-                            <div class="widget-post__options is--hidden" id="stock-options">
-                            </div>
-                            <div class="widget-post__actions post--actions">
-                                <div class="post-actions__attachments">
-                                    {{-- <button type="button" class="btn post-actions__stock attachments--btn" aria-controls="stock-options" aria-haspopup="true">
-                                        <i class="fa fa-usd" aria-hidden="true"></i>
-                                        stock
-                                    </button> --}}
-
-                                    <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
-                                        <label for="upload-video" class="post-actions__label">
-
-                                            <i class="fa fa-video " aria-hidden="true"></i> 
-                                        </label>
-                                    </button>
-                                    {{-- <input type="file" id="upload-video" name="video[0]" accept="video/mp4;capture=camera" multiple onclick="addimagegallery()"> --}}
-
-                                    <button type="button" class="btn post-actions__upload attachments--btn" onclick="addimagegallery()">
-                                        <label for="upload-image" class="post-actions__label">
-                                            <i class="fa fa-file-image" aria-hidden="true"></i> 
-                                        </label>
-                                    </button>
-                                    {{-- <input type="file" id="upload-image" name="img[0]" accept="image/*;capture=camera" multiple onchange="addimagegallery()"> --}}
-                                </div>
-
-                                <div class="post-actions__widget">
-                                    <button class="btn post-actions__publish">Post</button>
-                                </div>
-                            </div>
-
-
-                        </form>
                     </div>
+
                 </div>
-
-            </div>
-
+            @endif
 
             @foreach ($c as $sqls)
                     <?php   $count = DB::Table('tb_comments')->where('comment_object_id', $sqls->new_id)->get();

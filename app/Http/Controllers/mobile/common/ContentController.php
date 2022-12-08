@@ -212,6 +212,16 @@ class ContentController extends Controller
         return 1 ;
     }
 
+
+    public function unhidecontent(Request $request){
+       
+        DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>1]);
+
+        
+        return 1 ;
+    }
+
+
     public function contentreport($id){
         $sql =  DB::Table('tb_content_reports')->where('new_id',$id)->first();
         if($sql != null){

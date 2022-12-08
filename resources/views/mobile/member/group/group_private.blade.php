@@ -198,7 +198,7 @@
             
             <div class="col-md-12">
                 <div class="pt-4" style="font-weight: bold; color: #1C2833 ; font-size: 200% ; " >{{$group->name}}  </div> 
-                <div class="pt-1 pb-2"><i class="fa fa-solid fa-lock"></i> Private Group<b> {{$cg->count()}}</b> members</div>
+                <div class="pt-1 pb-2"><i class="fa fa-solid fa-lock"></i> กลุ่มส่วนตัว <b>สมาชิก {{$cg->count()}}</b> คน</div>
               
                     @foreach($cg as $cgs)
 
@@ -578,17 +578,19 @@
                     @endforeach
                 @else
 
-                    <div class="pt-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > About </div> 
-                    <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-lock"></i> Private </div> 
-                    <div> Only members can see who's in the group and what they post. </div>
-                    <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-eye"></i> Visible</div>
-                    <div> Anyone can fine this group.</div>
+                    <div class="pt-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > เกี่ยวกับ </div> 
+                    <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-lock"></i> ส่วนตัว </div> 
+                    <div> เฉพาะสมาชิกเท่านั้นที่สามารถเห็นคนที่อยู่ในกลุ่มและสิ่งที่สมาชิดโพสต์ได้</div>
+                    <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-eye"></i> แสดงให้เห็น</div>
+                    <div>ทุกคนจะสามารถค้นหากลุ่มนี้พบ</div>
                     <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-clock"></i> History</div>
-                    <div class="pb-2"> Group created on {{date("F j, Y",strtotime($group->created_at))}}.</div>
-                    <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-user"></i>  {{$cg->count()}} members </div> 
-                    <div> Only members can see who's in the group and what they post. </div>
+                    <div class="pb-2"> สร้างเมื่อ {{date("F j, Y",strtotime($group->created_at))}}.</div>
+                    {{-- <div class="pt-2" style="font-weight: 500; font-size: 110% ;"><i class="fa fa-solid fa-user"></i> สมาชิก {{$cg->count()}} คน </div> 
+                    <div> เฉพาะสมาชิกเท่านั้นที่สามารถเห็นคนที่อยู่ในกลุ่มและสิ่งที่สมาชิดโพสต์ได้</div> --}}
                     <hr> <!-- ------------------ -->
-                    <div class="pt-2 pb-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > Addmins and Moderators <span style=" font-weight: 500; font-size: 90% ; position: absolute; right: 20px;"><a href="#">See All</a></span> </div> 
+                    <div class="pt-2 pb-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > สมาชิก 
+                        {{-- <span style=" font-weight: 500; font-size: 90% ; position: absolute; right: 20px;"><a href="#">See All</a></span>  --}}
+                    </div> 
                     {{-- <div class="pt-2 pb-2" style="font-weight: bold; color: #1C2833 ; font-size: 120% ; " > Addmins and Moderators <span style=" font-weight: 500; font-size: 90% ; position: absolute; right: 20px;"><a href="#">See All</a></span> </div>  --}}
                     @if($group->created_by == 0)
                         <img class=" rounded-circle  " src="{{asset('new_assets/img/Moldii.png')}}" alt="alt" style="width: 50px; height:50px;" >
@@ -604,13 +606,13 @@
                         @endforeach
                     @endif
                   
-                    <div ><small >user Join and admins. </small></div>
+                    {{-- <div ><small >user Join and admins. </small></div> --}}
                     <hr> <!-- ------------------ -->
 
                     <div style="text-align: center; padding : 0 20 0 20 ; ">
                     <div class="pt-5"><i class="fa fa-solid fa-lock" ></i></div>
-                    <div class="pt-2" style="font-weight: bold; color: #1C2833 ; font-size: 130% ;  " > This Group is Private  </div> 
-                    <div class="pt-1 pb-5" style="font-weight: 500; font-size: 110% ;">Join this group to view or participate in discussions. </div> 
+                    <div class="pt-2" style="font-weight: bold; color: #1C2833 ; font-size: 130% ;  " >กลุ่มนี้เป็นกลุ่มส่วนตัว  </div> 
+                    <div class="pt-1 pb-5" style="font-weight: 500; font-size: 110% ;">เข้าร่วมกลุ่มนี้เพื่อดูหรือมีส่วนร่วมในการพัฒนา </div> 
                     </div>
                     <div class="pb-5"></div>
                 @endif

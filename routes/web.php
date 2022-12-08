@@ -105,6 +105,8 @@ Route::post('user/submitslip', [UserAccController::class, 'submitslip']);// แ�
 
 Route::get('user/mylike', [UserAccController::class, 'mylike']);
 Route::get('user/mybookmark', [UserAccController::class, 'mybookmark']);
+Route::get('user/taged', [UserAccController::class, 'taged']);
+Route::get('user/postList', [UserAccController::class, 'postList']);
 
 
 Route::get('user/confirmreceive/{id}', [UserAccController::class, 'confirmreceive']);// รายการของฉัน
@@ -157,6 +159,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/hidecontent', [ContentController::class, 'hidecontent']); 
 Route::get('/deletecontent', [ContentController::class, 'deletecontent']); 
 Route::get('/hidecontent', [ContentController::class, 'hidecontent']); 
+Route::get('/unhidecontent', [ContentController::class, 'unhidecontent']); 
 Route::get('/contentreport/{id}', [ContentController::class, 'contentreport']); 
 
 
@@ -273,6 +276,7 @@ Route::get('confirm/otp',[OtpController::class,'confirm'])->name('Confirm_OTP');
 Route::post('check/otp',[OtpController::class,'check'])->name('Check_OTP');
 Route::get('tag',[RegisterController::class,'tag']);
 Route::post('selecttag',[RegisterController::class,'selecttag']);
+Route::post('updatetag',[RegisterController::class,'updatetag']);
 
 
 //resetpass

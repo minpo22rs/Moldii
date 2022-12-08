@@ -461,6 +461,18 @@ class UserAccController extends Controller
 
     }
 
+
+    public function postList(){
+        $like = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
+        $mark = DB::Table('tb_bookmarks')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
+        $new = DB::Table('tb_news')->where('customer_id',Session::get('cid'))->where('new_published',2)->get();
+        
+        return view('mobile.member.userAccount.postList')->with(['like' => $like ,'mark'=>$mark,'new'=>$new]);
+
+    }
+
+
+
     public function mylike(){
         $sql = DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->orderBy('created_at','DESC')->get();
         
@@ -498,6 +510,15 @@ class UserAccController extends Controller
     }
     public function appAccess(){// การเข้าถึงของแอป
         return view('mobile.member.userAccount.appAccess');
+
+    }
+
+    public function taged(){
+        $user = User::where('customer_id',Session::get('cid'))->first();
+        $arr  = json_decode($user->tag) ;
+        // dd($arr);
+        // dd(array_search('t',$arr));
+        return view('mobile.member.userAccount.taged')->with(['user'=>$user,'arr'=>$arr]);
 
     }
     
