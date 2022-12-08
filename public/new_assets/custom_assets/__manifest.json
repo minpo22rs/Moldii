@@ -11,15 +11,8 @@
     "description": "Moldii รวมของเล่น ของสะสมไว้ในที่นี่ที่เดียว",
     "lang": "th",
     "dir": "auto",
-    "categories": ["books", "education", "medical"],
-    "screenshots": [
-        {
-            "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
-            "sizes": "2880x1800",
-            "type": "image/png",
-            "description": "A screenshot of the home page"
-        }
-    ],
+   
+    
     "shortcuts": [
         {
             "name":"Moldii",
@@ -33,7 +26,7 @@
             "src": "/new_assets/img/logo_icon/Moldii Logo 512x512.png",
             "type": "image/png",
             "sizes": "512x512",
-            "purpose": "maskable"
+            "purpose": "any"
         }
         ,
         {
