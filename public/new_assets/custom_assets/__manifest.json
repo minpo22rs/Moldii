@@ -27,13 +27,7 @@
     ],
     "icons": [
         
-        {
-            "src": "/new_assets/img/logo_icon/Moldii Logo 512x512.png",
-            "type": "image/png",
-            "sizes": "512x512",
-            "purpose": "maskable"
-        }
-        ,
+       
         {
             "src": "/new_assets/img/logo_icon/Moldii Logo 192x192.png",
             "sizes": "192x192",
