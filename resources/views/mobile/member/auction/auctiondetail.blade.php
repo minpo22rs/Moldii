@@ -302,8 +302,7 @@
 
         var aid = "{{$auction->id_auction}}" ;
         var min = parseInt(p)+parseInt(b);
-        var bitrun = 0;
-
+       
         $(".stepper-ups").on("click", function () {
             var valueInput = document.getElementById('bitcount').value;
             document.getElementById('bitcount').value = (parseInt(valueInput) + parseInt(b));
@@ -365,7 +364,7 @@
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
                         // $('#bitcount').remove();
                         // $('#divbit').append('input type="number" class="form-control font-weight-bold ml-3" value="'+json['bit']+'" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />');
-                        bitrun =json['bit'];
+                        
                         document.getElementById('bitcount').value= json['bit'];
                         // $('#bitcount').val( json['bit']);
                         $( "#here" ).load(window.location.href + " #here" );
@@ -461,10 +460,9 @@
                         limit = json['limit'];
                     
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+parseInt(json['now']).toFixed(2);
-                        $('#bitcount').remove();
-                        $('#divbit').append('<input type="number" class="form-control font-weight-bold ml-3" value="'+bitrun+'" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />');
 
-                        // document.getElementById('priceupdate').value = json['bit'];
+                        document.getElementById('priceupdate').value = json['bit'];
+                        document.getElementById('bitcount').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
                        
                     }
