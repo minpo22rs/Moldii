@@ -178,7 +178,7 @@ class OrderController extends Controller
             return  redirect('ordertoship/'.$order->id.'')->with('msg','สั่งซื้อสินค้าเรียบร้อยแล้ว');
             
         }elseif(Session::get('typepayment') == 'Credit card'){//
-            $url='https://api.globalprimepay.com/v2/tokens/charge';
+            $url='https://api.gbprimepay.com/v2/tokens/charge';
             $headers = array(
                 'Content-Type: application/json',
             );
@@ -199,7 +199,7 @@ class OrderController extends Controller
             $payload = json_encode($data);
 
         }elseif(Session::get('typepayment') == 'Mobile Banking'){//
-            $url='https://api.globalprimepay.com/v2/mobileBanking';
+            $url='https://api.gbprimepay.com/v2/mobileBanking';
             $mes = $amount.$ref.$responseUrl.$backgroundUrl.Session::get('bankcode');
             $checksum = hash_hmac('sha256', $mes,$secret_key);
             // $checksum =  base64_encode($s);
@@ -225,7 +225,7 @@ class OrderController extends Controller
 
         }elseif(Session::get('typepayment') == 'Wechat Pay'){
 
-            $url='https://api.globalprimepay.com/v2/wechat/text';
+            $url='https://api.gbprimepay.com/v2/wechat/text';
 
             $mes = $amount.$ref.$backgroundUrl;
             $checksum = hash_hmac('sha256',$mes,$secret_key);
@@ -249,7 +249,7 @@ class OrderController extends Controller
 
 
         }elseif(Session::get('typepayment') == 'TrueMoney Wallet'){//
-            $url='https://api.globalprimepay.com/v2/trueWallet';
+            $url='https://api.gbprimepay.com/v2/trueWallet';
             $headers = array(
                 'application/x-www-form-urlencoded',
             ); 
@@ -271,7 +271,7 @@ class OrderController extends Controller
 
 
         }elseif(Session::get('typepayment') == 'ShopeePay'){//
-            $url='https://api.globalprimepay.com/v1/shopeePay';
+            $url='https://api.gbprimepay.com/v1/shopeePay';
             $headers = array(
                 'application/x-www-form-urlencoded',
             ); 
@@ -292,7 +292,7 @@ class OrderController extends Controller
 
 
         }elseif(Session::get('typepayment') == 'Rabbit Line Pay'){
-            $url='https://api.globalprimepay.com/v2/linepay';
+            $url='https://api.gbprimepay.com/v2/linepay';
             $headers = array(
                 'application/x-www-form-urlencoded',
             ); 

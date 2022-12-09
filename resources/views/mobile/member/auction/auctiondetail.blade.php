@@ -117,10 +117,15 @@
                         }
                 
                 ?>
-                <div class="stepper-dark align-self-center form-inline" style="font-size: 18px; " id="divbit">
+                <div class="stepper-dark align-self-center form-inline" style="font-size: 18px; ">
                     {{-- <a href="#" class=" stepper-downs align-self-center " style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a> --}}
-                    ราคาประมูล : <input type="number" class="form-control font-weight-bold ml-3" value="{{$p}}" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />
-                    <button class="btn btn-sm btn-warning ml-3" onclick="resetbit()"> รีเซต</button>
+                   
+                         ราคาประมูล : 
+                        <div  id="divbit"> <input type="number" class="form-control font-weight-bold ml-3" value="{{$p}}" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" /></div>
+                        <button class="btn btn-sm btn-warning ml-3 " onclick="resetbit()"> รีเซต</button>
+                   
+                    
+                    
                     
                     {{-- <a href="#" class=" stepper-ups align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle "></i></a> --}}
                 </div>
@@ -297,7 +302,7 @@
 
         var aid = "{{$auction->id_auction}}" ;
         var min = parseInt(p)+parseInt(b);
-        
+        var bitrun = 0;
 
         $(".stepper-ups").on("click", function () {
             var valueInput = document.getElementById('bitcount').value;
@@ -348,7 +353,7 @@
                     data: {'pid':pid,'aid':aid,'count':bitcount,'_token':_token},
                     success: function(data) {
                         var json = JSON.parse(data);
-                    
+                        console.log(json);
                         if(parseInt(json['chk']) ==1){
                             Swal.fire({
                                 text : "ท่านนำประมูลอยู่แล้ว",
@@ -358,10 +363,13 @@
                         
                         limit = json['limit'];
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+json['now'];
-
-                        document.getElementById('bitcount').value = json['bit'];
+                        // $('#bitcount').remove();
+                        // $('#divbit').append('input type="number" class="form-control font-weight-bold ml-3" value="'+json['bit']+'" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />');
+                        bitrun =json['bit'];
+                        document.getElementById('bitcount').value= json['bit'];
+                        // $('#bitcount').val( json['bit']);
                         $( "#here" ).load(window.location.href + " #here" );
-                        $( "#divbit" ).load(window.location.href + " #divbit" );
+                        // $( "#divbit" ).load(window.location.href + " #divbit" );
                         
                     }
                         
@@ -453,8 +461,10 @@
                         limit = json['limit'];
                     
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+parseInt(json['now']).toFixed(2);
+                        $('#bitcount').remove();
+                        $('#divbit').append('<input type="number" class="form-control font-weight-bold ml-3" value="'+bitrun+'" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />');
 
-                        document.getElementById('priceupdate').value = json['bit'];
+                        // document.getElementById('priceupdate').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
                        
                     }
