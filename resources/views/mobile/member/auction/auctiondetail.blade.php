@@ -462,7 +462,7 @@
                         document.getElementById('pricenow').innerHTML = 'ราคาปัจจุบัน ฿ '+parseInt(json['now']).toFixed(2);
 
                         document.getElementById('priceupdate').value = json['bit'];
-                        document.getElementById('bitcount').value = json['bit'];
+                        // document.getElementById('bitcount').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
                        
                     }
