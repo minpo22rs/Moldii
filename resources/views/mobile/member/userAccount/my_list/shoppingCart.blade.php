@@ -83,17 +83,24 @@
 
                                         <div class="row col-12">
                                             @if($product->product_discount != null)
-                                                <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>ราคา : ฿{{number_format($product->product_price,2,'.','')}}</s> </h5>
-                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_discount,2,'.','')}}</h5>
+                                                <h5 class="m-0 font-weight-bold" style="color:rgba(116, 116, 116, 1);"><s>ราคา : ฿{{number_format($product->product_price,2,'.',',')}}</s> </h5>
+                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_discount,2,'.',',')}}</h5>
                                             @else
-                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_price,2,'.','')}}</h5>
+                                                <h5 class="m-0 font-weight-bold ml-1" style="color:rgba(80, 202, 101, 1);">ราคา : ฿{{number_format($product->product_price,2,'.',',')}}</h5>
+                                            @endif
+                                            @if($product->product_published == 3)
+                                                <h6 class="m-0">( สินค้าจากการประมูล )</h6>
+                                                <br>   <br>
                                             @endif
                                         </div>
-                                        <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">
-                                            <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle" onclick="countdown({{$p}},{{$cartts->cart_id}});"></i></a>
-                                            <input type="text" class="form-control font-weight-bold "value="{{$cartts->count}}" id="countupdown{{$cartts->cart_id}}" readonly style="border:none;"  />
-                                            <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle " onclick="countup({{$p}},{{$cartts->cart_id}});"></i></a>
-                                        </div>
+                                     
+                                        @if($product->product_published != 3)
+                                            <div class="my-1 stepper stepper-dark align-self-center" style="font-size: 17px; ">
+                                                <a href="#" class=" stepper-down align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle" onclick="countdown({{$p}},{{$cartts->cart_id}});"></i></a>
+                                                <input type="text" class="form-control font-weight-bold "value="{{$cartts->count}}" id="countupdown{{$cartts->cart_id}}" readonly style="border:none;"  />
+                                                <a href="#" class=" stepper-up align-self-center" style="color:rgba(0, 0, 0, 1);"><i class="far fa-plus-circle " onclick="countup({{$p}},{{$cartts->cart_id}});"></i></a>
+                                            </div>
+                                        @endif
                                     </div>
 
                                 </div>

@@ -105,7 +105,7 @@
         {{-- <form action="{{url('addauction')}}" method="POST">
             @csrf --}}
             @csrf 
-            <div class="row justify-content-between  p-1" id="divbit">
+            <div class="row justify-content-between  p-1" >
                 {{-- <h3 class="font-weight-bold mb-0 align-self-center">จำนวน</h3> --}}
                 <?php   $p = 0;
                         if($log->count()!=0){
@@ -117,7 +117,7 @@
                         }
                 
                 ?>
-                <div class="stepper-dark align-self-center form-inline" style="font-size: 18px; ">
+                <div class="stepper-dark align-self-center form-inline" style="font-size: 18px; " id="divbit">
                     {{-- <a href="#" class=" stepper-downs align-self-center " style="color:rgba(0, 0, 0, 1);"><i class="far fa-minus-circle"></i></a> --}}
                     ราคาประมูล : <input type="number" class="form-control font-weight-bold ml-3" value="{{$p}}" id="bitcount" style="font-size: 18px;width:150px;text-align:center" name="count" />
                     <button class="btn btn-sm btn-warning ml-3" onclick="resetbit()"> รีเซต</button>
@@ -293,9 +293,9 @@
         var countDownDate = new Date(limit).getTime();
         // Set the date we're counting down to
         var _token = $('input[name="_token"]').val();
-        var pid = document.getElementById('pid').value ;
+        var pid = "{{$product->product_id}}" ;
 
-        var aid = document.getElementById('aid').value ;
+        var aid = "{{$auction->id_auction}}" ;
         var min = parseInt(p)+parseInt(b);
         
 
@@ -332,8 +332,8 @@
         function updateDiv()
         { 
            
-            var bitcount = document.getElementById('bitcount').value ;
-            var now =document.getElementById('priceupdate').value;
+            var bitcount = parseInt(document.getElementById('bitcount').value) ;
+            var now = parseInt(document.getElementById('priceupdate').value);
          
             if(bitcount < now){
                         Swal.fire({
@@ -361,6 +361,7 @@
 
                         document.getElementById('bitcount').value = json['bit'];
                         $( "#here" ).load(window.location.href + " #here" );
+                        $( "#divbit" ).load(window.location.href + " #divbit" );
                         
                     }
                         

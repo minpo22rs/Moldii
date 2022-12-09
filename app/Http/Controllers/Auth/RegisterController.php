@@ -132,7 +132,7 @@ class RegisterController extends Controller
 
     public function updatetag(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         DB::table('tb_customers')->where('customer_id',Session::get('cid'))->update(['tag'=> json_encode($request->checkbox, JSON_UNESCAPED_UNICODE)]);
 
 
