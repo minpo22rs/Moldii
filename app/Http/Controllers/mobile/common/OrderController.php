@@ -148,13 +148,18 @@ class OrderController extends Controller
         $url='';
         $secret_key = "PbqyzQgpWejNZKq8mhShhMyI27WZgcHp";
         $public = "vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl";
+      
+        // $secret_key = "7kHnSDgAH1LBTG1lfKy5tceYsYxhJwW1";
+        // $public = "yuyCcvpmILceiYhLsDUPDhvCyJOuyWem";
+
+
         $data = array();
         $d = date('Ymd');
         $r = rand(0000000,9999999);
         $ref = $d.$r;
 
-        $responseUrl = "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."";
-        $backgroundUrl = "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."";
+        $responseUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
+        $backgroundUrl = "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."";
 
         $amount = number_format(Session::get('totalcart'),2,'.','');
 
@@ -192,8 +197,8 @@ class OrderController extends Controller
                     "token"=> $sql->token
                 ),
                 "otp"=> "Y",
-                "responseUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id."",
-                "backgroundUrl"=> "https://modii.sapapps.work/gateway/response/".Session::get('cid')."/".$order->id.""
+                "responseUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id."",
+                "backgroundUrl"=> "http://127.0.0.1:8000/gateway/response/".Session::get('cid')."/".$order->id.""
             );
 
             $payload = json_encode($data);

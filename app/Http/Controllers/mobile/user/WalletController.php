@@ -57,7 +57,7 @@ class WalletController extends Controller
 
        if(Session::get('wallettypepayment') == 'Credit card')
        {
-            $url='https://api.globalprimepay.com/v2/tokens/charge';
+            $url='https://api.gbprimepay.com/v2/tokens/charge';
             $headers = array(
                 'Content-Type: application/json',
             );

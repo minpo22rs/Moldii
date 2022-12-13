@@ -422,7 +422,7 @@ class UserAccController extends Controller
        
 
         $payload = json_encode($data);
-        $ch = curl_init('https://api.globalprimepay.com/v2/tokens');
+        $ch = curl_init('https://api.gbprimepay.com/v2/tokens');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
         curl_setopt($ch, CURLOPT_POST, true);
@@ -791,7 +791,7 @@ class UserAccController extends Controller
        
 
         $payload = json_encode($data);
-        $ch = curl_init('https://api.globalprimepay.com/v2/tokens');
+        $ch = curl_init('https://api.gbprimepay.com/v2/tokens');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
         curl_setopt($ch, CURLOPT_POST, true);
