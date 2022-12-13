@@ -368,12 +368,12 @@ class OrderController extends Controller
     public function threed($x){
         // dd(/$x);
         $data1 = array(
-            "publicKey"=> 'yuyCcvpmILceiYhLsDUPDhvCyJOuyWem',
+            "publicKey"=> 'vQPduUV2rVDva6aR8sx8kVrCVfpK4Dtl',
             "gbpReferenceNo"=> $x,
             
         );
 
-        $ch1 = curl_init('https://api.globalprimepay.com/v2/tokens/3d_secured');
+        $ch1 = curl_init('https://api.gbprimepay.com/v2/tokens/3d_secured');
         curl_setopt($ch1, CURLOPT_HEADER, 0);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch1, CURLOPT_POST, true);
