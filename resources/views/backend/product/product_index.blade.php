@@ -118,6 +118,8 @@
             </div>
         </div>
     </div>
+
+    
 </div>
 
 <div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">

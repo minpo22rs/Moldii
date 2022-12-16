@@ -139,9 +139,10 @@ class MerchantAuctionController extends Controller
         $auction = Auction::where('id_auction','=',$id)->leftJoin('tb_products', 'tb_auctions.product_id', '=', 'tb_products.product_id')->first();
         // $ad = Auction_detail::where('id_auction',$id)->leftJoin('tb_products', 'tb_auction_details.product_id', '=', 'tb_products.product_id')->first();
         $img  = DB::Table('tb_product_imgs')->where('product_id',$auction->product_id)->get();
+        $user  = DB::Table('tb_customers')->where('customer_id',$auction->win)->first();
 
         $cat = category::where('deleted_at',null)->get();
-        $data = array('auction' => $auction,'cat'=>$cat,'img'=>$img);
+        $data = array('auction' => $auction,'cat'=>$cat,'img'=>$img,'user'=>$user);
         return view('merchant.auction.detailauction', $data);
     }
 

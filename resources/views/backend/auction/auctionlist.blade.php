@@ -257,9 +257,15 @@
                             <input type="number" class="form-control" name="price" required>
                         </div>
 
-                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ <span class="text-danger">*</span></label>
+                        <label class="col-sm-2 col-form-label  text-right">ร้านค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
-                            <input type="number" class="form-control" name="bit" required>
+                            <select class="form-control" name="merchant_id">
+                                <option value="">เลือกร้านค้า</option>
+                                @foreach($mer as $mers)
+                                    <option value="{{$mers->merchant_id}}">{{$mers->merchant_shopname}}</option>
+
+                                @endforeach
+                            </select>
                         </div>
                         
                     </div>

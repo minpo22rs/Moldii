@@ -246,7 +246,9 @@
 
                                 <dt class="col-sm-6">บริษัทขนส่ง</dt>
                                 <dd class="col-sm-6 border-bottom">
+                                    
                                     <strong>{{$shipcom->name_company}}</strong>
+                                   
                                 </dd>
                                 <br><br>
                                 @if($order->status_order==2 || $order->status_order==4 || $order->status_order==3 && $ordetail[0]->tracking_code==null)

@@ -7,17 +7,34 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('merchant/addauction')}}" method="POST"  id="addnews" enctype="multipart/form-data">
-                @csrf
+           
                 <div class="modal-body">
+                    @if($auction->finish ==1)
+                    <div class="form-group row text-danger">
+                        <label class="col-sm-2 col-form-label">สถานะ </label>
+
+
+                        <label class="col-sm-3 col-form-label">สิ้นสุดการประมูลแล้ว </label>
+
+
+                        <label class="col-sm-2 col-form-label text-right">ผู้ชนะ </label>
+                        <label class="col-sm-3 col-form-label">{{$user->customer_name}} {{$user->customer_lname}} </label>
+
+                        
+                        <br>
+                        <br>
+                    </div>
+                    @endif
                     
-                  
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" value="{{$auction->date_start}}" readonly>
                         </div>
-                       
+                        <label class="col-sm-2 col-form-label text-right">ราคาเริ่มต้น <span class="text-danger">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" value="{{$auction->price}}" readonly>
+                        </div>
                         
                     </div>
                     <div class="form-group row">
@@ -31,19 +48,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                       
-                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น <span class="text-danger">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="price" value="{{$auction->price}}" readonly>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ <span class="text-danger">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="bit" value="{{$auction->bit}}" readonly>
-                        </div>
-                        
-                    </div>
 
                     <div class="form-group row">
                        
@@ -132,7 +136,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">ยกเลิก</button>
                 </div>
-            </form>
+            
             
         </div>
     </div>

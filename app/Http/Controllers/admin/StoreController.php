@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Models\notification;
 use Auth;
+use Hash;
+use Mail;
 
 class StoreController extends Controller
 {
@@ -43,11 +45,29 @@ class StoreController extends Controller
      */
     public function statusstore(Request $request)
     {
-    
         $merchant = Merchant::where('merchant_id',$request->id)->update(['merchant_status'=>$request->status]);
         $noti = new notification();
         if($request->status == 3){
+            $rand = rand();
+            $hash = Hash::make($rand);
+            $merchant = Merchant::where('merchant_id',$request->id)->update(['password'=>$hash]);
+            $merchants = Merchant::where('merchant_id',$request->id)->first();
+            // dd($merchants);    
+
             $noti->noti_title       = 'อนุมัติการเปิดร้านค้าบนแอปพลิเคชัน Moldii';
+
+            $data  = array(
+                'rand'   => $rand,
+                'merchant'   => $merchants,
+            );
+        
+            Mail::send('backend.store.mail',$data,function($message) use($merchants){
+                $message->to($merchants->merchant_email)
+                        ->subject('อนุมัติการเปิดร้านค้าบนแอปพลิเคชัน Moldii')
+                        ->from('moldiiapp@gmail.com');
+            });
+        
+           
 
         }else{
             $noti->noti_title       = 'ปฏิเสธการเปิดร้านค้าบนแอปพลิเคชัน Moldii';
@@ -58,6 +78,8 @@ class StoreController extends Controller
         // $noti->noti_detail      = $request->detail;
         $noti->noti_create_by   = Auth::user()->admin_id;
         $noti->save();
+
+        return back()->with('success', 'Successful');
     }
 
     /**

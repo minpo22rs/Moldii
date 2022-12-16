@@ -12,6 +12,7 @@ use App\Models\Auction_detail;
 use App\Models\product;
 use App\Models\product_img;
 use App\Models\category;
+use App\Models\Merchant;
 
 class AuctionController extends Controller
 {
@@ -20,9 +21,10 @@ class AuctionController extends Controller
     {
         $auction = Auction::leftJoin('tb_products','tb_auctions.product_id','=','tb_products.product_id')->orderBy('tb_auctions.created_at','DESC')->get();
         $product = product::where('product_published',1)->get();
+        $mer = Merchant::where('merchant_status',3)->get();
         $cat = category::where('deleted_at',null)->get();
         $s = DB::Table('tb_shipping_companys')->get();
-        $data = array('auction' => $auction,'product'=>$product,'cat'=>$cat,'s'=>$s);
+        $data = array('auction' => $auction,'product'=>$product,'cat'=>$cat,'s'=>$s,'mer'=>$mer);
         return view('backend.auction.auctionlist', $data);
     }
 
@@ -36,12 +38,12 @@ class AuctionController extends Controller
                 foreach($request->pid as $key => $item) {
 
                     $auction = new Auction();
-                    $auction->code     = substr(md5(mt_rand()), 0, 8).'%A';
-                    $auction->price      = $request->price;
-                    $auction->bit      = $request->bit;
+                    $auction->code          = substr(md5(mt_rand()), 0, 8).'%A';
+                    $auction->price         = $request->price;
+                    
                     $auction->date_start      = $request->date_start;
                     $auction->time_start      = $request->time_start;
-                    $auction->time_finish      = $request->time_finish;
+                    $auction->time_finish     = $request->time_finish;
                     $auction->product_id      = $item;
                    
                     $auction->save();
@@ -61,7 +63,7 @@ class AuctionController extends Controller
                     $product->height                = $request->height;
                     $product->product_published     = 3;
 
-                    $product->product_merchant_id   = 0;
+                    $product->product_merchant_id   = $request->merchant_id;
 
                     $name = rand().time().'.'.$request->file('files')[0]->getClientOriginalExtension();
                     $request->file('files')[0]->storeAs('product_cover',$name);

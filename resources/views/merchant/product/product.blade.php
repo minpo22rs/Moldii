@@ -72,38 +72,44 @@
                     </thead>
                     <tbody>
                         @foreach ($product as $key => $item)
-                        <tr>
-                            <td class="text-center text-middle">{{$key+1}}</td>
-                            <td class="text-center text-middle">
-                                <img src="{{asset('storage/app/product_cover/'.$item->product_img.'')}}" class="img-fluid" width="100" height="100">
-                            </td>
-                            <td class="text-center text-middle">{{$item->product_name}}</td>
-                            {{-- <td class="text-center text-middle">{{ Str::limit($item->product_description, 50) }}</td> --}}
-                            <td class="text-center text-middle">
-                                <span style="color: #2ed8b6;">ราคา: </span>{{$item->product_price}} ฿<br>
-                                {{-- <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br> --}}
-                                <span style="color: #FFB64D;">ราคาที่ลดแล้ว:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
-                            </td>
-                            <td class="text-center text-middle">{{$item->product_amount}}</td>
-                            <td class="text-center text-middle">
-                                <div class="dropdown-primary dropdown open">
-                                    <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$item->product_id}})"><i class="icofont icofont-speech-comments"></i> ดูความคิดเห้น</a>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_product({{$item->product_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            @if($item->product_published ==1)
+                                <tr>
+                                    <td class="text-center text-middle">{{$key+1}}</td>
+                                    <td class="text-center text-middle">
+                                        <img src="{{asset('storage/app/product_cover/'.$item->product_img.'')}}" class="img-fluid" width="100" height="100">
+                                    </td>
+                                    <td class="text-center text-middle">{{$item->product_name}}</td>
+                                    {{-- <td class="text-center text-middle">{{ Str::limit($item->product_description, 50) }}</td> --}}
+                                    <td class="text-center text-middle">
+                                        <span style="color: #2ed8b6;">ราคา: </span>{{$item->product_price}} ฿<br>
+                                        {{-- <span style="color: #FF5370;">คะแนน:</span> {{$item->product_gpoint}} <br> --}}
+                                        <span style="color: #FFB64D;">ราคาที่ลดแล้ว:</span> {{$item->product_discount!=null?$item->product_discount.'฿':'-'}} 
+                                    </td>
+                                    <td class="text-center text-middle">{{$item->product_amount}}</td>
+                                    <td class="text-center text-middle">
+                                        <div class="dropdown-primary dropdown open">
+                                            <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
+                                                <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="view_comment({{$item->product_id}})"><i class="icofont icofont-speech-comments"></i> ดูความคิดเห้น</a>
+                                                <a href="#" class="dropdown-item waves-light waves-effect" data-toggle="modal" data-target="#edit-Modal" onclick="edit_product({{$item->product_id}})"><i class="fa fa-edit"></i> แก้ไข</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="#" class="dropdown-item waves-light waves-effect" onclick="del_product({{$item->product_id}})"><i class="icofont icofont-bin"></i> ลบ</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    
 </div>
+
+
 
 <div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
