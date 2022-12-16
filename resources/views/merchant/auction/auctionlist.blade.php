@@ -148,41 +148,32 @@
                     <input type="hidden" name="type" value="0">
                   
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">วันที่</label>
+                        <label class="col-sm-2 col-form-label">วันที่ <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required>
                         </div>
-                       
+                        <label class="col-sm-2 col-form-label text-right">ราคาเริ่มต้น <span class="text-danger">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
                         
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น</label>
+                        <label class="col-sm-2 col-form-label">เวลาเริ่มต้น <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="time" class="form-control" id="timefrom" name="time_start" required>
                         </div>
-                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด</label>
+                        <label class="col-sm-2 col-form-label text-right">สิ้นสุด <span class="text-danger">*</span></label>
                         <div class="col-sm-3">
                             <input type="time" class="form-control" id="timeto" name="time_finish" required>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                       
-                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น</label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="price" required>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ</label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="bit" required>
-                        </div>
-                        
-                    </div>
+                    
                     
 
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">เลือกรายการสินค้าที่จะเข้าร่วม</label>
+                        <label class="col-sm-4 col-form-label">เลือกรายการสินค้าที่จะเข้าร่วม <span class="text-danger">*</span></label>
                         
                     </div>
 
@@ -229,6 +220,10 @@
                             <input type="date" class="form-control" id="datefrom" name="date_start" required>
                             {{-- <input type="date" class="form-control" id="datefrom" name="date_start" min="{{date("Y-m-d")}}" required> --}}
                         </div>
+                        <label class="col-sm-2 col-form-label text-right">ราคาเริ่มต้น <span class="text-danger">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
                        
                         
                     </div>
@@ -243,19 +238,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                       
-                        <label class="col-sm-2 col-form-label">ราคาเริ่มต้น <span class="text-danger">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="price" required>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label  text-right">บิทครั้งละ <span class="text-danger">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="number" class="form-control" name="bit" required>
-                        </div>
-                        
-                    </div>
+                  
 
                     <div class="form-group row">
                        

@@ -41,7 +41,7 @@ class MerchantAuctionController extends Controller
                     $auction = new Auction();
                     $auction->code              = substr(md5(mt_rand()), 0, 8).'%A';
                     $auction->price             = $request->price;
-                    $auction->bit               = $request->bit;
+       
                     $auction->date_start        = $request->date_start;
                     $auction->time_start        = $request->time_start;
                     $auction->time_finish       = $request->time_finish;
@@ -83,7 +83,7 @@ class MerchantAuctionController extends Controller
                     $auction = new Auction();
                     $auction->code                  = substr(md5(mt_rand()), 0, 8).'%A';
                     $auction->price                 = $request->price;
-                    $auction->bit                   = $request->bit;
+              
                     $auction->date_start            = $request->date_start;
                     $auction->time_start            = $request->time_start;
                     $auction->time_finish           = $request->time_finish;
@@ -163,7 +163,7 @@ class MerchantAuctionController extends Controller
         try {
             $auction = Auction::findOrFail( $request->id);
             $auction->price             = $request->price;
-            $auction->bit               = $request->bit;
+
             $auction->date_start        = $request->date_start;
             $auction->time_start        = $request->time_start;
             $auction->time_finish       = $request->time_finish;
