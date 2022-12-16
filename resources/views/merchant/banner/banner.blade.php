@@ -33,6 +33,7 @@
             </div>
             <div class="d-inline-block">
                 <h5>แบนเนอร์</h5>
+                <small>ขนาดรูปภาพแบนเนอร์: 390X150 px </small>
                 <span>สถานะ: <label class="label label-primary">ร้านค้า</label></span>
             </div>
         </div>
