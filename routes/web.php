@@ -149,6 +149,7 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     Route::get('orderdetail/{id}', 'OrderMerchantController@orderdetail');
     Route::get('cancelorder/{id}', 'OrderMerchantController@cancelorder');
     Route::post('createbooking', 'OrderMerchantController@createbooking');
+    Route::get('orderlabel/{id}', 'OrderMerchantController@orderlabel');
 
     // auction
     Route::get('auction', 'MerchantAuctionController@index');

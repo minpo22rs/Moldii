@@ -131,20 +131,20 @@ class OrderMerchantController extends Controller
             if($json->status === 'false'){
                 // dd('whattttttt');
                 DB::Table('tb_order_details')->where('order_id',$request->oid)
-                        ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_order'=>'4']);
+                        ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_detail'=>'4']);
                 return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
 
             }else{
                 // dd('ok');
-                Orders::where('id_order',$request->oid)->update(['purchase_id'=>$json->purchase_id]);
+                // Orders::where('id_order',$request->oid)->update(['purchase_id'=>$json->purchase_id]);
                 $res = self::confirm($json->purchase_id,$jsondata['0']->tracking_code,$request->oid);
                 if($res == 1){
                     return redirect('merchant/ordermerchant')->with('error','Unsuccessfully, please try again.');
 
                 }else{
                     DB::Table('tb_order_details')->where('order_id',$request->oid)->where('store_id',Auth::guard('merchant')->user()->merchant_id)
-                            ->update(['tracking_code'=>$jsondata['0']->courier_tracking_code,'status_detail'=>'5']);
+                            ->update(['tracking_code'=>$jsondata['0']->courier_tracking_code,'status_detail'=>'5','purchase_id'=>$json->purchase_id]);
 
                     return redirect('merchant/ordermerchant')->with('success','successfully');
 
@@ -176,17 +176,53 @@ class OrderMerchantController extends Controller
         
         if($jsonres->status === 'false'){
             DB::Table('tb_order_details')->where('order_id',$id)
-                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_order'=>'4']);
+                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_detail'=>'4']);
             return 1;
         }else{
 
             // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
             DB::Table('tb_order_details')->where('order_id',$id)
-                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'1']);
+                ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'5']);
             return 0;
 
         }
           
+    }
+
+    public function orderlabel($id){
+        // dd($id);
+        $post_data = array(
+            'api_key'=>'pd66f6883421f7c83185b476ece358f3d7608bedf3c8859cba162937677e087480439a610c89e3280c1649670055',
+            // 'purchase_id' => $purchase_id
+            'purchase_id' => '19851515',
+            'size'=>'letter '
+        );
+        $post_data = http_build_query($post_data);
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL, 'https://mkpservice.shippop.com/label/');
+  
+        curl_setopt($curl,CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $jsonres = json_decode($result);
+
+        // dd($jsonres->html);
+        return view('merchant.order.label')->with(['res'=>$jsonres->html]);
+
+        
+        // if($jsonres->status === 'false'){
+        //     DB::Table('tb_order_details')->where('order_id',$id)
+        //         ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['status_detail'=>'4']);
+        //     return 1;
+        // }else{
+
+        //     // Orders::where('id_order',$id)->update(['tracking_code'=>$tracking_code,'status_order'=>'3']);
+        //     DB::Table('tb_order_details')->where('order_id',$id)
+        //         ->where('store_id',Auth::guard('merchant')->user()->merchant_id)->update(['tracking_code'=>$tracking_code,'status_detail'=>'5']);
+        //     return 0;
+
+        // }
     }
 
    

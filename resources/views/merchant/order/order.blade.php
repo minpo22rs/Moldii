@@ -99,7 +99,7 @@
                                             @elseif($sqls->status_detail==1 || $sqls->status_detail==9)
                                                 ที่ต้องจัดส่ง<br><br>
                                            
-                                            @elseif($sqls->status_detail==10)
+                                            @elseif($sqls->status_detail==10 || $sqls->status_detail==7)
                                                 ลูกค้าได้รับสินค้าแล้ว<br><br>
                                             @else
                                                 -<br><br>
@@ -121,7 +121,7 @@
 
                                     <td style="text-align: center;">
                                         <div class="dropdown-primary dropdown open">
-                                            <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">More</button>
+                                            <button class="btn btn-outline-primary btn-round dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">เพิ่มเติม</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="z-index: 999; position: static;">
                                                 {{-- @if($nums->status_order==2 || $nums->status_order==4 && $sql[0]->tracking_code==null)
                                                     @if($sql[0]->tracking_code==null)
@@ -129,7 +129,10 @@
                                                         <i class="fa fa-edit"></i> จัดส่งออเดอร์
                                                     </a>
                                                 @endif --}}
-                                                <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> View Detail</a>
+                                                <a href="{{url('merchant/orderdetail/'.$nums->id_order.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> ดูรายละเอียด</a>
+                                                @if($sqls->status_detail==5)
+                                                    <a href="{{url('merchant/orderlabel/'.$sqls->id_order_detail.'')}}" class="dropdown-item waves-light waves-effect" ><i class="icofont icofont-speech-comments"></i> พิมพ์ใบปะหน้า</a>
+                                                @endif
                                                 @if($sql[0]->tracking_code==null)
                                                     <div class="dropdown-divider"></div>
 
