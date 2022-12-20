@@ -5,6 +5,7 @@ use DB;
 use Session;
 use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
+use App\Models\tb_chats;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TestUiController extends Controller
     }
 
     public function p(){
-      
+
         // $c = DB::Table('tb_news')->where('new_type','C')->orWhere('new_type','U')->where('new_published',1)
         //         ->leftJoin('tb_customers','tb_news.customer_id','=','tb_customers.customer_id')
         //         ->select('tb_news.*','tb_customers.customer_username')
@@ -35,10 +36,11 @@ class TestUiController extends Controller
         // dd(Session::get('cid'));
         // return view('policy');
         // return view('mobile.member.register.tag');
-        return redirect('ordertoship/7');
+        // return redirect('ordertoship/7');
         // return view('mobile.member.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'cp'=> $cp,'u'=>$u]);
+        return view('mobile.member.common.content.shopping.chat');
 
-        
+
     }
 
     public function cm_podcast(){
@@ -56,14 +58,14 @@ class TestUiController extends Controller
     }
     public function Profile(){
         return view('mobile.member.userAccount.myAccount');
-        
+
     }
 
     public function pass ()
     {
         return view('mobile.member.forgotPassword.forgotChange');
     }
-  
+
 
     public function goToView(Request $request)
     {
@@ -74,6 +76,52 @@ class TestUiController extends Controller
         }
         else
             return "triggered";
+    }
+
+
+
+    public function show_user( ){
+        $cus = User::paginate(5);
+
+        return view('mobile.member.common.content.shopping.chat-test', compact('cus'));
+
+    }
+
+    public function chat_user($id){
+
+        $user = User::where('customer_id',$id)->first();
+
+        return view('mobile.member.common.content.shopping.chat', compact('user'));
+    }
+
+
+
+
+
+    public function send_message(Request $request){
+
+
+        $row = array();
+        $row["text"] = $request->message;
+        $row["customer_id"] = $request->customer_id;
+
+        DB::table('tb_chats')->insert($row);
+
+        $data = tb_chats::where('customer_id',$request->customer_id)->first();
+
+        return json_encode($data);
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

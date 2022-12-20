@@ -20,7 +20,7 @@ use App\Http\Controllers\mobile\user\OtpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-
+use App\Events\MyChatEvent;
 use App\Http\Controllers\TestUiController;
 
 /*
@@ -64,7 +64,7 @@ Route::get('user/phoneNumber', [UserAccController::class, 'phoneNumber']);// ห
 Route::get('user/newPhoneNumber', [UserAccController::class, 'newPhoneNumber']);// กรอกเบอร์ใหม่ รับ OTP
 Route::get('user/OTP_PhoneNumber', [UserAccController::class, 'OTP_PhoneNumber']);// กรอกOTP
 Route::post('checkotpchangephone', [UserAccController::class, 'checkotpchangephone']);// กรอกOTP
-Route::get('user/changePassword', [UserAccController::class, 'changePassword']);// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน 
+Route::get('user/changePassword', [UserAccController::class, 'changePassword']);// กรอกรหัสผ่านปัจจุบัน เพื่อเปลี่ยนรหัสผ่าน
 Route::get('user/newPassword', [UserAccController::class, 'newPassword']);// กรอกรหัสผ่านใหม่
 Route::post('user/savenewPassword', [UserAccController::class, 'savenewPassword']);// กรอกรหัสผ่านใหม่
 Route::get('sendotpchangepassword', [UserAccController::class, 'sendotpchangepassword']);// กรอกรหัสผ่านใหม่
@@ -124,21 +124,21 @@ Route::get('user/score/{id}', [UserAccController::class, 'score']);// ให้�
 Route::post('user/sendscore', [UserAccController::class, 'sendscore']);// ให้คะแนน
 Route::post('requestdeleteaccount', [UserAccController::class, 'requestdeleteaccount']);
 
-Route::get('user/wallet', [WalletController::class, 'index']); 
-Route::get('user/selectpaymentWallet/{type}/{num}', [WalletController::class, 'selectpaymentWallet']); 
+Route::get('user/wallet', [WalletController::class, 'index']);
+Route::get('user/selectpaymentWallet/{type}/{num}', [WalletController::class, 'selectpaymentWallet']);
 Route::get('user/addMoney', [WalletController::class, 'addMoney']); //เติมเงิน
 Route::get('user/bankAccount', [WalletController::class, 'bankAccount']); // บัญชีธนาคาร
 Route::get('user/specifyNumber', [WalletController::class, 'specifyNumber']); // ระบุจำนวน
 Route::get('user/Top_upWallet', [WalletController::class, 'Top_upWallet']); // Top-up wallet
 Route::post('user/paymentWallet', [WalletController::class, 'paymentWallet']); // Top-up wallet
 Route::post('walletgateway/response/{id}', [WalletController::class, 'Top_upWallet']); // Top-up wallet
-Route::get('user/convert', [WalletController::class, 'convert']); 
-Route::get('user/coin', [WalletController::class, 'coin']); 
-Route::post('user/submitconvert', [WalletController::class, 'submitconvert']); 
-Route::get('submitdonate', [WalletController::class, 'submitdonate']); 
-Route::get('user/donate', [WalletController::class, 'donate']); 
-Route::get('selectdonate', [WalletController::class, 'selectdonate']); 
-Route::post('user/submitdonateexchange', [WalletController::class, 'submitdonateexchange']); 
+Route::get('user/convert', [WalletController::class, 'convert']);
+Route::get('user/coin', [WalletController::class, 'coin']);
+Route::post('user/submitconvert', [WalletController::class, 'submitconvert']);
+Route::get('submitdonate', [WalletController::class, 'submitdonate']);
+Route::get('user/donate', [WalletController::class, 'donate']);
+Route::get('selectdonate', [WalletController::class, 'selectdonate']);
+Route::post('user/submitdonateexchange', [WalletController::class, 'submitdonateexchange']);
 
 
 
@@ -147,37 +147,37 @@ Route::get('user/agreement', [UserAccController::class, 'agreement']);// ศู�
 
 
 
-Route::get('/', [MainController::class, 'index']); 
-Route::get('/index', [MainController::class, 'indexpage']); 
-Route::get('/followwriter', [MainController::class, 'followwriter']); 
-Route::get('/unfollowwriter', [MainController::class, 'unfollowwriter']); 
-Route::get('/likecontent', [MainController::class, 'likecontent']); 
-Route::get('/unlikecontent', [MainController::class, 'unlikecontent']); 
-Route::get('/bookmarkadd', [MainController::class, 'bookmarkadd']); 
-Route::get('/unbookmark', [MainController::class, 'unbookmark']); 
-Route::get('logout', [LoginController::class, 'logout']); 
-Route::get('/hidecontent', [ContentController::class, 'hidecontent']); 
-Route::get('/deletecontent', [ContentController::class, 'deletecontent']); 
-Route::get('/hidecontent', [ContentController::class, 'hidecontent']); 
-Route::get('/unhidecontent', [ContentController::class, 'unhidecontent']); 
-Route::get('/contentreport/{id}', [ContentController::class, 'contentreport']); 
+Route::get('/', [MainController::class, 'index']);
+Route::get('/index', [MainController::class, 'indexpage']);
+Route::get('/followwriter', [MainController::class, 'followwriter']);
+Route::get('/unfollowwriter', [MainController::class, 'unfollowwriter']);
+Route::get('/likecontent', [MainController::class, 'likecontent']);
+Route::get('/unlikecontent', [MainController::class, 'unlikecontent']);
+Route::get('/bookmarkadd', [MainController::class, 'bookmarkadd']);
+Route::get('/unbookmark', [MainController::class, 'unbookmark']);
+Route::get('logout', [LoginController::class, 'logout']);
+Route::get('/hidecontent', [ContentController::class, 'hidecontent']);
+Route::get('/deletecontent', [ContentController::class, 'deletecontent']);
+Route::get('/hidecontent', [ContentController::class, 'hidecontent']);
+Route::get('/unhidecontent', [ContentController::class, 'unhidecontent']);
+Route::get('/contentreport/{id}', [ContentController::class, 'contentreport']);
 
 
-Route::post('user/search', [ContentController::class, 'search']); 
-Route::get('user/searcha/{id}/{text}', [ContentController::class, 'searcha']); 
+Route::post('user/search', [ContentController::class, 'search']);
+Route::get('user/searcha/{id}/{text}', [ContentController::class, 'searcha']);
 
 
 
 
 // content
-Route::post('userpostcontent', [ContentController::class, 'userpostcontent']); 
+Route::post('userpostcontent', [ContentController::class, 'userpostcontent']);
 
 
-Route::get('content/{id}', [ContentController::class, 'index']); 
-Route::post('sendcomment', [ContentController::class, 'sendcomment']); 
-Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']); 
+Route::get('content/{id}', [ContentController::class, 'index']);
+Route::post('sendcomment', [ContentController::class, 'sendcomment']);
+Route::post('sendcommentreply', [ContentController::class, 'sendcommentreply']);
 
-Route::get('user/helpCenter', [HelpCenterController::class, 'index']); 
+Route::get('user/helpCenter', [HelpCenterController::class, 'index']);
 
 
 
@@ -190,32 +190,32 @@ Route::get('checkmnstore',[StoreController::class,'checkmnstore']);
 Route::get('checkemailstore',[StoreController::class,'checkemailstore']);
 
 //group
-Route::get('group', [GroupController::class, 'index']); 
-Route::get('groupid/{id}', [GroupController::class, 'groupid']); 
-Route::get('requestjoingroup/{type}/{id}', [GroupController::class, 'requestjoingroup']); 
-Route::get('groupall', [GroupController::class, 'groupall']); 
-Route::post('opengroup', [GroupController::class, 'opengroup']); 
-Route::get('mygroup', [GroupController::class, 'mygroup']); 
+Route::get('group', [GroupController::class, 'index']);
+Route::get('groupid/{id}', [GroupController::class, 'groupid']);
+Route::get('requestjoingroup/{type}/{id}', [GroupController::class, 'requestjoingroup']);
+Route::get('groupall', [GroupController::class, 'groupall']);
+Route::post('opengroup', [GroupController::class, 'opengroup']);
+Route::get('mygroup', [GroupController::class, 'mygroup']);
 
 
 //cart
-Route::post('cart', [CartController::class, 'addcart']); 
-Route::get('cartindex', [CartController::class, 'index']); 
-Route::get('calcartstore', [CartController::class, 'calcartstore']); 
-Route::get('calcartid', [CartController::class, 'calcartid']); 
-Route::get('calcartall', [CartController::class, 'calcartall']); 
-Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkoutaddress']); 
-Route::get('checkoutaddress2', [CartController::class, 'checkoutaddress2']); 
-Route::get('delcartid', [CartController::class, 'delcartid']); 
-Route::get('countdown', [CartController::class, 'countdown']); 
-Route::get('countup', [CartController::class, 'countup']); 
-Route::get('coinswitch', [CartController::class, 'coinswitch']); 
-Route::get('coinswitch2', [CartController::class, 'coinswitch2']); 
+Route::post('cart', [CartController::class, 'addcart']);
+Route::get('cartindex', [CartController::class, 'index']);
+Route::get('calcartstore', [CartController::class, 'calcartstore']);
+Route::get('calcartid', [CartController::class, 'calcartid']);
+Route::get('calcartall', [CartController::class, 'calcartall']);
+Route::match(['GET', 'POST'],'checkoutaddress', [CartController::class, 'checkoutaddress']);
+Route::get('checkoutaddress2', [CartController::class, 'checkoutaddress2']);
+Route::get('delcartid', [CartController::class, 'delcartid']);
+Route::get('countdown', [CartController::class, 'countdown']);
+Route::get('countup', [CartController::class, 'countup']);
+Route::get('coinswitch', [CartController::class, 'coinswitch']);
+Route::get('coinswitch2', [CartController::class, 'coinswitch2']);
 
 
 
 //video
-Route::get('video', [videoController::class, 'index']); 
+Route::get('video', [videoController::class, 'index']);
 
 
 Route::get('/boss', function() {
@@ -226,7 +226,7 @@ Route::get('/boss', function() {
 
 
 Route::get('/policy', function() {
-	
+
 
 	return view('policy');
 });
@@ -260,8 +260,8 @@ Route::get('shopping/category/latest/{id}',[ShoppingController::class,'latest'])
 Route::get('shopping/category/bestseller/{id}',[ShoppingController::class,'bestseller']);
 Route::get('shopping/product/{id}',[ShoppingController::class,'product']);
 Route::get('shopping/merchant/{id}',[ShoppingController::class,'merchant']);
-Route::get('/likeproduct', [ShoppingController::class, 'likeproduct']); 
-Route::get('/unlikeproduct', [ShoppingController::class, 'unlikeproduct']); 
+Route::get('/likeproduct', [ShoppingController::class, 'likeproduct']);
+Route::get('/unlikeproduct', [ShoppingController::class, 'unlikeproduct']);
 
 
 //process register
@@ -301,7 +301,7 @@ Route::post('gateway/response/{id}/{rid}', [OrderController::class, 'addorder'])
 Route::post('paymentgateway', [OrderController::class, 'paymentgateway']);
 
 
-// Test UI 
+// Test UI
 Route::get('p',[TestUiController::class,'p']);
 Route::get('test/ui',[TestUiController::class,'index']);
 
@@ -318,4 +318,19 @@ Route::get('test/pass',[TestUiController::class,'pass']);
 Route::get('test/all',[TestUiController::class,'testAll']);
 Route::get('test/goToView',[TestUiController::class,'goToView']);
 
-Route::get('/testbox', [TestUiController::class, 'testbox']); 
+Route::get('/testbox', [TestUiController::class, 'testbox']);
+
+
+
+
+// Route::get('testchat', [TestUiController::class, 'testchat']);
+
+Route::get('testchat', [TestUiController::class, 'show_user']);
+Route::get('/testchat/chat_user/{id}', [TestUiController::class, 'chat_user']);
+// Route::get('/testchat/send_message/{data}', [TestUiController::class, 'send_message']);
+Route::get('send_message/{data}', [TestUiController::class, 'send_message']);
+
+
+
+
+
