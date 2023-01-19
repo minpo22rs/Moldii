@@ -78,7 +78,7 @@
                             <td class="text-center text-middle">{{$key+1}}</td>
                             <td class="text-middle text-center">
                                 <div class="img-round">
-                                    <img src="{{asset('storage/app/merchant/'.$item->merchant_img.'')}}" alt="" class="img-fluid"> 
+                                    <img src="{{asset('storage/app/merchant/'.$item->merchant_img.'')}}" alt="" class="img-fluid">
                                 </div>
                             </td>
                             <td class="text-middle">
@@ -123,7 +123,7 @@
                                 <div class="col-6">
                                     <input type="file" name="img[]" style="display: none;" id="adddocument">
                                     <button type="button" class="btn btn-success btn-outline-success btn-round" onclick="document.getElementById('adddocument').click();">
-                                        <i class="icofont icofont-image"></i> อัพโหลด</button> 
+                                        <i class="icofont icofont-image"></i> อัพโหลด</button>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                         <label class="col-sm-2 col-form-label">อีเมล <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                               
+
                                 <div class="col-12">
                                     <input type="text" name="email" class="form-control" placeholder="Email...">
                                     @error('email')<span class="messages text-danger">{{ $message }}</span>@enderror
@@ -167,7 +167,7 @@
                                     <input type="text" name="phone" class="form-control" placeholder="เบอร์โทรศัพท์..." onkeyup="autoTab(this);">
                                     @error('password')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                         <label class="col-sm-2 col-form-label">ชื่อร้านค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                               
+
                                 <div class="col-6">
                                     <input type="text" name="shopname" class="form-control" placeholder="ชื่อร้านค้า...">
                                     @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
@@ -191,23 +191,23 @@
                         <label class="col-sm-2 col-form-label">ที่อยู่ร้านค้า <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <div class="row">
-                               
+
                                 <div class="col-12">
                                     <input type="text" name="address" class="form-control" placeholder="รายละเอียดที่อยู่...">
                                     @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <br>
                                 <br>
-                                
-                                
+
+
                                 <div class="col-6">
                                     <select  class="form-control" name="province" id="province" onchange="getAmphure(this.value);" required>
-            
+
                                         <option value="" >เลือกจังหวัด</option>
                                         @foreach($p as  $ps)
                                             <option value="{{$ps->id}}" >{{$ps->name_th}}</option>
                                         @endforeach
-                                    
+
                                 </select>
                                     @error('shopname')<span class="messages text-danger">{{ $message }}</span>@enderror
                                 </div>
@@ -313,9 +313,9 @@
             dataType: 'HTML',
             data: {'v':v},
             success: function(data) {
-               
+
                 $('#county').html(data);
-               
+
             }
         });
 
@@ -328,9 +328,9 @@
             dataType: 'HTML',
             data: {'v':v},
             success: function(data) {
-               
+
                 $('#tumbon').html(data);
-               
+
             }
         });
 
@@ -346,7 +346,7 @@
             success: function(data) {
                 document.getElementById('zip_code').value = data;
                 // $('#zip_code').value(data);data
-               
+
             }
         });
 
@@ -365,14 +365,14 @@
                 var returnText=new String("");
                 var obj_l=obj.value.length;
                 var obj_l2=obj_l-1;
-                for(i=0;i<pattern.length;i++){           
+                for(i=0;i<pattern.length;i++){
                     if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){
                         returnText+=obj.value+pattern_ex;
                         obj.value=returnText;
                     }
                 }
                 if(obj_l>=pattern.length){
-                    obj.value=obj.value.substr(0,pattern.length);           
+                    obj.value=obj.value.substr(0,pattern.length);
                 }
     }
 

@@ -176,7 +176,7 @@
                                 </li>
 
                                 <li class="">
-                                    
+
                                     <a href="{{url("admin/tranfer")}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-check-circled"></i><b>D</b></span>
                                         <span class="pcoded-mtext">ตรวจสอบการโอนเงิน</span>
@@ -185,7 +185,7 @@
                                 </li>
                             </ul>
                             <div class="pcoded-navigation-label">การจัดการสินค้า </div>
-                            <ul class="pcoded-item pcoded-left-item"> 
+                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-cubes"></i><b>C</b></span>
@@ -234,7 +234,7 @@
                                 </li>
                             </ul>
                             <div class="pcoded-navigation-label">การจัดการเนื้อหา</div>
-                            <ul class="pcoded-item pcoded-left-item"> 
+                            <ul class="pcoded-item pcoded-left-item">
                                 {{-- <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="icofont icofont-home"></i><b>C</b></span>
@@ -331,7 +331,7 @@
                                 </li> --}}
                             </ul>
                             <div class="pcoded-navigation-label">ส่วนการตลาด</div>
-                            <ul class="pcoded-item pcoded-left-item"> 
+                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <li class="">
                                         <a href="{{url('admin/notification')}}">

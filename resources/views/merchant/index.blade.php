@@ -17,7 +17,7 @@
         border-bottom: 40px solid #ff9d10;
         margin: 0 0 10px -50px !important;
     }
-    .select2-container {    
+    .select2-container {
         z-index: 999999999999;
     }
     .select2-dropdown .select2-dropdown--below {
@@ -71,7 +71,7 @@
                             <img src="{{asset('storage/app/merchant/'.Auth::guard('merchant')->user()->merchant_img.'')}}" class="img-radius" alt="User-Profile-Image" width="100" height="100">
                         </div>
                         <h6 class="f-w-600 m-t-25 m-b-10">{{Auth::guard('merchant')->user()->merchant_shopname}} </h6>
-                        
+
                         {{-- <hr/>
                         <p class="text-muted m-t-15">ระดับกิจกรรม: 87%</p>
                         <ul class="list-unstyled activity-leval">
@@ -141,7 +141,7 @@
                         <div class="col-6 bg-c-pink" onclick="event_decline({{$fs->fs_id}})">
                             <a href="#!" class="" style="color: white;"><i class="icofont icofont-ui-close m-r-10"></i> ปฏิเสธ</a>
                         </div>
-                    </div> 
+                    </div>
                     @endif
                     @endif
                 </div>

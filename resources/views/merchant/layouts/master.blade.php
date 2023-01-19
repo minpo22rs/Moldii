@@ -58,13 +58,24 @@
     <link href="{{ asset('plugins/crop/croppie.css') }}" type="text/css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500&display=swap" rel="stylesheet">
     <!-- jquery file upload Frame work -->
-    
+
     <link href="{{ asset('files/assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ asset('files/assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css" rel="stylesheet" />
     <style>
         body {
             font-family: 'Prompt', sans-serif;
         }
+        .logo-moldii{
+            width: 27%
+        }
+        @media screen and (max-width: 1000px) {
+            .logo-moldii{
+                width: 45px;
+
+
+            }
+        }
+
     </style>
     @yield('css')
 </head>
@@ -101,7 +112,7 @@
                             </div>
                         </div>
                         <a href="{{url("merchant/index")}}">
-                            <img class="img-fluid" src="{{asset('storage/app/logo/Moldii.png')}}" alt="Theme-Logo" style="width: 27% !important" />
+                            <img class=" logo-moldii" src="{{asset('storage/app/logo/Moldii.png')}}" alt="Theme-Logo"  />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>
@@ -172,7 +183,7 @@
                                     </a>
                                 </li>
 
-                               
+
                             </ul>
                             <div class="pcoded-navigation-label">การจัดการสินค้า</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -198,6 +209,18 @@
                                     <a href="{{url('merchant/banner')}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-image"></i><b>D</b></span>
                                         <span class="pcoded-mtext">แบนเนอร์</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">การเแจ้งเตือน</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+
+                                <li class="">
+                                    <a href="{{url('merchant/chat_message')}}">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-messaging"></i><b>D</b></span>
+                                        <span class="pcoded-mtext">ข้อความ</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -246,6 +269,7 @@
     <script src="{{asset('/files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- jquery slimscroll js -->
     <script src="{{asset('/files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+
     <!-- modernizr js -->
     <script src="{{asset('/files/bower_components/modernizr/js/modernizr.js')}}"></script>
     <script src="{{asset('/files/bower_components/modernizr/js/css-scrollbars.js')}}"></script>

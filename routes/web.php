@@ -157,7 +157,19 @@ Route::group(['namespace' => 'merchant', 'prefix' => 'merchant', 'as' => 'mercha
     Route::get('editauction/{id}', 'MerchantAuctionController@edit');
     Route::get('detailauction/{id}', 'MerchantAuctionController@detailauction');
     Route::post('updateauction', 'MerchantAuctionController@update');
-    
+
+
+
+    Route::get('chat_message', 'ChatController@index');
+    Route::get('chat_room/{id}', 'ChatController@chatRoom');
+    Route::post('send_message', 'ChatController@sendMessage');
+    Route::get('fetch_msg', 'ChatController@fetchMsg');
+    Route::get('user_msg', 'ChatController@fetchUserMsg');
+
+
+
+
+
 });
 
 
@@ -174,3 +186,4 @@ Route::get('/clc', function() {
     // session()->forget('key');
 	return "Cleared!";
 });
+
