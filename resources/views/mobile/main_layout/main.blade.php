@@ -22,7 +22,9 @@
     <link rel="icon" type="image/png" href="{{ asset('/new_assets/img/logo_icon/Moldii Logo 512x512.png') }}" sizes="512x512">
 
     <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('/new_assets/img/logo_icon/Moldii Logo 192x192.png') }}">
-    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
@@ -30,11 +32,16 @@
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
     <link rel="apple-touch-startup-image" href="https://modii.sapapps.work/new_assets/img/logo_icon/Moldii Logo 192x192.png.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/new_assets/icon/icofont/css/icofont.css')}}">
 
     <link rel="stylesheet" href="{{ asset('/new_assets/css/style.css') }}">
     <link rel="manifest" href="{{ asset('/new_assets/custom_assets/__manifest.json') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+  />
 
 </head>
 
@@ -73,13 +80,13 @@
         </a>
         <a href="{{url('video')}}" class="item" id="bottom_button_yt">
             <div class="col">
-                <div style="padding: 8px 0px 8px 0px"><img src="{{ asset('new_assets/icon/คลิป.png')}}" id="bottom_icon_yt"></div> 
+                <div style="padding: 8px 0px 8px 0px"><img src="{{ asset('new_assets/icon/คลิป.png')}}" id="bottom_icon_yt"></div>
                 <span class="text-white" id="bottom_text_yt">คลิป</span>
             </div>
         </a>
-       
+
         {{-- <a href="{{url('cartindex')}}" class="item" id="bottom_button_bk">
-            
+
             <div class="col ">
                 <span style="background-color: #34C759 ; color: #fff ;  padding: 2px 5px 2px 5px ; border-radius: 25px ; position: relative; left: 15px ; top: 5px ;">{{$sql->countt}}</span>
                 <ion-icon name="cart" class="text-white md hydrated" id="bottom_icon_bk"></ion-icon>
@@ -88,25 +95,25 @@
         </a> --}}
         <a href="{{url('group')}}" class="item" id="bottom_button_fam">
             <div class="col">
-                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/กลุ่ม.png')}}" id="bottom_icon_fam"></div> 
+                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/กลุ่ม.png')}}" id="bottom_icon_fam"></div>
                 <span class="text-white" id="bottom_text_fam">กลุ่ม</span>
             </div>
         </a>
         <a href="{{url('auction')}}" class="item" id="bottom_button_noti">
             <div class="col">
-                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ประมูลสินค้า.png')}}" id="bottom_icon_noti"></div> 
+                <div style="padding: 2px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ประมูลสินค้า.png')}}" id="bottom_icon_noti"></div>
                 <span class="text-white" id="bottom_text_noti">ประมูลสินค้า</span>
             </div>
         </a>
         <a href="{{url('store')}}" class="item" id="bottom_button_s">
             <div class="col">
-            <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ร้านค้า.png')}}" id="bottom_icon_s"></div> 
+            <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/ร้านค้า.png')}}" id="bottom_icon_s"></div>
                 <span class="text-white" id="bottom_text_s">ร้านค้า</span>
             </div>
         </a>
         <a href="{{url('user/myAccount')}}" class="item" id="bottom_button_acc">
             <div class="col">
-                <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/โปรไฟล์.png')}}" id="bottom_icon_acc"></div> 
+                <div style="padding: 1px 0px 3px 0px"><img src="{{ asset('new_assets/icon/โปรไฟล์.png')}}" id="bottom_icon_acc"></div>
                 <span class="text-white" id="bottom_text_acc">โปรไฟล์</span>
             </div>
         </a>
@@ -248,7 +255,7 @@
     </div>
 
     @yield('custom_modal')
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <!-- ///////////// Js Files ////////////////////  -->
     <!-- Jquery -->
     <script src="{{ asset('new_assets/js/lib/jquery-3.4.1.min.js') }}"></script>
@@ -267,11 +274,16 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <!-- QR Code -->
     <script src="{{ asset('new_assets/js/lib/qrcode.min.js') }}"></script>
+    <script src="{{ asset('new_assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('new_assets/js/jquery.js') }}"></script>
     <!-- fontawesom -->
     <!-- <script src="https://kit.fontawesome.com/6a1519527e.js" crossorigin="anonymous"></script> -->
     <script src="{{ asset('new_assets/js/script.js') }}"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- sdk.js FB --}}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
 
     <script>
         function triggered() {
@@ -283,8 +295,8 @@
             document.getElementById('bottom_button_home').className = 'item';
             document.getElementById('bottom_icon_home').className = 'text-white md hydrated';
             // document.getElementById('bottom_text_home').className = 'text-white';
-            
-            
+
+
 
             // document.getElementById('bottom_button_bk').className = 'item';
             // document.getElementById('bottom_icon_bk').className = 'text-white md hydrated';
@@ -350,7 +362,7 @@
             }
         }
 
-       
+
     </script>
     @yield('custom_script')
 </body>

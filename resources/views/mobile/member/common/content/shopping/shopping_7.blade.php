@@ -2,7 +2,7 @@
 @extends('mobile.main_layout.main')
 @section('app_header')
 <style>
-  
+
     .nav-item .nav-link.active {
         background-color: #FF5C63 !important;
         color: white !important;
@@ -48,7 +48,7 @@
     .active:after {
         content: "\2212";
     }
-        
+
 
 </style>
 <div class="appHeader bg-danger text-light">
@@ -61,7 +61,7 @@
 
     </div>
     <div class="center mt-1 ">ร้านค้า </div>
-  
+
 </div>
 @endsection
 
@@ -81,9 +81,10 @@
 
                     <div class="right">
                          <button type="button" class="btn  btn-sm rounded shadowed  mr-1 p-1 align-self-center " style="width: 48px; height: 15px; background: #FF5C63; color: white; font-size:10px;">ติดตาม</button><br>
-                         <button type="button" class="btn  btn-sm rounded shadowed  mr-1 p-1 align-self-center " style="width: 48px; height: 15px; background: #E5E6E7; color: white; font-size:10px;">พูดคุย</button>
+                         <a href="{{url('/chatMsg/index/'.$merchant->merchant_id  )}}" type="button" class="btn  btn-sm rounded shadowed  mr-1 p-1 align-self-center " style="width: 48px; height: 15px; background: #E5E6E7; color: white; font-size:10px;">พูดคุย</a>
                     </div>
         </div>
+        <a href=""></a>
 
         <div class="row text-center mt-1 ">
             <div class="col-4 p-1 line-con align-self-center">
@@ -103,14 +104,14 @@
                 <h6 class=" m-0 p-0" style="color:rgba(160, 160, 160, 1);">การตอบกลับแชท</h6>
             </div>
         </div>
-        
+
 
 
         <div class="mt-2" name="story_videos_section" id="story_videos_section">
 
             <ul class="nav nav-tabs style1 mt-2" role="tablist">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#foryou" role="tab">สำหรับคุณ</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#product" role="tab">สินค้า</a></li> 
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#product" role="tab">สินค้า</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#new" role="tab"> มาใหม่</a></li>
                 <li class="nav-item active"><a class="nav-link " data-toggle="tab" href="#cat" role="tab">หมวดหมู่</a></li>
 
@@ -130,24 +131,24 @@
                                             <div class="row pl-1">
                                                 <h5 class=" font-weight-bolder m-0">{{$products->product_name}}</h5>
                                             </div>
-                                            <div class=" row ">                           
+                                            <div class=" row ">
                                                 <h6 class="mt-1 pl-1 m-0 col-6" style=" color:#E81F12;">฿ <b>250</b></h6>
                                                 <div class="pl-2">
                                                     <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                     <div class="rating-system2">
-        
+
                                                         <input type="radio" name='rate2' id="star5_2" />
                                                         <label for="star5_2"></label>
-        
+
                                                         <input type="radio" name='rate2' id="star4_2" />
                                                         <label for="star4_2"></label>
-        
+
                                                         <input type="radio" name='rate2' id="star3_2" />
                                                         <label for="star3_2"></label>
-        
+
                                                         <input type="radio" name='rate2' id="star2_2" />
                                                         <label for="star2_2"></label>
-        
+
                                                         <input type="radio" name='rate2' id="star1_2" />
                                                         <label for="star1_2"></label>
                                                     </div>
@@ -164,7 +165,7 @@
 
                         @foreach($product as $products)
                             <?php $details = DB::Table('tb_order_details')->where('product_id',$products->product_id)->get()?>
-            
+
                             <a href="{{url('shopping/product/'.$products->product_id.'')}}" style="width: 50%;">
                                 <div class=" card  my-2 mx-2 align-self-center justify-content-center">
                                     <img class="imaged w-100 card-image-top mt-1" src="{{('https://testgit.sapapps.work/moldii/storage/app/product_cover/'.$products->product_img.'')}}" alt="alt" style=" height:120px;">
@@ -176,12 +177,12 @@
                                             @if($products->product_discount!=null)
                                                 <div class="row col-7">
                                                     <h6 class="mt-1 pl-1 m-0 "><s>฿{{$products->product_price}}</s></h6><h6 class="mt-1 pl-1 m-0  font-weight-bold" style="color:#E81F12;">฿{{$products->product_discount}}</h6>
-            
+
                                                 </div>
                                             @else
                                                 <div class="row col-7">
                                                     <h6 class="mt-1 pl-1 m-0 ">฿{{$products->product_price}}</h6>
-                                                  
+
                                                 </div>
                                             @endif
                                             <div class="col-5 mt-1 text-right">
@@ -192,14 +193,14 @@
                                 </div>
                             </a>
                         @endforeach
-            
+
                     </div>
-               
+
                     <div class=" mt-2 mb-3 ">
                         @foreach ($img as $imgd)
                             <img class="imaged w-100 card-image-top mt-2"  src="{{('https://testgit.sapapps.work/moldii/storage/app/banner_store/'.$imgd->banner_promote_img.'')}}" alt="alt" style=" width:343px; height: 96px;">
                         @endforeach
-                
+
                     </div>
 
 
@@ -224,19 +225,19 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
-                        
+
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star4_2" />
                                                     <label for="star4_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star3_2" />
                                                     <label for="star3_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star2_2" />
                                                     <label for="star2_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star1_2" />
                                                     <label for="star1_2"></label>
                                                 </div>
@@ -266,19 +267,19 @@
                                             <div class="pl-2">
                                                 <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                 <div class="rating-system2">
-                        
+
                                                     <input type="radio" name='rate2' id="star5_2" />
                                                     <label for="star5_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star4_2" />
                                                     <label for="star4_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star3_2" />
                                                     <label for="star3_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star2_2" />
                                                     <label for="star2_2"></label>
-                        
+
                                                     <input type="radio" name='rate2' id="star1_2" />
                                                     <label for="star1_2"></label>
                                                 </div>
@@ -293,7 +294,7 @@
 
 
                 <div id="cat" class="tab-pane fade ">
-                  
+
                     @foreach ($category as $categorys)
 
                         <button class="accordion" style="font-weight: 500;">{{$categorys->cat_name}} </button>
@@ -315,19 +316,19 @@
                                                         <div class="pl-2">
                                                             <h6 class="m-0"><small>ขายได้ 100 ชิ้น</small></h6>
                                                             <div class="rating-system2">
-                
+
                                                                 <input type="radio" name='rate2' id="star5_2" />
                                                                 <label for="star5_2"></label>
-                
+
                                                                 <input type="radio" name='rate2' id="star4_2" />
                                                                 <label for="star4_2"></label>
-                
+
                                                                 <input type="radio" name='rate2' id="star3_2" />
                                                                 <label for="star3_2"></label>
-                
+
                                                                 <input type="radio" name='rate2' id="star2_2" />
                                                                 <label for="star2_2"></label>
-                
+
                                                                 <input type="radio" name='rate2' id="star1_2" />
                                                                 <label for="star1_2"></label>
                                                             </div>
@@ -340,10 +341,10 @@
 
                                 </div>
                         </div> <!-- panel 1 [End] -->
-            
+
                     @endforeach
-            
-                    
+
+
                 </div>
 
 
@@ -351,12 +352,12 @@
         </div>
 
 
-            
 
 
 
 
-            
+
+
     </div> <!-- container -->
 </div> <!-- col-md-12  mt-3 -->
 <br>
@@ -373,8 +374,8 @@
         })
         }
 
-       
-   
+
+
         bottom_now(6);
 
 
@@ -390,7 +391,7 @@
                 panel.style.maxHeight = null;
                 } else {
                 panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
+                }
             });
         }
     </script>

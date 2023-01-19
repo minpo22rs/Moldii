@@ -7,7 +7,7 @@ use App\Models\Tb_order_detail;
 use App\Models\Tb_order;
 use App\Models\tb_chats;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TestUiController extends Controller
@@ -80,36 +80,91 @@ class TestUiController extends Controller
 
 
 
-    public function show_user( ){
-        $cus = User::paginate(5);
 
-        return view('mobile.member.common.content.shopping.chat-test', compact('cus'));
+    //********Chat
+    // public function chat_user($id){
 
-    }
+    //     $user = User::where('customer_id',$id)->first();
 
-    public function chat_user($id){
-
-        $user = User::where('customer_id',$id)->first();
-
-        return view('mobile.member.common.content.shopping.chat', compact('user'));
-    }
+    //     return view('mobile.member.common.content.shopping.chat', compact('user'));
+    // }
 
 
+    // public function sendMessage(Request $request){
+
+
+    //     $row = array();
+    //     $row["text"] = $request->text;
+    //     $row["customer_id"] = $request->customer_id;
+    //     $row["store_id"] = $request->store_id;
+    //     $row["from"] = 'F';
+    //     DB::table('tb_chats')->insert($row);
+
+
+    //     $html = '';
+
+    //     $cid = tb_chats::where('customer_id', $request->customer_id)->where('store_id',$request->store_id )->get();
+
+    //     foreach($cid as $msg){
+    //         if($msg->from == 'F'){
+    //             $html .= '<li class="container darker"> <p class="m-0">'.$msg->text.'</p> </li> ';
+
+    //        }else{
+    //            $html .= '<li class="container "> <p class="m-0">'.$msg->text.'</p> </li> ';
+
+    //        }
+
+
+    //     }
+
+
+    //     $data = [
+    //      'cid'=>$cid,
+    //      'html'=>$html
+    //     ];
+
+
+    //     return json_encode($data);
+
+    // }
+
+    // public function to_chat($id){
+
+    //     $merchant = DB::Table('tb_merchants')->where('merchant_id',$id)->first();
+    //     $user_id = Session::get('cid');
+
+    //     $cid = tb_chats::where('customer_id', $user_id)->where('store_id', $id)->get();
+
+
+    //     return view('mobile.member.common.content.shopping.chat', compact('cid','merchant'));
+    // }
+
+    // public function fetchMessage(Request $request){
+    //     $cid= tb_chats::where('tb_chats.customer_id', $request->customer_id)->where('store_id', $request->store_id)->get();
+    //     $html = '';
+
+    //     foreach($cid as $msg){
+    //         if($msg->from == 'F'){
+    //              $html .= '<li class="container darker "> <p class="m-0">'.$msg->text.'</p> </li> ';
+
+    //         }elseif($msg->from == 'B'){
+    //             $html .= '<li class="container "> <p class="m-0">'.$msg->text.'</p> </li> ';
+
+    //         }
+
+    //     }
+    //     // dd($user);
+    //     $data = [
+    //         'cid'=>$cid,
+    //         'html'=>$html
+    //        ];
+
+    //     return json_encode($data);
+    // }
+    //********Chat
 
 
 
-    public function send_message(Request $request){
-
-
-        $row = array();
-        $row["text"] = $request->message;
-        $row["customer_id"] = $request->customer_id;
-
-        DB::table('tb_chats')->insert($row);
-
-        $data = tb_chats::where('customer_id',$request->customer_id)->first();
-
-        return json_encode($data);
 
 
 
@@ -117,11 +172,5 @@ class TestUiController extends Controller
 
 
 
-
-
-
-
-
-    }
 
 }

@@ -2301,8 +2301,6 @@ a.badge-dark {
     opacity: 0.5;
 }
 
-
-
 .btn-index {
     background: #fc684b !important;
     /* old :  #fc684b !important;*/
@@ -2324,8 +2322,6 @@ a.badge-dark {
     border-color: #fc684b;
     opacity: 0.5;
 }
-
-
 
 .btn-danger {
     background: #FF5C63 !important;
@@ -4424,9 +4420,10 @@ textarea,
     background-position: center center;
     position: absolute;
     left: 50%;
-    top: calc(50% + -22px);
+    top: calc(50%);
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
     transform: translate(-50%, -50%);
+    z-index: 5;
 }
 
 .custom-file-upload label.file-uploaded label {
@@ -4434,13 +4431,19 @@ textarea,
 }
 
 .custom-file-upload label.file-uploaded span {
+    width: 100%;
+    max-height: 18px;
     bottom: 0;
     left: 0;
     top: auto;
     transform: translate(0, 0);
+    color: #ffffff;
     font-size: 11px;
-    color: #4F5050;
-    background-color: #E1E1E1;
+    background-color: #00000096;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    padding: 0 4px 0 4px;
 }
 
 .verify-input {

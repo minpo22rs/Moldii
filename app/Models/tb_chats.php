@@ -12,7 +12,8 @@ class tb_chats extends Model
     protected $fillable = [
       'text',
       'store_id',
-      'customer_id'
+      'customer_id',
+      'room_id'
 
     ];
 

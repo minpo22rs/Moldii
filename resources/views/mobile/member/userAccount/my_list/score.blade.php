@@ -57,7 +57,7 @@
             <div class="custom-file-upload " style="width:75px;height:75px; color:;">
                 <input type="file" name="imgs[1]" id="fileuploadInput2" accept=".png, .jpg, .jpeg">
                 <label for="fileuploadInput2">
-                    <span>
+                    <span class="">
                         <i class="font-weight-bold fs-11px">รูปภาพ</i>
                         <i class="fal fa-plus-circle fs-1_5rem"></i>
                     </span>
@@ -84,7 +84,7 @@
         </div>
         <div class="col-12 px-3">
             <div  class="card col-12 m-0 p-1 pb-0">
-                
+
                 <textarea class="input-phd form-control" type="text" name="text" style="border:none; height:92px;" placeholder="ใส่ข้อความของคุณ"></textarea>
 
 
@@ -129,14 +129,14 @@
                 // console.log(i);
                 document.getElementById('starid').value=i+1;
                 if (star.className === starClassInactive) {
-                    for (i; i >= 0; --i) 
+                    for (i; i >= 0; --i)
                     stars[i].className = starClassActive
                     // console.log('+'+i)
                 } else {
-                    for (i; i < starsLength; ++i) 
+                    for (i; i < starsLength; ++i)
                     stars[i].className = starClassInactive
                     // console.log('-'+i);
-                    
+
                 }
             };
         });

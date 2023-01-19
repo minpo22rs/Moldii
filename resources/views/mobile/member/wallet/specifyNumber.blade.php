@@ -19,7 +19,7 @@
 
                 @elseif(Session::get('walletbankcode')=='014')
                     <img class="mx-2" style="width:2.5rem;" src="{{ asset('new_assets/img/icon/logo_bank/SCB.svg')}}" alt="alt">
-        
+
                 @elseif(Session::get('walletbankcode')=='025')
                     <img class="mx-2" style="width:2.5rem;" src="{{ asset('new_assets/img/icon/logo_bank/Krungsri.svg')}}" alt="alt">
 
@@ -50,7 +50,7 @@
             @if(Session::get('wallettypepayment') == 'Rabbit Line Pay' )
                 <img class="mx-2" style="width:2.5rem;" src="{{ asset('new_assets/img/icon/logo_bank/Rabbit.svg')}}" alt="alt">
             @endif
-            
+
                 <h5 class="m-0  font-weight-bold align-self-center" style="color:rgba(84, 84, 84, 1);">{{Session::get('wallettypepayment')}}</h5>
         </div>
         {{-- <div class="col-6 mx-0 text-right">
@@ -189,7 +189,7 @@
 @section('custom_script')
 <script>
     bottom_now(7);
-    
+
     const inputTopUp = document.getElementById("input_Top_Up");
     const btnTopUp = document.getElementById("btn_Top_Up");
 
@@ -209,8 +209,8 @@
     // checkConfirmShow.addEventListener('click', () => {
     //     checkConfirmCon.classList.add('show-check-confirm');
     //     inputTopUp.classList.add('color-220');
-        
-        
+
+
     // });
 
     checkConfirmOff.addEventListener('click', () => {
@@ -239,7 +239,7 @@
             $('#amounttt').html('฿'+new Intl.NumberFormat().format(v));
             checkConfirmCon.classList.add('show-check-confirm');
             inputTopUp.classList.add('color-220');
-            
+
 
         }
     }
@@ -247,9 +247,9 @@
     function formconfirm(){
         $('#inputnum').submit();
     }
-   
 
-    
+
+
 
 
 

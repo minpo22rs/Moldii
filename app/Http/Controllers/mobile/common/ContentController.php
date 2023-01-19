@@ -15,7 +15,7 @@ use App\Models\User;
 
 class ContentController extends Controller
 {
-    
+
     public function index($id)
     {
         $c = DB::Table('tb_news')->where('new_id',$id)
@@ -32,11 +32,11 @@ class ContentController extends Controller
         $u = User::where('customer_id',Session::get('cid'))->first();
 
 
-       
+
         // dd($c);
         DB::Table('tb_news')->where('new_id',$id)->increment('viewer', 1);
 
-       
+
         return view('mobile.member.common.content.comment')->with(['c'=>$c,'comment'=> $comment,'countreply'=>$countreply,'bm'=>$bm,'imggal'=>$imggal,'f'=>$f,'la'=>$la,'sh'=>$sh,'u'=>$u]);
     }
 
@@ -63,8 +63,8 @@ class ContentController extends Controller
 
     public function userpostcontent(Request $request){
         date_default_timezone_set('Asia/Bangkok');
-   
-        
+
+
         DB::beginTransaction();
         try {
 
@@ -94,23 +94,23 @@ class ContentController extends Controller
                         $contentimg->name  = $name;
                         if($ext =='mp4' || $ext =='MOV'){
                             $contentimg->type  = 'V';
-        
+
                         }else{
                             $contentimg->type  = 'I';
-        
+
                         }
                         $contentimg->save();
-                    
-                
+
+
                 }
             }
-        
+
             DB::commit();
             return back()->with('success','โพสต์เรียบร้อยแล้ว');
         } catch (\Throwable $th) {
             dd($th);
             DB::rollback();
-        
+
             return back()->with('success','Something Wrong! Content can not Upload.');
         }
     }
@@ -119,7 +119,7 @@ class ContentController extends Controller
     {
 
         $colors =  Session::get('recent');
-    
+
         if (($key = array_search($request->text, $colors)) !== false) {
             // unset($colors[$key]);
         }else{
@@ -140,8 +140,8 @@ class ContentController extends Controller
         if($id ==1){
 
             $colors =  Session::get('recent');
-            
-    
+
+
             if (($key = array_search($a, $colors)) !== false) {
                 // unset($colors[$key]);
             }else{
@@ -150,9 +150,9 @@ class ContentController extends Controller
                     Session::push('recent',$a);
 
                 }
-    
+
             }
-    
+
             $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
             $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
             $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
@@ -163,7 +163,7 @@ class ContentController extends Controller
         }else{
 
             $colors =  Session::get('recent');
-    
+
             if (($key = array_search($a, $colors)) !== false) {
                 // unset($colors[$key]);
             }else{
@@ -172,24 +172,24 @@ class ContentController extends Controller
                     Session::push('recent',$a);
 
                 }
-    
+
             }
-    
+
             $sqlc = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','C')->get();
             $sqlp = DB::Table('tb_tags')->where('tag_name', 'like', '%' .$a. '%')->where('tag_type','=','P')->get();
             $cat = DB::Table('tb_category')->where('deleted_at','!=',null)->limit('6')->get();
             // dd( $sql);
-            
+
 
 
         }
-       
+
         return view('mobile.member.common.search')->with(['sqlp'=>$sqlp,'sqlc'=>$sqlc,'cat'=>$cat]);
     }
 
 
     public function deletecontent(Request $request){
-      
+
         DB::Table('tb_news')->where('new_id',$request->id)->delete();
         $sql = DB::Table('tb_new_imgs')->where('new_id',$request->id)->get();
         if( $sql != null){
@@ -200,24 +200,24 @@ class ContentController extends Controller
 
         }
         DB::Table('tb_new_imgs')->where('new_id',$request->id)->delete();
-      
+
         return 1 ;
     }
 
     public function hidecontent(Request $request){
-       
+
         DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>2]);
 
-        
+
         return 1 ;
     }
 
 
     public function unhidecontent(Request $request){
-       
+
         DB::Table('tb_news')->where('new_id',$request->id)->update(['new_published'=>1]);
 
-        
+
         return 1 ;
     }
 
@@ -232,10 +232,61 @@ class ContentController extends Controller
 
         }
 
-        
+
         return back() ;
     }
 
-    
-    
+    public function sharePost(Request $request){
+        $id = $request->input('id');
+
+        $urlen = urlencode('https://modii.sapapps.work/content/'.$id .'');
+        $link = "https://modii.sapapps.work/content/$id";
+        $html = '
+        <br>
+                                <div class="row justify-content-around p-1 ">
+                                    <a href="https://social-plugins.line.me/lineit/share?url='.$urlen. '"
+                                        class="m-0 text-center align-self-end  share-item">
+                                        <img src="' . url('new_assets/img/icon/share/LINE.svg') . '" alt="alt"
+                                            class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Line</h5>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u='.$urlen. '"
+                                        class="m-0 text-center  align-self-end share-item">
+                                        <img src="    ' . url('new_assets/img/icon/share/facebook.svg') . '
+                                        " alt="alt"
+                                            class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Facebook</h5>
+
+                                    </a>
+                                    <div onclick="copyLink('.$id.');"   class="m-0 text-center align-self-end  share-item">
+                                      <input type="text" id="linkPost" style="display:none;" value="'.$link.'">
+
+                                        <img src="    ' . url('new_assets/img/icon/share/Link.svg') . '
+                                        " alt="alt"
+                                            class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Copy link</h5>
+
+                                    </div>
+                                    <div onclick="messengerShare('.$id.')" class="m-0 text-center align-self-end  share-item">
+                                        <img src="    ' . url('new_assets/img/icon/share/Messenger.svg') . '
+                                        " alt="alt"
+                                            class=" " style="width:47px; height:47px;">
+                                        <h5 class="font-weight-bold m-0 mt-1">Messenger</h5>
+
+                                    </div>
+
+                                    <div class="row col-11 mt-4 p-0">
+                                        <button type="button" data-dismiss="modal" class="btn  btn-block font-weight-bold"
+                                            style="background-color:rgba(255, 92, 99, 1); color:#FFF; font-size:15px; border-radius: 8px;">ยกเลิก</button>
+                                    </div>
+                                </div>
+                                <br>
+
+
+        ';
+        $data = ['html'=>$html];
+        return json_encode($data);
+
+    }
+
 }

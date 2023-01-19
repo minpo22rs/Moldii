@@ -42,22 +42,22 @@ class MainController extends Controller
 
 
         // $result = $cp->merge($c);
-   
+
         return view('mobile.member.common.index')->with(['c'=>$c,'v'=>$v,'p'=>$p,'s'=>$s,'cat'=>$cat,'pro'=>$pro,'group'=>$group,'ban'=>$ban,'cat'=>$cat,'u'=>$u,'noti'=>$noti,'ccomment'=>$ccomment,'notiid'=>$notiid]);
     }
 
     public function followwriter(Request $request){
-      
+
         DB::Table('tb_followers')->insert(['id_customer'=>Session::get('cid'),'id_c_follower'=>$request->id]);
-      
+
         return 1 ;
     }
 
     public function unfollowwriter(Request $request){
-       
+
         DB::Table('tb_followers')->where('id_customer',Session::get('cid'))->where('id_c_follower',$request->id)->delete();
 
-        
+
         return 1 ;
     }
 
@@ -68,36 +68,36 @@ class MainController extends Controller
         if($sql ==null){
             DB::Table('tb_content_likes')->insert(['customer_id'=>Session::get('cid'),'content_id'=>$request->id,'type_like'=>'C']);
             DB::Table('tb_news')->where('new_id',$request->id)->increment('like', 1);
-    
+
         }
 
         $count = DB::Table('tb_news')->where('new_id',$request->id)->first();
-       
+
         return $count->like ;
     }
 
     public function unlikecontent(Request $request){
-       
+
         DB::Table('tb_content_likes')->where('customer_id',Session::get('cid'))->where('content_id',$request->id)->delete();
         DB::Table('tb_news')->where('new_id',$request->id)->decrement('like', 1);
 
         $count = DB::Table('tb_news')->where('new_id',$request->id)->first();
-       
+
         return $count->like ;
     }
 
     public function bookmarkadd(Request $request){
-      
+
         DB::Table('tb_bookmarks')->insert(['customer_id'=>Session::get('cid'),'id_ref'=>$request->id]);
-      
+
         return 1 ;
     }
 
     public function unbookmark(Request $request){
-       
+
         DB::Table('tb_bookmarks')->where('customer_id',Session::get('cid'))->where('id_ref',$request->id)->delete();
 
-        
+
         return 1 ;
     }
 
@@ -105,5 +105,6 @@ class MainController extends Controller
 
 
 
-    
+
+
 }

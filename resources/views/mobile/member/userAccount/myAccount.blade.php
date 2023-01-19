@@ -53,7 +53,7 @@
             </a>
         </div>
     </div>
-   
+
 </div>
 
 <div class="row my-2">
@@ -90,10 +90,10 @@
                     </div>
                 </a>
             @endif
-                
+
         </div>
     </div>
-   
+
 </div>
 
 <a href="{{url('user/myList')}}" class="row py-1 border-top pl-2" style="color:black; font-size:18px">
@@ -177,7 +177,7 @@
     </div>
 </a>
 
-{{-- 
+{{--
 <a href="{{url('user/sendslip')}}" class="row py-1  border-top pl-2 border-bottom" style="color:black; font-size:18px">
     <div class="col-8 mx-0 align-self-center row ">
         <img  src="{{ asset('new_assets/icon/หน้าแจ้งชำระเงิน.png')}}" >
@@ -215,6 +215,6 @@
         })
     }
 
-    
+
 </script>
 @endsection
